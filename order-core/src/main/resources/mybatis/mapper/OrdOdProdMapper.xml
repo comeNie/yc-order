@@ -1,0 +1,628 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.yc.order.dao.mapper.interfaces.OrdOdProdMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.yc.order.dao.mapper.bo.OrdOdProd" >
+    <id column="PROD_DETAL_ID" property="prodDetalId" jdbcType="BIGINT" />
+    <result column="ORDER_ID" property="orderId" jdbcType="BIGINT" />
+    <result column="TRANSLATE_TYPE" property="translateType" jdbcType="VARCHAR" />
+    <result column="LANGUNGE_PAIR" property="langungePair" jdbcType="VARCHAR" />
+    <result column="TRANSLATE_NAME" property="translateName" jdbcType="VARCHAR" />
+    <result column="TRANSLATE_LEVEL" property="translateLevel" jdbcType="VARCHAR" />
+    <result column="MEETING_SUM" property="meetingSum" jdbcType="BIGINT" />
+    <result column="INTERPER_GEN" property="interperGen" jdbcType="VARCHAR" />
+    <result column="MEETING_ADDRESS" property="meetingAddress" jdbcType="VARCHAR" />
+    <result column="INTERPER_SUM" property="interperSum" jdbcType="BIGINT" />
+    <result column="USE_CODE" property="useCode" jdbcType="VARCHAR" />
+    <result column="FIELD_CODE" property="fieldCode" jdbcType="VARCHAR" />
+    <result column="IS_SET_TYPE" property="isSetType" jdbcType="VARCHAR" />
+    <result column="IS_URGENT" property="isUrgent" jdbcType="VARCHAR" />
+    <result column="STATE_TIME" property="stateTime" jdbcType="TIMESTAMP" />
+    <result column="END_TIME" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="STATE" property="state" jdbcType="VARCHAR" />
+    <result column="LOOK_STATE" property="lookState" jdbcType="VARCHAR" />
+    <result column="INTERPER_FEE" property="interperFee" jdbcType="BIGINT" />
+    <result column="IS_INVOICE" property="isInvoice" jdbcType="VARCHAR" />
+    <result column="UPDATE_CHL_ID" property="updateChlId" jdbcType="VARCHAR" />
+    <result column="INTERPER_ID" property="interperId" jdbcType="VARCHAR" />
+    <result column="UPDATE_INTERPER_ID" property="updateInterperId" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.ai.yc.order.dao.mapper.bo.OrdOdProdWithBLOBs" extends="BaseResultMap" >
+    <result column="NEED_TRANSLATE_INFO" property="needTranslateInfo" jdbcType="LONGVARCHAR" />
+    <result column="TRANSLATE_INFO" property="translateInfo" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    PROD_DETAL_ID, ORDER_ID, TRANSLATE_TYPE, LANGUNGE_PAIR, TRANSLATE_NAME, TRANSLATE_LEVEL, 
+    MEETING_SUM, INTERPER_GEN, MEETING_ADDRESS, INTERPER_SUM, USE_CODE, FIELD_CODE, IS_SET_TYPE, 
+    IS_URGENT, STATE_TIME, END_TIME, STATE, LOOK_STATE, INTERPER_FEE, IS_INVOICE, UPDATE_CHL_ID, 
+    INTERPER_ID, UPDATE_INTERPER_ID, UPDATE_TIME
+  </sql>
+  <sql id="Blob_Column_List" >
+    NEED_TRANSLATE_INFO, TRANSLATE_INFO
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdProdCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ord_od_prod
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdProdCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ord_od_prod
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ord_od_prod
+    where PROD_DETAL_ID = #{prodDetalId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="Long" >
+    delete from ord_od_prod
+    where PROD_DETAL_ID = #{prodDetalId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdProdCriteria" >
+    delete from ord_od_prod
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdProdWithBLOBs" >
+    insert into ord_od_prod (PROD_DETAL_ID, ORDER_ID, TRANSLATE_TYPE, 
+      LANGUNGE_PAIR, TRANSLATE_NAME, TRANSLATE_LEVEL, 
+      MEETING_SUM, INTERPER_GEN, MEETING_ADDRESS, 
+      INTERPER_SUM, USE_CODE, FIELD_CODE, 
+      IS_SET_TYPE, IS_URGENT, STATE_TIME, 
+      END_TIME, STATE, LOOK_STATE, 
+      INTERPER_FEE, IS_INVOICE, UPDATE_CHL_ID, 
+      INTERPER_ID, UPDATE_INTERPER_ID, UPDATE_TIME, 
+      NEED_TRANSLATE_INFO, TRANSLATE_INFO
+      )
+    values (#{prodDetalId,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, #{translateType,jdbcType=VARCHAR}, 
+      #{langungePair,jdbcType=VARCHAR}, #{translateName,jdbcType=VARCHAR}, #{translateLevel,jdbcType=VARCHAR}, 
+      #{meetingSum,jdbcType=BIGINT}, #{interperGen,jdbcType=VARCHAR}, #{meetingAddress,jdbcType=VARCHAR}, 
+      #{interperSum,jdbcType=BIGINT}, #{useCode,jdbcType=VARCHAR}, #{fieldCode,jdbcType=VARCHAR}, 
+      #{isSetType,jdbcType=VARCHAR}, #{isUrgent,jdbcType=VARCHAR}, #{stateTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{state,jdbcType=VARCHAR}, #{lookState,jdbcType=VARCHAR}, 
+      #{interperFee,jdbcType=BIGINT}, #{isInvoice,jdbcType=VARCHAR}, #{updateChlId,jdbcType=VARCHAR}, 
+      #{interperId,jdbcType=VARCHAR}, #{updateInterperId,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{needTranslateInfo,jdbcType=LONGVARCHAR}, #{translateInfo,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdProdWithBLOBs" >
+    insert into ord_od_prod
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="prodDetalId != null" >
+        PROD_DETAL_ID,
+      </if>
+      <if test="orderId != null" >
+        ORDER_ID,
+      </if>
+      <if test="translateType != null" >
+        TRANSLATE_TYPE,
+      </if>
+      <if test="langungePair != null" >
+        LANGUNGE_PAIR,
+      </if>
+      <if test="translateName != null" >
+        TRANSLATE_NAME,
+      </if>
+      <if test="translateLevel != null" >
+        TRANSLATE_LEVEL,
+      </if>
+      <if test="meetingSum != null" >
+        MEETING_SUM,
+      </if>
+      <if test="interperGen != null" >
+        INTERPER_GEN,
+      </if>
+      <if test="meetingAddress != null" >
+        MEETING_ADDRESS,
+      </if>
+      <if test="interperSum != null" >
+        INTERPER_SUM,
+      </if>
+      <if test="useCode != null" >
+        USE_CODE,
+      </if>
+      <if test="fieldCode != null" >
+        FIELD_CODE,
+      </if>
+      <if test="isSetType != null" >
+        IS_SET_TYPE,
+      </if>
+      <if test="isUrgent != null" >
+        IS_URGENT,
+      </if>
+      <if test="stateTime != null" >
+        STATE_TIME,
+      </if>
+      <if test="endTime != null" >
+        END_TIME,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+      <if test="lookState != null" >
+        LOOK_STATE,
+      </if>
+      <if test="interperFee != null" >
+        INTERPER_FEE,
+      </if>
+      <if test="isInvoice != null" >
+        IS_INVOICE,
+      </if>
+      <if test="updateChlId != null" >
+        UPDATE_CHL_ID,
+      </if>
+      <if test="interperId != null" >
+        INTERPER_ID,
+      </if>
+      <if test="updateInterperId != null" >
+        UPDATE_INTERPER_ID,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="needTranslateInfo != null" >
+        NEED_TRANSLATE_INFO,
+      </if>
+      <if test="translateInfo != null" >
+        TRANSLATE_INFO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="prodDetalId != null" >
+        #{prodDetalId,jdbcType=BIGINT},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="translateType != null" >
+        #{translateType,jdbcType=VARCHAR},
+      </if>
+      <if test="langungePair != null" >
+        #{langungePair,jdbcType=VARCHAR},
+      </if>
+      <if test="translateName != null" >
+        #{translateName,jdbcType=VARCHAR},
+      </if>
+      <if test="translateLevel != null" >
+        #{translateLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingSum != null" >
+        #{meetingSum,jdbcType=BIGINT},
+      </if>
+      <if test="interperGen != null" >
+        #{interperGen,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingAddress != null" >
+        #{meetingAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="interperSum != null" >
+        #{interperSum,jdbcType=BIGINT},
+      </if>
+      <if test="useCode != null" >
+        #{useCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldCode != null" >
+        #{fieldCode,jdbcType=VARCHAR},
+      </if>
+      <if test="isSetType != null" >
+        #{isSetType,jdbcType=VARCHAR},
+      </if>
+      <if test="isUrgent != null" >
+        #{isUrgent,jdbcType=VARCHAR},
+      </if>
+      <if test="stateTime != null" >
+        #{stateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="lookState != null" >
+        #{lookState,jdbcType=VARCHAR},
+      </if>
+      <if test="interperFee != null" >
+        #{interperFee,jdbcType=BIGINT},
+      </if>
+      <if test="isInvoice != null" >
+        #{isInvoice,jdbcType=VARCHAR},
+      </if>
+      <if test="updateChlId != null" >
+        #{updateChlId,jdbcType=VARCHAR},
+      </if>
+      <if test="interperId != null" >
+        #{interperId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateInterperId != null" >
+        #{updateInterperId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="needTranslateInfo != null" >
+        #{needTranslateInfo,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="translateInfo != null" >
+        #{translateInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdProdCriteria" resultType="java.lang.Integer" >
+    select count(*) from ord_od_prod
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ord_od_prod
+    <set >
+      <if test="record.prodDetalId != null" >
+        PROD_DETAL_ID = #{record.prodDetalId,jdbcType=BIGINT},
+      </if>
+      <if test="record.orderId != null" >
+        ORDER_ID = #{record.orderId,jdbcType=BIGINT},
+      </if>
+      <if test="record.translateType != null" >
+        TRANSLATE_TYPE = #{record.translateType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.langungePair != null" >
+        LANGUNGE_PAIR = #{record.langungePair,jdbcType=VARCHAR},
+      </if>
+      <if test="record.translateName != null" >
+        TRANSLATE_NAME = #{record.translateName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.translateLevel != null" >
+        TRANSLATE_LEVEL = #{record.translateLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.meetingSum != null" >
+        MEETING_SUM = #{record.meetingSum,jdbcType=BIGINT},
+      </if>
+      <if test="record.interperGen != null" >
+        INTERPER_GEN = #{record.interperGen,jdbcType=VARCHAR},
+      </if>
+      <if test="record.meetingAddress != null" >
+        MEETING_ADDRESS = #{record.meetingAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.interperSum != null" >
+        INTERPER_SUM = #{record.interperSum,jdbcType=BIGINT},
+      </if>
+      <if test="record.useCode != null" >
+        USE_CODE = #{record.useCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fieldCode != null" >
+        FIELD_CODE = #{record.fieldCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isSetType != null" >
+        IS_SET_TYPE = #{record.isSetType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isUrgent != null" >
+        IS_URGENT = #{record.isUrgent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stateTime != null" >
+        STATE_TIME = #{record.stateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endTime != null" >
+        END_TIME = #{record.endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.state != null" >
+        STATE = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lookState != null" >
+        LOOK_STATE = #{record.lookState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.interperFee != null" >
+        INTERPER_FEE = #{record.interperFee,jdbcType=BIGINT},
+      </if>
+      <if test="record.isInvoice != null" >
+        IS_INVOICE = #{record.isInvoice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateChlId != null" >
+        UPDATE_CHL_ID = #{record.updateChlId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.interperId != null" >
+        INTERPER_ID = #{record.interperId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateInterperId != null" >
+        UPDATE_INTERPER_ID = #{record.updateInterperId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.needTranslateInfo != null" >
+        NEED_TRANSLATE_INFO = #{record.needTranslateInfo,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.translateInfo != null" >
+        TRANSLATE_INFO = #{record.translateInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update ord_od_prod
+    set PROD_DETAL_ID = #{record.prodDetalId,jdbcType=BIGINT},
+      ORDER_ID = #{record.orderId,jdbcType=BIGINT},
+      TRANSLATE_TYPE = #{record.translateType,jdbcType=VARCHAR},
+      LANGUNGE_PAIR = #{record.langungePair,jdbcType=VARCHAR},
+      TRANSLATE_NAME = #{record.translateName,jdbcType=VARCHAR},
+      TRANSLATE_LEVEL = #{record.translateLevel,jdbcType=VARCHAR},
+      MEETING_SUM = #{record.meetingSum,jdbcType=BIGINT},
+      INTERPER_GEN = #{record.interperGen,jdbcType=VARCHAR},
+      MEETING_ADDRESS = #{record.meetingAddress,jdbcType=VARCHAR},
+      INTERPER_SUM = #{record.interperSum,jdbcType=BIGINT},
+      USE_CODE = #{record.useCode,jdbcType=VARCHAR},
+      FIELD_CODE = #{record.fieldCode,jdbcType=VARCHAR},
+      IS_SET_TYPE = #{record.isSetType,jdbcType=VARCHAR},
+      IS_URGENT = #{record.isUrgent,jdbcType=VARCHAR},
+      STATE_TIME = #{record.stateTime,jdbcType=TIMESTAMP},
+      END_TIME = #{record.endTime,jdbcType=TIMESTAMP},
+      STATE = #{record.state,jdbcType=VARCHAR},
+      LOOK_STATE = #{record.lookState,jdbcType=VARCHAR},
+      INTERPER_FEE = #{record.interperFee,jdbcType=BIGINT},
+      IS_INVOICE = #{record.isInvoice,jdbcType=VARCHAR},
+      UPDATE_CHL_ID = #{record.updateChlId,jdbcType=VARCHAR},
+      INTERPER_ID = #{record.interperId,jdbcType=VARCHAR},
+      UPDATE_INTERPER_ID = #{record.updateInterperId,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      NEED_TRANSLATE_INFO = #{record.needTranslateInfo,jdbcType=LONGVARCHAR},
+      TRANSLATE_INFO = #{record.translateInfo,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ord_od_prod
+    set PROD_DETAL_ID = #{record.prodDetalId,jdbcType=BIGINT},
+      ORDER_ID = #{record.orderId,jdbcType=BIGINT},
+      TRANSLATE_TYPE = #{record.translateType,jdbcType=VARCHAR},
+      LANGUNGE_PAIR = #{record.langungePair,jdbcType=VARCHAR},
+      TRANSLATE_NAME = #{record.translateName,jdbcType=VARCHAR},
+      TRANSLATE_LEVEL = #{record.translateLevel,jdbcType=VARCHAR},
+      MEETING_SUM = #{record.meetingSum,jdbcType=BIGINT},
+      INTERPER_GEN = #{record.interperGen,jdbcType=VARCHAR},
+      MEETING_ADDRESS = #{record.meetingAddress,jdbcType=VARCHAR},
+      INTERPER_SUM = #{record.interperSum,jdbcType=BIGINT},
+      USE_CODE = #{record.useCode,jdbcType=VARCHAR},
+      FIELD_CODE = #{record.fieldCode,jdbcType=VARCHAR},
+      IS_SET_TYPE = #{record.isSetType,jdbcType=VARCHAR},
+      IS_URGENT = #{record.isUrgent,jdbcType=VARCHAR},
+      STATE_TIME = #{record.stateTime,jdbcType=TIMESTAMP},
+      END_TIME = #{record.endTime,jdbcType=TIMESTAMP},
+      STATE = #{record.state,jdbcType=VARCHAR},
+      LOOK_STATE = #{record.lookState,jdbcType=VARCHAR},
+      INTERPER_FEE = #{record.interperFee,jdbcType=BIGINT},
+      IS_INVOICE = #{record.isInvoice,jdbcType=VARCHAR},
+      UPDATE_CHL_ID = #{record.updateChlId,jdbcType=VARCHAR},
+      INTERPER_ID = #{record.interperId,jdbcType=VARCHAR},
+      UPDATE_INTERPER_ID = #{record.updateInterperId,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdProdWithBLOBs" >
+    update ord_od_prod
+    <set >
+      <if test="orderId != null" >
+        ORDER_ID = #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="translateType != null" >
+        TRANSLATE_TYPE = #{translateType,jdbcType=VARCHAR},
+      </if>
+      <if test="langungePair != null" >
+        LANGUNGE_PAIR = #{langungePair,jdbcType=VARCHAR},
+      </if>
+      <if test="translateName != null" >
+        TRANSLATE_NAME = #{translateName,jdbcType=VARCHAR},
+      </if>
+      <if test="translateLevel != null" >
+        TRANSLATE_LEVEL = #{translateLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingSum != null" >
+        MEETING_SUM = #{meetingSum,jdbcType=BIGINT},
+      </if>
+      <if test="interperGen != null" >
+        INTERPER_GEN = #{interperGen,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingAddress != null" >
+        MEETING_ADDRESS = #{meetingAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="interperSum != null" >
+        INTERPER_SUM = #{interperSum,jdbcType=BIGINT},
+      </if>
+      <if test="useCode != null" >
+        USE_CODE = #{useCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldCode != null" >
+        FIELD_CODE = #{fieldCode,jdbcType=VARCHAR},
+      </if>
+      <if test="isSetType != null" >
+        IS_SET_TYPE = #{isSetType,jdbcType=VARCHAR},
+      </if>
+      <if test="isUrgent != null" >
+        IS_URGENT = #{isUrgent,jdbcType=VARCHAR},
+      </if>
+      <if test="stateTime != null" >
+        STATE_TIME = #{stateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        END_TIME = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="lookState != null" >
+        LOOK_STATE = #{lookState,jdbcType=VARCHAR},
+      </if>
+      <if test="interperFee != null" >
+        INTERPER_FEE = #{interperFee,jdbcType=BIGINT},
+      </if>
+      <if test="isInvoice != null" >
+        IS_INVOICE = #{isInvoice,jdbcType=VARCHAR},
+      </if>
+      <if test="updateChlId != null" >
+        UPDATE_CHL_ID = #{updateChlId,jdbcType=VARCHAR},
+      </if>
+      <if test="interperId != null" >
+        INTERPER_ID = #{interperId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateInterperId != null" >
+        UPDATE_INTERPER_ID = #{updateInterperId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="needTranslateInfo != null" >
+        NEED_TRANSLATE_INFO = #{needTranslateInfo,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="translateInfo != null" >
+        TRANSLATE_INFO = #{translateInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where PROD_DETAL_ID = #{prodDetalId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdProdWithBLOBs" >
+    update ord_od_prod
+    set ORDER_ID = #{orderId,jdbcType=BIGINT},
+      TRANSLATE_TYPE = #{translateType,jdbcType=VARCHAR},
+      LANGUNGE_PAIR = #{langungePair,jdbcType=VARCHAR},
+      TRANSLATE_NAME = #{translateName,jdbcType=VARCHAR},
+      TRANSLATE_LEVEL = #{translateLevel,jdbcType=VARCHAR},
+      MEETING_SUM = #{meetingSum,jdbcType=BIGINT},
+      INTERPER_GEN = #{interperGen,jdbcType=VARCHAR},
+      MEETING_ADDRESS = #{meetingAddress,jdbcType=VARCHAR},
+      INTERPER_SUM = #{interperSum,jdbcType=BIGINT},
+      USE_CODE = #{useCode,jdbcType=VARCHAR},
+      FIELD_CODE = #{fieldCode,jdbcType=VARCHAR},
+      IS_SET_TYPE = #{isSetType,jdbcType=VARCHAR},
+      IS_URGENT = #{isUrgent,jdbcType=VARCHAR},
+      STATE_TIME = #{stateTime,jdbcType=TIMESTAMP},
+      END_TIME = #{endTime,jdbcType=TIMESTAMP},
+      STATE = #{state,jdbcType=VARCHAR},
+      LOOK_STATE = #{lookState,jdbcType=VARCHAR},
+      INTERPER_FEE = #{interperFee,jdbcType=BIGINT},
+      IS_INVOICE = #{isInvoice,jdbcType=VARCHAR},
+      UPDATE_CHL_ID = #{updateChlId,jdbcType=VARCHAR},
+      INTERPER_ID = #{interperId,jdbcType=VARCHAR},
+      UPDATE_INTERPER_ID = #{updateInterperId,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      NEED_TRANSLATE_INFO = #{needTranslateInfo,jdbcType=LONGVARCHAR},
+      TRANSLATE_INFO = #{translateInfo,jdbcType=LONGVARCHAR}
+    where PROD_DETAL_ID = #{prodDetalId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdProd" >
+    update ord_od_prod
+    set ORDER_ID = #{orderId,jdbcType=BIGINT},
+      TRANSLATE_TYPE = #{translateType,jdbcType=VARCHAR},
+      LANGUNGE_PAIR = #{langungePair,jdbcType=VARCHAR},
+      TRANSLATE_NAME = #{translateName,jdbcType=VARCHAR},
+      TRANSLATE_LEVEL = #{translateLevel,jdbcType=VARCHAR},
+      MEETING_SUM = #{meetingSum,jdbcType=BIGINT},
+      INTERPER_GEN = #{interperGen,jdbcType=VARCHAR},
+      MEETING_ADDRESS = #{meetingAddress,jdbcType=VARCHAR},
+      INTERPER_SUM = #{interperSum,jdbcType=BIGINT},
+      USE_CODE = #{useCode,jdbcType=VARCHAR},
+      FIELD_CODE = #{fieldCode,jdbcType=VARCHAR},
+      IS_SET_TYPE = #{isSetType,jdbcType=VARCHAR},
+      IS_URGENT = #{isUrgent,jdbcType=VARCHAR},
+      STATE_TIME = #{stateTime,jdbcType=TIMESTAMP},
+      END_TIME = #{endTime,jdbcType=TIMESTAMP},
+      STATE = #{state,jdbcType=VARCHAR},
+      LOOK_STATE = #{lookState,jdbcType=VARCHAR},
+      INTERPER_FEE = #{interperFee,jdbcType=BIGINT},
+      IS_INVOICE = #{isInvoice,jdbcType=VARCHAR},
+      UPDATE_CHL_ID = #{updateChlId,jdbcType=VARCHAR},
+      INTERPER_ID = #{interperId,jdbcType=VARCHAR},
+      UPDATE_INTERPER_ID = #{updateInterperId,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+    where PROD_DETAL_ID = #{prodDetalId,jdbcType=BIGINT}
+  </update>
+</mapper>

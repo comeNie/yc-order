@@ -1,0 +1,28 @@
+-doclet com.ai.runner.apicollector.doclet.APIDoclet
+-docletpath C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.ai.runner.plugin\apicollector\2.0-SNAPSHOT\e21a38aa1cfbb56b145fe5aa60d29a28040811f1\apicollector-2.0-SNAPSHOT.jar;C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\org.elasticsearch\elasticsearch\1.6.0\d7bf1da80ff809610873d8e1e3a82a7349d2ae59\elasticsearch-1.6.0.jar;C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.3.1\ecb6e1f8e4b0e84c4b886c2f14a1500caf309757\gson-2.3.1.jar;C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.alibaba\fastjson\1.2.6\b74bde9cceb2f9ec1077a9c7c3a007c251531ba6\fastjson-1.2.6.jar;C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\org.apache.lucene\lucene-core\4.10.4\cbdb5f686a85e391d9b88f0bae9e018f4d9472ff\lucene-core-4.10.4.jar;C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\org.apache.lucene\lucene-analyzers-common\4.10.4\438dca3789b04735fe6b223d4aded3561fc5c039\lucene-analyzers-common-4.10.4.jar;C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\org.apache.lucene\lucene-queries\4.10.4\f3b55bc9553d622760b585550ffa6dbd082f32f3\lucene-queries-4.10.4.jar;C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\org.apache.lucene\lucene-memory\4.10.4\d80858a3954435b5c731a24945505b99bd5c159c\lucene-memory-4.10.4.jar;C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\org.apache.lucene\lucene-highlighter\4.10.4\8ceadd928c9d8efef7b069fd850f25db42fbec8b\lucene-highlighter-4.10.4.jar;C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\org.apache.lucene\lucene-queryparser\4.10.4\432d1e1b0aa99695bcaadf49c380c87b17a6f01b\lucene-queryparser-4.10.4.jar;C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\org.apache.lucene\lucene-sandbox\4.10.4\1600fe003fd6fef68cebca0802c96227501feb99\lucene-sandbox-4.10.4.jar;C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\org.apache.lucene\lucene-suggest\4.10.4\9a1b5e1974fe61e16d78e8a5b26f802cb2fb9863\lucene-suggest-4.10.4.jar;C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\org.apache.lucene\lucene-misc\4.10.4\1dea0f279c158875b2374bc03fb7b502b559ea84\lucene-misc-4.10.4.jar;C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\org.apache.lucene\lucene-join\4.10.4\abc55f0284b01a23cf41422f3596bc1fba06701b\lucene-join-4.10.4.jar;C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\org.apache.lucene\lucene-grouping\4.10.4\bb60a4aa452d2783584c0b2e832564741b88f8f5\lucene-grouping-4.10.4.jar;C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\org.apache.lucene\lucene-spatial\4.10.4\79ac88a4f91125f47a1a8e28fffae9860e7b3ca6\lucene-spatial-4.10.4.jar;C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\org.antlr\antlr-runtime\3.5\baa82bff19059401e90e1b90020beb9c96305d7\antlr-runtime-3.5.jar;C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\org.ow2.asm\asm\4.1\ad568238ee36a820bd6c6806807e8a14ea34684d\asm-4.1.jar;C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\org.ow2.asm\asm-commons\4.1\f8b86f4ee6e02082f63a658e00eb5506821253c6\asm-commons-4.1.jar;C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\org.yaml\snakeyaml\1.12\ebe66a6b88caab31d7a19571ad23656377523545\snakeyaml-1.12.jar;C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.spatial4j\spatial4j\0.4.1\4234d12b1ba4d4b539fb3e29edd948a99539d9eb\spatial4j-0.4.1.jar;
+-esconfig '{"clusterName":"elasticsearch_for_sol","ip":"10.1.234.160", "port":14999}'
+-private
+-encoding utf-8
+-owner yc-order
+-ownerType yc
+-version 1.0-SNAPSHOT
+-artifactId test
+-groupId com.ai.yc.order
+-belong yc-order
+E:\eclipse-new\workspace_yc\yc-order\order-api\src\main\java\com\ai\yc\order\api\test\interfaces\TestSV.java
+E:\eclipse-new\workspace_yc\yc-order\order-api\src\main\java\com\ai\yc\order\api\test\param\TestRequest.java
+E:\eclipse-new\workspace_yc\yc-order\order-api\src\main\java\com\ai\yc\order\api\test\param\TestResponse.java
+E:\eclipse-new\workspace_yc\yc-order\order-api\build\opt-base\com\ai\opt\base\exception\BusinessException.java
+E:\eclipse-new\workspace_yc\yc-order\order-api\build\opt-base\com\ai\opt\base\exception\GenericException.java
+E:\eclipse-new\workspace_yc\yc-order\order-api\build\opt-base\com\ai\opt\base\exception\RPCSystemException.java
+E:\eclipse-new\workspace_yc\yc-order\order-api\build\opt-base\com\ai\opt\base\exception\SystemException.java
+E:\eclipse-new\workspace_yc\yc-order\order-api\build\opt-base\com\ai\opt\base\vo\BaseInfo.java
+E:\eclipse-new\workspace_yc\yc-order\order-api\build\opt-base\com\ai\opt\base\vo\BaseListResponse.java
+E:\eclipse-new\workspace_yc\yc-order\order-api\build\opt-base\com\ai\opt\base\vo\BaseMapResponse.java
+E:\eclipse-new\workspace_yc\yc-order\order-api\build\opt-base\com\ai\opt\base\vo\BaseResponse.java
+E:\eclipse-new\workspace_yc\yc-order\order-api\build\opt-base\com\ai\opt\base\vo\BaseSetResponse.java
+E:\eclipse-new\workspace_yc\yc-order\order-api\build\opt-base\com\ai\opt\base\vo\HBasePager.java
+E:\eclipse-new\workspace_yc\yc-order\order-api\build\opt-base\com\ai\opt\base\vo\PageInfo.java
+E:\eclipse-new\workspace_yc\yc-order\order-api\build\opt-base\com\ai\opt\base\vo\PageInfoResponse.java
+E:\eclipse-new\workspace_yc\yc-order\order-api\build\opt-base\com\ai\opt\base\vo\RequestHeader.java
+E:\eclipse-new\workspace_yc\yc-order\order-api\build\opt-base\com\ai\opt\base\vo\ResponseHeader.java

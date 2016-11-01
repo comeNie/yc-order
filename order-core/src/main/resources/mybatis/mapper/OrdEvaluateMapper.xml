@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.yc.order.dao.mapper.interfaces.OrdEvaluateMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.yc.order.dao.mapper.bo.OrdEvaluate" >
+    <id column="EVALUATE_ID" property="evaluateId" jdbcType="BIGINT" />
+    <result column="ORDER_ID" property="orderId" jdbcType="BIGINT" />
+    <result column="SERVE_QUALITY" property="serveQuality" jdbcType="BIGINT" />
+    <result column="SERVE_SPEEN" property="serveSpeen" jdbcType="BIGINT" />
+    <result column="SERVE_MANNER" property="serveManner" jdbcType="BIGINT" />
+    <result column="EVALUATE_CONTENT" property="evaluateContent" jdbcType="VARCHAR" />
+    <result column="STATE" property="state" jdbcType="VARCHAR" />
+    <result column="EVALUATE_TIME" property="evaluateTime" jdbcType="TIMESTAMP" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    EVALUATE_ID, ORDER_ID, SERVE_QUALITY, SERVE_SPEEN, SERVE_MANNER, EVALUATE_CONTENT, 
+    STATE, EVALUATE_TIME, REMARK
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.yc.order.dao.mapper.bo.OrdEvaluateCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ord_evaluate
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from ord_evaluate
+    where EVALUATE_ID = #{evaluateId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="Long" >
+    delete from ord_evaluate
+    where EVALUATE_ID = #{evaluateId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.yc.order.dao.mapper.bo.OrdEvaluateCriteria" >
+    delete from ord_evaluate
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.yc.order.dao.mapper.bo.OrdEvaluate" >
+    insert into ord_evaluate (EVALUATE_ID, ORDER_ID, SERVE_QUALITY, 
+      SERVE_SPEEN, SERVE_MANNER, EVALUATE_CONTENT, 
+      STATE, EVALUATE_TIME, REMARK
+      )
+    values (#{evaluateId,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, #{serveQuality,jdbcType=BIGINT}, 
+      #{serveSpeen,jdbcType=BIGINT}, #{serveManner,jdbcType=BIGINT}, #{evaluateContent,jdbcType=VARCHAR}, 
+      #{state,jdbcType=VARCHAR}, #{evaluateTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.yc.order.dao.mapper.bo.OrdEvaluate" >
+    insert into ord_evaluate
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="evaluateId != null" >
+        EVALUATE_ID,
+      </if>
+      <if test="orderId != null" >
+        ORDER_ID,
+      </if>
+      <if test="serveQuality != null" >
+        SERVE_QUALITY,
+      </if>
+      <if test="serveSpeen != null" >
+        SERVE_SPEEN,
+      </if>
+      <if test="serveManner != null" >
+        SERVE_MANNER,
+      </if>
+      <if test="evaluateContent != null" >
+        EVALUATE_CONTENT,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+      <if test="evaluateTime != null" >
+        EVALUATE_TIME,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="evaluateId != null" >
+        #{evaluateId,jdbcType=BIGINT},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="serveQuality != null" >
+        #{serveQuality,jdbcType=BIGINT},
+      </if>
+      <if test="serveSpeen != null" >
+        #{serveSpeen,jdbcType=BIGINT},
+      </if>
+      <if test="serveManner != null" >
+        #{serveManner,jdbcType=BIGINT},
+      </if>
+      <if test="evaluateContent != null" >
+        #{evaluateContent,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluateTime != null" >
+        #{evaluateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.yc.order.dao.mapper.bo.OrdEvaluateCriteria" resultType="java.lang.Integer" >
+    select count(*) from ord_evaluate
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ord_evaluate
+    <set >
+      <if test="record.evaluateId != null" >
+        EVALUATE_ID = #{record.evaluateId,jdbcType=BIGINT},
+      </if>
+      <if test="record.orderId != null" >
+        ORDER_ID = #{record.orderId,jdbcType=BIGINT},
+      </if>
+      <if test="record.serveQuality != null" >
+        SERVE_QUALITY = #{record.serveQuality,jdbcType=BIGINT},
+      </if>
+      <if test="record.serveSpeen != null" >
+        SERVE_SPEEN = #{record.serveSpeen,jdbcType=BIGINT},
+      </if>
+      <if test="record.serveManner != null" >
+        SERVE_MANNER = #{record.serveManner,jdbcType=BIGINT},
+      </if>
+      <if test="record.evaluateContent != null" >
+        EVALUATE_CONTENT = #{record.evaluateContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        STATE = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.evaluateTime != null" >
+        EVALUATE_TIME = #{record.evaluateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ord_evaluate
+    set EVALUATE_ID = #{record.evaluateId,jdbcType=BIGINT},
+      ORDER_ID = #{record.orderId,jdbcType=BIGINT},
+      SERVE_QUALITY = #{record.serveQuality,jdbcType=BIGINT},
+      SERVE_SPEEN = #{record.serveSpeen,jdbcType=BIGINT},
+      SERVE_MANNER = #{record.serveManner,jdbcType=BIGINT},
+      EVALUATE_CONTENT = #{record.evaluateContent,jdbcType=VARCHAR},
+      STATE = #{record.state,jdbcType=VARCHAR},
+      EVALUATE_TIME = #{record.evaluateTime,jdbcType=TIMESTAMP},
+      REMARK = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.yc.order.dao.mapper.bo.OrdEvaluate" >
+    update ord_evaluate
+    <set >
+      <if test="orderId != null" >
+        ORDER_ID = #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="serveQuality != null" >
+        SERVE_QUALITY = #{serveQuality,jdbcType=BIGINT},
+      </if>
+      <if test="serveSpeen != null" >
+        SERVE_SPEEN = #{serveSpeen,jdbcType=BIGINT},
+      </if>
+      <if test="serveManner != null" >
+        SERVE_MANNER = #{serveManner,jdbcType=BIGINT},
+      </if>
+      <if test="evaluateContent != null" >
+        EVALUATE_CONTENT = #{evaluateContent,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluateTime != null" >
+        EVALUATE_TIME = #{evaluateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where EVALUATE_ID = #{evaluateId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.yc.order.dao.mapper.bo.OrdEvaluate" >
+    update ord_evaluate
+    set ORDER_ID = #{orderId,jdbcType=BIGINT},
+      SERVE_QUALITY = #{serveQuality,jdbcType=BIGINT},
+      SERVE_SPEEN = #{serveSpeen,jdbcType=BIGINT},
+      SERVE_MANNER = #{serveManner,jdbcType=BIGINT},
+      EVALUATE_CONTENT = #{evaluateContent,jdbcType=VARCHAR},
+      STATE = #{state,jdbcType=VARCHAR},
+      EVALUATE_TIME = #{evaluateTime,jdbcType=TIMESTAMP},
+      REMARK = #{remark,jdbcType=VARCHAR}
+    where EVALUATE_ID = #{evaluateId,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.yc.order.dao.mapper.interfaces.OrdOdPersonInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.yc.order.dao.mapper.bo.OrdOdPersonInfo" >
+    <id column="PERSON_ID" property="personId" jdbcType="BIGINT" />
+    <result column="ORDER_ID" property="orderId" jdbcType="BIGINT" />
+    <result column="OPER_TYPE" property="operType" jdbcType="VARCHAR" />
+    <result column="INTERPER_ID" property="interperId" jdbcType="VARCHAR" />
+    <result column="INTERPER_NAME" property="interperName" jdbcType="VARCHAR" />
+    <result column="TEL" property="tel" jdbcType="VARCHAR" />
+    <result column="INTERPER_FEE" property="interperFee" jdbcType="BIGINT" />
+    <result column="CREART_TIME" property="creartTime" jdbcType="TIMESTAMP" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    PERSON_ID, ORDER_ID, OPER_TYPE, INTERPER_ID, INTERPER_NAME, TEL, INTERPER_FEE, CREART_TIME, 
+    REMARK
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdPersonInfoCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ord_od_person_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from ord_od_person_info
+    where PERSON_ID = #{personId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="Long" >
+    delete from ord_od_person_info
+    where PERSON_ID = #{personId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdPersonInfoCriteria" >
+    delete from ord_od_person_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdPersonInfo" >
+    insert into ord_od_person_info (PERSON_ID, ORDER_ID, OPER_TYPE, 
+      INTERPER_ID, INTERPER_NAME, TEL, 
+      INTERPER_FEE, CREART_TIME, REMARK
+      )
+    values (#{personId,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, #{operType,jdbcType=VARCHAR}, 
+      #{interperId,jdbcType=VARCHAR}, #{interperName,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, 
+      #{interperFee,jdbcType=BIGINT}, #{creartTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdPersonInfo" >
+    insert into ord_od_person_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="personId != null" >
+        PERSON_ID,
+      </if>
+      <if test="orderId != null" >
+        ORDER_ID,
+      </if>
+      <if test="operType != null" >
+        OPER_TYPE,
+      </if>
+      <if test="interperId != null" >
+        INTERPER_ID,
+      </if>
+      <if test="interperName != null" >
+        INTERPER_NAME,
+      </if>
+      <if test="tel != null" >
+        TEL,
+      </if>
+      <if test="interperFee != null" >
+        INTERPER_FEE,
+      </if>
+      <if test="creartTime != null" >
+        CREART_TIME,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="personId != null" >
+        #{personId,jdbcType=BIGINT},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="operType != null" >
+        #{operType,jdbcType=VARCHAR},
+      </if>
+      <if test="interperId != null" >
+        #{interperId,jdbcType=VARCHAR},
+      </if>
+      <if test="interperName != null" >
+        #{interperName,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="interperFee != null" >
+        #{interperFee,jdbcType=BIGINT},
+      </if>
+      <if test="creartTime != null" >
+        #{creartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdPersonInfoCriteria" resultType="java.lang.Integer" >
+    select count(*) from ord_od_person_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ord_od_person_info
+    <set >
+      <if test="record.personId != null" >
+        PERSON_ID = #{record.personId,jdbcType=BIGINT},
+      </if>
+      <if test="record.orderId != null" >
+        ORDER_ID = #{record.orderId,jdbcType=BIGINT},
+      </if>
+      <if test="record.operType != null" >
+        OPER_TYPE = #{record.operType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.interperId != null" >
+        INTERPER_ID = #{record.interperId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.interperName != null" >
+        INTERPER_NAME = #{record.interperName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tel != null" >
+        TEL = #{record.tel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.interperFee != null" >
+        INTERPER_FEE = #{record.interperFee,jdbcType=BIGINT},
+      </if>
+      <if test="record.creartTime != null" >
+        CREART_TIME = #{record.creartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ord_od_person_info
+    set PERSON_ID = #{record.personId,jdbcType=BIGINT},
+      ORDER_ID = #{record.orderId,jdbcType=BIGINT},
+      OPER_TYPE = #{record.operType,jdbcType=VARCHAR},
+      INTERPER_ID = #{record.interperId,jdbcType=VARCHAR},
+      INTERPER_NAME = #{record.interperName,jdbcType=VARCHAR},
+      TEL = #{record.tel,jdbcType=VARCHAR},
+      INTERPER_FEE = #{record.interperFee,jdbcType=BIGINT},
+      CREART_TIME = #{record.creartTime,jdbcType=TIMESTAMP},
+      REMARK = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdPersonInfo" >
+    update ord_od_person_info
+    <set >
+      <if test="orderId != null" >
+        ORDER_ID = #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="operType != null" >
+        OPER_TYPE = #{operType,jdbcType=VARCHAR},
+      </if>
+      <if test="interperId != null" >
+        INTERPER_ID = #{interperId,jdbcType=VARCHAR},
+      </if>
+      <if test="interperName != null" >
+        INTERPER_NAME = #{interperName,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        TEL = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="interperFee != null" >
+        INTERPER_FEE = #{interperFee,jdbcType=BIGINT},
+      </if>
+      <if test="creartTime != null" >
+        CREART_TIME = #{creartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PERSON_ID = #{personId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdPersonInfo" >
+    update ord_od_person_info
+    set ORDER_ID = #{orderId,jdbcType=BIGINT},
+      OPER_TYPE = #{operType,jdbcType=VARCHAR},
+      INTERPER_ID = #{interperId,jdbcType=VARCHAR},
+      INTERPER_NAME = #{interperName,jdbcType=VARCHAR},
+      TEL = #{tel,jdbcType=VARCHAR},
+      INTERPER_FEE = #{interperFee,jdbcType=BIGINT},
+      CREART_TIME = #{creartTime,jdbcType=TIMESTAMP},
+      REMARK = #{remark,jdbcType=VARCHAR}
+    where PERSON_ID = #{personId,jdbcType=BIGINT}
+  </update>
+</mapper>
