@@ -14,18 +14,23 @@ public class FeeInfo implements Serializable {
 	private static final long serialVersionUID = 1L;
 	/**
 	 *  币种
+	 *  "1：RMB
+		2：$"
 	 */
 	private String currencyUnit;// CURRENCY_UNIT
 	/**
 	 *  总费用
+	 *  单位厘
 	 */
 	private Long totalFee;// TOTAL_FEE;
 	/**
 	 *  总优惠金额 一期不需要此字段
+	 *  单位厘
 	 */
 	private Long discountFee;// DISCOUNT_FEE
 	/**
 	 * 总减免费用 一期不需要此字段
+	 * 单位厘
 	 */
 	private Long operDiscountFee;// OPER_DISCOUNT_FEE
 	/**
@@ -34,10 +39,12 @@ public class FeeInfo implements Serializable {
 	private String operDiscountDesc;// OPER_DISCOUNT_DESC
 	/**
 	 *  总应收费用
+	 *  单位厘
 	 */
 	private Long adjustFee;// ADJUST_FEE
 	/**
 	 *  总实收费用
+	 *  单位厘
 	 */
 	private Long paidFee;// PAID_FEE
 	// 总已收费用

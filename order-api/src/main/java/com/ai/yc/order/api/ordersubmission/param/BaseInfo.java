@@ -15,18 +15,35 @@ public class BaseInfo implements Serializable {
 	private static final long serialVersionUID = 1L;
 	/**
 	 *  业务标识
+	 *  0:国内业务
+	 *	1：国际业务
 	 */
 	private String flag;
 	/**
 	 *  订单来源
+	 *  0：PC-中文站
+		1：PC-汉语站
+		2：百度
+		3：金山
+		4：找翻译
+		5：WAP-中文
+		6：WAP-英语
+		7：微信助手
+
 	 */
 	private String chlId;
 	/**
 	 *  订单类型
+	 *  "订单类型：
+		1：个人订单
+		2：企业订单
+		"
 	 */
 	private String orderType;
 	/**
 	 * 业务类型
+	 * "1：正常单
+		2：退费单"
 	 */
 	private String busiType;
 	/**
@@ -35,10 +52,18 @@ public class BaseInfo implements Serializable {
 	private String orderLevel;
 	/**
 	 *  报价标识
+	 *  "0：系统自动报价
+		 1：人工报价"
+
 	 */
 	private String subFlag;
 	/**
 	 *  用户类型
+	 *  "10：个人
+		11：企业
+		12：代理人
+		"
+
 	 */
 	private String userType;
 	/**
@@ -56,6 +81,7 @@ public class BaseInfo implements Serializable {
 	// 时区
 	/**
 	 * 下单时间
+	 * 取系统时间
 	 */
 	private Timestamp orderTime;
 	/**
