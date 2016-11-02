@@ -12,13 +12,21 @@ public class ContactInfo implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	// 联系人姓名
+	/**
+	 *  联系人姓名
+	 */
 	private String contactName;
-	// 联系人电话
+	/**
+	 *  联系人电话
+	 */
 	private String contactTel;
-	// 联系人邮箱
+	/**
+	 * 联系人邮箱
+	 */
 	private String contactEmail;
-	// 附加信息
+	/**
+	 *  附加信息
+	 */
 	private String remark;
 
 	public String getContactName() {

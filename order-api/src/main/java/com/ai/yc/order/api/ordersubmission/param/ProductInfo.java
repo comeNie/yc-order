@@ -13,38 +13,72 @@ public class ProductInfo implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	// 翻译类型
+	/**
+	 *  翻译类型
+	 */
 	private String translateType;
-	// 语言对
+	/**
+	 *  语言对
+	 */
 	private String langungePair;
-	// 翻译主题
+	/**
+	 *  翻译主题
+	 */
 	private String translateName;
-	// 翻译级别
+	/**
+	 *  翻译级别
+	 */
 	private String translateLevel;
-	// 会场数量
+	/**
+	 *  会场数量
+	 */
 	private Long meetingSum;// MEETING_SUM
-	// 译员性别
+	/**
+	 *  译员性别
+	 */
 	private String interperGen;// INTERPER_GEN;
-	// 会议地点
+	/**
+	 *  会议地点
+	 */
 	private String meetingAddress;// MEETING_ADDRESS;
-	// 译员数量
+	/**
+	 *  译员数量
+	 */
 	private Long interperSum;// INTERPER_SUM;
-	// 用途ID
+	/**
+	 *  用途ID
+	 */
 	private String useCode;// USE_CODE
-	// 领域ID
+	/**
+	 *  领域ID
+	 */
 	private String fieldCode;// FIELD_CODE
-	// 库存ID
-	// 是否排版
+	/**
+	 *  库存ID
+	 */
+	/**
+	 *  是否排版
+	 */
 	private String isSetType;// IS_SET_TYPE
-	// 是否加急
+	/**
+	 *  是否加急
+	 */
 	private String isUrgent;
-	// 需翻译内容
+	/**
+	 *  需翻译内容
+	 */
 	private String needTranslateInfo;// NEED_TRANSLATE_INFO;
-	// 翻译内容
+	/**
+	 *  翻译内容
+	 */
 	private String translateInfo;// TRANSLATE_INFO;
-	// 开始时间
+	/**
+	 *  开始时间
+	 */
 	private Timestamp startTime;
-	// 结束时间
+	/**
+	 *  结束时间
+	 */
 	private Timestamp endTime;
 
 	public String getTranslateType() {

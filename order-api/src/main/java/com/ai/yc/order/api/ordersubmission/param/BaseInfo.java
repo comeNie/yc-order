@@ -13,38 +13,70 @@ public class BaseInfo implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	// 业务标识
+	/**
+	 *  业务标识
+	 */
 	private String flag;
-	// 订单来源
+	/**
+	 *  订单来源
+	 */
 	private String chlId;
-	// 订单类型
+	/**
+	 *  订单类型
+	 */
 	private String orderType;
-	// 业务类型
+	/**
+	 * 业务类型
+	 */
 	private String busiType;
-	// 订单级别
+	/**
+	 *  订单级别
+	 */
 	private String orderLevel;
-	// 报价标识
+	/**
+	 *  报价标识
+	 */
 	private String subFlag;
-	// 用户类型
+	/**
+	 *  用户类型
+	 */
 	private String userType;
-	// 用户ID
+	/**
+	 *  用户ID
+	 */
 	private String userId;
-	// 企业ID
+	/**
+	 *  企业ID
+	 */
 	private String corporaId;
-	// 账户ID
+	/**
+	 *  账户ID
+	 */
 	private Long accountId;
 	// 时区
-	// 下单时间
+	/**
+	 * 下单时间
+	 */
 	private Timestamp orderTime;
-	// 省份
+	/**
+	 * 省份
+	 */
 	private String provinceCode;
-	// 地市
+	/**
+	 *  地市
+	 */
 	private String cityCode;
-	// 订单简要信息
+	/**
+	 *  订单简要信息
+	 */
 	private String orderDesc;
-	// 订单关键词
+	/**
+	 *  订单关键词
+	 */
 	private String keywords;
-	// 订单备注
+	/**
+	 *  订单备注
+	 */
 	private String remark;
 
 	public String getFlag() {
