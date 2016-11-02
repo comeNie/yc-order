@@ -8,9 +8,21 @@ public class OrderSubmissionRequest implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	/**
+	 * 订单基础信息
+	 */
 	private BaseInfo baseInfo;
+	/**
+	 * 产品信息
+	 */
 	private ProductInfo productInfo;
+	/**
+	 * 费用信息
+	 */
 	private FeeInfo feeInfo;
+	/**
+	 * 联系人信息
+	 */
 	private ContactInfo contactInfo;
 
 	public ContactInfo getContactInfo() {
