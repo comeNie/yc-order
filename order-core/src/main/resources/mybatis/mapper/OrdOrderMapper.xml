@@ -8,6 +8,8 @@
     <result column="ORDER_TYPE" property="orderType" jdbcType="VARCHAR" />
     <result column="BUSI_TYPE" property="busiType" jdbcType="VARCHAR" />
     <result column="ORDER_LEVEL" property="orderLevel" jdbcType="VARCHAR" />
+    <result column="TRANSLATE_TYPE" property="translateType" jdbcType="VARCHAR" />
+    <result column="TRANSLATE_NAME" property="translateName" jdbcType="VARCHAR" />
     <result column="SUB_FLAG" property="subFlag" jdbcType="VARCHAR" />
     <result column="USER_TYPE" property="userType" jdbcType="VARCHAR" />
     <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
@@ -95,11 +97,11 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    ORDER_ID, FLAG, CHL_ID, ORDER_TYPE, BUSI_TYPE, ORDER_LEVEL, SUB_FLAG, USER_TYPE, 
-    USER_ID, CORPORA_ID, ACCOUNT_ID, TIME_ZONE, ORDER_TIME, STATE, STATE_CHG_TIME, DISPLAY_FLAG, 
-    DISPLAY_FLAG_CHG_TIME, INTERPER_TYPE, LSP_ID, INTERPER_ID, LOCK_TIME, OPER_ID, UPDATE_FLAG, 
-    REASON_DESC, REMARK, FINISH_TIME, ORDER_DESC, KEYWORDS, IF_WARNING, WARNING_TYPE, 
-    IP_ADDRESS, PROVINCE_CODE, CITY_CODE
+    ORDER_ID, FLAG, CHL_ID, ORDER_TYPE, BUSI_TYPE, ORDER_LEVEL, TRANSLATE_TYPE, TRANSLATE_NAME, 
+    SUB_FLAG, USER_TYPE, USER_ID, CORPORA_ID, ACCOUNT_ID, TIME_ZONE, ORDER_TIME, STATE, 
+    STATE_CHG_TIME, DISPLAY_FLAG, DISPLAY_FLAG_CHG_TIME, INTERPER_TYPE, LSP_ID, INTERPER_ID, 
+    LOCK_TIME, OPER_ID, UPDATE_FLAG, REASON_DESC, REMARK, FINISH_TIME, ORDER_DESC, KEYWORDS, 
+    IF_WARNING, WARNING_TYPE, IP_ADDRESS, PROVINCE_CODE, CITY_CODE
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOrderCriteria" >
     select
@@ -137,28 +139,28 @@
   <insert id="insert" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOrder" >
     insert into ord_order (ORDER_ID, FLAG, CHL_ID, 
       ORDER_TYPE, BUSI_TYPE, ORDER_LEVEL, 
-      SUB_FLAG, USER_TYPE, USER_ID, 
-      CORPORA_ID, ACCOUNT_ID, TIME_ZONE, 
-      ORDER_TIME, STATE, STATE_CHG_TIME, 
-      DISPLAY_FLAG, DISPLAY_FLAG_CHG_TIME, INTERPER_TYPE, 
-      LSP_ID, INTERPER_ID, LOCK_TIME, 
-      OPER_ID, UPDATE_FLAG, REASON_DESC, 
-      REMARK, FINISH_TIME, ORDER_DESC, 
-      KEYWORDS, IF_WARNING, WARNING_TYPE, 
-      IP_ADDRESS, PROVINCE_CODE, CITY_CODE
-      )
+      TRANSLATE_TYPE, TRANSLATE_NAME, SUB_FLAG, 
+      USER_TYPE, USER_ID, CORPORA_ID, 
+      ACCOUNT_ID, TIME_ZONE, ORDER_TIME, 
+      STATE, STATE_CHG_TIME, DISPLAY_FLAG, 
+      DISPLAY_FLAG_CHG_TIME, INTERPER_TYPE, LSP_ID, 
+      INTERPER_ID, LOCK_TIME, OPER_ID, 
+      UPDATE_FLAG, REASON_DESC, REMARK, 
+      FINISH_TIME, ORDER_DESC, KEYWORDS, 
+      IF_WARNING, WARNING_TYPE, IP_ADDRESS, 
+      PROVINCE_CODE, CITY_CODE)
     values (#{orderId,jdbcType=BIGINT}, #{flag,jdbcType=VARCHAR}, #{chlId,jdbcType=VARCHAR}, 
       #{orderType,jdbcType=VARCHAR}, #{busiType,jdbcType=VARCHAR}, #{orderLevel,jdbcType=VARCHAR}, 
-      #{subFlag,jdbcType=VARCHAR}, #{userType,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
-      #{corporaId,jdbcType=VARCHAR}, #{accountId,jdbcType=BIGINT}, #{timeZone,jdbcType=VARCHAR}, 
-      #{orderTime,jdbcType=TIMESTAMP}, #{state,jdbcType=VARCHAR}, #{stateChgTime,jdbcType=TIMESTAMP}, 
-      #{displayFlag,jdbcType=VARCHAR}, #{displayFlagChgTime,jdbcType=TIMESTAMP}, #{interperType,jdbcType=VARCHAR}, 
-      #{lspId,jdbcType=BIGINT}, #{interperId,jdbcType=VARCHAR}, #{lockTime,jdbcType=TIMESTAMP}, 
-      #{operId,jdbcType=VARCHAR}, #{updateFlag,jdbcType=VARCHAR}, #{reasonDesc,jdbcType=VARCHAR}, 
-      #{remark,jdbcType=VARCHAR}, #{finishTime,jdbcType=TIMESTAMP}, #{orderDesc,jdbcType=VARCHAR}, 
-      #{keywords,jdbcType=VARCHAR}, #{ifWarning,jdbcType=VARCHAR}, #{warningType,jdbcType=VARCHAR}, 
-      #{ipAddress,jdbcType=VARCHAR}, #{provinceCode,jdbcType=VARCHAR}, #{cityCode,jdbcType=VARCHAR}
-      )
+      #{translateType,jdbcType=VARCHAR}, #{translateName,jdbcType=VARCHAR}, #{subFlag,jdbcType=VARCHAR}, 
+      #{userType,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{corporaId,jdbcType=VARCHAR}, 
+      #{accountId,jdbcType=BIGINT}, #{timeZone,jdbcType=VARCHAR}, #{orderTime,jdbcType=TIMESTAMP}, 
+      #{state,jdbcType=VARCHAR}, #{stateChgTime,jdbcType=TIMESTAMP}, #{displayFlag,jdbcType=VARCHAR}, 
+      #{displayFlagChgTime,jdbcType=TIMESTAMP}, #{interperType,jdbcType=VARCHAR}, #{lspId,jdbcType=BIGINT}, 
+      #{interperId,jdbcType=VARCHAR}, #{lockTime,jdbcType=TIMESTAMP}, #{operId,jdbcType=VARCHAR}, 
+      #{updateFlag,jdbcType=VARCHAR}, #{reasonDesc,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{finishTime,jdbcType=TIMESTAMP}, #{orderDesc,jdbcType=VARCHAR}, #{keywords,jdbcType=VARCHAR}, 
+      #{ifWarning,jdbcType=VARCHAR}, #{warningType,jdbcType=VARCHAR}, #{ipAddress,jdbcType=VARCHAR}, 
+      #{provinceCode,jdbcType=VARCHAR}, #{cityCode,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOrder" >
     insert into ord_order
@@ -180,6 +182,12 @@
       </if>
       <if test="orderLevel != null" >
         ORDER_LEVEL,
+      </if>
+      <if test="translateType != null" >
+        TRANSLATE_TYPE,
+      </if>
+      <if test="translateName != null" >
+        TRANSLATE_NAME,
       </if>
       <if test="subFlag != null" >
         SUB_FLAG,
@@ -281,6 +289,12 @@
       </if>
       <if test="orderLevel != null" >
         #{orderLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="translateType != null" >
+        #{translateType,jdbcType=VARCHAR},
+      </if>
+      <if test="translateName != null" >
+        #{translateName,jdbcType=VARCHAR},
       </if>
       <if test="subFlag != null" >
         #{subFlag,jdbcType=VARCHAR},
@@ -392,6 +406,12 @@
       <if test="record.orderLevel != null" >
         ORDER_LEVEL = #{record.orderLevel,jdbcType=VARCHAR},
       </if>
+      <if test="record.translateType != null" >
+        TRANSLATE_TYPE = #{record.translateType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.translateName != null" >
+        TRANSLATE_NAME = #{record.translateName,jdbcType=VARCHAR},
+      </if>
       <if test="record.subFlag != null" >
         SUB_FLAG = #{record.subFlag,jdbcType=VARCHAR},
       </if>
@@ -486,6 +506,8 @@
       ORDER_TYPE = #{record.orderType,jdbcType=VARCHAR},
       BUSI_TYPE = #{record.busiType,jdbcType=VARCHAR},
       ORDER_LEVEL = #{record.orderLevel,jdbcType=VARCHAR},
+      TRANSLATE_TYPE = #{record.translateType,jdbcType=VARCHAR},
+      TRANSLATE_NAME = #{record.translateName,jdbcType=VARCHAR},
       SUB_FLAG = #{record.subFlag,jdbcType=VARCHAR},
       USER_TYPE = #{record.userType,jdbcType=VARCHAR},
       USER_ID = #{record.userId,jdbcType=VARCHAR},
@@ -534,6 +556,12 @@
       </if>
       <if test="orderLevel != null" >
         ORDER_LEVEL = #{orderLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="translateType != null" >
+        TRANSLATE_TYPE = #{translateType,jdbcType=VARCHAR},
+      </if>
+      <if test="translateName != null" >
+        TRANSLATE_NAME = #{translateName,jdbcType=VARCHAR},
       </if>
       <if test="subFlag != null" >
         SUB_FLAG = #{subFlag,jdbcType=VARCHAR},
@@ -626,6 +654,8 @@
       ORDER_TYPE = #{orderType,jdbcType=VARCHAR},
       BUSI_TYPE = #{busiType,jdbcType=VARCHAR},
       ORDER_LEVEL = #{orderLevel,jdbcType=VARCHAR},
+      TRANSLATE_TYPE = #{translateType,jdbcType=VARCHAR},
+      TRANSLATE_NAME = #{translateName,jdbcType=VARCHAR},
       SUB_FLAG = #{subFlag,jdbcType=VARCHAR},
       USER_TYPE = #{userType,jdbcType=VARCHAR},
       USER_ID = #{userId,jdbcType=VARCHAR},
