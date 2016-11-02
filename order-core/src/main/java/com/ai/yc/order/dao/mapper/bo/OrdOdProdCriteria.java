@@ -385,6 +385,76 @@ public class OrdOdProdCriteria {
             return (Criteria) this;
         }
 
+        public Criteria andLangungePairNameIsNull() {
+            addCriterion("LANGUNGE_PAIR_NAME is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLangungePairNameIsNotNull() {
+            addCriterion("LANGUNGE_PAIR_NAME is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLangungePairNameEqualTo(String value) {
+            addCriterion("LANGUNGE_PAIR_NAME =", value, "langungePairName");
+            return (Criteria) this;
+        }
+
+        public Criteria andLangungePairNameNotEqualTo(String value) {
+            addCriterion("LANGUNGE_PAIR_NAME <>", value, "langungePairName");
+            return (Criteria) this;
+        }
+
+        public Criteria andLangungePairNameGreaterThan(String value) {
+            addCriterion("LANGUNGE_PAIR_NAME >", value, "langungePairName");
+            return (Criteria) this;
+        }
+
+        public Criteria andLangungePairNameGreaterThanOrEqualTo(String value) {
+            addCriterion("LANGUNGE_PAIR_NAME >=", value, "langungePairName");
+            return (Criteria) this;
+        }
+
+        public Criteria andLangungePairNameLessThan(String value) {
+            addCriterion("LANGUNGE_PAIR_NAME <", value, "langungePairName");
+            return (Criteria) this;
+        }
+
+        public Criteria andLangungePairNameLessThanOrEqualTo(String value) {
+            addCriterion("LANGUNGE_PAIR_NAME <=", value, "langungePairName");
+            return (Criteria) this;
+        }
+
+        public Criteria andLangungePairNameLike(String value) {
+            addCriterion("LANGUNGE_PAIR_NAME like", value, "langungePairName");
+            return (Criteria) this;
+        }
+
+        public Criteria andLangungePairNameNotLike(String value) {
+            addCriterion("LANGUNGE_PAIR_NAME not like", value, "langungePairName");
+            return (Criteria) this;
+        }
+
+        public Criteria andLangungePairNameIn(List<String> values) {
+            addCriterion("LANGUNGE_PAIR_NAME in", values, "langungePairName");
+            return (Criteria) this;
+        }
+
+        public Criteria andLangungePairNameNotIn(List<String> values) {
+            addCriterion("LANGUNGE_PAIR_NAME not in", values, "langungePairName");
+            return (Criteria) this;
+        }
+
+        public Criteria andLangungePairNameBetween(String value1, String value2) {
+            addCriterion("LANGUNGE_PAIR_NAME between", value1, value2, "langungePairName");
+            return (Criteria) this;
+        }
+
+        public Criteria andLangungePairNameNotBetween(String value1, String value2) {
+            addCriterion("LANGUNGE_PAIR_NAME not between", value1, value2, "langungePairName");
+            return (Criteria) this;
+        }
+
         public Criteria andTranslateNameIsNull() {
             addCriterion("TRANSLATE_NAME is null");
             return (Criteria) this;

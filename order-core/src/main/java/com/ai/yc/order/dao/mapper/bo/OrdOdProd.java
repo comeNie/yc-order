@@ -11,6 +11,8 @@ public class OrdOdProd {
 
     private String langungePair;
 
+    private String langungePairName;
+
     private String translateName;
 
     private String translateLevel;
@@ -81,6 +83,14 @@ public class OrdOdProd {
 
     public void setLangungePair(String langungePair) {
         this.langungePair = langungePair == null ? null : langungePair.trim();
+    }
+
+    public String getLangungePairName() {
+        return langungePairName;
+    }
+
+    public void setLangungePairName(String langungePairName) {
+        this.langungePairName = langungePairName == null ? null : langungePairName.trim();
     }
 
     public String getTranslateName() {

@@ -6,6 +6,7 @@
     <result column="ORDER_ID" property="orderId" jdbcType="BIGINT" />
     <result column="TRANSLATE_TYPE" property="translateType" jdbcType="VARCHAR" />
     <result column="LANGUNGE_PAIR" property="langungePair" jdbcType="VARCHAR" />
+    <result column="LANGUNGE_PAIR_NAME" property="langungePairName" jdbcType="VARCHAR" />
     <result column="TRANSLATE_NAME" property="translateName" jdbcType="VARCHAR" />
     <result column="TRANSLATE_LEVEL" property="translateLevel" jdbcType="VARCHAR" />
     <result column="MEETING_SUM" property="meetingSum" jdbcType="BIGINT" />
@@ -90,10 +91,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    PROD_DETAL_ID, ORDER_ID, TRANSLATE_TYPE, LANGUNGE_PAIR, TRANSLATE_NAME, TRANSLATE_LEVEL, 
-    MEETING_SUM, INTERPER_GEN, MEETING_ADDRESS, INTERPER_SUM, USE_CODE, FIELD_CODE, IS_SET_TYPE, 
-    IS_URGENT, STATE_TIME, END_TIME, STATE, LOOK_STATE, INTERPER_FEE, IS_INVOICE, UPDATE_CHL_ID, 
-    INTERPER_ID, UPDATE_INTERPER_ID, UPDATE_TIME
+    PROD_DETAL_ID, ORDER_ID, TRANSLATE_TYPE, LANGUNGE_PAIR, LANGUNGE_PAIR_NAME, TRANSLATE_NAME, 
+    TRANSLATE_LEVEL, MEETING_SUM, INTERPER_GEN, MEETING_ADDRESS, INTERPER_SUM, USE_CODE, 
+    FIELD_CODE, IS_SET_TYPE, IS_URGENT, STATE_TIME, END_TIME, STATE, LOOK_STATE, INTERPER_FEE, 
+    IS_INVOICE, UPDATE_CHL_ID, INTERPER_ID, UPDATE_INTERPER_ID, UPDATE_TIME
   </sql>
   <sql id="Blob_Column_List" >
     NEED_TRANSLATE_INFO, TRANSLATE_INFO
@@ -151,24 +152,24 @@
   </delete>
   <insert id="insert" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdProdWithBLOBs" >
     insert into ord_od_prod (PROD_DETAL_ID, ORDER_ID, TRANSLATE_TYPE, 
-      LANGUNGE_PAIR, TRANSLATE_NAME, TRANSLATE_LEVEL, 
-      MEETING_SUM, INTERPER_GEN, MEETING_ADDRESS, 
-      INTERPER_SUM, USE_CODE, FIELD_CODE, 
-      IS_SET_TYPE, IS_URGENT, STATE_TIME, 
-      END_TIME, STATE, LOOK_STATE, 
-      INTERPER_FEE, IS_INVOICE, UPDATE_CHL_ID, 
-      INTERPER_ID, UPDATE_INTERPER_ID, UPDATE_TIME, 
-      NEED_TRANSLATE_INFO, TRANSLATE_INFO
+      LANGUNGE_PAIR, LANGUNGE_PAIR_NAME, TRANSLATE_NAME, 
+      TRANSLATE_LEVEL, MEETING_SUM, INTERPER_GEN, 
+      MEETING_ADDRESS, INTERPER_SUM, USE_CODE, 
+      FIELD_CODE, IS_SET_TYPE, IS_URGENT, 
+      STATE_TIME, END_TIME, STATE, 
+      LOOK_STATE, INTERPER_FEE, IS_INVOICE, 
+      UPDATE_CHL_ID, INTERPER_ID, UPDATE_INTERPER_ID, 
+      UPDATE_TIME, NEED_TRANSLATE_INFO, TRANSLATE_INFO
       )
     values (#{prodDetalId,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, #{translateType,jdbcType=VARCHAR}, 
-      #{langungePair,jdbcType=VARCHAR}, #{translateName,jdbcType=VARCHAR}, #{translateLevel,jdbcType=VARCHAR}, 
-      #{meetingSum,jdbcType=BIGINT}, #{interperGen,jdbcType=VARCHAR}, #{meetingAddress,jdbcType=VARCHAR}, 
-      #{interperSum,jdbcType=BIGINT}, #{useCode,jdbcType=VARCHAR}, #{fieldCode,jdbcType=VARCHAR}, 
-      #{isSetType,jdbcType=VARCHAR}, #{isUrgent,jdbcType=VARCHAR}, #{stateTime,jdbcType=TIMESTAMP}, 
-      #{endTime,jdbcType=TIMESTAMP}, #{state,jdbcType=VARCHAR}, #{lookState,jdbcType=VARCHAR}, 
-      #{interperFee,jdbcType=BIGINT}, #{isInvoice,jdbcType=VARCHAR}, #{updateChlId,jdbcType=VARCHAR}, 
-      #{interperId,jdbcType=VARCHAR}, #{updateInterperId,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{needTranslateInfo,jdbcType=LONGVARCHAR}, #{translateInfo,jdbcType=LONGVARCHAR}
+      #{langungePair,jdbcType=VARCHAR}, #{langungePairName,jdbcType=VARCHAR}, #{translateName,jdbcType=VARCHAR}, 
+      #{translateLevel,jdbcType=VARCHAR}, #{meetingSum,jdbcType=BIGINT}, #{interperGen,jdbcType=VARCHAR}, 
+      #{meetingAddress,jdbcType=VARCHAR}, #{interperSum,jdbcType=BIGINT}, #{useCode,jdbcType=VARCHAR}, 
+      #{fieldCode,jdbcType=VARCHAR}, #{isSetType,jdbcType=VARCHAR}, #{isUrgent,jdbcType=VARCHAR}, 
+      #{stateTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{state,jdbcType=VARCHAR}, 
+      #{lookState,jdbcType=VARCHAR}, #{interperFee,jdbcType=BIGINT}, #{isInvoice,jdbcType=VARCHAR}, 
+      #{updateChlId,jdbcType=VARCHAR}, #{interperId,jdbcType=VARCHAR}, #{updateInterperId,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{needTranslateInfo,jdbcType=LONGVARCHAR}, #{translateInfo,jdbcType=LONGVARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdProdWithBLOBs" >
@@ -185,6 +186,9 @@
       </if>
       <if test="langungePair != null" >
         LANGUNGE_PAIR,
+      </if>
+      <if test="langungePairName != null" >
+        LANGUNGE_PAIR_NAME,
       </if>
       <if test="translateName != null" >
         TRANSLATE_NAME,
@@ -265,6 +269,9 @@
       </if>
       <if test="langungePair != null" >
         #{langungePair,jdbcType=VARCHAR},
+      </if>
+      <if test="langungePairName != null" >
+        #{langungePairName,jdbcType=VARCHAR},
       </if>
       <if test="translateName != null" >
         #{translateName,jdbcType=VARCHAR},
@@ -355,6 +362,9 @@
       <if test="record.langungePair != null" >
         LANGUNGE_PAIR = #{record.langungePair,jdbcType=VARCHAR},
       </if>
+      <if test="record.langungePairName != null" >
+        LANGUNGE_PAIR_NAME = #{record.langungePairName,jdbcType=VARCHAR},
+      </if>
       <if test="record.translateName != null" >
         TRANSLATE_NAME = #{record.translateName,jdbcType=VARCHAR},
       </if>
@@ -432,6 +442,7 @@
       ORDER_ID = #{record.orderId,jdbcType=BIGINT},
       TRANSLATE_TYPE = #{record.translateType,jdbcType=VARCHAR},
       LANGUNGE_PAIR = #{record.langungePair,jdbcType=VARCHAR},
+      LANGUNGE_PAIR_NAME = #{record.langungePairName,jdbcType=VARCHAR},
       TRANSLATE_NAME = #{record.translateName,jdbcType=VARCHAR},
       TRANSLATE_LEVEL = #{record.translateLevel,jdbcType=VARCHAR},
       MEETING_SUM = #{record.meetingSum,jdbcType=BIGINT},
@@ -464,6 +475,7 @@
       ORDER_ID = #{record.orderId,jdbcType=BIGINT},
       TRANSLATE_TYPE = #{record.translateType,jdbcType=VARCHAR},
       LANGUNGE_PAIR = #{record.langungePair,jdbcType=VARCHAR},
+      LANGUNGE_PAIR_NAME = #{record.langungePairName,jdbcType=VARCHAR},
       TRANSLATE_NAME = #{record.translateName,jdbcType=VARCHAR},
       TRANSLATE_LEVEL = #{record.translateLevel,jdbcType=VARCHAR},
       MEETING_SUM = #{record.meetingSum,jdbcType=BIGINT},
@@ -499,6 +511,9 @@
       </if>
       <if test="langungePair != null" >
         LANGUNGE_PAIR = #{langungePair,jdbcType=VARCHAR},
+      </if>
+      <if test="langungePairName != null" >
+        LANGUNGE_PAIR_NAME = #{langungePairName,jdbcType=VARCHAR},
       </if>
       <if test="translateName != null" >
         TRANSLATE_NAME = #{translateName,jdbcType=VARCHAR},
@@ -574,6 +589,7 @@
     set ORDER_ID = #{orderId,jdbcType=BIGINT},
       TRANSLATE_TYPE = #{translateType,jdbcType=VARCHAR},
       LANGUNGE_PAIR = #{langungePair,jdbcType=VARCHAR},
+      LANGUNGE_PAIR_NAME = #{langungePairName,jdbcType=VARCHAR},
       TRANSLATE_NAME = #{translateName,jdbcType=VARCHAR},
       TRANSLATE_LEVEL = #{translateLevel,jdbcType=VARCHAR},
       MEETING_SUM = #{meetingSum,jdbcType=BIGINT},
@@ -603,6 +619,7 @@
     set ORDER_ID = #{orderId,jdbcType=BIGINT},
       TRANSLATE_TYPE = #{translateType,jdbcType=VARCHAR},
       LANGUNGE_PAIR = #{langungePair,jdbcType=VARCHAR},
+      LANGUNGE_PAIR_NAME = #{langungePairName,jdbcType=VARCHAR},
       TRANSLATE_NAME = #{translateName,jdbcType=VARCHAR},
       TRANSLATE_LEVEL = #{translateLevel,jdbcType=VARCHAR},
       MEETING_SUM = #{meetingSum,jdbcType=BIGINT},
