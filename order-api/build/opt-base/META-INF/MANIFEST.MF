@@ -1,5 +1,0 @@
-Manifest-Version: 1.0.1-SNAPSHOT
-create-date: 2016-07-21 14:34:53
-Built-By: gradle 2.2
-packageName: opt-base
-
