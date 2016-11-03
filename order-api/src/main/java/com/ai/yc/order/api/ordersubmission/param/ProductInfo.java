@@ -2,6 +2,7 @@ package com.ai.yc.order.api.ordersubmission.param;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.List;
 /**
  * 订单下单产品信息
  * @author zhangzd
@@ -21,11 +22,7 @@ public class ProductInfo implements Serializable {
 
 	 */
 	private String translateType;
-	/**
-	 *  语言对
-	 *  数据字典获取编码
-	 */
-	private String langungePair;
+	
 	/**
 	 *  翻译主题
 	 *  快速翻译：取文本前15个字    
@@ -33,17 +30,7 @@ public class ProductInfo implements Serializable {
 	 *  口译翻译：用户填写 
 	 */
 	private String translateName;
-	/**
-	 *  翻译级别
-	 *  "100110：陪同翻译
-		100120：交替传译
-		100130：同声翻译
-		100210：标准级
-		100220：专业级
-		100230：出版级"
-
-	 */
-	private String translateLevel;
+	
 	/**
 	 * 翻译字数，前台传递过来
 	 * 快速翻译时为必填
@@ -80,10 +67,6 @@ public class ProductInfo implements Serializable {
 	 */
 	private String fieldCode;// FIELD_CODE
 	/**
-	 *  库存ID
-	 *  笔译翻译时为必填
-	 */
-	/**
 	 *  是否排版
 	 *  笔译翻译时为必填
 	 */
@@ -114,6 +97,30 @@ public class ProductInfo implements Serializable {
 	 *  口译订单为必填
 	 */
 	private Timestamp endTime;
+	/**
+	 * 语言对数据集合
+	 */
+	private List<LanguagePairInfo> languagePairInfoList;
+	/**
+	 * 翻译级别数据集合
+	 */
+	private List<TranslateLevelInfo> translateLevelInfoList;
+
+	public List<LanguagePairInfo> getLanguagePairInfoList() {
+		return languagePairInfoList;
+	}
+
+	public void setLanguagePairInfoList(List<LanguagePairInfo> languagePairInfoList) {
+		this.languagePairInfoList = languagePairInfoList;
+	}
+
+	public List<TranslateLevelInfo> getTranslateLevelInfoList() {
+		return translateLevelInfoList;
+	}
+
+	public void setTranslateLevelInfoList(List<TranslateLevelInfo> translateLevelInfoList) {
+		this.translateLevelInfoList = translateLevelInfoList;
+	}
 
 	public Long getTranslateSum() {
 		return translateSum;
@@ -131,13 +138,6 @@ public class ProductInfo implements Serializable {
 		this.translateType = translateType;
 	}
 
-	public String getLangungePair() {
-		return langungePair;
-	}
-
-	public void setLangungePair(String langungePair) {
-		this.langungePair = langungePair;
-	}
 
 	public String getTranslateName() {
 		return translateName;
@@ -145,14 +145,6 @@ public class ProductInfo implements Serializable {
 
 	public void setTranslateName(String translateName) {
 		this.translateName = translateName;
-	}
-
-	public String getTranslateLevel() {
-		return translateLevel;
-	}
-
-	public void setTranslateLevel(String translateLevel) {
-		this.translateLevel = translateLevel;
 	}
 
 	public Long getMeetingSum() {
