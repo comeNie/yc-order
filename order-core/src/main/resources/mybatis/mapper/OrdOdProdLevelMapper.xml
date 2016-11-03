@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ai.yc.order.dao.mapper.interfaces.OrdOdProdExtendMapper" >
-  <resultMap id="BaseResultMap" type="com.ai.yc.order.dao.mapper.bo.OrdOdProdExtend" >
+<mapper namespace="com.ai.yc.order.dao.mapper.interfaces.OrdOdProdLevelMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.yc.order.dao.mapper.bo.OrdOdProdLevel" >
     <id column="PROD_DETAL_EXTEND_ID" property="prodDetalExtendId" jdbcType="BIGINT" />
     <result column="PROD_DETAL_ID" property="prodDetalId" jdbcType="BIGINT" />
     <result column="ORDER_ID" property="orderId" jdbcType="BIGINT" />
-    <result column="LANGUNGE_PAIR" property="langungePair" jdbcType="VARCHAR" />
-    <result column="LANGUNGE_PAIR_NAME" property="langungePairName" jdbcType="VARCHAR" />
+    <result column="TRANSLATE_LEVEL" property="translateLevel" jdbcType="VARCHAR" />
     <result column="INFO_JSON" property="infoJson" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -68,16 +67,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    PROD_DETAL_EXTEND_ID, PROD_DETAL_ID, ORDER_ID, LANGUNGE_PAIR, LANGUNGE_PAIR_NAME, 
-    INFO_JSON
+    PROD_DETAL_EXTEND_ID, PROD_DETAL_ID, ORDER_ID, TRANSLATE_LEVEL, INFO_JSON
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdProdExtendCriteria" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdProdLevelCriteria" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from ord_od_prod_extend
+    from ord_od_prod_level
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -91,29 +89,27 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Long" >
     select 
     <include refid="Base_Column_List" />
-    from ord_od_prod_extend
+    from ord_od_prod_level
     where PROD_DETAL_EXTEND_ID = #{prodDetalExtendId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="Long" >
-    delete from ord_od_prod_extend
+    delete from ord_od_prod_level
     where PROD_DETAL_EXTEND_ID = #{prodDetalExtendId,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdProdExtendCriteria" >
-    delete from ord_od_prod_extend
+  <delete id="deleteByExample" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdProdLevelCriteria" >
+    delete from ord_od_prod_level
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdProdExtend" >
-    insert into ord_od_prod_extend (PROD_DETAL_EXTEND_ID, PROD_DETAL_ID, ORDER_ID, 
-      LANGUNGE_PAIR, LANGUNGE_PAIR_NAME, INFO_JSON
-      )
+  <insert id="insert" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdProdLevel" >
+    insert into ord_od_prod_level (PROD_DETAL_EXTEND_ID, PROD_DETAL_ID, ORDER_ID, 
+      TRANSLATE_LEVEL, INFO_JSON)
     values (#{prodDetalExtendId,jdbcType=BIGINT}, #{prodDetalId,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, 
-      #{langungePair,jdbcType=VARCHAR}, #{langungePairName,jdbcType=VARCHAR}, #{infoJson,jdbcType=VARCHAR}
-      )
+      #{translateLevel,jdbcType=VARCHAR}, #{infoJson,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdProdExtend" >
-    insert into ord_od_prod_extend
+  <insert id="insertSelective" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdProdLevel" >
+    insert into ord_od_prod_level
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="prodDetalExtendId != null" >
         PROD_DETAL_EXTEND_ID,
@@ -124,11 +120,8 @@
       <if test="orderId != null" >
         ORDER_ID,
       </if>
-      <if test="langungePair != null" >
-        LANGUNGE_PAIR,
-      </if>
-      <if test="langungePairName != null" >
-        LANGUNGE_PAIR_NAME,
+      <if test="translateLevel != null" >
+        TRANSLATE_LEVEL,
       </if>
       <if test="infoJson != null" >
         INFO_JSON,
@@ -144,25 +137,22 @@
       <if test="orderId != null" >
         #{orderId,jdbcType=BIGINT},
       </if>
-      <if test="langungePair != null" >
-        #{langungePair,jdbcType=VARCHAR},
-      </if>
-      <if test="langungePairName != null" >
-        #{langungePairName,jdbcType=VARCHAR},
+      <if test="translateLevel != null" >
+        #{translateLevel,jdbcType=VARCHAR},
       </if>
       <if test="infoJson != null" >
         #{infoJson,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdProdExtendCriteria" resultType="java.lang.Integer" >
-    select count(*) from ord_od_prod_extend
+  <select id="countByExample" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdProdLevelCriteria" resultType="java.lang.Integer" >
+    select count(*) from ord_od_prod_level
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update ord_od_prod_extend
+    update ord_od_prod_level
     <set >
       <if test="record.prodDetalExtendId != null" >
         PROD_DETAL_EXTEND_ID = #{record.prodDetalExtendId,jdbcType=BIGINT},
@@ -173,11 +163,8 @@
       <if test="record.orderId != null" >
         ORDER_ID = #{record.orderId,jdbcType=BIGINT},
       </if>
-      <if test="record.langungePair != null" >
-        LANGUNGE_PAIR = #{record.langungePair,jdbcType=VARCHAR},
-      </if>
-      <if test="record.langungePairName != null" >
-        LANGUNGE_PAIR_NAME = #{record.langungePairName,jdbcType=VARCHAR},
+      <if test="record.translateLevel != null" >
+        TRANSLATE_LEVEL = #{record.translateLevel,jdbcType=VARCHAR},
       </if>
       <if test="record.infoJson != null" >
         INFO_JSON = #{record.infoJson,jdbcType=VARCHAR},
@@ -188,19 +175,18 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update ord_od_prod_extend
+    update ord_od_prod_level
     set PROD_DETAL_EXTEND_ID = #{record.prodDetalExtendId,jdbcType=BIGINT},
       PROD_DETAL_ID = #{record.prodDetalId,jdbcType=BIGINT},
       ORDER_ID = #{record.orderId,jdbcType=BIGINT},
-      LANGUNGE_PAIR = #{record.langungePair,jdbcType=VARCHAR},
-      LANGUNGE_PAIR_NAME = #{record.langungePairName,jdbcType=VARCHAR},
+      TRANSLATE_LEVEL = #{record.translateLevel,jdbcType=VARCHAR},
       INFO_JSON = #{record.infoJson,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdProdExtend" >
-    update ord_od_prod_extend
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdProdLevel" >
+    update ord_od_prod_level
     <set >
       <if test="prodDetalId != null" >
         PROD_DETAL_ID = #{prodDetalId,jdbcType=BIGINT},
@@ -208,11 +194,8 @@
       <if test="orderId != null" >
         ORDER_ID = #{orderId,jdbcType=BIGINT},
       </if>
-      <if test="langungePair != null" >
-        LANGUNGE_PAIR = #{langungePair,jdbcType=VARCHAR},
-      </if>
-      <if test="langungePairName != null" >
-        LANGUNGE_PAIR_NAME = #{langungePairName,jdbcType=VARCHAR},
+      <if test="translateLevel != null" >
+        TRANSLATE_LEVEL = #{translateLevel,jdbcType=VARCHAR},
       </if>
       <if test="infoJson != null" >
         INFO_JSON = #{infoJson,jdbcType=VARCHAR},
@@ -220,12 +203,11 @@
     </set>
     where PROD_DETAL_EXTEND_ID = #{prodDetalExtendId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdProdExtend" >
-    update ord_od_prod_extend
+  <update id="updateByPrimaryKey" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdProdLevel" >
+    update ord_od_prod_level
     set PROD_DETAL_ID = #{prodDetalId,jdbcType=BIGINT},
       ORDER_ID = #{orderId,jdbcType=BIGINT},
-      LANGUNGE_PAIR = #{langungePair,jdbcType=VARCHAR},
-      LANGUNGE_PAIR_NAME = #{langungePairName,jdbcType=VARCHAR},
+      TRANSLATE_LEVEL = #{translateLevel,jdbcType=VARCHAR},
       INFO_JSON = #{infoJson,jdbcType=VARCHAR}
     where PROD_DETAL_EXTEND_ID = #{prodDetalExtendId,jdbcType=BIGINT}
   </update>

@@ -1,12 +1,10 @@
 package com.ai.yc.order.dao.mapper.interfaces;
 
-import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
-
 import com.ai.yc.order.dao.mapper.bo.OrdOdProd;
 import com.ai.yc.order.dao.mapper.bo.OrdOdProdCriteria;
 import com.ai.yc.order.dao.mapper.bo.OrdOdProdWithBLOBs;
+import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface OrdOdProdMapper {
     int countByExample(OrdOdProdCriteria example);
