@@ -535,6 +535,146 @@ public class OrdOrderCriteria {
             return (Criteria) this;
         }
 
+        public Criteria andTranslateTypeIsNull() {
+            addCriterion("TRANSLATE_TYPE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTranslateTypeIsNotNull() {
+            addCriterion("TRANSLATE_TYPE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTranslateTypeEqualTo(String value) {
+            addCriterion("TRANSLATE_TYPE =", value, "translateType");
+            return (Criteria) this;
+        }
+
+        public Criteria andTranslateTypeNotEqualTo(String value) {
+            addCriterion("TRANSLATE_TYPE <>", value, "translateType");
+            return (Criteria) this;
+        }
+
+        public Criteria andTranslateTypeGreaterThan(String value) {
+            addCriterion("TRANSLATE_TYPE >", value, "translateType");
+            return (Criteria) this;
+        }
+
+        public Criteria andTranslateTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("TRANSLATE_TYPE >=", value, "translateType");
+            return (Criteria) this;
+        }
+
+        public Criteria andTranslateTypeLessThan(String value) {
+            addCriterion("TRANSLATE_TYPE <", value, "translateType");
+            return (Criteria) this;
+        }
+
+        public Criteria andTranslateTypeLessThanOrEqualTo(String value) {
+            addCriterion("TRANSLATE_TYPE <=", value, "translateType");
+            return (Criteria) this;
+        }
+
+        public Criteria andTranslateTypeLike(String value) {
+            addCriterion("TRANSLATE_TYPE like", value, "translateType");
+            return (Criteria) this;
+        }
+
+        public Criteria andTranslateTypeNotLike(String value) {
+            addCriterion("TRANSLATE_TYPE not like", value, "translateType");
+            return (Criteria) this;
+        }
+
+        public Criteria andTranslateTypeIn(List<String> values) {
+            addCriterion("TRANSLATE_TYPE in", values, "translateType");
+            return (Criteria) this;
+        }
+
+        public Criteria andTranslateTypeNotIn(List<String> values) {
+            addCriterion("TRANSLATE_TYPE not in", values, "translateType");
+            return (Criteria) this;
+        }
+
+        public Criteria andTranslateTypeBetween(String value1, String value2) {
+            addCriterion("TRANSLATE_TYPE between", value1, value2, "translateType");
+            return (Criteria) this;
+        }
+
+        public Criteria andTranslateTypeNotBetween(String value1, String value2) {
+            addCriterion("TRANSLATE_TYPE not between", value1, value2, "translateType");
+            return (Criteria) this;
+        }
+
+        public Criteria andTranslateNameIsNull() {
+            addCriterion("TRANSLATE_NAME is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTranslateNameIsNotNull() {
+            addCriterion("TRANSLATE_NAME is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTranslateNameEqualTo(String value) {
+            addCriterion("TRANSLATE_NAME =", value, "translateName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTranslateNameNotEqualTo(String value) {
+            addCriterion("TRANSLATE_NAME <>", value, "translateName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTranslateNameGreaterThan(String value) {
+            addCriterion("TRANSLATE_NAME >", value, "translateName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTranslateNameGreaterThanOrEqualTo(String value) {
+            addCriterion("TRANSLATE_NAME >=", value, "translateName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTranslateNameLessThan(String value) {
+            addCriterion("TRANSLATE_NAME <", value, "translateName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTranslateNameLessThanOrEqualTo(String value) {
+            addCriterion("TRANSLATE_NAME <=", value, "translateName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTranslateNameLike(String value) {
+            addCriterion("TRANSLATE_NAME like", value, "translateName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTranslateNameNotLike(String value) {
+            addCriterion("TRANSLATE_NAME not like", value, "translateName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTranslateNameIn(List<String> values) {
+            addCriterion("TRANSLATE_NAME in", values, "translateName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTranslateNameNotIn(List<String> values) {
+            addCriterion("TRANSLATE_NAME not in", values, "translateName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTranslateNameBetween(String value1, String value2) {
+            addCriterion("TRANSLATE_NAME between", value1, value2, "translateName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTranslateNameNotBetween(String value1, String value2) {
+            addCriterion("TRANSLATE_NAME not between", value1, value2, "translateName");
+            return (Criteria) this;
+        }
+
         public Criteria andSubFlagIsNull() {
             addCriterion("SUB_FLAG is null");
             return (Criteria) this;

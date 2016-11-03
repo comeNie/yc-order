@@ -1,14 +1,13 @@
 package com.ai.yc.order.util;
 
-import java.lang.reflect.Field;  
-import java.util.HashMap;  
-import java.util.List;  
-import java.util.Map;  
-  
-import org.dom4j.Document;  
-import org.dom4j.DocumentHelper;  
-import org.dom4j.Element;  
-  
+import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.dom4j.Document;
+import org.dom4j.DocumentHelper;
+import org.dom4j.Element;
 
 import com.ai.opt.sdk.util.StringUtil;
 

@@ -30,6 +30,14 @@
 	<!-- 缓存 -->
 	<dubbo:reference id="iCacheSV"
 		interface="com.ai.platform.common.api.cache.interfaces.ICacheSV" />
+	
+	<!-- 语言对 -->	
+	<dubbo:reference id="iQuerySysDuadSV"
+		interface="com.ai.platform.common.api.sysduad.interfaces.IQuerySysDuadSV" />	
+		
+	<!-- 用途 -->	
+	<dubbo:reference id="iQuerySysPurposeSV"
+		interface="com.ai.platform.common.api.syspurpose.interfaces.IQuerySysPurposeSV" />		
 
 	
 </beans>

@@ -1,9 +1,11 @@
 package com.ai.yc.order.dao.mapper.interfaces;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.ai.yc.order.dao.mapper.bo.OrdOdPersonInfo;
 import com.ai.yc.order.dao.mapper.bo.OrdOdPersonInfoCriteria;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 public interface OrdOdPersonInfoMapper {
     int countByExample(OrdOdPersonInfoCriteria example);

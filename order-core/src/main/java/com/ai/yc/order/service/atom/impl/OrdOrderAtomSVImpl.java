@@ -1,7 +1,5 @@
 package com.ai.yc.order.service.atom.impl;
 
-import java.util.List;
-
 import org.springframework.stereotype.Component;
 
 import com.ai.yc.order.dao.mapper.bo.OrdOrder;

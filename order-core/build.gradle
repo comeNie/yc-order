@@ -15,4 +15,9 @@ dependencies {
             "org.springframework:spring-test:4.1.7.RELEASE",
             "junit:junit:4.12"
             )
+	
+	/*********************公共中心****************************/
+	compile 'com.ai.platform.common:sysduad:1.0-SNAPSHOT'
+	compile 'com.ai.platform.common:syspurpose:1.0-SNAPSHOT'
+	
 }

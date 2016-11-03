@@ -1,9 +1,11 @@
 package com.ai.yc.order.dao.mapper.interfaces;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.ai.yc.order.dao.mapper.bo.OrdOdInvoice;
 import com.ai.yc.order.dao.mapper.bo.OrdOdInvoiceCriteria;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 public interface OrdOdInvoiceMapper {
     int countByExample(OrdOdInvoiceCriteria example);

@@ -1,7 +1,8 @@
 package com.ai.yc.order.util;
 
-import com.ai.opt.base.exception.SystemException;
 import org.apache.commons.lang.StringUtils;
+
+import com.ai.opt.base.exception.SystemException;
 
 /**
  * 通用检查类

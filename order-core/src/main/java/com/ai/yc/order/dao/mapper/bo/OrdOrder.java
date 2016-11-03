@@ -15,6 +15,10 @@ public class OrdOrder {
 
     private String orderLevel;
 
+    private String translateType;
+
+    private String translateName;
+
     private String subFlag;
 
     private String userType;
@@ -115,6 +119,22 @@ public class OrdOrder {
 
     public void setOrderLevel(String orderLevel) {
         this.orderLevel = orderLevel == null ? null : orderLevel.trim();
+    }
+
+    public String getTranslateType() {
+        return translateType;
+    }
+
+    public void setTranslateType(String translateType) {
+        this.translateType = translateType == null ? null : translateType.trim();
+    }
+
+    public String getTranslateName() {
+        return translateName;
+    }
+
+    public void setTranslateName(String translateName) {
+        this.translateName = translateName == null ? null : translateName.trim();
     }
 
     public String getSubFlag() {

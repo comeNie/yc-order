@@ -11,6 +11,8 @@ public class OrdOdProd {
 
     private String langungePair;
 
+    private String langungePairName;
+
     private String translateName;
 
     private String translateLevel;
@@ -51,6 +53,10 @@ public class OrdOdProd {
 
     private Timestamp updateTime;
 
+    private String translateSum;
+
+    private String prodDetalState;
+
     public Long getProdDetalId() {
         return prodDetalId;
     }
@@ -81,6 +87,14 @@ public class OrdOdProd {
 
     public void setLangungePair(String langungePair) {
         this.langungePair = langungePair == null ? null : langungePair.trim();
+    }
+
+    public String getLangungePairName() {
+        return langungePairName;
+    }
+
+    public void setLangungePairName(String langungePairName) {
+        this.langungePairName = langungePairName == null ? null : langungePairName.trim();
     }
 
     public String getTranslateName() {
@@ -241,5 +255,21 @@ public class OrdOdProd {
 
     public void setUpdateTime(Timestamp updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getTranslateSum() {
+        return translateSum;
+    }
+
+    public void setTranslateSum(String translateSum) {
+        this.translateSum = translateSum == null ? null : translateSum.trim();
+    }
+
+    public String getProdDetalState() {
+        return prodDetalState;
+    }
+
+    public void setProdDetalState(String prodDetalState) {
+        this.prodDetalState = prodDetalState == null ? null : prodDetalState.trim();
     }
 }
