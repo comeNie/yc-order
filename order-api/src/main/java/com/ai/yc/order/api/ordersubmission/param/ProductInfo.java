@@ -45,6 +45,11 @@ public class ProductInfo implements Serializable {
 	 */
 	private String translateLevel;
 	/**
+	 * 翻译字数，前台传递过来
+	 * 快速翻译时为必填
+	 */
+	private Long translateSum;//TRANSLATE_SUM
+	/**
 	 *  会场数量
 	 *  口译翻译时为必填
 	 */
@@ -109,6 +114,14 @@ public class ProductInfo implements Serializable {
 	 *  口译订单为必填
 	 */
 	private Timestamp endTime;
+
+	public Long getTranslateSum() {
+		return translateSum;
+	}
+
+	public void setTranslateSum(Long translateSum) {
+		this.translateSum = translateSum;
+	}
 
 	public String getTranslateType() {
 		return translateType;
