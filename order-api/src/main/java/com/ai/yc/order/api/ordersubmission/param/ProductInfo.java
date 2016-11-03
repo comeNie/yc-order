@@ -16,16 +16,6 @@ public class ProductInfo implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	/**
-	 * 翻译类型 "0：快速翻译 1：文档翻译 2：口译翻译"
-	 * 
-	 */
-	private String translateType;
-
-	/**
-	 * 翻译主题 快速翻译：取文本前15个字 文档翻译：取第一个文件名称 口译翻译：用户填写
-	 */
-	private String translateName;
 
 	/**
 	 * 翻译字数，前台传递过来 快速翻译时为必填
@@ -122,22 +112,6 @@ public class ProductInfo implements Serializable {
 
 	public void setTranslateSum(Long translateSum) {
 		this.translateSum = translateSum;
-	}
-
-	public String getTranslateType() {
-		return translateType;
-	}
-
-	public void setTranslateType(String translateType) {
-		this.translateType = translateType;
-	}
-
-	public String getTranslateName() {
-		return translateName;
-	}
-
-	public void setTranslateName(String translateName) {
-		this.translateName = translateName;
 	}
 
 	public Long getMeetingSum() {
