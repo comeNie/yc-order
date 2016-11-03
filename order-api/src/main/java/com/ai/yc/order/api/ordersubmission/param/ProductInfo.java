@@ -3,8 +3,10 @@ package com.ai.yc.order.api.ordersubmission.param;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
+
 /**
  * 订单下单产品信息
+ * 
  * @author zhangzd
  *
  */
@@ -15,86 +17,66 @@ public class ProductInfo implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	/**
-	 *  翻译类型
-	 *  "0：快速翻译
-		1：文档翻译
-		2：口译翻译"
-
+	 * 翻译类型 "0：快速翻译 1：文档翻译 2：口译翻译"
+	 * 
 	 */
 	private String translateType;
-	
+
 	/**
-	 *  翻译主题
-	 *  快速翻译：取文本前15个字    
-	 *  文档翻译：取第一个文件名称
-	 *  口译翻译：用户填写 
+	 * 翻译主题 快速翻译：取文本前15个字 文档翻译：取第一个文件名称 口译翻译：用户填写
 	 */
 	private String translateName;
-	
+
 	/**
-	 * 翻译字数，前台传递过来
-	 * 快速翻译时为必填
+	 * 翻译字数，前台传递过来 快速翻译时为必填
 	 */
-	private Long translateSum;//TRANSLATE_SUM
+	private Long translateSum;// TRANSLATE_SUM
 	/**
-	 *  会场数量
-	 *  口译翻译时为必填
+	 * 会场数量 口译翻译时为必填
 	 */
 	private Long meetingSum;// MEETING_SUM
 	/**
-	 *  译员性别
-	 *  口译翻译时为必填
+	 * 译员性别 口译翻译时为必填
 	 */
 	private String interperGen;// INTERPER_GEN;
 	/**
-	 *  会议地点
-	 *  口译翻译时为必填
+	 * 会议地点 口译翻译时为必填
 	 */
 	private String meetingAddress;// MEETING_ADDRESS;
 	/**
-	 *  译员数量
-	 *  口译翻译时为必填
+	 * 译员数量 口译翻译时为必填
 	 */
 	private Long interperSum;// INTERPER_SUM;
 	/**
-	 *  用途ID
-	 *  笔译翻译时为必填
+	 * 用途ID 笔译翻译时为必填
 	 */
 	private String useCode;// USE_CODE
 	/**
-	 *  领域ID
-	 *  笔译翻译时为必填
+	 * 领域ID 笔译翻译时为必填
 	 */
 	private String fieldCode;// FIELD_CODE
 	/**
-	 *  是否排版
-	 *  笔译翻译时为必填
+	 * 是否排版 笔译翻译时为必填
 	 */
 	private String isSetType;// IS_SET_TYPE
 	/**
-	 *  是否加急
-	 *  笔译翻译时为必填
+	 * 是否加急 笔译翻译时为必填
 	 */
 	private String isUrgent;
 	/**
-	 *  需翻译内容
-	 *  笔译翻译时为必填，文档翻译时记录ID
+	 * 需翻译内容 笔译翻译时为必填，文档翻译时记录ID
 	 */
 	private String needTranslateInfo;// NEED_TRANSLATE_INFO;
 	/**
-	 *  翻译内容
-	 *  笔译翻译时为必填，文档翻译时记录ID
+	 * 翻译内容 笔译翻译时为必填，文档翻译时记录ID
 	 */
 	private String translateInfo;// TRANSLATE_INFO;
 	/**
-	 *  开始时间
-	 *  笔译订单取订单支付完成时间        
-	 *  口译订单取用户选择时间
+	 * 开始时间 笔译订单取订单支付完成时间 口译订单取用户选择时间
 	 */
 	private Timestamp startTime;
 	/**
-	 *  结束时间
-	 *  口译订单为必填
+	 * 结束时间 口译订单为必填
 	 */
 	private Timestamp endTime;
 	/**
@@ -105,6 +87,18 @@ public class ProductInfo implements Serializable {
 	 * 翻译级别数据集合
 	 */
 	private List<TranslateLevelInfo> translateLevelInfoList;
+	/**
+	 * 文档信息数据集合
+	 */
+	private List<FileInfo> fileInfoList;
+
+	public List<FileInfo> getFileInfoList() {
+		return fileInfoList;
+	}
+
+	public void setFileInfoList(List<FileInfo> fileInfoList) {
+		this.fileInfoList = fileInfoList;
+	}
 
 	public List<LanguagePairInfo> getLanguagePairInfoList() {
 		return languagePairInfoList;
@@ -137,7 +131,6 @@ public class ProductInfo implements Serializable {
 	public void setTranslateType(String translateType) {
 		this.translateType = translateType;
 	}
-
 
 	public String getTranslateName() {
 		return translateName;
