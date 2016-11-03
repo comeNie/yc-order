@@ -10,7 +10,7 @@ public class OrderSubmissionValidate {
 		return null;
 	}
 	/**
-	 * 口译咸蛋校验
+	 * 口译下单校验
 	 */
 	public static String interpretOrder(OrderSubmissionRequest request){
 		return null;
