@@ -1,6 +1,7 @@
 package com.ai.yc.order.api.orderquery.param;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import com.ai.opt.base.vo.BaseInfo;
 
@@ -55,14 +56,7 @@ public class OrdOrderVo extends BaseInfo {
 	 * 翻译类型
 	 */
 	private String translateType;
-	/**
-	 * 语言对ID
-	 */
-	private String langungePair;
-	/**
-	 * 语言对名称
-	 */
-	private String langungePairName;
+
 	/**
 	 * 翻译主题
 	 */
@@ -99,6 +93,18 @@ public class OrdOrderVo extends BaseInfo {
 	 * 总待收费用
 	 */
 	private Long payFee;
+	/**
+	 * 语言信息
+	 */
+	private List<OrdProdExtendVo> ordProdExtendList;
+	/**
+	 * 文件信息
+	 */
+	private List<OrdProdFileVo> ordProdFileList;
+	/**
+	 * 翻译级别信息
+	 */
+	private List<OrdProdLevelVo> ordprodLevelList;
 
 	public Long getOrderId() {
 		return orderId;
@@ -196,22 +202,6 @@ public class OrdOrderVo extends BaseInfo {
 		this.translateType = translateType;
 	}
 
-	public String getLangungePair() {
-		return langungePair;
-	}
-
-	public void setLangungePair(String langungePair) {
-		this.langungePair = langungePair;
-	}
-
-	public String getLangungePairName() {
-		return langungePairName;
-	}
-
-	public void setLangungePairName(String langungePairName) {
-		this.langungePairName = langungePairName;
-	}
-
 	public String getTranslateName() {
 		return translateName;
 	}
@@ -274,6 +264,30 @@ public class OrdOrderVo extends BaseInfo {
 
 	public void setPayFee(Long payFee) {
 		this.payFee = payFee;
+	}
+
+	public List<OrdProdExtendVo> getOrdProdExtendList() {
+		return ordProdExtendList;
+	}
+
+	public void setOrdProdExtendList(List<OrdProdExtendVo> ordProdExtendList) {
+		this.ordProdExtendList = ordProdExtendList;
+	}
+
+	public List<OrdProdFileVo> getOrdProdFileList() {
+		return ordProdFileList;
+	}
+
+	public void setOrdProdFileList(List<OrdProdFileVo> ordProdFileList) {
+		this.ordProdFileList = ordProdFileList;
+	}
+
+	public List<OrdProdLevelVo> getOrdprodLevelList() {
+		return ordprodLevelList;
+	}
+
+	public void setOrdprodLevelList(List<OrdProdLevelVo> ordprodLevelList) {
+		this.ordprodLevelList = ordprodLevelList;
 	}
 
 }
