@@ -22,7 +22,7 @@ import com.ai.yc.order.api.orderquery.param.QueryOrderRsponse;
 @Produces({ MediaType.APPLICATION_JSON, MediaType.TEXT_XML })
 public interface IOrderQuerySV {
 	/**
-	 * 查询订单列表（我的订单）
+	 * 查询订单列表（我的订单--客户）
 	 * @param queryOrderRequest
 	 * @return
 	 * @throws BusinessException
