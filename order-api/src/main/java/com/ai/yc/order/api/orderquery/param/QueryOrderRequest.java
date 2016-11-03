@@ -25,9 +25,9 @@ public class QueryOrderRequest extends BaseInfo {
 	 */
 	private String translateType;
 	/**
-	 * 订单简要信息
+	 * 翻译主题
 	 */
-	private String orderDesc;
+	private String translateName;
 	/**
 	 * 下单查询开始时间
 	 */
@@ -78,12 +78,12 @@ public class QueryOrderRequest extends BaseInfo {
 		this.translateType = translateType;
 	}
 
-	public String getOrderDesc() {
-		return orderDesc;
+	public String getTranslateName() {
+		return translateName;
 	}
 
-	public void setOrderDesc(String orderDesc) {
-		this.orderDesc = orderDesc;
+	public void setTranslateName(String translateName) {
+		this.translateName = translateName;
 	}
 
 	public Timestamp getOrderTimeStart() {
