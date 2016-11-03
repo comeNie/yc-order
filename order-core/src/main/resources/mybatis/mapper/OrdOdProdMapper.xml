@@ -27,6 +27,8 @@
     <result column="INTERPER_ID" property="interperId" jdbcType="VARCHAR" />
     <result column="UPDATE_INTERPER_ID" property="updateInterperId" jdbcType="VARCHAR" />
     <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="TRANSLATE_SUM" property="translateSum" jdbcType="VARCHAR" />
+    <result column="PROD_DETAL_STATE" property="prodDetalState" jdbcType="VARCHAR" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.ai.yc.order.dao.mapper.bo.OrdOdProdWithBLOBs" extends="BaseResultMap" >
     <result column="NEED_TRANSLATE_INFO" property="needTranslateInfo" jdbcType="LONGVARCHAR" />
@@ -94,7 +96,8 @@
     PROD_DETAL_ID, ORDER_ID, TRANSLATE_TYPE, LANGUNGE_PAIR, LANGUNGE_PAIR_NAME, TRANSLATE_NAME, 
     TRANSLATE_LEVEL, MEETING_SUM, INTERPER_GEN, MEETING_ADDRESS, INTERPER_SUM, USE_CODE, 
     FIELD_CODE, IS_SET_TYPE, IS_URGENT, STATE_TIME, END_TIME, STATE, LOOK_STATE, INTERPER_FEE, 
-    IS_INVOICE, UPDATE_CHL_ID, INTERPER_ID, UPDATE_INTERPER_ID, UPDATE_TIME
+    IS_INVOICE, UPDATE_CHL_ID, INTERPER_ID, UPDATE_INTERPER_ID, UPDATE_TIME, TRANSLATE_SUM, 
+    PROD_DETAL_STATE
   </sql>
   <sql id="Blob_Column_List" >
     NEED_TRANSLATE_INFO, TRANSLATE_INFO
@@ -159,7 +162,8 @@
       STATE_TIME, END_TIME, STATE, 
       LOOK_STATE, INTERPER_FEE, IS_INVOICE, 
       UPDATE_CHL_ID, INTERPER_ID, UPDATE_INTERPER_ID, 
-      UPDATE_TIME, NEED_TRANSLATE_INFO, TRANSLATE_INFO
+      UPDATE_TIME, TRANSLATE_SUM, PROD_DETAL_STATE, 
+      NEED_TRANSLATE_INFO, TRANSLATE_INFO
       )
     values (#{prodDetalId,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, #{translateType,jdbcType=VARCHAR}, 
       #{langungePair,jdbcType=VARCHAR}, #{langungePairName,jdbcType=VARCHAR}, #{translateName,jdbcType=VARCHAR}, 
@@ -169,7 +173,8 @@
       #{stateTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{state,jdbcType=VARCHAR}, 
       #{lookState,jdbcType=VARCHAR}, #{interperFee,jdbcType=BIGINT}, #{isInvoice,jdbcType=VARCHAR}, 
       #{updateChlId,jdbcType=VARCHAR}, #{interperId,jdbcType=VARCHAR}, #{updateInterperId,jdbcType=VARCHAR}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{needTranslateInfo,jdbcType=LONGVARCHAR}, #{translateInfo,jdbcType=LONGVARCHAR}
+      #{updateTime,jdbcType=TIMESTAMP}, #{translateSum,jdbcType=VARCHAR}, #{prodDetalState,jdbcType=VARCHAR}, 
+      #{needTranslateInfo,jdbcType=LONGVARCHAR}, #{translateInfo,jdbcType=LONGVARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdProdWithBLOBs" >
@@ -249,6 +254,12 @@
       </if>
       <if test="updateTime != null" >
         UPDATE_TIME,
+      </if>
+      <if test="translateSum != null" >
+        TRANSLATE_SUM,
+      </if>
+      <if test="prodDetalState != null" >
+        PROD_DETAL_STATE,
       </if>
       <if test="needTranslateInfo != null" >
         NEED_TRANSLATE_INFO,
@@ -332,6 +343,12 @@
       </if>
       <if test="updateTime != null" >
         #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="translateSum != null" >
+        #{translateSum,jdbcType=VARCHAR},
+      </if>
+      <if test="prodDetalState != null" >
+        #{prodDetalState,jdbcType=VARCHAR},
       </if>
       <if test="needTranslateInfo != null" >
         #{needTranslateInfo,jdbcType=LONGVARCHAR},
@@ -425,6 +442,12 @@
       <if test="record.updateTime != null" >
         UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.translateSum != null" >
+        TRANSLATE_SUM = #{record.translateSum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodDetalState != null" >
+        PROD_DETAL_STATE = #{record.prodDetalState,jdbcType=VARCHAR},
+      </if>
       <if test="record.needTranslateInfo != null" >
         NEED_TRANSLATE_INFO = #{record.needTranslateInfo,jdbcType=LONGVARCHAR},
       </if>
@@ -463,6 +486,8 @@
       INTERPER_ID = #{record.interperId,jdbcType=VARCHAR},
       UPDATE_INTERPER_ID = #{record.updateInterperId,jdbcType=VARCHAR},
       UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      TRANSLATE_SUM = #{record.translateSum,jdbcType=VARCHAR},
+      PROD_DETAL_STATE = #{record.prodDetalState,jdbcType=VARCHAR},
       NEED_TRANSLATE_INFO = #{record.needTranslateInfo,jdbcType=LONGVARCHAR},
       TRANSLATE_INFO = #{record.translateInfo,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
@@ -495,7 +520,9 @@
       UPDATE_CHL_ID = #{record.updateChlId,jdbcType=VARCHAR},
       INTERPER_ID = #{record.interperId,jdbcType=VARCHAR},
       UPDATE_INTERPER_ID = #{record.updateInterperId,jdbcType=VARCHAR},
-      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP}
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      TRANSLATE_SUM = #{record.translateSum,jdbcType=VARCHAR},
+      PROD_DETAL_STATE = #{record.prodDetalState,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -575,6 +602,12 @@
       <if test="updateTime != null" >
         UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="translateSum != null" >
+        TRANSLATE_SUM = #{translateSum,jdbcType=VARCHAR},
+      </if>
+      <if test="prodDetalState != null" >
+        PROD_DETAL_STATE = #{prodDetalState,jdbcType=VARCHAR},
+      </if>
       <if test="needTranslateInfo != null" >
         NEED_TRANSLATE_INFO = #{needTranslateInfo,jdbcType=LONGVARCHAR},
       </if>
@@ -610,6 +643,8 @@
       INTERPER_ID = #{interperId,jdbcType=VARCHAR},
       UPDATE_INTERPER_ID = #{updateInterperId,jdbcType=VARCHAR},
       UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      TRANSLATE_SUM = #{translateSum,jdbcType=VARCHAR},
+      PROD_DETAL_STATE = #{prodDetalState,jdbcType=VARCHAR},
       NEED_TRANSLATE_INFO = #{needTranslateInfo,jdbcType=LONGVARCHAR},
       TRANSLATE_INFO = #{translateInfo,jdbcType=LONGVARCHAR}
     where PROD_DETAL_ID = #{prodDetalId,jdbcType=BIGINT}
@@ -639,7 +674,9 @@
       UPDATE_CHL_ID = #{updateChlId,jdbcType=VARCHAR},
       INTERPER_ID = #{interperId,jdbcType=VARCHAR},
       UPDATE_INTERPER_ID = #{updateInterperId,jdbcType=VARCHAR},
-      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      TRANSLATE_SUM = #{translateSum,jdbcType=VARCHAR},
+      PROD_DETAL_STATE = #{prodDetalState,jdbcType=VARCHAR}
     where PROD_DETAL_ID = #{prodDetalId,jdbcType=BIGINT}
   </update>
 </mapper>

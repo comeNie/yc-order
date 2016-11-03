@@ -53,6 +53,10 @@ public class OrdOdProd {
 
     private Timestamp updateTime;
 
+    private String translateSum;
+
+    private String prodDetalState;
+
     public Long getProdDetalId() {
         return prodDetalId;
     }
@@ -251,5 +255,21 @@ public class OrdOdProd {
 
     public void setUpdateTime(Timestamp updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getTranslateSum() {
+        return translateSum;
+    }
+
+    public void setTranslateSum(String translateSum) {
+        this.translateSum = translateSum == null ? null : translateSum.trim();
+    }
+
+    public String getProdDetalState() {
+        return prodDetalState;
+    }
+
+    public void setProdDetalState(String prodDetalState) {
+        this.prodDetalState = prodDetalState == null ? null : prodDetalState.trim();
     }
 }
