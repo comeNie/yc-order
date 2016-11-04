@@ -1204,6 +1204,66 @@ public class OrdOdFeeTotalCriteria {
             addCriterion("TOTAL_JF not between", value1, value2, "totalJf");
             return (Criteria) this;
         }
+
+        public Criteria andPayTimeIsNull() {
+            addCriterion("PAY_TIME is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTimeIsNotNull() {
+            addCriterion("PAY_TIME is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTimeEqualTo(Timestamp value) {
+            addCriterion("PAY_TIME =", value, "payTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTimeNotEqualTo(Timestamp value) {
+            addCriterion("PAY_TIME <>", value, "payTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTimeGreaterThan(Timestamp value) {
+            addCriterion("PAY_TIME >", value, "payTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTimeGreaterThanOrEqualTo(Timestamp value) {
+            addCriterion("PAY_TIME >=", value, "payTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTimeLessThan(Timestamp value) {
+            addCriterion("PAY_TIME <", value, "payTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTimeLessThanOrEqualTo(Timestamp value) {
+            addCriterion("PAY_TIME <=", value, "payTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTimeIn(List<Timestamp> values) {
+            addCriterion("PAY_TIME in", values, "payTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTimeNotIn(List<Timestamp> values) {
+            addCriterion("PAY_TIME not in", values, "payTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTimeBetween(Timestamp value1, Timestamp value2) {
+            addCriterion("PAY_TIME between", value1, value2, "payTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTimeNotBetween(Timestamp value1, Timestamp value2) {
+            addCriterion("PAY_TIME not between", value1, value2, "payTime");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

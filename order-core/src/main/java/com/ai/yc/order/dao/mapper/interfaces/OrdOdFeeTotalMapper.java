@@ -1,11 +1,9 @@
 package com.ai.yc.order.dao.mapper.interfaces;
 
-import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
-
 import com.ai.yc.order.dao.mapper.bo.OrdOdFeeTotal;
 import com.ai.yc.order.dao.mapper.bo.OrdOdFeeTotalCriteria;
+import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface OrdOdFeeTotalMapper {
     int countByExample(OrdOdFeeTotalCriteria example);
