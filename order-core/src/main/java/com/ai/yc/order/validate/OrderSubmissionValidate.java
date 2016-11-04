@@ -63,6 +63,29 @@ public class OrderSubmissionValidate {
 	 * 文档翻译下单校验
 	 */
 	public void docTranslateOrder(OrderSubmissionRequest request) {
+		//
+		this.validateNull(request);
+		//
+		if(TRANSLATE_TYPE_1.equals(request.getBaseInfo().getTranslateType())){
+			// 用途ID
+			if(StringUtil.isBlank(request.getProductInfo().getUseCode())){
+				this.newException("用途ID不能为空,请输入");
+			}
+			// 领域ID
+			if(StringUtil.isBlank(request.getProductInfo().getFieldCode())){
+				this.newException("领域ID不能为空,请输入");
+			}
+			// 是否排版
+			if(StringUtil.isBlank(request.getProductInfo().getIsSetType())){
+				this.newException("是否排版不能为空,请输入");
+			}
+			// 是否加急
+			if(StringUtil.isBlank(request.getProductInfo().getIsUrgent())){
+				this.newException("是否加急不能为空,请输入");
+			}
+
+		}
+		log.info("********文档翻译订单传参成功*********");
 	}
 
 	/**
