@@ -6,5 +6,7 @@ import com.ai.yc.order.dao.mapper.bo.OrdOdLogistics;
 
 public interface IOrderSubmissionBusiSV {
 	public OrderSubmissionResponse saveOrderSubmission(OrderSubmissionRequest request);
+	public OrderSubmissionResponse saveOrderSubmissionSupper(OrderSubmissionRequest request);
 	public void saveContact(OrdOdLogistics ordOdLogistics);
+	
 }

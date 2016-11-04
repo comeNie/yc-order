@@ -179,7 +179,7 @@ public class OrderSubmisissonSVImplTest extends BaseTest {
 		request.setContactInfo(contactInfo);
 		request.setFeeInfo(feeInfo);
 		//
-		this.validate.textTraslateOrder(request);
+		//this.validate.textTraslateOrder(request);
 		
 		log.info("request:"+JSON.toJSONString(request));
 		//
@@ -310,7 +310,7 @@ public class OrderSubmisissonSVImplTest extends BaseTest {
 		request.setContactInfo(contactInfo);
 		request.setFeeInfo(feeInfo);
 		//
-		this.validate.docTranslateOrder(request);
+		//this.validate.docTranslateOrder(request);
 		
 		log.info("request:"+JSON.toJSONString(request));
 		//
@@ -429,7 +429,7 @@ public class OrderSubmisissonSVImplTest extends BaseTest {
 		request.setContactInfo(contactInfo);
 		request.setFeeInfo(feeInfo);
 		//
-		this.validate.interpretOrder(request);
+		//this.validate.interpretOrder(request);
 		
 		log.info("request:"+JSON.toJSONString(request));
 		//

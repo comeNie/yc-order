@@ -22,12 +22,25 @@ public class OrderSubmissionValidate {
 	private static final String TRANSLATE_TYPE_0 = "0";
 	private static final String TRANSLATE_TYPE_1 = "1";
 	private static final String TRANSLATE_TYPE_2 = "2";
+	
+	public void validate(OrderSubmissionRequest request){
+		this.validateNull(request);
+		if(TRANSLATE_TYPE_0.equals(request.getBaseInfo().getTranslateType())){
+			this.textTraslateOrder(request);
+		}
+		if(TRANSLATE_TYPE_1.equals(request.getBaseInfo().getTranslateType())){
+			this.docTranslateOrder(request);
+		}
+		if(TRANSLATE_TYPE_2.equals(request.getBaseInfo().getTranslateType())){
+			this.interpretOrder(request);
+		}
+		
+	
+	}
 	/**
 	 * 文本翻译下单校验
 	 */
 	public void textTraslateOrder(OrderSubmissionRequest request) {
-		//
-		this.validateNull(request);
 		//
 		if(TRANSLATE_TYPE_0.equals(request.getBaseInfo().getTranslateType())){
 			// 翻译字数
@@ -64,8 +77,6 @@ public class OrderSubmissionValidate {
 	 */
 	public void docTranslateOrder(OrderSubmissionRequest request) {
 		//
-		this.validateNull(request);
-		//
 		if(TRANSLATE_TYPE_1.equals(request.getBaseInfo().getTranslateType())){
 			// 用途ID
 			if(StringUtil.isBlank(request.getProductInfo().getUseCode())){
@@ -92,8 +103,6 @@ public class OrderSubmissionValidate {
 	 * 口译翻译下单校验
 	 */
 	public void interpretOrder(OrderSubmissionRequest request) {
-		//
-		this.validateNull(request);
 		//
 		if(TRANSLATE_TYPE_2.equals(request.getBaseInfo().getTranslateType())){
 			// 会场数量
