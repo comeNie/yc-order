@@ -1,5 +1,7 @@
 package com.ai.yc.order.service.atom.interfaces;
 
-public interface IOrdOdLogisticsAtomSV {
+import com.ai.yc.order.dao.mapper.bo.OrdOdLogistics;
 
+public interface IOrdOdLogisticsAtomSV {
+	public void insertSelective(OrdOdLogistics ordOdLogistics);
 }

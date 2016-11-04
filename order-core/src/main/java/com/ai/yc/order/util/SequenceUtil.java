@@ -23,18 +23,24 @@ public final class SequenceUtil {
     private static final String ORD_OD_STATE_CHG$STATE_CHG_ID$SEQ = "ORD_OD_STATE_CHG$STATE_CHG_ID$SEQ";
 
     private static final String ORD_OD_PROD_EXTEND$PROD_DETAL_EXTEND_ID$SEQ = "ORD_OD_PROD_EXTEND$PROD_DETAL_EXTEND_ID$SEQ";
+    
+    private static final String ORD_OD_PROD_LEVEL$PROD_DETAL_EXTEND_ID$SEQ = "ORD_OD_PROD_LEVEL$PROD_DETAL_EXTEND_ID$SEQ";
 
     private static final String ORD_OD_FEE_OFFSET$FEE_OFFSET_ID$SEQ = "ORD_OD_FEE_OFFSET$FEE_OFFSET_ID$SEQ";
 
     private static final String ORD_BALACNE_IF$BALACNE_IF_ID$SEQ = "ORD_BALACNE_IF$BALACNE_IF_ID$SEQ";
     
-    private static final String ORD_OD_LOGISTICS$LOGISTICS_ID$SEQ="ORD_OD_LOGISTICS$LOGISTICS_ID$SEQ";
+    private static final String ORD_OD_LOGISTICS$CONTACT_ID$SEQ="ORD_OD_LOGISTICS$CONTACT_ID$SEQ";
     
     private static final String FREIGHT_TEMPLATE$TEMPLATE_ID$SEQ="FREIGHT_TEMPLATE$TEMPLATE_ID$SEQ";
     
     private static final String FREIGHT_TEMPLATE_PROD$REGION_ID$SEQ="FREIGHT_TEMPLATE_PROD$REGION_ID$SEQ";
 
     private static final String ORD_OD_DELIVER_INFO$REGION_ID$SEQ="ORD_OD_DELIVER_INFO$REGION_ID$SEQ";
+    
+    private static final String ORD_OD_PROD_FILE$PROD_FILE_ID$SEQ = "ORD_OD_PROD_FILE$PROD_FILE_ID$SEQ";
+    
+    private static final String ORD_OD_PERSON_INFO$PERSON_ID$SEQ = "ORD_OD_PERSON_INFO$PERSON_ID$SEQ";
     
     public static Long createOrderId() {
         String seq = SeqUtil.getNewId(ORD_ORDER$ORDER_ID$SEQ, 10);
@@ -57,14 +63,28 @@ public final class SequenceUtil {
         Long newId = SeqUtil.getNewId(ORD_OD_PROD_EXTEND$PROD_DETAL_EXTEND_ID$SEQ);
         return Long.valueOf(newId);
     }
+    
+    public static Long createProdDetailLevelId() {
+        Long newId = SeqUtil.getNewId(ORD_OD_PROD_LEVEL$PROD_DETAL_EXTEND_ID$SEQ);
+        return Long.valueOf(newId);
+    }
 
     public static Long genCartProdId() {
         return SeqUtil.getNewId(ORD_OD_CART_PROD$PROD_DETAL_ID$SEQ);
     }
     
-    public static Long genLogisticsId() {
-    	return SeqUtil.getNewId(ORD_OD_LOGISTICS$LOGISTICS_ID$SEQ);
+    public static Long createContactId() {
+    	return SeqUtil.getNewId(ORD_OD_LOGISTICS$CONTACT_ID$SEQ);
     }
+    
+    public static Long createProdDetailFileId(){
+    	return SeqUtil.getNewId(ORD_OD_PROD_FILE$PROD_FILE_ID$SEQ);
+    }
+    
+    public static Long createPersonId(){
+    	return SeqUtil.getNewId(ORD_OD_PERSON_INFO$PERSON_ID$SEQ);
+    }
+    
 
     public static Long createFeeOffsetId() {
         return SeqUtil.getNewId(ORD_OD_FEE_OFFSET$FEE_OFFSET_ID$SEQ);

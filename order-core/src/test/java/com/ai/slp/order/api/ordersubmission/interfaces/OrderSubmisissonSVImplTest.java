@@ -176,8 +176,9 @@ public class OrderSubmisissonSVImplTest extends BaseTest {
 		this.validate.textTraslateOrder(request);
 		
 		log.info("request:"+JSON.toJSONString(request));
-		
-
+		//
+		OrderSubmissionResponse response = this.orderSubmissionSV.orderSubmission(request);
+		log.info("response:"+JSON.toJSONString(response));
 	}
 	/**
 	 * 
@@ -306,7 +307,9 @@ public class OrderSubmisissonSVImplTest extends BaseTest {
 		this.validate.docTranslateOrder(request);
 		
 		log.info("request:"+JSON.toJSONString(request));
-		
+		//
+		OrderSubmissionResponse response = this.orderSubmissionSV.orderSubmission(request);
+		log.info("response:"+JSON.toJSONString(response));
 
 	}
 	/**
@@ -423,7 +426,9 @@ public class OrderSubmisissonSVImplTest extends BaseTest {
 		this.validate.interpretOrder(request);
 		
 		log.info("request:"+JSON.toJSONString(request));
-		
+		//
+		OrderSubmissionResponse response = this.orderSubmissionSV.orderSubmission(request);
+		log.info("response:"+JSON.toJSONString(response));
 
 	}
 }	
