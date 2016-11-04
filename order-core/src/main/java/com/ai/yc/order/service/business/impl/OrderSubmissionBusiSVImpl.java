@@ -67,7 +67,7 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 		BeanUtils.copyVO(ordOrder, request.getBaseInfo());
 		ordOrder.setOrderId(orderId);
 		if (TRANSLATE_TYPE_0.equals(request.getBaseInfo().getTranslateType())) {
-			ordOrder.setState("11");
+			ordOrder.setState("11");//待支付
 			ordOrder.setStateChgTime(DateUtil.getSysDate());
 			ordOrder.setDisplayFlag("11");
 			ordOrder.setDisplayFlagChgTime(DateUtil.getSysDate());
@@ -75,10 +75,20 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 			ordOrder.setTimeZone("default");
 		}
 		if (TRANSLATE_TYPE_1.equals(request.getBaseInfo().getTranslateType())) {
-
+			ordOrder.setState("13");//待报价
+			ordOrder.setStateChgTime(DateUtil.getSysDate());
+			ordOrder.setDisplayFlag("11");
+			ordOrder.setDisplayFlagChgTime(DateUtil.getSysDate());
+			ordOrder.setUpdateFlag("N");
+			ordOrder.setTimeZone("default");
 		}
 		if (TRANSLATE_TYPE_2.equals(request.getBaseInfo().getTranslateType())) {
-
+			ordOrder.setState("13");//待报价
+			ordOrder.setStateChgTime(DateUtil.getSysDate());
+			ordOrder.setDisplayFlag("11");
+			ordOrder.setDisplayFlagChgTime(DateUtil.getSysDate());
+			ordOrder.setUpdateFlag("N");
+			ordOrder.setTimeZone("default");
 		}
 		//
 		this.ordOrderAtomSV.insertSelective(ordOrder);
@@ -92,23 +102,40 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 		ordOdProdWithBLOBs.setTranslateName(ordOrder.getTranslateName());
 		ordOdProdWithBLOBs.setOrderId(orderId);
 		if (TRANSLATE_TYPE_0.equals(request.getBaseInfo().getTranslateType())) {
-			ordOdProdWithBLOBs.setProdDetalState("0");
+			ordOdProdWithBLOBs.setProdDetalState("0");//未处理
 			// 翻译字数
 			ordOdProdWithBLOBs.setTranslateSum(request.getProductInfo().getTranslateSum().toString());
 			// 用途ID
 			ordOdProdWithBLOBs.setUseCode(request.getProductInfo().getUseCode());// productInfo.setUseCode("1111");
 			// 领域ID
-			ordOdProdWithBLOBs.setFieldCode(request.getProductInfo().getFieldCode()); //productInfo.setFieldCode("2222");
+			ordOdProdWithBLOBs.setFieldCode(request.getProductInfo().getFieldCode()); // productInfo.setFieldCode("2222");
 			// 是否排版
 			ordOdProdWithBLOBs.setIsSetType(request.getProductInfo().getIsSetType());// productInfo.setIsSetType("0");
 			// 是否加急
 			ordOdProdWithBLOBs.setIsUrgent(request.getProductInfo().getIsUrgent());// productInfo.setIsUrgent("0");
 		}
 		if (TRANSLATE_TYPE_1.equals(request.getBaseInfo().getTranslateType())) {
+			ordOdProdWithBLOBs.setProdDetalState("0");//未处理
+			// 用途ID
+			ordOdProdWithBLOBs.setUseCode(request.getProductInfo().getUseCode());// productInfo.setUseCode("1111");
+			// 领域ID
+			ordOdProdWithBLOBs.setFieldCode(request.getProductInfo().getFieldCode()); // productInfo.setFieldCode("2222");
+			// 是否排版
+			ordOdProdWithBLOBs.setIsSetType(request.getProductInfo().getIsSetType());// productInfo.setIsSetType("0");
+			// 是否加急
+			ordOdProdWithBLOBs.setIsUrgent(request.getProductInfo().getIsUrgent());// productInfo.setIsUrgent("0");
 
 		}
 		if (TRANSLATE_TYPE_2.equals(request.getBaseInfo().getTranslateType())) {
-
+			ordOdProdWithBLOBs.setProdDetalState("0");//未处理
+			// 会场数量
+			ordOdProdWithBLOBs.setMeetingSum(request.getProductInfo().getMeetingSum());//productInfo.setMeetingSum(10l);
+			// 译员性别
+			ordOdProdWithBLOBs.setInterperGen(request.getProductInfo().getInterperGen());//productInfo.setInterperGen("0");
+			// 会议地点
+			ordOdProdWithBLOBs.setMeetingAddress(request.getProductInfo().getMeetingAddress());//productInfo.setMeetingAddress("北京市石景山区");
+			// 译员数量
+			ordOdProdWithBLOBs.setInterperSum(request.getProductInfo().getInterperSum());//productInfo.setInterperSum(10l);
 		}
 		// 语言对信息
 		List<LanguagePairInfo> languafePairInfoList = request.getProductInfo().getLanguagePairInfoList();
@@ -186,7 +213,7 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 		ordOdFeeTotal.setPaidFee(0l);
 		// 总待收费用
 		ordOdFeeTotal.setPayFee(0l);
-		//下单费用列表 修改时间为下单时间
+		// 下单费用列表 修改时间为下单时间
 		ordOdFeeTotal.setUpdateTime(DateUtil.getSysDate());
 		// 添加费用信息
 		this.ordOdFeeTotalAtomSV.insertSelective(ordOdFeeTotal);

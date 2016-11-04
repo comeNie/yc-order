@@ -37,14 +37,14 @@ public class OrderSubmisissonSVImplTest extends BaseTest {
 	@Autowired
 	private IOrderSubmissionBusiSV orderSubmissionBusiSV;
 	
-	@Test
+	//@Test
 	public void orderSubmission(){
 		OrderSubmissionRequest request = new OrderSubmissionRequest();
 		log.info("request:"+JSON.toJSONString(request));
 		OrderSubmissionResponse response = this.orderSubmissionSV.orderSubmission(request);
 		log.info("response:"+JSON.toJSONString(response));
 	}
-	@Test
+	//@Test
 	public void mapTest(){
 		Map<String,String> flagMap = this.orderSubmissionParam.getFlagMap();
 		log.info("flagMap:"+JSON.toJSONString(flagMap));
@@ -437,7 +437,7 @@ public class OrderSubmisissonSVImplTest extends BaseTest {
 		log.info("response:"+JSON.toJSONString(response));
 
 	}
-	@Test
+	//@Test
 	public void saveContact(){
 		OrdOdLogistics ordOdLogistics = new OrdOdLogistics();
 		ordOdLogistics.setContactId(1l);
