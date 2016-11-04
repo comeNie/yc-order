@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.yc.order.dao.mapper.interfaces.OrdOdProdFileMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.yc.order.dao.mapper.bo.OrdOdProdFile" >
+    <id column="PROD_FILE_ID" property="prodFileId" jdbcType="VARCHAR" />
+    <result column="PROD_DETAL_ID" property="prodDetalId" jdbcType="BIGINT" />
+    <result column="FILE_NAME" property="fileName" jdbcType="VARCHAR" />
+    <result column="FILE_SAVE_ID" property="fileSaveId" jdbcType="VARCHAR" />
+    <result column="FILE_TRANSLATE_ID" property="fileTranslateId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    PROD_FILE_ID, PROD_DETAL_ID, FILE_NAME, FILE_SAVE_ID, FILE_TRANSLATE_ID
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdProdFileCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ord_od_prod_file
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ord_od_prod_file
+    where PROD_FILE_ID = #{prodFileId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ord_od_prod_file
+    where PROD_FILE_ID = #{prodFileId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdProdFileCriteria" >
+    delete from ord_od_prod_file
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdProdFile" >
+    insert into ord_od_prod_file (PROD_FILE_ID, PROD_DETAL_ID, FILE_NAME, 
+      FILE_SAVE_ID, FILE_TRANSLATE_ID)
+    values (#{prodFileId,jdbcType=VARCHAR}, #{prodDetalId,jdbcType=BIGINT}, #{fileName,jdbcType=VARCHAR}, 
+      #{fileSaveId,jdbcType=VARCHAR}, #{fileTranslateId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdProdFile" >
+    insert into ord_od_prod_file
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="prodFileId != null" >
+        PROD_FILE_ID,
+      </if>
+      <if test="prodDetalId != null" >
+        PROD_DETAL_ID,
+      </if>
+      <if test="fileName != null" >
+        FILE_NAME,
+      </if>
+      <if test="fileSaveId != null" >
+        FILE_SAVE_ID,
+      </if>
+      <if test="fileTranslateId != null" >
+        FILE_TRANSLATE_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="prodFileId != null" >
+        #{prodFileId,jdbcType=VARCHAR},
+      </if>
+      <if test="prodDetalId != null" >
+        #{prodDetalId,jdbcType=BIGINT},
+      </if>
+      <if test="fileName != null" >
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSaveId != null" >
+        #{fileSaveId,jdbcType=VARCHAR},
+      </if>
+      <if test="fileTranslateId != null" >
+        #{fileTranslateId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdProdFileCriteria" resultType="java.lang.Integer" >
+    select count(*) from ord_od_prod_file
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ord_od_prod_file
+    <set >
+      <if test="record.prodFileId != null" >
+        PROD_FILE_ID = #{record.prodFileId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodDetalId != null" >
+        PROD_DETAL_ID = #{record.prodDetalId,jdbcType=BIGINT},
+      </if>
+      <if test="record.fileName != null" >
+        FILE_NAME = #{record.fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileSaveId != null" >
+        FILE_SAVE_ID = #{record.fileSaveId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileTranslateId != null" >
+        FILE_TRANSLATE_ID = #{record.fileTranslateId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ord_od_prod_file
+    set PROD_FILE_ID = #{record.prodFileId,jdbcType=VARCHAR},
+      PROD_DETAL_ID = #{record.prodDetalId,jdbcType=BIGINT},
+      FILE_NAME = #{record.fileName,jdbcType=VARCHAR},
+      FILE_SAVE_ID = #{record.fileSaveId,jdbcType=VARCHAR},
+      FILE_TRANSLATE_ID = #{record.fileTranslateId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdProdFile" >
+    update ord_od_prod_file
+    <set >
+      <if test="prodDetalId != null" >
+        PROD_DETAL_ID = #{prodDetalId,jdbcType=BIGINT},
+      </if>
+      <if test="fileName != null" >
+        FILE_NAME = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSaveId != null" >
+        FILE_SAVE_ID = #{fileSaveId,jdbcType=VARCHAR},
+      </if>
+      <if test="fileTranslateId != null" >
+        FILE_TRANSLATE_ID = #{fileTranslateId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PROD_FILE_ID = #{prodFileId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdProdFile" >
+    update ord_od_prod_file
+    set PROD_DETAL_ID = #{prodDetalId,jdbcType=BIGINT},
+      FILE_NAME = #{fileName,jdbcType=VARCHAR},
+      FILE_SAVE_ID = #{fileSaveId,jdbcType=VARCHAR},
+      FILE_TRANSLATE_ID = #{fileTranslateId,jdbcType=VARCHAR}
+    where PROD_FILE_ID = #{prodFileId,jdbcType=VARCHAR}
+  </update>
+</mapper>
