@@ -16,6 +16,7 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 
 	@Override
 	public QueryOrderRsponse queryOrder(QueryOrderRequest queryOrderRequest) throws BusinessException, SystemException {
+		//调用搜索引擎进行查询
 		QueryOrderRsponse response = new QueryOrderRsponse();
 		ResponseHeader responseHeader = new ResponseHeader(true, ExceptCodeConstants.Special.SUCCESS, "订单查询成功");
 		response.setResponseHeader(responseHeader);
