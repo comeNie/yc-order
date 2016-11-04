@@ -24,6 +24,20 @@ public class IOrderQuerySVImplTest extends BaseTest{
 	@Test
 	public void orderQueryCount(){
 		QueryOrdCountRequest request = new QueryOrdCountRequest();
+		//request.setOrderLevel("1");
+		request.setBusiType("1");
+		request.setChlId("001");
+		request.setInterperId("1");
+		request.setInterperType("1");
+		request.setState("11");
+		request.setTimeZone("a");
+		request.setLspId(123L);
+		request.setTranslateType("1");
+		request.setSubFlag("1");
+		request.setCorporaId("1");
+		request.setDisplayFlag("11");
+		request.setUserType("1");
+		request.setUserId("1");
 		QueryOrdCountResponse response = this.iOrderQuerySV.queryOrderCount(request);
 		log.info("response:"+JSON.toJSONString(response));
 	}

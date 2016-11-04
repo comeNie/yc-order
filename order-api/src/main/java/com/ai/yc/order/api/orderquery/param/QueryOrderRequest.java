@@ -131,7 +131,7 @@ public class QueryOrderRequest  implements Serializable {
 	 */
 	private String fieldCode;
 	/**
-	 * 用户名称
+	 * 用户昵称
 	 */
 	private String userName;
 	/**
