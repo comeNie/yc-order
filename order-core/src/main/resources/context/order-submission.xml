@@ -32,7 +32,7 @@
 				<entry key="3" value="金山" />
 				<entry key="4" value="找翻译" />
 				<entry key="5" value="WAP-中文" />
-				<entry key="6" value="WAP-英语" /> 
+				<entry key="6" value="WAP-英语" />
 				<entry key="7" value="微信助手" />
 			</map>
 		</property>
@@ -61,7 +61,7 @@
 				<entry key="2" value="口译翻译" />
 			</map>
 		</property>
-		
+
 		<!-- /** * 订单级别 */ private Map<String, String> orderLevelMap; -->
 		<property name="orderLevelMap">
 			<map>
@@ -78,15 +78,25 @@
 				<entry key="1" value="人工报价" />
 			</map>
 		</property>
-		<!-- 10：个人 11：企业 12：代理人  -->
+		<!-- 10：个人 11：企业 12：代理人 -->
 		<property name="userTypeMap">
 			<map>
 				<entry key="10" value="个人" />
 				<entry key="11" value="企业" />
-				<entry key="12" value="代理人" /> 
+				<entry key="12" value="代理人" />
 			</map>
 		</property>
-		
+
+		<!-- /** * 币种 * "1：RMB 2：$" */ -->
+		<property name="currencyUnitMap">
+			<map>
+				<entry key="1" value="RMB" />
+				<entry key="2" value="$" />
+			</map>
+		</property>
+
+
+
 	</bean>
 
 </beans>

@@ -1,8 +1,8 @@
 package com.ai.yc.order.validate;
 
-import java.util.HashMap;
-import java.util.Map;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,28 +12,93 @@ import com.ai.yc.order.api.ordersubmission.param.OrderSubmissionRequest;
 import com.alibaba.fastjson.JSON;
 @Service
 public class OrderSubmissionValidate {
+	public static final Logger log = LogManager.getLogger(OrderSubmissionValidate.class);
+	//
 	@Autowired
 	private OrderSubmissionParam orderSubmissionParam;
+	/*<entry key="0" value="快速翻译" />
+	<entry key="1" value="文档翻译" />
+	<entry key="2" value="口译翻译" />*/
+	private static final String TRANSLATE_TYPE_0 = "0";
+	private static final String TRANSLATE_TYPE_1 = "1";
+	private static final String TRANSLATE_TYPE_2 = "2";
 	/**
 	 * 文本翻译下单校验
 	 */
-	public static String textTraslateOrder(OrderSubmissionRequest request) {
-		return null;
+	public void textTraslateOrder(OrderSubmissionRequest request) {
+		//
+		this.validateNull(request);
+		//
+		if(TRANSLATE_TYPE_0.equals(request.getBaseInfo().getTranslateType())){
+			// 翻译字数
+			if(null == request.getProductInfo().getTranslateSum() || request.getProductInfo().getTranslateSum() == 0){
+				this.newException("翻译字数不能为空,请输入");
+			}
+			// 用途ID
+			if(StringUtil.isBlank(request.getProductInfo().getUseCode())){
+				this.newException("用途ID不能为空,请输入");
+			}
+			// 领域ID
+			if(StringUtil.isBlank(request.getProductInfo().getFieldCode())){
+				this.newException("领域ID不能为空,请输入");
+			}
+			// 是否排版
+			if(StringUtil.isBlank(request.getProductInfo().getIsSetType())){
+				this.newException("是否排版不能为空,请输入");
+			}
+			// 是否加急
+			if(StringUtil.isBlank(request.getProductInfo().getIsUrgent())){
+				this.newException("是否加急不能为空,请输入");
+			}
+			// 需翻译内容
+			if(StringUtil.isBlank(request.getProductInfo().getNeedTranslateInfo())){
+				this.newException("需翻译内容不能为空,请输入");
+			}
+
+		}
+		log.info("********文本翻译订单传参成功*********");
 	}
 
 	/**
 	 * 文档翻译下单校验
 	 */
-	public static String docTranslateOrder(OrderSubmissionRequest request) {
-		return null;
+	public void docTranslateOrder(OrderSubmissionRequest request) {
 	}
 
 	/**
 	 * 口译翻译下单校验
 	 */
-	public static String interpretOrder(OrderSubmissionRequest request) {
-		return null;
-
+	public void interpretOrder(OrderSubmissionRequest request) {
+		//
+		this.validateNull(request);
+		//
+		if(TRANSLATE_TYPE_2.equals(request.getBaseInfo().getTranslateType())){
+			// 会场数量
+			if(null == request.getProductInfo().getMeetingSum() || request.getProductInfo().getMeetingSum() == 0){
+				this.newException("会场数量不能为空，请填写");
+			}
+			// 译员性别
+			if(StringUtil.isBlank(request.getProductInfo().getInterperGen())){
+				this.newException("译员性别不能为空，请填写");
+			}
+			// 会议地点
+			if(StringUtil.isBlank(request.getProductInfo().getMeetingAddress())){
+				this.newException("会议地点不能为空，请填写");
+			}
+			// 译员数量
+			if(null == request.getProductInfo().getInterperSum() || request.getProductInfo().getInterperSum() == 0 ){
+				this.newException("译员数量不能为空，请填写");
+			}
+			//开始时间
+			if(null == request.getProductInfo().getStartTime()){
+				this.newException("开始时间不能为空，请填写");
+			}
+			//结束时间
+			if(null == request.getProductInfo().getEndTime()){
+				this.newException("结束时间不能为空，请填写");
+			}
+		}
+		log.info("********口译翻译订单传参成功*********");
 	}
 
 	/**
@@ -206,25 +271,18 @@ public class OrderSubmissionValidate {
 		//产品信息校验
 		if(null == request.getProductInfo()){
 			this.newException("产品信息不能为空");
-		}else{
-			/**
-			 * 翻译类型 "0：快速翻译 1：文档翻译 2：口译翻译"
-			 * 
-			 */
-			// translateType;
-			if (StringUtil.isBlank(request.getBaseInfo().getTranslateType())) {
-				this.newException("翻译类型不能为空");
-			}
-
-			/**
-			 * 翻译主题 快速翻译：取文本前15个字 文档翻译：取第一个文件名称 口译翻译：用户填写
-			 */
-			// translateName;
-			if (StringUtil.isBlank(request.getBaseInfo().getTranslateName())) {
-				this.newException("翻译主题不能为空");
-			}
 		}
-
+		//费用信息校验
+		if(null == request.getFeeInfo()){
+			this.newException("费用信息不能为空");
+		}else{
+			//2016-11-03 --------------------------------
+//			String flag = this.orderSubmissionParam.getMap().get(request.getBaseInfo().getUserType());
+//			if(StringUtil.isBlank(flag)){
+//				this.newException("用户类型范围不正确，请参考"+JSON.toJSONString(this.orderSubmissionParam.getUserTypeMap()));
+//			}
+		}
+		
 	}
 
 	/**

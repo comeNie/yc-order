@@ -51,6 +51,16 @@ public class OrderSubmissionParam {
 	 * 
 	 */
 	private Map<String, String> userTypeMap;
+	
+	private Map<String, String> currencyUnitMap; 
+
+	public Map<String, String> getCurrencyUnitMap() {
+		return currencyUnitMap;
+	}
+
+	public void setCurrencyUnitMap(Map<String, String> currencyUnitMap) {
+		this.currencyUnitMap = currencyUnitMap;
+	}
 
 	public Map<String, String> getUserTypeMap() {
 		return userTypeMap;
