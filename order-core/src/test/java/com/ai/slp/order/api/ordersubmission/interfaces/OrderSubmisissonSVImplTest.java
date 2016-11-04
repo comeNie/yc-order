@@ -19,6 +19,8 @@ import com.ai.yc.order.api.ordersubmission.param.OrderSubmissionRequest;
 import com.ai.yc.order.api.ordersubmission.param.OrderSubmissionResponse;
 import com.ai.yc.order.api.ordersubmission.param.ProductInfo;
 import com.ai.yc.order.api.ordersubmission.param.TranslateLevelInfo;
+import com.ai.yc.order.dao.mapper.bo.OrdOdLogistics;
+import com.ai.yc.order.service.business.interfaces.IOrderSubmissionBusiSV;
 import com.ai.yc.order.validate.OrderSubmissionParam;
 import com.ai.yc.order.validate.OrderSubmissionValidate;
 import com.alibaba.fastjson.JSON;
@@ -31,6 +33,10 @@ public class OrderSubmisissonSVImplTest extends BaseTest {
 	private OrderSubmissionParam orderSubmissionParam;
 	@Autowired
 	private OrderSubmissionValidate validate;
+	
+	@Autowired
+	private IOrderSubmissionBusiSV orderSubmissionBusiSV;
+	
 	@Test
 	public void orderSubmission(){
 		OrderSubmissionRequest request = new OrderSubmissionRequest();
@@ -430,5 +436,15 @@ public class OrderSubmisissonSVImplTest extends BaseTest {
 		OrderSubmissionResponse response = this.orderSubmissionSV.orderSubmission(request);
 		log.info("response:"+JSON.toJSONString(response));
 
+	}
+	@Test
+	public void saveContact(){
+		OrdOdLogistics ordOdLogistics = new OrdOdLogistics();
+		ordOdLogistics.setContactId(1l);
+		ordOdLogistics.setContactEmail("zhangzd@asiainfo.com");
+		ordOdLogistics.setContactName("zhangzd");
+		ordOdLogistics.setOrderId(1l);
+		
+		this.orderSubmissionBusiSV.saveContact(ordOdLogistics);
 	}
 }	
