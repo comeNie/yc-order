@@ -17,6 +17,7 @@ import com.ai.yc.order.dao.mapper.interfaces.OrdOdLogisticsMapper;
 import com.ai.yc.order.dao.mapper.interfaces.OrdOdPersonInfoMapper;
 import com.ai.yc.order.dao.mapper.interfaces.OrdOdProdExtendMapper;
 import com.ai.yc.order.dao.mapper.interfaces.OrdOdProdFileMapper;
+import com.ai.yc.order.dao.mapper.interfaces.OrdOdProdLevelMapper;
 import com.ai.yc.order.dao.mapper.interfaces.OrdOdProdMapper;
 import com.ai.yc.order.dao.mapper.interfaces.OrdOdStateChgMapper;
 import com.ai.yc.order.dao.mapper.interfaces.OrdOrderMapper;
@@ -94,6 +95,10 @@ public class MapperFactory {
     
     public static OrdOdProdFileMapper getOrdOdProdFileMapper(){
     	return sqlSessionTemplate.getMapper(OrdOdProdFileMapper.class);
+    }
+    
+    public static OrdOdProdLevelMapper getOrdOdProdLevelMapper(){
+    	return sqlSessionTemplate.getMapper(OrdOdProdLevelMapper.class);
     }
 }
 
