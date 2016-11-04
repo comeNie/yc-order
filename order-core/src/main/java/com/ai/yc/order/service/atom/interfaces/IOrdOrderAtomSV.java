@@ -3,5 +3,12 @@ package com.ai.yc.order.service.atom.interfaces;
 import com.ai.yc.order.dao.mapper.bo.OrdOrder;
 
 public interface IOrdOrderAtomSV {
+	/**
+	 * 根据主键查询
+	 */
 	public OrdOrder findByPrimaryKey(OrdOrder ordOrder);
+	/**
+	 * 查询订单数
+	 */
+	public int findOrderCount(OrdOrder ordOrder);
 }

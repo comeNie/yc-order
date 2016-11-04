@@ -1,10 +1,9 @@
 package com.ai.yc.order.api.orderquery.param;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-import com.ai.opt.base.vo.BaseInfo;
-
-public class QueryOrderRequest extends BaseInfo {
+public class QueryOrderRequest  implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	/**
