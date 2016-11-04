@@ -1,5 +1,7 @@
 package com.ai.yc.order.service.atom.interfaces;
 
-public interface IOrdOdFeeTotalAtomSV {
+import com.ai.yc.order.dao.mapper.bo.OrdOdFeeTotal;
 
+public interface IOrdOdFeeTotalAtomSV {
+	public void insertSelective(OrdOdFeeTotal ordOdFeeTotal);
 }

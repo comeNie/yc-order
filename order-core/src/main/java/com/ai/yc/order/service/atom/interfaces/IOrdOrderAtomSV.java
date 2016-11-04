@@ -11,4 +11,9 @@ public interface IOrdOrderAtomSV {
 	 * 查询订单数
 	 */
 	public int findOrderCount(OrdOrder ordOrder);
+	/**
+	 * 添加订单
+	 * @author zhangzd
+	 */
+	public void insertSelective(OrdOrder OrdOrder);
 }

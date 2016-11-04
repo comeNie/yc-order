@@ -78,4 +78,11 @@ public class OrdOrderAtomSVImpl implements IOrdOrderAtomSV {
 		return ordOrderMapper.countByExample(example);
 	}
 
+	@Override
+	public void insertSelective(OrdOrder OrdOrder) {
+		//
+		MapperFactory.getOrdOrderMapper().insertSelective(OrdOrder);
+		
+	}
+
 }
