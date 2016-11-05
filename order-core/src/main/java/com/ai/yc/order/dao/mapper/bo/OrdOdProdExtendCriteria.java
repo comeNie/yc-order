@@ -513,6 +513,76 @@ public class OrdOdProdExtendCriteria {
             addCriterion("INFO_JSON not between", value1, value2, "infoJson");
             return (Criteria) this;
         }
+
+        public Criteria andLangungeNameEnIsNull() {
+            addCriterion("LANGUNGE_NAME_EN is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLangungeNameEnIsNotNull() {
+            addCriterion("LANGUNGE_NAME_EN is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLangungeNameEnEqualTo(String value) {
+            addCriterion("LANGUNGE_NAME_EN =", value, "langungeNameEn");
+            return (Criteria) this;
+        }
+
+        public Criteria andLangungeNameEnNotEqualTo(String value) {
+            addCriterion("LANGUNGE_NAME_EN <>", value, "langungeNameEn");
+            return (Criteria) this;
+        }
+
+        public Criteria andLangungeNameEnGreaterThan(String value) {
+            addCriterion("LANGUNGE_NAME_EN >", value, "langungeNameEn");
+            return (Criteria) this;
+        }
+
+        public Criteria andLangungeNameEnGreaterThanOrEqualTo(String value) {
+            addCriterion("LANGUNGE_NAME_EN >=", value, "langungeNameEn");
+            return (Criteria) this;
+        }
+
+        public Criteria andLangungeNameEnLessThan(String value) {
+            addCriterion("LANGUNGE_NAME_EN <", value, "langungeNameEn");
+            return (Criteria) this;
+        }
+
+        public Criteria andLangungeNameEnLessThanOrEqualTo(String value) {
+            addCriterion("LANGUNGE_NAME_EN <=", value, "langungeNameEn");
+            return (Criteria) this;
+        }
+
+        public Criteria andLangungeNameEnLike(String value) {
+            addCriterion("LANGUNGE_NAME_EN like", value, "langungeNameEn");
+            return (Criteria) this;
+        }
+
+        public Criteria andLangungeNameEnNotLike(String value) {
+            addCriterion("LANGUNGE_NAME_EN not like", value, "langungeNameEn");
+            return (Criteria) this;
+        }
+
+        public Criteria andLangungeNameEnIn(List<String> values) {
+            addCriterion("LANGUNGE_NAME_EN in", values, "langungeNameEn");
+            return (Criteria) this;
+        }
+
+        public Criteria andLangungeNameEnNotIn(List<String> values) {
+            addCriterion("LANGUNGE_NAME_EN not in", values, "langungeNameEn");
+            return (Criteria) this;
+        }
+
+        public Criteria andLangungeNameEnBetween(String value1, String value2) {
+            addCriterion("LANGUNGE_NAME_EN between", value1, value2, "langungeNameEn");
+            return (Criteria) this;
+        }
+
+        public Criteria andLangungeNameEnNotBetween(String value1, String value2) {
+            addCriterion("LANGUNGE_NAME_EN not between", value1, value2, "langungeNameEn");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

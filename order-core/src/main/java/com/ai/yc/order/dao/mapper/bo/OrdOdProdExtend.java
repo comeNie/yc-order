@@ -13,6 +13,8 @@ public class OrdOdProdExtend {
 
     private String infoJson;
 
+    private String langungeNameEn;
+
     public Long getProdDetalExtendId() {
         return prodDetalExtendId;
     }
@@ -59,5 +61,13 @@ public class OrdOdProdExtend {
 
     public void setInfoJson(String infoJson) {
         this.infoJson = infoJson == null ? null : infoJson.trim();
+    }
+
+    public String getLangungeNameEn() {
+        return langungeNameEn;
+    }
+
+    public void setLangungeNameEn(String langungeNameEn) {
+        this.langungeNameEn = langungeNameEn == null ? null : langungeNameEn.trim();
     }
 }
