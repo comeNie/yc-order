@@ -463,6 +463,76 @@ public class OrdOdProdFileCriteria {
             addCriterion("FILE_TRANSLATE_ID not between", value1, value2, "fileTranslateId");
             return (Criteria) this;
         }
+
+        public Criteria andFileTranslateNameIsNull() {
+            addCriterion("FILE_TRANSLATE_NAME is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileTranslateNameIsNotNull() {
+            addCriterion("FILE_TRANSLATE_NAME is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileTranslateNameEqualTo(String value) {
+            addCriterion("FILE_TRANSLATE_NAME =", value, "fileTranslateName");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileTranslateNameNotEqualTo(String value) {
+            addCriterion("FILE_TRANSLATE_NAME <>", value, "fileTranslateName");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileTranslateNameGreaterThan(String value) {
+            addCriterion("FILE_TRANSLATE_NAME >", value, "fileTranslateName");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileTranslateNameGreaterThanOrEqualTo(String value) {
+            addCriterion("FILE_TRANSLATE_NAME >=", value, "fileTranslateName");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileTranslateNameLessThan(String value) {
+            addCriterion("FILE_TRANSLATE_NAME <", value, "fileTranslateName");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileTranslateNameLessThanOrEqualTo(String value) {
+            addCriterion("FILE_TRANSLATE_NAME <=", value, "fileTranslateName");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileTranslateNameLike(String value) {
+            addCriterion("FILE_TRANSLATE_NAME like", value, "fileTranslateName");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileTranslateNameNotLike(String value) {
+            addCriterion("FILE_TRANSLATE_NAME not like", value, "fileTranslateName");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileTranslateNameIn(List<String> values) {
+            addCriterion("FILE_TRANSLATE_NAME in", values, "fileTranslateName");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileTranslateNameNotIn(List<String> values) {
+            addCriterion("FILE_TRANSLATE_NAME not in", values, "fileTranslateName");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileTranslateNameBetween(String value1, String value2) {
+            addCriterion("FILE_TRANSLATE_NAME between", value1, value2, "fileTranslateName");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileTranslateNameNotBetween(String value1, String value2) {
+            addCriterion("FILE_TRANSLATE_NAME not between", value1, value2, "fileTranslateName");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

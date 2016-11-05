@@ -11,6 +11,8 @@ public class OrdOdProdFile {
 
     private String fileTranslateId;
 
+    private String fileTranslateName;
+
     public String getProdFileId() {
         return prodFileId;
     }
@@ -49,5 +51,13 @@ public class OrdOdProdFile {
 
     public void setFileTranslateId(String fileTranslateId) {
         this.fileTranslateId = fileTranslateId == null ? null : fileTranslateId.trim();
+    }
+
+    public String getFileTranslateName() {
+        return fileTranslateName;
+    }
+
+    public void setFileTranslateName(String fileTranslateName) {
+        this.fileTranslateName = fileTranslateName == null ? null : fileTranslateName.trim();
     }
 }

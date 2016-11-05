@@ -7,6 +7,7 @@
     <result column="FILE_NAME" property="fileName" jdbcType="VARCHAR" />
     <result column="FILE_SAVE_ID" property="fileSaveId" jdbcType="VARCHAR" />
     <result column="FILE_TRANSLATE_ID" property="fileTranslateId" jdbcType="VARCHAR" />
+    <result column="FILE_TRANSLATE_NAME" property="fileTranslateName" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -67,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    PROD_FILE_ID, PROD_DETAL_ID, FILE_NAME, FILE_SAVE_ID, FILE_TRANSLATE_ID
+    PROD_FILE_ID, PROD_DETAL_ID, FILE_NAME, FILE_SAVE_ID, FILE_TRANSLATE_ID, FILE_TRANSLATE_NAME
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdProdFileCriteria" >
     select
@@ -104,9 +105,11 @@
   </delete>
   <insert id="insert" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdProdFile" >
     insert into ord_od_prod_file (PROD_FILE_ID, PROD_DETAL_ID, FILE_NAME, 
-      FILE_SAVE_ID, FILE_TRANSLATE_ID)
+      FILE_SAVE_ID, FILE_TRANSLATE_ID, FILE_TRANSLATE_NAME
+      )
     values (#{prodFileId,jdbcType=VARCHAR}, #{prodDetalId,jdbcType=BIGINT}, #{fileName,jdbcType=VARCHAR}, 
-      #{fileSaveId,jdbcType=VARCHAR}, #{fileTranslateId,jdbcType=VARCHAR})
+      #{fileSaveId,jdbcType=VARCHAR}, #{fileTranslateId,jdbcType=VARCHAR}, #{fileTranslateName,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdProdFile" >
     insert into ord_od_prod_file
@@ -126,6 +129,9 @@
       <if test="fileTranslateId != null" >
         FILE_TRANSLATE_ID,
       </if>
+      <if test="fileTranslateName != null" >
+        FILE_TRANSLATE_NAME,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="prodFileId != null" >
@@ -142,6 +148,9 @@
       </if>
       <if test="fileTranslateId != null" >
         #{fileTranslateId,jdbcType=VARCHAR},
+      </if>
+      <if test="fileTranslateName != null" >
+        #{fileTranslateName,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -169,6 +178,9 @@
       <if test="record.fileTranslateId != null" >
         FILE_TRANSLATE_ID = #{record.fileTranslateId,jdbcType=VARCHAR},
       </if>
+      <if test="record.fileTranslateName != null" >
+        FILE_TRANSLATE_NAME = #{record.fileTranslateName,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -180,7 +192,8 @@
       PROD_DETAL_ID = #{record.prodDetalId,jdbcType=BIGINT},
       FILE_NAME = #{record.fileName,jdbcType=VARCHAR},
       FILE_SAVE_ID = #{record.fileSaveId,jdbcType=VARCHAR},
-      FILE_TRANSLATE_ID = #{record.fileTranslateId,jdbcType=VARCHAR}
+      FILE_TRANSLATE_ID = #{record.fileTranslateId,jdbcType=VARCHAR},
+      FILE_TRANSLATE_NAME = #{record.fileTranslateName,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -200,6 +213,9 @@
       <if test="fileTranslateId != null" >
         FILE_TRANSLATE_ID = #{fileTranslateId,jdbcType=VARCHAR},
       </if>
+      <if test="fileTranslateName != null" >
+        FILE_TRANSLATE_NAME = #{fileTranslateName,jdbcType=VARCHAR},
+      </if>
     </set>
     where PROD_FILE_ID = #{prodFileId,jdbcType=VARCHAR}
   </update>
@@ -208,7 +224,8 @@
     set PROD_DETAL_ID = #{prodDetalId,jdbcType=BIGINT},
       FILE_NAME = #{fileName,jdbcType=VARCHAR},
       FILE_SAVE_ID = #{fileSaveId,jdbcType=VARCHAR},
-      FILE_TRANSLATE_ID = #{fileTranslateId,jdbcType=VARCHAR}
+      FILE_TRANSLATE_ID = #{fileTranslateId,jdbcType=VARCHAR},
+      FILE_TRANSLATE_NAME = #{fileTranslateName,jdbcType=VARCHAR}
     where PROD_FILE_ID = #{prodFileId,jdbcType=VARCHAR}
   </update>
 </mapper>
