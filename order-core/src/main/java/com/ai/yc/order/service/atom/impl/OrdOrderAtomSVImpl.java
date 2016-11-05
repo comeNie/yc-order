@@ -85,4 +85,9 @@ public class OrdOrderAtomSVImpl implements IOrdOrderAtomSV {
 		
 	}
 
+	@Override
+	public OrdOrder findByPrimaryKey(Long orderId) {
+		return MapperFactory.getOrdOrderMapper().selectByPrimaryKey(orderId);
+	}
+
 }

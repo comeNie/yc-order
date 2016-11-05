@@ -7,6 +7,8 @@ public interface IOrdOrderAtomSV {
 	 * 根据主键查询
 	 */
 	public OrdOrder findByPrimaryKey(OrdOrder ordOrder);
+	
+	public OrdOrder findByPrimaryKey(Long orderId);
 	/**
 	 * 查询订单数
 	 */

@@ -18,6 +18,17 @@ public final class OrdersConstants {
 		
 		public final static String RMB = "1";
 	}
+	
+	public final static class OrdOdFeeTotal {
+		private OrdOdFeeTotal() {}
+		
+        /**
+         * in:收入  out:支出
+         */
+        public final static String PAY_FLAG_IN = "in";
+		
+		public final static String PAY_FLAG_OUT = "out";
+	}
 
 	public final static class TranslateLevel {
 
