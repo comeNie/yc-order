@@ -27,13 +27,15 @@ public class OrderSubmissionSVImpl implements IOrderSubmissionSV {
 		OrderSubmissionResponse response = new OrderSubmissionResponse();
 		ResponseHeader responseHeader = new ResponseHeader(true, ExceptCodeConstants.Special.SUCCESS, "订单提交成功");
 		//校验
-		this.orderSubmissionValidate.validate(request);
+		
 		//
 		try {
+			this.orderSubmissionValidate.validate(request);
 			//response = this.orderSubmissionBusiSV.saveOrderSubmission(request);
 			response = this.orderSubmissionBusiSV.saveOrderSubmissionSupper(request);
 			response.setResponseHeader(responseHeader);
 		} catch (BusinessException e) {
+			responseHeader.setIsSuccess(false);
 			responseHeader.setResultCode(e.getErrorCode());
 			responseHeader.setResultMessage(e.getErrorMessage());
 			response.setResponseHeader(responseHeader);
