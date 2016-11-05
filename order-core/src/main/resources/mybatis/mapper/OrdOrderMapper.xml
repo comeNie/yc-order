@@ -37,6 +37,7 @@
     <result column="IP_ADDRESS" property="ipAddress" jdbcType="VARCHAR" />
     <result column="PROVINCE_CODE" property="provinceCode" jdbcType="VARCHAR" />
     <result column="CITY_CODE" property="cityCode" jdbcType="VARCHAR" />
+    <result column="PAY_REMARK" property="payRemark" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -101,7 +102,7 @@
     SUB_FLAG, USER_TYPE, USER_ID, CORPORA_ID, ACCOUNT_ID, TIME_ZONE, ORDER_TIME, STATE, 
     STATE_CHG_TIME, DISPLAY_FLAG, DISPLAY_FLAG_CHG_TIME, INTERPER_TYPE, LSP_ID, INTERPER_ID, 
     LOCK_TIME, OPER_ID, UPDATE_FLAG, REASON_DESC, REMARK, FINISH_TIME, ORDER_DESC, KEYWORDS, 
-    IF_WARNING, WARNING_TYPE, IP_ADDRESS, PROVINCE_CODE, CITY_CODE
+    IF_WARNING, WARNING_TYPE, IP_ADDRESS, PROVINCE_CODE, CITY_CODE, PAY_REMARK
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOrderCriteria" >
     select
@@ -148,7 +149,8 @@
       UPDATE_FLAG, REASON_DESC, REMARK, 
       FINISH_TIME, ORDER_DESC, KEYWORDS, 
       IF_WARNING, WARNING_TYPE, IP_ADDRESS, 
-      PROVINCE_CODE, CITY_CODE)
+      PROVINCE_CODE, CITY_CODE, PAY_REMARK
+      )
     values (#{orderId,jdbcType=BIGINT}, #{flag,jdbcType=VARCHAR}, #{chlId,jdbcType=VARCHAR}, 
       #{orderType,jdbcType=VARCHAR}, #{busiType,jdbcType=VARCHAR}, #{orderLevel,jdbcType=VARCHAR}, 
       #{translateType,jdbcType=VARCHAR}, #{translateName,jdbcType=VARCHAR}, #{subFlag,jdbcType=VARCHAR}, 
@@ -160,7 +162,8 @@
       #{updateFlag,jdbcType=VARCHAR}, #{reasonDesc,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
       #{finishTime,jdbcType=TIMESTAMP}, #{orderDesc,jdbcType=VARCHAR}, #{keywords,jdbcType=VARCHAR}, 
       #{ifWarning,jdbcType=VARCHAR}, #{warningType,jdbcType=VARCHAR}, #{ipAddress,jdbcType=VARCHAR}, 
-      #{provinceCode,jdbcType=VARCHAR}, #{cityCode,jdbcType=VARCHAR})
+      #{provinceCode,jdbcType=VARCHAR}, #{cityCode,jdbcType=VARCHAR}, #{payRemark,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOrder" >
     insert into ord_order
@@ -270,6 +273,9 @@
       <if test="cityCode != null" >
         CITY_CODE,
       </if>
+      <if test="payRemark != null" >
+        PAY_REMARK,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="orderId != null" >
@@ -376,6 +382,9 @@
       </if>
       <if test="cityCode != null" >
         #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="payRemark != null" >
+        #{payRemark,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -493,6 +502,9 @@
       <if test="record.cityCode != null" >
         CITY_CODE = #{record.cityCode,jdbcType=VARCHAR},
       </if>
+      <if test="record.payRemark != null" >
+        PAY_REMARK = #{record.payRemark,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -534,7 +546,8 @@
       WARNING_TYPE = #{record.warningType,jdbcType=VARCHAR},
       IP_ADDRESS = #{record.ipAddress,jdbcType=VARCHAR},
       PROVINCE_CODE = #{record.provinceCode,jdbcType=VARCHAR},
-      CITY_CODE = #{record.cityCode,jdbcType=VARCHAR}
+      CITY_CODE = #{record.cityCode,jdbcType=VARCHAR},
+      PAY_REMARK = #{record.payRemark,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -644,6 +657,9 @@
       <if test="cityCode != null" >
         CITY_CODE = #{cityCode,jdbcType=VARCHAR},
       </if>
+      <if test="payRemark != null" >
+        PAY_REMARK = #{payRemark,jdbcType=VARCHAR},
+      </if>
     </set>
     where ORDER_ID = #{orderId,jdbcType=BIGINT}
   </update>
@@ -682,7 +698,8 @@
       WARNING_TYPE = #{warningType,jdbcType=VARCHAR},
       IP_ADDRESS = #{ipAddress,jdbcType=VARCHAR},
       PROVINCE_CODE = #{provinceCode,jdbcType=VARCHAR},
-      CITY_CODE = #{cityCode,jdbcType=VARCHAR}
+      CITY_CODE = #{cityCode,jdbcType=VARCHAR},
+      PAY_REMARK = #{payRemark,jdbcType=VARCHAR}
     where ORDER_ID = #{orderId,jdbcType=BIGINT}
   </update>
 </mapper>

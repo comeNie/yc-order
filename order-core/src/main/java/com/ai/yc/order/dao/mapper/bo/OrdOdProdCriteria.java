@@ -1724,6 +1724,76 @@ public class OrdOdProdCriteria {
             addCriterion("UPDATE_TIME not between", value1, value2, "updateTime");
             return (Criteria) this;
         }
+
+        public Criteria andTypeDescIsNull() {
+            addCriterion("TYPE_DESC is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeDescIsNotNull() {
+            addCriterion("TYPE_DESC is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeDescEqualTo(String value) {
+            addCriterion("TYPE_DESC =", value, "typeDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeDescNotEqualTo(String value) {
+            addCriterion("TYPE_DESC <>", value, "typeDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeDescGreaterThan(String value) {
+            addCriterion("TYPE_DESC >", value, "typeDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeDescGreaterThanOrEqualTo(String value) {
+            addCriterion("TYPE_DESC >=", value, "typeDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeDescLessThan(String value) {
+            addCriterion("TYPE_DESC <", value, "typeDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeDescLessThanOrEqualTo(String value) {
+            addCriterion("TYPE_DESC <=", value, "typeDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeDescLike(String value) {
+            addCriterion("TYPE_DESC like", value, "typeDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeDescNotLike(String value) {
+            addCriterion("TYPE_DESC not like", value, "typeDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeDescIn(List<String> values) {
+            addCriterion("TYPE_DESC in", values, "typeDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeDescNotIn(List<String> values) {
+            addCriterion("TYPE_DESC not in", values, "typeDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeDescBetween(String value1, String value2) {
+            addCriterion("TYPE_DESC between", value1, value2, "typeDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeDescNotBetween(String value1, String value2) {
+            addCriterion("TYPE_DESC not between", value1, value2, "typeDesc");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

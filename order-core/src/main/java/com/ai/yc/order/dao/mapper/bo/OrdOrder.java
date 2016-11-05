@@ -73,6 +73,8 @@ public class OrdOrder {
 
     private String cityCode;
 
+    private String payRemark;
+
     public Long getOrderId() {
         return orderId;
     }
@@ -351,5 +353,13 @@ public class OrdOrder {
 
     public void setCityCode(String cityCode) {
         this.cityCode = cityCode == null ? null : cityCode.trim();
+    }
+
+    public String getPayRemark() {
+        return payRemark;
+    }
+
+    public void setPayRemark(String payRemark) {
+        this.payRemark = payRemark == null ? null : payRemark.trim();
     }
 }

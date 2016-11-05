@@ -39,6 +39,14 @@ public class OrdOdFeeTotal {
 
     private Timestamp payTime;
 
+    private Long setTypeFee;
+
+    private Long urgentFee;
+
+    private Long descTypeFee;
+
+    private String remark;
+
     public Long getOrderId() {
         return orderId;
     }
@@ -181,5 +189,37 @@ public class OrdOdFeeTotal {
 
     public void setPayTime(Timestamp payTime) {
         this.payTime = payTime;
+    }
+
+    public Long getSetTypeFee() {
+        return setTypeFee;
+    }
+
+    public void setSetTypeFee(Long setTypeFee) {
+        this.setTypeFee = setTypeFee;
+    }
+
+    public Long getUrgentFee() {
+        return urgentFee;
+    }
+
+    public void setUrgentFee(Long urgentFee) {
+        this.urgentFee = urgentFee;
+    }
+
+    public Long getDescTypeFee() {
+        return descTypeFee;
+    }
+
+    public void setDescTypeFee(Long descTypeFee) {
+        this.descTypeFee = descTypeFee;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark == null ? null : remark.trim();
     }
 }

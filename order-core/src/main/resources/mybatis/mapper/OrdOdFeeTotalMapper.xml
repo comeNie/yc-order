@@ -20,6 +20,10 @@
     <result column="UPDATE_CHL_ID" property="updateChlId" jdbcType="VARCHAR" />
     <result column="TOTAL_JF" property="totalJf" jdbcType="BIGINT" />
     <result column="PAY_TIME" property="payTime" jdbcType="TIMESTAMP" />
+    <result column="SET_TYPE_FEE" property="setTypeFee" jdbcType="BIGINT" />
+    <result column="URGENT_FEE" property="urgentFee" jdbcType="BIGINT" />
+    <result column="DESC_TYPE_FEE" property="descTypeFee" jdbcType="BIGINT" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -82,7 +86,8 @@
   <sql id="Base_Column_List" >
     ORDER_ID, PAY_FLAG, CURRENCY_UNIT, TOTAL_FEE, DISCOUNT_FEE, OPER_DISCOUNT_FEE, OPER_DISCOUNT_DESC, 
     ADJUST_FEE, PAID_FEE, PAY_FEE, PLAT_FEE, INTERPER_FEE, PAY_STYLE, UPDATE_OPER_ID, 
-    UPDATE_TIME, UPDATE_CHL_ID, TOTAL_JF, PAY_TIME
+    UPDATE_TIME, UPDATE_CHL_ID, TOTAL_JF, PAY_TIME, SET_TYPE_FEE, URGENT_FEE, DESC_TYPE_FEE, 
+    REMARK
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdFeeTotalCriteria" >
     select
@@ -123,15 +128,17 @@
       OPER_DISCOUNT_DESC, ADJUST_FEE, PAID_FEE, 
       PAY_FEE, PLAT_FEE, INTERPER_FEE, 
       PAY_STYLE, UPDATE_OPER_ID, UPDATE_TIME, 
-      UPDATE_CHL_ID, TOTAL_JF, PAY_TIME
-      )
+      UPDATE_CHL_ID, TOTAL_JF, PAY_TIME, 
+      SET_TYPE_FEE, URGENT_FEE, DESC_TYPE_FEE, 
+      REMARK)
     values (#{orderId,jdbcType=BIGINT}, #{payFlag,jdbcType=VARCHAR}, #{currencyUnit,jdbcType=VARCHAR}, 
       #{totalFee,jdbcType=BIGINT}, #{discountFee,jdbcType=BIGINT}, #{operDiscountFee,jdbcType=BIGINT}, 
       #{operDiscountDesc,jdbcType=VARCHAR}, #{adjustFee,jdbcType=BIGINT}, #{paidFee,jdbcType=BIGINT}, 
       #{payFee,jdbcType=BIGINT}, #{platFee,jdbcType=BIGINT}, #{interperFee,jdbcType=BIGINT}, 
       #{payStyle,jdbcType=VARCHAR}, #{updateOperId,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{updateChlId,jdbcType=VARCHAR}, #{totalJf,jdbcType=BIGINT}, #{payTime,jdbcType=TIMESTAMP}
-      )
+      #{updateChlId,jdbcType=VARCHAR}, #{totalJf,jdbcType=BIGINT}, #{payTime,jdbcType=TIMESTAMP}, 
+      #{setTypeFee,jdbcType=BIGINT}, #{urgentFee,jdbcType=BIGINT}, #{descTypeFee,jdbcType=BIGINT}, 
+      #{remark,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdFeeTotal" >
     insert into ord_od_fee_total
@@ -190,6 +197,18 @@
       <if test="payTime != null" >
         PAY_TIME,
       </if>
+      <if test="setTypeFee != null" >
+        SET_TYPE_FEE,
+      </if>
+      <if test="urgentFee != null" >
+        URGENT_FEE,
+      </if>
+      <if test="descTypeFee != null" >
+        DESC_TYPE_FEE,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="orderId != null" >
@@ -245,6 +264,18 @@
       </if>
       <if test="payTime != null" >
         #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="setTypeFee != null" >
+        #{setTypeFee,jdbcType=BIGINT},
+      </if>
+      <if test="urgentFee != null" >
+        #{urgentFee,jdbcType=BIGINT},
+      </if>
+      <if test="descTypeFee != null" >
+        #{descTypeFee,jdbcType=BIGINT},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -311,6 +342,18 @@
       <if test="record.payTime != null" >
         PAY_TIME = #{record.payTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.setTypeFee != null" >
+        SET_TYPE_FEE = #{record.setTypeFee,jdbcType=BIGINT},
+      </if>
+      <if test="record.urgentFee != null" >
+        URGENT_FEE = #{record.urgentFee,jdbcType=BIGINT},
+      </if>
+      <if test="record.descTypeFee != null" >
+        DESC_TYPE_FEE = #{record.descTypeFee,jdbcType=BIGINT},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -335,7 +378,11 @@
       UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
       UPDATE_CHL_ID = #{record.updateChlId,jdbcType=VARCHAR},
       TOTAL_JF = #{record.totalJf,jdbcType=BIGINT},
-      PAY_TIME = #{record.payTime,jdbcType=TIMESTAMP}
+      PAY_TIME = #{record.payTime,jdbcType=TIMESTAMP},
+      SET_TYPE_FEE = #{record.setTypeFee,jdbcType=BIGINT},
+      URGENT_FEE = #{record.urgentFee,jdbcType=BIGINT},
+      DESC_TYPE_FEE = #{record.descTypeFee,jdbcType=BIGINT},
+      REMARK = #{record.remark,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -394,6 +441,18 @@
       <if test="payTime != null" >
         PAY_TIME = #{payTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="setTypeFee != null" >
+        SET_TYPE_FEE = #{setTypeFee,jdbcType=BIGINT},
+      </if>
+      <if test="urgentFee != null" >
+        URGENT_FEE = #{urgentFee,jdbcType=BIGINT},
+      </if>
+      <if test="descTypeFee != null" >
+        DESC_TYPE_FEE = #{descTypeFee,jdbcType=BIGINT},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
     </set>
     where ORDER_ID = #{orderId,jdbcType=BIGINT}
   </update>
@@ -415,7 +474,11 @@
       UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
       UPDATE_CHL_ID = #{updateChlId,jdbcType=VARCHAR},
       TOTAL_JF = #{totalJf,jdbcType=BIGINT},
-      PAY_TIME = #{payTime,jdbcType=TIMESTAMP}
+      PAY_TIME = #{payTime,jdbcType=TIMESTAMP},
+      SET_TYPE_FEE = #{setTypeFee,jdbcType=BIGINT},
+      URGENT_FEE = #{urgentFee,jdbcType=BIGINT},
+      DESC_TYPE_FEE = #{descTypeFee,jdbcType=BIGINT},
+      REMARK = #{remark,jdbcType=VARCHAR}
     where ORDER_ID = #{orderId,jdbcType=BIGINT}
   </update>
 </mapper>

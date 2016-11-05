@@ -2494,6 +2494,76 @@ public class OrdOrderCriteria {
             addCriterion("CITY_CODE not between", value1, value2, "cityCode");
             return (Criteria) this;
         }
+
+        public Criteria andPayRemarkIsNull() {
+            addCriterion("PAY_REMARK is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayRemarkIsNotNull() {
+            addCriterion("PAY_REMARK is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayRemarkEqualTo(String value) {
+            addCriterion("PAY_REMARK =", value, "payRemark");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayRemarkNotEqualTo(String value) {
+            addCriterion("PAY_REMARK <>", value, "payRemark");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayRemarkGreaterThan(String value) {
+            addCriterion("PAY_REMARK >", value, "payRemark");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayRemarkGreaterThanOrEqualTo(String value) {
+            addCriterion("PAY_REMARK >=", value, "payRemark");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayRemarkLessThan(String value) {
+            addCriterion("PAY_REMARK <", value, "payRemark");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayRemarkLessThanOrEqualTo(String value) {
+            addCriterion("PAY_REMARK <=", value, "payRemark");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayRemarkLike(String value) {
+            addCriterion("PAY_REMARK like", value, "payRemark");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayRemarkNotLike(String value) {
+            addCriterion("PAY_REMARK not like", value, "payRemark");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayRemarkIn(List<String> values) {
+            addCriterion("PAY_REMARK in", values, "payRemark");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayRemarkNotIn(List<String> values) {
+            addCriterion("PAY_REMARK not in", values, "payRemark");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayRemarkBetween(String value1, String value2) {
+            addCriterion("PAY_REMARK between", value1, value2, "payRemark");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayRemarkNotBetween(String value1, String value2) {
+            addCriterion("PAY_REMARK not between", value1, value2, "payRemark");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

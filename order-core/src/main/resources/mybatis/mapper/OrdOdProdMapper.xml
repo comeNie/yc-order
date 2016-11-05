@@ -26,6 +26,7 @@
     <result column="INTERPER_ID" property="interperId" jdbcType="VARCHAR" />
     <result column="UPDATE_INTERPER_ID" property="updateInterperId" jdbcType="VARCHAR" />
     <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="TYPE_DESC" property="typeDesc" jdbcType="VARCHAR" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.ai.yc.order.dao.mapper.bo.OrdOdProdWithBLOBs" extends="BaseResultMap" >
     <result column="NEED_TRANSLATE_INFO" property="needTranslateInfo" jdbcType="LONGVARCHAR" />
@@ -93,7 +94,7 @@
     PROD_DETAL_ID, ORDER_ID, TRANSLATE_TYPE, TRANSLATE_NAME, MEETING_SUM, TRANSLATE_SUM, 
     INTERPER_GEN, MEETING_ADDRESS, INTERPER_SUM, USE_CODE, FIELD_CODE, IS_SET_TYPE, IS_URGENT, 
     STATE_TIME, END_TIME, PROD_DETAL_STATE, STATE, LOOK_STATE, INTERPER_FEE, IS_INVOICE, 
-    UPDATE_CHL_ID, INTERPER_ID, UPDATE_INTERPER_ID, UPDATE_TIME
+    UPDATE_CHL_ID, INTERPER_ID, UPDATE_INTERPER_ID, UPDATE_TIME, TYPE_DESC
   </sql>
   <sql id="Blob_Column_List" >
     NEED_TRANSLATE_INFO, TRANSLATE_INFO
@@ -158,7 +159,7 @@
       PROD_DETAL_STATE, STATE, LOOK_STATE, 
       INTERPER_FEE, IS_INVOICE, UPDATE_CHL_ID, 
       INTERPER_ID, UPDATE_INTERPER_ID, UPDATE_TIME, 
-      NEED_TRANSLATE_INFO, TRANSLATE_INFO
+      TYPE_DESC, NEED_TRANSLATE_INFO, TRANSLATE_INFO
       )
     values (#{prodDetalId,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, #{translateType,jdbcType=VARCHAR}, 
       #{translateName,jdbcType=VARCHAR}, #{meetingSum,jdbcType=BIGINT}, #{translateSum,jdbcType=VARCHAR}, 
@@ -168,7 +169,7 @@
       #{prodDetalState,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{lookState,jdbcType=VARCHAR}, 
       #{interperFee,jdbcType=BIGINT}, #{isInvoice,jdbcType=VARCHAR}, #{updateChlId,jdbcType=VARCHAR}, 
       #{interperId,jdbcType=VARCHAR}, #{updateInterperId,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{needTranslateInfo,jdbcType=LONGVARCHAR}, #{translateInfo,jdbcType=LONGVARCHAR}
+      #{typeDesc,jdbcType=VARCHAR}, #{needTranslateInfo,jdbcType=LONGVARCHAR}, #{translateInfo,jdbcType=LONGVARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdProdWithBLOBs" >
@@ -245,6 +246,9 @@
       </if>
       <if test="updateTime != null" >
         UPDATE_TIME,
+      </if>
+      <if test="typeDesc != null" >
+        TYPE_DESC,
       </if>
       <if test="needTranslateInfo != null" >
         NEED_TRANSLATE_INFO,
@@ -325,6 +329,9 @@
       </if>
       <if test="updateTime != null" >
         #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="typeDesc != null" >
+        #{typeDesc,jdbcType=VARCHAR},
       </if>
       <if test="needTranslateInfo != null" >
         #{needTranslateInfo,jdbcType=LONGVARCHAR},
@@ -415,6 +422,9 @@
       <if test="record.updateTime != null" >
         UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.typeDesc != null" >
+        TYPE_DESC = #{record.typeDesc,jdbcType=VARCHAR},
+      </if>
       <if test="record.needTranslateInfo != null" >
         NEED_TRANSLATE_INFO = #{record.needTranslateInfo,jdbcType=LONGVARCHAR},
       </if>
@@ -452,6 +462,7 @@
       INTERPER_ID = #{record.interperId,jdbcType=VARCHAR},
       UPDATE_INTERPER_ID = #{record.updateInterperId,jdbcType=VARCHAR},
       UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      TYPE_DESC = #{record.typeDesc,jdbcType=VARCHAR},
       NEED_TRANSLATE_INFO = #{record.needTranslateInfo,jdbcType=LONGVARCHAR},
       TRANSLATE_INFO = #{record.translateInfo,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
@@ -483,7 +494,8 @@
       UPDATE_CHL_ID = #{record.updateChlId,jdbcType=VARCHAR},
       INTERPER_ID = #{record.interperId,jdbcType=VARCHAR},
       UPDATE_INTERPER_ID = #{record.updateInterperId,jdbcType=VARCHAR},
-      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP}
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      TYPE_DESC = #{record.typeDesc,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -560,6 +572,9 @@
       <if test="updateTime != null" >
         UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="typeDesc != null" >
+        TYPE_DESC = #{typeDesc,jdbcType=VARCHAR},
+      </if>
       <if test="needTranslateInfo != null" >
         NEED_TRANSLATE_INFO = #{needTranslateInfo,jdbcType=LONGVARCHAR},
       </if>
@@ -594,6 +609,7 @@
       INTERPER_ID = #{interperId,jdbcType=VARCHAR},
       UPDATE_INTERPER_ID = #{updateInterperId,jdbcType=VARCHAR},
       UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      TYPE_DESC = #{typeDesc,jdbcType=VARCHAR},
       NEED_TRANSLATE_INFO = #{needTranslateInfo,jdbcType=LONGVARCHAR},
       TRANSLATE_INFO = #{translateInfo,jdbcType=LONGVARCHAR}
     where PROD_DETAL_ID = #{prodDetalId,jdbcType=BIGINT}
@@ -622,7 +638,8 @@
       UPDATE_CHL_ID = #{updateChlId,jdbcType=VARCHAR},
       INTERPER_ID = #{interperId,jdbcType=VARCHAR},
       UPDATE_INTERPER_ID = #{updateInterperId,jdbcType=VARCHAR},
-      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      TYPE_DESC = #{typeDesc,jdbcType=VARCHAR}
     where PROD_DETAL_ID = #{prodDetalId,jdbcType=BIGINT}
   </update>
 </mapper>

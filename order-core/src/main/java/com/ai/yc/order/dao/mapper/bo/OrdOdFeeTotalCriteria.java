@@ -1264,6 +1264,256 @@ public class OrdOdFeeTotalCriteria {
             addCriterion("PAY_TIME not between", value1, value2, "payTime");
             return (Criteria) this;
         }
+
+        public Criteria andSetTypeFeeIsNull() {
+            addCriterion("SET_TYPE_FEE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSetTypeFeeIsNotNull() {
+            addCriterion("SET_TYPE_FEE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSetTypeFeeEqualTo(Long value) {
+            addCriterion("SET_TYPE_FEE =", value, "setTypeFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andSetTypeFeeNotEqualTo(Long value) {
+            addCriterion("SET_TYPE_FEE <>", value, "setTypeFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andSetTypeFeeGreaterThan(Long value) {
+            addCriterion("SET_TYPE_FEE >", value, "setTypeFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andSetTypeFeeGreaterThanOrEqualTo(Long value) {
+            addCriterion("SET_TYPE_FEE >=", value, "setTypeFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andSetTypeFeeLessThan(Long value) {
+            addCriterion("SET_TYPE_FEE <", value, "setTypeFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andSetTypeFeeLessThanOrEqualTo(Long value) {
+            addCriterion("SET_TYPE_FEE <=", value, "setTypeFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andSetTypeFeeIn(List<Long> values) {
+            addCriterion("SET_TYPE_FEE in", values, "setTypeFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andSetTypeFeeNotIn(List<Long> values) {
+            addCriterion("SET_TYPE_FEE not in", values, "setTypeFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andSetTypeFeeBetween(Long value1, Long value2) {
+            addCriterion("SET_TYPE_FEE between", value1, value2, "setTypeFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andSetTypeFeeNotBetween(Long value1, Long value2) {
+            addCriterion("SET_TYPE_FEE not between", value1, value2, "setTypeFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andUrgentFeeIsNull() {
+            addCriterion("URGENT_FEE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUrgentFeeIsNotNull() {
+            addCriterion("URGENT_FEE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUrgentFeeEqualTo(Long value) {
+            addCriterion("URGENT_FEE =", value, "urgentFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andUrgentFeeNotEqualTo(Long value) {
+            addCriterion("URGENT_FEE <>", value, "urgentFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andUrgentFeeGreaterThan(Long value) {
+            addCriterion("URGENT_FEE >", value, "urgentFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andUrgentFeeGreaterThanOrEqualTo(Long value) {
+            addCriterion("URGENT_FEE >=", value, "urgentFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andUrgentFeeLessThan(Long value) {
+            addCriterion("URGENT_FEE <", value, "urgentFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andUrgentFeeLessThanOrEqualTo(Long value) {
+            addCriterion("URGENT_FEE <=", value, "urgentFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andUrgentFeeIn(List<Long> values) {
+            addCriterion("URGENT_FEE in", values, "urgentFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andUrgentFeeNotIn(List<Long> values) {
+            addCriterion("URGENT_FEE not in", values, "urgentFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andUrgentFeeBetween(Long value1, Long value2) {
+            addCriterion("URGENT_FEE between", value1, value2, "urgentFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andUrgentFeeNotBetween(Long value1, Long value2) {
+            addCriterion("URGENT_FEE not between", value1, value2, "urgentFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescTypeFeeIsNull() {
+            addCriterion("DESC_TYPE_FEE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescTypeFeeIsNotNull() {
+            addCriterion("DESC_TYPE_FEE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescTypeFeeEqualTo(Long value) {
+            addCriterion("DESC_TYPE_FEE =", value, "descTypeFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescTypeFeeNotEqualTo(Long value) {
+            addCriterion("DESC_TYPE_FEE <>", value, "descTypeFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescTypeFeeGreaterThan(Long value) {
+            addCriterion("DESC_TYPE_FEE >", value, "descTypeFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescTypeFeeGreaterThanOrEqualTo(Long value) {
+            addCriterion("DESC_TYPE_FEE >=", value, "descTypeFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescTypeFeeLessThan(Long value) {
+            addCriterion("DESC_TYPE_FEE <", value, "descTypeFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescTypeFeeLessThanOrEqualTo(Long value) {
+            addCriterion("DESC_TYPE_FEE <=", value, "descTypeFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescTypeFeeIn(List<Long> values) {
+            addCriterion("DESC_TYPE_FEE in", values, "descTypeFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescTypeFeeNotIn(List<Long> values) {
+            addCriterion("DESC_TYPE_FEE not in", values, "descTypeFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescTypeFeeBetween(Long value1, Long value2) {
+            addCriterion("DESC_TYPE_FEE between", value1, value2, "descTypeFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescTypeFeeNotBetween(Long value1, Long value2) {
+            addCriterion("DESC_TYPE_FEE not between", value1, value2, "descTypeFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkIsNull() {
+            addCriterion("REMARK is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkIsNotNull() {
+            addCriterion("REMARK is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkEqualTo(String value) {
+            addCriterion("REMARK =", value, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkNotEqualTo(String value) {
+            addCriterion("REMARK <>", value, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkGreaterThan(String value) {
+            addCriterion("REMARK >", value, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkGreaterThanOrEqualTo(String value) {
+            addCriterion("REMARK >=", value, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkLessThan(String value) {
+            addCriterion("REMARK <", value, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkLessThanOrEqualTo(String value) {
+            addCriterion("REMARK <=", value, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkLike(String value) {
+            addCriterion("REMARK like", value, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkNotLike(String value) {
+            addCriterion("REMARK not like", value, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkIn(List<String> values) {
+            addCriterion("REMARK in", values, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkNotIn(List<String> values) {
+            addCriterion("REMARK not in", values, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkBetween(String value1, String value2) {
+            addCriterion("REMARK between", value1, value2, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkNotBetween(String value1, String value2) {
+            addCriterion("REMARK not between", value1, value2, "remark");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

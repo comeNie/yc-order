@@ -51,6 +51,8 @@ public class OrdOdProd {
 
     private Timestamp updateTime;
 
+    private String typeDesc;
+
     public Long getProdDetalId() {
         return prodDetalId;
     }
@@ -241,5 +243,13 @@ public class OrdOdProd {
 
     public void setUpdateTime(Timestamp updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getTypeDesc() {
+        return typeDesc;
+    }
+
+    public void setTypeDesc(String typeDesc) {
+        this.typeDesc = typeDesc == null ? null : typeDesc.trim();
     }
 }
