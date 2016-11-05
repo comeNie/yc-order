@@ -240,6 +240,8 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 		this.orderContactInfoSubmit(request, orderId);
 		
 		// --------------产品信息---------------------
+		response.setOrderId(orderId);
+		//
 		return response;
 	}
 
