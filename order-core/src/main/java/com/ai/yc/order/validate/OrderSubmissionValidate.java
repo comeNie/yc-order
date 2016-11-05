@@ -313,6 +313,9 @@ public class OrderSubmissionValidate {
 		if(null == request.getFeeInfo()){
 			this.newException("费用信息不能为空");
 		}else{
+			if(null == request.getFeeInfo().getTotalFee() || request.getFeeInfo().getTotalFee() == 0 ){
+				this.newException("总费用不能为空或者0");
+			}
 			//2016-11-03 --------------------------------
 //			String flag = this.orderSubmissionParam.getMap().get(request.getBaseInfo().getUserType());
 //			if(StringUtil.isBlank(flag)){
