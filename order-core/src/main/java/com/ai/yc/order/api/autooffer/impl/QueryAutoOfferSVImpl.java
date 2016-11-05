@@ -1,4 +1,4 @@
-package com.ai.yc.order.autooffer.impl;
+package com.ai.yc.order.api.autooffer.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
