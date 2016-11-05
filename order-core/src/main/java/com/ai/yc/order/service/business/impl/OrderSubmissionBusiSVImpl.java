@@ -343,6 +343,7 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 				ordOdProdExtend.setOrderId(orderId);// 当前订单id
 				ordOdProdExtend.setLangungePair(languagePairInfo.getLanguagePairId());
 				ordOdProdExtend.setLangungePairName(languagePairInfo.getLanguagePairName());
+				ordOdProdExtend.setLangungeNameEn(languagePairInfo.getLanguageNameEn());
 				// 循环添加语言对信息
 				this.ordOdProdExtendAtomSV.insertSelective(ordOdProdExtend);
 			}

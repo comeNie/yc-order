@@ -16,9 +16,21 @@ public class LanguagePairInfo implements Serializable {
 	 */
 	private String languagePairName;
 	/**
+	 * 语言对名称英文
+	 */
+	private String languageNameEn;
+	/**
 	 * 扩展信息
 	 */
 	private String infoJson;
+
+	public String getLanguageNameEn() {
+		return languageNameEn;
+	}
+
+	public void setLanguageNameEn(String languageNameEn) {
+		this.languageNameEn = languageNameEn;
+	}
 
 	public String getInfoJson() {
 		return infoJson;
