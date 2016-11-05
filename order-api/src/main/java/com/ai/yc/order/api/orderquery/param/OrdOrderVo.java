@@ -17,10 +17,7 @@ public class OrdOrderVo extends BaseInfo {
 	 */
 
 	private String flag;
-	/**
-	 * 时区
-	 */
-	private String timeZone;
+
 	/**
 	 * 用户类型
 	 */
@@ -163,14 +160,6 @@ public class OrdOrderVo extends BaseInfo {
 
 	public void setFlag(String flag) {
 		this.flag = flag;
-	}
-
-	public String getTimeZone() {
-		return timeZone;
-	}
-
-	public void setTimeZone(String timeZone) {
-		this.timeZone = timeZone;
 	}
 
 	public String getUserType() {

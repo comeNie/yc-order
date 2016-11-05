@@ -3,7 +3,7 @@ package com.ai.yc.order.api.orderquery.param;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class QueryOrderRequest  implements Serializable {
+public class QueryOrderRequest implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	/**
@@ -18,10 +18,7 @@ public class QueryOrderRequest  implements Serializable {
 	 * 业务标识
 	 */
 	private String flag;
-	/**
-	 * 时区
-	 */
-	private String timeZone;
+
 	/**
 	 * 用户类型
 	 */
@@ -206,14 +203,6 @@ public class QueryOrderRequest  implements Serializable {
 
 	public void setFlag(String flag) {
 		this.flag = flag;
-	}
-
-	public String getTimeZone() {
-		return timeZone;
-	}
-
-	public void setTimeZone(String timeZone) {
-		this.timeZone = timeZone;
 	}
 
 	public String getUserType() {
