@@ -270,7 +270,12 @@ public class OrderSubmissionValidate {
 			 */
 			// accountId;
 
-			// 时区
+			/**
+			 * 时区
+			 */
+			if(StringUtil.isBlank(request.getBaseInfo().getTimeZone())){
+				this.newException("时区不能为空");
+			}
 			/**
 			 * 下单时间 取系统时间
 			 */

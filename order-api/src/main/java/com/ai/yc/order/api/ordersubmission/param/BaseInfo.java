@@ -93,6 +93,18 @@ public class BaseInfo implements Serializable {
 	 * 订单备注
 	 */
 	private String remark;
+	/**
+	 * 时区
+	 */
+	private String timeZone;
+
+	public String getTimeZone() {
+		return timeZone;
+	}
+
+	public void setTimeZone(String timeZone) {
+		this.timeZone = timeZone;
+	}
 
 	public String getTranslateType() {
 		return translateType;

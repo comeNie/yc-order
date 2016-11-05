@@ -262,7 +262,7 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 			ordOrder.setDisplayFlag("11");
 			ordOrder.setDisplayFlagChgTime(DateUtil.getSysDate());
 			ordOrder.setUpdateFlag("N");
-			ordOrder.setTimeZone("default");
+			//ordOrder.setTimeZone("default");
 		}
 		if (TRANSLATE_TYPE_1.equals(request.getBaseInfo().getTranslateType())) {
 			ordOrder.setState("13");// 待报价
@@ -270,7 +270,7 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 			ordOrder.setDisplayFlag("11");
 			ordOrder.setDisplayFlagChgTime(DateUtil.getSysDate());
 			ordOrder.setUpdateFlag("N");
-			ordOrder.setTimeZone("default");
+			//ordOrder.setTimeZone("default");
 		}
 		if (TRANSLATE_TYPE_2.equals(request.getBaseInfo().getTranslateType())) {
 			ordOrder.setState("13");// 待报价
@@ -278,7 +278,7 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 			ordOrder.setDisplayFlag("11");
 			ordOrder.setDisplayFlagChgTime(DateUtil.getSysDate());
 			ordOrder.setUpdateFlag("N");
-			ordOrder.setTimeZone("default");
+			//ordOrder.setTimeZone("default");
 		}
 		//
 		this.ordOrderAtomSV.insertSelective(ordOrder);

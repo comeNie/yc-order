@@ -94,6 +94,8 @@ public class OrderSubmisissonSVImplTest extends BaseTest {
 		baseInfo.setUserId("1001");
 		//下单时间
 		baseInfo.setOrderTime(DateUtil.getSysDate());
+		//时区
+		baseInfo.setTimeZone("GMT+8");
 		/**
 		 * 产品信息
 		 */
@@ -217,6 +219,8 @@ public class OrderSubmisissonSVImplTest extends BaseTest {
 		baseInfo.setUserId("1001");
 		//下单时间
 		baseInfo.setOrderTime(DateUtil.getSysDate());
+		//时区
+		baseInfo.setTimeZone("GMT+8");
 		/**
 		 * 产品信息
 		 */
@@ -349,6 +353,8 @@ public class OrderSubmisissonSVImplTest extends BaseTest {
 		baseInfo.setUserId("1001");
 		//下单时间
 		baseInfo.setOrderTime(DateUtil.getSysDate());
+		//时区
+		baseInfo.setTimeZone("GMT+8");
 		/**
 		 * 产品信息
 		 */
