@@ -19,6 +19,7 @@
     <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="UPDATE_CHL_ID" property="updateChlId" jdbcType="VARCHAR" />
     <result column="TOTAL_JF" property="totalJf" jdbcType="BIGINT" />
+    <result column="PAY_TIME" property="payTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -81,7 +82,7 @@
   <sql id="Base_Column_List" >
     ORDER_ID, PAY_FLAG, CURRENCY_UNIT, TOTAL_FEE, DISCOUNT_FEE, OPER_DISCOUNT_FEE, OPER_DISCOUNT_DESC, 
     ADJUST_FEE, PAID_FEE, PAY_FEE, PLAT_FEE, INTERPER_FEE, PAY_STYLE, UPDATE_OPER_ID, 
-    UPDATE_TIME, UPDATE_CHL_ID, TOTAL_JF
+    UPDATE_TIME, UPDATE_CHL_ID, TOTAL_JF, PAY_TIME
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdFeeTotalCriteria" >
     select
@@ -122,13 +123,15 @@
       OPER_DISCOUNT_DESC, ADJUST_FEE, PAID_FEE, 
       PAY_FEE, PLAT_FEE, INTERPER_FEE, 
       PAY_STYLE, UPDATE_OPER_ID, UPDATE_TIME, 
-      UPDATE_CHL_ID, TOTAL_JF)
+      UPDATE_CHL_ID, TOTAL_JF, PAY_TIME
+      )
     values (#{orderId,jdbcType=BIGINT}, #{payFlag,jdbcType=VARCHAR}, #{currencyUnit,jdbcType=VARCHAR}, 
       #{totalFee,jdbcType=BIGINT}, #{discountFee,jdbcType=BIGINT}, #{operDiscountFee,jdbcType=BIGINT}, 
       #{operDiscountDesc,jdbcType=VARCHAR}, #{adjustFee,jdbcType=BIGINT}, #{paidFee,jdbcType=BIGINT}, 
       #{payFee,jdbcType=BIGINT}, #{platFee,jdbcType=BIGINT}, #{interperFee,jdbcType=BIGINT}, 
       #{payStyle,jdbcType=VARCHAR}, #{updateOperId,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{updateChlId,jdbcType=VARCHAR}, #{totalJf,jdbcType=BIGINT})
+      #{updateChlId,jdbcType=VARCHAR}, #{totalJf,jdbcType=BIGINT}, #{payTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdFeeTotal" >
     insert into ord_od_fee_total
@@ -184,6 +187,9 @@
       <if test="totalJf != null" >
         TOTAL_JF,
       </if>
+      <if test="payTime != null" >
+        PAY_TIME,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="orderId != null" >
@@ -236,6 +242,9 @@
       </if>
       <if test="totalJf != null" >
         #{totalJf,jdbcType=BIGINT},
+      </if>
+      <if test="payTime != null" >
+        #{payTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -299,6 +308,9 @@
       <if test="record.totalJf != null" >
         TOTAL_JF = #{record.totalJf,jdbcType=BIGINT},
       </if>
+      <if test="record.payTime != null" >
+        PAY_TIME = #{record.payTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -322,7 +334,8 @@
       UPDATE_OPER_ID = #{record.updateOperId,jdbcType=VARCHAR},
       UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
       UPDATE_CHL_ID = #{record.updateChlId,jdbcType=VARCHAR},
-      TOTAL_JF = #{record.totalJf,jdbcType=BIGINT}
+      TOTAL_JF = #{record.totalJf,jdbcType=BIGINT},
+      PAY_TIME = #{record.payTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -378,6 +391,9 @@
       <if test="totalJf != null" >
         TOTAL_JF = #{totalJf,jdbcType=BIGINT},
       </if>
+      <if test="payTime != null" >
+        PAY_TIME = #{payTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where ORDER_ID = #{orderId,jdbcType=BIGINT}
   </update>
@@ -398,7 +414,8 @@
       UPDATE_OPER_ID = #{updateOperId,jdbcType=VARCHAR},
       UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
       UPDATE_CHL_ID = #{updateChlId,jdbcType=VARCHAR},
-      TOTAL_JF = #{totalJf,jdbcType=BIGINT}
+      TOTAL_JF = #{totalJf,jdbcType=BIGINT},
+      PAY_TIME = #{payTime,jdbcType=TIMESTAMP}
     where ORDER_ID = #{orderId,jdbcType=BIGINT}
   </update>
 </mapper>

@@ -37,6 +37,8 @@ public class OrdOdFeeTotal {
 
     private Long totalJf;
 
+    private Timestamp payTime;
+
     public Long getOrderId() {
         return orderId;
     }
@@ -171,5 +173,13 @@ public class OrdOdFeeTotal {
 
     public void setTotalJf(Long totalJf) {
         this.totalJf = totalJf;
+    }
+
+    public Timestamp getPayTime() {
+        return payTime;
+    }
+
+    public void setPayTime(Timestamp payTime) {
+        this.payTime = payTime;
     }
 }

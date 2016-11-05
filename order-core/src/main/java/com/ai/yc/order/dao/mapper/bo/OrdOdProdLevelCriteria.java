@@ -3,7 +3,7 @@ package com.ai.yc.order.dao.mapper.bo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrdOdProdExtendCriteria {
+public class OrdOdProdLevelCriteria {
     protected String orderByClause;
 
     protected boolean distinct;
@@ -14,7 +14,7 @@ public class OrdOdProdExtendCriteria {
 
     protected Integer limitEnd;
 
-    public OrdOdProdExtendCriteria() {
+    public OrdOdProdLevelCriteria() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -304,143 +304,73 @@ public class OrdOdProdExtendCriteria {
             return (Criteria) this;
         }
 
-        public Criteria andLangungePairIsNull() {
-            addCriterion("LANGUNGE_PAIR is null");
+        public Criteria andTranslateLevelIsNull() {
+            addCriterion("TRANSLATE_LEVEL is null");
             return (Criteria) this;
         }
 
-        public Criteria andLangungePairIsNotNull() {
-            addCriterion("LANGUNGE_PAIR is not null");
+        public Criteria andTranslateLevelIsNotNull() {
+            addCriterion("TRANSLATE_LEVEL is not null");
             return (Criteria) this;
         }
 
-        public Criteria andLangungePairEqualTo(String value) {
-            addCriterion("LANGUNGE_PAIR =", value, "langungePair");
+        public Criteria andTranslateLevelEqualTo(String value) {
+            addCriterion("TRANSLATE_LEVEL =", value, "translateLevel");
             return (Criteria) this;
         }
 
-        public Criteria andLangungePairNotEqualTo(String value) {
-            addCriterion("LANGUNGE_PAIR <>", value, "langungePair");
+        public Criteria andTranslateLevelNotEqualTo(String value) {
+            addCriterion("TRANSLATE_LEVEL <>", value, "translateLevel");
             return (Criteria) this;
         }
 
-        public Criteria andLangungePairGreaterThan(String value) {
-            addCriterion("LANGUNGE_PAIR >", value, "langungePair");
+        public Criteria andTranslateLevelGreaterThan(String value) {
+            addCriterion("TRANSLATE_LEVEL >", value, "translateLevel");
             return (Criteria) this;
         }
 
-        public Criteria andLangungePairGreaterThanOrEqualTo(String value) {
-            addCriterion("LANGUNGE_PAIR >=", value, "langungePair");
+        public Criteria andTranslateLevelGreaterThanOrEqualTo(String value) {
+            addCriterion("TRANSLATE_LEVEL >=", value, "translateLevel");
             return (Criteria) this;
         }
 
-        public Criteria andLangungePairLessThan(String value) {
-            addCriterion("LANGUNGE_PAIR <", value, "langungePair");
+        public Criteria andTranslateLevelLessThan(String value) {
+            addCriterion("TRANSLATE_LEVEL <", value, "translateLevel");
             return (Criteria) this;
         }
 
-        public Criteria andLangungePairLessThanOrEqualTo(String value) {
-            addCriterion("LANGUNGE_PAIR <=", value, "langungePair");
+        public Criteria andTranslateLevelLessThanOrEqualTo(String value) {
+            addCriterion("TRANSLATE_LEVEL <=", value, "translateLevel");
             return (Criteria) this;
         }
 
-        public Criteria andLangungePairLike(String value) {
-            addCriterion("LANGUNGE_PAIR like", value, "langungePair");
+        public Criteria andTranslateLevelLike(String value) {
+            addCriterion("TRANSLATE_LEVEL like", value, "translateLevel");
             return (Criteria) this;
         }
 
-        public Criteria andLangungePairNotLike(String value) {
-            addCriterion("LANGUNGE_PAIR not like", value, "langungePair");
+        public Criteria andTranslateLevelNotLike(String value) {
+            addCriterion("TRANSLATE_LEVEL not like", value, "translateLevel");
             return (Criteria) this;
         }
 
-        public Criteria andLangungePairIn(List<String> values) {
-            addCriterion("LANGUNGE_PAIR in", values, "langungePair");
+        public Criteria andTranslateLevelIn(List<String> values) {
+            addCriterion("TRANSLATE_LEVEL in", values, "translateLevel");
             return (Criteria) this;
         }
 
-        public Criteria andLangungePairNotIn(List<String> values) {
-            addCriterion("LANGUNGE_PAIR not in", values, "langungePair");
+        public Criteria andTranslateLevelNotIn(List<String> values) {
+            addCriterion("TRANSLATE_LEVEL not in", values, "translateLevel");
             return (Criteria) this;
         }
 
-        public Criteria andLangungePairBetween(String value1, String value2) {
-            addCriterion("LANGUNGE_PAIR between", value1, value2, "langungePair");
+        public Criteria andTranslateLevelBetween(String value1, String value2) {
+            addCriterion("TRANSLATE_LEVEL between", value1, value2, "translateLevel");
             return (Criteria) this;
         }
 
-        public Criteria andLangungePairNotBetween(String value1, String value2) {
-            addCriterion("LANGUNGE_PAIR not between", value1, value2, "langungePair");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangungePairNameIsNull() {
-            addCriterion("LANGUNGE_PAIR_NAME is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangungePairNameIsNotNull() {
-            addCriterion("LANGUNGE_PAIR_NAME is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangungePairNameEqualTo(String value) {
-            addCriterion("LANGUNGE_PAIR_NAME =", value, "langungePairName");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangungePairNameNotEqualTo(String value) {
-            addCriterion("LANGUNGE_PAIR_NAME <>", value, "langungePairName");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangungePairNameGreaterThan(String value) {
-            addCriterion("LANGUNGE_PAIR_NAME >", value, "langungePairName");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangungePairNameGreaterThanOrEqualTo(String value) {
-            addCriterion("LANGUNGE_PAIR_NAME >=", value, "langungePairName");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangungePairNameLessThan(String value) {
-            addCriterion("LANGUNGE_PAIR_NAME <", value, "langungePairName");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangungePairNameLessThanOrEqualTo(String value) {
-            addCriterion("LANGUNGE_PAIR_NAME <=", value, "langungePairName");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangungePairNameLike(String value) {
-            addCriterion("LANGUNGE_PAIR_NAME like", value, "langungePairName");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangungePairNameNotLike(String value) {
-            addCriterion("LANGUNGE_PAIR_NAME not like", value, "langungePairName");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangungePairNameIn(List<String> values) {
-            addCriterion("LANGUNGE_PAIR_NAME in", values, "langungePairName");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangungePairNameNotIn(List<String> values) {
-            addCriterion("LANGUNGE_PAIR_NAME not in", values, "langungePairName");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangungePairNameBetween(String value1, String value2) {
-            addCriterion("LANGUNGE_PAIR_NAME between", value1, value2, "langungePairName");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangungePairNameNotBetween(String value1, String value2) {
-            addCriterion("LANGUNGE_PAIR_NAME not between", value1, value2, "langungePairName");
+        public Criteria andTranslateLevelNotBetween(String value1, String value2) {
+            addCriterion("TRANSLATE_LEVEL not between", value1, value2, "translateLevel");
             return (Criteria) this;
         }
 

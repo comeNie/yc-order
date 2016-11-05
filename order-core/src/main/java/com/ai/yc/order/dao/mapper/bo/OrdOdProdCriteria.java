@@ -315,146 +315,6 @@ public class OrdOdProdCriteria {
             return (Criteria) this;
         }
 
-        public Criteria andLangungePairIsNull() {
-            addCriterion("LANGUNGE_PAIR is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangungePairIsNotNull() {
-            addCriterion("LANGUNGE_PAIR is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangungePairEqualTo(String value) {
-            addCriterion("LANGUNGE_PAIR =", value, "langungePair");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangungePairNotEqualTo(String value) {
-            addCriterion("LANGUNGE_PAIR <>", value, "langungePair");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangungePairGreaterThan(String value) {
-            addCriterion("LANGUNGE_PAIR >", value, "langungePair");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangungePairGreaterThanOrEqualTo(String value) {
-            addCriterion("LANGUNGE_PAIR >=", value, "langungePair");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangungePairLessThan(String value) {
-            addCriterion("LANGUNGE_PAIR <", value, "langungePair");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangungePairLessThanOrEqualTo(String value) {
-            addCriterion("LANGUNGE_PAIR <=", value, "langungePair");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangungePairLike(String value) {
-            addCriterion("LANGUNGE_PAIR like", value, "langungePair");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangungePairNotLike(String value) {
-            addCriterion("LANGUNGE_PAIR not like", value, "langungePair");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangungePairIn(List<String> values) {
-            addCriterion("LANGUNGE_PAIR in", values, "langungePair");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangungePairNotIn(List<String> values) {
-            addCriterion("LANGUNGE_PAIR not in", values, "langungePair");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangungePairBetween(String value1, String value2) {
-            addCriterion("LANGUNGE_PAIR between", value1, value2, "langungePair");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangungePairNotBetween(String value1, String value2) {
-            addCriterion("LANGUNGE_PAIR not between", value1, value2, "langungePair");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangungePairNameIsNull() {
-            addCriterion("LANGUNGE_PAIR_NAME is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangungePairNameIsNotNull() {
-            addCriterion("LANGUNGE_PAIR_NAME is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangungePairNameEqualTo(String value) {
-            addCriterion("LANGUNGE_PAIR_NAME =", value, "langungePairName");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangungePairNameNotEqualTo(String value) {
-            addCriterion("LANGUNGE_PAIR_NAME <>", value, "langungePairName");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangungePairNameGreaterThan(String value) {
-            addCriterion("LANGUNGE_PAIR_NAME >", value, "langungePairName");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangungePairNameGreaterThanOrEqualTo(String value) {
-            addCriterion("LANGUNGE_PAIR_NAME >=", value, "langungePairName");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangungePairNameLessThan(String value) {
-            addCriterion("LANGUNGE_PAIR_NAME <", value, "langungePairName");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangungePairNameLessThanOrEqualTo(String value) {
-            addCriterion("LANGUNGE_PAIR_NAME <=", value, "langungePairName");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangungePairNameLike(String value) {
-            addCriterion("LANGUNGE_PAIR_NAME like", value, "langungePairName");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangungePairNameNotLike(String value) {
-            addCriterion("LANGUNGE_PAIR_NAME not like", value, "langungePairName");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangungePairNameIn(List<String> values) {
-            addCriterion("LANGUNGE_PAIR_NAME in", values, "langungePairName");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangungePairNameNotIn(List<String> values) {
-            addCriterion("LANGUNGE_PAIR_NAME not in", values, "langungePairName");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangungePairNameBetween(String value1, String value2) {
-            addCriterion("LANGUNGE_PAIR_NAME between", value1, value2, "langungePairName");
-            return (Criteria) this;
-        }
-
-        public Criteria andLangungePairNameNotBetween(String value1, String value2) {
-            addCriterion("LANGUNGE_PAIR_NAME not between", value1, value2, "langungePairName");
-            return (Criteria) this;
-        }
-
         public Criteria andTranslateNameIsNull() {
             addCriterion("TRANSLATE_NAME is null");
             return (Criteria) this;
@@ -525,76 +385,6 @@ public class OrdOdProdCriteria {
             return (Criteria) this;
         }
 
-        public Criteria andTranslateLevelIsNull() {
-            addCriterion("TRANSLATE_LEVEL is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andTranslateLevelIsNotNull() {
-            addCriterion("TRANSLATE_LEVEL is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andTranslateLevelEqualTo(String value) {
-            addCriterion("TRANSLATE_LEVEL =", value, "translateLevel");
-            return (Criteria) this;
-        }
-
-        public Criteria andTranslateLevelNotEqualTo(String value) {
-            addCriterion("TRANSLATE_LEVEL <>", value, "translateLevel");
-            return (Criteria) this;
-        }
-
-        public Criteria andTranslateLevelGreaterThan(String value) {
-            addCriterion("TRANSLATE_LEVEL >", value, "translateLevel");
-            return (Criteria) this;
-        }
-
-        public Criteria andTranslateLevelGreaterThanOrEqualTo(String value) {
-            addCriterion("TRANSLATE_LEVEL >=", value, "translateLevel");
-            return (Criteria) this;
-        }
-
-        public Criteria andTranslateLevelLessThan(String value) {
-            addCriterion("TRANSLATE_LEVEL <", value, "translateLevel");
-            return (Criteria) this;
-        }
-
-        public Criteria andTranslateLevelLessThanOrEqualTo(String value) {
-            addCriterion("TRANSLATE_LEVEL <=", value, "translateLevel");
-            return (Criteria) this;
-        }
-
-        public Criteria andTranslateLevelLike(String value) {
-            addCriterion("TRANSLATE_LEVEL like", value, "translateLevel");
-            return (Criteria) this;
-        }
-
-        public Criteria andTranslateLevelNotLike(String value) {
-            addCriterion("TRANSLATE_LEVEL not like", value, "translateLevel");
-            return (Criteria) this;
-        }
-
-        public Criteria andTranslateLevelIn(List<String> values) {
-            addCriterion("TRANSLATE_LEVEL in", values, "translateLevel");
-            return (Criteria) this;
-        }
-
-        public Criteria andTranslateLevelNotIn(List<String> values) {
-            addCriterion("TRANSLATE_LEVEL not in", values, "translateLevel");
-            return (Criteria) this;
-        }
-
-        public Criteria andTranslateLevelBetween(String value1, String value2) {
-            addCriterion("TRANSLATE_LEVEL between", value1, value2, "translateLevel");
-            return (Criteria) this;
-        }
-
-        public Criteria andTranslateLevelNotBetween(String value1, String value2) {
-            addCriterion("TRANSLATE_LEVEL not between", value1, value2, "translateLevel");
-            return (Criteria) this;
-        }
-
         public Criteria andMeetingSumIsNull() {
             addCriterion("MEETING_SUM is null");
             return (Criteria) this;
@@ -652,6 +442,76 @@ public class OrdOdProdCriteria {
 
         public Criteria andMeetingSumNotBetween(Long value1, Long value2) {
             addCriterion("MEETING_SUM not between", value1, value2, "meetingSum");
+            return (Criteria) this;
+        }
+
+        public Criteria andTranslateSumIsNull() {
+            addCriterion("TRANSLATE_SUM is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTranslateSumIsNotNull() {
+            addCriterion("TRANSLATE_SUM is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTranslateSumEqualTo(String value) {
+            addCriterion("TRANSLATE_SUM =", value, "translateSum");
+            return (Criteria) this;
+        }
+
+        public Criteria andTranslateSumNotEqualTo(String value) {
+            addCriterion("TRANSLATE_SUM <>", value, "translateSum");
+            return (Criteria) this;
+        }
+
+        public Criteria andTranslateSumGreaterThan(String value) {
+            addCriterion("TRANSLATE_SUM >", value, "translateSum");
+            return (Criteria) this;
+        }
+
+        public Criteria andTranslateSumGreaterThanOrEqualTo(String value) {
+            addCriterion("TRANSLATE_SUM >=", value, "translateSum");
+            return (Criteria) this;
+        }
+
+        public Criteria andTranslateSumLessThan(String value) {
+            addCriterion("TRANSLATE_SUM <", value, "translateSum");
+            return (Criteria) this;
+        }
+
+        public Criteria andTranslateSumLessThanOrEqualTo(String value) {
+            addCriterion("TRANSLATE_SUM <=", value, "translateSum");
+            return (Criteria) this;
+        }
+
+        public Criteria andTranslateSumLike(String value) {
+            addCriterion("TRANSLATE_SUM like", value, "translateSum");
+            return (Criteria) this;
+        }
+
+        public Criteria andTranslateSumNotLike(String value) {
+            addCriterion("TRANSLATE_SUM not like", value, "translateSum");
+            return (Criteria) this;
+        }
+
+        public Criteria andTranslateSumIn(List<String> values) {
+            addCriterion("TRANSLATE_SUM in", values, "translateSum");
+            return (Criteria) this;
+        }
+
+        public Criteria andTranslateSumNotIn(List<String> values) {
+            addCriterion("TRANSLATE_SUM not in", values, "translateSum");
+            return (Criteria) this;
+        }
+
+        public Criteria andTranslateSumBetween(String value1, String value2) {
+            addCriterion("TRANSLATE_SUM between", value1, value2, "translateSum");
+            return (Criteria) this;
+        }
+
+        public Criteria andTranslateSumNotBetween(String value1, String value2) {
+            addCriterion("TRANSLATE_SUM not between", value1, value2, "translateSum");
             return (Criteria) this;
         }
 
@@ -1255,6 +1115,76 @@ public class OrdOdProdCriteria {
             return (Criteria) this;
         }
 
+        public Criteria andProdDetalStateIsNull() {
+            addCriterion("PROD_DETAL_STATE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdDetalStateIsNotNull() {
+            addCriterion("PROD_DETAL_STATE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdDetalStateEqualTo(String value) {
+            addCriterion("PROD_DETAL_STATE =", value, "prodDetalState");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdDetalStateNotEqualTo(String value) {
+            addCriterion("PROD_DETAL_STATE <>", value, "prodDetalState");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdDetalStateGreaterThan(String value) {
+            addCriterion("PROD_DETAL_STATE >", value, "prodDetalState");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdDetalStateGreaterThanOrEqualTo(String value) {
+            addCriterion("PROD_DETAL_STATE >=", value, "prodDetalState");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdDetalStateLessThan(String value) {
+            addCriterion("PROD_DETAL_STATE <", value, "prodDetalState");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdDetalStateLessThanOrEqualTo(String value) {
+            addCriterion("PROD_DETAL_STATE <=", value, "prodDetalState");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdDetalStateLike(String value) {
+            addCriterion("PROD_DETAL_STATE like", value, "prodDetalState");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdDetalStateNotLike(String value) {
+            addCriterion("PROD_DETAL_STATE not like", value, "prodDetalState");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdDetalStateIn(List<String> values) {
+            addCriterion("PROD_DETAL_STATE in", values, "prodDetalState");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdDetalStateNotIn(List<String> values) {
+            addCriterion("PROD_DETAL_STATE not in", values, "prodDetalState");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdDetalStateBetween(String value1, String value2) {
+            addCriterion("PROD_DETAL_STATE between", value1, value2, "prodDetalState");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdDetalStateNotBetween(String value1, String value2) {
+            addCriterion("PROD_DETAL_STATE not between", value1, value2, "prodDetalState");
+            return (Criteria) this;
+        }
+
         public Criteria andStateIsNull() {
             addCriterion("STATE is null");
             return (Criteria) this;
@@ -1792,146 +1722,6 @@ public class OrdOdProdCriteria {
 
         public Criteria andUpdateTimeNotBetween(Timestamp value1, Timestamp value2) {
             addCriterion("UPDATE_TIME not between", value1, value2, "updateTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andTranslateSumIsNull() {
-            addCriterion("TRANSLATE_SUM is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andTranslateSumIsNotNull() {
-            addCriterion("TRANSLATE_SUM is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andTranslateSumEqualTo(String value) {
-            addCriterion("TRANSLATE_SUM =", value, "translateSum");
-            return (Criteria) this;
-        }
-
-        public Criteria andTranslateSumNotEqualTo(String value) {
-            addCriterion("TRANSLATE_SUM <>", value, "translateSum");
-            return (Criteria) this;
-        }
-
-        public Criteria andTranslateSumGreaterThan(String value) {
-            addCriterion("TRANSLATE_SUM >", value, "translateSum");
-            return (Criteria) this;
-        }
-
-        public Criteria andTranslateSumGreaterThanOrEqualTo(String value) {
-            addCriterion("TRANSLATE_SUM >=", value, "translateSum");
-            return (Criteria) this;
-        }
-
-        public Criteria andTranslateSumLessThan(String value) {
-            addCriterion("TRANSLATE_SUM <", value, "translateSum");
-            return (Criteria) this;
-        }
-
-        public Criteria andTranslateSumLessThanOrEqualTo(String value) {
-            addCriterion("TRANSLATE_SUM <=", value, "translateSum");
-            return (Criteria) this;
-        }
-
-        public Criteria andTranslateSumLike(String value) {
-            addCriterion("TRANSLATE_SUM like", value, "translateSum");
-            return (Criteria) this;
-        }
-
-        public Criteria andTranslateSumNotLike(String value) {
-            addCriterion("TRANSLATE_SUM not like", value, "translateSum");
-            return (Criteria) this;
-        }
-
-        public Criteria andTranslateSumIn(List<String> values) {
-            addCriterion("TRANSLATE_SUM in", values, "translateSum");
-            return (Criteria) this;
-        }
-
-        public Criteria andTranslateSumNotIn(List<String> values) {
-            addCriterion("TRANSLATE_SUM not in", values, "translateSum");
-            return (Criteria) this;
-        }
-
-        public Criteria andTranslateSumBetween(String value1, String value2) {
-            addCriterion("TRANSLATE_SUM between", value1, value2, "translateSum");
-            return (Criteria) this;
-        }
-
-        public Criteria andTranslateSumNotBetween(String value1, String value2) {
-            addCriterion("TRANSLATE_SUM not between", value1, value2, "translateSum");
-            return (Criteria) this;
-        }
-
-        public Criteria andProdDetalStateIsNull() {
-            addCriterion("PROD_DETAL_STATE is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andProdDetalStateIsNotNull() {
-            addCriterion("PROD_DETAL_STATE is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andProdDetalStateEqualTo(String value) {
-            addCriterion("PROD_DETAL_STATE =", value, "prodDetalState");
-            return (Criteria) this;
-        }
-
-        public Criteria andProdDetalStateNotEqualTo(String value) {
-            addCriterion("PROD_DETAL_STATE <>", value, "prodDetalState");
-            return (Criteria) this;
-        }
-
-        public Criteria andProdDetalStateGreaterThan(String value) {
-            addCriterion("PROD_DETAL_STATE >", value, "prodDetalState");
-            return (Criteria) this;
-        }
-
-        public Criteria andProdDetalStateGreaterThanOrEqualTo(String value) {
-            addCriterion("PROD_DETAL_STATE >=", value, "prodDetalState");
-            return (Criteria) this;
-        }
-
-        public Criteria andProdDetalStateLessThan(String value) {
-            addCriterion("PROD_DETAL_STATE <", value, "prodDetalState");
-            return (Criteria) this;
-        }
-
-        public Criteria andProdDetalStateLessThanOrEqualTo(String value) {
-            addCriterion("PROD_DETAL_STATE <=", value, "prodDetalState");
-            return (Criteria) this;
-        }
-
-        public Criteria andProdDetalStateLike(String value) {
-            addCriterion("PROD_DETAL_STATE like", value, "prodDetalState");
-            return (Criteria) this;
-        }
-
-        public Criteria andProdDetalStateNotLike(String value) {
-            addCriterion("PROD_DETAL_STATE not like", value, "prodDetalState");
-            return (Criteria) this;
-        }
-
-        public Criteria andProdDetalStateIn(List<String> values) {
-            addCriterion("PROD_DETAL_STATE in", values, "prodDetalState");
-            return (Criteria) this;
-        }
-
-        public Criteria andProdDetalStateNotIn(List<String> values) {
-            addCriterion("PROD_DETAL_STATE not in", values, "prodDetalState");
-            return (Criteria) this;
-        }
-
-        public Criteria andProdDetalStateBetween(String value1, String value2) {
-            addCriterion("PROD_DETAL_STATE between", value1, value2, "prodDetalState");
-            return (Criteria) this;
-        }
-
-        public Criteria andProdDetalStateNotBetween(String value1, String value2) {
-            addCriterion("PROD_DETAL_STATE not between", value1, value2, "prodDetalState");
             return (Criteria) this;
         }
     }

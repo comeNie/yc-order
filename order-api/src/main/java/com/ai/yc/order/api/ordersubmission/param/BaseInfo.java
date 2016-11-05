@@ -2,8 +2,10 @@ package com.ai.yc.order.api.ordersubmission.param;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+
 /**
  * 订单下单基本信息
+ * 
  * @author zhangzd
  *
  */
@@ -14,74 +16,61 @@ public class BaseInfo implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	/**
-	 *  业务标识
-	 *  0:国内业务
-	 *	1：国际业务
+	 * 业务标识 0:国内业务 1：国际业务
 	 */
 	private String flag;
 	/**
-	 *  订单来源
-	 *  0：PC-中文站
-		1：PC-汉语站
-		2：百度
-		3：金山
-		4：找翻译
-		5：WAP-中文
-		6：WAP-英语
-		7：微信助手
-
+	 * 订单来源 0：PC-中文站 1：PC-汉语站 2：百度 3：金山 4：找翻译 5：WAP-中文 6：WAP-英语 7：微信助手
+	 * 
 	 */
 	private String chlId;
 	/**
-	 *  订单类型
-	 *  "订单类型：
-		1：个人订单
-		2：企业订单
-		"
+	 * 订单类型 "订单类型： 1：个人订单 2：企业订单 "
 	 */
 	private String orderType;
 	/**
-	 * 业务类型
-	 * "1：正常单
-		2：退费单"
+	 * 业务类型 "1：正常单 2：退费单"
 	 */
 	private String busiType;
 	/**
-	 *  订单级别
+	 * 翻译类型 "0：快速翻译 1：文档翻译 2：口译翻译"
+	 * 
+	 */
+	private String translateType;
+
+	/**
+	 * 翻译主题 快速翻译：取文本前15个字 文档翻译：取第一个文件名称 口译翻译：用户填写
+	 */
+	private String translateName;
+	/**
+	 * 订单级别
 	 */
 	private String orderLevel;
 	/**
-	 *  报价标识
-	 *  "0：系统自动报价
-		 1：人工报价"
-
+	 * 报价标识 "0：系统自动报价 1：人工报价"
+	 * 
 	 */
 	private String subFlag;
 	/**
-	 *  用户类型
-	 *  "10：个人
-		11：企业
-		12：代理人
-		"
-
+	 * 用户类型 "10：个人 11：企业 12：代理人 "
+	 * 
 	 */
 	private String userType;
 	/**
-	 *  用户ID
+	 * 用户ID
 	 */
 	private String userId;
 	/**
-	 *  企业ID
+	 * 企业ID
 	 */
 	private String corporaId;
 	/**
-	 *  账户ID
+	 * 账户ID
 	 */
 	private Long accountId;
 	// 时区
 	/**
-	 * 下单时间
-	 * 取系统时间
+	 * 下单时间 取系统时间
 	 */
 	private Timestamp orderTime;
 	/**
@@ -89,21 +78,37 @@ public class BaseInfo implements Serializable {
 	 */
 	private String provinceCode;
 	/**
-	 *  地市
+	 * 地市
 	 */
 	private String cityCode;
 	/**
-	 *  订单简要信息
+	 * 订单简要信息
 	 */
 	private String orderDesc;
 	/**
-	 *  订单关键词
+	 * 订单关键词
 	 */
 	private String keywords;
 	/**
-	 *  订单备注
+	 * 订单备注
 	 */
 	private String remark;
+
+	public String getTranslateType() {
+		return translateType;
+	}
+
+	public void setTranslateType(String translateType) {
+		this.translateType = translateType;
+	}
+
+	public String getTranslateName() {
+		return translateName;
+	}
+
+	public void setTranslateName(String translateName) {
+		this.translateName = translateName;
+	}
 
 	public String getFlag() {
 		return flag;

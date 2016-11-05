@@ -1,15 +1,13 @@
 package com.ai.yc.order.dao.mapper.bo;
 
-public class OrdOdProdExtend {
+public class OrdOdProdLevel {
     private Long prodDetalExtendId;
 
     private Long prodDetalId;
 
     private Long orderId;
 
-    private String langungePair;
-
-    private String langungePairName;
+    private String translateLevel;
 
     private String infoJson;
 
@@ -37,20 +35,12 @@ public class OrdOdProdExtend {
         this.orderId = orderId;
     }
 
-    public String getLangungePair() {
-        return langungePair;
+    public String getTranslateLevel() {
+        return translateLevel;
     }
 
-    public void setLangungePair(String langungePair) {
-        this.langungePair = langungePair == null ? null : langungePair.trim();
-    }
-
-    public String getLangungePairName() {
-        return langungePairName;
-    }
-
-    public void setLangungePairName(String langungePairName) {
-        this.langungePairName = langungePairName == null ? null : langungePairName.trim();
+    public void setTranslateLevel(String translateLevel) {
+        this.translateLevel = translateLevel == null ? null : translateLevel.trim();
     }
 
     public String getInfoJson() {

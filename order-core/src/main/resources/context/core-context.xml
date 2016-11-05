@@ -90,4 +90,5 @@
 	<!-- 设定注解扫描基础包 -->
 	<context:component-scan base-package="com.ai.yc.order" />
 	
+	<import resource="order-submission.xml"/>
 </beans>

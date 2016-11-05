@@ -3,6 +3,8 @@ package com.ai.yc.order.service.business.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ai.opt.sdk.util.BeanUtils;
+import com.ai.yc.order.api.orderquery.param.QueryOrdCountRequest;
 import com.ai.yc.order.dao.mapper.bo.OrdOrder;
 import com.ai.yc.order.service.atom.interfaces.IOrdOrderAtomSV;
 import com.ai.yc.order.service.business.interfaces.IOrdOrderBusiSV;
@@ -15,5 +17,12 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 	public OrdOrder findByPrimaryKey(OrdOrder ordOrder) {
 		return this.ordOrderAtomSV.findByPrimaryKey(ordOrder);
 	}
+	@Override
+	public int findOrderCount(QueryOrdCountRequest request) {
+		OrdOrder orderRequest = new OrdOrder();
+		BeanUtils.copyProperties(orderRequest, request);
+		return ordOrderAtomSV.findOrderCount(orderRequest);
+	}
+	
 
 }

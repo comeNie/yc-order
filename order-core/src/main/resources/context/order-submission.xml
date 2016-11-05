@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context
+		   http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		   http://www.springframework.org/schema/aop
+		   http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		   http://www.springframework.org/schema/tx
+		   http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+		   http://mybatis.org/schema/mybatis-spring 
+		   http://mybatis.org/schema/mybatis-spring.xsd">
+	<!-- 加载配置文件 -->
+	<bean id="orderSubmissionParam" class="com.ai.yc.order.validate.OrderSubmissionParam">
+		<!-- 业务类型 -->
+		<property name="flagMap">
+			<map>
+				<entry key="0" value="国内业务" />
+				<entry key="1" value="国际业务" />
+			</map>
+		</property>
+		<!-- /** * 订单来源 0：PC-中文站 1：PC-英文站 2：百度 3：金山 4：找翻译 5：WAP-中文 6：WAP-英语 7：微信助手 
+			* */ private Map<String, String> chlIdMap; -->
+		<property name="chlIdMap">
+			<map>
+				<entry key="0" value="PC-中文站" />
+				<entry key="1" value="PC-英文站" />
+				<entry key="2" value="百度" />
+				<entry key="3" value="金山" />
+				<entry key="4" value="找翻译" />
+				<entry key="5" value="WAP-中文" />
+				<entry key="6" value="WAP-英语" />
+				<entry key="7" value="微信助手" />
+			</map>
+		</property>
+
+		<!-- /** * 订单类型 "订单类型： 1：个人订单 2：企业订单 " */ private Map<String, String> orderTypeMap; -->
+		<property name="orderTypeMap">
+			<map>
+				<entry key="1" value="个人订单 " />
+				<entry key="2" value="企业订单" />
+			</map>
+		</property>
+		<!-- /** * 业务类型 "1：正常单 2：退费单" */ private Map<String, String> busiTypeMap; -->
+		<property name="busiTypeMap">
+			<map>
+				<entry key="1" value="正常单" />
+				<entry key="2" value="退费单" />
+			</map>
+		</property>
+		<!-- /** * 翻译类型 "0：快速翻译 1：文档翻译 2：口译翻译" * */ private Map <String , String> 
+			translateTypeMap; -->
+
+		<property name="translateTypeMap">
+			<map>
+				<entry key="0" value="快速翻译" />
+				<entry key="1" value="文档翻译" />
+				<entry key="2" value="口译翻译" />
+			</map>
+		</property>
+
+		<!-- /** * 订单级别 */ private Map<String, String> orderLevelMap; -->
+		<property name="orderLevelMap">
+			<map>
+				<entry key="1" value="V1" />
+				<entry key="2" value="V2" />
+				<entry key="3" value="V3" />
+				<entry key="4" value="V4" />
+			</map>
+		</property>
+		<!-- /** * 报价标识 "0：系统自动报价 1：人工报价" * */ private Map<String, String> subFlagMap; -->
+		<property name="subFlagMap">
+			<map>
+				<entry key="0" value="系统自动报价" />
+				<entry key="1" value="人工报价" />
+			</map>
+		</property>
+		<!-- 10：个人 11：企业 12：代理人 -->
+		<property name="userTypeMap">
+			<map>
+				<entry key="10" value="个人" />
+				<entry key="11" value="企业" />
+				<entry key="12" value="代理人" />
+			</map>
+		</property>
+
+		<!-- /** * 币种 * "1：RMB 2：$" */ -->
+		<property name="currencyUnitMap">
+			<map>
+				<entry key="1" value="RMB" />
+				<entry key="2" value="$" />
+			</map>
+		</property>
+
+
+
+	</bean>
+
+</beans>

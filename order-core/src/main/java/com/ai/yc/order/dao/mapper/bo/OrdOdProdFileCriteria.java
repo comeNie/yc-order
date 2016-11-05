@@ -3,7 +3,7 @@ package com.ai.yc.order.dao.mapper.bo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrdOdProdExtendCriteria {
+public class OrdOdProdFileCriteria {
     protected String orderByClause;
 
     protected boolean distinct;
@@ -14,7 +14,7 @@ public class OrdOdProdExtendCriteria {
 
     protected Integer limitEnd;
 
-    public OrdOdProdExtendCriteria() {
+    public OrdOdProdFileCriteria() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -124,63 +124,73 @@ public class OrdOdProdExtendCriteria {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andProdDetalExtendIdIsNull() {
-            addCriterion("PROD_DETAL_EXTEND_ID is null");
+        public Criteria andProdFileIdIsNull() {
+            addCriterion("PROD_FILE_ID is null");
             return (Criteria) this;
         }
 
-        public Criteria andProdDetalExtendIdIsNotNull() {
-            addCriterion("PROD_DETAL_EXTEND_ID is not null");
+        public Criteria andProdFileIdIsNotNull() {
+            addCriterion("PROD_FILE_ID is not null");
             return (Criteria) this;
         }
 
-        public Criteria andProdDetalExtendIdEqualTo(Long value) {
-            addCriterion("PROD_DETAL_EXTEND_ID =", value, "prodDetalExtendId");
+        public Criteria andProdFileIdEqualTo(String value) {
+            addCriterion("PROD_FILE_ID =", value, "prodFileId");
             return (Criteria) this;
         }
 
-        public Criteria andProdDetalExtendIdNotEqualTo(Long value) {
-            addCriterion("PROD_DETAL_EXTEND_ID <>", value, "prodDetalExtendId");
+        public Criteria andProdFileIdNotEqualTo(String value) {
+            addCriterion("PROD_FILE_ID <>", value, "prodFileId");
             return (Criteria) this;
         }
 
-        public Criteria andProdDetalExtendIdGreaterThan(Long value) {
-            addCriterion("PROD_DETAL_EXTEND_ID >", value, "prodDetalExtendId");
+        public Criteria andProdFileIdGreaterThan(String value) {
+            addCriterion("PROD_FILE_ID >", value, "prodFileId");
             return (Criteria) this;
         }
 
-        public Criteria andProdDetalExtendIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("PROD_DETAL_EXTEND_ID >=", value, "prodDetalExtendId");
+        public Criteria andProdFileIdGreaterThanOrEqualTo(String value) {
+            addCriterion("PROD_FILE_ID >=", value, "prodFileId");
             return (Criteria) this;
         }
 
-        public Criteria andProdDetalExtendIdLessThan(Long value) {
-            addCriterion("PROD_DETAL_EXTEND_ID <", value, "prodDetalExtendId");
+        public Criteria andProdFileIdLessThan(String value) {
+            addCriterion("PROD_FILE_ID <", value, "prodFileId");
             return (Criteria) this;
         }
 
-        public Criteria andProdDetalExtendIdLessThanOrEqualTo(Long value) {
-            addCriterion("PROD_DETAL_EXTEND_ID <=", value, "prodDetalExtendId");
+        public Criteria andProdFileIdLessThanOrEqualTo(String value) {
+            addCriterion("PROD_FILE_ID <=", value, "prodFileId");
             return (Criteria) this;
         }
 
-        public Criteria andProdDetalExtendIdIn(List<Long> values) {
-            addCriterion("PROD_DETAL_EXTEND_ID in", values, "prodDetalExtendId");
+        public Criteria andProdFileIdLike(String value) {
+            addCriterion("PROD_FILE_ID like", value, "prodFileId");
             return (Criteria) this;
         }
 
-        public Criteria andProdDetalExtendIdNotIn(List<Long> values) {
-            addCriterion("PROD_DETAL_EXTEND_ID not in", values, "prodDetalExtendId");
+        public Criteria andProdFileIdNotLike(String value) {
+            addCriterion("PROD_FILE_ID not like", value, "prodFileId");
             return (Criteria) this;
         }
 
-        public Criteria andProdDetalExtendIdBetween(Long value1, Long value2) {
-            addCriterion("PROD_DETAL_EXTEND_ID between", value1, value2, "prodDetalExtendId");
+        public Criteria andProdFileIdIn(List<String> values) {
+            addCriterion("PROD_FILE_ID in", values, "prodFileId");
             return (Criteria) this;
         }
 
-        public Criteria andProdDetalExtendIdNotBetween(Long value1, Long value2) {
-            addCriterion("PROD_DETAL_EXTEND_ID not between", value1, value2, "prodDetalExtendId");
+        public Criteria andProdFileIdNotIn(List<String> values) {
+            addCriterion("PROD_FILE_ID not in", values, "prodFileId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdFileIdBetween(String value1, String value2) {
+            addCriterion("PROD_FILE_ID between", value1, value2, "prodFileId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProdFileIdNotBetween(String value1, String value2) {
+            addCriterion("PROD_FILE_ID not between", value1, value2, "prodFileId");
             return (Criteria) this;
         }
 
@@ -244,273 +254,213 @@ public class OrdOdProdExtendCriteria {
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdIsNull() {
-            addCriterion("ORDER_ID is null");
+        public Criteria andFileNameIsNull() {
+            addCriterion("FILE_NAME is null");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdIsNotNull() {
-            addCriterion("ORDER_ID is not null");
+        public Criteria andFileNameIsNotNull() {
+            addCriterion("FILE_NAME is not null");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdEqualTo(Long value) {
-            addCriterion("ORDER_ID =", value, "orderId");
+        public Criteria andFileNameEqualTo(String value) {
+            addCriterion("FILE_NAME =", value, "fileName");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdNotEqualTo(Long value) {
-            addCriterion("ORDER_ID <>", value, "orderId");
+        public Criteria andFileNameNotEqualTo(String value) {
+            addCriterion("FILE_NAME <>", value, "fileName");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdGreaterThan(Long value) {
-            addCriterion("ORDER_ID >", value, "orderId");
+        public Criteria andFileNameGreaterThan(String value) {
+            addCriterion("FILE_NAME >", value, "fileName");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("ORDER_ID >=", value, "orderId");
+        public Criteria andFileNameGreaterThanOrEqualTo(String value) {
+            addCriterion("FILE_NAME >=", value, "fileName");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdLessThan(Long value) {
-            addCriterion("ORDER_ID <", value, "orderId");
+        public Criteria andFileNameLessThan(String value) {
+            addCriterion("FILE_NAME <", value, "fileName");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdLessThanOrEqualTo(Long value) {
-            addCriterion("ORDER_ID <=", value, "orderId");
+        public Criteria andFileNameLessThanOrEqualTo(String value) {
+            addCriterion("FILE_NAME <=", value, "fileName");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdIn(List<Long> values) {
-            addCriterion("ORDER_ID in", values, "orderId");
+        public Criteria andFileNameLike(String value) {
+            addCriterion("FILE_NAME like", value, "fileName");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdNotIn(List<Long> values) {
-            addCriterion("ORDER_ID not in", values, "orderId");
+        public Criteria andFileNameNotLike(String value) {
+            addCriterion("FILE_NAME not like", value, "fileName");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdBetween(Long value1, Long value2) {
-            addCriterion("ORDER_ID between", value1, value2, "orderId");
+        public Criteria andFileNameIn(List<String> values) {
+            addCriterion("FILE_NAME in", values, "fileName");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdNotBetween(Long value1, Long value2) {
-            addCriterion("ORDER_ID not between", value1, value2, "orderId");
+        public Criteria andFileNameNotIn(List<String> values) {
+            addCriterion("FILE_NAME not in", values, "fileName");
             return (Criteria) this;
         }
 
-        public Criteria andLangungePairIsNull() {
-            addCriterion("LANGUNGE_PAIR is null");
+        public Criteria andFileNameBetween(String value1, String value2) {
+            addCriterion("FILE_NAME between", value1, value2, "fileName");
             return (Criteria) this;
         }
 
-        public Criteria andLangungePairIsNotNull() {
-            addCriterion("LANGUNGE_PAIR is not null");
+        public Criteria andFileNameNotBetween(String value1, String value2) {
+            addCriterion("FILE_NAME not between", value1, value2, "fileName");
             return (Criteria) this;
         }
 
-        public Criteria andLangungePairEqualTo(String value) {
-            addCriterion("LANGUNGE_PAIR =", value, "langungePair");
+        public Criteria andFileSaveIdIsNull() {
+            addCriterion("FILE_SAVE_ID is null");
             return (Criteria) this;
         }
 
-        public Criteria andLangungePairNotEqualTo(String value) {
-            addCriterion("LANGUNGE_PAIR <>", value, "langungePair");
+        public Criteria andFileSaveIdIsNotNull() {
+            addCriterion("FILE_SAVE_ID is not null");
             return (Criteria) this;
         }
 
-        public Criteria andLangungePairGreaterThan(String value) {
-            addCriterion("LANGUNGE_PAIR >", value, "langungePair");
+        public Criteria andFileSaveIdEqualTo(String value) {
+            addCriterion("FILE_SAVE_ID =", value, "fileSaveId");
             return (Criteria) this;
         }
 
-        public Criteria andLangungePairGreaterThanOrEqualTo(String value) {
-            addCriterion("LANGUNGE_PAIR >=", value, "langungePair");
+        public Criteria andFileSaveIdNotEqualTo(String value) {
+            addCriterion("FILE_SAVE_ID <>", value, "fileSaveId");
             return (Criteria) this;
         }
 
-        public Criteria andLangungePairLessThan(String value) {
-            addCriterion("LANGUNGE_PAIR <", value, "langungePair");
+        public Criteria andFileSaveIdGreaterThan(String value) {
+            addCriterion("FILE_SAVE_ID >", value, "fileSaveId");
             return (Criteria) this;
         }
 
-        public Criteria andLangungePairLessThanOrEqualTo(String value) {
-            addCriterion("LANGUNGE_PAIR <=", value, "langungePair");
+        public Criteria andFileSaveIdGreaterThanOrEqualTo(String value) {
+            addCriterion("FILE_SAVE_ID >=", value, "fileSaveId");
             return (Criteria) this;
         }
 
-        public Criteria andLangungePairLike(String value) {
-            addCriterion("LANGUNGE_PAIR like", value, "langungePair");
+        public Criteria andFileSaveIdLessThan(String value) {
+            addCriterion("FILE_SAVE_ID <", value, "fileSaveId");
             return (Criteria) this;
         }
 
-        public Criteria andLangungePairNotLike(String value) {
-            addCriterion("LANGUNGE_PAIR not like", value, "langungePair");
+        public Criteria andFileSaveIdLessThanOrEqualTo(String value) {
+            addCriterion("FILE_SAVE_ID <=", value, "fileSaveId");
             return (Criteria) this;
         }
 
-        public Criteria andLangungePairIn(List<String> values) {
-            addCriterion("LANGUNGE_PAIR in", values, "langungePair");
+        public Criteria andFileSaveIdLike(String value) {
+            addCriterion("FILE_SAVE_ID like", value, "fileSaveId");
             return (Criteria) this;
         }
 
-        public Criteria andLangungePairNotIn(List<String> values) {
-            addCriterion("LANGUNGE_PAIR not in", values, "langungePair");
+        public Criteria andFileSaveIdNotLike(String value) {
+            addCriterion("FILE_SAVE_ID not like", value, "fileSaveId");
             return (Criteria) this;
         }
 
-        public Criteria andLangungePairBetween(String value1, String value2) {
-            addCriterion("LANGUNGE_PAIR between", value1, value2, "langungePair");
+        public Criteria andFileSaveIdIn(List<String> values) {
+            addCriterion("FILE_SAVE_ID in", values, "fileSaveId");
             return (Criteria) this;
         }
 
-        public Criteria andLangungePairNotBetween(String value1, String value2) {
-            addCriterion("LANGUNGE_PAIR not between", value1, value2, "langungePair");
+        public Criteria andFileSaveIdNotIn(List<String> values) {
+            addCriterion("FILE_SAVE_ID not in", values, "fileSaveId");
             return (Criteria) this;
         }
 
-        public Criteria andLangungePairNameIsNull() {
-            addCriterion("LANGUNGE_PAIR_NAME is null");
+        public Criteria andFileSaveIdBetween(String value1, String value2) {
+            addCriterion("FILE_SAVE_ID between", value1, value2, "fileSaveId");
             return (Criteria) this;
         }
 
-        public Criteria andLangungePairNameIsNotNull() {
-            addCriterion("LANGUNGE_PAIR_NAME is not null");
+        public Criteria andFileSaveIdNotBetween(String value1, String value2) {
+            addCriterion("FILE_SAVE_ID not between", value1, value2, "fileSaveId");
             return (Criteria) this;
         }
 
-        public Criteria andLangungePairNameEqualTo(String value) {
-            addCriterion("LANGUNGE_PAIR_NAME =", value, "langungePairName");
+        public Criteria andFileTranslateIdIsNull() {
+            addCriterion("FILE_TRANSLATE_ID is null");
             return (Criteria) this;
         }
 
-        public Criteria andLangungePairNameNotEqualTo(String value) {
-            addCriterion("LANGUNGE_PAIR_NAME <>", value, "langungePairName");
+        public Criteria andFileTranslateIdIsNotNull() {
+            addCriterion("FILE_TRANSLATE_ID is not null");
             return (Criteria) this;
         }
 
-        public Criteria andLangungePairNameGreaterThan(String value) {
-            addCriterion("LANGUNGE_PAIR_NAME >", value, "langungePairName");
+        public Criteria andFileTranslateIdEqualTo(String value) {
+            addCriterion("FILE_TRANSLATE_ID =", value, "fileTranslateId");
             return (Criteria) this;
         }
 
-        public Criteria andLangungePairNameGreaterThanOrEqualTo(String value) {
-            addCriterion("LANGUNGE_PAIR_NAME >=", value, "langungePairName");
+        public Criteria andFileTranslateIdNotEqualTo(String value) {
+            addCriterion("FILE_TRANSLATE_ID <>", value, "fileTranslateId");
             return (Criteria) this;
         }
 
-        public Criteria andLangungePairNameLessThan(String value) {
-            addCriterion("LANGUNGE_PAIR_NAME <", value, "langungePairName");
+        public Criteria andFileTranslateIdGreaterThan(String value) {
+            addCriterion("FILE_TRANSLATE_ID >", value, "fileTranslateId");
             return (Criteria) this;
         }
 
-        public Criteria andLangungePairNameLessThanOrEqualTo(String value) {
-            addCriterion("LANGUNGE_PAIR_NAME <=", value, "langungePairName");
+        public Criteria andFileTranslateIdGreaterThanOrEqualTo(String value) {
+            addCriterion("FILE_TRANSLATE_ID >=", value, "fileTranslateId");
             return (Criteria) this;
         }
 
-        public Criteria andLangungePairNameLike(String value) {
-            addCriterion("LANGUNGE_PAIR_NAME like", value, "langungePairName");
+        public Criteria andFileTranslateIdLessThan(String value) {
+            addCriterion("FILE_TRANSLATE_ID <", value, "fileTranslateId");
             return (Criteria) this;
         }
 
-        public Criteria andLangungePairNameNotLike(String value) {
-            addCriterion("LANGUNGE_PAIR_NAME not like", value, "langungePairName");
+        public Criteria andFileTranslateIdLessThanOrEqualTo(String value) {
+            addCriterion("FILE_TRANSLATE_ID <=", value, "fileTranslateId");
             return (Criteria) this;
         }
 
-        public Criteria andLangungePairNameIn(List<String> values) {
-            addCriterion("LANGUNGE_PAIR_NAME in", values, "langungePairName");
+        public Criteria andFileTranslateIdLike(String value) {
+            addCriterion("FILE_TRANSLATE_ID like", value, "fileTranslateId");
             return (Criteria) this;
         }
 
-        public Criteria andLangungePairNameNotIn(List<String> values) {
-            addCriterion("LANGUNGE_PAIR_NAME not in", values, "langungePairName");
+        public Criteria andFileTranslateIdNotLike(String value) {
+            addCriterion("FILE_TRANSLATE_ID not like", value, "fileTranslateId");
             return (Criteria) this;
         }
 
-        public Criteria andLangungePairNameBetween(String value1, String value2) {
-            addCriterion("LANGUNGE_PAIR_NAME between", value1, value2, "langungePairName");
+        public Criteria andFileTranslateIdIn(List<String> values) {
+            addCriterion("FILE_TRANSLATE_ID in", values, "fileTranslateId");
             return (Criteria) this;
         }
 
-        public Criteria andLangungePairNameNotBetween(String value1, String value2) {
-            addCriterion("LANGUNGE_PAIR_NAME not between", value1, value2, "langungePairName");
+        public Criteria andFileTranslateIdNotIn(List<String> values) {
+            addCriterion("FILE_TRANSLATE_ID not in", values, "fileTranslateId");
             return (Criteria) this;
         }
 
-        public Criteria andInfoJsonIsNull() {
-            addCriterion("INFO_JSON is null");
+        public Criteria andFileTranslateIdBetween(String value1, String value2) {
+            addCriterion("FILE_TRANSLATE_ID between", value1, value2, "fileTranslateId");
             return (Criteria) this;
         }
 
-        public Criteria andInfoJsonIsNotNull() {
-            addCriterion("INFO_JSON is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andInfoJsonEqualTo(String value) {
-            addCriterion("INFO_JSON =", value, "infoJson");
-            return (Criteria) this;
-        }
-
-        public Criteria andInfoJsonNotEqualTo(String value) {
-            addCriterion("INFO_JSON <>", value, "infoJson");
-            return (Criteria) this;
-        }
-
-        public Criteria andInfoJsonGreaterThan(String value) {
-            addCriterion("INFO_JSON >", value, "infoJson");
-            return (Criteria) this;
-        }
-
-        public Criteria andInfoJsonGreaterThanOrEqualTo(String value) {
-            addCriterion("INFO_JSON >=", value, "infoJson");
-            return (Criteria) this;
-        }
-
-        public Criteria andInfoJsonLessThan(String value) {
-            addCriterion("INFO_JSON <", value, "infoJson");
-            return (Criteria) this;
-        }
-
-        public Criteria andInfoJsonLessThanOrEqualTo(String value) {
-            addCriterion("INFO_JSON <=", value, "infoJson");
-            return (Criteria) this;
-        }
-
-        public Criteria andInfoJsonLike(String value) {
-            addCriterion("INFO_JSON like", value, "infoJson");
-            return (Criteria) this;
-        }
-
-        public Criteria andInfoJsonNotLike(String value) {
-            addCriterion("INFO_JSON not like", value, "infoJson");
-            return (Criteria) this;
-        }
-
-        public Criteria andInfoJsonIn(List<String> values) {
-            addCriterion("INFO_JSON in", values, "infoJson");
-            return (Criteria) this;
-        }
-
-        public Criteria andInfoJsonNotIn(List<String> values) {
-            addCriterion("INFO_JSON not in", values, "infoJson");
-            return (Criteria) this;
-        }
-
-        public Criteria andInfoJsonBetween(String value1, String value2) {
-            addCriterion("INFO_JSON between", value1, value2, "infoJson");
-            return (Criteria) this;
-        }
-
-        public Criteria andInfoJsonNotBetween(String value1, String value2) {
-            addCriterion("INFO_JSON not between", value1, value2, "infoJson");
+        public Criteria andFileTranslateIdNotBetween(String value1, String value2) {
+            addCriterion("FILE_TRANSLATE_ID not between", value1, value2, "fileTranslateId");
             return (Criteria) this;
         }
     }

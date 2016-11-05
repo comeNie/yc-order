@@ -1,6 +1,7 @@
 package com.ai.yc.order.api.orderquery.param;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import com.ai.opt.base.vo.BaseInfo;
 
@@ -12,13 +13,27 @@ public class OrdOrderVo extends BaseInfo {
 	 */
 	private Long orderId;
 	/**
+	 * 业务标识
+	 */
+
+	private String flag;
+	/**
+	 * 时区
+	 */
+	private String timeZone;
+	/**
+	 * 用户类型
+	 */
+	private String userType;
+
+	/**
 	 * 用户ID
 	 */
 	private String userId;
 	/**
-	 * 账号ID
+	 * 用户名称
 	 */
-	private Long acountId;
+	private String userName;
 	/**
 	 * 订单来源
 	 */
@@ -31,74 +46,108 @@ public class OrdOrderVo extends BaseInfo {
 	 * 业务类型
 	 */
 	private String busiType;
+
 	/**
 	 * 订单级别
 	 */
 	private String orderLevel;
+
 	/**
-	 * 用户类型
+	 * 翻译类型
 	 */
-	private String userType;
+	private String translateType;
+
 	/**
-	 * 企业ID
+	 * 翻译主题
 	 */
-	private String corporaId;
-	/**
-	 * 下单时间
-	 */
-	private Timestamp orderTime;
+	private String translateName;
+
 	/**
 	 * 客户端显示状态
 	 */
 	private String displayFlag;
 	/**
-	 * 翻译类型
+	 * 后场订单状态
 	 */
-	private String translateType;
+	private String state;
 	/**
-	 * 语言对ID
+	 * 译员类型
 	 */
-	private String langungePair;
+	private String interperType;
 	/**
-	 * 语言对名称
+	 * lsp编号
 	 */
-	private String langungePairName;
+	private Long lspId;
 	/**
-	 * 翻译主题
+	 * lsp名称
 	 */
-	private String translateName;
+	private String lspName;
 	/**
-	 * 币种
+	 * 领取人ID
 	 */
-	private String currencyUnit;
+	private String interperId;
 	/**
-	 * 总费用
+	 * 译员名称
 	 */
-	private Long totalFee;
+	private String interperName;
 	/**
-	 * 总优惠金额
+	 * 返工标识
 	 */
-	private Long discountFee;
+	private String updateFlag;
+	/**
+	 * 下单时间
+	 */
+	private Timestamp orderTime;
+	/**
+	 * 状态变化时间（在修改中、待确认页面为译员提交时间）
+	 */
+	private Timestamp stateChgTime;
+	/**
+	 * 领取时间
+	 */
+	private Timestamp lockTime;
+	/**
+	 * 完成时间
+	 */
+	private Timestamp finishTime;
 
 	/**
-	 * 减免费用
+	 * 支付方式
 	 */
-	private Long operDiscountFee;
+	private String payStyle;
+	/**
+	 * 支付时间
+	 */
+	private Timestamp payTime;
+	/**
+	 * 翻译开始时间
+	 */
+	private Timestamp startTime;
+	/**
+	 * 翻译结束时间
+	 */
+	private Timestamp endTime;
+	/**
+	 * 确认剩余时间（翻译结束时间-当前时间）
+	 */
+	private Timestamp remainingTime;
+	/**
+	 * 报价人（费用操作人）
+	 */
+	private String updateOperId;
+	/**
+	 * 报价时间（费用变更时间）
+	 */
+	private Timestamp updateTime;
+	/**
+	 * 修改剩余时间（一期未用）
+	 */
+	private Timestamp updateRemainingTime;
 
 	/**
-	 * 总应收费用
+	 * 语言信息
 	 */
-	private Long adjustFee;
-
-	/**
-	 * 总实收费用
-	 */
-	private Long paidFee;
-
-	/**
-	 * 总待收费用
-	 */
-	private Long payFee;
+	private List<OrdProdExtendVo> ordProdExtendList;
 
 	public Long getOrderId() {
 		return orderId;
@@ -106,6 +155,30 @@ public class OrdOrderVo extends BaseInfo {
 
 	public void setOrderId(Long orderId) {
 		this.orderId = orderId;
+	}
+
+	public String getFlag() {
+		return flag;
+	}
+
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
+
+	public String getTimeZone() {
+		return timeZone;
+	}
+
+	public void setTimeZone(String timeZone) {
+		this.timeZone = timeZone;
+	}
+
+	public String getUserType() {
+		return userType;
+	}
+
+	public void setUserType(String userType) {
+		this.userType = userType;
 	}
 
 	public String getUserId() {
@@ -116,12 +189,12 @@ public class OrdOrderVo extends BaseInfo {
 		this.userId = userId;
 	}
 
-	public Long getAcountId() {
-		return acountId;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setAcountId(Long acountId) {
-		this.acountId = acountId;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getChlId() {
@@ -156,60 +229,12 @@ public class OrdOrderVo extends BaseInfo {
 		this.orderLevel = orderLevel;
 	}
 
-	public String getUserType() {
-		return userType;
-	}
-
-	public void setUserType(String userType) {
-		this.userType = userType;
-	}
-
-	public String getCorporaId() {
-		return corporaId;
-	}
-
-	public void setCorporaId(String corporaId) {
-		this.corporaId = corporaId;
-	}
-
-	public Timestamp getOrderTime() {
-		return orderTime;
-	}
-
-	public void setOrderTime(Timestamp orderTime) {
-		this.orderTime = orderTime;
-	}
-
-	public String getDisplayFlag() {
-		return displayFlag;
-	}
-
-	public void setDisplayFlag(String displayFlag) {
-		this.displayFlag = displayFlag;
-	}
-
 	public String getTranslateType() {
 		return translateType;
 	}
 
 	public void setTranslateType(String translateType) {
 		this.translateType = translateType;
-	}
-
-	public String getLangungePair() {
-		return langungePair;
-	}
-
-	public void setLangungePair(String langungePair) {
-		this.langungePair = langungePair;
-	}
-
-	public String getLangungePairName() {
-		return langungePairName;
-	}
-
-	public void setLangungePairName(String langungePairName) {
-		this.langungePairName = langungePairName;
 	}
 
 	public String getTranslateName() {
@@ -220,60 +245,172 @@ public class OrdOrderVo extends BaseInfo {
 		this.translateName = translateName;
 	}
 
-	public String getCurrencyUnit() {
-		return currencyUnit;
+	public String getDisplayFlag() {
+		return displayFlag;
 	}
 
-	public void setCurrencyUnit(String currencyUnit) {
-		this.currencyUnit = currencyUnit;
+	public void setDisplayFlag(String displayFlag) {
+		this.displayFlag = displayFlag;
 	}
 
-	public Long getTotalFee() {
-		return totalFee;
+	public String getState() {
+		return state;
 	}
 
-	public void setTotalFee(Long totalFee) {
-		this.totalFee = totalFee;
+	public void setState(String state) {
+		this.state = state;
 	}
 
-	public Long getDiscountFee() {
-		return discountFee;
+	public String getInterperType() {
+		return interperType;
 	}
 
-	public void setDiscountFee(Long discountFee) {
-		this.discountFee = discountFee;
+	public void setInterperType(String interperType) {
+		this.interperType = interperType;
 	}
 
-	public Long getOperDiscountFee() {
-		return operDiscountFee;
+	public Long getLspId() {
+		return lspId;
 	}
 
-	public void setOperDiscountFee(Long operDiscountFee) {
-		this.operDiscountFee = operDiscountFee;
+	public void setLspId(Long lspId) {
+		this.lspId = lspId;
 	}
 
-	public Long getAdjustFee() {
-		return adjustFee;
+	public String getLspName() {
+		return lspName;
 	}
 
-	public void setAdjustFee(Long adjustFee) {
-		this.adjustFee = adjustFee;
+	public void setLspName(String lspName) {
+		this.lspName = lspName;
 	}
 
-	public Long getPaidFee() {
-		return paidFee;
+	public String getInterperId() {
+		return interperId;
 	}
 
-	public void setPaidFee(Long paidFee) {
-		this.paidFee = paidFee;
+	public void setInterperId(String interperId) {
+		this.interperId = interperId;
 	}
 
-	public Long getPayFee() {
-		return payFee;
+	public String getInterperName() {
+		return interperName;
 	}
 
-	public void setPayFee(Long payFee) {
-		this.payFee = payFee;
+	public void setInterperName(String interperName) {
+		this.interperName = interperName;
+	}
+
+	public String getUpdateFlag() {
+		return updateFlag;
+	}
+
+	public void setUpdateFlag(String updateFlag) {
+		this.updateFlag = updateFlag;
+	}
+
+	public Timestamp getOrderTime() {
+		return orderTime;
+	}
+
+	public void setOrderTime(Timestamp orderTime) {
+		this.orderTime = orderTime;
+	}
+
+	public Timestamp getStateChgTime() {
+		return stateChgTime;
+	}
+
+	public void setStateChgTime(Timestamp stateChgTime) {
+		this.stateChgTime = stateChgTime;
+	}
+
+	public Timestamp getLockTime() {
+		return lockTime;
+	}
+
+	public void setLockTime(Timestamp lockTime) {
+		this.lockTime = lockTime;
+	}
+
+	public Timestamp getFinishTime() {
+		return finishTime;
+	}
+
+	public void setFinishTime(Timestamp finishTime) {
+		this.finishTime = finishTime;
+	}
+
+	public String getPayStyle() {
+		return payStyle;
+	}
+
+	public void setPayStyle(String payStyle) {
+		this.payStyle = payStyle;
+	}
+
+	public Timestamp getPayTime() {
+		return payTime;
+	}
+
+	public void setPayTime(Timestamp payTime) {
+		this.payTime = payTime;
+	}
+
+	public Timestamp getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(Timestamp startTime) {
+		this.startTime = startTime;
+	}
+
+	public Timestamp getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(Timestamp endTime) {
+		this.endTime = endTime;
+	}
+
+	public Timestamp getRemainingTime() {
+		return remainingTime;
+	}
+
+	public void setRemainingTime(Timestamp remainingTime) {
+		this.remainingTime = remainingTime;
+	}
+
+	public String getUpdateOperId() {
+		return updateOperId;
+	}
+
+	public void setUpdateOperId(String updateOperId) {
+		this.updateOperId = updateOperId;
+	}
+
+	public Timestamp getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Timestamp updateTime) {
+		this.updateTime = updateTime;
+	}
+
+	public Timestamp getUpdateRemainingTime() {
+		return updateRemainingTime;
+	}
+
+	public void setUpdateRemainingTime(Timestamp updateRemainingTime) {
+		this.updateRemainingTime = updateRemainingTime;
+	}
+
+	public List<OrdProdExtendVo> getOrdProdExtendList() {
+		return ordProdExtendList;
+	}
+
+	public void setOrdProdExtendList(List<OrdProdExtendVo> ordProdExtendList) {
+		this.ordProdExtendList = ordProdExtendList;
 	}
 
 }

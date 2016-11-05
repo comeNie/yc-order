@@ -9,15 +9,11 @@ public class OrdOdProd {
 
     private String translateType;
 
-    private String langungePair;
-
-    private String langungePairName;
-
     private String translateName;
 
-    private String translateLevel;
-
     private Long meetingSum;
+
+    private String translateSum;
 
     private String interperGen;
 
@@ -37,6 +33,8 @@ public class OrdOdProd {
 
     private Timestamp endTime;
 
+    private String prodDetalState;
+
     private String state;
 
     private String lookState;
@@ -52,10 +50,6 @@ public class OrdOdProd {
     private String updateInterperId;
 
     private Timestamp updateTime;
-
-    private String translateSum;
-
-    private String prodDetalState;
 
     public Long getProdDetalId() {
         return prodDetalId;
@@ -81,22 +75,6 @@ public class OrdOdProd {
         this.translateType = translateType == null ? null : translateType.trim();
     }
 
-    public String getLangungePair() {
-        return langungePair;
-    }
-
-    public void setLangungePair(String langungePair) {
-        this.langungePair = langungePair == null ? null : langungePair.trim();
-    }
-
-    public String getLangungePairName() {
-        return langungePairName;
-    }
-
-    public void setLangungePairName(String langungePairName) {
-        this.langungePairName = langungePairName == null ? null : langungePairName.trim();
-    }
-
     public String getTranslateName() {
         return translateName;
     }
@@ -105,20 +83,20 @@ public class OrdOdProd {
         this.translateName = translateName == null ? null : translateName.trim();
     }
 
-    public String getTranslateLevel() {
-        return translateLevel;
-    }
-
-    public void setTranslateLevel(String translateLevel) {
-        this.translateLevel = translateLevel == null ? null : translateLevel.trim();
-    }
-
     public Long getMeetingSum() {
         return meetingSum;
     }
 
     public void setMeetingSum(Long meetingSum) {
         this.meetingSum = meetingSum;
+    }
+
+    public String getTranslateSum() {
+        return translateSum;
+    }
+
+    public void setTranslateSum(String translateSum) {
+        this.translateSum = translateSum == null ? null : translateSum.trim();
     }
 
     public String getInterperGen() {
@@ -193,6 +171,14 @@ public class OrdOdProd {
         this.endTime = endTime;
     }
 
+    public String getProdDetalState() {
+        return prodDetalState;
+    }
+
+    public void setProdDetalState(String prodDetalState) {
+        this.prodDetalState = prodDetalState == null ? null : prodDetalState.trim();
+    }
+
     public String getState() {
         return state;
     }
@@ -255,21 +241,5 @@ public class OrdOdProd {
 
     public void setUpdateTime(Timestamp updateTime) {
         this.updateTime = updateTime;
-    }
-
-    public String getTranslateSum() {
-        return translateSum;
-    }
-
-    public void setTranslateSum(String translateSum) {
-        this.translateSum = translateSum == null ? null : translateSum.trim();
-    }
-
-    public String getProdDetalState() {
-        return prodDetalState;
-    }
-
-    public void setProdDetalState(String prodDetalState) {
-        this.prodDetalState = prodDetalState == null ? null : prodDetalState.trim();
     }
 }
