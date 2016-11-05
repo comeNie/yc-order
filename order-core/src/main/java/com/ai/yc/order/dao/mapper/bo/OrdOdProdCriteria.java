@@ -1794,6 +1794,146 @@ public class OrdOdProdCriteria {
             addCriterion("TYPE_DESC not between", value1, value2, "typeDesc");
             return (Criteria) this;
         }
+
+        public Criteria andTakeDayIsNull() {
+            addCriterion("TAKE_DAY is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTakeDayIsNotNull() {
+            addCriterion("TAKE_DAY is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTakeDayEqualTo(String value) {
+            addCriterion("TAKE_DAY =", value, "takeDay");
+            return (Criteria) this;
+        }
+
+        public Criteria andTakeDayNotEqualTo(String value) {
+            addCriterion("TAKE_DAY <>", value, "takeDay");
+            return (Criteria) this;
+        }
+
+        public Criteria andTakeDayGreaterThan(String value) {
+            addCriterion("TAKE_DAY >", value, "takeDay");
+            return (Criteria) this;
+        }
+
+        public Criteria andTakeDayGreaterThanOrEqualTo(String value) {
+            addCriterion("TAKE_DAY >=", value, "takeDay");
+            return (Criteria) this;
+        }
+
+        public Criteria andTakeDayLessThan(String value) {
+            addCriterion("TAKE_DAY <", value, "takeDay");
+            return (Criteria) this;
+        }
+
+        public Criteria andTakeDayLessThanOrEqualTo(String value) {
+            addCriterion("TAKE_DAY <=", value, "takeDay");
+            return (Criteria) this;
+        }
+
+        public Criteria andTakeDayLike(String value) {
+            addCriterion("TAKE_DAY like", value, "takeDay");
+            return (Criteria) this;
+        }
+
+        public Criteria andTakeDayNotLike(String value) {
+            addCriterion("TAKE_DAY not like", value, "takeDay");
+            return (Criteria) this;
+        }
+
+        public Criteria andTakeDayIn(List<String> values) {
+            addCriterion("TAKE_DAY in", values, "takeDay");
+            return (Criteria) this;
+        }
+
+        public Criteria andTakeDayNotIn(List<String> values) {
+            addCriterion("TAKE_DAY not in", values, "takeDay");
+            return (Criteria) this;
+        }
+
+        public Criteria andTakeDayBetween(String value1, String value2) {
+            addCriterion("TAKE_DAY between", value1, value2, "takeDay");
+            return (Criteria) this;
+        }
+
+        public Criteria andTakeDayNotBetween(String value1, String value2) {
+            addCriterion("TAKE_DAY not between", value1, value2, "takeDay");
+            return (Criteria) this;
+        }
+
+        public Criteria andTakeTimeIsNull() {
+            addCriterion("TAKE_TIME is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTakeTimeIsNotNull() {
+            addCriterion("TAKE_TIME is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTakeTimeEqualTo(String value) {
+            addCriterion("TAKE_TIME =", value, "takeTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andTakeTimeNotEqualTo(String value) {
+            addCriterion("TAKE_TIME <>", value, "takeTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andTakeTimeGreaterThan(String value) {
+            addCriterion("TAKE_TIME >", value, "takeTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andTakeTimeGreaterThanOrEqualTo(String value) {
+            addCriterion("TAKE_TIME >=", value, "takeTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andTakeTimeLessThan(String value) {
+            addCriterion("TAKE_TIME <", value, "takeTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andTakeTimeLessThanOrEqualTo(String value) {
+            addCriterion("TAKE_TIME <=", value, "takeTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andTakeTimeLike(String value) {
+            addCriterion("TAKE_TIME like", value, "takeTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andTakeTimeNotLike(String value) {
+            addCriterion("TAKE_TIME not like", value, "takeTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andTakeTimeIn(List<String> values) {
+            addCriterion("TAKE_TIME in", values, "takeTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andTakeTimeNotIn(List<String> values) {
+            addCriterion("TAKE_TIME not in", values, "takeTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andTakeTimeBetween(String value1, String value2) {
+            addCriterion("TAKE_TIME between", value1, value2, "takeTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andTakeTimeNotBetween(String value1, String value2) {
+            addCriterion("TAKE_TIME not between", value1, value2, "takeTime");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
