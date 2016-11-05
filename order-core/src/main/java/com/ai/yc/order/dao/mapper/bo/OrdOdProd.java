@@ -53,6 +53,10 @@ public class OrdOdProd {
 
     private String typeDesc;
 
+    private String takeDay;
+
+    private String takeTime;
+
     public Long getProdDetalId() {
         return prodDetalId;
     }
@@ -251,5 +255,21 @@ public class OrdOdProd {
 
     public void setTypeDesc(String typeDesc) {
         this.typeDesc = typeDesc == null ? null : typeDesc.trim();
+    }
+
+    public String getTakeDay() {
+        return takeDay;
+    }
+
+    public void setTakeDay(String takeDay) {
+        this.takeDay = takeDay == null ? null : takeDay.trim();
+    }
+
+    public String getTakeTime() {
+        return takeTime;
+    }
+
+    public void setTakeTime(String takeTime) {
+        this.takeTime = takeTime == null ? null : takeTime.trim();
     }
 }
