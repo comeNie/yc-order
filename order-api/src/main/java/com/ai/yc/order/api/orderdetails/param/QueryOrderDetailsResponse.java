@@ -85,15 +85,7 @@ public class QueryOrderDetailsResponse extends BaseResponse{
      */
     private String userId;
     
-    /**
-     * 用户名
-     */
-    private String username;
-    
-    /**
-     * 用户昵称
-     */
-    private String usernick;
+   
 
     /**
      * 企业ID
@@ -328,21 +320,7 @@ public class QueryOrderDetailsResponse extends BaseResponse{
 		this.userId = userId;
 	}
 
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getUsernick() {
-		return usernick;
-	}
-
-	public void setUsernick(String usernick) {
-		this.usernick = usernick;
-	}
+    
 
 	public String getCorporaId() {
 		return corporaId;
