@@ -37,7 +37,11 @@
 		
 	<!-- 用途 -->	
 	<dubbo:reference id="iQuerySysPurposeSV"
-		interface="com.ai.platform.common.api.syspurpose.interfaces.IQuerySysPurposeSV" />		
+		interface="com.ai.platform.common.api.syspurpose.interfaces.IQuerySysPurposeSV" />	
+		
+	<!-- 领域-->	
+	<dubbo:reference id="iQuerySysDomainSV"
+		interface="com.ai.platform.common.api.syspurpose.interfaces.IQuerySysDomainSV" />			
 
 	
 </beans>

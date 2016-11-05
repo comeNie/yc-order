@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.ai.opt.sdk.dubbo.util.DubboConsumerFactory;
+import com.ai.platform.common.api.sysdomain.interfaces.IQuerySysDomainSV;
+import com.ai.platform.common.api.sysdomain.param.QuerySysDomainDetailsRes;
 import com.ai.platform.common.api.sysduad.interfaces.IQuerySysDuadSV;
 import com.ai.platform.common.api.sysduad.param.QuerySysDuadDetailsRes;
 import com.ai.platform.common.api.syspurpose.interfaces.IQuerySysPurposeSV;
@@ -42,6 +44,18 @@ public class SysConfigAtomSVImpl implements ISysConfigAtomSV {
 			throw new BusinessException(purpose.getResponseHeader().getResultCode(), purpose.getResponseHeader().getResultMessage());
 		}
 		return purpose;
+	}
+
+	@Override
+	public QuerySysDomainDetailsRes querySysDomainDetails(String domainId) {
+		QuerySysDomainDetailsRes domain = DubboConsumerFactory.getService(IQuerySysDomainSV.class).querySysDomainDetails(domainId);
+		if(domain==null){
+			throw new BusinessException(ExceptCodeConstants.Special.SYSTEM_ERROR, "系统异常，请稍后重试");
+		}
+		if(domain.getResponseHeader()!=null&&!domain.getResponseHeader().getIsSuccess()){
+			throw new BusinessException(domain.getResponseHeader().getResultCode(), domain.getResponseHeader().getResultMessage());
+		}
+		return domain;
 	}
 
 }
