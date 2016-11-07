@@ -19,4 +19,10 @@ public class OrdOdStateChgAtomSVImpl implements IOrdOdStateChgAtomSV {
 		return MapperFactory.getOrdOdStateChgMapper().selectByExample(example);
 	}
 
+	@Override
+	public void insertSelective(OrdOdStateChg ordOdStateChg) {
+		// TODO Auto-generated method stub
+		MapperFactory.getOrdOdStateChgMapper().insertSelective(ordOdStateChg);
+	}
+
 }

@@ -20,6 +20,7 @@ import com.ai.yc.order.dao.mapper.bo.OrdOdProdExtend;
 import com.ai.yc.order.dao.mapper.bo.OrdOdProdFile;
 import com.ai.yc.order.dao.mapper.bo.OrdOdProdLevel;
 import com.ai.yc.order.dao.mapper.bo.OrdOdProdWithBLOBs;
+import com.ai.yc.order.dao.mapper.bo.OrdOdStateChg;
 import com.ai.yc.order.dao.mapper.bo.OrdOrder;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdFeeTotalAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdLogisticsAtomSV;
@@ -27,6 +28,7 @@ import com.ai.yc.order.service.atom.interfaces.IOrdOdProdAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdProdExtendAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdProdFileAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdProdLevelAtomSV;
+import com.ai.yc.order.service.atom.interfaces.IOrdOdStateChgAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOrderAtomSV;
 import com.ai.yc.order.service.business.interfaces.IOrderSubmissionBusiSV;
 import com.ai.yc.order.util.SequenceUtil;
@@ -47,6 +49,8 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 	private IOrdOdProdLevelAtomSV ordOdProdLevelAtomSV;// 翻译级别表
 	@Autowired
 	private IOrdOdFeeTotalAtomSV ordOdFeeTotalAtomSV;// 费用信息表
+	@Autowired
+	private IOrdOdStateChgAtomSV ordOdStateChgAtomSV;// 订单轨迹表
 
 	private static final String TRANSLATE_TYPE_0 = "0";
 	private static final String TRANSLATE_TYPE_1 = "1";
@@ -238,6 +242,7 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 		this.orderProductInfoSubmit(request, orderId);
 		this.orderFeeInfoSubmit(request, orderId);
 		this.orderContactInfoSubmit(request, orderId);
+		this.orderStateChgInfoSubmit(request.getBaseInfo().getUserId(), orderId, request.getBaseInfo().getTranslateType());
 		
 		// --------------产品信息---------------------
 		response.setOrderId(orderId);
@@ -433,10 +438,36 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 			this.ordOdLogisticsAtomSV.insertSelective(ordOdLogistics);
 		}
 	}
-
+	/**
+	 * 订单提交-订单轨迹表
+	 */
+	public void orderStateChgInfoSubmit(String userId,Long orderId,String translateType){
+		OrdOdStateChg ordOdStateChg = new OrdOdStateChg();
+		//
+		Long stateChgId = SequenceUtil.createStateChgId();
+		//
+		ordOdStateChg.setStateChgId(stateChgId);
+		ordOdStateChg.setOrderId(orderId);
+		ordOdStateChg.setOperId(userId);
+		//
+		if (TRANSLATE_TYPE_0.equals(translateType)){
+			ordOdStateChg.setNewState("11");
+		}
+		if (TRANSLATE_TYPE_1.equals(translateType)){
+			ordOdStateChg.setNewState("13");
+		}
+		if (TRANSLATE_TYPE_2.equals(translateType)){
+			ordOdStateChg.setNewState("13");
+		}
+		ordOdStateChg.setStateChgTime(DateUtil.getSysDate());
+		this.ordOdStateChgAtomSV.insertSelective(ordOdStateChg);
+	}
+	
 	@Transactional
 	public void saveContact(OrdOdLogistics ordOdLogistics) {
 		this.ordOdLogisticsAtomSV.insertSelective(ordOdLogistics);
 	}
+	
+	
 
 }

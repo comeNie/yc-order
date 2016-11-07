@@ -7,5 +7,7 @@ import com.ai.yc.order.dao.mapper.bo.OrdOdStateChg;
 public interface IOrdOdStateChgAtomSV {
 	
 	List<OrdOdStateChg> findByOrderId(Long orderId);
+	
+	public void insertSelective(OrdOdStateChg ordOdStateChg);
 
 }
