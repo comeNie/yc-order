@@ -98,5 +98,36 @@
 
 
 	</bean>
-
+	
+	<!-- 翻译级别 初始化数据 100210：标准级 100220：专业级 100230：出版级 -->
+	<bean id="textOrderTranslateTimeBeanMap" class="com.ai.yc.order.validate.TextOrderTranslateTimeBeanMap">
+		<property name="translateLevelMap">
+			<map>
+				<entry key="100210" value-ref="standardLevelTimeBean" />
+				<entry key="100220" value-ref="majorLevelTimeBean" />
+				<entry key="100230" value-ref="publishLevelTimeBean" />
+			</map>
+		</property>
+	</bean>
+	<!-- 翻译级别 实体类 标准级别 -->
+	<bean id="standardLevelTimeBean" class="com.ai.yc.order.validate.TextOrderTranslateTimeBean">
+		<property name="translateLevel" value="100210"/>
+		<property name="increases" value="1000"/>
+		<property name="urgentTime" value="1"/>
+		<property name="nonUrgentTime" value="2"/>
+	</bean>
+	<!-- 翻译级别 实体类 专业级别 -->
+	<bean id="majorLevelTimeBean" class="com.ai.yc.order.validate.TextOrderTranslateTimeBean">
+		<property name="translateLevel" value="100220"/>
+		<property name="increases" value="1000"/>
+		<property name="urgentTime" value="2"/>
+		<property name="nonUrgentTime" value="3"/>
+	</bean>
+	<!-- 翻译级别 实体类 出版级别 -->
+	<bean id="publishLevelTimeBean" class="com.ai.yc.order.validate.TextOrderTranslateTimeBean">
+		<property name="translateLevel" value="100230"/>
+		<property name="increases" value="1000"/>
+		<property name="urgentTime" value="3"/>
+		<property name="nonUrgentTime" value="4"/>
+	</bean>
 </beans>
