@@ -8,4 +8,8 @@ public interface IOrdOdFeeTotalAtomSV {
 	OrdOdFeeTotal findByOrderId(String payFlag,Long orderId);
 	
     void updateByOrderIdSelective(Long orderId, OrdOdFeeTotal record);
+	
+	OrdOdFeeTotal findByOrderId(Long orderId);
+	
+	
 }
