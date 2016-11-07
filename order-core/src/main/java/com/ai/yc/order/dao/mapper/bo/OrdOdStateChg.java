@@ -21,6 +21,8 @@ public class OrdOdStateChg {
 
     private Timestamp stateChgTime;
 
+    private String chgDescEn;
+
     public Long getStateChgId() {
         return stateChgId;
     }
@@ -91,5 +93,13 @@ public class OrdOdStateChg {
 
     public void setStateChgTime(Timestamp stateChgTime) {
         this.stateChgTime = stateChgTime;
+    }
+
+    public String getChgDescEn() {
+        return chgDescEn;
+    }
+
+    public void setChgDescEn(String chgDescEn) {
+        this.chgDescEn = chgDescEn == null ? null : chgDescEn.trim();
     }
 }

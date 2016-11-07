@@ -724,6 +724,76 @@ public class OrdOdStateChgCriteria {
             addCriterion("STATE_CHG_TIME not between", value1, value2, "stateChgTime");
             return (Criteria) this;
         }
+
+        public Criteria andChgDescEnIsNull() {
+            addCriterion("CHG_DESC_EN is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChgDescEnIsNotNull() {
+            addCriterion("CHG_DESC_EN is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChgDescEnEqualTo(String value) {
+            addCriterion("CHG_DESC_EN =", value, "chgDescEn");
+            return (Criteria) this;
+        }
+
+        public Criteria andChgDescEnNotEqualTo(String value) {
+            addCriterion("CHG_DESC_EN <>", value, "chgDescEn");
+            return (Criteria) this;
+        }
+
+        public Criteria andChgDescEnGreaterThan(String value) {
+            addCriterion("CHG_DESC_EN >", value, "chgDescEn");
+            return (Criteria) this;
+        }
+
+        public Criteria andChgDescEnGreaterThanOrEqualTo(String value) {
+            addCriterion("CHG_DESC_EN >=", value, "chgDescEn");
+            return (Criteria) this;
+        }
+
+        public Criteria andChgDescEnLessThan(String value) {
+            addCriterion("CHG_DESC_EN <", value, "chgDescEn");
+            return (Criteria) this;
+        }
+
+        public Criteria andChgDescEnLessThanOrEqualTo(String value) {
+            addCriterion("CHG_DESC_EN <=", value, "chgDescEn");
+            return (Criteria) this;
+        }
+
+        public Criteria andChgDescEnLike(String value) {
+            addCriterion("CHG_DESC_EN like", value, "chgDescEn");
+            return (Criteria) this;
+        }
+
+        public Criteria andChgDescEnNotLike(String value) {
+            addCriterion("CHG_DESC_EN not like", value, "chgDescEn");
+            return (Criteria) this;
+        }
+
+        public Criteria andChgDescEnIn(List<String> values) {
+            addCriterion("CHG_DESC_EN in", values, "chgDescEn");
+            return (Criteria) this;
+        }
+
+        public Criteria andChgDescEnNotIn(List<String> values) {
+            addCriterion("CHG_DESC_EN not in", values, "chgDescEn");
+            return (Criteria) this;
+        }
+
+        public Criteria andChgDescEnBetween(String value1, String value2) {
+            addCriterion("CHG_DESC_EN between", value1, value2, "chgDescEn");
+            return (Criteria) this;
+        }
+
+        public Criteria andChgDescEnNotBetween(String value1, String value2) {
+            addCriterion("CHG_DESC_EN not between", value1, value2, "chgDescEn");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

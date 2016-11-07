@@ -11,6 +11,7 @@
     <result column="OPER_ID" property="operId" jdbcType="VARCHAR" />
     <result column="OPER_NAME" property="operName" jdbcType="VARCHAR" />
     <result column="STATE_CHG_TIME" property="stateChgTime" jdbcType="TIMESTAMP" />
+    <result column="CHG_DESC_EN" property="chgDescEn" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -72,7 +73,7 @@
   </sql>
   <sql id="Base_Column_List" >
     STATE_CHG_ID, ORDER_ID, ORG_STATE, NEW_STATE, CHG_DESC, ORG_ID, OPER_ID, OPER_NAME, 
-    STATE_CHG_TIME
+    STATE_CHG_TIME, CHG_DESC_EN
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdStateChgCriteria" >
     select
@@ -110,12 +111,12 @@
   <insert id="insert" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdStateChg" >
     insert into ord_od_state_chg (STATE_CHG_ID, ORDER_ID, ORG_STATE, 
       NEW_STATE, CHG_DESC, ORG_ID, 
-      OPER_ID, OPER_NAME, STATE_CHG_TIME
-      )
+      OPER_ID, OPER_NAME, STATE_CHG_TIME, 
+      CHG_DESC_EN)
     values (#{stateChgId,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, #{orgState,jdbcType=VARCHAR}, 
       #{newState,jdbcType=VARCHAR}, #{chgDesc,jdbcType=VARCHAR}, #{orgId,jdbcType=VARCHAR}, 
-      #{operId,jdbcType=VARCHAR}, #{operName,jdbcType=VARCHAR}, #{stateChgTime,jdbcType=TIMESTAMP}
-      )
+      #{operId,jdbcType=VARCHAR}, #{operName,jdbcType=VARCHAR}, #{stateChgTime,jdbcType=TIMESTAMP}, 
+      #{chgDescEn,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdStateChg" >
     insert into ord_od_state_chg
@@ -147,6 +148,9 @@
       <if test="stateChgTime != null" >
         STATE_CHG_TIME,
       </if>
+      <if test="chgDescEn != null" >
+        CHG_DESC_EN,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="stateChgId != null" >
@@ -175,6 +179,9 @@
       </if>
       <if test="stateChgTime != null" >
         #{stateChgTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgDescEn != null" >
+        #{chgDescEn,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -214,6 +221,9 @@
       <if test="record.stateChgTime != null" >
         STATE_CHG_TIME = #{record.stateChgTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.chgDescEn != null" >
+        CHG_DESC_EN = #{record.chgDescEn,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -229,7 +239,8 @@
       ORG_ID = #{record.orgId,jdbcType=VARCHAR},
       OPER_ID = #{record.operId,jdbcType=VARCHAR},
       OPER_NAME = #{record.operName,jdbcType=VARCHAR},
-      STATE_CHG_TIME = #{record.stateChgTime,jdbcType=TIMESTAMP}
+      STATE_CHG_TIME = #{record.stateChgTime,jdbcType=TIMESTAMP},
+      CHG_DESC_EN = #{record.chgDescEn,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -261,6 +272,9 @@
       <if test="stateChgTime != null" >
         STATE_CHG_TIME = #{stateChgTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="chgDescEn != null" >
+        CHG_DESC_EN = #{chgDescEn,jdbcType=VARCHAR},
+      </if>
     </set>
     where STATE_CHG_ID = #{stateChgId,jdbcType=BIGINT}
   </update>
@@ -273,7 +287,8 @@
       ORG_ID = #{orgId,jdbcType=VARCHAR},
       OPER_ID = #{operId,jdbcType=VARCHAR},
       OPER_NAME = #{operName,jdbcType=VARCHAR},
-      STATE_CHG_TIME = #{stateChgTime,jdbcType=TIMESTAMP}
+      STATE_CHG_TIME = #{stateChgTime,jdbcType=TIMESTAMP},
+      CHG_DESC_EN = #{chgDescEn,jdbcType=VARCHAR}
     where STATE_CHG_ID = #{stateChgId,jdbcType=BIGINT}
   </update>
 </mapper>
