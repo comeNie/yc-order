@@ -14,6 +14,7 @@ import com.ai.yc.order.api.ordersubmission.param.LanguagePairInfo;
 import com.ai.yc.order.api.ordersubmission.param.OrderSubmissionRequest;
 import com.ai.yc.order.api.ordersubmission.param.OrderSubmissionResponse;
 import com.ai.yc.order.api.ordersubmission.param.TranslateLevelInfo;
+import com.ai.yc.order.constants.OrdersConstants;
 import com.ai.yc.order.dao.mapper.bo.OrdOdFeeTotal;
 import com.ai.yc.order.dao.mapper.bo.OrdOdLogistics;
 import com.ai.yc.order.dao.mapper.bo.OrdOdProdExtend;
@@ -202,7 +203,7 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 		OrdOdFeeTotal ordOdFeeTotal = new OrdOdFeeTotal();
 		BeanUtils.copyVO(ordOdFeeTotal, request.getFeeInfo());
 		ordOdFeeTotal.setOrderId(orderId);
-		ordOdFeeTotal.setPayFlag("in");
+		ordOdFeeTotal.setPayFlag(OrdersConstants.OrdOdFeeTotal.PAY_FLAG_IN);
 		// 总优惠金额
 		ordOdFeeTotal.setDiscountFee(0l);
 		// 总减免费用
@@ -406,7 +407,7 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 		OrdOdFeeTotal ordOdFeeTotal = new OrdOdFeeTotal();
 		BeanUtils.copyVO(ordOdFeeTotal, request.getFeeInfo());
 		ordOdFeeTotal.setOrderId(orderId);
-		ordOdFeeTotal.setPayFlag("in");
+		ordOdFeeTotal.setPayFlag(OrdersConstants.OrdOdFeeTotal.PAY_FLAG_IN);
 		// 总优惠金额
 		ordOdFeeTotal.setDiscountFee(0l);
 		// 总减免费用
