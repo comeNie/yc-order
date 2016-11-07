@@ -1485,52 +1485,62 @@ public class OrdOrderCriteria {
             return (Criteria) this;
         }
 
-        public Criteria andLspIdEqualTo(Long value) {
+        public Criteria andLspIdEqualTo(String value) {
             addCriterion("LSP_ID =", value, "lspId");
             return (Criteria) this;
         }
 
-        public Criteria andLspIdNotEqualTo(Long value) {
+        public Criteria andLspIdNotEqualTo(String value) {
             addCriterion("LSP_ID <>", value, "lspId");
             return (Criteria) this;
         }
 
-        public Criteria andLspIdGreaterThan(Long value) {
+        public Criteria andLspIdGreaterThan(String value) {
             addCriterion("LSP_ID >", value, "lspId");
             return (Criteria) this;
         }
 
-        public Criteria andLspIdGreaterThanOrEqualTo(Long value) {
+        public Criteria andLspIdGreaterThanOrEqualTo(String value) {
             addCriterion("LSP_ID >=", value, "lspId");
             return (Criteria) this;
         }
 
-        public Criteria andLspIdLessThan(Long value) {
+        public Criteria andLspIdLessThan(String value) {
             addCriterion("LSP_ID <", value, "lspId");
             return (Criteria) this;
         }
 
-        public Criteria andLspIdLessThanOrEqualTo(Long value) {
+        public Criteria andLspIdLessThanOrEqualTo(String value) {
             addCriterion("LSP_ID <=", value, "lspId");
             return (Criteria) this;
         }
 
-        public Criteria andLspIdIn(List<Long> values) {
+        public Criteria andLspIdLike(String value) {
+            addCriterion("LSP_ID like", value, "lspId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLspIdNotLike(String value) {
+            addCriterion("LSP_ID not like", value, "lspId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLspIdIn(List<String> values) {
             addCriterion("LSP_ID in", values, "lspId");
             return (Criteria) this;
         }
 
-        public Criteria andLspIdNotIn(List<Long> values) {
+        public Criteria andLspIdNotIn(List<String> values) {
             addCriterion("LSP_ID not in", values, "lspId");
             return (Criteria) this;
         }
 
-        public Criteria andLspIdBetween(Long value1, Long value2) {
+        public Criteria andLspIdBetween(String value1, String value2) {
             addCriterion("LSP_ID between", value1, value2, "lspId");
             return (Criteria) this;
         }
 
-        public Criteria andLspIdNotBetween(Long value1, Long value2) {
+        public Criteria andLspIdNotBetween(String value1, String value2) {
             addCriterion("LSP_ID not between", value1, value2, "lspId");
             return (Criteria) this;
         }

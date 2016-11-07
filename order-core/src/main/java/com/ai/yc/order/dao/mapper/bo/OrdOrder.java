@@ -43,7 +43,7 @@ public class OrdOrder {
 
     private String interperType;
 
-    private Long lspId;
+    private String lspId;
 
     private String interperId;
 
@@ -235,12 +235,12 @@ public class OrdOrder {
         this.interperType = interperType == null ? null : interperType.trim();
     }
 
-    public Long getLspId() {
+    public String getLspId() {
         return lspId;
     }
 
-    public void setLspId(Long lspId) {
-        this.lspId = lspId;
+    public void setLspId(String lspId) {
+        this.lspId = lspId == null ? null : lspId.trim();
     }
 
     public String getInterperId() {

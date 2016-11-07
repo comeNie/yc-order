@@ -22,7 +22,7 @@
     <result column="DISPLAY_FLAG" property="displayFlag" jdbcType="VARCHAR" />
     <result column="DISPLAY_FLAG_CHG_TIME" property="displayFlagChgTime" jdbcType="TIMESTAMP" />
     <result column="INTERPER_TYPE" property="interperType" jdbcType="VARCHAR" />
-    <result column="LSP_ID" property="lspId" jdbcType="BIGINT" />
+    <result column="LSP_ID" property="lspId" jdbcType="VARCHAR" />
     <result column="INTERPER_ID" property="interperId" jdbcType="VARCHAR" />
     <result column="LOCK_TIME" property="lockTime" jdbcType="TIMESTAMP" />
     <result column="OPER_ID" property="operId" jdbcType="VARCHAR" />
@@ -157,7 +157,7 @@
       #{userType,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{corporaId,jdbcType=VARCHAR}, 
       #{accountId,jdbcType=BIGINT}, #{timeZone,jdbcType=VARCHAR}, #{orderTime,jdbcType=TIMESTAMP}, 
       #{state,jdbcType=VARCHAR}, #{stateChgTime,jdbcType=TIMESTAMP}, #{displayFlag,jdbcType=VARCHAR}, 
-      #{displayFlagChgTime,jdbcType=TIMESTAMP}, #{interperType,jdbcType=VARCHAR}, #{lspId,jdbcType=BIGINT}, 
+      #{displayFlagChgTime,jdbcType=TIMESTAMP}, #{interperType,jdbcType=VARCHAR}, #{lspId,jdbcType=VARCHAR}, 
       #{interperId,jdbcType=VARCHAR}, #{lockTime,jdbcType=TIMESTAMP}, #{operId,jdbcType=VARCHAR}, 
       #{updateFlag,jdbcType=VARCHAR}, #{reasonDesc,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
       #{finishTime,jdbcType=TIMESTAMP}, #{orderDesc,jdbcType=VARCHAR}, #{keywords,jdbcType=VARCHAR}, 
@@ -339,7 +339,7 @@
         #{interperType,jdbcType=VARCHAR},
       </if>
       <if test="lspId != null" >
-        #{lspId,jdbcType=BIGINT},
+        #{lspId,jdbcType=VARCHAR},
       </if>
       <if test="interperId != null" >
         #{interperId,jdbcType=VARCHAR},
@@ -458,7 +458,7 @@
         INTERPER_TYPE = #{record.interperType,jdbcType=VARCHAR},
       </if>
       <if test="record.lspId != null" >
-        LSP_ID = #{record.lspId,jdbcType=BIGINT},
+        LSP_ID = #{record.lspId,jdbcType=VARCHAR},
       </if>
       <if test="record.interperId != null" >
         INTERPER_ID = #{record.interperId,jdbcType=VARCHAR},
@@ -532,7 +532,7 @@
       DISPLAY_FLAG = #{record.displayFlag,jdbcType=VARCHAR},
       DISPLAY_FLAG_CHG_TIME = #{record.displayFlagChgTime,jdbcType=TIMESTAMP},
       INTERPER_TYPE = #{record.interperType,jdbcType=VARCHAR},
-      LSP_ID = #{record.lspId,jdbcType=BIGINT},
+      LSP_ID = #{record.lspId,jdbcType=VARCHAR},
       INTERPER_ID = #{record.interperId,jdbcType=VARCHAR},
       LOCK_TIME = #{record.lockTime,jdbcType=TIMESTAMP},
       OPER_ID = #{record.operId,jdbcType=VARCHAR},
@@ -613,7 +613,7 @@
         INTERPER_TYPE = #{interperType,jdbcType=VARCHAR},
       </if>
       <if test="lspId != null" >
-        LSP_ID = #{lspId,jdbcType=BIGINT},
+        LSP_ID = #{lspId,jdbcType=VARCHAR},
       </if>
       <if test="interperId != null" >
         INTERPER_ID = #{interperId,jdbcType=VARCHAR},
@@ -684,7 +684,7 @@
       DISPLAY_FLAG = #{displayFlag,jdbcType=VARCHAR},
       DISPLAY_FLAG_CHG_TIME = #{displayFlagChgTime,jdbcType=TIMESTAMP},
       INTERPER_TYPE = #{interperType,jdbcType=VARCHAR},
-      LSP_ID = #{lspId,jdbcType=BIGINT},
+      LSP_ID = #{lspId,jdbcType=VARCHAR},
       INTERPER_ID = #{interperId,jdbcType=VARCHAR},
       LOCK_TIME = #{lockTime,jdbcType=TIMESTAMP},
       OPER_ID = #{operId,jdbcType=VARCHAR},
