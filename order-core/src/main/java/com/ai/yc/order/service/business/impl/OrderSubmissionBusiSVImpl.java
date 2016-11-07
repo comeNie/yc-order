@@ -33,6 +33,7 @@ import com.ai.yc.order.service.atom.interfaces.IOrdOdStateChgAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOrderAtomSV;
 import com.ai.yc.order.service.business.interfaces.IOrderSubmissionBusiSV;
 import com.ai.yc.order.util.SequenceUtil;
+import com.ai.yc.order.validate.TextOrderTranslateTimeUtil;
 
 @Service
 public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
@@ -52,6 +53,9 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 	private IOrdOdFeeTotalAtomSV ordOdFeeTotalAtomSV;// 费用信息表
 	@Autowired
 	private IOrdOdStateChgAtomSV ordOdStateChgAtomSV;// 订单轨迹表
+	
+	@Autowired
+	private TextOrderTranslateTimeUtil textOrderTranslateTimeUtil;//计算翻译耗时
 
 	private static final String TRANSLATE_TYPE_0 = "0";
 	private static final String TRANSLATE_TYPE_1 = "1";
@@ -300,6 +304,7 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 		ordOdProdWithBLOBs.setTranslateType(request.getBaseInfo().getTranslateType());
 		ordOdProdWithBLOBs.setTranslateName(request.getBaseInfo().getTranslateName());
 		ordOdProdWithBLOBs.setOrderId(orderId);
+		//文本类翻译
 		if (TRANSLATE_TYPE_0.equals(request.getBaseInfo().getTranslateType())) {
 			ordOdProdWithBLOBs.setProdDetalState("0");// 未处理
 			// 翻译字数
@@ -312,6 +317,15 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 			ordOdProdWithBLOBs.setIsSetType(request.getProductInfo().getIsSetType());// productInfo.setIsSetType("0");
 			// 是否加急
 			ordOdProdWithBLOBs.setIsUrgent(request.getProductInfo().getIsUrgent());// productInfo.setIsUrgent("0");
+			//翻译耗时计算
+			Integer sumHours = textOrderTranslateTimeUtil.textOrderTranslateTime(request.getProductInfo().getTranslateLevelInfoList().get(0).getTranslateLevel(), request.getProductInfo().getIsUrgent(), request.getProductInfo().getTranslateSum());
+			//
+			Integer takeDay = sumHours / 24;
+			Integer takeTime = sumHours % 24;
+			//需耗天
+			ordOdProdWithBLOBs.setTakeDay(takeDay.toString());
+			//需耗时
+			ordOdProdWithBLOBs.setTakeTime(takeTime.toString());
 		}
 		if (TRANSLATE_TYPE_1.equals(request.getBaseInfo().getTranslateType())) {
 			ordOdProdWithBLOBs.setProdDetalState("0");// 未处理

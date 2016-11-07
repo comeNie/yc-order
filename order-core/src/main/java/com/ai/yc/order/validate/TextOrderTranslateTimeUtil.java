@@ -1,10 +1,13 @@
 package com.ai.yc.order.validate;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class TextOrderTranslateTimeUtil {
+	public static final Logger log = LogManager.getLogger(TextOrderTranslateTimeUtil.class);
 	@Autowired
 	private TextOrderTranslateTimeBeanMap textOrderTranslateTimeBeanMap;
 	/**
@@ -18,7 +21,9 @@ public class TextOrderTranslateTimeUtil {
 		TextOrderTranslateTimeBean textOrderTranslateTimeBean = this.textOrderTranslateTimeBeanMap.getTranslateLevelMap().get(translateLevel);
 		if(null != textOrderTranslateTimeBean){
 			Integer total = Integer.parseInt(translateSum.toString()) / textOrderTranslateTimeBean.getIncreases();
-			Integer remainder = Integer.parseInt(translateSum.toString()) / textOrderTranslateTimeBean.getIncreases();
+			Integer remainder = Integer.parseInt(translateSum.toString()) % textOrderTranslateTimeBean.getIncreases();
+			log.info("total:"+total);
+			log.info("remainder:"+remainder);
 			//非加急状态
 			if("N".equals(isUrgent)){
 				time = textOrderTranslateTimeBean.getNonUrgentTime();

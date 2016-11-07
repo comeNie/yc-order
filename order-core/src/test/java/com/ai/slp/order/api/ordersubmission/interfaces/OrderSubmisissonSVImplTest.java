@@ -101,7 +101,7 @@ public class OrderSubmisissonSVImplTest extends BaseTest {
 		 */
 		ProductInfo productInfo = new ProductInfo();
 		// 翻译字数
-		productInfo.setTranslateSum(1000l);
+		productInfo.setTranslateSum(1002l);
 		// 用途ID
 		productInfo.setUseCode("1111");
 		// 领域ID
@@ -109,7 +109,7 @@ public class OrderSubmisissonSVImplTest extends BaseTest {
 		// 是否排版
 		productInfo.setIsSetType("0");
 		// 是否加急
-		productInfo.setIsUrgent("0");
+		productInfo.setIsUrgent("N");
 		// 需翻译内容
 		productInfo.setNeedTranslateInfo("翻译成英文");
 		
@@ -166,7 +166,7 @@ public class OrderSubmisissonSVImplTest extends BaseTest {
 		 */
 		TranslateLevelInfo translateLevelInfo = new TranslateLevelInfo ();
 		// 翻译级别
-		translateLevelInfo.setTranslateLevel("1");
+		translateLevelInfo.setTranslateLevel("100210");
 		// 扩展信息
 		translateLevelInfo.setInfoJson("翻译级别扩展信息");
 		//
