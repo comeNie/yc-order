@@ -23,7 +23,7 @@ public interface IOrdOrderAtomSV {
 	
 	int updateByPrimaryKeySelective(OrdOrder record);
 	
-	
+
 	/**
 	 * 根据id修改订单
 	 * @author zhanglh

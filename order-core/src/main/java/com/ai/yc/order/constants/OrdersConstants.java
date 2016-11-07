@@ -229,7 +229,6 @@ public final class OrdersConstants {
 		public final static String ORG_ID_SYS = "1";
 	}
 	
-
 	   public static final class OrdOdStateChg {
 
 	        /**
