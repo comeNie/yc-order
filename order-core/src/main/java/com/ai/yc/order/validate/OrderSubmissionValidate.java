@@ -62,6 +62,11 @@ public class OrderSubmissionValidate {
 			// 是否加急
 			if(StringUtil.isBlank(request.getProductInfo().getIsUrgent())){
 				this.newException("是否加急不能为空,请输入");
+			}else{
+				String flag = this.orderSubmissionParam.getIsUrgentMap().get(request.getProductInfo().getIsUrgent());
+				if(StringUtil.isBlank(flag)){
+					this.newException("是否加急范围不正确，请参考"+JSON.toJSONString(this.orderSubmissionParam.getIsUrgentMap()));
+				}
 			}
 			// 需翻译内容
 			if(StringUtil.isBlank(request.getProductInfo().getNeedTranslateInfo())){
@@ -93,6 +98,11 @@ public class OrderSubmissionValidate {
 			// 是否加急
 			if(StringUtil.isBlank(request.getProductInfo().getIsUrgent())){
 				this.newException("是否加急不能为空,请输入");
+			}else{
+				String flag = this.orderSubmissionParam.getIsUrgentMap().get(request.getProductInfo().getIsUrgent());
+				if(StringUtil.isBlank(flag)){
+					this.newException("是否加急范围不正确，请参考"+JSON.toJSONString(this.orderSubmissionParam.getIsUrgentMap()));
+				}
 			}
 
 		}

@@ -2,8 +2,10 @@ package com.ai.yc.order.validate;
 
 import java.util.HashMap;
 import java.util.Map;
+
 /**
  * 初始化键值对
+ * 
  * @author zhangzd
  *
  */
@@ -51,8 +53,20 @@ public class OrderSubmissionParam {
 	 * 
 	 */
 	private Map<String, String> userTypeMap;
-	
-	private Map<String, String> currencyUnitMap; 
+	/**
+	 * 是否加急 N:否；Y：是
+	 */
+	private Map<String, String> isUrgentMap;
+
+	public Map<String, String> getIsUrgentMap() {
+		return isUrgentMap;
+	}
+
+	public void setIsUrgentMap(Map<String, String> isUrgentMap) {
+		this.isUrgentMap = isUrgentMap;
+	}
+
+	private Map<String, String> currencyUnitMap;
 
 	public Map<String, String> getCurrencyUnitMap() {
 		return currencyUnitMap;

@@ -234,7 +234,7 @@ public class OrderSubmisissonSVImplTest extends BaseTest {
 		// 是否排版
 		productInfo.setIsSetType("0");
 		// 是否加急
-		productInfo.setIsUrgent("0");
+		productInfo.setIsUrgent("N");
 		
 		//开始时间需要支付完成再添加
 		// 开始时间

@@ -94,8 +94,14 @@
 				<entry key="2" value="$" />
 			</map>
 		</property>
-
-
+		
+		<!-- /** 是否加急 N:否；Y：是 */ -->
+		<property name="isUrgentMap">
+			<map>
+				<entry key="N" value="否" />
+				<entry key="Y" value="是" />
+			</map>
+		</property>
 
 	</bean>
 	
