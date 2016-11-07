@@ -1,5 +1,9 @@
 package com.ai.yc.order.service.atom.impl;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.stereotype.Component;
 
 import com.ai.opt.sdk.util.StringUtil;
@@ -88,6 +92,20 @@ public class OrdOrderAtomSVImpl implements IOrdOrderAtomSV {
 	@Override
 	public OrdOrder findByPrimaryKey(Long orderId) {
 		return MapperFactory.getOrdOrderMapper().selectByPrimaryKey(orderId);
+	}
+
+	@Override
+	public int updateById(OrdOrder ordOrder) {
+		 return MapperFactory.getOrdOrderMapper().updateByPrimaryKey(ordOrder);
+	}
+
+	@Override
+	public List<OrdOrder> findOrdList(Integer limitStart, Integer limitEnd) {
+		OrdOrderMapper ordOrderMapper = MapperFactory.getOrdOrderMapper();
+		OrdOrderCriteria example = new OrdOrderCriteria();
+		example.setLimitStart(limitStart);
+        example.setLimitEnd(limitEnd);
+		return ordOrderMapper.selectByExample(example);
 	}
 
 }

@@ -29,7 +29,15 @@ public final class OrdersConstants {
 		
 		public final static String PAY_FLAG_OUT = "out";
 	}
-
+	public final static class State {
+		private State() {}
+		
+        /**
+         * 取消
+         */
+     	public final static String CANCEL_STATE = "91";
+        
+	}
 	public final static class TranslateLevel {
 
 		private TranslateLevel() {
@@ -66,4 +74,22 @@ public final class OrdersConstants {
 		public final static String PUBLISH = "100230";
 
 	}
+	   public static final class OrdOdStateChg {
+
+	        /**
+	         * 處理信息
+	         * Date: 2016年11月7日 <br>
+	         * Copyright (c) 2016 asiainfo.com <br>
+	         * 
+	         * @author zhanglh
+	         */
+	        public static class ChgDesc {
+	            /**
+	             * 订单－取消
+	             */
+	            public static final String ORDER_TO_CANCEL = "您的订单已取消";
+
+	        }
+
+	    }
 }

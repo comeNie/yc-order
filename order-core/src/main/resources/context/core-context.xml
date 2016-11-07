@@ -22,12 +22,13 @@
 			</list>
 		</property>
 	</bean>
-
 	<!-- 配置数据源 -->
 	<bean id="dataSource" class="com.ai.opt.sdk.datasource.OptHikariDataSource">
 		<constructor-arg name="dataSourceName" value="yc-order-db" />
 	</bean>
-
+	<bean id="userDataSource" class="com.ai.opt.sdk.datasource.OptHikariDataSource">
+		<constructor-arg name="dataSourceName" value="yc-user-db" />
+	</bean>
 
 	<!--<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource"> -->
 	<!--<property name="driverClassName" value="${jdbc.driverClassName}"/> -->
