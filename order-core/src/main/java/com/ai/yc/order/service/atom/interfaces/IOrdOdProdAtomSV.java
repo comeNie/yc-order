@@ -6,4 +6,6 @@ public interface IOrdOdProdAtomSV {
 	public void insertSelective(OrdOdProdWithBLOBs ordOdProdWithBLOBs);
 	
 	OrdOdProdWithBLOBs findByOrderId(Long orderId);
+	
+	void updateByOrderIdSelective(OrdOdProdWithBLOBs ordOdProdWithBLOBs,Long orderId);
 }

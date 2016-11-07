@@ -18,4 +18,8 @@ public interface IOrdOrderAtomSV {
 	 * @author zhangzd
 	 */
 	public void insertSelective(OrdOrder OrdOrder);
+	
+	int updateByPrimaryKeySelective(OrdOrder record);
+	
+	
 }

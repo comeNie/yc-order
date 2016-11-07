@@ -28,5 +28,15 @@ public class OrdOdProdAtomSVImpl implements IOrdOdProdAtomSV {
 		}
 		return ordOdProds.get(0);
 	}
+
+	@Override
+	public void updateByOrderIdSelective(OrdOdProdWithBLOBs ordOdProdWithBLOBs,
+			Long orderId) {
+		OrdOdProdCriteria example = new OrdOdProdCriteria();
+		OrdOdProdCriteria.Criteria criteria = example.createCriteria();
+		criteria.andOrderIdEqualTo(orderId);
+		MapperFactory.getOrdOdProdMapper().updateByExampleSelective(ordOdProdWithBLOBs, example);
+		
+	}
 	
 }

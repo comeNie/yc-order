@@ -90,4 +90,9 @@ public class OrdOrderAtomSVImpl implements IOrdOrderAtomSV {
 		return MapperFactory.getOrdOrderMapper().selectByPrimaryKey(orderId);
 	}
 
+	@Override
+	public int updateByPrimaryKeySelective(OrdOrder record) {
+		return MapperFactory.getOrdOrderMapper().updateByPrimaryKey(record);
+	}
+
 }

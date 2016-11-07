@@ -31,4 +31,12 @@ public class OrdOdFeeTotalAtomSVImpl implements IOrdOdFeeTotalAtomSV {
 		return ordOdFeeTotals.get(0);
 	}
 
+	@Override
+	public void updateByOrderIdSelective(Long orderId, OrdOdFeeTotal record) {
+		OrdOdFeeTotalCriteria example = new OrdOdFeeTotalCriteria();
+		OrdOdFeeTotalCriteria.Criteria  criteria = example.createCriteria();
+		criteria.andOrderIdEqualTo(orderId);
+		 MapperFactory.getOrdOdFeeTotalMapper().updateByExampleSelective(record, example);
+	}
+
 }

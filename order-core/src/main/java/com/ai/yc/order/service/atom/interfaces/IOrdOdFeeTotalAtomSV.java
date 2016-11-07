@@ -6,4 +6,6 @@ public interface IOrdOdFeeTotalAtomSV {
 	public void insertSelective(OrdOdFeeTotal ordOdFeeTotal);
 	
 	OrdOdFeeTotal findByOrderId(String payFlag,Long orderId);
+	
+    void updateByOrderIdSelective(Long orderId, OrdOdFeeTotal record);
 }
