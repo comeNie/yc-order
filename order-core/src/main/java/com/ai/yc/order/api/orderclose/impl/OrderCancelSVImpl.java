@@ -14,6 +14,8 @@ import com.ai.opt.sdk.util.BeanUtils;
 import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.yc.order.api.orderclose.interfaces.IOrderCancelSV;
 import com.ai.yc.order.api.orderclose.param.OrderCancelRequest;
+import com.ai.yc.order.api.sesdata.interfaces.ISesDataUpdateSV;
+import com.ai.yc.order.constants.OrdersConstants;
 import com.ai.yc.order.dao.mapper.bo.OrdOrder;
 import com.ai.yc.order.service.atom.interfaces.IOrdOrderAtomSV;
 import com.ai.yc.order.service.business.interfaces.IOrderCancelBusiSV;
@@ -26,10 +28,13 @@ public class OrderCancelSVImpl implements IOrderCancelSV {
 	private IOrdOrderAtomSV ordOrderAtomSV;
 	@Autowired
 	private IOrderCancelBusiSV orderCancelBusiSV;
+	@Autowired
+	private ISesDataUpdateSV sesDataUpdateSV;
 	
 	@Override
 	public BaseResponse handCancelNoPayOrder(OrderCancelRequest request) throws BusinessException, SystemException {
 		/* 1.参数检验*/
+		request.setTenantId(OrdersConstants.TENANT_ID);
 		ValidateUtils.validateCancleOrdOrder(request);
 		BaseResponse response=new BaseResponse();
 		List<OrdOrder> noPayOrders=null;
@@ -52,7 +57,7 @@ public class OrderCancelSVImpl implements IOrderCancelSV {
 		ResponseHeader header=new ResponseHeader(true, ExceptCodeConstants.Special.SUCCESS, "关闭未支付订单");
 		response.setResponseHeader(header);
 		//刷新数据到搜索引擎
-		
+		sesDataUpdateSV.updateSesData(request.getOrderId());
 		return response;
 	}
 

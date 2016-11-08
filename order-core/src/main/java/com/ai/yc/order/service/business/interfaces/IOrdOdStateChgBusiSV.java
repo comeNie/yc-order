@@ -18,5 +18,11 @@ public interface IOrdOdStateChgBusiSV {
 	 * 报价轨迹
 	 */
 	void addOfferChgDesc(OrdOdStateChg chg);
+	/**
+	 * 关闭轨迹
+	 */
+	void addCloseChgDesc(OrdOdStateChg chg);
+	
+	
 
 }

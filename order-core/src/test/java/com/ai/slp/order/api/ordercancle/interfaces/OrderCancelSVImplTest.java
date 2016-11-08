@@ -17,6 +17,7 @@ public class OrderCancelSVImplTest  extends BaseTest{
 		OrderCancelRequest res = new OrderCancelRequest();
 		res.setOrderId(123l);
 		res.setOperId("123456");
+		res.setReasonDesc("cesshi");
 		res.setTenantId("yinyun");
 		BaseResponse response = this.iOrderCancelSV.handCancelNoPayOrder(res);
 		log.info("response:"+JSON.toJSONString(response));

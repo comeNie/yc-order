@@ -12,8 +12,8 @@ import com.ai.opt.sdk.util.DateUtil;
 import com.ai.yc.order.constants.OrdersConstants;
 import com.ai.yc.order.dao.mapper.bo.OrdOdStateChg;
 import com.ai.yc.order.dao.mapper.bo.OrdOrder;
-import com.ai.yc.order.service.atom.interfaces.IOrdOdStateChgAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOrderAtomSV;
+import com.ai.yc.order.service.business.interfaces.IOrdOdStateChgBusiSV;
 import com.ai.yc.order.service.business.interfaces.IOrderCancelBusiSV;
 
 
@@ -24,7 +24,7 @@ public class OrderCancelBusiSVImpl implements IOrderCancelBusiSV {
     @Autowired
     private IOrdOrderAtomSV ordOrderAtomSV;
     @Autowired
-    private IOrdOdStateChgAtomSV ordOdStateChgAtomSV;
+    private IOrdOdStateChgBusiSV ordOdStateChgBusiSV;
 
     @Override
     public void orderCancel(OrdOrder ordOrder) throws BusinessException, SystemException {
@@ -37,10 +37,10 @@ public class OrderCancelBusiSVImpl implements IOrderCancelBusiSV {
         ordOrderAtomSV.updateById(ordOrder);
         /* 2.写入订单状态变化轨迹表 */
         OrdOdStateChg ordOdStateChg = new OrdOdStateChg();
+        ordOdStateChg.setOrderId(ordOrder.getOrderId());
         ordOdStateChg.setOperId(ordOrder.getOperId());
-        ordOdStateChg.setStateChgTime(sysDate);
         ordOdStateChg.setOrgState(ordOrder.getState());
         ordOdStateChg.setNewState(OrdersConstants.OrderState.CANCEL_STATE);
-        ordOdStateChgAtomSV.insertSelective(ordOdStateChg);
+        ordOdStateChgBusiSV.addCloseChgDesc(ordOdStateChg);
     }
 }
