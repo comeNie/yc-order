@@ -21,7 +21,7 @@ public class ProdVo implements Serializable {
 	/**
 	 * 翻译字数
 	 */
-	private Long translateSum;
+	private String translateSum;
 
 	
 	/**
@@ -339,11 +339,13 @@ public class ProdVo implements Serializable {
 		this.updateTime = updateTime;
 	}
 
-	public Long getTranslateSum() {
+	
+
+	public String getTranslateSum() {
 		return translateSum;
 	}
 
-	public void setTranslateSum(Long translateSum) {
+	public void setTranslateSum(String translateSum) {
 		this.translateSum = translateSum;
 	}
 
