@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ai.opt.base.exception.BusinessException;
+import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.ai.opt.sdk.util.StringUtil;
 import com.ai.yc.order.api.ordersubmission.param.OrderSubmissionRequest;
 import com.alibaba.fastjson.JSON;
@@ -336,7 +337,7 @@ public class OrderSubmissionValidate {
 	 * 异常消息打印
 	 */
 	public void newException(String errorMessage) {
-		throw new BusinessException("999999", errorMessage);
+		throw new BusinessException(ExceptCodeConstants.Special.SYSTEM_ERROR, errorMessage);
 	}
 	
 }
