@@ -25,4 +25,12 @@ public class OrdOdProdLevelAtomSVImpl implements IOrdOdProdLevelAtomSV {
 		return MapperFactory.getOrdOdProdLevelMapper().selectByExample(example);
 	}
 
+	@Override
+	public void deleteByOrderId(Long orderId) {
+		OrdOdProdLevelCriteria example = new OrdOdProdLevelCriteria();
+		OrdOdProdLevelCriteria.Criteria criteria = example.createCriteria();
+		criteria.andOrderIdEqualTo(orderId);
+		MapperFactory.getOrdOdProdLevelMapper().deleteByExample(example);	
+	}
+
 }

@@ -8,4 +8,6 @@ public interface IOrdOdProdFileAtomSV {
 	public void insertSelective(OrdOdProdFile ordOdProdFile);
 	
 	List<OrdOdProdFile> findByProdDetalId(Long prodDetalId);
+	
+	void deleteByProdDetalId(Long prodDetalId);
 }

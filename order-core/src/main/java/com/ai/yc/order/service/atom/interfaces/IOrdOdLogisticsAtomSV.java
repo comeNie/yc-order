@@ -7,4 +7,6 @@ public interface IOrdOdLogisticsAtomSV {
 	
 	OrdOdLogistics findByOrderId(Long orderId);
 	
+	void updateByOrderIdSelective(OrdOdLogistics record, Long orderId);
+	
 }

@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.ai.opt.base.vo.ResponseHeader;
 import com.ai.opt.sdk.util.DateUtil;
-import com.ai.platform.common.api.sysduad.param.QuerySysDuadDetailsRes;
-import com.ai.platform.common.api.syspurpose.param.QuerySysPurposeDetailsRes;
+import com.ai.yc.common.api.sysduad.param.QuerySysDuadDetailsRes;
+import com.ai.yc.common.api.syspurpose.param.QuerySysPurposeDetailsRes;
 import com.ai.yc.order.api.autooffer.param.QueryAutoOfferReq;
 import com.ai.yc.order.api.autooffer.param.QueryAutoOfferRes;
 import com.ai.yc.order.constants.OrdersConstants;

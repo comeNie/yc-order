@@ -1,8 +1,8 @@
 package com.ai.yc.order.service.atom.interfaces;
 
-import com.ai.platform.common.api.sysdomain.param.QuerySysDomainDetailsRes;
-import com.ai.platform.common.api.sysduad.param.QuerySysDuadDetailsRes;
-import com.ai.platform.common.api.syspurpose.param.QuerySysPurposeDetailsRes;
+import com.ai.yc.common.api.sysdomain.param.QuerySysDomainDetailsRes;
+import com.ai.yc.common.api.sysduad.param.QuerySysDuadDetailsRes;
+import com.ai.yc.common.api.syspurpose.param.QuerySysPurposeDetailsRes;
 
 
 

@@ -27,7 +27,7 @@ public class UpdatePayStatusRequest implements Serializable {
 	private String operId;
 	
 	/**
-	 * 操作人用户名(必填)
+	 * 操作人用户名
 	 */
 	private String operName;
 

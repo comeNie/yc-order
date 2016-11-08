@@ -30,4 +30,12 @@ public class OrdOdLogisticsAtomSVImpl implements IOrdOdLogisticsAtomSV {
 		}
 	}
 
+	@Override
+	public void updateByOrderIdSelective(OrdOdLogistics record, Long orderId) {
+		OrdOdLogisticsCriteria example = new OrdOdLogisticsCriteria();
+		OrdOdLogisticsCriteria.Criteria  criteria = example.createCriteria();
+		criteria.andOrderIdEqualTo(orderId);
+		MapperFactory.getOrdOdLogisticsMapper().updateByExampleSelective(record, example);
+	}
+
 }

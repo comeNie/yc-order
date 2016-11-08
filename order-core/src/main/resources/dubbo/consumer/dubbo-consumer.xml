@@ -29,19 +29,19 @@
 
 	<!-- 缓存 -->
 	<dubbo:reference id="iCacheSV"
-		interface="com.ai.platform.common.api.cache.interfaces.ICacheSV" />
+		interface="com.ai.yc.common.api.cache.interfaces.ICacheSV" />
 	
 	<!-- 语言对 -->	
 	<dubbo:reference id="iQuerySysDuadSV"
-		interface="com.ai.platform.common.api.sysduad.interfaces.IQuerySysDuadSV" />	
+		interface="com.ai.yc.common.api.sysduad.interfaces.IQuerySysDuadSV" />	
 		
 	<!-- 用途 -->	
 	<dubbo:reference id="iQuerySysPurposeSV"
-		interface="com.ai.platform.common.api.syspurpose.interfaces.IQuerySysPurposeSV" />	
+		interface="com.ai.yc.common.api.syspurpose.interfaces.IQuerySysPurposeSV" />	
 		
 	<!-- 领域-->	
 	<dubbo:reference id="iQuerySysDomainSV"
-		interface="com.ai.platform.common.api.syspurpose.interfaces.IQuerySysDomainSV" />			
+		interface="com.ai.yc.common.api.sysdomain.interfaces.IQuerySysDomainSV" />			
 
 	
 </beans>

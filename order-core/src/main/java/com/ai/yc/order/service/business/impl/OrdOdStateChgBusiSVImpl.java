@@ -24,6 +24,14 @@ public class OrdOdStateChgBusiSVImpl implements IOrdOdStateChgBusiSV {
 	
 	private final static String PAY_CHG_ADMIN_DESC_EN = "Administrator %s pay for the order.";
 	
+	private final static String UPDATE_CHG_ADMIN_DESC_CN = "管理员%s修改了订单。";
+		
+	private final static String UPDATE_CHG_ADMIN_DESC_EN = "Administrator %s revised the order.";
+	
+	private final static String OFFER_CHG_ADMIN_DESC_CN = "订单已报价，等待您支付。";
+	
+	private final static String OFFER_CHG_ADMIN_DESC_EN = "order has been quoted, waiting for you to pay.";
+	
 	@Autowired
 	private IOrdOdStateChgAtomSV ordOdStateChgAtomSV;
 	
@@ -33,9 +41,34 @@ public class OrdOdStateChgBusiSVImpl implements IOrdOdStateChgBusiSV {
 		String descCn = PAY_CHG_USER_DESC_CN;
 		String descEn = PAY_CHG_USER_DESC_EN;
 		if(OrdersConstants.OrgID.ORG_ID_SYS.equals(chg.getOrgId())){
-			descCn = String.format(PAY_CHG_ADMIN_DESC_CN, chg.getOperName());
-			descEn = String.format(PAY_CHG_ADMIN_DESC_EN, chg.getOperName());
+			descCn = String.format(PAY_CHG_ADMIN_DESC_CN, chg.getOperName()==null?chg.getOperId():chg.getOperName());
+			descEn = String.format(PAY_CHG_ADMIN_DESC_EN, chg.getOperName()==null?chg.getOperId():chg.getOperName());
 		}
+		
+		chg.setChgDesc(descCn);
+		chg.setChgDescEn(descEn);
+		chg.setStateChgTime(DateUtil.getSysDate());
+		ordOdStateChgAtomSV.insertSelective(chg);
+	}
+
+	@Override
+	public void addUpdateChgDesc(OrdOdStateChg chg) {
+		chg.setStateChgId(SequenceUtil.createStateChgId());
+		String descCn = String.format(UPDATE_CHG_ADMIN_DESC_CN, chg.getOperName()==null?chg.getOperId():chg.getOperName());
+		String descEn = String.format(UPDATE_CHG_ADMIN_DESC_EN, chg.getOperName()==null?chg.getOperId():chg.getOperName());
+		chg.setOrgId(OrdersConstants.OrgID.ORG_ID_SYS);
+		chg.setChgDesc(descCn);
+		chg.setChgDescEn(descEn);
+		chg.setStateChgTime(DateUtil.getSysDate());
+		ordOdStateChgAtomSV.insertSelective(chg);
+	}
+
+	@Override
+	public void addOfferChgDesc(OrdOdStateChg chg) {
+		chg.setStateChgId(SequenceUtil.createStateChgId());
+		String descCn = String.format(OFFER_CHG_ADMIN_DESC_CN, chg.getOperName()==null?chg.getOperId():chg.getOperName());
+		String descEn = String.format(OFFER_CHG_ADMIN_DESC_EN, chg.getOperName()==null?chg.getOperId():chg.getOperName());
+		chg.setOrgId(OrdersConstants.OrgID.ORG_ID_SYS);
 		chg.setChgDesc(descCn);
 		chg.setChgDescEn(descEn);
 		chg.setStateChgTime(DateUtil.getSysDate());

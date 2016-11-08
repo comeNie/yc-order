@@ -10,8 +10,8 @@ import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.vo.ResponseHeader;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.ai.opt.sdk.util.BeanUtils;
-import com.ai.platform.common.api.sysdomain.param.QuerySysDomainDetailsRes;
-import com.ai.platform.common.api.syspurpose.param.QuerySysPurposeDetailsRes;
+import com.ai.yc.common.api.sysdomain.param.QuerySysDomainDetailsRes;
+import com.ai.yc.common.api.syspurpose.param.QuerySysPurposeDetailsRes;
 import com.ai.yc.order.api.orderdetails.param.ContactsVo;
 import com.ai.yc.order.api.orderdetails.param.OrderFeeVo;
 import com.ai.yc.order.api.orderdetails.param.OrderStateChgVo;
@@ -37,6 +37,7 @@ import com.ai.yc.order.service.atom.interfaces.IOrdOdLogisticsAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdPersonInfoAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdProdAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdProdExtendAtomSV;
+import com.ai.yc.order.service.atom.interfaces.IOrdOdProdFileAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdProdLevelAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdStateChgAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOrderAtomSV;
@@ -75,6 +76,9 @@ public class QueryOrderDetailsBusiSVImpl implements IQueryOrderDetailsBusiSV {
 	
 	@Autowired
 	private transient IOrdOdFeeTotalAtomSV iOrdOdFeeTotalAtomSV;
+	
+	@Autowired
+	private transient IOrdOdProdFileAtomSV iOrdOdProdFileAtomSV;
 	
 	@Autowired
 	private transient ISysConfigAtomSV iSysConfigAtomSV;
@@ -144,7 +148,7 @@ public class QueryOrderDetailsBusiSVImpl implements IQueryOrderDetailsBusiSV {
 		//文件列表
 		List<ProdFileVo> prodFiles = new ArrayList<ProdFileVo>();
 		if(ordOdProd!=null){
-			List<OrdOdProdFile> ordOdProdFiles = new ArrayList<OrdOdProdFile>();
+			List<OrdOdProdFile> ordOdProdFiles = iOrdOdProdFileAtomSV.findByProdDetalId(ordOdProd.getProdDetalId());
 			for(OrdOdProdFile ordOdProdFile:ordOdProdFiles){
 				ProdFileVo prodFile = new ProdFileVo();
 				BeanUtils.copyProperties(prodFile, ordOdProdFile);

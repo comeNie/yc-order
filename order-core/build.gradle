@@ -9,7 +9,7 @@ dependencies {
 
     compile 'com.ai.opt.sdk:opt-sdk:2.2.1-SNAPSHOT'
     
-    compile 'com.ai.platform.common:cache:1.0-SNAPSHOT'
+    compile 'com.ai.yc.common:cache:1.0-SNAPSHOT'
     
     testCompile(
             "org.springframework:spring-test:4.1.7.RELEASE",
@@ -17,8 +17,8 @@ dependencies {
             )
 	
 	/*********************公共中心****************************/
-	compile 'com.ai.platform.common:sysduad:1.0-SNAPSHOT'
-	compile 'com.ai.platform.common:syspurpose:1.0-SNAPSHOT'
-	compile 'com.ai.platform.common:sysdomain:1.0-SNAPSHOT'
+	compile 'com.ai.yc.common:sysduad:1.0-SNAPSHOT'
+	compile 'com.ai.yc.common:syspurpose:1.0-SNAPSHOT'
+	compile 'com.ai.yc.common:sysdomain:1.0-SNAPSHOT'
 	
 }

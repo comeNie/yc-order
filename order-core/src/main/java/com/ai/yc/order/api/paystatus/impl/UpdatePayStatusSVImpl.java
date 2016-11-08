@@ -1,4 +1,4 @@
-package com.ai.yc.order.api.paystatus;
+package com.ai.yc.order.api.paystatus.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -37,9 +37,6 @@ public class UpdatePayStatusSVImpl implements IUpdatePayStatusSV{
 		}
 		if(StringUtil.isBlank(req.getOperId())){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "操作工号不能为空");
-		}
-		if(StringUtil.isBlank(req.getOperName())){
-			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "操作人用户名不能为空");
 		}
 		if(req.getOrderFee()==null){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "订单费用不能为空");

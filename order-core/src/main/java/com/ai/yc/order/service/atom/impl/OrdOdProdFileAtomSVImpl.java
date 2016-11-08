@@ -13,7 +13,6 @@ public class OrdOdProdFileAtomSVImpl implements IOrdOdProdFileAtomSV {
 
 	@Override
 	public void insertSelective(OrdOdProdFile ordOdProdFile) {
-		// TODO Auto-generated method stub
 		MapperFactory.getOrdOdProdFileMapper().insertSelective(ordOdProdFile);
 	}
 
@@ -23,6 +22,14 @@ public class OrdOdProdFileAtomSVImpl implements IOrdOdProdFileAtomSV {
 		OrdOdProdFileCriteria.Criteria criteria = example.createCriteria();
 		criteria.andProdDetalIdEqualTo(prodDetalId);
 		return MapperFactory.getOrdOdProdFileMapper().selectByExample(example);
+	}
+
+	@Override
+	public void deleteByProdDetalId(Long prodDetalId) {
+		OrdOdProdFileCriteria example = new OrdOdProdFileCriteria();
+		OrdOdProdFileCriteria.Criteria criteria = example.createCriteria();
+		criteria.andProdDetalIdEqualTo(prodDetalId);
+		MapperFactory.getOrdOdProdFileMapper().deleteByExample(example);
 	}
 
 }

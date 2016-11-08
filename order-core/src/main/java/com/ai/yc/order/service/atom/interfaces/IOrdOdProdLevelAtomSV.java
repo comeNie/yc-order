@@ -8,4 +8,6 @@ public interface IOrdOdProdLevelAtomSV {
 	public void insertSelective(OrdOdProdLevel ordOdProdLevel);
 	
 	List<OrdOdProdLevel> findByOrderId(Long orderId);
+	
+	void deleteByOrderId(Long orderId);
 }
