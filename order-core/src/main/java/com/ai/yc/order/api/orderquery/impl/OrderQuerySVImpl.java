@@ -1,8 +1,10 @@
 package com.ai.yc.order.api.orderquery.impl;
 
+
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -286,20 +288,186 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
 		}
 
-		// 如果状态变化开始时间不为空
+		// 如果状态变化开始、结束时间不为空
 		if (request.getStateChgTimeStart() != null && request.getStateChgTimeEnd() != null) {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'ZZZ'");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZ");
 			String start = sdf.format(request.getStateChgTimeStart());
 			String end = sdf.format(request.getStateChgTimeEnd());
-			System.out.println("startDate" + start);
-			SearchCriteria searchCriteria1 = new SearchCriteria();
-			searchCriteria1.setOption(new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.range));
-			searchCriteria1.setField(SearchFieldConfConstants.STATE_CHG_TIME);
-			searchCriteria1.addFieldValue(start);
-			searchCriteria1.addFieldValue(end);
-			searchfieldVos.add(searchCriteria1);
+			SearchCriteria searchCriteria = new SearchCriteria();
+			searchCriteria.setOption(new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.range));
+			searchCriteria.setField(SearchFieldConfConstants.STATE_CHG_TIME);
+			searchCriteria.addFieldValue(start);
+			searchCriteria.addFieldValue(end);
+			searchfieldVos.add(searchCriteria);
 		}
-
+		// 如果状态变化开始时间不为空
+		if(request.getStateChgTimeStart() != null && request.getStateChgTimeEnd() == null){
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZ");
+			String start = sdf.format(request.getStateChgTimeStart());
+			String end = sdf.format(new Date());
+			SearchCriteria searchCriteria = new SearchCriteria();
+			searchCriteria.setOption(new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.range));
+			searchCriteria.setField(SearchFieldConfConstants.STATE_CHG_TIME);
+			searchCriteria.addFieldValue(start);
+			searchCriteria.addFieldValue(end);
+			searchfieldVos.add(searchCriteria);
+		}
+		//如果状态变化结束时间不为空
+		if(request.getStateChgTimeStart() == null && request.getStateChgTimeEnd() != null){
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZ");
+			String end = sdf.format(request.getStateChgTimeEnd());
+			String start = sdf.format(new Date());
+			SearchCriteria searchCriteria = new SearchCriteria();
+			searchCriteria.setOption(new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.range));
+			searchCriteria.setField(SearchFieldConfConstants.STATE_CHG_TIME);
+			searchCriteria.addFieldValue(start);
+			searchCriteria.addFieldValue(end);
+			searchfieldVos.add(searchCriteria);
+		}
+		//下单开始、结束时间不为空
+		if (request.getOrderTimeStart() != null && request.getOrderTimeEnd() != null) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZ");
+			String start = sdf.format(request.getOrderTimeStart());
+			String end = sdf.format(request.getOrderTimeEnd());
+			SearchCriteria searchCriteria = new SearchCriteria();
+			searchCriteria.setOption(new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.range));
+			searchCriteria.setField(SearchFieldConfConstants.ORDER_TIME);
+			searchCriteria.addFieldValue(start);
+			searchCriteria.addFieldValue(end);
+			searchfieldVos.add(searchCriteria);
+		}
+		//下单开始时间不为空
+		if (request.getOrderTimeStart() != null && request.getOrderTimeEnd() == null) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZ");
+			String start = sdf.format(request.getOrderTimeStart());
+			String end = sdf.format(new Date());
+			SearchCriteria searchCriteria = new SearchCriteria();
+			searchCriteria.setOption(new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.range));
+			searchCriteria.setField(SearchFieldConfConstants.ORDER_TIME);
+			searchCriteria.addFieldValue(start);
+			searchCriteria.addFieldValue(end);
+			searchfieldVos.add(searchCriteria);
+		}
+		//下单结束时间不为空
+		if (request.getOrderTimeStart() == null && request.getOrderTimeEnd()!= null) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZ");
+			String end = sdf.format(request.getOrderTimeEnd());
+			String start = sdf.format(new Date());
+			SearchCriteria searchCriteria = new SearchCriteria();
+			searchCriteria.setOption(new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.range));
+			searchCriteria.setField(SearchFieldConfConstants.ORDER_TIME);
+			searchCriteria.addFieldValue(start);
+			searchCriteria.addFieldValue(end);
+			searchfieldVos.add(searchCriteria);
+		}
+		//如果领取开始、结束时间不为空
+		if (request.getLockTimeStart() != null && request.getLockTimeEnd() != null) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZ");
+			String start = sdf.format(request.getLockTimeStart());
+			String end = sdf.format(request.getLockTimeEnd());
+			SearchCriteria searchCriteria = new SearchCriteria();
+			searchCriteria.setOption(new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.range));
+			searchCriteria.setField(SearchFieldConfConstants.LOCK_TIME);
+			searchCriteria.addFieldValue(start);
+			searchCriteria.addFieldValue(end);
+			searchfieldVos.add(searchCriteria);
+		}
+		//如果领取开始时间不为空
+		if (request.getLockTimeStart() != null && request.getLockTimeEnd() == null) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZ");
+			String end = sdf.format(request.getLockTimeStart());
+			String start = sdf.format(new Date());
+			SearchCriteria searchCriteria = new SearchCriteria();
+			searchCriteria.setOption(new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.range));
+			searchCriteria.setField(SearchFieldConfConstants.LOCK_TIME);
+			searchCriteria.addFieldValue(start);
+			searchCriteria.addFieldValue(end);
+			searchfieldVos.add(searchCriteria);
+		}
+		//如果领取结束时间不为空
+		if (request.getLockTimeStart() == null && request.getLockTimeEnd() != null) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZ");
+			String end = sdf.format(request.getLockTimeEnd());
+			String start = sdf.format(new Date());
+			SearchCriteria searchCriteria = new SearchCriteria();
+			searchCriteria.setOption(new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.range));
+			searchCriteria.setField(SearchFieldConfConstants.LOCK_TIME);
+			searchCriteria.addFieldValue(start);
+			searchCriteria.addFieldValue(end);
+			searchfieldVos.add(searchCriteria);
+		}
+		//如果支付开始、结束时间不为空
+		if (request.getPayTimeStart() != null && request.getPayTimeEnd() != null) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZ");
+			String start = sdf.format(request.getPayTimeStart());
+			String end = sdf.format(request.getPayTimeEnd());
+			SearchCriteria searchCriteria = new SearchCriteria();
+			searchCriteria.setOption(new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.range));
+			searchCriteria.setField(SearchFieldConfConstants.PAY_TIME);
+			searchCriteria.addFieldValue(start);
+			searchCriteria.addFieldValue(end);
+			searchfieldVos.add(searchCriteria);
+		}
+		//如果支付开始时间不为空
+		if (request.getPayTimeStart() != null && request.getPayTimeEnd() == null) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZ");
+			String end = sdf.format(request.getPayTimeStart());
+			String start = sdf.format(new Date());
+			SearchCriteria searchCriteria = new SearchCriteria();
+			searchCriteria.setOption(new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.range));
+			searchCriteria.setField(SearchFieldConfConstants.PAY_TIME);
+			searchCriteria.addFieldValue(start);
+			searchCriteria.addFieldValue(end);
+			searchfieldVos.add(searchCriteria);
+		}
+		//如果支付结束时间不为空
+		if (request.getPayTimeStart() == null && request.getPayTimeEnd()!= null) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZ");
+			String end = sdf.format(request.getPayTimeEnd());
+			String start = sdf.format(new Date());
+			SearchCriteria searchCriteria = new SearchCriteria();
+			searchCriteria.setOption(new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.range));
+			searchCriteria.setField(SearchFieldConfConstants.PAY_TIME);
+			searchCriteria.addFieldValue(start);
+			searchCriteria.addFieldValue(end);
+			searchfieldVos.add(searchCriteria);
+		}
+		//如果报价开始、结束时间不为空
+		if (request.getUpdateTimeStart() != null && request.getUpdateTimeEnd() != null) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZ");
+			String start = sdf.format(request.getUpdateTimeStart());
+			String end = sdf.format(request.getUpdateTimeEnd());
+			SearchCriteria searchCriteria = new SearchCriteria();
+			searchCriteria.setOption(new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.range));
+			searchCriteria.setField(SearchFieldConfConstants.UPDATE_TIME);
+			searchCriteria.addFieldValue(start);
+			searchCriteria.addFieldValue(end);
+			searchfieldVos.add(searchCriteria);
+		}
+		//如果报价开始时间不为空
+		if (request.getUpdateTimeStart() != null && request.getUpdateTimeEnd() == null) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZ");
+			String end = sdf.format(request.getUpdateTimeStart());
+			String start = sdf.format(new Date());
+			SearchCriteria searchCriteria = new SearchCriteria();
+			searchCriteria.setOption(new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.range));
+			searchCriteria.setField(SearchFieldConfConstants.UPDATE_TIME);
+			searchCriteria.addFieldValue(start);
+			searchCriteria.addFieldValue(end);
+			searchfieldVos.add(searchCriteria);
+		}
+		//如果报价结束时间不为空
+		if (request.getUpdateTimeStart() == null && request.getUpdateTimeEnd() != null) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZ");
+			String end = sdf.format(request.getUpdateTimeEnd());
+			String start = sdf.format(new Date());
+			SearchCriteria searchCriteria = new SearchCriteria();
+			searchCriteria.setOption(new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.range));
+			searchCriteria.setField(SearchFieldConfConstants.UPDATE_TIME);
+			searchCriteria.addFieldValue(start);
+			searchCriteria.addFieldValue(end);
+			searchfieldVos.add(searchCriteria);
+		}
 		return searchfieldVos;
 	}
 
@@ -323,10 +491,10 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 		Sort sort = new Sort("ordertime", SortOrder.DESC);
 		sortList.add(sort);
 		Result<OrderInfo> result = orderSearch.search(orderSearchCriteria, startSize, maxSize, sortList);
-		List<OrderInfo> reslist = result.getContents();
-		String info = JSON.toJSONString(reslist);
+		List<OrderInfo> ordList = result.getContents();
+		/*String info = JSON.toJSONString(reslist);
 		List<OrderInfo> ordList = JSON.parseObject(info, new TypeReference<List<OrderInfo>>() {
-		});
+		});*/
 		if (!CollectionUtil.isEmpty(ordList)) {
 			return ordList.size();
 		} else {
