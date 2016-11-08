@@ -26,7 +26,7 @@ public class QueryOrderDetailsSVImpl implements IQueryOrderDetailsSV {
 
 	@Override
 	public QueryOrderDetailsResponse queryOrderDetails(Long orderId)throws BusinessException, SystemException {
-		if(orderId!=null){
+		if(orderId==null){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "订单ID不能为空");
 		}
 		return iQueryOrderDetailsBusiSV.queryOrderDetails(orderId);
