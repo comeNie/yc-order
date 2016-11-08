@@ -49,7 +49,7 @@ public class QueryOrderRequest implements Serializable {
 	 */
 	private String translateType;
 	/**
-	 * 翻译主题
+	 * 翻译主题(模糊)
 	 */
 	private String translateName;
 
@@ -73,7 +73,7 @@ public class QueryOrderRequest implements Serializable {
 	/**
 	 * LSP编号
 	 */
-	private Long lspId;
+	private String lspId;
 
 	/**
 	 * 领取人(译员)ID
@@ -128,11 +128,11 @@ public class QueryOrderRequest implements Serializable {
 	 */
 	private String fieldCode;
 	/**
-	 * 用户昵称
+	 * 用户昵称(模糊)
 	 */
 	private String userName;
 	/**
-	 * 译员昵称
+	 * 译员昵称(模糊)
 	 */
 	private String interperName;
 
@@ -301,11 +301,11 @@ public class QueryOrderRequest implements Serializable {
 		this.interperType = interperType;
 	}
 
-	public Long getLspId() {
+	public String getLspId() {
 		return lspId;
 	}
 
-	public void setLspId(Long lspId) {
+	public void setLspId(String lspId) {
 		this.lspId = lspId;
 	}
 

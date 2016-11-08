@@ -1,5 +1,7 @@
 package com.ai.slp.order.api.orderquery.interfaces;
 
+import java.sql.Timestamp;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -17,7 +19,29 @@ public class IOrderQuerySVImplTest extends BaseTest{
 	@Test
 	public void orderQuery(){
 		QueryOrderRequest request = new QueryOrderRequest();
-		request.setUserId("123");
+		//request.setFlag("12io");
+		//request.setOrderType("1ololp");
+		request.setOrderId(123l);
+		request.setFieldCode("2222");
+		//request.setDisplayFlag("11lolo");
+		request.setCorporaId("1");
+		//request.setKeyWords(keyWords);
+		request.setLspId("1236");
+		request.setInterperName("test");
+		request.setOrderLevel("1");
+		request.setInterperId("1");
+		request.setLangungePaire("1");
+		request.setTranslateType("1");
+		request.setTranslateName("翻译主题信息");
+		request.setChlId("001");
+		request.setState("11");
+		request.setSubFlag("1");
+		Timestamp ts = Timestamp.valueOf("2016-10-08 12:20:12");
+		Timestamp es = Timestamp.valueOf("2018-10-08 12:20:12");
+		//request.setStateChgTimeStart(ts);
+		//request.setStateChgTimeEnd(es);
+		request.setPageSize(20);
+		request.setPageNo(1);
 		QueryOrderRsponse response = this.iOrderQuerySV.queryOrder(request);
 		log.info("response:"+JSON.toJSONString(response));
 	}

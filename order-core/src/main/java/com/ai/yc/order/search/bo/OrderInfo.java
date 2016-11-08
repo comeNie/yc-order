@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 public class OrderInfo {
-	private long orderid;
+	private String orderid;
 	private String flag;
 	private String timezone;
 	private String usertype;
@@ -35,20 +35,22 @@ public class OrderInfo {
 	private String updateoperid;
 	private String field;
 	private String usecode;
+	private String subflag;
 	private long proddetailid;
+	private String keywords;
 	/**
 	 * 费用变更时间
 	 */
 	private Date updatetime;
 
-	private String keywords;
+	
 	private List<OrdProdExtend> ordextendes;
 
-	public long getOrderid() {
+	public String getOrderid() {
 		return orderid;
 	}
 
-	public void setOrderid(long orderid) {
+	public void setOrderid(String orderid) {
 		this.orderid = orderid;
 	}
 
@@ -284,8 +286,6 @@ public class OrderInfo {
 		this.field = field;
 	}
 
-	
-
 	public String getUsecode() {
 		return usecode;
 	}
@@ -301,8 +301,6 @@ public class OrderInfo {
 	public void setProddetailid(long proddetailid) {
 		this.proddetailid = proddetailid;
 	}
-
-
 
 	public Date getUpdatetime() {
 		return updatetime;
@@ -326,6 +324,14 @@ public class OrderInfo {
 
 	public void setOrdextendes(List<OrdProdExtend> ordextendes) {
 		this.ordextendes = ordextendes;
+	}
+
+	public String getSubflag() {
+		return subflag;
+	}
+
+	public void setSubflag(String subflag) {
+		this.subflag = subflag;
 	}
 
 }

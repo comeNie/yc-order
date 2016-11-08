@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
-import com.ai.opt.sdk.util.BeanUtils;
 import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.yc.order.dao.mapper.bo.OrdBalacneIf;
 import com.ai.yc.order.dao.mapper.bo.OrdOdFeeTotal;
@@ -21,13 +20,10 @@ import com.ai.yc.order.service.atom.interfaces.IOrdBalacneIfAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdFeeTotalAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdProdAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdProdExtendAtomSV;
-import com.ai.yc.order.service.atom.interfaces.IOrdOrderAtomSV;
 import com.ai.yc.order.service.business.interfaces.search.IOrderIndexBusiSV;
 
 @Service
 public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
-	@Autowired
-	private IOrdOrderAtomSV ordOrderAtomSV;
 
 	@Autowired
 	private IOrdOdProdAtomSV ordOdProdAtomSV;
@@ -45,7 +41,7 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 		List<OrdProdExtend> ordextendList = new ArrayList<>();
 		for (OrdOrder ord : ordList) {
 			OrderInfo ordInfo = new OrderInfo();
-			ordInfo.setOrderid(ord.getOrderId());
+			ordInfo.setOrderid(ord.getOrderId().toString());
 			ordInfo.setBusitype(ord.getBusiType());
 			ordInfo.setCorpoarid(ord.getCorporaId());
 			ordInfo.setFlag(ord.getFlag());
@@ -65,6 +61,9 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 			ordInfo.setUpdateflag(ord.getUpdateFlag());
 			ordInfo.setOrdertime(ord.getOrderTime());
 			ordInfo.setLocktime(ord.getLockTime());
+			ordInfo.setTranslatename(ord.getTranslateName());
+			ordInfo.setTranslatetype(ord.getTranslateType());
+			ordInfo.setSubflag(ord.getSubFlag());
 			//赋值假数据
 			ordInfo.setUsername("test");
 			ordInfo.setLspname("test");

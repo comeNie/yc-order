@@ -74,7 +74,7 @@ public class OrdOrderVo extends BaseInfo {
 	/**
 	 * lsp编号
 	 */
-	private Long lspId;
+	private String lspId;
 	/**
 	 * lsp名称
 	 */
@@ -84,7 +84,7 @@ public class OrdOrderVo extends BaseInfo {
 	 */
 	private String interperId;
 	/**
-	 * 译员名称
+	 * 译员昵称
 	 */
 	private String interperName;
 	/**
@@ -258,14 +258,6 @@ public class OrdOrderVo extends BaseInfo {
 		this.interperType = interperType;
 	}
 
-	public Long getLspId() {
-		return lspId;
-	}
-
-	public void setLspId(Long lspId) {
-		this.lspId = lspId;
-	}
-
 	public String getLspName() {
 		return lspName;
 	}
@@ -400,6 +392,14 @@ public class OrdOrderVo extends BaseInfo {
 
 	public void setOrdProdExtendList(List<OrdProdExtendVo> ordProdExtendList) {
 		this.ordProdExtendList = ordProdExtendList;
+	}
+
+	public String getLspId() {
+		return lspId;
+	}
+
+	public void setLspId(String lspId) {
+		this.lspId = lspId;
 	}
 
 }
