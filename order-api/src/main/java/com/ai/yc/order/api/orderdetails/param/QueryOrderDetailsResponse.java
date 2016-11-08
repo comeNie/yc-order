@@ -18,7 +18,7 @@ public class QueryOrderDetailsResponse extends BaseResponse{
 	/**
 	 * 订单ID
 	 */
-	private String orderId;
+	private Long orderId;
 	
     /**
      * 0:国内业务 1：国际业务
@@ -232,11 +232,13 @@ public class QueryOrderDetailsResponse extends BaseResponse{
      */
     private List<OrderStateChgVo> orderStateChgs;
 
-	public String getOrderId() {
+	
+
+	public Long getOrderId() {
 		return orderId;
 	}
 
-	public void setOrderId(String orderId) {
+	public void setOrderId(Long orderId) {
 		this.orderId = orderId;
 	}
 
