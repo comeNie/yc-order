@@ -184,7 +184,7 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 					SESClientFactory.getSearchClient(SearchConstants.SearchNameSpace).bulkInsert(orderList);
 				}
 		 }catch(Exception e){
-			 
+			 throw new SystemException("","订单信息加入搜索引擎失败,订单ID:"+orderId);
 		 }
             return true;
 	}
