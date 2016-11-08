@@ -2,6 +2,7 @@ package com.ai.yc.order.util;
 
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
+import com.ai.yc.order.api.orderclose.param.OrderCancelRequest;
 import com.ai.yc.order.api.orderquery.param.QueryOrdCountRequest;
 import com.ai.yc.order.api.orderquery.param.QueryOrderRequest;
 
@@ -23,6 +24,17 @@ public class ValidateUtils {
 	public static void validateQueryOrdCount(QueryOrdCountRequest condition) {
 		if (condition == null) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "参数对象不能为空");
+		}
+	}
+	public static void validateCancleOrdOrder(OrderCancelRequest condition) {
+		if (condition == null) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "参数对象不能为空");
+		}
+		if (condition.getOrderId() == null) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "订单ID不能为空");
+		}
+		if (condition.getOperId() == null) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "操作员ID不能为空");
 		}
 	}
 	

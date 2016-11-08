@@ -31,15 +31,7 @@ public final class OrdersConstants {
 
 		public final static String PAY_FLAG_OUT = "out";
 	}
-	public final static class State {
-		private State() {}
-		
-        /**
-         * 取消
-         */
-     	public final static String CANCEL_STATE = "91";
-        
-	}
+	
 	public final static class TranslateLevel {
 
 		private TranslateLevel() {
@@ -159,6 +151,10 @@ public final class OrdersConstants {
 		 * 翻译修改中
 		 */
 		public final static String STATE_TRASLATE_UPDATING = "23";
+		/**
+         * 取消
+         */
+     	public final static String CANCEL_STATE = "91";
 
 	}
 

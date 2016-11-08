@@ -1,12 +1,11 @@
 package com.ai.yc.order.service.atom.impl;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
 import com.ai.opt.sdk.util.StringUtil;
+import com.ai.yc.order.constants.OrdersConstants;
 import com.ai.yc.order.dao.mapper.bo.OrdOrder;
 import com.ai.yc.order.dao.mapper.bo.OrdOrderCriteria;
 import com.ai.yc.order.dao.mapper.factory.MapperFactory;
@@ -111,6 +110,16 @@ public class OrdOrderAtomSVImpl implements IOrdOrderAtomSV {
 		example.setLimitStart(limitStart);
         example.setLimitEnd(limitEnd);
 		return ordOrderMapper.selectByExample(example);
+	}
+
+	@Override
+	public List<OrdOrder> findNoPayOrdList(long orderId) {
+		OrdOrderMapper ordOrderMapper = MapperFactory.getOrdOrderMapper();
+		OrdOrderCriteria example=new OrdOrderCriteria();
+    	OrdOrderCriteria.Criteria criteria = example.createCriteria();
+    	criteria.andStateEqualTo(OrdersConstants.OrderState.STATE_WAIT_PAY);
+    	criteria.andOrderIdEqualTo(orderId);
+    	return ordOrderMapper.selectByExample(example);
 	}
 
 }
