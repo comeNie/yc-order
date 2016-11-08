@@ -30,5 +30,9 @@ public class SearchFieldConfConstants {
     public static final String PAY_STYLE = "paystyle";
     public static final String UPDATE_OPER_ID = "updateoperid";
     public static final String STATE_CHG_TIME = "statechgtime";
+    public static final String ORDER_TIME = "ordertime";
+    public static final String LOCK_TIME = "locktime";
+    public static final String PAY_TIME = "paytime";
+    public static final String UPDATE_TIME = "updatetime";
     
 }
