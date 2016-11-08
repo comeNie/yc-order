@@ -72,6 +72,15 @@ public class OrderSubmissionValidate {
 			if(StringUtil.isBlank(request.getProductInfo().getNeedTranslateInfo())){
 				this.newException("需翻译内容不能为空,请输入");
 			}
+			//费用信息校验
+			if(null == request.getFeeInfo()){
+				this.newException("费用信息不能为空");
+			}else{
+				if(null == request.getFeeInfo().getTotalFee() || request.getFeeInfo().getTotalFee() == 0 ){
+					this.newException("总费用不能为空或者0");
+				}
+				
+			}
 
 		}
 		log.info("********文本翻译订单传参成功*********");
@@ -319,19 +328,7 @@ public class OrderSubmissionValidate {
 		if(null == request.getProductInfo()){
 			this.newException("产品信息不能为空");
 		}
-		//费用信息校验
-		if(null == request.getFeeInfo()){
-			this.newException("费用信息不能为空");
-		}else{
-			if(null == request.getFeeInfo().getTotalFee() || request.getFeeInfo().getTotalFee() == 0 ){
-				this.newException("总费用不能为空或者0");
-			}
-			//2016-11-03 --------------------------------
-//			String flag = this.orderSubmissionParam.getMap().get(request.getBaseInfo().getUserType());
-//			if(StringUtil.isBlank(flag)){
-//				this.newException("用户类型范围不正确，请参考"+JSON.toJSONString(this.orderSubmissionParam.getUserTypeMap()));
-//			}
-		}
+		
 		
 	}
 

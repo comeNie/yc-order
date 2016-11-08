@@ -243,7 +243,7 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 
 		// --------------订单基本信息---------------------
 		Long orderId = SequenceUtil.createOrderId();
-		this.orderBaseInfoSubmit(request);
+		this.orderBaseInfoSubmit(request,orderId);
 		this.orderProductInfoSubmit(request, orderId);
 		this.orderFeeInfoSubmit(request, orderId);
 		this.orderContactInfoSubmit(request, orderId);
@@ -258,9 +258,8 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 	/**
 	 * 提交订-单基本信息
 	 */
-	public void orderBaseInfoSubmit(OrderSubmissionRequest request) {
+	public void orderBaseInfoSubmit(OrderSubmissionRequest request,Long orderId) {
 		// --------------订单基本信息---------------------
-		Long orderId = SequenceUtil.createOrderId();
 		OrdOrder ordOrder = new OrdOrder();
 		BeanUtils.copyVO(ordOrder, request.getBaseInfo());
 		ordOrder.setOrderId(orderId);
@@ -422,6 +421,10 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 		BeanUtils.copyVO(ordOdFeeTotal, request.getFeeInfo());
 		ordOdFeeTotal.setOrderId(orderId);
 		ordOdFeeTotal.setPayFlag(OrdersConstants.OrdOdFeeTotal.PAY_FLAG_IN);
+		//总金额 文档翻译类型 和 口译翻译类型 默认为0
+		if (TRANSLATE_TYPE_1.equals(request.getBaseInfo().getTranslateType()) || TRANSLATE_TYPE_2.equals(request.getBaseInfo().getTranslateType())) {
+			ordOdFeeTotal.setTotalFee(0l);
+		}
 		// 总优惠金额
 		ordOdFeeTotal.setDiscountFee(0l);
 		// 总减免费用

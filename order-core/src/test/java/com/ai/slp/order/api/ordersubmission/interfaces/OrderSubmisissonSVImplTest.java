@@ -248,7 +248,7 @@ public class OrderSubmisissonSVImplTest extends BaseTest {
 		// 币种
 		feeInfo.setCurrencyUnit("1");
 		// 总费用
-		feeInfo.setTotalFee(1000l);
+		//feeInfo.setTotalFee();
 		// 总优惠金额
 		// 总减免费用
 		// 减免原因
@@ -379,7 +379,7 @@ public class OrderSubmisissonSVImplTest extends BaseTest {
 		// 币种
 		feeInfo.setCurrencyUnit("1");
 		// 总费用
-		feeInfo.setTotalFee(1000l);
+		//feeInfo.setTotalFee(1000l);
 		// 总优惠金额
 		// 总减免费用
 		// 减免原因
