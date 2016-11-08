@@ -166,10 +166,6 @@ public class QueryOrderRequest implements Serializable {
 	 * 报价结束时间
 	 */
 	private Timestamp updateTimeEnd;
-	/**
-	 * 是否分页
-	 */
-	private String isPage;
 
 	/**
 	 * 页码，必填
@@ -467,14 +463,6 @@ public class QueryOrderRequest implements Serializable {
 
 	public void setUpdateTimeEnd(Timestamp updateTimeEnd) {
 		this.updateTimeEnd = updateTimeEnd;
-	}
-
-	public String getIsPage() {
-		return isPage;
-	}
-
-	public void setIsPage(String isPage) {
-		this.isPage = isPage;
 	}
 
 	public Integer getPageNo() {
