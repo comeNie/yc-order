@@ -140,6 +140,10 @@ public class OrdOrderVo extends BaseInfo {
 	 * 修改剩余时间（一期未用）
 	 */
 	private Timestamp updateRemainingTime;
+	/**
+	 * 总费用
+	 */
+	private long totalFee;
 
 	/**
 	 * 语言信息
@@ -400,6 +404,14 @@ public class OrdOrderVo extends BaseInfo {
 
 	public void setLspId(String lspId) {
 		this.lspId = lspId;
+	}
+
+	public long getTotalFee() {
+		return totalFee;
+	}
+
+	public void setTotalFee(long totalFee) {
+		this.totalFee = totalFee;
 	}
 
 }

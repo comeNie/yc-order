@@ -95,7 +95,7 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 				order.setUserName(ord.getUsername());
 				order.setState(ord.getState());
 				order.setPayStyle(ord.getPaystyle());
-
+				order.setTotalFee(ord.getTotalfee());
 				if (ord.getStarttime() != null) {
 					order.setStartTime(new Timestamp(ord.getStarttime().getTime()));
 				}

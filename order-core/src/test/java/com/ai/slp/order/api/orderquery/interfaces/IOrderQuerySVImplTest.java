@@ -22,11 +22,11 @@ public class IOrderQuerySVImplTest extends BaseTest{
 		//request.setFlag("12io");
 		//request.setOrderType("1ololp");
 		request.setOrderId(123l);
-		request.setFieldCode("2222");
+		request.setFieldCode("3333");
 		//request.setDisplayFlag("11lolo");
-		request.setCorporaId("1");
+		/*request.setCorporaId("1");
 		//request.setKeyWords(keyWords);
-		request.setLspId("1236");
+		//request.setLspId("1236");
 		request.setInterperName("test");
 		request.setOrderLevel("1");
 		request.setInterperId("1");
@@ -35,11 +35,11 @@ public class IOrderQuerySVImplTest extends BaseTest{
 		request.setTranslateName("翻译主题信息");
 		request.setChlId("001");
 		request.setState("11");
-		request.setSubFlag("1");
+		request.setSubFlag("1");*/
 		//request.setTranslateName("翻译");
 		Timestamp ts = Timestamp.valueOf("2016-11-08 10:20:12");
 		//Timestamp es = Timestamp.valueOf("2018-11-10 12:20:12");
-		request.setStateChgTimeStart(ts);
+		//request.setStateChgTimeStart(ts);
 		//request.setStateChgTimeEnd(es);
 		request.setPageSize(20);
 		request.setPageNo(1);

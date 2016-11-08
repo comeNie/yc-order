@@ -38,6 +38,7 @@ public class OrderInfo {
 	private String subflag;
 	private long proddetailid;
 	private String keywords;
+	private long totalfee;
 	/**
 	 * 费用变更时间
 	 */
@@ -332,6 +333,14 @@ public class OrderInfo {
 
 	public void setSubflag(String subflag) {
 		this.subflag = subflag;
+	}
+
+	public long getTotalfee() {
+		return totalfee;
+	}
+
+	public void setTotalfee(long totalfee) {
+		this.totalfee = totalfee;
 	}
 
 }

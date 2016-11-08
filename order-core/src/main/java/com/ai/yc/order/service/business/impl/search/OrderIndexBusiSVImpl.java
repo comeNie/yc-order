@@ -99,6 +99,7 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 			if (ordOdFeeTotal != null) {
 				ordInfo.setUpdateoperid(ordOdFeeTotal.getUpdateOperId());
 				ordInfo.setUpdatetime(ordOdFeeTotal.getUpdateTime());
+				ordInfo.setTotalfee(ordOdFeeTotal.getTotalFee());
 			}
 			// 查询支付信息
 			OrdBalacneIf ordBalacneIf = ordBalacneIfAtomSV.findByOrderId(ord.getOrderId());
