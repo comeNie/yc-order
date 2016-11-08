@@ -95,12 +95,12 @@ public class OrdOrderAtomSVImpl implements IOrdOrderAtomSV {
 
 	@Override
 	public int updateByPrimaryKeySelective(OrdOrder record) {
-		return MapperFactory.getOrdOrderMapper().updateByPrimaryKey(record);
+		return MapperFactory.getOrdOrderMapper().updateByPrimaryKeySelective(record);
 	}
 
 	@Override
 	public int updateById(OrdOrder ordOrder) {
-		 return MapperFactory.getOrdOrderMapper().updateByPrimaryKey(ordOrder);
+		 return MapperFactory.getOrdOrderMapper().updateByPrimaryKeySelective(ordOrder);
 	}
 
 	@Override
