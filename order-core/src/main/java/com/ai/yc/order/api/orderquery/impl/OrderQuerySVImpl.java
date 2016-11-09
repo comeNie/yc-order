@@ -475,16 +475,7 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 	public int queryPageCount(QueryOrderRequest request) {
 		// 调用搜索引擎进行查询
 		int startSize = 1;
-		int maxSize = 1;
-		// 最大条数设置
-		int pageNo = request.getPageNo();
-		int size = request.getPageSize();
-		if (request.getPageNo() == 1) {
-			startSize = 0;
-		} else {
-			startSize = (pageNo - 1) * size;
-		}
-		maxSize = size;
+		int maxSize = 1000;
 		IOrderSearch orderSearch = new OrderSearchImpl();
 		List<SearchCriteria> orderSearchCriteria = commonConditions(request);
 		List<Sort> sortList = new ArrayList<Sort>();
