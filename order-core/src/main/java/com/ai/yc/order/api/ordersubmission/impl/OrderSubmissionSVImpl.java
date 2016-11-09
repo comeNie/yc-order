@@ -1,5 +1,7 @@
 package com.ai.yc.order.api.ordersubmission.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,9 +17,12 @@ import com.ai.yc.order.service.business.interfaces.search.IOrderIndexBusiSV;
 import com.ai.yc.order.validate.OrderSubmissionValidate;
 import com.alibaba.dubbo.config.annotation.Service;
 
+import sun.util.logging.resources.logging;
+
 @Service
 @Component
 public class OrderSubmissionSVImpl implements IOrderSubmissionSV {
+	private static Logger logger = LoggerFactory.getLogger(OrderSubmissionSVImpl.class);
 	@Autowired
 	private IOrderSubmissionBusiSV orderSubmissionBusiSV;
 	@Autowired
@@ -38,6 +43,8 @@ public class OrderSubmissionSVImpl implements IOrderSubmissionSV {
 			response = this.orderSubmissionBusiSV.saveOrderSubmissionSupper(request);
 			//mds提交订单
 			//response = this.orderSubmissionBusiSV.saveOrderSubmissionSupperMdsSend(request);
+			Long orderId = response.getOrderId();
+			logger.info("订单下单返回订单编号：>>>>>>"+orderId);
 			this.orderIndexBusiSV.insertSesData(response.getOrderId());
 			//
 			response.setResponseHeader(responseHeader);
