@@ -72,7 +72,7 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 		BeanUtils.copyVO(ordOrder, request.getBaseInfo());
 		ordOrder.setOrderId(orderId);
 		if (TRANSLATE_TYPE_0.equals(request.getBaseInfo().getTranslateType())) {
-			ordOrder.setState("11");// 待支付
+			ordOrder.setState(OrdersConstants.OrderState.STATE_WAIT_PAY);// 待支付
 			ordOrder.setStateChgTime(DateUtil.getSysDate());
 			ordOrder.setDisplayFlag("11");
 			ordOrder.setDisplayFlagChgTime(DateUtil.getSysDate());
@@ -80,7 +80,7 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 			ordOrder.setTimeZone("default");
 		}
 		if (TRANSLATE_TYPE_1.equals(request.getBaseInfo().getTranslateType())) {
-			ordOrder.setState("13");// 待报价
+			ordOrder.setState(OrdersConstants.OrderState.STATE_WAIT_OFFER);// 待报价
 			ordOrder.setStateChgTime(DateUtil.getSysDate());
 			ordOrder.setDisplayFlag("11");
 			ordOrder.setDisplayFlagChgTime(DateUtil.getSysDate());
@@ -88,7 +88,7 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 			ordOrder.setTimeZone("default");
 		}
 		if (TRANSLATE_TYPE_2.equals(request.getBaseInfo().getTranslateType())) {
-			ordOrder.setState("13");// 待报价
+			ordOrder.setState(OrdersConstants.OrderState.STATE_WAIT_OFFER);// 待报价
 			ordOrder.setStateChgTime(DateUtil.getSysDate());
 			ordOrder.setDisplayFlag("11");
 			ordOrder.setDisplayFlagChgTime(DateUtil.getSysDate());
@@ -264,7 +264,7 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 		BeanUtils.copyVO(ordOrder, request.getBaseInfo());
 		ordOrder.setOrderId(orderId);
 		if (TRANSLATE_TYPE_0.equals(request.getBaseInfo().getTranslateType())) {
-			ordOrder.setState("11");// 待支付
+			ordOrder.setState(OrdersConstants.OrderState.STATE_WAIT_PAY);// 待支付
 			ordOrder.setStateChgTime(DateUtil.getSysDate());
 			ordOrder.setDisplayFlag("11");
 			ordOrder.setDisplayFlagChgTime(DateUtil.getSysDate());
@@ -272,7 +272,7 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 			//ordOrder.setTimeZone("default");
 		}
 		if (TRANSLATE_TYPE_1.equals(request.getBaseInfo().getTranslateType())) {
-			ordOrder.setState("13");// 待报价
+			ordOrder.setState(OrdersConstants.OrderState.STATE_WAIT_OFFER);// 待报价
 			ordOrder.setStateChgTime(DateUtil.getSysDate());
 			ordOrder.setDisplayFlag("11");
 			ordOrder.setDisplayFlagChgTime(DateUtil.getSysDate());
@@ -280,7 +280,7 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 			//ordOrder.setTimeZone("default");
 		}
 		if (TRANSLATE_TYPE_2.equals(request.getBaseInfo().getTranslateType())) {
-			ordOrder.setState("13");// 待报价
+			ordOrder.setState(OrdersConstants.OrderState.STATE_WAIT_OFFER);// 待报价
 			ordOrder.setStateChgTime(DateUtil.getSysDate());
 			ordOrder.setDisplayFlag("11");
 			ordOrder.setDisplayFlagChgTime(DateUtil.getSysDate());
@@ -469,13 +469,13 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 		ordOdStateChg.setOperId(userId);
 		//
 		if (TRANSLATE_TYPE_0.equals(translateType)){
-			ordOdStateChg.setNewState("11");
+			ordOdStateChg.setNewState(OrdersConstants.OrderState.STATE_WAIT_PAY);
 		}
 		if (TRANSLATE_TYPE_1.equals(translateType)){
-			ordOdStateChg.setNewState("13");
+			ordOdStateChg.setNewState(OrdersConstants.OrderState.STATE_WAIT_OFFER);
 		}
 		if (TRANSLATE_TYPE_2.equals(translateType)){
-			ordOdStateChg.setNewState("13");
+			ordOdStateChg.setNewState(OrdersConstants.OrderState.STATE_WAIT_OFFER);
 		}
 		ordOdStateChg.setStateChgTime(DateUtil.getSysDate());
 		this.ordOdStateChgAtomSV.insertSelective(ordOdStateChg);
