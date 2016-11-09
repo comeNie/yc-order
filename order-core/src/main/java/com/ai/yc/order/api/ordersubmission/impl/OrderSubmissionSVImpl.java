@@ -48,7 +48,7 @@ public class OrderSubmissionSVImpl implements IOrderSubmissionSV {
 			this.orderIndexBusiSV.insertSesData(response.getOrderId());
 			//
 			response.setResponseHeader(responseHeader);
-		} catch (BusinessException e) {
+		} catch (BusinessException |SystemException e) {
 			responseHeader.setIsSuccess(false);
 			responseHeader.setResultCode(e.getErrorCode());
 			responseHeader.setResultMessage(e.getErrorMessage());
