@@ -16,13 +16,13 @@ import com.ai.paas.ipaas.mds.IMessageProcessor;
 import com.ai.paas.ipaas.mds.IMsgProcessorHandler;
 import com.ai.yc.order.constants.OrdersConstants;
 import com.ai.yc.order.service.business.interfaces.IOrderSubmissionBusiSV;
-@Component
+//@Component
 public class OrderSubmissionMdsConsumer extends AbstractMdsConsumer{
 
 	private static Logger logger = LoggerFactory.getLogger(OrderSubmissionMdsConsumer.class);
 	@Autowired
 	private IOrderSubmissionBusiSV orderSubmissionBusiSV;
-	@PostConstruct
+	//@PostConstruct
 	public void init() throws Exception{
 		this.startMdsConsumer();
 	}

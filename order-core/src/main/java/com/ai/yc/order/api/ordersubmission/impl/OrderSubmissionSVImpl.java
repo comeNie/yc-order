@@ -11,6 +11,7 @@ import com.ai.yc.order.api.ordersubmission.interfaces.IOrderSubmissionSV;
 import com.ai.yc.order.api.ordersubmission.param.OrderSubmissionRequest;
 import com.ai.yc.order.api.ordersubmission.param.OrderSubmissionResponse;
 import com.ai.yc.order.service.business.interfaces.IOrderSubmissionBusiSV;
+import com.ai.yc.order.service.business.interfaces.search.IOrderIndexBusiSV;
 import com.ai.yc.order.validate.OrderSubmissionValidate;
 import com.alibaba.dubbo.config.annotation.Service;
 
@@ -21,6 +22,8 @@ public class OrderSubmissionSVImpl implements IOrderSubmissionSV {
 	private IOrderSubmissionBusiSV orderSubmissionBusiSV;
 	@Autowired
 	private OrderSubmissionValidate orderSubmissionValidate;
+	@Autowired
+	private IOrderIndexBusiSV orderIndexBusiSV;//订单搜索引擎添加服务
 	@Override
 	public OrderSubmissionResponse orderSubmission(OrderSubmissionRequest request)
 			throws BusinessException, SystemException {
@@ -32,8 +35,11 @@ public class OrderSubmissionSVImpl implements IOrderSubmissionSV {
 		try {
 			this.orderSubmissionValidate.validate(request);
 			//response = this.orderSubmissionBusiSV.saveOrderSubmission(request);
-			//response = this.orderSubmissionBusiSV.saveOrderSubmissionSupper(request);
-			response = this.orderSubmissionBusiSV.saveOrderSubmissionSupperMdsSend(request);
+			response = this.orderSubmissionBusiSV.saveOrderSubmissionSupper(request);
+			//mds提交订单
+			//response = this.orderSubmissionBusiSV.saveOrderSubmissionSupperMdsSend(request);
+			this.orderIndexBusiSV.insertSesData(response.getOrderId());
+			//
 			response.setResponseHeader(responseHeader);
 		} catch (BusinessException e) {
 			responseHeader.setIsSuccess(false);
