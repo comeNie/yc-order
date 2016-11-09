@@ -59,6 +59,9 @@ public class QueryOrderDetailsResponse extends BaseResponse{
 
     /**
      * 翻译类型
+     * 0：文本翻译
+     *1：文档翻译
+     *2：口译翻译
      */
     private String translateType;
 
@@ -79,6 +82,8 @@ public class QueryOrderDetailsResponse extends BaseResponse{
      * 12：代理人
      */
     private String userType;
+    
+    private String timeZone;
 
     /**
      * 用户ID
@@ -516,6 +521,14 @@ public class QueryOrderDetailsResponse extends BaseResponse{
 
 	public void setOrderStateChgs(List<OrderStateChgVo> orderStateChgs) {
 		this.orderStateChgs = orderStateChgs;
+	}
+
+	public String getTimeZone() {
+		return timeZone;
+	}
+
+	public void setTimeZone(String timeZone) {
+		this.timeZone = timeZone;
 	}
     
     

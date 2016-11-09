@@ -23,6 +23,11 @@ public class UProdFileVo implements Serializable{
 	private String fileSaveId;
 	
 	/**
+	 * 翻译文件名称
+	 */
+	private String fileTranslateName;
+	
+	/**
 	 * 翻译文件存储ID
 	 */
 	private String fileTraslateId;
@@ -49,6 +54,14 @@ public class UProdFileVo implements Serializable{
 
 	public void setFileTraslateId(String fileTraslateId) {
 		this.fileTraslateId = fileTraslateId;
+	}
+
+	public String getFileTranslateName() {
+		return fileTranslateName;
+	}
+
+	public void setFileTranslateName(String fileTranslateName) {
+		this.fileTranslateName = fileTranslateName;
 	}
 	
 	
