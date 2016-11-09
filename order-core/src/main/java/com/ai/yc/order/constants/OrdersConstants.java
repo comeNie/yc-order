@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 public final class OrdersConstants {
 	public final static String TENANT_ID = "yeecloud";
+	public final static String YC_ORDERSUBMISSION_TOPIC = "ycOrderSubmissionTopic";
 
 	public final static class TranslatePrice {
 		private TranslatePrice() {

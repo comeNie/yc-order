@@ -32,6 +32,8 @@ import com.ai.yc.order.service.atom.interfaces.IOrdOdProdLevelAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdStateChgAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOrderAtomSV;
 import com.ai.yc.order.service.business.interfaces.IOrderSubmissionBusiSV;
+import com.ai.yc.order.service.mds.ordersubmission.OrderSubmissionMdsSendMess;
+import com.ai.yc.order.service.mds.ordersubmission.OrderSubmissionMdsVo;
 import com.ai.yc.order.util.SequenceUtil;
 import com.ai.yc.order.validate.TextOrderTranslateTimeUtil;
 
@@ -56,7 +58,9 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 	
 	@Autowired
 	private TextOrderTranslateTimeUtil textOrderTranslateTimeUtil;//计算翻译耗时
-
+	@Autowired
+	private OrderSubmissionMdsSendMess orderSubmissionMdsSendMess;//发送订单提交消息
+	
 	private static final String TRANSLATE_TYPE_0 = "0";
 	private static final String TRANSLATE_TYPE_1 = "1";
 	private static final String TRANSLATE_TYPE_2 = "2";
@@ -254,7 +258,45 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 		//
 		return response;
 	}
+	/**
+	 *	提交订单-mds获取消息，异步提交
+	 */
+	@Override
+	@Transactional
+	public OrderSubmissionResponse saveOrderSubmissionSupperMds(Long orderId,OrderSubmissionRequest request) {
+		OrderSubmissionResponse response = new OrderSubmissionResponse();
 
+		// --------------订单基本信息---------------------
+		this.orderBaseInfoSubmit(request,orderId);
+		this.orderProductInfoSubmit(request, orderId);
+		this.orderFeeInfoSubmit(request, orderId);
+		this.orderContactInfoSubmit(request, orderId);
+		this.orderStateChgInfoSubmit(request.getBaseInfo().getUserId(), orderId, request.getBaseInfo().getTranslateType());
+		
+		// --------------产品信息---------------------
+		response.setOrderId(orderId);
+		//
+		return response;
+	}
+	/**
+	 * 提交订单-mds发送消息
+	 */
+	public OrderSubmissionResponse saveOrderSubmissionSupperMdsSend(OrderSubmissionRequest request) {
+		OrderSubmissionResponse response = new OrderSubmissionResponse();
+		//
+		Long orderId = SequenceUtil.createOrderId();
+		//
+		OrderSubmissionMdsVo vo = new OrderSubmissionMdsVo();
+		//
+		vo.setOrderId(orderId);
+		vo.setOrderSubmissionRequest(request);
+		//
+		this.orderSubmissionMdsSendMess.sendMessages(vo);
+		//
+		response.setOrderId(orderId);
+		//
+		return response;
+	}
 	/**
 	 * 提交订-单基本信息
 	 */

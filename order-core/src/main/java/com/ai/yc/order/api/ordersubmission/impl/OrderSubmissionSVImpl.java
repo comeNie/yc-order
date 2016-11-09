@@ -32,7 +32,8 @@ public class OrderSubmissionSVImpl implements IOrderSubmissionSV {
 		try {
 			this.orderSubmissionValidate.validate(request);
 			//response = this.orderSubmissionBusiSV.saveOrderSubmission(request);
-			response = this.orderSubmissionBusiSV.saveOrderSubmissionSupper(request);
+			//response = this.orderSubmissionBusiSV.saveOrderSubmissionSupper(request);
+			response = this.orderSubmissionBusiSV.saveOrderSubmissionSupperMdsSend(request);
 			response.setResponseHeader(responseHeader);
 		} catch (BusinessException e) {
 			responseHeader.setIsSuccess(false);
