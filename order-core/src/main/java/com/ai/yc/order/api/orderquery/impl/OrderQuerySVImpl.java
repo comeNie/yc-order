@@ -140,7 +140,7 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 		pageinfo.setResult(results);
 		pageinfo.setPageSize(request.getPageSize());
 		pageinfo.setPageNo(request.getPageNo());
-		pageinfo.setCount(queryPageCount(request));
+		pageinfo.setCount(new Long(result.getCount()).intValue());
 		response.setPageInfo(pageinfo);
 		ResponseHeader responseHeader = new ResponseHeader(true, ExceptCodeConstants.Special.SUCCESS, "订单查询成功");
 		response.setResponseHeader(responseHeader);
@@ -469,28 +469,6 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 			searchfieldVos.add(searchCriteria);
 		}
 		return searchfieldVos;
-	}
-
-	// 获取查询条数
-	public int queryPageCount(QueryOrderRequest request) {
-		// 调用搜索引擎进行查询
-		int startSize = 0;
-		int maxSize = 1000;
-		IOrderSearch orderSearch = new OrderSearchImpl();
-		List<SearchCriteria> orderSearchCriteria = commonConditions(request);
-		List<Sort> sortList = new ArrayList<Sort>();
-		Sort sort = new Sort("ordertime", SortOrder.DESC);
-		sortList.add(sort);
-		Result<OrderInfo> result = orderSearch.search(orderSearchCriteria, startSize, maxSize, sortList);
-		List<OrderInfo> ordList = result.getContents();
-		/*String info = JSON.toJSONString(reslist);
-		List<OrderInfo> ordList = JSON.parseObject(info, new TypeReference<List<OrderInfo>>() {
-		});*/
-		if (!CollectionUtil.isEmpty(ordList)) {
-			return ordList.size();
-		} else {
-			return 0;
-		}
 	}
 
 	@Override
