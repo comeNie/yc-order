@@ -76,7 +76,7 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 			ordOrder.setStateChgTime(DateUtil.getSysDate());
 			ordOrder.setDisplayFlag(OrdersConstants.OrderState.STATE_WAIT_PAY);
 			ordOrder.setDisplayFlagChgTime(DateUtil.getSysDate());
-			ordOrder.setUpdateFlag("N");
+			ordOrder.setUpdateFlag(OrdersConstants.OrdOrder.UpdateFlag.UPDATE_FLAG_N);
 			ordOrder.setTimeZone("default");
 		}
 		if (TRANSLATE_TYPE_1.equals(request.getBaseInfo().getTranslateType())) {
@@ -84,7 +84,7 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 			ordOrder.setStateChgTime(DateUtil.getSysDate());
 			ordOrder.setDisplayFlag(OrdersConstants.OrderState.STATE_WAIT_OFFER);
 			ordOrder.setDisplayFlagChgTime(DateUtil.getSysDate());
-			ordOrder.setUpdateFlag("N");
+			ordOrder.setUpdateFlag(OrdersConstants.OrdOrder.UpdateFlag.UPDATE_FLAG_N);
 			ordOrder.setTimeZone("default");
 		}
 		if (TRANSLATE_TYPE_2.equals(request.getBaseInfo().getTranslateType())) {
@@ -92,7 +92,7 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 			ordOrder.setStateChgTime(DateUtil.getSysDate());
 			ordOrder.setDisplayFlag(OrdersConstants.OrderState.STATE_WAIT_OFFER);
 			ordOrder.setDisplayFlagChgTime(DateUtil.getSysDate());
-			ordOrder.setUpdateFlag("N");
+			ordOrder.setUpdateFlag(OrdersConstants.OrdOrder.UpdateFlag.UPDATE_FLAG_N);
 			ordOrder.setTimeZone("default");
 		}
 		//
@@ -263,28 +263,23 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 		OrdOrder ordOrder = new OrdOrder();
 		BeanUtils.copyVO(ordOrder, request.getBaseInfo());
 		ordOrder.setOrderId(orderId);
+		ordOrder.setStateChgTime(DateUtil.getSysDate());
+		ordOrder.setDisplayFlagChgTime(DateUtil.getSysDate());
+		ordOrder.setUpdateFlag(OrdersConstants.OrdOrder.UpdateFlag.UPDATE_FLAG_N);
+		//
 		if (TRANSLATE_TYPE_0.equals(request.getBaseInfo().getTranslateType())) {
 			ordOrder.setState(OrdersConstants.OrderState.STATE_WAIT_PAY);// 待支付
-			ordOrder.setStateChgTime(DateUtil.getSysDate());
 			ordOrder.setDisplayFlag(OrdersConstants.OrderState.STATE_WAIT_PAY);
-			ordOrder.setDisplayFlagChgTime(DateUtil.getSysDate());
-			ordOrder.setUpdateFlag("N");
 			//ordOrder.setTimeZone("default");
 		}
 		if (TRANSLATE_TYPE_1.equals(request.getBaseInfo().getTranslateType())) {
 			ordOrder.setState(OrdersConstants.OrderState.STATE_WAIT_OFFER);// 待报价
-			ordOrder.setStateChgTime(DateUtil.getSysDate());
 			ordOrder.setDisplayFlag(OrdersConstants.OrderState.STATE_WAIT_OFFER);
-			ordOrder.setDisplayFlagChgTime(DateUtil.getSysDate());
-			ordOrder.setUpdateFlag("N");
 			//ordOrder.setTimeZone("default");
 		}
 		if (TRANSLATE_TYPE_2.equals(request.getBaseInfo().getTranslateType())) {
 			ordOrder.setState(OrdersConstants.OrderState.STATE_WAIT_OFFER);// 待报价
-			ordOrder.setStateChgTime(DateUtil.getSysDate());
 			ordOrder.setDisplayFlag(OrdersConstants.OrderState.STATE_WAIT_OFFER);
-			ordOrder.setDisplayFlagChgTime(DateUtil.getSysDate());
-			ordOrder.setUpdateFlag("N");
 			//ordOrder.setTimeZone("default");
 		}
 		//

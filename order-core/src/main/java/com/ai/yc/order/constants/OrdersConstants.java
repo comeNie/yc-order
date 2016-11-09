@@ -244,7 +244,20 @@ public final class OrdersConstants {
 	
 	public static final class OrdOdProd{
 		public static class ProdDetalState{
+			/**
+			 * 0：未处理
+			 */
 			public static final String UNTREATED = "0";
+		}
+	}
+	public static final class OrdOrder{
+		public static class UpdateFlag{
+			/**
+			 * Y：是
+			 * N：否
+			 */
+			public static final String UPDATE_FLAG_Y = "Y";
+			public static final String UPDATE_FLAG_N = "N";
 		}
 	}
 }
