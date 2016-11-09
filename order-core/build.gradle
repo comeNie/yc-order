@@ -20,8 +20,4 @@ dependencies {
 	compile 'com.ai.yc.common:sysduad:1.0-SNAPSHOT'
 	compile 'com.ai.yc.common:syspurpose:1.0-SNAPSHOT'
 	compile 'com.ai.yc.common:sysdomain:1.0-SNAPSHOT'
-		/*********************排除国际化与搜索冲突的包****************************/
-	compile ("com.ai.opt:opt-base:1.0.2-SNAPSHOT") {
-        exclude group: 'com.google.guava', module: 'guava'
-        }
 }
