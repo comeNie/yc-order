@@ -38,7 +38,7 @@ public class OrderSubmissionSVImpl implements IOrderSubmissionSV {
 		
 		//
 		try {
-			//this.orderSubmissionValidate.validate(request);
+			this.orderSubmissionValidate.validate(request);
 			//response = this.orderSubmissionBusiSV.saveOrderSubmission(request);
 			response = this.orderSubmissionBusiSV.saveOrderSubmissionSupper(request);
 			//mds提交订单
