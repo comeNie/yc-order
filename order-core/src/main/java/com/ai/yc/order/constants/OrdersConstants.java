@@ -3,7 +3,8 @@ package com.ai.yc.order.constants;
 import java.math.BigDecimal;
 
 public final class OrdersConstants {
-	public final static String TENANT_ID ="yeecloud";
+	public final static String TENANT_ID = "yeecloud";
+
 	public final static class TranslatePrice {
 		private TranslatePrice() {
 		}
@@ -31,7 +32,7 @@ public final class OrdersConstants {
 
 		public final static String PAY_FLAG_OUT = "out";
 	}
-	
+
 	public final static class TranslateLevel {
 
 		private TranslateLevel() {
@@ -68,31 +69,29 @@ public final class OrdersConstants {
 		public final static String PUBLISH = "100230";
 
 	}
-	
+
 	/**
-	* 翻译类型
+	 * 翻译类型
 	 */
 	public final static class TranslateType {
 
 		private TranslateType() {
 		}
-		
 
-	    /**
-	     * 文本翻译
-	     */
-	    public static final String ORDER_TYPE_FAST = "0";
+		/**
+		 * 文本翻译
+		 */
+		public static final String ORDER_TYPE_FAST = "0";
 
-	    /**
-	     * 文档翻译
-	     */
-	    public static final String ORDER_TYPE_DOC = "1";
+		/**
+		 * 文档翻译
+		 */
+		public static final String ORDER_TYPE_DOC = "1";
 
-	    
-	    /**
-	     * 口译
-	     */
-	    public static final String ORDER_TYPE_ORAL = "2";
+		/**
+		 * 口译
+		 */
+		public static final String ORDER_TYPE_ORAL = "2";
 	}
 
 	/*
@@ -152,9 +151,9 @@ public final class OrdersConstants {
 		 */
 		public final static String STATE_TRASLATE_UPDATING = "23";
 		/**
-         * 取消
-         */
-     	public final static String CANCEL_STATE = "91";
+		 * 取消
+		 */
+		public final static String CANCEL_STATE = "91";
 
 	}
 
@@ -179,68 +178,73 @@ public final class OrdersConstants {
 		 * 翻译中
 		 */
 		public final static String FLAG_TRASLATING = "23";
-		
+
 		/**
 		 * 待确认
 		 */
-		public final static String FLAG_WAIT_OK= "50";
-		
+		public final static String FLAG_WAIT_OK = "50";
+
 		/**
 		 * 评论
 		 */
-		public final static String FLAG_WAIT_COMMENT= "52";
-		
+		public final static String FLAG_WAIT_COMMENT = "52";
+
 		/**
 		 * 完成
 		 */
-		public final static String FLAG_FINISHED= "90";
-		
+		public final static String FLAG_FINISHED = "90";
+
 		/**
 		 * 取消、关闭
 		 */
-		public final static String FLAG_CANCEL= "91";
-		
+		public final static String FLAG_CANCEL = "91";
+
 		/**
 		 * 已退款
 		 */
-		public final static String FLAG_REFUNDED= "92";
+		public final static String FLAG_REFUNDED = "92";
 
 	}
-	
+
 	/*
 	 * 操作机构
 	 */
 	public final static class OrgID {
 		private OrgID() {
 		}
-		
+
 		/**
 		 * 用户操作
 		 */
-		public final static String ORG_ID_USER= "0";
-		
+		public final static String ORG_ID_USER = "0";
+
 		/**
 		 * 系统操作
 		 */
 		public final static String ORG_ID_SYS = "1";
 	}
+
+	public static final class OrdOdStateChg {
+
+		/**
+		 * 處理信息 Date: 2016年11月7日 <br>
+		 * Copyright (c) 2016 asiainfo.com <br>
+		 * 
+		 * @author zhanglh
+		 */
+		public static class ChgDesc {
+			/**
+			 * 订单－取消
+			 */
+			public static final String ORDER_TO_CANCEL = "您的订单已取消";
+
+		}
+
+	}
 	
-	   public static final class OrdOdStateChg {
-
-	        /**
-	         * 處理信息
-	         * Date: 2016年11月7日 <br>
-	         * Copyright (c) 2016 asiainfo.com <br>
-	         * 
-	         * @author zhanglh
-	         */
-	        public static class ChgDesc {
-	            /**
-	             * 订单－取消
-	             */
-	            public static final String ORDER_TO_CANCEL = "您的订单已取消";
-
-	        }
-
-	    }
+	public static final class OrdOdProd{
+		public static class ProdDetalState{
+			public static final String UNTREATED = "0";
+		}
+	}
 }

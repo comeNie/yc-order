@@ -74,7 +74,7 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 		if (TRANSLATE_TYPE_0.equals(request.getBaseInfo().getTranslateType())) {
 			ordOrder.setState(OrdersConstants.OrderState.STATE_WAIT_PAY);// 待支付
 			ordOrder.setStateChgTime(DateUtil.getSysDate());
-			ordOrder.setDisplayFlag("11");
+			ordOrder.setDisplayFlag(OrdersConstants.OrderState.STATE_WAIT_PAY);
 			ordOrder.setDisplayFlagChgTime(DateUtil.getSysDate());
 			ordOrder.setUpdateFlag("N");
 			ordOrder.setTimeZone("default");
@@ -82,7 +82,7 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 		if (TRANSLATE_TYPE_1.equals(request.getBaseInfo().getTranslateType())) {
 			ordOrder.setState(OrdersConstants.OrderState.STATE_WAIT_OFFER);// 待报价
 			ordOrder.setStateChgTime(DateUtil.getSysDate());
-			ordOrder.setDisplayFlag("11");
+			ordOrder.setDisplayFlag(OrdersConstants.OrderState.STATE_WAIT_OFFER);
 			ordOrder.setDisplayFlagChgTime(DateUtil.getSysDate());
 			ordOrder.setUpdateFlag("N");
 			ordOrder.setTimeZone("default");
@@ -90,7 +90,7 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 		if (TRANSLATE_TYPE_2.equals(request.getBaseInfo().getTranslateType())) {
 			ordOrder.setState(OrdersConstants.OrderState.STATE_WAIT_OFFER);// 待报价
 			ordOrder.setStateChgTime(DateUtil.getSysDate());
-			ordOrder.setDisplayFlag("11");
+			ordOrder.setDisplayFlag(OrdersConstants.OrderState.STATE_WAIT_OFFER);
 			ordOrder.setDisplayFlagChgTime(DateUtil.getSysDate());
 			ordOrder.setUpdateFlag("N");
 			ordOrder.setTimeZone("default");
@@ -107,7 +107,7 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 		ordOdProdWithBLOBs.setTranslateName(ordOrder.getTranslateName());
 		ordOdProdWithBLOBs.setOrderId(orderId);
 		if (TRANSLATE_TYPE_0.equals(request.getBaseInfo().getTranslateType())) {
-			ordOdProdWithBLOBs.setProdDetalState("0");// 未处理
+			ordOdProdWithBLOBs.setProdDetalState(OrdersConstants.OrdOdProd.ProdDetalState.UNTREATED);// 未处理
 			// 翻译字数
 			ordOdProdWithBLOBs.setTranslateSum(request.getProductInfo().getTranslateSum().toString());
 			// 用途ID
@@ -120,7 +120,7 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 			ordOdProdWithBLOBs.setIsUrgent(request.getProductInfo().getIsUrgent());// productInfo.setIsUrgent("0");
 		}
 		if (TRANSLATE_TYPE_1.equals(request.getBaseInfo().getTranslateType())) {
-			ordOdProdWithBLOBs.setProdDetalState("0");// 未处理
+			ordOdProdWithBLOBs.setProdDetalState(OrdersConstants.OrdOdProd.ProdDetalState.UNTREATED);// 未处理
 			// 用途ID
 			ordOdProdWithBLOBs.setUseCode(request.getProductInfo().getUseCode());// productInfo.setUseCode("1111");
 			// 领域ID
@@ -132,7 +132,7 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 
 		}
 		if (TRANSLATE_TYPE_2.equals(request.getBaseInfo().getTranslateType())) {
-			ordOdProdWithBLOBs.setProdDetalState("0");// 未处理
+			ordOdProdWithBLOBs.setProdDetalState(OrdersConstants.OrdOdProd.ProdDetalState.UNTREATED);// 未处理
 			// 会场数量
 			ordOdProdWithBLOBs.setMeetingSum(request.getProductInfo().getMeetingSum());// productInfo.setMeetingSum(10l);
 			// 译员性别
@@ -266,7 +266,7 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 		if (TRANSLATE_TYPE_0.equals(request.getBaseInfo().getTranslateType())) {
 			ordOrder.setState(OrdersConstants.OrderState.STATE_WAIT_PAY);// 待支付
 			ordOrder.setStateChgTime(DateUtil.getSysDate());
-			ordOrder.setDisplayFlag("11");
+			ordOrder.setDisplayFlag(OrdersConstants.OrderState.STATE_WAIT_PAY);
 			ordOrder.setDisplayFlagChgTime(DateUtil.getSysDate());
 			ordOrder.setUpdateFlag("N");
 			//ordOrder.setTimeZone("default");
@@ -274,7 +274,7 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 		if (TRANSLATE_TYPE_1.equals(request.getBaseInfo().getTranslateType())) {
 			ordOrder.setState(OrdersConstants.OrderState.STATE_WAIT_OFFER);// 待报价
 			ordOrder.setStateChgTime(DateUtil.getSysDate());
-			ordOrder.setDisplayFlag("11");
+			ordOrder.setDisplayFlag(OrdersConstants.OrderState.STATE_WAIT_OFFER);
 			ordOrder.setDisplayFlagChgTime(DateUtil.getSysDate());
 			ordOrder.setUpdateFlag("N");
 			//ordOrder.setTimeZone("default");
@@ -282,7 +282,7 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 		if (TRANSLATE_TYPE_2.equals(request.getBaseInfo().getTranslateType())) {
 			ordOrder.setState(OrdersConstants.OrderState.STATE_WAIT_OFFER);// 待报价
 			ordOrder.setStateChgTime(DateUtil.getSysDate());
-			ordOrder.setDisplayFlag("11");
+			ordOrder.setDisplayFlag(OrdersConstants.OrderState.STATE_WAIT_OFFER);
 			ordOrder.setDisplayFlagChgTime(DateUtil.getSysDate());
 			ordOrder.setUpdateFlag("N");
 			//ordOrder.setTimeZone("default");
@@ -305,7 +305,7 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 		ordOdProdWithBLOBs.setOrderId(orderId);
 		//文本类翻译
 		if (TRANSLATE_TYPE_0.equals(request.getBaseInfo().getTranslateType())) {
-			ordOdProdWithBLOBs.setProdDetalState("0");// 未处理
+			ordOdProdWithBLOBs.setProdDetalState(OrdersConstants.OrdOdProd.ProdDetalState.UNTREATED);// 未处理
 			// 翻译字数
 			ordOdProdWithBLOBs.setTranslateSum(request.getProductInfo().getTranslateSum().toString());
 			// 用途ID
@@ -327,7 +327,7 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 			ordOdProdWithBLOBs.setTakeTime(takeTime.toString());
 		}
 		if (TRANSLATE_TYPE_1.equals(request.getBaseInfo().getTranslateType())) {
-			ordOdProdWithBLOBs.setProdDetalState("0");// 未处理
+			ordOdProdWithBLOBs.setProdDetalState(OrdersConstants.OrdOdProd.ProdDetalState.UNTREATED);// 未处理
 			// 用途ID
 			ordOdProdWithBLOBs.setUseCode(request.getProductInfo().getUseCode());// productInfo.setUseCode("1111");
 			// 领域ID
@@ -339,7 +339,7 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 
 		}
 		if (TRANSLATE_TYPE_2.equals(request.getBaseInfo().getTranslateType())) {
-			ordOdProdWithBLOBs.setProdDetalState("0");// 未处理
+			ordOdProdWithBLOBs.setProdDetalState(OrdersConstants.OrdOdProd.ProdDetalState.UNTREATED);// 未处理
 			// 会场数量
 			ordOdProdWithBLOBs.setMeetingSum(request.getProductInfo().getMeetingSum());// productInfo.setMeetingSum(10l);
 			// 译员性别
