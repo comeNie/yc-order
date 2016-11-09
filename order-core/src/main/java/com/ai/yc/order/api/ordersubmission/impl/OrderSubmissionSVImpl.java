@@ -58,7 +58,7 @@ public class OrderSubmissionSVImpl implements IOrderSubmissionSV {
 			
 			responseHeader.setIsSuccess(false);
 			responseHeader.setResultCode("999999");
-			responseHeader.setResultMessage(e.getMessage());
+			responseHeader.setResultMessage(e.getStackTrace().toString());
 			response.setResponseHeader(responseHeader);
 		}
 		return response;
