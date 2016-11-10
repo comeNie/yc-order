@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.sdk.components.ses.SESClientFactory;
+import com.ai.opt.sdk.dubbo.util.DubboConsumerFactory;
 import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.yc.order.constants.SearchConstants;
 import com.ai.yc.order.dao.mapper.bo.OrdBalacneIf;
@@ -25,6 +26,9 @@ import com.ai.yc.order.service.atom.interfaces.IOrdOdProdAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdProdExtendAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOrderAtomSV;
 import com.ai.yc.order.service.business.interfaces.search.IOrderIndexBusiSV;
+import com.ai.yc.user.api.userservice.interfaces.IYCUserServiceSV;
+import com.ai.yc.user.api.userservice.param.SearchYCUserRequest;
+import com.ai.yc.user.api.userservice.param.YCUserInfoResponse;
 
 @Service
 public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
@@ -69,10 +73,17 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 			ordInfo.setTranslatename(ord.getTranslateName());
 			ordInfo.setTranslatetype(ord.getTranslateType());
 			ordInfo.setSubflag(ord.getSubFlag());
+			//获取昵称
+			/*IYCUserServiceSV userServiceSV = DubboConsumerFactory.getService(IYCUserServiceSV.class);
+			SearchYCUserRequest request = new SearchYCUserRequest();
+			request.setUserId(ord.getUserId());
+			YCUserInfoResponse response = userServiceSV.searchYCUserInfo(request);
+			if(response.getResponseHeader().isSuccess()==true){
+				ordInfo.setUsername(response.getNickname());
+			}*/
 			//赋值假数据
 			ordInfo.setUsername("test");
 			ordInfo.setLspname("test");
-			//BeanUtils.copyProperties(ordInfo, ord);
 			// 查询商品信息
 			OrdOdProd ordOdProd = ordOdProdAtomSV.findByOrderId(ord.getOrderId());
 			if (ordOdProd != null) {
@@ -145,6 +156,14 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 					ordInfo.setTranslatename(ord.getTranslateName());
 					ordInfo.setTranslatetype(ord.getTranslateType());
 					ordInfo.setSubflag(ord.getSubFlag());
+					//获取昵称
+					/*IYCUserServiceSV userServiceSV = DubboConsumerFactory.getService(IYCUserServiceSV.class);
+					SearchYCUserRequest request = new SearchYCUserRequest();
+					request.setUserId(ord.getUserId());
+					YCUserInfoResponse response = userServiceSV.searchYCUserInfo(request);
+					if(response.getResponseHeader().isSuccess()==true){
+						ordInfo.setUsername(response.getNickname());
+					}*/
 					//赋值假数据
 					ordInfo.setUsername("test");
 					ordInfo.setLspname("test");

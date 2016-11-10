@@ -113,6 +113,12 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 				if (ord.getLocktime() != null) {
 					order.setLockTime(new Timestamp(ord.getLocktime().getTime()));
 				}
+				if (ord.getOrdertime() != null) {
+					order.setOrderTime(new Timestamp(ord.getOrdertime().getTime()));
+				}
+				if (ord.getPaytime() != null) {
+					order.setPayTime(new Timestamp(ord.getPaytime().getTime()));
+				}
 				if (ord.getUpdatetime() != null) {
 					order.setUpdateTime(new Timestamp(ord.getUpdatetime().getTime()));
 				}
