@@ -23,6 +23,7 @@ import com.ai.yc.order.dao.mapper.bo.OrdOdProdLevel;
 import com.ai.yc.order.dao.mapper.bo.OrdOdProdWithBLOBs;
 import com.ai.yc.order.dao.mapper.bo.OrdOdStateChg;
 import com.ai.yc.order.dao.mapper.bo.OrdOrder;
+import com.ai.yc.order.orderlevel.rule.OrderLevelUtil;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdFeeTotalAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdLogisticsAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdProdAtomSV;
@@ -60,6 +61,8 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 	private TextOrderTranslateTimeUtil textOrderTranslateTimeUtil;//计算翻译耗时
 	@Autowired
 	private OrderSubmissionMdsSendMess orderSubmissionMdsSendMess;//发送订单提交消息
+	@Autowired
+	private OrderLevelUtil orderLevelUtil;//订单级别算法类
 	
 	private static final String TRANSLATE_TYPE_0 = "0";
 	private static final String TRANSLATE_TYPE_1 = "1";
@@ -310,6 +313,7 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 		ordOrder.setUpdateFlag(OrdersConstants.OrdOrder.UpdateFlag.UPDATE_FLAG_N);
 		//
 		if (TRANSLATE_TYPE_0.equals(request.getBaseInfo().getTranslateType())) {
+			ordOrder.setOrderLevel(this.textOrderLevel(request));//文本类下单 订单级别需要计算
 			ordOrder.setState(OrdersConstants.OrderState.STATE_WAIT_PAY);// 待支付
 			ordOrder.setDisplayFlag(OrdersConstants.OrderState.STATE_WAIT_PAY);
 			//ordOrder.setTimeZone("default");
@@ -324,10 +328,26 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 			ordOrder.setDisplayFlag(OrdersConstants.OrderState.STATE_WAIT_OFFER);
 			//ordOrder.setTimeZone("default");
 		}
+		
 		//
 		this.ordOrderAtomSV.insertSelective(ordOrder);
 	}
-
+	/**
+	 * 文本翻译类下单-订单级别需要根据规则计算
+	 */
+	public String textOrderLevel(OrderSubmissionRequest request){
+		Integer totalFee = Integer.parseInt(request.getFeeInfo().getTotalFee().toString());
+		String translateLevel = "";
+		String translateType = request.getBaseInfo().getTranslateType();
+		String isUrgent = request.getProductInfo().getIsUrgent();
+		//
+		if(!CollectionUtil.isEmpty(request.getProductInfo().getTranslateLevelInfoList())){
+			translateLevel = request.getProductInfo().getTranslateLevelInfoList().get(0).getTranslateLevel();
+		}
+		String orderLevel = this.orderLevelUtil.orderLevel(totalFee, translateLevel, translateType, isUrgent);
+		//
+		return orderLevel;
+	}
 	/**
 	 * 提交订单-产品信息
 	 */

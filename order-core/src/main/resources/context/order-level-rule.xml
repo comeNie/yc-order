@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context
+		   http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		   http://www.springframework.org/schema/aop
+		   http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		   http://www.springframework.org/schema/tx
+		   http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+		   http://mybatis.org/schema/mybatis-spring 
+		   http://mybatis.org/schema/mybatis-spring.xsd">
+		   
+	<!-- 订单级别键值 2016-11-10 11:44 zhangzd -->
+	<bean id="orderLevelMap" class="com.ai.yc.order.orderlevel.rule.OrderLevelMap">
+		
+		<property name="orderLevelMap">
+			<map>
+				<!-- V1级别订单 -->
+				<entry key="0_99_100210_N" value="1" />
+				<entry key="0_99_100220_N" value="1" />
+				
+				<!-- V2级别订单 -->
+				<entry key="100_499_100210_N" value="2" />
+				<entry key="100_499_100220_N" value="2" />
+				<entry key="0_99_100210_Y" value="2" />
+				
+				<!-- V3级别订单 -->	
+				<entry key="500_1999_100210_N" value="3" />
+				<entry key="500_1999_100220_N" value="3" />
+				<entry key="100_499_100210_Y" value="3" />
+				<entry key="100_499_100220_Y" value="3" />
+				
+				<!-- V4级别订单 -->
+				<entry key="2000_100210_N" value="4" />
+				<entry key="2000_100220_N" value="4" />
+				<entry key="500_1999_100210_Y" value="4" />
+				<entry key="500_1999_100220_Y" value="4" />
+				
+			</map>
+		</property>
+		<!-- 价格区间定义 -->
+		<property name="orderLevelPriceMap">
+			<map>
+				<entry key="onePrice" value-ref="onePrice"/>
+				<entry key="twoPrice" value-ref="twoPrice"/>
+				<entry key="threePrice" value-ref="threePrice"/>
+				<entry key="fourPrice" value-ref="fourPrice"/>
+			</map>
+		</property>
+
+	</bean>
+	
+	<!-- 0~99 区间乘以1000 厘为单位-->
+	<bean id="onePrice" class="com.ai.yc.order.orderlevel.rule.OrderLevelPrice">
+		<property name="minPrice" value="0"/>
+		<property name="maxPrice" value="99000"/>
+	</bean>
+	<!-- 100~499 区间乘以1000 厘为单位 -->
+	<bean id="twoPrice" class="com.ai.yc.order.orderlevel.rule.OrderLevelPrice">
+		<property name="minPrice" value="100000"/>
+		<property name="maxPrice" value="499000"/>
+	</bean>
+	<!-- 500~1999 区间乘以1000 厘为单位 -->
+	<bean id="threePrice" class="com.ai.yc.order.orderlevel.rule.OrderLevelPrice">
+		<property name="minPrice" value="500000"/>
+		<property name="maxPrice" value="1999000"/>
+	</bean>
+	<!-- 500~1999 区间乘以1000 厘为单位 -->
+	<bean id="fourPrice" class="com.ai.yc.order.orderlevel.rule.OrderLevelPrice">
+		<property name="minPrice" value="2000000"/>
+		<property name="maxPrice" value=""/>
+	</bean>
+</beans>
