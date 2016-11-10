@@ -1,8 +1,8 @@
 package com.ai.yc.order.api.orderquery.param;
 
-import com.ai.opt.base.vo.BaseInfo;
+import java.io.Serializable;
 
-public class QueryOrdCountRequest extends BaseInfo {
+public class QueryOrdCountRequest implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	/**

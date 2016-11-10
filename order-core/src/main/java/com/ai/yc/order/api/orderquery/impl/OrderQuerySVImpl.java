@@ -30,7 +30,6 @@ import com.ai.yc.order.api.orderquery.param.QueryOrdCountRequest;
 import com.ai.yc.order.api.orderquery.param.QueryOrdCountResponse;
 import com.ai.yc.order.api.orderquery.param.QueryOrderRequest;
 import com.ai.yc.order.api.orderquery.param.QueryOrderRsponse;
-import com.ai.yc.order.constants.OrdersConstants;
 import com.ai.yc.order.constants.SearchFieldConfConstants;
 import com.ai.yc.order.search.bo.OrdProdExtend;
 import com.ai.yc.order.search.bo.OrderInfo;
@@ -50,7 +49,6 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 
 	@Override
 	public QueryOrderRsponse queryOrder(QueryOrderRequest request) throws BusinessException, SystemException {
-		request.setTenantId(OrdersConstants.TENANT_ID);
 		// 有效性校验
 		ValidateUtils.validateQueryOrder(request);
 		// 调用搜索引擎进行查询
@@ -476,7 +474,6 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 	@Override
 	public QueryOrdCountResponse queryOrderCount(QueryOrdCountRequest request)
 			throws BusinessException, SystemException {
-		request.setTenantId(OrdersConstants.TENANT_ID);
 		// 有效性校验
 		ValidateUtils.validateQueryOrdCount(request);
 		QueryOrdCountResponse response = new QueryOrdCountResponse();
