@@ -20,7 +20,7 @@ public class OrderPayProcessedResultValidate {
 	 * 总校验方法 订单支付结果处理数据校验
 	 */
 	public void validate(OrderPayProcessedResultRequest request) {
-		this.validate(request);
+		this.validateNull(request);
 	}
 
 	public void validateNull(OrderPayProcessedResultRequest request) {

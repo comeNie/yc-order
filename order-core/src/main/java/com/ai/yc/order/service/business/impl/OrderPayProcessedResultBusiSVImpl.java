@@ -2,6 +2,7 @@ package com.ai.yc.order.service.business.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ai.opt.sdk.util.BeanUtils;
 import com.ai.opt.sdk.util.DateUtil;
@@ -32,6 +33,7 @@ public class OrderPayProcessedResultBusiSVImpl implements IOrderPayProcessedResu
 	
 	
 	@Override
+	@Transactional
 	public OrderPayProcessedResultResponse updateOrderPayProcessedResult(OrderPayProcessedResultRequest request) {
 		OrderPayProcessedResultResponse response = new OrderPayProcessedResultResponse();
 		
@@ -75,8 +77,10 @@ public class OrderPayProcessedResultBusiSVImpl implements IOrderPayProcessedResu
 		ordBalacneIf.setPaySystemId("1");
 		//支付时间
 		ordBalacneIf.setPayTime(request.getFeeInfo().getPayTime());
+		ordBalacneIf.setCreateTime(request.getFeeInfo().getPayTime());
 		//外部流水号
 		ordBalacneIf.setExternalId("123");
+		this.ordBalacneIfAtomSV.insertSelective(ordBalacneIf);
 		//
 		response.setOrderId(request.getBaseInfo().getOrderId());
 		//
