@@ -47,6 +47,12 @@ public class OrdOdFeeTotal {
 
     private String remark;
 
+    private String discountSum;
+
+    private Long couponFee;
+
+    private Long jfCouponFee;
+
     public Long getOrderId() {
         return orderId;
     }
@@ -221,5 +227,29 @@ public class OrdOdFeeTotal {
 
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
+    }
+
+    public String getDiscountSum() {
+        return discountSum;
+    }
+
+    public void setDiscountSum(String discountSum) {
+        this.discountSum = discountSum == null ? null : discountSum.trim();
+    }
+
+    public Long getCouponFee() {
+        return couponFee;
+    }
+
+    public void setCouponFee(Long couponFee) {
+        this.couponFee = couponFee;
+    }
+
+    public Long getJfCouponFee() {
+        return jfCouponFee;
+    }
+
+    public void setJfCouponFee(Long jfCouponFee) {
+        this.jfCouponFee = jfCouponFee;
     }
 }
