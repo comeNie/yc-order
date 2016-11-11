@@ -32,64 +32,91 @@ public class OrderPayProcessedResultBusiSVImpl implements IOrderPayProcessedResu
 	private IOrdOdProdAtomSV ordOdProdAtomSV;
 	@Autowired
 	private IOrdBalacneIfAtomSV ordBalacneIfAtomSV;
-	
-	
+
 	@Override
 	@Transactional
 	public OrderPayProcessedResultResponse updateOrderPayProcessedResult(OrderPayProcessedResultRequest request) {
 		OrderPayProcessedResultResponse response = new OrderPayProcessedResultResponse();
 		OrdOrder ordOrderDb = this.ordOrderAtomSV.findByPrimaryKey(request.getBaseInfo().getOrderId());
-		if(null == ordOrderDb){
+		if (null == ordOrderDb) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "此订单信息不存在");
 		}
-		//订单基本信息修改
+		//
+		this.baseInfo(request);
+		this.feeInfo(request);
+		this.prodInfo(request);
+		this.payInfo(request);
+		//
+		response.setOrderId(request.getBaseInfo().getOrderId());
+		//
+		return response;
+	}
+	/**
+	 * 基本信息
+	 */
+	public void baseInfo(OrderPayProcessedResultRequest request) {
+		// 订单基本信息修改
 		OrdOrder ordOrder = new OrdOrder();
 		//
 		BeanUtils.copyVO(ordOrder, request.getBaseInfo());
-		//订单状态
-		ordOrder.setState(OrdersConstants.OrderState.STATE_WAIT_RECEIVE);//待领取
-		//客户端显示状态
-		ordOrder.setDisplayFlag(OrdersConstants.OrderDisplayFlag.FLAG_TRASLATING);//翻译中
-		//客户端显示状态修改时间
+		// 订单状态
+		ordOrder.setState(OrdersConstants.OrderState.STATE_WAIT_RECEIVE);// 待领取
+		// 客户端显示状态
+		ordOrder.setDisplayFlag(OrdersConstants.OrderDisplayFlag.FLAG_TRASLATING);// 翻译中
+		// 客户端显示状态修改时间
 		ordOrder.setDisplayFlagChgTime(DateUtil.getSysDate());
 		//
 		this.ordOrderAtomSV.updateByPrimaryKeySelective(ordOrder);
-		//订单费用信息修改
+	}
+	/**
+	 * 费用信息
+	 */
+	public void feeInfo(OrderPayProcessedResultRequest request) {
+		// 订单费用信息修改
 		OrdOdFeeTotal ordOdFeeTotal = new OrdOdFeeTotal();
 		//
 		BeanUtils.copyVO(ordOdFeeTotal, request.getFeeInfo());
 		//
 		this.ordOdFeeTotalAtomSV.updateByOrderIdSelective(request.getBaseInfo().getOrderId(), ordOdFeeTotal);
-		//订单产品下单成功时间修改
+
+	}
+	/**
+	 * 产品信息
+	 */
+	public void prodInfo(OrderPayProcessedResultRequest request) {
+		// 订单产品下单成功时间修改
 		OrdOdProdWithBLOBs ordOdProdWithBLOBs = new OrdOdProdWithBLOBs();
 		ordOdProdWithBLOBs.setStateTime(request.getProdInfo().getStateTime());
 		//
 		this.ordOdProdAtomSV.updateByOrderIdSelective(ordOdProdWithBLOBs, request.getBaseInfo().getOrderId());
-		//添加支付机构信息
+
+	}
+	/**
+	 * 支付信息
+	 */
+	public void payInfo(OrderPayProcessedResultRequest request) {
+		// 添加支付机构信息
 		OrdBalacneIf ordBalacneIf = new OrdBalacneIf();
 		//
 		Long balacneIfId = SequenceUtil.createBalacneIfId();
-		ordBalacneIf.setBalacneIfId(balacneIfId);//自动编号
-		//订单编号
+		ordBalacneIf.setBalacneIfId(balacneIfId);// 自动编号
+		// 订单编号
 		ordBalacneIf.setOrderId(request.getBaseInfo().getOrderId());
-		//支付方式
+		// 支付方式
 		ordBalacneIf.setPayStyle(request.getFeeInfo().getPayStyle());
-		//币种
+		// 币种
 		ordBalacneIf.setCurrencyUnit(request.getFeeInfo().getCurrencyUnit());
-		//支付费用
+		// 支付费用
 		ordBalacneIf.setPayFee(request.getFeeInfo().getTotalFee());
-		//支付中心编号 默认为1
+		// 支付中心编号 默认为1
 		ordBalacneIf.setPaySystemId("1");
-		//支付时间
+		// 支付时间
 		ordBalacneIf.setPayTime(request.getFeeInfo().getPayTime());
 		ordBalacneIf.setCreateTime(request.getFeeInfo().getPayTime());
-		//外部流水号
+		// 外部流水号
 		ordBalacneIf.setExternalId(request.getFeeInfo().getExternalId());
 		this.ordBalacneIfAtomSV.insertSelective(ordBalacneIf);
 		//
-		response.setOrderId(request.getBaseInfo().getOrderId());
-		//
-		return response;
 	}
 
 }

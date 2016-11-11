@@ -24,7 +24,7 @@ public class OrderPayProcessedResultSVImplTest extends BaseTest {
 		baseInfo.setAccountId(1001l);
 		baseInfo.setCorporaId("1001");
 		baseInfo.setDisplayFlag("23");
-		baseInfo.setOrderId(1001l);
+		baseInfo.setOrderId(2000000015644537l);
 		baseInfo.setOrderType("1");
 		baseInfo.setState("23");
 		baseInfo.setUserId("1001");
