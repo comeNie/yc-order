@@ -40,10 +40,12 @@ public class OrderFeeQuerySVImpl implements IOrderFeeQuerySV {
 			response.setResponseHeader(responseHeader);
 			response = this.orderFeeQueryBusiSV.orderFeeQuery(request);
 		} catch (BusinessException | SystemException e) {
+			responseHeader.setIsSuccess(false);
 			responseHeader.setResultCode(e.getErrorCode());
 			responseHeader.setResultMessage(e.getErrorMessage());
 			response.setResponseHeader(responseHeader);
 		} catch (Exception e){
+			responseHeader.setIsSuccess(false);
 			responseHeader.setResultCode(ExceptCodeConstants.Special.NO_DATA_OR_CACAE_ERROR);
 			responseHeader.setResultMessage("未查询到相关数据");
 			response.setResponseHeader(responseHeader);
