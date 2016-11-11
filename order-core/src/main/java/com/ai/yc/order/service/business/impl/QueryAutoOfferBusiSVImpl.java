@@ -69,8 +69,8 @@ public class QueryAutoOfferBusiSVImpl implements IQueryAutoOfferBusiSV {
 				}
 			}
 		}
-		//保留两位小数
-		res.setPrice(wordfee.setScale(2,BigDecimal.ROUND_HALF_UP));
+		//单位为厘
+		res.setPrice(wordfee.multiply(new BigDecimal(1000)));
 		res.setOfferTime(DateUtil.getSysDate());
 		res.setResponseHeader(new ResponseHeader(true, ResultCodeConstants.SUCCESS_CODE, "查询成功"));
 		return res;
