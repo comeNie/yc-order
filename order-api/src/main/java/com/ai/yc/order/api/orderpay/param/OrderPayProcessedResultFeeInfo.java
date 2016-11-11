@@ -52,6 +52,18 @@ public class OrderPayProcessedResultFeeInfo implements Serializable {
 	 * 赠送积分
 	 */
 	private Long totalJf;
+	/**
+	 * 外部支付流水号
+	 */
+	private String externalId;// EXTERNAL_ID;
+
+	public String getExternalId() {
+		return externalId;
+	}
+
+	public void setExternalId(String externalId) {
+		this.externalId = externalId;
+	}
 
 	public String getPayStyle() {
 		return payStyle;

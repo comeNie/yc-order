@@ -126,6 +126,9 @@ public class OrderPayProcessedResultValidate {
 		if(null == request.getFeeInfo().getPayTime()){
 			this.newException("支付时间不能为空");
 		}
+		if(StringUtil.isBlank(request.getFeeInfo().getExternalId())){
+			this.newException("外部支付流水号不能为空");
+		}
 		// 赠送积分
 
 

@@ -38,6 +38,7 @@ public class OrderPayProcessedResultSVImplTest extends BaseTest {
 		feeInfo.setTotalFee(1000l);
 		feeInfo.setPayTime(DateUtil.getSysDate());
 		feeInfo.setCurrencyUnit("1");
+		feeInfo.setExternalId("1000001");
 		//
 		request.setBaseInfo(baseInfo);
 		request.setProdInfo(prodInfo);
