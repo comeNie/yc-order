@@ -11,11 +11,6 @@ public class OrderPayProcessedResultFeeInfo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * 币种 "1：RMB 2：$"
-	 */
-	private String currencyUnit;// CURRENCY_UNIT
-
-	/**
 	 * 支付方式
 	 */
 	private String payStyle;
@@ -71,14 +66,6 @@ public class OrderPayProcessedResultFeeInfo implements Serializable {
 
 	public void setPayStyle(String payStyle) {
 		this.payStyle = payStyle;
-	}
-
-	public String getCurrencyUnit() {
-		return currencyUnit;
-	}
-
-	public void setCurrencyUnit(String currencyUnit) {
-		this.currencyUnit = currencyUnit;
 	}
 
 	public Long getTotalFee() {

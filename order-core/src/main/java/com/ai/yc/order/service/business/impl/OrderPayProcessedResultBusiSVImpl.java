@@ -21,6 +21,7 @@ import com.ai.yc.order.service.atom.interfaces.IOrdOdProdAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOrderAtomSV;
 import com.ai.yc.order.service.business.interfaces.IOrderPayProcessedResultBusiSV;
 import com.ai.yc.order.util.SequenceUtil;
+
 /**
  * 
  * @author zhangzd
@@ -55,6 +56,7 @@ public class OrderPayProcessedResultBusiSVImpl implements IOrderPayProcessedResu
 		//
 		return response;
 	}
+
 	/**
 	 * 基本信息
 	 */
@@ -72,6 +74,7 @@ public class OrderPayProcessedResultBusiSVImpl implements IOrderPayProcessedResu
 		//
 		this.ordOrderAtomSV.updateByPrimaryKeySelective(ordOrder);
 	}
+
 	/**
 	 * 费用信息
 	 */
@@ -84,6 +87,7 @@ public class OrderPayProcessedResultBusiSVImpl implements IOrderPayProcessedResu
 		this.ordOdFeeTotalAtomSV.updateByOrderIdSelective(request.getBaseInfo().getOrderId(), ordOdFeeTotal);
 
 	}
+
 	/**
 	 * 产品信息
 	 */
@@ -95,6 +99,7 @@ public class OrderPayProcessedResultBusiSVImpl implements IOrderPayProcessedResu
 		this.ordOdProdAtomSV.updateByOrderIdSelective(ordOdProdWithBLOBs, request.getBaseInfo().getOrderId());
 
 	}
+
 	/**
 	 * 支付信息
 	 */
@@ -109,7 +114,13 @@ public class OrderPayProcessedResultBusiSVImpl implements IOrderPayProcessedResu
 		// 支付方式
 		ordBalacneIf.setPayStyle(request.getFeeInfo().getPayStyle());
 		// 币种
-		ordBalacneIf.setCurrencyUnit(request.getFeeInfo().getCurrencyUnit());
+		OrdOdFeeTotal ordOdFeeTotal = this.ordOdFeeTotalAtomSV.findByOrderId(request.getBaseInfo().getOrderId());
+		if (null != ordOdFeeTotal) {
+			if (null != ordOdFeeTotal.getCurrencyUnit()) {
+				ordBalacneIf.setCurrencyUnit(ordOdFeeTotal.getCurrencyUnit());
+			}
+		}
+
 		// 支付费用
 		ordBalacneIf.setPayFee(request.getFeeInfo().getTotalFee());
 		// 支付中心编号 默认为1

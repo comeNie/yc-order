@@ -94,15 +94,7 @@ public class OrderPayProcessedResultValidate {
 		if (null == request.getFeeInfo()) {
 			this.newException("费用信息不能为空");
 		}
-		// 币种
-		if(StringUtil.isBlank(request.getFeeInfo().getCurrencyUnit())){
-			this.newException("币种信息不能为空");
-		}else{
-			String flag = this.orderSubmissionParam.getCurrencyUnitMap().get(request.getFeeInfo().getCurrencyUnit());
-			if(StringUtil.isBlank(flag)){
-				this.newException("币种范围不正确，请参考"+JSON.toJSONString(this.orderSubmissionParam.getCurrencyUnitMap()));
-			}
-		}
+		
 		// 支付方式
 		if(StringUtil.isBlank(request.getFeeInfo().getPayStyle())){
 			this.newException("支付方式不能为空");
