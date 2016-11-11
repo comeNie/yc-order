@@ -23,6 +23,11 @@ import com.ai.yc.order.service.atom.interfaces.IOrdOdProdFileAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdProdLevelAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOrderAtomSV;
 import com.ai.yc.order.service.business.interfaces.IOrderFeeQueryBusiSV;
+/**
+ * 
+ * @author zhangzd
+ *
+ */
 @Service
 public class OrderFeeQueryBusiSVImpl implements IOrderFeeQueryBusiSV {
 	@Autowired

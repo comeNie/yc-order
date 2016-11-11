@@ -21,7 +21,11 @@ import com.ai.yc.order.service.atom.interfaces.IOrdOdProdAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOrderAtomSV;
 import com.ai.yc.order.service.business.interfaces.IOrderPayProcessedResultBusiSV;
 import com.ai.yc.order.util.SequenceUtil;
-
+/**
+ * 
+ * @author zhangzd
+ *
+ */
 @Service
 public class OrderPayProcessedResultBusiSVImpl implements IOrderPayProcessedResultBusiSV {
 	@Autowired

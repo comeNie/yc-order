@@ -37,7 +37,11 @@ import com.ai.yc.order.service.mds.ordersubmission.OrderSubmissionMdsSendMess;
 import com.ai.yc.order.service.mds.ordersubmission.OrderSubmissionMdsVo;
 import com.ai.yc.order.util.SequenceUtil;
 import com.ai.yc.order.validate.TextOrderTranslateTimeUtil;
-
+/**
+ * 
+ * @author zhangzd
+ *
+ */
 @Service
 public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 	@Autowired
