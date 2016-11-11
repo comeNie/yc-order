@@ -35,7 +35,7 @@ public class OrderFeeQuerySVImpl implements IOrderFeeQuerySV {
 			}
 			//
 			responseHeader.setIsSuccess(true);
-			responseHeader.setResultCode("000000");
+			responseHeader.setResultCode(ExceptCodeConstants.Special.SUCCESS);
 			responseHeader.setResultMessage("订单费用查询成功");
 			response.setResponseHeader(responseHeader);
 			response = this.orderFeeQueryBusiSV.orderFeeQuery(request);
