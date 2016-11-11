@@ -36,7 +36,9 @@ public class OrdOdStateChgBusiSVImpl implements IOrdOdStateChgBusiSV {
 	
 	private final static String CLOSE_CHG_ADMIN_DESC_EN = "Administrator %s closed the order.";
 	
+private final static String CHECK_CHG_ADMIN_DESC_CN = "管理员%s审核了订单。";
 	
+	private final static String CHECK_CHG_ADMIN_DESC_EN = "Administrator %s checked the order.";
 	@Autowired
 	private IOrdOdStateChgAtomSV ordOdStateChgAtomSV;
 	
@@ -85,6 +87,18 @@ public class OrdOdStateChgBusiSVImpl implements IOrdOdStateChgBusiSV {
 		chg.setStateChgId(SequenceUtil.createStateChgId());
 		String descCn = String.format(CLOSE_CHG_ADMIN_DESC_CN, chg.getOperName()==null?chg.getOperId():chg.getOperName());
 		String descEn = String.format(CLOSE_CHG_ADMIN_DESC_EN, chg.getOperName()==null?chg.getOperId():chg.getOperName());
+		chg.setOrgId(OrdersConstants.OrgID.ORG_ID_USER);
+		chg.setChgDesc(descCn);
+		chg.setChgDescEn(descEn);
+		chg.setStateChgTime(DateUtil.getSysDate());
+		ordOdStateChgAtomSV.insertSelective(chg);
+	}
+
+	@Override
+	public void checkChgDesc(OrdOdStateChg chg) {
+		chg.setStateChgId(SequenceUtil.createStateChgId());
+		String descCn = String.format(CHECK_CHG_ADMIN_DESC_CN, chg.getOperName()==null?chg.getOperId():chg.getOperName());
+		String descEn = String.format(CHECK_CHG_ADMIN_DESC_EN, chg.getOperName()==null?chg.getOperId():chg.getOperName());
 		chg.setOrgId(OrdersConstants.OrgID.ORG_ID_USER);
 		chg.setChgDesc(descCn);
 		chg.setChgDescEn(descEn);

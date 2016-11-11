@@ -122,4 +122,14 @@ public class OrdOrderAtomSVImpl implements IOrdOrderAtomSV {
     	return ordOrderMapper.selectByExample(example);
 	}
 
+	@Override
+	public List<OrdOrder> findNoReviewList(long orderId) {
+		OrdOrderMapper ordOrderMapper = MapperFactory.getOrdOrderMapper();
+		OrdOrderCriteria example=new OrdOrderCriteria();
+    	OrdOrderCriteria.Criteria criteria = example.createCriteria();
+    	criteria.andStateEqualTo(OrdersConstants.OrderState.WAIT_REVIEW_STATE);
+    	criteria.andOrderIdEqualTo(orderId);
+    	return ordOrderMapper.selectByExample(example);
+	}
+
 }

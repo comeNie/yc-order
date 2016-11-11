@@ -155,6 +155,19 @@ public final class OrdersConstants {
 		 * 取消
 		 */
 		public final static String CANCEL_STATE = "91";
+		/**
+		 * 待审核
+		 */
+		public final static String WAIT_REVIEW_STATE = "40";
+		
+		/**
+		 * 已经审核
+		 */
+		public final static String REVIEWED_STATE = "41";
+		/**
+		 * 审核失败
+		 */
+		public final static String REVIEW_FAILD_STATE = "42";
 
 	}
 

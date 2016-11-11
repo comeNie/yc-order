@@ -22,6 +22,10 @@ public interface IOrdOdStateChgBusiSV {
 	 * 关闭轨迹
 	 */
 	void addCloseChgDesc(OrdOdStateChg chg);
+	/**
+	 * 审核轨迹
+	 */
+	void checkChgDesc(OrdOdStateChg chg);
 	
 	
 

@@ -45,5 +45,11 @@ public interface IOrdOrderAtomSV {
 	 * @author zhanglh
 	 */
 	List<OrdOrder> findNoPayOrdList(long orderId);
+	/**
+	 * 根据id获取待审核订单
+	 * 
+	 * @author zhanglh
+	 */
+	List<OrdOrder> findNoReviewList(long orderId);
 
 }
