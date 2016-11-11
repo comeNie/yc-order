@@ -57,6 +57,18 @@ public class OrderSubmissionParam {
 	 * 是否加急 N:否；Y：是
 	 */
 	private Map<String, String> isUrgentMap;
+	/**
+	 * 支付方式 "YE：余额 ZFB：支付宝 YL：网银 PP：pay pal HF：后付 JF：积分 YHQ：优惠劵 HK：银行汇款/转账"
+	 */
+	private Map<String, String> payStyleMap;
+
+	public Map<String, String> getPayStyleMap() {
+		return payStyleMap;
+	}
+
+	public void setPayStyleMap(Map<String, String> payStyleMap) {
+		this.payStyleMap = payStyleMap;
+	}
 
 	public Map<String, String> getIsUrgentMap() {
 		return isUrgentMap;

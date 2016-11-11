@@ -91,7 +91,11 @@ public final class SequenceUtil {
     }
 
     public static Long createBalacneIfId() {
-        return SeqUtil.getNewId(ORD_BALACNE_IF$BALACNE_IF_ID$SEQ);
+    	String seq = SeqUtil.getNewId(ORD_BALACNE_IF$BALACNE_IF_ID$SEQ, 10);
+        int rannum = (int) (new Random().nextDouble() * (99999 - 10000 + 1)) + 10000;// 获取5位随机数
+        String balacneIfId = "3" + seq + rannum;
+        return Long.valueOf(balacneIfId);
+        //return SeqUtil.getNewId();
     }
 
     public static String getExternalId() {
