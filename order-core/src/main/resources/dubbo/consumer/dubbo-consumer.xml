@@ -41,7 +41,9 @@
 		
 	<!-- 领域-->	
 	<dubbo:reference id="iQuerySysDomainSV"
-		interface="com.ai.yc.common.api.sysdomain.interfaces.IQuerySysDomainSV" />			
-
+		interface="com.ai.yc.common.api.sysdomain.interfaces.IQuerySysDomainSV" />
+	<!-- 用户昵称 -->
+	<dubbo:reference id="iYCUserServiceSV"
+		interface="com.ai.yc.user.api.userservice.interfaces.IYCUserServiceSV" />	
 	
 </beans>

@@ -1,8 +1,8 @@
 package com.ai.yc.order.api.orderquery.param;
 
-import java.io.Serializable;
+import com.ai.opt.base.vo.BaseInfo;
 
-public class QueryOrdCountRequest  implements Serializable {
+public class QueryOrdCountRequest extends BaseInfo  {
 
 	private static final long serialVersionUID = 1L;
 	/**
@@ -13,10 +13,6 @@ public class QueryOrdCountRequest  implements Serializable {
 	 * 业务标识
 	 */
 	private String flag;
-	/**
-	 * 时区
-	 */
-	private String timeZone;
 	/**
 	 * 用户类型
 	 */
@@ -68,7 +64,7 @@ public class QueryOrdCountRequest  implements Serializable {
 	/**
 	 * LSP编号
 	 */
-	private Long lspId;
+	private String lspId;
 	/**
 	 * 领取人（译员）ID
 	 */
@@ -88,14 +84,6 @@ public class QueryOrdCountRequest  implements Serializable {
 
 	public void setFlag(String flag) {
 		this.flag = flag;
-	}
-
-	public String getTimeZone() {
-		return timeZone;
-	}
-
-	public void setTimeZone(String timeZone) {
-		this.timeZone = timeZone;
 	}
 
 	public String getUserType() {
@@ -194,11 +182,11 @@ public class QueryOrdCountRequest  implements Serializable {
 		this.interperType = interperType;
 	}
 
-	public Long getLspId() {
+	public String getLspId() {
 		return lspId;
 	}
 
-	public void setLspId(Long lspId) {
+	public void setLspId(String lspId) {
 		this.lspId = lspId;
 	}
 

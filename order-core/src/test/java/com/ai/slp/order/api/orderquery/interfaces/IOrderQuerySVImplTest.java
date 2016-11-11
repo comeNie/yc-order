@@ -21,8 +21,10 @@ public class IOrderQuerySVImplTest extends BaseTest{
 		QueryOrderRequest request = new QueryOrderRequest();
 		//request.setFlag("12io");
 		//request.setOrderType("1ololp");
-		request.setOrderId(123l);
-		request.setFieldCode("3333");
+		Long ss= 2000000015L;
+		request.setOrderId(123L);
+		System.out.println("========="+ss.toString());
+		//request.setFieldCode("3333");
 		//request.setDisplayFlag("11lolo");
 		/*request.setCorporaId("1");
 		//request.setKeyWords(keyWords);
@@ -32,7 +34,7 @@ public class IOrderQuerySVImplTest extends BaseTest{
 		request.setInterperId("1");
 		request.setLangungePaire("1");
 		request.setTranslateType("1");
-		request.setTranslateName("翻译主题信息");
+		
 		request.setChlId("001");
 		request.setState("11");
 		request.setSubFlag("1");*/
@@ -41,7 +43,8 @@ public class IOrderQuerySVImplTest extends BaseTest{
 		//Timestamp es = Timestamp.valueOf("2018-11-10 12:20:12");
 		//request.setStateChgTimeStart(ts);
 		//request.setStateChgTimeEnd(es);
-		request.setPageSize(20);
+		//request.setTranslateName("TEST");
+		request.setPageSize(10);
 		request.setPageNo(1);
 		QueryOrderRsponse response = this.iOrderQuerySV.queryOrder(request);
 		log.info("response:"+JSON.toJSONString(response));
@@ -55,8 +58,7 @@ public class IOrderQuerySVImplTest extends BaseTest{
 		request.setInterperId("1");
 		request.setInterperType("1");
 		request.setState("11");
-		request.setTimeZone("a");
-		request.setLspId(123L);
+		request.setLspId("123");
 		request.setTranslateType("1");
 		request.setSubFlag("1");
 		request.setCorporaId("1");

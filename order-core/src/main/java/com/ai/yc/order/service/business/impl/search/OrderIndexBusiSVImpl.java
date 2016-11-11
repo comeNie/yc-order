@@ -69,10 +69,17 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 			ordInfo.setTranslatename(ord.getTranslateName());
 			ordInfo.setTranslatetype(ord.getTranslateType());
 			ordInfo.setSubflag(ord.getSubFlag());
+			//获取昵称
+			/*IYCUserServiceSV userServiceSV = DubboConsumerFactory.getService(IYCUserServiceSV.class);
+			SearchYCUserRequest request = new SearchYCUserRequest();
+			request.setUserId(ord.getUserId());
+			YCUserInfoResponse response = userServiceSV.searchYCUserInfo(request);
+			if(response.getResponseHeader().isSuccess()==true){
+				ordInfo.setUsername(response.getNickname());
+			}*/
 			//赋值假数据
 			ordInfo.setUsername("test");
 			ordInfo.setLspname("test");
-			//BeanUtils.copyProperties(ordInfo, ord);
 			// 查询商品信息
 			OrdOdProd ordOdProd = ordOdProdAtomSV.findByOrderId(ord.getOrderId());
 			if (ordOdProd != null) {
@@ -100,6 +107,7 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 				ordInfo.setUpdateoperid(ordOdFeeTotal.getUpdateOperId());
 				ordInfo.setUpdatetime(ordOdFeeTotal.getUpdateTime());
 				ordInfo.setTotalfee(ordOdFeeTotal.getTotalFee());
+				ordInfo.setCurrencyunit(ordOdFeeTotal.getCurrencyUnit());
 			}
 			// 查询支付信息
 			OrdBalacneIf ordBalacneIf = ordBalacneIfAtomSV.findByOrderId(ord.getOrderId());
@@ -145,6 +153,14 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 					ordInfo.setTranslatename(ord.getTranslateName());
 					ordInfo.setTranslatetype(ord.getTranslateType());
 					ordInfo.setSubflag(ord.getSubFlag());
+					//获取昵称
+					/*IYCUserServiceSV userServiceSV = DubboConsumerFactory.getService(IYCUserServiceSV.class);
+					SearchYCUserRequest request = new SearchYCUserRequest();
+					request.setUserId(ord.getUserId());
+					YCUserInfoResponse response = userServiceSV.searchYCUserInfo(request);
+					if(response.getResponseHeader().isSuccess()==true){
+						ordInfo.setUsername(response.getNickname());
+					}*/
 					//赋值假数据
 					ordInfo.setUsername("test");
 					ordInfo.setLspname("test");
@@ -174,6 +190,8 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 					if (ordOdFeeTotal != null) {
 						ordInfo.setUpdateoperid(ordOdFeeTotal.getUpdateOperId());
 						ordInfo.setUpdatetime(ordOdFeeTotal.getUpdateTime());
+						ordInfo.setCurrencyunit(ordOdFeeTotal.getCurrencyUnit());
+						ordInfo.setTotalfee(ordOdFeeTotal.getTotalFee());
 					}
 					// 查询支付信息
 					OrdBalacneIf ordBalacneIf = ordBalacneIfAtomSV.findByOrderId(ord.getOrderId());

@@ -39,6 +39,7 @@ public class OrderInfo {
 	private long proddetailid;
 	private String keywords;
 	private long totalfee;
+	private String currencyunit;
 	/**
 	 * 费用变更时间
 	 */
@@ -341,6 +342,14 @@ public class OrderInfo {
 
 	public void setTotalfee(long totalfee) {
 		this.totalfee = totalfee;
+	}
+
+	public String getCurrencyunit() {
+		return currencyunit;
+	}
+
+	public void setCurrencyunit(String currencyunit) {
+		this.currencyunit = currencyunit;
 	}
 
 }

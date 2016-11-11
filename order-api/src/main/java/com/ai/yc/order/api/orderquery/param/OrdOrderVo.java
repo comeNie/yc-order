@@ -144,6 +144,10 @@ public class OrdOrderVo extends BaseInfo {
 	 * 总费用
 	 */
 	private long totalFee;
+	/**
+	 * 币种
+	 */
+	private String currencyUnit;
 
 	/**
 	 * 语言信息
@@ -412,6 +416,14 @@ public class OrdOrderVo extends BaseInfo {
 
 	public void setTotalFee(long totalFee) {
 		this.totalFee = totalFee;
+	}
+
+	public String getCurrencyUnit() {
+		return currencyUnit;
+	}
+
+	public void setCurrencyUnit(String currencyUnit) {
+		this.currencyUnit = currencyUnit;
 	}
 
 }

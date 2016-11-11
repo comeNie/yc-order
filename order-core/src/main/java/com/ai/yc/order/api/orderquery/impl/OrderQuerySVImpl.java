@@ -30,6 +30,7 @@ import com.ai.yc.order.api.orderquery.param.QueryOrdCountRequest;
 import com.ai.yc.order.api.orderquery.param.QueryOrdCountResponse;
 import com.ai.yc.order.api.orderquery.param.QueryOrderRequest;
 import com.ai.yc.order.api.orderquery.param.QueryOrderRsponse;
+import com.ai.yc.order.constants.OrdersConstants;
 import com.ai.yc.order.constants.SearchFieldConfConstants;
 import com.ai.yc.order.search.bo.OrdProdExtend;
 import com.ai.yc.order.search.bo.OrderInfo;
@@ -49,6 +50,7 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 
 	@Override
 	public QueryOrderRsponse queryOrder(QueryOrderRequest request) throws BusinessException, SystemException {
+		request.setTenantId(OrdersConstants.TENANT_ID);
 		// 有效性校验
 		ValidateUtils.validateQueryOrder(request);
 		// 调用搜索引擎进行查询
@@ -96,6 +98,7 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 				order.setState(ord.getState());
 				order.setPayStyle(ord.getPaystyle());
 				order.setTotalFee(ord.getTotalfee());
+				order.setCurrencyUnit(ord.getCurrencyunit());
 				if (ord.getStarttime() != null) {
 					order.setStartTime(new Timestamp(ord.getStarttime().getTime()));
 				}
@@ -110,6 +113,12 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 				}
 				if (ord.getLocktime() != null) {
 					order.setLockTime(new Timestamp(ord.getLocktime().getTime()));
+				}
+				if (ord.getOrdertime() != null) {
+					order.setOrderTime(new Timestamp(ord.getOrdertime().getTime()));
+				}
+				if (ord.getPaytime() != null) {
+					order.setPayTime(new Timestamp(ord.getPaytime().getTime()));
 				}
 				if (ord.getUpdatetime() != null) {
 					order.setUpdateTime(new Timestamp(ord.getUpdatetime().getTime()));
@@ -474,6 +483,7 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 	@Override
 	public QueryOrdCountResponse queryOrderCount(QueryOrdCountRequest request)
 			throws BusinessException, SystemException {
+		request.setTenantId(OrdersConstants.TENANT_ID);
 		// 有效性校验
 		ValidateUtils.validateQueryOrdCount(request);
 		QueryOrdCountResponse response = new QueryOrdCountResponse();
