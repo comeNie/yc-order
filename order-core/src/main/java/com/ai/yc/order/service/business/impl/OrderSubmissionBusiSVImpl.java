@@ -405,6 +405,8 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 			ordOdProdWithBLOBs.setMeetingAddress(request.getProductInfo().getMeetingAddress());// productInfo.setMeetingAddress("北京市石景山区");
 			// 译员数量
 			ordOdProdWithBLOBs.setInterperSum(request.getProductInfo().getInterperSum());// productInfo.setInterperSum(10l);
+			// 开始时间 stateTime 跟接口属性不同 需要重新赋值
+			ordOdProdWithBLOBs.setStateTime(request.getProductInfo().getStartTime());
 		}
 		// 语言对信息
 		List<LanguagePairInfo> languafePairInfoList = request.getProductInfo().getLanguagePairInfoList();
