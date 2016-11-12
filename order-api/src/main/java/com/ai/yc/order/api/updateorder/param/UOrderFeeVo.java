@@ -37,7 +37,7 @@ public class UOrderFeeVo implements Serializable {
     /**
      * 减免原因
      */
-    private Long operDiscountDesc;
+    private String operDiscountDesc;
 
     /**
      * 总应收费用(必填)
@@ -189,12 +189,11 @@ public class UOrderFeeVo implements Serializable {
 		this.updateOperId = updateOperId;
 	}
 
-
-	public Long getOperDiscountDesc() {
+	public String getOperDiscountDesc() {
 		return operDiscountDesc;
 	}
 
-	public void setOperDiscountDesc(Long operDiscountDesc) {
+	public void setOperDiscountDesc(String operDiscountDesc) {
 		this.operDiscountDesc = operDiscountDesc;
 	}
 
