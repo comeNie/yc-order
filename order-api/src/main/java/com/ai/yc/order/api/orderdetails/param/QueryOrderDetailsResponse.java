@@ -181,6 +181,11 @@ public class QueryOrderDetailsResponse extends BaseResponse{
      * 备注
      */
     private String remark;
+    
+    /**
+     * 支付备注
+     */
+    private String payRemark;
 
     /**
      * 完成时间
@@ -529,6 +534,14 @@ public class QueryOrderDetailsResponse extends BaseResponse{
 
 	public void setTimeZone(String timeZone) {
 		this.timeZone = timeZone;
+	}
+
+	public String getPayRemark() {
+		return payRemark;
+	}
+
+	public void setPayRemark(String payRemark) {
+		this.payRemark = payRemark;
 	}
     
     

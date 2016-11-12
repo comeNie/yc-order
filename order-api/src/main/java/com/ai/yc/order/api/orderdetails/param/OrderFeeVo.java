@@ -105,6 +105,21 @@ public class OrderFeeVo implements Serializable {
      * 支付时间
      */
     private Timestamp payTime;
+    
+    /**
+     * 订单折扣
+     */
+    private String discountSum;
+
+    /**
+     * 优惠券抵扣金额
+     */
+    private Long couponFee;
+
+    /**
+     * 积分抵扣金额
+     */
+    private Long jfCouponFee;
 
 	public Long getOrderId() {
 		return orderId;
@@ -248,6 +263,30 @@ public class OrderFeeVo implements Serializable {
 
 	public void setPayTime(Timestamp payTime) {
 		this.payTime = payTime;
+	}
+
+	public String getDiscountSum() {
+		return discountSum;
+	}
+
+	public void setDiscountSum(String discountSum) {
+		this.discountSum = discountSum;
+	}
+
+	public Long getCouponFee() {
+		return couponFee;
+	}
+
+	public void setCouponFee(Long couponFee) {
+		this.couponFee = couponFee;
+	}
+
+	public Long getJfCouponFee() {
+		return jfCouponFee;
+	}
+
+	public void setJfCouponFee(Long jfCouponFee) {
+		this.jfCouponFee = jfCouponFee;
 	}
     
     

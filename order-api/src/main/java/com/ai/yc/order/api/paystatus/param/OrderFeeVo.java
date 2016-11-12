@@ -66,7 +66,48 @@ public class OrderFeeVo implements Serializable {
      * 支付备注(必填)
      */
     private String remark;
+    
+    /**
+     * 订单折扣
+     */
+    private String discountSum;
 
+    /**
+     * 优惠券抵扣金额
+     */
+    private Long couponFee;
+
+    /**
+     * 积分抵扣金额
+     */
+    private Long jfCouponFee;
+    
+    
+
+
+	public String getDiscountSum() {
+		return discountSum;
+	}
+
+	public void setDiscountSum(String discountSum) {
+		this.discountSum = discountSum;
+	}
+
+	public Long getCouponFee() {
+		return couponFee;
+	}
+
+	public void setCouponFee(Long couponFee) {
+		this.couponFee = couponFee;
+	}
+
+	public Long getJfCouponFee() {
+		return jfCouponFee;
+	}
+
+	public void setJfCouponFee(Long jfCouponFee) {
+		this.jfCouponFee = jfCouponFee;
+	}
 
 	public String getCurrencyUnit() {
 		return currencyUnit;

@@ -10,6 +10,8 @@ import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.vo.ResponseHeader;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.ai.opt.sdk.util.BeanUtils;
+import com.ai.yc.common.api.sysdomain.param.QuerySysDomainDetailsRes;
+import com.ai.yc.common.api.syspurpose.param.QuerySysPurposeDetailsRes;
 import com.ai.yc.order.api.orderdetails.param.ContactsVo;
 import com.ai.yc.order.api.orderdetails.param.OrderFeeVo;
 import com.ai.yc.order.api.orderdetails.param.OrderStateChgVo;
@@ -114,12 +116,12 @@ public class QueryOrderDetailsBusiSVImpl implements IQueryOrderDetailsBusiSV {
 		if(ordOdProd!=null){
 			ProdVo prod = new ProdVo();
 			BeanUtils.copyProperties(prod, ordOdProd);
-		/*	QuerySysPurposeDetailsRes purpose = iSysConfigAtomSV.querySysPurposeDetails(prod.getUseCode());
+			QuerySysPurposeDetailsRes purpose = iSysConfigAtomSV.querySysPurposeDetails(prod.getUseCode());
 			prod.setUseCn(purpose.getPurposeCn());
 			prod.setUseEn(purpose.getPurposeEn());
 			QuerySysDomainDetailsRes domain = iSysConfigAtomSV.querySysDomainDetails(prod.getFieldCode());
 			prod.setFieldCn(domain.getDomainCn());
-			prod.setFieldEn(domain.getDomainEn());*/
+			prod.setFieldEn(domain.getDomainEn());
 			resp.setProd(prod);
 		}
 		
