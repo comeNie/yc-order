@@ -92,6 +92,10 @@ public class OrdOrderVo extends BaseInfo {
 	 */
 	private String updateFlag;
 	/**
+	 * 操作工号
+	 */
+	private String operId;
+	/**
 	 * 下单时间
 	 */
 	private Timestamp orderTime;
@@ -424,6 +428,14 @@ public class OrdOrderVo extends BaseInfo {
 
 	public void setCurrencyUnit(String currencyUnit) {
 		this.currencyUnit = currencyUnit;
+	}
+
+	public String getOperId() {
+		return operId;
+	}
+
+	public void setOperId(String operId) {
+		this.operId = operId;
 	}
 
 }
