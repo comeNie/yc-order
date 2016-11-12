@@ -389,8 +389,8 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 		//如果领取开始时间不为空
 		if (request.getLockTimeStart() != null && request.getLockTimeEnd() == null) {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZ");
-			String end = sdf.format(request.getLockTimeStart());
-			String start = sdf.format(new Date());
+			String start = sdf.format(request.getLockTimeStart());
+			String end = sdf.format(new Date());
 			SearchCriteria searchCriteria = new SearchCriteria();
 			searchCriteria.setOption(new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.range));
 			searchCriteria.setField(SearchFieldConfConstants.LOCK_TIME);
@@ -425,8 +425,8 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 		//如果支付开始时间不为空
 		if (request.getPayTimeStart() != null && request.getPayTimeEnd() == null) {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZ");
-			String end = sdf.format(request.getPayTimeStart());
-			String start = sdf.format(new Date());
+			String start = sdf.format(request.getPayTimeStart());
+			String end = sdf.format(new Date());
 			SearchCriteria searchCriteria = new SearchCriteria();
 			searchCriteria.setOption(new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.range));
 			searchCriteria.setField(SearchFieldConfConstants.PAY_TIME);
@@ -461,8 +461,8 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 		//如果报价开始时间不为空
 		if (request.getUpdateTimeStart() != null && request.getUpdateTimeEnd() == null) {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZ");
-			String end = sdf.format(request.getUpdateTimeStart());
-			String start = sdf.format(new Date());
+			String start = sdf.format(request.getUpdateTimeStart());
+			String end = sdf.format(new Date());
 			SearchCriteria searchCriteria = new SearchCriteria();
 			searchCriteria.setOption(new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.range));
 			searchCriteria.setField(SearchFieldConfConstants.UPDATE_TIME);
