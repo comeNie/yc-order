@@ -29,11 +29,12 @@ public class OrderCancelSVImplTest  extends BaseTest{
 	@Test
 	public void ordercheck(){
 		OrderReviewRequest res = new OrderReviewRequest();
-		res.setOrderId(123l);
-		res.setOperId("123456");
+		res.setOrderId(123L);
+		/*res.setOperId("123456");
 		res.setReasonDesc("cesshi");
-		res.setTenantId("yinyun");
-		res.setState("09");
+		res.setTenantId("yinyun");*/
+		res.setState("42");
+		res.setOperId("123456");
 		BaseResponse response = this.iOrderReviewSV.handReviewOrder(res);
 		log.info("response:"+JSON.toJSONString(response));
 	}

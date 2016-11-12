@@ -34,6 +34,7 @@ public class OrderCancelBusiSVImpl implements IOrderCancelBusiSV {
         ordOrder.setDisplayFlag(OrdersConstants.OrderDisplayFlag.FLAG_CANCEL);
         ordOrder.setStateChgTime(sysDate);
         ordOrder.setDisplayFlagChgTime(sysDate);
+        ordOrder.setOperId(ordOrder.getOperId());
         ordOrderAtomSV.updateById(ordOrder);
         /* 2.写入订单状态变化轨迹表 */
         OrdOdStateChg ordOdStateChg = new OrdOdStateChg();

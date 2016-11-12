@@ -69,6 +69,7 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 			ordInfo.setTranslatename(ord.getTranslateName());
 			ordInfo.setTranslatetype(ord.getTranslateType());
 			ordInfo.setSubflag(ord.getSubFlag());
+			ordInfo.setOperid(ord.getOperId());
 			//获取昵称
 			/*IYCUserServiceSV userServiceSV = DubboConsumerFactory.getService(IYCUserServiceSV.class);
 			SearchYCUserRequest request = new SearchYCUserRequest();
@@ -153,6 +154,7 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 					ordInfo.setTranslatename(ord.getTranslateName());
 					ordInfo.setTranslatetype(ord.getTranslateType());
 					ordInfo.setSubflag(ord.getSubFlag());
+					ordInfo.setOperid(ord.getOperId());
 					//获取昵称
 					/*IYCUserServiceSV userServiceSV = DubboConsumerFactory.getService(IYCUserServiceSV.class);
 					SearchYCUserRequest request = new SearchYCUserRequest();
