@@ -23,6 +23,7 @@ public class IOrderQuerySVImplTest extends BaseTest{
 		//request.setOrderType("1ololp");
 		Long ss= 2000000015L;
 		request.setOrderId(123L);
+		request.setOperId("10001");
 		System.out.println("========="+ss.toString());
 		//request.setFieldCode("3333");
 		//request.setDisplayFlag("11lolo");

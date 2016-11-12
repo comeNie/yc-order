@@ -167,6 +167,11 @@ public class QueryOrderRequest extends BaseInfo {
 	 * 报价结束时间
 	 */
 	private Timestamp updateTimeEnd;
+	/**
+	 * 操作员
+	 */
+	private String operId;
+	
 
 	/**
 	 * 页码，必填
@@ -488,6 +493,14 @@ public class QueryOrderRequest extends BaseInfo {
 
 	public void setInterperName(String interperName) {
 		this.interperName = interperName;
+	}
+
+	public String getOperId() {
+		return operId;
+	}
+
+	public void setOperId(String operId) {
+		this.operId = operId;
 	}
 
 }

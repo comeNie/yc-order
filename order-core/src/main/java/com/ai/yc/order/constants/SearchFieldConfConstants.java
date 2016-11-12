@@ -34,5 +34,6 @@ public class SearchFieldConfConstants {
     public static final String LOCK_TIME = "locktime";
     public static final String PAY_TIME = "paytime";
     public static final String UPDATE_TIME = "updatetime";
+    public static final String OPER_ID = "operid";
     
 }

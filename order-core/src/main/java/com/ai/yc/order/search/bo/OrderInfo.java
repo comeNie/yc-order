@@ -40,6 +40,7 @@ public class OrderInfo {
 	private String keywords;
 	private long totalfee;
 	private String currencyunit;
+	private String operid;
 	/**
 	 * 费用变更时间
 	 */
@@ -350,6 +351,14 @@ public class OrderInfo {
 
 	public void setCurrencyunit(String currencyunit) {
 		this.currencyunit = currencyunit;
+	}
+
+	public String getOperid() {
+		return operid;
+	}
+
+	public void setOperid(String operid) {
+		this.operid = operid;
 	}
 
 }
