@@ -116,6 +116,15 @@
 				<entry key="HK" value="银行汇款/转账" />
 			</map>
 		</property>
+		
+		<property name="translateLevelMap">
+			<map>
+				<entry key="100210" value="标准级" />
+				<entry key="100220" value="专业级" />
+				<entry key="100230" value="出版级" />
+			</map>
+		</property>
+		
 	</bean>
 
 	<!-- 翻译级别 初始化数据 100210：标准级 100220：专业级 100230：出版级 -->

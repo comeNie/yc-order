@@ -61,6 +61,10 @@ public class OrderSubmissionParam {
 	 * 支付方式 "YE：余额 ZFB：支付宝 YL：网银 PP：pay pal HF：后付 JF：积分 YHQ：优惠劵 HK：银行汇款/转账"
 	 */
 	private Map<String, String> payStyleMap;
+	/**
+	 * 翻译级别："100210：标准级;100220：专业级;100230：出版级;"
+	 */
+	private Map<String, String> translateLevelMap;
 
 	public Map<String, String> getPayStyleMap() {
 		return payStyleMap;
@@ -150,6 +154,14 @@ public class OrderSubmissionParam {
 
 	public void setFlagMap(Map<String, String> flagMap) {
 		this.flagMap = flagMap;
+	}
+
+	public Map<String, String> getTranslateLevelMap() {
+		return translateLevelMap;
+	}
+
+	public void setTranslateLevelMap(Map<String, String> translateLevelMap) {
+		this.translateLevelMap = translateLevelMap;
 	}
 
 }
