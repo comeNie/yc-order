@@ -7,9 +7,21 @@ public class OrderLevelRequest implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	/**
+	 * 总费用
+	 */
 	private Integer totalFee;
+	/**
+	 * 翻译级别
+	 */
 	private String translateLevel;
+	/**
+	 * 翻译类型
+	 */
 	private String translateType;
+	/**
+	 * 是否加急
+	 */
 	private String isUrgent;
 
 	public Integer getTotalFee() {
