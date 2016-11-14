@@ -694,6 +694,76 @@ public class OrdEvaluateCriteria {
             addCriterion("REMARK not between", value1, value2, "remark");
             return (Criteria) this;
         }
+
+        public Criteria andEvaluateSunIsNull() {
+            addCriterion("EVALUATE_SUN is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateSunIsNotNull() {
+            addCriterion("EVALUATE_SUN is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateSunEqualTo(String value) {
+            addCriterion("EVALUATE_SUN =", value, "evaluateSun");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateSunNotEqualTo(String value) {
+            addCriterion("EVALUATE_SUN <>", value, "evaluateSun");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateSunGreaterThan(String value) {
+            addCriterion("EVALUATE_SUN >", value, "evaluateSun");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateSunGreaterThanOrEqualTo(String value) {
+            addCriterion("EVALUATE_SUN >=", value, "evaluateSun");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateSunLessThan(String value) {
+            addCriterion("EVALUATE_SUN <", value, "evaluateSun");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateSunLessThanOrEqualTo(String value) {
+            addCriterion("EVALUATE_SUN <=", value, "evaluateSun");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateSunLike(String value) {
+            addCriterion("EVALUATE_SUN like", value, "evaluateSun");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateSunNotLike(String value) {
+            addCriterion("EVALUATE_SUN not like", value, "evaluateSun");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateSunIn(List<String> values) {
+            addCriterion("EVALUATE_SUN in", values, "evaluateSun");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateSunNotIn(List<String> values) {
+            addCriterion("EVALUATE_SUN not in", values, "evaluateSun");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateSunBetween(String value1, String value2) {
+            addCriterion("EVALUATE_SUN between", value1, value2, "evaluateSun");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateSunNotBetween(String value1, String value2) {
+            addCriterion("EVALUATE_SUN not between", value1, value2, "evaluateSun");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
