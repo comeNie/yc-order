@@ -18,6 +18,11 @@ public class UpdateOrderRequest implements Serializable{
 	 */
 	private Long orderId;
 	
+	/**
+	 * 订单级别
+	 */
+	private String orderLevel;
+	
 	 /**
      * 订单费用信息
      */
@@ -102,6 +107,14 @@ public class UpdateOrderRequest implements Serializable{
 
 	public void setOperName(String operName) {
 		this.operName = operName;
+	}
+
+	public String getOrderLevel() {
+		return orderLevel;
+	}
+
+	public void setOrderLevel(String orderLevel) {
+		this.orderLevel = orderLevel;
 	}
     
     
