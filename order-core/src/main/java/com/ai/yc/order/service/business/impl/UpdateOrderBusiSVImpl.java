@@ -11,6 +11,7 @@ import com.ai.opt.base.vo.ResponseHeader;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.ai.opt.sdk.util.BeanUtils;
 import com.ai.opt.sdk.util.DateUtil;
+import com.ai.opt.sdk.util.StringUtil;
 import com.ai.yc.order.api.updateorder.param.UProdFileVo;
 import com.ai.yc.order.api.updateorder.param.UProdLevelVo;
 import com.ai.yc.order.api.updateorder.param.UpdateOrderRequest;
@@ -74,6 +75,15 @@ public class UpdateOrderBusiSVImpl implements IUpdateOrderBusiSV{
 			throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT, "订单不存在");
 		}
 		resp.setOrderId(req.getOrderId());
+		
+		//修改订单级别
+		if(!StringUtil.isBlank(req.getOrderLevel())){
+			OrdOrder order = new OrdOrder();
+			order.setOrderId(req.getOrderId());
+			order.setOrderLevel(req.getOrderLevel());
+			iOrdOrderAtomSV.updateByPrimaryKeySelective(record);
+		}
+		
 		//修改联系人信息
 		if(req.getContacts()!=null){
 			  OrdOdLogistics logistics = new OrdOdLogistics();
