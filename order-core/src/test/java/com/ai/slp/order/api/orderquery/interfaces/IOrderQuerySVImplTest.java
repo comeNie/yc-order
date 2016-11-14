@@ -22,8 +22,8 @@ public class IOrderQuerySVImplTest extends BaseTest{
 		//request.setFlag("12io");
 		//request.setOrderType("1ololp");
 		Long ss= 2000000015L;
-		request.setOrderId(123L);
-		request.setOperId("10001");
+		//request.setOrderId(123L);
+		//request.setOperId("10001");
 		System.out.println("========="+ss.toString());
 		//request.setFieldCode("3333");
 		//request.setDisplayFlag("11lolo");
@@ -41,8 +41,9 @@ public class IOrderQuerySVImplTest extends BaseTest{
 		request.setSubFlag("1");*/
 		//request.setTranslateName("翻译");
 		Timestamp ts = Timestamp.valueOf("2016-11-08 10:20:12");
-		//Timestamp es = Timestamp.valueOf("2018-11-10 12:20:12");
-		//request.setStateChgTimeStart(ts);
+		Timestamp es = Timestamp.valueOf("2018-11-11 12:20:12");
+		request.setPayTimeStart(ts);
+		//request.setOrderTimeStart(ts);
 		//request.setStateChgTimeEnd(es);
 		//request.setTranslateName("TEST");
 		request.setPageSize(10);
