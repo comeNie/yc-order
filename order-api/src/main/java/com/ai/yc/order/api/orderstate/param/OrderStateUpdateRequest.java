@@ -7,7 +7,13 @@ public class OrderStateUpdateRequest implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	/**
+	 * 订单编号
+	 */
 	private Long orderId;
+	/**
+	 * 订单状态
+	 */
 	private String state;
 	public String getState() {
 		return state;
