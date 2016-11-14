@@ -74,7 +74,7 @@ public class OrderFeeVo implements Serializable {
     /**
      * 加急费用
      */
-    private Long urGentFee;
+    private Long urgentFee;
     
     /**
      * 转换格式费用
@@ -209,12 +209,12 @@ public class OrderFeeVo implements Serializable {
 		this.setTypeFee = setTypeFee;
 	}
 
-	public Long getUrGentFee() {
-		return urGentFee;
+	public Long getUrgentFee() {
+		return urgentFee;
 	}
 
-	public void setUrGentFee(Long urGentFee) {
-		this.urGentFee = urGentFee;
+	public void setUrgentFee(Long urgentFee) {
+		this.urgentFee = urgentFee;
 	}
 
 	public Long getDescTypeFee() {
