@@ -133,9 +133,13 @@ public class OrdOrderVo extends BaseInfo {
 	 */
 	private Timestamp remainingTime;
 	/**
-	 * 报价人（费用操作人）
+	 * 报价人id（费用操作人）
 	 */
 	private String updateOperId;
+	/**
+	 * 报价人
+	 */
+	private String updateOperName;
 	/**
 	 * 报价时间（费用变更时间）
 	 */
@@ -157,6 +161,10 @@ public class OrdOrderVo extends BaseInfo {
 	 * 语言信息
 	 */
 	private List<OrdProdExtendVo> ordProdExtendList;
+	/**
+	 * 翻译级别
+	 */
+	private List<OrdProdLevelVo> ordProdLevelList;
 
 	public Long getOrderId() {
 		return orderId;
@@ -436,6 +444,22 @@ public class OrdOrderVo extends BaseInfo {
 
 	public void setOperId(String operId) {
 		this.operId = operId;
+	}
+
+	public String getUpdateOperName() {
+		return updateOperName;
+	}
+
+	public void setUpdateOperName(String updateOperName) {
+		this.updateOperName = updateOperName;
+	}
+
+	public List<OrdProdLevelVo> getOrdProdLevelList() {
+		return ordProdLevelList;
+	}
+
+	public void setOrdProdLevelList(List<OrdProdLevelVo> ordProdLevelList) {
+		this.ordProdLevelList = ordProdLevelList;
 	}
 
 }

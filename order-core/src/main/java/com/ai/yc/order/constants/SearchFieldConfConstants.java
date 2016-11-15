@@ -28,7 +28,7 @@ public class SearchFieldConfConstants {
     public static final String USER_NAME = "username";
     public static final String LSP_NAME = "lspname";
     public static final String PAY_STYLE = "paystyle";
-    public static final String UPDATE_OPER_ID = "updateoperid";
+    public static final String UPDATE_OPER_NAME = "updatename";
     public static final String STATE_CHG_TIME = "statechgtime";
     public static final String ORDER_TIME = "ordertime";
     public static final String LOCK_TIME = "locktime";
