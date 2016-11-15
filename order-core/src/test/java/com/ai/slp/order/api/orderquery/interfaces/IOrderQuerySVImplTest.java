@@ -22,7 +22,10 @@ public class IOrderQuerySVImplTest extends BaseTest{
 		//request.setFlag("12io");
 		//request.setOrderType("1ololp");
 		Long ss= 2000000015L;
-		//request.setOrderId(123L);
+		//request.setUserName("大海HAODEDSKLDSL");
+		//request.setOrderId(2000000025373363l);
+		request.setUpdateOperName("test");
+		//request.setTranslateName("翻译");
 		//request.setOperId("10001");
 		System.out.println("========="+ss.toString());
 		//request.setFieldCode("3333");
@@ -41,11 +44,10 @@ public class IOrderQuerySVImplTest extends BaseTest{
 		request.setSubFlag("1");*/
 		//request.setTranslateName("翻译");
 		Timestamp ts = Timestamp.valueOf("2016-11-08 10:20:12");
-		Timestamp es = Timestamp.valueOf("2018-11-11 12:20:12");
-		request.setPayTimeStart(ts);
-		//request.setOrderTimeStart(ts);
+		Timestamp es = Timestamp.valueOf("2018-11-14 20:20:12");
+			//request.setPayTimeStart(ts);
+		//request.setOrderTimeEnd(es);
 		//request.setStateChgTimeEnd(es);
-		//request.setTranslateName("TEST");
 		request.setPageSize(10);
 		request.setPageNo(1);
 		QueryOrderRsponse response = this.iOrderQuerySV.queryOrder(request);

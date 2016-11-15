@@ -173,9 +173,9 @@ public final class OrderSearchCriteria {
             return this;
         }
         //报价人（费用操作工号）
-        public OrderSearchCriteriaBuilder updateOperId(String updateOperId) {
-            orderSearchCriteria.searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.UPDATE_OPER_ID,
-            		updateOperId, new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
+        public OrderSearchCriteriaBuilder updateOperName(String updateOperName) {
+            orderSearchCriteria.searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.UPDATE_OPER_NAME,
+            		updateOperName, new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
             return this;
         }
         // 排序

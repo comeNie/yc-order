@@ -26,6 +26,7 @@ import com.ai.paas.ipaas.util.StringUtil;
 import com.ai.yc.order.api.orderquery.interfaces.IOrderQuerySV;
 import com.ai.yc.order.api.orderquery.param.OrdOrderVo;
 import com.ai.yc.order.api.orderquery.param.OrdProdExtendVo;
+import com.ai.yc.order.api.orderquery.param.OrdProdLevelVo;
 import com.ai.yc.order.api.orderquery.param.QueryOrdCountRequest;
 import com.ai.yc.order.api.orderquery.param.QueryOrdCountResponse;
 import com.ai.yc.order.api.orderquery.param.QueryOrderRequest;
@@ -33,6 +34,7 @@ import com.ai.yc.order.api.orderquery.param.QueryOrderRsponse;
 import com.ai.yc.order.constants.OrdersConstants;
 import com.ai.yc.order.constants.SearchFieldConfConstants;
 import com.ai.yc.order.search.bo.OrdProdExtend;
+import com.ai.yc.order.search.bo.OrdProdLevel;
 import com.ai.yc.order.search.bo.OrderInfo;
 import com.ai.yc.order.service.business.impl.search.OrderSearchImpl;
 import com.ai.yc.order.service.business.interfaces.IOrdOrderBusiSV;
@@ -79,6 +81,8 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 			for (OrderInfo ord : ordList) {
 				OrdOrderVo order = new OrdOrderVo();
 				List<OrdProdExtendVo> ordProdExtendList = new ArrayList<OrdProdExtendVo>();
+				List<OrdProdLevelVo> ordProdLevelList = new ArrayList<OrdProdLevelVo>();
+				
 				// 订单id
 				order.setOrderId(Long.valueOf(ord.getOrderid()));
 				order.setBusiType(ord.getBusitype());
@@ -102,6 +106,7 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 				order.setOperId(ord.getOperid());
 				order.setTranslateName(ord.getTranslatename());
 				order.setTranslateType(ord.getTranslatetype());
+				order.setUpdateOperName(ord.getUpdatename());
 				if (ord.getStarttime() != null) {
 					order.setStartTime(new Timestamp(ord.getStarttime().getTime()));
 				}
@@ -146,6 +151,20 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 					}
 					order.setOrdProdExtendList(ordProdExtendList);
 				}
+				//获取翻译级别
+				String ordLevelInfos = JSON.toJSONString(ord.getOrdprodleveles());
+				List<OrdProdLevel> levelList = JSON.parseObject(ordLevelInfos,
+						new TypeReference<List<OrdProdLevel>>() {
+						});
+				if (!CollectionUtil.isEmpty(levelList)) {
+					for(OrdProdLevel level:levelList){
+						OrdProdLevelVo levelVo = new OrdProdLevelVo();
+						levelVo.setTranslateLevel(level.getTranslatelevel());
+						ordProdLevelList.add(levelVo);
+					}
+					order.setOrdProdLevelList(ordProdLevelList);
+				}
+				
 				results.add(order);
 			}
 		}
@@ -300,8 +319,8 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
 		}
 		// 如果报价人不为空
-		if (!StringUtil.isBlank(request.getUpdateOperId())) {
-			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.UPDATE_OPER_ID, request.getUpdateOperId(),
+		if (!StringUtil.isBlank(request.getUpdateOperName())) {
+			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.UPDATE_OPER_NAME, request.getUpdateOperName(),
 					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
 		}
 

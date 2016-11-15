@@ -156,9 +156,13 @@ public class QueryOrderRequest extends BaseInfo {
 	private Timestamp payTimeEnd;
 
 	/**
-	 * 报价人
+	 * 报价人id
 	 */
 	private String updateOperId;
+	/**
+	 * 报价人
+	 */
+	private String updateOperName;
 	/**
 	 * 报价开始时间
 	 */
@@ -501,6 +505,14 @@ public class QueryOrderRequest extends BaseInfo {
 
 	public void setOperId(String operId) {
 		this.operId = operId;
+	}
+
+	public String getUpdateOperName() {
+		return updateOperName;
+	}
+
+	public void setUpdateOperName(String updateOperName) {
+		this.updateOperName = updateOperName;
 	}
 
 }

@@ -16,13 +16,16 @@ import com.ai.yc.order.dao.mapper.bo.OrdBalacneIf;
 import com.ai.yc.order.dao.mapper.bo.OrdOdFeeTotal;
 import com.ai.yc.order.dao.mapper.bo.OrdOdProd;
 import com.ai.yc.order.dao.mapper.bo.OrdOdProdExtend;
+import com.ai.yc.order.dao.mapper.bo.OrdOdProdLevel;
 import com.ai.yc.order.dao.mapper.bo.OrdOrder;
 import com.ai.yc.order.search.bo.OrdProdExtend;
+import com.ai.yc.order.search.bo.OrdProdLevel;
 import com.ai.yc.order.search.bo.OrderInfo;
 import com.ai.yc.order.service.atom.interfaces.IOrdBalacneIfAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdFeeTotalAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdProdAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdProdExtendAtomSV;
+import com.ai.yc.order.service.atom.interfaces.IOrdOdProdLevelAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOrderAtomSV;
 import com.ai.yc.order.service.business.interfaces.search.IOrderIndexBusiSV;
 
@@ -39,12 +42,15 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 	private IOrdBalacneIfAtomSV ordBalacneIfAtomSV;
 	@Autowired
 	private IOrdOrderAtomSV ordOrderAtomSV;
+	@Autowired
+	private IOrdOdProdLevelAtomSV ordOdProdLevelAtomSV;
 	@Override
 	public List<OrderInfo> orderFillQuery(List<OrdOrder> ordList) throws BusinessException, SystemException {
 
 		List<OrderInfo> ordInfoList = new ArrayList<>();
-		List<OrdProdExtend> ordextendList = new ArrayList<OrdProdExtend>();
 		for (OrdOrder ord : ordList) {
+			List<OrdProdExtend> ordextendList = new ArrayList<OrdProdExtend>();
+			List<OrdProdLevel> ordLevelLists = new ArrayList<OrdProdLevel>();
 			OrderInfo ordInfo = new OrderInfo();
 			ordInfo.setOrderid(ord.getOrderId().toString());
 			ordInfo.setBusitype(ord.getBusiType());
@@ -81,6 +87,7 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 			//赋值假数据
 			ordInfo.setUsername("test");
 			ordInfo.setLspname("test");
+			ordInfo.setUpdatename("test");
 			// 查询商品信息
 			OrdOdProd ordOdProd = ordOdProdAtomSV.findByOrderId(ord.getOrderId());
 			if (ordOdProd != null) {
@@ -101,6 +108,16 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 					ordextendList.add(prodextend);
 				}
 				ordInfo.setOrdextendes(ordextendList);
+			}
+			//查询翻译级别信息
+			List<OrdOdProdLevel> levelLists = ordOdProdLevelAtomSV.findByOrderId(ord.getOrderId());
+			if(!CollectionUtil.isEmpty(levelLists)){
+				for(OrdOdProdLevel level:levelLists){
+					OrdProdLevel ordLevel = new OrdProdLevel();
+					ordLevel.setTranslatelevel(level.getTranslateLevel());
+					ordLevelLists.add(ordLevel);
+				}
+				ordInfo.setOrdprodleveles(ordLevelLists);
 			}
 			// 查询费用信息
 			OrdOdFeeTotal ordOdFeeTotal = ordOdFeeTotalAtomSV.findByOrderId(ord.getOrderId());
@@ -129,6 +146,7 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 			 OrdOrder ord = ordOrderAtomSV.findByPrimaryKey(orderId);
 				List<OrdProdExtend> ordextendList = new ArrayList<OrdProdExtend>();
 				List<OrderInfo> orderList = new ArrayList<OrderInfo>();
+				List<OrdProdLevel> ordLevelList = new ArrayList<OrdProdLevel>();
 				if(ord!=null){
 					OrderInfo ordInfo = new OrderInfo();
 					ordInfo.setOrderid(ord.getOrderId().toString());
@@ -166,6 +184,7 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 					//赋值假数据
 					ordInfo.setUsername("test");
 					ordInfo.setLspname("test");
+					ordInfo.setUpdatename("test");
 					// 查询商品信息
 					OrdOdProd ordOdProd = ordOdProdAtomSV.findByOrderId(ord.getOrderId());
 					if (ordOdProd != null) {
@@ -194,6 +213,16 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 						ordInfo.setUpdatetime(ordOdFeeTotal.getUpdateTime());
 						ordInfo.setCurrencyunit(ordOdFeeTotal.getCurrencyUnit());
 						ordInfo.setTotalfee(ordOdFeeTotal.getTotalFee());
+					}
+					//查询翻译级别信息
+					List<OrdOdProdLevel> levelLists = ordOdProdLevelAtomSV.findByOrderId(ord.getOrderId());
+					if(!CollectionUtil.isEmpty(levelLists)){
+						for(OrdOdProdLevel level:levelLists){
+							OrdProdLevel ordLevel = new OrdProdLevel();
+							ordLevel.setTranslatelevel(level.getTranslateLevel());
+							ordLevelList.add(ordLevel);
+						}
+						ordInfo.setOrdprodleveles(ordLevelList);
 					}
 					// 查询支付信息
 					OrdBalacneIf ordBalacneIf = ordBalacneIfAtomSV.findByOrderId(ord.getOrderId());

@@ -42,13 +42,22 @@ public class OrderInfo {
 	private String currencyunit;
 	private String operid;
 	/**
+	 * 报价人
+	 */
+	private String updatename;
+	/**
 	 * 费用变更时间
 	 */
 	private Date updatetime;
 
-	
+	/**
+	 * 語言對
+	 */
 	private List<OrdProdExtend> ordextendes;
-
+	/**
+	 * 翻譯級別
+	 */
+	private List<OrdProdLevel> ordprodleveles;
 	public String getOrderid() {
 		return orderid;
 	}
@@ -359,6 +368,22 @@ public class OrderInfo {
 
 	public void setOperid(String operid) {
 		this.operid = operid;
+	}
+
+	public String getUpdatename() {
+		return updatename;
+	}
+
+	public void setUpdatename(String updatename) {
+		this.updatename = updatename;
+	}
+
+	public List<OrdProdLevel> getOrdprodleveles() {
+		return ordprodleveles;
+	}
+
+	public void setOrdprodleveles(List<OrdProdLevel> ordprodleveles) {
+		this.ordprodleveles = ordprodleveles;
 	}
 
 }
