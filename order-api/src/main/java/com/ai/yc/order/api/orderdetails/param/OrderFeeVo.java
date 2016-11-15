@@ -90,6 +90,11 @@ public class OrderFeeVo implements Serializable {
      * 操作工号
      */
     private String updateOperId;
+    
+    /**
+     * 操作工姓名
+     */
+    private String updateOperName;
 
     /**
      * 变更时间
@@ -287,6 +292,14 @@ public class OrderFeeVo implements Serializable {
 
 	public void setJfCouponFee(Long jfCouponFee) {
 		this.jfCouponFee = jfCouponFee;
+	}
+
+	public String getUpdateOperName() {
+		return updateOperName;
+	}
+
+	public void setUpdateOperName(String updateOperName) {
+		this.updateOperName = updateOperName;
 	}
     
     

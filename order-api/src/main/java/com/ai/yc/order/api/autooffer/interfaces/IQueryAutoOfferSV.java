@@ -33,7 +33,7 @@ public interface IQueryAutoOfferSV {
      * @RestRelativeURL autooffer/queryAutoOffer
 	 */
 	@POST
-	@Path("/autooffer")
+	@Path("/queryAutoOffer")
 	QueryAutoOfferRes queryAutoOffer(QueryAutoOfferReq req)throws BusinessException,SystemException;
 
 }

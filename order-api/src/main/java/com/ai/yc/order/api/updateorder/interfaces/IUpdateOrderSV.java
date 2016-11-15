@@ -33,7 +33,7 @@ public interface IUpdateOrderSV {
      * @RestRelativeURL updateorder/updateOrderInfo
 	 */
 	@POST
-	@Path("/updateorder")
+	@Path("/updateOrderInfo")
 	UpdateOrderResponse updateOrderInfo(UpdateOrderRequest req)throws BusinessException,SystemException;
 
 }

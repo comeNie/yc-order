@@ -33,7 +33,7 @@ public interface IUpdatePayStatusSV {
      * @RestRelativeURL paystatus/updatePayStatus
 	 */
 	@POST
-	@Path("/paystatus")
+	@Path("/updatePayStatus")
 	UpdatePayStatusResponse updatePayStatus(UpdatePayStatusRequest req)throws BusinessException,SystemException;
 
 }

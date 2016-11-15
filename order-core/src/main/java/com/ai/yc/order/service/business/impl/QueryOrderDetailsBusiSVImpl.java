@@ -10,8 +10,11 @@ import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.vo.ResponseHeader;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.ai.opt.sdk.util.BeanUtils;
+import com.ai.opt.sdk.util.StringUtil;
 import com.ai.yc.common.api.sysdomain.param.QuerySysDomainDetailsRes;
 import com.ai.yc.common.api.syspurpose.param.QuerySysPurposeDetailsRes;
+import com.ai.yc.common.api.sysuser.param.SysUserQueryRequest;
+import com.ai.yc.common.api.sysuser.param.SysUserQueryResponse;
 import com.ai.yc.order.api.orderdetails.param.ContactsVo;
 import com.ai.yc.order.api.orderdetails.param.OrderFeeVo;
 import com.ai.yc.order.api.orderdetails.param.OrderStateChgVo;
@@ -42,6 +45,7 @@ import com.ai.yc.order.service.atom.interfaces.IOrdOdProdLevelAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdStateChgAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOrderAtomSV;
 import com.ai.yc.order.service.atom.interfaces.ISysConfigAtomSV;
+import com.ai.yc.order.service.atom.interfaces.ISysUserAtomSV;
 import com.ai.yc.order.service.business.interfaces.IQueryOrderDetailsBusiSV;
 
 /**
@@ -82,6 +86,9 @@ public class QueryOrderDetailsBusiSVImpl implements IQueryOrderDetailsBusiSV {
 	
 	@Autowired
 	private transient ISysConfigAtomSV iSysConfigAtomSV;
+	
+	@Autowired
+	private transient ISysUserAtomSV iSysUserAtomSV;
 
 	@Override
 	public QueryOrderDetailsResponse queryOrderDetails(Long orderId) {
@@ -162,6 +169,15 @@ public class QueryOrderDetailsBusiSVImpl implements IQueryOrderDetailsBusiSV {
 		if(ordOdFeeTotal!=null){
 			OrderFeeVo orderFee = new OrderFeeVo();
 			BeanUtils.copyProperties(orderFee, ordOdFeeTotal);
+			//获取操作员工姓名
+			if(!StringUtil.isBlank(orderFee.getUpdateOperId())){
+				SysUserQueryRequest req = new SysUserQueryRequest();
+				req.setId(orderFee.getUpdateOperId());
+				SysUserQueryResponse userInfo = iSysUserAtomSV.queryUserInfo(req);
+				if(userInfo!=null){
+					orderFee.setUpdateOperName(StringUtil.isBlank(userInfo.getName())?userInfo.getLoginName():userInfo.getName());
+				}
+			}
 			resp.setOrderFee(orderFee);
 		}
 		
