@@ -1,0 +1,199 @@
+package com.ai.yc.order.api.orderreceivesearch.impl;
+
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.ai.opt.base.exception.BusinessException;
+import com.ai.opt.base.exception.SystemException;
+import com.ai.opt.base.vo.PageInfo;
+import com.ai.opt.base.vo.ResponseHeader;
+import com.ai.opt.sdk.constants.ExceptCodeConstants;
+import com.ai.opt.sdk.util.CollectionUtil;
+import com.ai.paas.ipaas.search.vo.Result;
+import com.ai.paas.ipaas.search.vo.SearchCriteria;
+import com.ai.paas.ipaas.search.vo.SearchOption;
+import com.ai.paas.ipaas.search.vo.Sort;
+import com.ai.paas.ipaas.search.vo.Sort.SortOrder;
+import com.ai.paas.ipaas.util.StringUtil;
+import com.ai.yc.order.api.orderquery.param.OrdProdExtendVo;
+import com.ai.yc.order.api.orderreceivesearch.interfaces.IOrderWaitReceiveSV;
+import com.ai.yc.order.api.orderreceivesearch.param.OrderWaitReceiveSearchInfo;
+import com.ai.yc.order.api.orderreceivesearch.param.OrderWaitReceiveSearchRequest;
+import com.ai.yc.order.api.orderreceivesearch.param.OrderWaitReceiveSearchResponse;
+import com.ai.yc.order.constants.SearchFieldConfConstants;
+import com.ai.yc.order.search.bo.OrdProdExtend;
+import com.ai.yc.order.search.bo.OrderInfo;
+import com.ai.yc.order.service.business.interfaces.IOrderWaitReceiveBusiSV;
+import com.alibaba.dubbo.config.annotation.Service;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
+
+@Service
+@Component
+public class OrderWaitReceiveSVImpl implements IOrderWaitReceiveSV {
+
+	@Autowired
+	private IOrderWaitReceiveBusiSV orderWaitReceiveBusiSV;
+
+	@Override
+	public OrderWaitReceiveSearchResponse pageSearchWaitReceive(OrderWaitReceiveSearchRequest request)
+			throws BusinessException, SystemException {
+		// TODO Auto-generated method stub
+		// request.setTenantId(OrdersConstants.TENANT_ID);
+		// 有效性校验
+		// ValidateUtils.validateQueryOrder(request);
+		// 调用搜索引擎进行查询
+		int startSize = 1;
+		int maxSize = 1;
+		// 最大条数设置
+		int pageNo = request.getPageNo();
+		int size = request.getPageSize();
+		if (request.getPageNo() == 1) {
+			startSize = 0;
+		} else {
+			startSize = (pageNo - 1) * size;
+		}
+		maxSize = size;
+		OrderWaitReceiveSearchResponse response = new OrderWaitReceiveSearchResponse();
+		//
+		PageInfo<OrderWaitReceiveSearchInfo> pageinfo = new PageInfo<OrderWaitReceiveSearchInfo>();
+
+		List<OrderWaitReceiveSearchInfo> results = new ArrayList<OrderWaitReceiveSearchInfo>();
+		//
+		
+		List<SearchCriteria> orderSearchCriteria = commonConditions(request);
+		List<Sort> sortList = new ArrayList<Sort>();
+		Sort sort = new Sort("ordertime", SortOrder.DESC);
+		sortList.add(sort);
+		Result<OrderInfo> result = this.orderWaitReceiveBusiSV.search(orderSearchCriteria, startSize, maxSize, sortList);
+		List<OrderInfo> ordList = result.getContents();
+		if (!CollectionUtil.isEmpty(ordList)) {
+			for (OrderInfo ord : ordList) {
+				OrderWaitReceiveSearchInfo order = new OrderWaitReceiveSearchInfo();
+				List<OrdProdExtendVo> ordProdExtendList = new ArrayList<OrdProdExtendVo>();
+
+				// 订单id
+				order.setOrderId(Long.valueOf(ord.getOrderid()));
+				order.setFlag(ord.getFlag());
+				order.setOrderLevel(ord.getOrderlevel());
+				order.setTotalFee(ord.getTotalfee());
+				order.setTranslateName(ord.getTranslatename());
+				order.setTranslateType(ord.getTranslatetype());
+				//
+				if (ord.getOrdertime() != null) {
+					order.setOrderTime(new Timestamp(ord.getOrdertime().getTime()));
+				}
+				if (ord.getPaytime() != null) {
+					order.setPayTime(new Timestamp(ord.getPaytime().getTime()));
+				}
+				
+				// 获取语言对名称
+				String extendInfos = JSON.toJSONString(ord.getOrdextendes());
+				List<OrdProdExtend> extendList = JSON.parseObject(extendInfos,
+						new TypeReference<List<OrdProdExtend>>() {
+						});
+				if (!CollectionUtil.isEmpty(extendList)) {
+					for (OrdProdExtend extend : extendList) {
+						OrdProdExtendVo prodExtend = new OrdProdExtendVo();
+						prodExtend.setLangungePair(extend.getLangungeid());
+						prodExtend.setLangungePairChName(extend.getLangungechname());
+						prodExtend.setLangungePairEnName(extend.getLangungeenname());
+						ordProdExtendList.add(prodExtend);
+					}
+					order.setLanguagePair(ordProdExtendList.get(0).getLangungePair());
+					order.setLanguagePairName(ordProdExtendList.get(0).getLangungePairChName());
+					order.setLanguageNameEn(ordProdExtendList.get(0).getLangungePairEnName());
+				}
+
+				results.add(order);
+			}
+		}
+		pageinfo.setResult(results);
+		pageinfo.setPageSize(request.getPageSize());
+		pageinfo.setPageNo(request.getPageNo());
+		pageinfo.setCount(new Long(result.getCount()).intValue());
+		response.setPageInfo(pageinfo);
+		ResponseHeader responseHeader = new ResponseHeader(true, ExceptCodeConstants.Special.SUCCESS, "订单查询成功");
+		response.setResponseHeader(responseHeader);
+		return response;
+	}
+
+	// 搜索引擎数据公共查询条件
+	public List<SearchCriteria> commonConditions(OrderWaitReceiveSearchRequest request) {
+		List<SearchCriteria> searchfieldVos = new ArrayList<SearchCriteria>();
+		/**
+		 * 如果业务标识不为空
+		 */
+		if (!StringUtil.isBlank(request.getFlag())) {
+			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.FLAG, request.getFlag(),
+					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
+
+		}
+		/**
+		 * 译员等级
+		 */
+		if (!StringUtil.isBlank(request.getInterperLevel())) {
+			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.ORDER_LEVEL, request.getInterperLevel(),
+					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
+
+		}
+
+		// 如果翻译类型不为空
+		if (!StringUtil.isBlank(request.getTranslateType())) {
+			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.TRANSLATE_TYPE, request.getTranslateType(),
+					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
+		}
+		// 如果翻译主题不为空
+		if (!StringUtil.isBlank(request.getTranslateName())) {
+			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.TRANSLATE_NAME, request.getTranslateName(),
+					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
+		}
+		// 如果翻译类型不为空
+		if (!StringUtil.isBlank(request.getTranslateType())) {
+			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.TRANSLATE_TYPE, request.getTranslateType(),
+					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
+		}
+		// 如果state不为空
+		if (!StringUtil.isBlank(request.getState())) {
+			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.STATE, request.getState(),
+					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
+		}
+		
+		// 如果译员类型不为空
+		if (!StringUtil.isBlank(request.getInterperType())) {
+			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.INTERPER_TYPE, request.getInterperType(),
+					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
+		}
+		
+		// 如果用途id不为空
+		if (!StringUtil.isBlank(request.getUseCode())) {
+			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.USE_CODE, request.getUseCode(),
+					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
+		}
+		// 如果领域id不为空
+		if (!StringUtil.isBlank(request.getFieldCode())) {
+			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.FIELD_CODE, request.getFieldCode(),
+					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
+		}
+		
+		// 产品表中开始时间字段区间查询 stateTime
+		if (null != request.getStartStateTime() && null != request.getEndStateTime()) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZ");
+			String start = sdf.format(request.getStartStateTime());
+			String end = sdf.format(request.getEndStateTime());
+			SearchCriteria searchCriteria = new SearchCriteria();
+			searchCriteria.setOption(new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.range));
+			searchCriteria.setField(SearchFieldConfConstants.STATE_TIME);
+			searchCriteria.addFieldValue(start);
+			searchCriteria.addFieldValue(end);
+			searchfieldVos.add(searchCriteria);
+		}
+		
+		return searchfieldVos;
+	}
+}
