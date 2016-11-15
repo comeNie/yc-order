@@ -34,6 +34,7 @@ import com.ai.yc.order.service.atom.interfaces.IOrdOdProdLevelAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOrderAtomSV;
 import com.ai.yc.order.service.business.interfaces.IOrdOdStateChgBusiSV;
 import com.ai.yc.order.service.business.interfaces.IUpdateOrderBusiSV;
+import com.ai.yc.order.service.business.interfaces.search.IOrderIndexBusiSV;
 import com.ai.yc.order.util.SequenceUtil;
 
 /**
@@ -65,6 +66,9 @@ public class UpdateOrderBusiSVImpl implements IUpdateOrderBusiSV{
 	
 	@Autowired
 	private IOrdOdStateChgBusiSV iOrdOdStateChgBusiSV;
+	
+	@Autowired
+	private IOrderIndexBusiSV orderIndexBusiSV;
 
 	@Override
 	public UpdateOrderResponse updateOrderInfo(UpdateOrderRequest req) {
@@ -164,8 +168,8 @@ public class UpdateOrderBusiSVImpl implements IUpdateOrderBusiSV{
 				
 			}
 		}
-	
-		
+	    //更新搜索引擎
+		orderIndexBusiSV.insertSesData(req.getOrderId());
 		return resp;
 	}
 	

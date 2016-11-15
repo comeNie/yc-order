@@ -22,6 +22,7 @@ import com.ai.yc.order.service.atom.interfaces.IOrdOdProdAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOrderAtomSV;
 import com.ai.yc.order.service.business.interfaces.IOrdOdStateChgBusiSV;
 import com.ai.yc.order.service.business.interfaces.IUpdatePayStatusBusiSV;
+import com.ai.yc.order.service.business.interfaces.search.IOrderIndexBusiSV;
 
 /**
  * @author hougang@asiainfo.com
@@ -43,6 +44,9 @@ public class UpdatePayStatusBusiSVImpl implements IUpdatePayStatusBusiSV {
 	
 	@Autowired
 	private IOrdOdStateChgBusiSV iOrdOdStateChgBusiSV;
+	
+	@Autowired
+	private IOrderIndexBusiSV orderIndexBusiSV;
 
 	@Override
 	public UpdatePayStatusResponse updatePayStatus(UpdatePayStatusRequest req) {
@@ -94,7 +98,8 @@ public class UpdatePayStatusBusiSVImpl implements IUpdatePayStatusBusiSV {
 		chg.setOrgId(OrdersConstants.OrgID.ORG_ID_SYS);
 		chg.setOrderId(req.getOrderId());
 		iOrdOdStateChgBusiSV.addPayChgDesc(chg);
-		
+		 //更新搜索引擎
+		orderIndexBusiSV.insertSesData(req.getOrderId());
 		resp.setOrderId(req.getOrderId());
 		resp.setResponseHeader(new ResponseHeader(true, ResultCodeConstants.SUCCESS_CODE, "查询成功"));
 		return resp;
