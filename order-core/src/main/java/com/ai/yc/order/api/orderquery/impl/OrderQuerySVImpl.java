@@ -129,7 +129,7 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 				if (ord.getStarttime() != null && ord.getEndtime() != null) {
 					long time = ord.getFinishtime().getTime() - DateUtil.getCurrentTimeMillis();
 					Timestamp scurrtest = new Timestamp(time);
-					order.setUpdateRemainingTime(scurrtest);
+					order.setRemainingTime(scurrtest);
 				}
 				// 获取语言对名称
 				String extendInfos = JSON.toJSONString(ord.getOrdextendes());
