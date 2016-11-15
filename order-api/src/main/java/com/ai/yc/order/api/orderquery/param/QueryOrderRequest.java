@@ -175,7 +175,14 @@ public class QueryOrderRequest extends BaseInfo {
 	 * 操作员
 	 */
 	private String operId;
-	
+	/**
+	 * 状态开始时间
+	 */
+	private Timestamp stateTimeStart;
+	/**
+	 * 状态结束时间
+	 */
+	private Timestamp stateTimeEnd;
 
 	/**
 	 * 页码，必填
@@ -513,6 +520,22 @@ public class QueryOrderRequest extends BaseInfo {
 
 	public void setUpdateOperName(String updateOperName) {
 		this.updateOperName = updateOperName;
+	}
+
+	public Timestamp getStateTimeStart() {
+		return stateTimeStart;
+	}
+
+	public void setStateTimeStart(Timestamp stateTimeStart) {
+		this.stateTimeStart = stateTimeStart;
+	}
+
+	public Timestamp getStateTimeEnd() {
+		return stateTimeEnd;
+	}
+
+	public void setStateTimeEnd(Timestamp stateTimeEnd) {
+		this.stateTimeEnd = stateTimeEnd;
 	}
 
 }
