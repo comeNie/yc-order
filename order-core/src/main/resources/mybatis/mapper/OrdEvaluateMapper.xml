@@ -11,6 +11,7 @@
     <result column="STATE" property="state" jdbcType="VARCHAR" />
     <result column="EVALUATE_TIME" property="evaluateTime" jdbcType="TIMESTAMP" />
     <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="EVALUATE_SUN" property="evaluateSun" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -72,7 +73,7 @@
   </sql>
   <sql id="Base_Column_List" >
     EVALUATE_ID, ORDER_ID, SERVE_QUALITY, SERVE_SPEEN, SERVE_MANNER, EVALUATE_CONTENT, 
-    STATE, EVALUATE_TIME, REMARK
+    STATE, EVALUATE_TIME, REMARK, EVALUATE_SUN
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.yc.order.dao.mapper.bo.OrdEvaluateCriteria" >
     select
@@ -110,12 +111,12 @@
   <insert id="insert" parameterType="com.ai.yc.order.dao.mapper.bo.OrdEvaluate" >
     insert into ord_evaluate (EVALUATE_ID, ORDER_ID, SERVE_QUALITY, 
       SERVE_SPEEN, SERVE_MANNER, EVALUATE_CONTENT, 
-      STATE, EVALUATE_TIME, REMARK
-      )
+      STATE, EVALUATE_TIME, REMARK, 
+      EVALUATE_SUN)
     values (#{evaluateId,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, #{serveQuality,jdbcType=BIGINT}, 
       #{serveSpeen,jdbcType=BIGINT}, #{serveManner,jdbcType=BIGINT}, #{evaluateContent,jdbcType=VARCHAR}, 
-      #{state,jdbcType=VARCHAR}, #{evaluateTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}
-      )
+      #{state,jdbcType=VARCHAR}, #{evaluateTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, 
+      #{evaluateSun,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ai.yc.order.dao.mapper.bo.OrdEvaluate" >
     insert into ord_evaluate
@@ -147,6 +148,9 @@
       <if test="remark != null" >
         REMARK,
       </if>
+      <if test="evaluateSun != null" >
+        EVALUATE_SUN,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="evaluateId != null" >
@@ -175,6 +179,9 @@
       </if>
       <if test="remark != null" >
         #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluateSun != null" >
+        #{evaluateSun,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -214,6 +221,9 @@
       <if test="record.remark != null" >
         REMARK = #{record.remark,jdbcType=VARCHAR},
       </if>
+      <if test="record.evaluateSun != null" >
+        EVALUATE_SUN = #{record.evaluateSun,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -229,7 +239,8 @@
       EVALUATE_CONTENT = #{record.evaluateContent,jdbcType=VARCHAR},
       STATE = #{record.state,jdbcType=VARCHAR},
       EVALUATE_TIME = #{record.evaluateTime,jdbcType=TIMESTAMP},
-      REMARK = #{record.remark,jdbcType=VARCHAR}
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      EVALUATE_SUN = #{record.evaluateSun,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -261,6 +272,9 @@
       <if test="remark != null" >
         REMARK = #{remark,jdbcType=VARCHAR},
       </if>
+      <if test="evaluateSun != null" >
+        EVALUATE_SUN = #{evaluateSun,jdbcType=VARCHAR},
+      </if>
     </set>
     where EVALUATE_ID = #{evaluateId,jdbcType=BIGINT}
   </update>
@@ -273,7 +287,8 @@
       EVALUATE_CONTENT = #{evaluateContent,jdbcType=VARCHAR},
       STATE = #{state,jdbcType=VARCHAR},
       EVALUATE_TIME = #{evaluateTime,jdbcType=TIMESTAMP},
-      REMARK = #{remark,jdbcType=VARCHAR}
+      REMARK = #{remark,jdbcType=VARCHAR},
+      EVALUATE_SUN = #{evaluateSun,jdbcType=VARCHAR}
     where EVALUATE_ID = #{evaluateId,jdbcType=BIGINT}
   </update>
 </mapper>

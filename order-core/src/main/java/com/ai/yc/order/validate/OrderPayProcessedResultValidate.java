@@ -70,9 +70,9 @@ public class OrderPayProcessedResultValidate {
 		// 企业ID
 		
 		// 账户ID
-		if(null == request.getBaseInfo().getAccountId()){
-			this.newException("账户Id不能为空");
-		}
+//		if(null == request.getBaseInfo().getAccountId()){
+//			this.newException("账户Id不能为空");
+//		}
 		// 订单状态
 		
 		// 客户端显示状态

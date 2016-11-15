@@ -14,10 +14,12 @@ import com.ai.yc.order.constants.OrdersConstants;
 import com.ai.yc.order.dao.mapper.bo.OrdBalacneIf;
 import com.ai.yc.order.dao.mapper.bo.OrdOdFeeTotal;
 import com.ai.yc.order.dao.mapper.bo.OrdOdProdWithBLOBs;
+import com.ai.yc.order.dao.mapper.bo.OrdOdStateChg;
 import com.ai.yc.order.dao.mapper.bo.OrdOrder;
 import com.ai.yc.order.service.atom.interfaces.IOrdBalacneIfAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdFeeTotalAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdProdAtomSV;
+import com.ai.yc.order.service.atom.interfaces.IOrdOdStateChgAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOrderAtomSV;
 import com.ai.yc.order.service.business.interfaces.IOrderPayProcessedResultBusiSV;
 import com.ai.yc.order.util.SequenceUtil;
@@ -37,7 +39,9 @@ public class OrderPayProcessedResultBusiSVImpl implements IOrderPayProcessedResu
 	private IOrdOdProdAtomSV ordOdProdAtomSV;
 	@Autowired
 	private IOrdBalacneIfAtomSV ordBalacneIfAtomSV;
-
+	@Autowired
+	private IOrdOdStateChgAtomSV ordOdStateChgAtomSV;// 订单轨迹表
+	
 	@Override
 	@Transactional
 	public OrderPayProcessedResultResponse updateOrderPayProcessedResult(OrderPayProcessedResultRequest request) {
@@ -51,6 +55,14 @@ public class OrderPayProcessedResultBusiSVImpl implements IOrderPayProcessedResu
 		this.feeInfo(request);
 		this.prodInfo(request);
 		this.payInfo(request);
+		
+		String userId = request.getBaseInfo().getUserId();
+		Long orderId = request.getBaseInfo().getOrderId();
+		String translateType = ordOrderDb.getTranslateType();//数据库获取订单翻译类型
+		String oldState = ordOrderDb.getState();//数据库获取订单当前状态
+		String newState = OrdersConstants.OrderState.STATE_WAIT_RECEIVE;//新状态为 待领取
+		//
+		this.orderStateChgInfoSubmit(userId, orderId, translateType, oldState, newState);
 		//
 		response.setOrderId(request.getBaseInfo().getOrderId());
 		//
@@ -132,6 +144,22 @@ public class OrderPayProcessedResultBusiSVImpl implements IOrderPayProcessedResu
 		ordBalacneIf.setExternalId(request.getFeeInfo().getExternalId());
 		this.ordBalacneIfAtomSV.insertSelective(ordBalacneIf);
 		//
+	}
+	/**
+	 * 订单提交-订单轨迹表
+	 */
+	public void orderStateChgInfoSubmit(String userId,Long orderId,String translateType,String oldState,String newState){
+		OrdOdStateChg ordOdStateChg = new OrdOdStateChg();
+		//
+		Long stateChgId = SequenceUtil.createStateChgId();
+		//
+		ordOdStateChg.setStateChgId(stateChgId);
+		ordOdStateChg.setOrderId(orderId);
+		ordOdStateChg.setOperId(userId);
+		ordOdStateChg.setOrgState(oldState);
+		ordOdStateChg.setNewState(newState);
+		ordOdStateChg.setStateChgTime(DateUtil.getSysDate());
+		this.ordOdStateChgAtomSV.insertSelective(ordOdStateChg);
 	}
 
 }

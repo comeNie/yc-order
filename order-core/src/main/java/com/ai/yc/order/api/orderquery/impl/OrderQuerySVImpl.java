@@ -100,6 +100,8 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 				order.setTotalFee(ord.getTotalfee());
 				order.setCurrencyUnit(ord.getCurrencyunit());
 				order.setOperId(ord.getOperid());
+				order.setTranslateName(ord.getTranslatename());
+				order.setTranslateType(ord.getTranslatetype());
 				if (ord.getStarttime() != null) {
 					order.setStartTime(new Timestamp(ord.getStarttime().getTime()));
 				}
@@ -210,7 +212,7 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 		// 如果翻译主题不为空
 		if (!StringUtil.isBlank(request.getTranslateName())) {
 			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.TRANSLATE_NAME, request.getTranslateName(),
-					new SearchOption(SearchOption.SearchLogic.should, SearchOption.SearchType.querystring)));
+					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
 		}
 		// 如果企业id不为空
 		if (!StringUtil.isBlank(request.getCorporaId())) {
@@ -280,12 +282,12 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 		// 如果用户昵称不为空
 		if (!StringUtil.isBlank(request.getUserName())) {
 			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.USER_NAME, request.getUserName(),
-					new SearchOption(SearchOption.SearchLogic.should, SearchOption.SearchType.querystring)));
+					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.match)));
 		}
 		// 如果译员名称不为空
 		if (!StringUtil.isBlank(request.getInterperName())) {
 			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.USER_NAME, request.getInterperName(),
-					new SearchOption(SearchOption.SearchLogic.should, SearchOption.SearchType.querystring)));
+					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
 		}
 		// 如果lsp名称不为空
 		if (!StringUtil.isBlank(request.getLspName())) {

@@ -21,6 +21,8 @@ public class OrdEvaluate {
 
     private String remark;
 
+    private String evaluateSun;
+
     public Long getEvaluateId() {
         return evaluateId;
     }
@@ -91,5 +93,13 @@ public class OrdEvaluate {
 
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
+    }
+
+    public String getEvaluateSun() {
+        return evaluateSun;
+    }
+
+    public void setEvaluateSun(String evaluateSun) {
+        this.evaluateSun = evaluateSun == null ? null : evaluateSun.trim();
     }
 }
