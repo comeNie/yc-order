@@ -30,7 +30,7 @@ public class ProdFileVo implements Serializable{
 	/**
 	 * 翻译文件存储ID
 	 */
-	private String fileTraslateId;
+	private String fileTranslateId;
 
 	public String getFileName() {
 		return fileName;
@@ -48,12 +48,14 @@ public class ProdFileVo implements Serializable{
 		this.fileSaveId = fileSaveId;
 	}
 
-	public String getFileTraslateId() {
-		return fileTraslateId;
+	
+
+	public String getFileTranslateId() {
+		return fileTranslateId;
 	}
 
-	public void setFileTraslateId(String fileTraslateId) {
-		this.fileTraslateId = fileTraslateId;
+	public void setFileTranslateId(String fileTranslateId) {
+		this.fileTranslateId = fileTranslateId;
 	}
 
 	public String getFileTranslateName() {
