@@ -91,6 +91,41 @@ public class UpdateOrderBusiSVImpl implements IUpdateOrderBusiSV{
 			  iOrdOdLogisticsAtomSV.updateByOrderIdSelective(logistics, req.getOrderId());
 		}
 		
+		OrdOdProd ordOdProdRecord = iOrdOdProdAtomSV.findByOrderId(req.getOrderId());
+		//产品信息
+		if(req.getProd()!=null){
+			OrdOdProdWithBLOBs ordOdProd = new OrdOdProdWithBLOBs();
+			BeanUtils.copyProperties(ordOdProd, req.getProd());
+			iOrdOdProdAtomSV.updateByOrderIdSelective(ordOdProd, req.getOrderId());
+			//修改翻译级别
+			List<UProdLevelVo> prodLevels = req.getProd().getProdLevels();
+			if(ordOdProdRecord!=null&&prodLevels!=null){
+				iOrdOdProdLevelAtomSV.deleteByOrderId(req.getOrderId());
+				for(UProdLevelVo prodLevel:prodLevels){
+					OrdOdProdLevel ordOdProdLevel = new OrdOdProdLevel();
+					ordOdProdLevel.setProdDetalExtendId(SequenceUtil.createProdDetailLevelId());
+					ordOdProdLevel.setOrderId(req.getOrderId());
+					ordOdProdLevel.setProdDetalId(ordOdProdRecord.getProdDetalId());
+					ordOdProdLevel.setTranslateLevel(prodLevel.getTranslateLevel());
+					ordOdProdLevel.setInfoJson(prodLevel.getInfoJson());
+					iOrdOdProdLevelAtomSV.insertSelective(ordOdProdLevel);
+				}
+			}
+		}
+		
+		//产品文件信息
+		if(ordOdProdRecord!=null&&req.getProdFiles()!=null){
+			iOrdOdProdFileAtomSV.deleteByProdDetalId(ordOdProdRecord.getProdDetalId());
+			for(UProdFileVo prodFile:req.getProdFiles()){
+				OrdOdProdFile ordOdProdFile = new OrdOdProdFile();
+				Long prodFileId = SequenceUtil.createProdDetailFileId();
+				BeanUtils.copyProperties(ordOdProdFile, prodFile);
+				ordOdProdFile.setProdFileId(String.valueOf(prodFileId));
+				ordOdProdFile.setProdDetalId(ordOdProdRecord.getProdDetalId());
+				iOrdOdProdFileAtomSV.insertSelective(ordOdProdFile);
+			}
+		}
+		
 		//添加修改轨迹
 		OrdOdStateChg chg = new OrdOdStateChg();
 		chg.setOrderId(record.getOrderId());
@@ -130,40 +165,7 @@ public class UpdateOrderBusiSVImpl implements IUpdateOrderBusiSV{
 			}
 		}
 	
-		OrdOdProd ordOdProdRecord = iOrdOdProdAtomSV.findByOrderId(req.getOrderId());
-		//产品信息
-		if(req.getProd()!=null){
-			OrdOdProdWithBLOBs ordOdProd = new OrdOdProdWithBLOBs();
-			BeanUtils.copyProperties(ordOdProd, req.getProd());
-			iOrdOdProdAtomSV.updateByOrderIdSelective(ordOdProd, req.getOrderId());
-			//修改翻译级别
-			List<UProdLevelVo> prodLevels = req.getProd().getProdLevels();
-			if(ordOdProdRecord!=null&&prodLevels!=null){
-				iOrdOdProdLevelAtomSV.deleteByOrderId(req.getOrderId());
-				for(UProdLevelVo prodLevel:prodLevels){
-					OrdOdProdLevel ordOdProdLevel = new OrdOdProdLevel();
-					ordOdProdLevel.setProdDetalExtendId(SequenceUtil.createProdDetailLevelId());
-					ordOdProdLevel.setOrderId(req.getOrderId());
-					ordOdProdLevel.setProdDetalId(ordOdProdRecord.getProdDetalId());
-					ordOdProdLevel.setTranslateLevel(prodLevel.getTranslateLevel());
-					ordOdProdLevel.setInfoJson(prodLevel.getInfoJson());
-					iOrdOdProdLevelAtomSV.insertSelective(ordOdProdLevel);
-				}
-			}
-		}
 		
-		//产品文件信息
-		if(ordOdProdRecord!=null&&req.getProdFiles()!=null){
-			iOrdOdProdFileAtomSV.deleteByProdDetalId(ordOdProdRecord.getProdDetalId());
-			for(UProdFileVo prodFile:req.getProdFiles()){
-				OrdOdProdFile ordOdProdFile = new OrdOdProdFile();
-				Long prodFileId = SequenceUtil.createProdDetailFileId();
-				BeanUtils.copyProperties(ordOdProdFile, prodFile);
-				ordOdProdFile.setProdFileId(String.valueOf(prodFileId));
-				ordOdProdFile.setProdDetalId(ordOdProdRecord.getProdDetalId());
-				iOrdOdProdFileAtomSV.insertSelective(ordOdProdFile);
-			}
-		}
 		return resp;
 	}
 	
