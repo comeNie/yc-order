@@ -279,11 +279,6 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.INTERPER_ID, request.getInterperId(),
 					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
 		}
-		// 如果用户id不为空
-		if (!StringUtil.isBlank(request.getUserId())) {
-			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.USER_ID, request.getInterperId(),
-					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
-		}
 		// 如果关键词不为空
 		if (!StringUtil.isBlank(request.getKeyWords())) {
 			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.KEYWORDS, request.getKeyWords(),
