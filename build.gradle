@@ -130,7 +130,6 @@ task zipConfig(type: Zip) {
     baseName "config"
     from "$buildDir/config"
 }
-z
 
 build.dependsOn copySubProjectsJar,copy3rdJars,copySubProjectsConfig
 
