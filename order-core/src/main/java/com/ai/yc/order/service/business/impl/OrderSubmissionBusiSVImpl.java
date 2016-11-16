@@ -32,6 +32,7 @@ import com.ai.yc.order.service.atom.interfaces.IOrdOdProdFileAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdProdLevelAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdStateChgAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOrderAtomSV;
+import com.ai.yc.order.service.business.interfaces.IOrdOdStateChgBusiSV;
 import com.ai.yc.order.service.business.interfaces.IOrderSubmissionBusiSV;
 import com.ai.yc.order.service.mds.ordersubmission.OrderSubmissionMdsSendMess;
 import com.ai.yc.order.service.mds.ordersubmission.OrderSubmissionMdsVo;
@@ -519,6 +520,13 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 			this.ordOdLogisticsAtomSV.insertSelective(ordOdLogistics);
 		}
 	}
+	
+	/**
+	 * 订单提交	
+	 */
+	private final static String ORDER_ALREADY_SUBMISSION_CN = "订单已经提交，订单号%s";	
+	private final static String ORDER_ALREADY_SUBMISSION_EN = "The order has been submitted, Order Number:%s";
+
 	/**
 	 * 订单提交-订单轨迹表
 	 */
@@ -540,7 +548,12 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 		if (TRANSLATE_TYPE_2.equals(translateType)){
 			ordOdStateChg.setNewState(OrdersConstants.OrderState.STATE_WAIT_OFFER);
 		}
+		String descCn = String.format(ORDER_ALREADY_SUBMISSION_CN, orderId);
+		String descEn = String.format(ORDER_ALREADY_SUBMISSION_EN, orderId);
+		
 		ordOdStateChg.setStateChgTime(DateUtil.getSysDate());
+		ordOdStateChg.setChgDesc(descCn);
+		ordOdStateChg.setChgDescEn(descEn);
 		this.ordOdStateChgAtomSV.insertSelective(ordOdStateChg);
 	}
 	
