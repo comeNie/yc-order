@@ -72,8 +72,21 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 		IOrderSearch orderSearch = new OrderSearchImpl();
 		List<SearchCriteria> orderSearchCriteria = commonConditions(request);
 		List<Sort> sortList = new ArrayList<Sort>();
-		Sort sort = new Sort("ordertime", SortOrder.DESC);
-		sortList.add(sort);
+		if(!StringUtil.isBlank(request.getOrderByFlag())){
+			if("1".equals(request.getOrderByFlag())){
+				Sort sort = new Sort(SearchFieldConfConstants.TAKE_DAY, SortOrder.DESC);
+				sortList.add(sort);
+			}else if("2".equals(request.getOrderByFlag())){
+				Sort sort = new Sort(SearchFieldConfConstants.TAKE_TIME, SortOrder.DESC);
+				sortList.add(sort);
+			}else if("3".equals(request.getOrderByFlag())){
+				Sort sort = new Sort(SearchFieldConfConstants.TOTAL_FEE, SortOrder.DESC);
+				sortList.add(sort);
+			}
+		}else{
+			Sort sort = new Sort(SearchFieldConfConstants.ORDER_TIME, SortOrder.DESC);
+			sortList.add(sort);
+		}
 		Result<OrderInfo> result = orderSearch.search(orderSearchCriteria, startSize, maxSize, sortList);
 		List<OrderInfo> ordList = result.getContents();
 		if (!CollectionUtil.isEmpty(ordList)) {
@@ -539,7 +552,17 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 			searchCriteria.addFieldValue(end);
 			searchfieldVos.add(searchCriteria);
 		}
-
+		//状态集合不为空
+		if(!CollectionUtil.isEmpty(request.getStateList())){
+			SearchCriteria searchCriteria = new SearchCriteria();
+			SearchOption option = new SearchOption();
+			option.setSearchLogic(SearchOption.SearchLogic.must);
+			option.setSearchType(SearchOption.SearchType.match);
+			searchCriteria.setFieldValue(request.getStateList());
+			searchCriteria.setField(SearchFieldConfConstants.STATE);
+			searchCriteria.setOption(option);
+			searchfieldVos.add(searchCriteria);
+		}
 		return searchfieldVos;
 	}
 

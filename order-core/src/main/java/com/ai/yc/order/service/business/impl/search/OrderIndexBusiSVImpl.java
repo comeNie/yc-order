@@ -96,6 +96,8 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 				ordInfo.setUsecode(ordOdProd.getUseCode());
 				ordInfo.setField(ordOdProd.getFieldCode());
 				ordInfo.setProddetailid(ordOdProd.getProdDetalId());
+				ordInfo.setTakeday(ordOdProd.getTakeDay());
+				ordInfo.setTaketime(ordOdProd.getTakeTime());
 			}
 			// 查询语言对信息
 			List<OrdOdProdExtend> ordOdProdExtendList = ordOdProdExtendAtomSV.findByOrderId(ord.getOrderId());
@@ -193,6 +195,8 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 						ordInfo.setUsecode(ordOdProd.getUseCode());
 						ordInfo.setField(ordOdProd.getFieldCode());
 						ordInfo.setProddetailid(ordOdProd.getProdDetalId());
+						ordInfo.setTakeday(ordOdProd.getTakeDay());
+						ordInfo.setTaketime(ordOdProd.getTakeTime());
 					}
 					// 查询语言对信息
 					List<OrdOdProdExtend> ordOdProdExtendList = ordOdProdExtendAtomSV.findByOrderId(ord.getOrderId());

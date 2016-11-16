@@ -1,6 +1,7 @@
 package com.ai.yc.order.api.orderquery.param;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import com.ai.opt.base.vo.BaseInfo;
 
@@ -183,6 +184,14 @@ public class QueryOrderRequest extends BaseInfo {
 	 * 状态结束时间
 	 */
 	private Timestamp stateTimeEnd;
+	/**
+	 * 状态集合
+	 */
+	private List<Object> stateList;
+	/**
+	 * 排序（1需耗天排序，2需耗时排序，3总费用）
+	 */
+	private String orderByFlag;
 
 	/**
 	 * 页码，必填
@@ -536,6 +545,22 @@ public class QueryOrderRequest extends BaseInfo {
 
 	public void setStateTimeEnd(Timestamp stateTimeEnd) {
 		this.stateTimeEnd = stateTimeEnd;
+	}
+
+	public List<Object> getStateList() {
+		return stateList;
+	}
+
+	public void setStateList(List<Object> stateList) {
+		this.stateList = stateList;
+	}
+
+	public String getOrderByFlag() {
+		return orderByFlag;
+	}
+
+	public void setOrderByFlag(String orderByFlag) {
+		this.orderByFlag = orderByFlag;
 	}
 
 }
