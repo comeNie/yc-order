@@ -47,20 +47,38 @@ public class UpdatePayStatusSVImpl implements IUpdatePayStatusSV{
 		if(req.getOrderFee().getTotalFee()==null){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "总费用不能为空");
 		}
+		if(req.getOrderFee().getTotalFee()<0){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "总费用不合法");
+		}
 		if(req.getOrderFee().getDiscountFee()==null){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "总优惠金额不能为空");
+		}
+		if(req.getOrderFee().getDiscountFee()<0){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "总优惠金额不合法");
 		}
 		if(req.getOrderFee().getOperDiscountFee()==null){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "减免费用不能为空");
 		}
+		if(req.getOrderFee().getOperDiscountFee()<0){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "减免费用不合法");
+		}
 		if(req.getOrderFee().getAdjustFee()==null){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "应收费用不能为空");
+		}
+		if(req.getOrderFee().getAdjustFee()<0){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "应收费用不合法");
 		}
 		if(req.getOrderFee().getPaidFee()==null){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "总实收费用 不能为空");
 		}
+		if(req.getOrderFee().getPaidFee()<0){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "总实收费用 不合法");
+		}
 		if(req.getOrderFee().getPayFee()==null){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "总待收费用不能为空");
+		}
+		if(req.getOrderFee().getPayFee()<0){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "总待收费用不合法");
 		}
 		if(StringUtil.isBlank(req.getOrderFee().getPayStyle())){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "支付方式不能为空");

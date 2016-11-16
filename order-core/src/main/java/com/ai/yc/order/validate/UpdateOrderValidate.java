@@ -36,17 +36,32 @@ public class UpdateOrderValidate {
 			if(orderFee.getTotalFee()==null){
 				throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "总费用不能为空");
 			}
+			if(orderFee.getTotalFee()<0){
+				throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "总费用不合法");
+			}
 			if(orderFee.getDiscountFee()==null){
 				throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "总优惠金额不能为空");
+			}
+			if(orderFee.getDiscountFee()<0){
+				throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "总优惠金额不合法");
 			}
 			if(orderFee.getOperDiscountFee()==null){
 				throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "减免费用不能为空");
 			}
+			if(orderFee.getOperDiscountFee()<0){
+				throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "减免费用不合法");
+			}
 			if(orderFee.getAdjustFee()==null){
 				throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "应收费用不能为空");
 			}
+			if(orderFee.getAdjustFee()<0){
+				throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "应收费用不合法");
+			}
 			if(orderFee.getPaidFee()==null){
 				throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "总实收费用 不能为空");
+			}
+			if(orderFee.getPaidFee()<0){
+				throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "总实收费用 不合法");
 			}
 			if(orderFee.getPayFee()==null){
 				throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "总待收费用不能为空");
