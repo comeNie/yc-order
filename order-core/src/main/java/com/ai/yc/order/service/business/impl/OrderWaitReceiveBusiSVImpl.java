@@ -119,7 +119,6 @@ public class OrderWaitReceiveBusiSVImpl implements IOrderWaitReceiveBusiSV {
 		if (!CollectionUtil.isEmpty(ordList)) {
 			for (OrderInfo ord : ordList) {
 				OrderWaitReceiveSearchInfo order = new OrderWaitReceiveSearchInfo();
-				List<OrdProdExtendVo> ordProdExtendList = new ArrayList<OrdProdExtendVo>();
 
 				// 订单id
 				order.setOrderId(Long.valueOf(ord.getOrderid()));
@@ -128,6 +127,8 @@ public class OrderWaitReceiveBusiSVImpl implements IOrderWaitReceiveBusiSV {
 				order.setTotalFee(ord.getTotalfee());
 				order.setTranslateName(ord.getTranslatename());
 				order.setTranslateType(ord.getTranslatetype());
+				order.setTakeDay(ord.getTakeday());
+				order.setTakeTime(ord.getTaketime());
 				//
 				if (ord.getOrdertime() != null) {
 					order.setOrderTime(new Timestamp(ord.getOrdertime().getTime()));
@@ -142,16 +143,10 @@ public class OrderWaitReceiveBusiSVImpl implements IOrderWaitReceiveBusiSV {
 						new TypeReference<List<OrdProdExtend>>() {
 						});
 				if (!CollectionUtil.isEmpty(extendList)) {
-					for (OrdProdExtend extend : extendList) {
-						OrdProdExtendVo prodExtend = new OrdProdExtendVo();
-						prodExtend.setLangungePair(extend.getLangungeid());
-						prodExtend.setLangungePairChName(extend.getLangungechname());
-						prodExtend.setLangungePairEnName(extend.getLangungeenname());
-						ordProdExtendList.add(prodExtend);
-					}
-					order.setLanguagePair(ordProdExtendList.get(0).getLangungePair());
-					order.setLanguagePairName(ordProdExtendList.get(0).getLangungePairChName());
-					order.setLanguageNameEn(ordProdExtendList.get(0).getLangungePairEnName());
+					//
+					order.setLanguagePair(extendList.get(0).getLangungeid());
+					order.setLanguagePairName(extendList.get(0).getLangungechname());
+					order.setLanguageNameEn(extendList.get(0).getLangungeenname());
 				}
 
 				results.add(order);

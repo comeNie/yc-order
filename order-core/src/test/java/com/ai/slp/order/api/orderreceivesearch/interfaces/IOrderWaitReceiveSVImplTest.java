@@ -23,7 +23,7 @@ public class IOrderWaitReceiveSVImplTest extends BaseTest {
 		
 		request.setPageSize(10);
 		request.setSortFlag("1");
-		request.setSortField("2");
+		request.setSortField("1");
 		//request.setState("20");
 		OrderWaitReceiveSearchResponse response = this.orderWaitReceiveSV.pageSearchWaitReceive(request);
 		log.info("response:"+JSON.toJSONString(response));
