@@ -124,7 +124,13 @@
 				<entry key="100230" value="出版级" />
 			</map>
 		</property>
-		
+		<!-- 译员类型:"0：普通译员 1：LSP译员" -->
+		<property name="interperTypeMap">
+			<map>
+				<entry key="0" value="普通译员" />
+				<entry key="1" value="LSP译员" />
+			</map>
+		</property>
 	</bean>
 
 	<!-- 翻译级别 初始化数据 100210：标准级 100220：专业级 100230：出版级 -->

@@ -65,6 +65,11 @@ public class OrderSubmissionParam {
 	 * 翻译级别："100210：标准级;100220：专业级;100230：出版级;"
 	 */
 	private Map<String, String> translateLevelMap;
+	/**
+	 * 译员类型:"0：普通译员 1：LSP译员"
+	 * 
+	 */
+	private Map<String, String> interperTypeMap;
 
 	public Map<String, String> getPayStyleMap() {
 		return payStyleMap;
@@ -162,6 +167,14 @@ public class OrderSubmissionParam {
 
 	public void setTranslateLevelMap(Map<String, String> translateLevelMap) {
 		this.translateLevelMap = translateLevelMap;
+	}
+
+	public Map<String, String> getInterperTypeMap() {
+		return interperTypeMap;
+	}
+
+	public void setInterperTypeMap(Map<String, String> interperTypeMap) {
+		this.interperTypeMap = interperTypeMap;
 	}
 
 }

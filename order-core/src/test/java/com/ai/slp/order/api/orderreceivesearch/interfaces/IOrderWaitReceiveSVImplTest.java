@@ -16,7 +16,11 @@ public class IOrderWaitReceiveSVImplTest extends BaseTest {
 	public void pageSearchWaitReceive(){
 		OrderWaitReceiveSearchRequest request = new OrderWaitReceiveSearchRequest();
 		//
+		request.setFlag("0");
+		request.setInterperLevel("1");
+		//request.setInterperType("0");
 		request.setPageNo(1);
+		
 		request.setPageSize(10);
 		OrderWaitReceiveSearchResponse response = this.orderWaitReceiveSV.pageSearchWaitReceive(request);
 		log.info("response:"+JSON.toJSONString(response));
