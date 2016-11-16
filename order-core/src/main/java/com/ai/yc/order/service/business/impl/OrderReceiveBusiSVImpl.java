@@ -2,6 +2,7 @@ package com.ai.yc.order.service.business.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ai.opt.sdk.util.BeanUtils;
 import com.ai.yc.order.api.orderreceive.param.OrderReceiveRequest;
@@ -21,7 +22,8 @@ public class OrderReceiveBusiSVImpl implements IOrderReceiveBusiSV {
 	private IOrdOdFeeTotalAtomSV ordOdFeeTotalAtomSV;
 	
 	@Override
-	public OrderReceiveResponse orderReceive(OrderReceiveRequest request) {
+	@Transactional
+	public OrderReceiveResponse updateOrderReceive(OrderReceiveRequest request) {
 		// TODO Auto-generated method stub
 		OrderReceiveResponse response = new OrderReceiveResponse();
 		//
