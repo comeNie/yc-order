@@ -28,7 +28,7 @@ public interface IQueryOrderDetailsSV {
 	 * @throws BusinessException
 	 * @throws SystemException
 	 * @author hougang
-	 * @ApiCode ORD_2006
+	 * @ApiCode ORD_2008
 	 * @ApiDocMethod
      * @RestRelativeURL orderdetails/queryOrderDetails
 	 */
