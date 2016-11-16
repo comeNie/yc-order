@@ -143,8 +143,8 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 				if (ord.getUpdatetime() != null) {
 					order.setUpdateTime(new Timestamp(ord.getUpdatetime().getTime()));
 				}
-				if (ord.getStarttime() != null && ord.getEndtime() != null) {
-					long time = ord.getFinishtime().getTime() - DateUtil.getCurrentTimeMillis();
+				if (ord.getEndtime() != null) {
+					long time = ord.getEndtime().getTime() - DateUtil.getCurrentTimeMillis();
 					Timestamp scurrtest = new Timestamp(time);
 					order.setRemainingTime(scurrtest);
 				}
