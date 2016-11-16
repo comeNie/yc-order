@@ -1,6 +1,8 @@
 package com.ai.slp.order.api.orderquery.interfaces;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +26,7 @@ public class IOrderQuerySVImplTest extends BaseTest{
 		Long ss= 2000000015L;
 		//request.setUserName("大海HAODEDSKLDSL");
 		//request.setOrderId(2000000025373363l);
-		request.setUpdateOperName("test");
+		//request.setUpdateOperName("test");
 		//request.setTranslateName("翻译");
 		//request.setOperId("10001");
 		System.out.println("========="+ss.toString());
@@ -50,6 +52,13 @@ public class IOrderQuerySVImplTest extends BaseTest{
 		//request.setStateChgTimeEnd(es);
 		request.setPageSize(10);
 		request.setPageNo(1);
+		List<Object> list = new ArrayList<Object>();
+		Object o1 = "13";
+		Object o2 = "91";
+		
+		list.add(o1);
+		list.add(o2);
+		request.setStateList(list);
 		QueryOrderRsponse response = this.iOrderQuerySV.queryOrder(request);
 		log.info("response:"+JSON.toJSONString(response));
 	}

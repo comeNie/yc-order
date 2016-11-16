@@ -41,6 +41,8 @@ public class OrderInfo {
 	private long totalfee;
 	private String currencyunit;
 	private String operid;
+	private String takeday;
+	private String taketime;
 	/**
 	 * 报价人
 	 */
@@ -384,6 +386,22 @@ public class OrderInfo {
 
 	public void setOrdprodleveles(List<OrdProdLevel> ordprodleveles) {
 		this.ordprodleveles = ordprodleveles;
+	}
+
+	public String getTakeday() {
+		return takeday;
+	}
+
+	public void setTakeday(String takeday) {
+		this.takeday = takeday;
+	}
+
+	public String getTaketime() {
+		return taketime;
+	}
+
+	public void setTaketime(String taketime) {
+		this.taketime = taketime;
 	}
 
 }

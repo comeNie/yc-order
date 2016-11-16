@@ -36,5 +36,9 @@ public class SearchFieldConfConstants {
     public static final String UPDATE_TIME = "updatetime";
     public static final String STATE_TIME = "starttime";
     public static final String OPER_ID = "operid";
+    public static final String TAKE_DAY = "takeday";
+    public static final String TAKE_TIME = "taketime";
+    public static final String TOTAL_FEE = "totalfee";
+    
     
 }
