@@ -102,14 +102,14 @@ public class OrderWaitReceiveBusiSVImpl implements IOrderWaitReceiveBusiSV {
 		}
 		// 剩余时间
 		if (FIELD_1.equals(request.getSortField())) {
-			sort = new Sort("takeDay", sortFlagEn);
-			Sort sortTakeTime = new Sort("takeTime", sortFlagEn);
+			sort = new Sort("takeday", sortFlagEn);
+			Sort sortTakeTime = new Sort("taketime", sortFlagEn);
 			//
 			sortList.add(sortTakeTime);
 		}
 		// 订单金额
 		if (FIELD_2.equals(request.getSortField())) {
-			sort = new Sort("takeTime", sortFlagEn);
+			sort = new Sort("totalfee", sortFlagEn);
 		}
 		sortList.add(sort);
 		//
