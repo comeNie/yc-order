@@ -17,8 +17,6 @@ import com.ai.yc.order.service.business.interfaces.search.IOrderIndexBusiSV;
 import com.ai.yc.order.validate.OrderSubmissionValidate;
 import com.alibaba.dubbo.config.annotation.Service;
 
-import sun.util.logging.resources.logging;
-
 @Service
 @Component
 public class OrderSubmissionSVImpl implements IOrderSubmissionSV {

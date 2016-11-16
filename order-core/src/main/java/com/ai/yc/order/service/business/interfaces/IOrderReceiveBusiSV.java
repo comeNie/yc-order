@@ -4,5 +4,5 @@ import com.ai.yc.order.api.orderreceive.param.OrderReceiveRequest;
 import com.ai.yc.order.api.orderreceive.param.OrderReceiveResponse;
 
 public interface IOrderReceiveBusiSV {
-	public OrderReceiveResponse orderReceive(OrderReceiveRequest request);
+	public OrderReceiveResponse updateOrderReceive(OrderReceiveRequest request);
 }

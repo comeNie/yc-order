@@ -143,8 +143,8 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 				if (ord.getUpdatetime() != null) {
 					order.setUpdateTime(new Timestamp(ord.getUpdatetime().getTime()));
 				}
-				if (ord.getStarttime() != null && ord.getEndtime() != null) {
-					long time = ord.getFinishtime().getTime() - DateUtil.getCurrentTimeMillis();
+				if (ord.getEndtime() != null) {
+					long time = ord.getEndtime().getTime() - DateUtil.getCurrentTimeMillis();
 					Timestamp scurrtest = new Timestamp(time);
 					order.setRemainingTime(scurrtest);
 				}
@@ -277,11 +277,6 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 		// 如果译员id不为空
 		if (!StringUtil.isBlank(request.getInterperId())) {
 			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.INTERPER_ID, request.getInterperId(),
-					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
-		}
-		// 如果用户id不为空
-		if (!StringUtil.isBlank(request.getUserId())) {
-			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.USER_ID, request.getInterperId(),
 					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
 		}
 		// 如果关键词不为空
