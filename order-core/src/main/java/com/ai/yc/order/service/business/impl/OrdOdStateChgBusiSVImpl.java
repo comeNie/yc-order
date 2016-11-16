@@ -20,9 +20,9 @@ public class OrdOdStateChgBusiSVImpl implements IOrdOdStateChgBusiSV {
 	
 	private final static String PAY_CHG_USER_DESC_EN = "Client pay the order.";
 	
-    private final static String PAY_CHG_ADMIN_DESC_CN = "管理员%s支付了订单。";
+    private final static String PAY_CHG_ADMIN_DESC_CN = "订单已支付成功，进入任务中心等待译员领取。";
 	
-	private final static String PAY_CHG_ADMIN_DESC_EN = "Administrator %s pay for the order.";
+	private final static String PAY_CHG_ADMIN_DESC_EN = "Your order has been paid and released to the task center.  A translator will be assigned to deal with the task.";
 	
 	private final static String UPDATE_CHG_ADMIN_DESC_CN = "管理员%s修改了订单。";
 		
@@ -30,7 +30,7 @@ public class OrdOdStateChgBusiSVImpl implements IOrdOdStateChgBusiSV {
 	
 	private final static String OFFER_CHG_ADMIN_DESC_CN = "订单已报价，等待您支付。";
 	
-	private final static String OFFER_CHG_ADMIN_DESC_EN = "order has been quoted, waiting for you to pay.";
+	private final static String OFFER_CHG_ADMIN_DESC_EN = "Your order has been quoted, please finish the payment.";
 	
 	private final static String CLOSE_CHG_ADMIN_DESC_CN = "管理员%s关闭了订单。";
 	
@@ -48,8 +48,8 @@ private final static String CHECK_CHG_ADMIN_DESC_CN = "管理员%s审核了订�
 		String descCn = PAY_CHG_USER_DESC_CN;
 		String descEn = PAY_CHG_USER_DESC_EN;
 		if(OrdersConstants.OrgID.ORG_ID_SYS.equals(chg.getOrgId())){
-			descCn = String.format(PAY_CHG_ADMIN_DESC_CN, chg.getOperName()==null?chg.getOperId():chg.getOperName());
-			descEn = String.format(PAY_CHG_ADMIN_DESC_EN, chg.getOperName()==null?chg.getOperId():chg.getOperName());
+			descCn = PAY_CHG_ADMIN_DESC_CN;
+			descEn = PAY_CHG_ADMIN_DESC_EN;
 		}
 		
 		chg.setChgDesc(descCn);
