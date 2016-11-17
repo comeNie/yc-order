@@ -11,8 +11,6 @@ import com.ai.yc.order.dao.mapper.interfaces.OrdEvaluateMapper;
 import com.ai.yc.order.dao.mapper.interfaces.OrdOdFeeOffsetMapper;
 import com.ai.yc.order.dao.mapper.interfaces.OrdOdFeeProdMapper;
 import com.ai.yc.order.dao.mapper.interfaces.OrdOdFeeTotalMapper;
-import com.ai.yc.order.dao.mapper.interfaces.OrdOdInvoiceLogisticsMapper;
-import com.ai.yc.order.dao.mapper.interfaces.OrdOdInvoiceMapper;
 import com.ai.yc.order.dao.mapper.interfaces.OrdOdLogisticsMapper;
 import com.ai.yc.order.dao.mapper.interfaces.OrdOdPersonInfoMapper;
 import com.ai.yc.order.dao.mapper.interfaces.OrdOdProdExtendMapper;
@@ -63,14 +61,6 @@ public class MapperFactory {
     
     public static OrdOdFeeTotalMapper getOrdOdFeeTotalMapper(){
     	return sqlSessionTemplate.getMapper(OrdOdFeeTotalMapper.class);
-    }
-    
-    public static OrdOdInvoiceLogisticsMapper getOrdOdInvoiceLogisticsMapper(){
-    	return sqlSessionTemplate.getMapper(OrdOdInvoiceLogisticsMapper.class);
-    }
-    
-    public static OrdOdInvoiceMapper getOrdOdInvoiceMapper(){
-    	return sqlSessionTemplate.getMapper(OrdOdInvoiceMapper.class);
     }
     
     public static OrdOdLogisticsMapper getOrdOdLogisticsMapper(){
