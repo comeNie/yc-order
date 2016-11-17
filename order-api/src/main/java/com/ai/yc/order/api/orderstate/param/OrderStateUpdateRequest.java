@@ -15,17 +15,33 @@ public class OrderStateUpdateRequest implements Serializable {
 	 * 订单状态
 	 */
 	private String state;
+	/**
+	 * 客户端显示状态
+	 */
+	private String displayFlag;// DISPLAY_FLAG
+
 	public String getState() {
 		return state;
 	}
+
 	public void setState(String state) {
 		this.state = state;
 	}
+
 	public Long getOrderId() {
 		return orderId;
 	}
+
 	public void setOrderId(Long orderId) {
 		this.orderId = orderId;
 	}
-	
+
+	public String getDisplayFlag() {
+		return displayFlag;
+	}
+
+	public void setDisplayFlag(String displayFlag) {
+		this.displayFlag = displayFlag;
+	}
+
 }
