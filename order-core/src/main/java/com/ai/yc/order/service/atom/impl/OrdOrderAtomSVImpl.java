@@ -132,4 +132,12 @@ public class OrdOrderAtomSVImpl implements IOrdOrderAtomSV {
     	return ordOrderMapper.selectByExample(example);
 	}
 
+	@Override
+	public List<OrdOrder> findByState(String state) {
+		OrdOrderCriteria example=new OrdOrderCriteria();
+    	OrdOrderCriteria.Criteria criteria = example.createCriteria();
+    	criteria.andStateEqualTo(state);
+		return MapperFactory.getOrdOrderMapper().selectByExample(example);
+	}
+
 }

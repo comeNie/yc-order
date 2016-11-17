@@ -32,6 +32,11 @@ public interface IOrdOdStateChgBusiSV {
 	 */
 	public void orderReceiveChgDesc(OrderReceiveRequest request, String interperId,String interperType,String lspId,String orgState);
 	
+	void addAllCloseChgDesc(OrdOdStateChg chg) ;
 	
+	/**
+	 * 系统提交了订单
+	 */
+	void addSysConfirmeChgDesc(OrdOdStateChg chg) ;
 
 }

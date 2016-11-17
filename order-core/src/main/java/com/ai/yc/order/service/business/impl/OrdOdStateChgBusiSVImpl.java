@@ -36,6 +36,10 @@ public class OrdOdStateChgBusiSVImpl implements IOrdOdStateChgBusiSV {
 	private final static String CLOSE_CHG_ADMIN_DESC_CN = "管理员%s关闭了订单。";
 
 	private final static String CLOSE_CHG_ADMIN_DESC_EN = "Administrator %s closed the order.";
+	
+	private final static String CLOSE_CHG_DESC_CN = "订单 %s 已关闭。";
+
+	private final static String CLOSE_CHG_DESC_EN = "Order %s has been closed.";
 
 	private final static String CHECK_CHG_ADMIN_DESC_CN = "管理员%s审核了订单。";
 
@@ -50,6 +54,9 @@ public class OrdOdStateChgBusiSVImpl implements IOrdOdStateChgBusiSV {
 	 */
 	private final static String ORDER_RECEIVE_DESC_CN_LSP = "管理员%s领取订单";
 	private final static String ORDER_RECEIVE_DESC_EN_LSP = "Administrator %s claimed the order";
+	
+	private final static String ORDER_CONFIRME_DESC_CN_SYS = "系统确认了订单";
+	private final static String ORDER_CONFIRME_DESC_EN_SYS = "System confirmed the order";
 	
 	@Autowired
 	private IOrdOdStateChgAtomSV ordOdStateChgAtomSV;
@@ -111,6 +118,16 @@ public class OrdOdStateChgBusiSVImpl implements IOrdOdStateChgBusiSV {
 		chg.setStateChgTime(DateUtil.getSysDate());
 		ordOdStateChgAtomSV.insertSelective(chg);
 	}
+	
+	public void addAllCloseChgDesc(OrdOdStateChg chg) {
+		chg.setStateChgId(SequenceUtil.createStateChgId());
+		String descCn = String.format(CLOSE_CHG_DESC_CN,String.valueOf(chg.getOrderId()));
+		String descEn = String.format(CLOSE_CHG_DESC_EN,String.valueOf(chg.getOrderId()));
+		chg.setChgDesc(descCn);
+		chg.setChgDescEn(descEn);
+		chg.setStateChgTime(DateUtil.getSysDate());
+		ordOdStateChgAtomSV.insertSelective(chg);
+	}
 
 	@Override
 	public void checkChgDesc(OrdOdStateChg chg) {
@@ -149,6 +166,17 @@ public class OrdOdStateChgBusiSVImpl implements IOrdOdStateChgBusiSV {
 		ordOdStateChg.setChgDescEn(descEn);
 		ordOdStateChg.setStateChgTime(DateUtil.getSysDate());
 		ordOdStateChgAtomSV.insertSelective(ordOdStateChg);
+	}
+
+	@Override
+	public void addSysConfirmeChgDesc(OrdOdStateChg chg) {
+		chg.setStateChgId(SequenceUtil.createStateChgId());
+		chg.setChgDesc(ORDER_CONFIRME_DESC_CN_SYS);
+		chg.setChgDescEn(ORDER_CONFIRME_DESC_EN_SYS);
+		chg.setOrgId(OrdersConstants.OrgID.ORG_ID_SYS);
+    	chg.setOperId(OrdersConstants.SYS_OPER_ID);
+		chg.setStateChgTime(DateUtil.getSysDate());
+		ordOdStateChgAtomSV.insertSelective(chg);
 	}
 
 }

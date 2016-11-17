@@ -5,6 +5,11 @@ import java.math.BigDecimal;
 public final class OrdersConstants {
 	public final static String TENANT_ID = "yeecloud";
 	public final static String YC_ORDERSUBMISSION_TOPIC = "ycOrderSubmissionTopic";
+	
+	/**
+	 * 系统操作
+	 */
+	public final static String SYS_OPER_ID = "1000011";
 
 	public final static class TranslatePrice {
 		private TranslatePrice() {
@@ -168,6 +173,16 @@ public final class OrdersConstants {
 		 * 审核失败
 		 */
 		public final static String REVIEW_FAILD_STATE = "42";
+		
+		/**
+		 * 待确认
+		 */
+		public final static String WAIT_OK_STATE = "50";
+		
+		/**
+		 * 待确认
+		 */
+		public final static String WAIT_COMMENT_STATE = "52";
 
 	}
 

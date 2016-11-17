@@ -51,5 +51,10 @@ public interface IOrdOrderAtomSV {
 	 * @author zhanglh
 	 */
 	List<OrdOrder> findNoReviewList(long orderId);
+	
+	/**
+	 * 根据订单状态查询
+	 */
+	List<OrdOrder> findByState(String state);
 
 }
