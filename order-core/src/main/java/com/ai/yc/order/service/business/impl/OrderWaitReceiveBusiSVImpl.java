@@ -4,7 +4,9 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ai.opt.base.vo.PageInfo;
@@ -25,6 +27,8 @@ import com.ai.yc.order.api.orderreceivesearch.param.OrderWaitReceiveSearchReques
 import com.ai.yc.order.api.orderreceivesearch.param.OrderWaitReceiveSearchResponse;
 import com.ai.yc.order.constants.SearchConstants;
 import com.ai.yc.order.constants.SearchFieldConfConstants;
+import com.ai.yc.order.interperlevel.rule.InterperLevelMap;
+import com.ai.yc.order.interperlevel.rule.OrderLevelRange;
 import com.ai.yc.order.search.bo.OrdProdExtend;
 import com.ai.yc.order.search.bo.OrderInfo;
 import com.ai.yc.order.service.business.interfaces.IOrderWaitReceiveBusiSV;
@@ -53,6 +57,10 @@ public class OrderWaitReceiveBusiSVImpl implements IOrderWaitReceiveBusiSV {
 	 * 订单金额
 	 */
 	private static final String FIELD_2 = "2";
+	
+	@Autowired
+	private InterperLevelMap interperLevelMap;//译员级别判定订单查询级别
+	
 	@Override
 	public Result<OrderInfo> search(List<SearchCriteria> searchCriterias, int from, int offset, List<Sort> sorts) {
 		ISearchClient searchClient = SESClientFactory.getSearchClient(SearchConstants.SearchNameSpace);
@@ -177,9 +185,21 @@ public class OrderWaitReceiveBusiSVImpl implements IOrderWaitReceiveBusiSV {
 		 * 译员等级
 		 */
 		if (!StringUtil.isBlank(request.getInterperLevel())) {
-			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.ORDER_LEVEL, request.getInterperLevel(),
-					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
-
+			//
+			Map<String,OrderLevelRange> interperLevelMap = this.interperLevelMap.getInterperLevelMap();
+			//
+			SearchCriteria searchCriteria = new SearchCriteria();
+			searchCriteria.setOption(new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.range));
+			searchCriteria.setField(SearchFieldConfConstants.ORDER_LEVEL);
+			String minValue = "1";
+			String maxValue = "1";
+			if(null != interperLevelMap.get(request.getInterperLevel())){
+				minValue = interperLevelMap.get(request.getInterperLevel()).getMinValue();
+				maxValue = interperLevelMap.get(request.getInterperLevel()).getMaxValue();
+			}
+			searchCriteria.addFieldValue(minValue);
+			searchCriteria.addFieldValue(maxValue);
+			searchfieldVos.add(searchCriteria);
 		}
 
 		// 如果翻译类型不为空 不等于2的情况

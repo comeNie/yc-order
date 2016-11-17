@@ -17,11 +17,11 @@ public class IOrderWaitReceiveSVImplTest extends BaseTest {
 		OrderWaitReceiveSearchRequest request = new OrderWaitReceiveSearchRequest();
 		//
 		request.setFlag("0");
-		request.setInterperLevel("2");
+		request.setInterperLevel("3");
 		//request.setInterperType("0");
 		request.setPageNo(1);
 		
-		request.setPageSize(10);
+		request.setPageSize(100);
 		request.setSortFlag("1");
 		request.setSortField("1");
 		//request.setState("20");
