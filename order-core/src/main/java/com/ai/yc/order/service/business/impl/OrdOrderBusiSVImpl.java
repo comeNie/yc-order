@@ -8,6 +8,7 @@ import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.ai.opt.sdk.util.BeanUtils;
 import com.ai.opt.sdk.util.DateUtil;
+import com.ai.paas.ipaas.util.StringUtil;
 import com.ai.yc.order.api.orderquery.param.QueryOrdCountRequest;
 import com.ai.yc.order.api.orderstate.param.OrderStateUpdateRequest;
 import com.ai.yc.order.api.orderstate.param.OrderStateUpdateResponse;
@@ -50,6 +51,11 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 		ordOrder.setOrderId(request.getOrderId());
 		ordOrder.setState(request.getState());
 		ordOrder.setStateChgTime(DateUtil.getSysDate());
+		//
+		if(StringUtil.isBlank(request.getDisplayFlag())){
+			ordOrder.setDisplayFlag(request.getDisplayFlag());
+			ordOrder.setDisplayFlagChgTime(DateUtil.getSysDate());
+		}
 		//
 		this.ordOrderAtomSV.updateByPrimaryKeySelective(ordOrder);
 		//

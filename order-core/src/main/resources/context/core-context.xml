@@ -93,4 +93,5 @@
 	
 	<import resource="order-submission.xml"/>
 	<import resource="order-level-rule.xml"/>
+	<import resource="interper-level-rule.xml"/>
 </beans>
