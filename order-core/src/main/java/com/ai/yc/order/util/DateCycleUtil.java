@@ -103,7 +103,7 @@ public final class DateCycleUtil {
 		String startTime = sdf.format(cal.getTime());
 		//
 		LOG.info("*****StartTime*****：" + startTime);
-		long startTimeLong = cal.getTime().getTime() / 1000;
+		long startTimeLong = cal.getTime().getTime();
 		LOG.info("*****StartTime long*****：" + startTimeLong);
 		//
 		cal.add(DateType, amount);
@@ -111,7 +111,7 @@ public final class DateCycleUtil {
 		String endTime = sdf.format(cal.getTime());
 
 		LOG.info("*****EndTime*****：" + endTime);
-		long endTimeLong = cal.getTime().getTime() / 1000;
+		long endTimeLong = cal.getTime().getTime();
 		LOG.info("*****EndTime long*****：" + endTimeLong);
 
 		timeMap.put("startTime", startTimeLong);
@@ -156,5 +156,6 @@ public final class DateCycleUtil {
 		
 		String dateTypeValue = DateCycleUtil.dateTypeMap.get(DATE_TYPE_DAY);
 		LOG.info("日期类型："+dateTypeValue);
+		
 	}
 }

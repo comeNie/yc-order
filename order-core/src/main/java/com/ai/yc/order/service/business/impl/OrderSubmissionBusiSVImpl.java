@@ -1,5 +1,6 @@
 package com.ai.yc.order.service.business.impl;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,7 @@ import com.ai.yc.order.service.atom.interfaces.IOrdOrderAtomSV;
 import com.ai.yc.order.service.business.interfaces.IOrderSubmissionBusiSV;
 import com.ai.yc.order.service.mds.ordersubmission.OrderSubmissionMdsSendMess;
 import com.ai.yc.order.service.mds.ordersubmission.OrderSubmissionMdsVo;
+import com.ai.yc.order.util.DateCycleUtil;
 import com.ai.yc.order.util.SequenceUtil;
 import com.ai.yc.order.validate.TextOrderTranslateTimeUtil;
 /**
@@ -332,6 +334,8 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 			ordOrder.setDisplayFlag(OrdersConstants.OrderState.STATE_WAIT_OFFER);
 			//ordOrder.setTimeZone("default");
 		}
+		//待支付 三天内有效
+		ordOrder.setEndChgTime(new Timestamp(Long.valueOf(DateCycleUtil.getCycleDate("D", 3).get("endTime").toString())));
 		
 		//
 		this.ordOrderAtomSV.insertSelective(ordOrder);
