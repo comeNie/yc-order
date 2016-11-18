@@ -1,5 +1,6 @@
 package com.ai.yc.order.util;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -122,6 +123,27 @@ public final class DateCycleUtil {
 
 	}
 	
+	public static Timestamp getTimestamp(Timestamp timestamp, String dateType,int amount) {
+		LOG.info("当前周期类型：" + dateType);
+		LOG.info("当前周期数：" + amount);
+		long millisecond = 0l;
+		long now = DateUtil.getSysDate().getTime();
+		//
+		if (dateType.equals(DATE_TYPE_DAY)) {
+			
+		} else if (dateType.equals(DATE_TYPE_HOURS)) {
+			now=timestamp.getTime();
+			millisecond = amount * 60 * 60 * 1000;
+		} else if (dateType.equals(DATE_TYPE_MINUTE)) {
+
+		}
+		//
+		LOG.info("毫秒："+(now+millisecond));
+		return new Timestamp(now + millisecond);
+
+
+	}
+	
 	public static Date strToDate(String timeStr) {
 		Date date = new Date();
 		try {
@@ -156,6 +178,8 @@ public final class DateCycleUtil {
 		
 		String dateTypeValue = DateCycleUtil.dateTypeMap.get(DATE_TYPE_DAY);
 		LOG.info("日期类型："+dateTypeValue);
+		DateCycleUtil.getTimestamp(DateUtil.getSysDate(), "H",0);
+		DateCycleUtil.getTimestamp(DateUtil.getSysDate(), "H",15);
 		
 	}
 }

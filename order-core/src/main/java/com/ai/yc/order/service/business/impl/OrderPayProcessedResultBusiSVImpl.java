@@ -22,6 +22,7 @@ import com.ai.yc.order.service.atom.interfaces.IOrdOdProdAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdStateChgAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOrderAtomSV;
 import com.ai.yc.order.service.business.interfaces.IOrderPayProcessedResultBusiSV;
+import com.ai.yc.order.util.DateCycleUtil;
 import com.ai.yc.order.util.SequenceUtil;
 
 /**
@@ -104,9 +105,17 @@ public class OrderPayProcessedResultBusiSVImpl implements IOrderPayProcessedResu
 	 * 产品信息
 	 */
 	public void prodInfo(OrderPayProcessedResultRequest request) {
+		OrdOdProdWithBLOBs ordOdProdDb = this.ordOdProdAtomSV.findByOrderId(request.getBaseInfo().getOrderId());
+		
 		// 订单产品下单成功时间修改
 		OrdOdProdWithBLOBs ordOdProdWithBLOBs = new OrdOdProdWithBLOBs();
 		ordOdProdWithBLOBs.setStateTime(request.getProdInfo().getStateTime());
+		//
+		Integer takeDay = Integer.valueOf(ordOdProdDb.getTakeDay());
+		Integer takeTime = Integer.valueOf(ordOdProdDb.getTakeTime());
+		//
+		ordOdProdWithBLOBs.setEndTime(DateCycleUtil.getTimestamp(request.getProdInfo().getStateTime(), "H", takeDay * 24 + takeTime));
+		
 		//
 		this.ordOdProdAtomSV.updateByOrderIdSelective(ordOdProdWithBLOBs, request.getBaseInfo().getOrderId());
 
