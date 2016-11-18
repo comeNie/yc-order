@@ -87,9 +87,7 @@ public class UpdatePayStatusBusiSVImpl implements IUpdatePayStatusBusiSV {
 			throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT, "产品信息不能为空");
 		}
 		//修改主表信息
-		if(OrdersConstants.TranslateType.ORDER_TYPE_ORAL.equals(record.getTranslateType())){
-			record.setEndChgTime(prodRecord.getEndTime());
-		}else{
+		if(!OrdersConstants.TranslateType.ORDER_TYPE_ORAL.equals(record.getTranslateType())){
 			long endChgTime = feeTotal.getPayTime().getTime();
 			if(!StringUtil.isBlank(prodRecord.getTakeDay())){
 				endChgTime = endChgTime + Long.valueOf(prodRecord.getTakeDay())*24*60*60*1000;
