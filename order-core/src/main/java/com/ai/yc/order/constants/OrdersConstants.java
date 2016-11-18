@@ -289,4 +289,11 @@ public final class OrdersConstants {
 			public static final String UPDATE_FLAG_N = "N";
 		}
 	}
+	
+	public static final class Language{
+		
+		public final static String LANGUAGE_ZH_CN = "zh_CN";
+		
+		public final static String LANGUAGE_US_EN = "us_EN";
+	}
 }

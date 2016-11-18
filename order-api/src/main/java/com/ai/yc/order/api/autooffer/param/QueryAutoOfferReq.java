@@ -11,6 +11,10 @@ public class QueryAutoOfferReq implements Serializable{
 	
 	private static final long serialVersionUID = -6127403387982254076L;
 	
+	public final static String LANGUAGE_ZH_CN = "zh_CN";
+	
+	public final static String LANGUAGE_US_EN = "us_EN";
+	
 	/**
 	 * 标准级
 	 */
@@ -25,6 +29,11 @@ public class QueryAutoOfferReq implements Serializable{
 	 * 出版集
 	 */
 	public final static String PUBLISH = "100230";
+	
+	/**
+	 * 语言zh_CN us_EN
+	 */
+	private String language;
 
 	/**
 	 * 字数(必填)
@@ -92,6 +101,14 @@ public class QueryAutoOfferReq implements Serializable{
 
 	public void setUrgent(boolean isUrgent) {
 		this.isUrgent = isUrgent;
+	}
+
+	public String getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(String language) {
+		this.language = language;
 	}
 	
 	

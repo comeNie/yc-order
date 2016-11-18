@@ -34,30 +34,54 @@ public class QueryAutoOfferBusiSVImpl implements IQueryAutoOfferBusiSV {
 		QueryAutoOfferRes res = new QueryAutoOfferRes();
 		QuerySysDuadDetailsRes duad = iSysConfigAtomSV.querySysDuadDetails(req.getDuadId());
 		BigDecimal wordfee = new BigDecimal(0);
-		if(OrdersConstants.TranslateLevel.ORDINARY.equals(req.getTranslateLevel())){
-			if(req.isUrgent()){
-				wordfee = (new BigDecimal(duad.getOrdinaryUrgent())).multiply(new BigDecimal(req.getWordNum()));
-			}else{
-				wordfee = (new BigDecimal(duad.getOrdinary())).multiply(new BigDecimal(req.getWordNum()));
+		if(OrdersConstants.Language.LANGUAGE_US_EN.equals(req.getLanguage())){
+			if(OrdersConstants.TranslateLevel.ORDINARY.equals(req.getTranslateLevel())){
+				if(req.isUrgent()){
+					wordfee = (new BigDecimal(duad.getOurgentDollar())).multiply(new BigDecimal(req.getWordNum()));
+				}else{
+					wordfee = (new BigDecimal(duad.getOrdinaryDollar())).multiply(new BigDecimal(req.getWordNum()));
+				}
+			}else if(OrdersConstants.TranslateLevel.PERFESSION.equals(req.getTranslateLevel())){
+				if(req.isUrgent()){
+					wordfee = (new BigDecimal(duad.getPurgentDollar())).multiply(new BigDecimal(req.getWordNum()));
+				}else{
+					wordfee = (new BigDecimal(duad.getProfessionalDollar())).multiply(new BigDecimal(req.getWordNum()));
+				}
+			}else if(OrdersConstants.TranslateLevel.PUBLISH.equals(req.getTranslateLevel())){
+				if(req.isUrgent()){
+					wordfee = (new BigDecimal(duad.getPuburgentDollar())).multiply(new BigDecimal(req.getWordNum()));
+				}else{
+					wordfee = (new BigDecimal(duad.getPublishDollar())).multiply(new BigDecimal(req.getWordNum()));
+				}
 			}
-		}else if(OrdersConstants.TranslateLevel.PERFESSION.equals(req.getTranslateLevel())){
-			if(req.isUrgent()){
-				wordfee = (new BigDecimal(duad.getProfessionalUrgent())).multiply(new BigDecimal(req.getWordNum()));
-			}else{
-				wordfee = (new BigDecimal(duad.getProfessional())).multiply(new BigDecimal(req.getWordNum()));
+			res.setCurrencyUnit(OrdersConstants.TranslatePrice.DOLLAR);
+		}else{
+			if(OrdersConstants.TranslateLevel.ORDINARY.equals(req.getTranslateLevel())){
+				if(req.isUrgent()){
+					wordfee = (new BigDecimal(duad.getOrdinaryUrgent())).multiply(new BigDecimal(req.getWordNum()));
+				}else{
+					wordfee = (new BigDecimal(duad.getOrdinary())).multiply(new BigDecimal(req.getWordNum()));
+				}
+			}else if(OrdersConstants.TranslateLevel.PERFESSION.equals(req.getTranslateLevel())){
+				if(req.isUrgent()){
+					wordfee = (new BigDecimal(duad.getProfessionalUrgent())).multiply(new BigDecimal(req.getWordNum()));
+				}else{
+					wordfee = (new BigDecimal(duad.getProfessional())).multiply(new BigDecimal(req.getWordNum()));
+				}
+			}else if(OrdersConstants.TranslateLevel.PUBLISH.equals(req.getTranslateLevel())){
+				if(req.isUrgent()){
+					wordfee = (new BigDecimal(duad.getPublishUrgent())).multiply(new BigDecimal(req.getWordNum()));
+				}else{
+					wordfee = (new BigDecimal(duad.getPublish())).multiply(new BigDecimal(req.getWordNum()));
+				}
 			}
-		}else if(OrdersConstants.TranslateLevel.PUBLISH.equals(req.getTranslateLevel())){
-			if(req.isUrgent()){
-				wordfee = (new BigDecimal(duad.getPublishUrgent())).multiply(new BigDecimal(req.getWordNum()));
-			}else{
-				wordfee = (new BigDecimal(duad.getPublish())).multiply(new BigDecimal(req.getWordNum()));
-			}
+			res.setCurrencyUnit(OrdersConstants.TranslatePrice.RMB);
 		}
+		
 		res.setValuationWay(QueryAutoOfferRes.VALUATION_WAY_WORD);
-		res.setCurrencyUnit(duad.getCurrency());
 		QuerySysPurposeDetailsRes purpose = iSysConfigAtomSV.querySysPurposeDetails(req.getPurposeId());
 		if(QuerySysPurposeDetailsRes.NAME_FLAG_YES.equals(purpose.getNamedFlag())){
-			if(OrdersConstants.TranslatePrice.DOLLAR.equals(duad.getCurrency())){
+			if(OrdersConstants.TranslatePrice.DOLLAR.equals(res.getCurrencyUnit())){
 				if(OrdersConstants.TranslatePrice.BASE_DOLLAR.compareTo(wordfee)>0){
 					wordfee = OrdersConstants.TranslatePrice.BASE_DOLLAR;
 					res.setValuationWay(QueryAutoOfferRes.VALUATION_WAY_BASE);

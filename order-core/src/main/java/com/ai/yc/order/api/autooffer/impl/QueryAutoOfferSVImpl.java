@@ -30,6 +30,9 @@ public class QueryAutoOfferSVImpl implements IQueryAutoOfferSV {
 		if(req==null){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "参数不能为空");
 		}
+		if(StringUtil.isBlank(req.getLanguage())){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "站点语言不能为空");
+		}
 		if(req.getWordNum()<=0){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_TYPE_NOT_RIGHT, "字数不合法");
 		}
