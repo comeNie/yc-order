@@ -9,7 +9,6 @@ import com.ai.opt.base.vo.BaseResponse;
 import com.ai.opt.base.vo.ResponseHeader;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.ai.opt.sdk.util.BeanUtils;
-import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.yc.order.api.translatesave.param.SaveTranslateInfoRequest;
 import com.ai.yc.order.api.translatesave.param.TranslateFileVo;
 import com.ai.yc.order.constants.OrdersConstants;
@@ -22,6 +21,7 @@ import com.ai.yc.order.service.atom.interfaces.IOrdOdProdAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdProdFileAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOrderAtomSV;
 import com.ai.yc.order.service.business.interfaces.ITranslateSaveBusiSV;
+import com.ai.yc.order.service.business.interfaces.search.IOrderIndexBusiSV;
 import com.ai.yc.order.util.SequenceUtil;
 
 @Service
@@ -36,6 +36,9 @@ public class TranslateSaveBusiSVImpl implements ITranslateSaveBusiSV {
 	
 	@Autowired
 	private transient IOrdOdProdFileAtomSV iOrdOdProdFileAtomSV;
+	
+	@Autowired
+	private IOrderIndexBusiSV orderIndexBusiSV;
 
 	@Override
 	public BaseResponse saveTranslateInfo(SaveTranslateInfoRequest request) {
@@ -49,7 +52,7 @@ public class TranslateSaveBusiSVImpl implements ITranslateSaveBusiSV {
 			iOrdOdProdAtomSV.updateByOrderIdSelective(ordOdProd, request.getOrderId());
 		}else if(OrdersConstants.TranslateType.ORDER_TYPE_DOC.equals(record.getTranslateType())){
 			OrdOdProd prodRecord = iOrdOdProdAtomSV.findByOrderId(request.getOrderId());
-			if(prodRecord!=null&&!CollectionUtil.isEmpty(request.getFileVos())){
+			if(prodRecord!=null&&request.getFileVos()!=null){
 				iOrdOdProdFileAtomSV.deleteByProdDetalId(prodRecord.getProdDetalId());
 				for(TranslateFileVo prodFile:request.getFileVos()){
 					OrdOdProdFile ordOdProdFile = new OrdOdProdFile();
@@ -61,6 +64,8 @@ public class TranslateSaveBusiSVImpl implements ITranslateSaveBusiSV {
 				}
 			}
 		}
+		 //更新搜索引擎
+		orderIndexBusiSV.insertSesData(request.getOrderId());
 		BaseResponse resp = new BaseResponse();
 		resp.setResponseHeader(new ResponseHeader(true, ResultCodeConstants.SUCCESS_CODE, "查询成功"));
 		return resp;
