@@ -1,5 +1,8 @@
 package com.ai.slp.order.api.ordercancle.interfaces;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -29,7 +32,10 @@ public class OrderCancelSVImplTest  extends BaseTest{
 	@Test
 	public void ordercheck(){
 		OrderReviewRequest res = new OrderReviewRequest();
-		res.setOrderId(123L);
+		List<Long> idList = new ArrayList<Long>();
+		idList.add(123l);
+		idList.add(435l);
+		res.setOrderIdList(idList);
 		/*res.setOperId("123456");
 		res.setReasonDesc("cesshi");
 		res.setTenantId("yinyun");*/

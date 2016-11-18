@@ -1,14 +1,16 @@
 package com.ai.yc.order.api.orderreview.param;
 
+import java.util.List;
+
 import com.ai.opt.base.vo.BaseInfo;
 
 public class OrderReviewRequest extends BaseInfo {
 
 	private static final long serialVersionUID = 1L;
 	/**
-	 * 订单ID,必填
+	 * 订单ID，必填
 	 */
-	private Long orderId;
+	private List<Long> orderIdList;
 	/**
 	 * 审核结果(41 已审核(通过),42 审核失败(不通过))
 	 */
@@ -22,13 +24,6 @@ public class OrderReviewRequest extends BaseInfo {
 	 */
 	private String operId;
 
-	public Long getOrderId() {
-		return orderId;
-	}
-
-	public void setOrderId(Long orderId) {
-		this.orderId = orderId;
-	}
 
 	public String getReasonDesc() {
 		return reasonDesc;
@@ -52,6 +47,14 @@ public class OrderReviewRequest extends BaseInfo {
 
 	public void setState(String state) {
 		this.state = state;
+	}
+
+	public List<Long> getOrderIdList() {
+		return orderIdList;
+	}
+
+	public void setOrderIdList(List<Long> orderIdList) {
+		this.orderIdList = orderIdList;
 	}
 
 }

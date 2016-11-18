@@ -55,10 +55,11 @@ public class IOrderQuerySVImplTest extends BaseTest{
 		List<Object> list = new ArrayList<Object>();
 		Object o1 = "13";
 		Object o2 = "91";
-		
 		list.add(o1);
 		list.add(o2);
-		request.setStateList(list);
+		//request.setStateList(list);
+		//request.setOrderByFlag("3");
+		request.setUserId("100329");
 		QueryOrderRsponse response = this.iOrderQuerySV.queryOrder(request);
 		log.info("response:"+JSON.toJSONString(response));
 	}
