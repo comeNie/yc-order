@@ -53,6 +53,7 @@ public class OrderReviewBusiSVImpl implements IOrderReviewBusiSV {
 				order.setDisplayFlag(OrdersConstants.OrderDisplayFlag.FLAG_WAIT_OK);
 				order.setStateChgTime(sysDate);
 				order.setDisplayFlagChgTime(sysDate);
+				order.setEndChgTime(request.getEndChgTime());
 				ordOrderAtomSV.updateById(order);
 				/* 2.写入订单状态变化轨迹表 */
 				OrdOdStateChg ordOdStateChg = new OrdOdStateChg();
