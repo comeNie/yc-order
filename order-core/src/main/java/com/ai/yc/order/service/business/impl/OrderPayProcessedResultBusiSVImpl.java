@@ -42,7 +42,7 @@ public class OrderPayProcessedResultBusiSVImpl implements IOrderPayProcessedResu
 	private IOrdBalacneIfAtomSV ordBalacneIfAtomSV;
 	@Autowired
 	private IOrdOdStateChgAtomSV ordOdStateChgAtomSV;// 订单轨迹表
-	
+
 	@Override
 	@Transactional
 	public OrderPayProcessedResultResponse updateOrderPayProcessedResult(OrderPayProcessedResultRequest request) {
@@ -56,12 +56,13 @@ public class OrderPayProcessedResultBusiSVImpl implements IOrderPayProcessedResu
 		this.feeInfo(request);
 		this.prodInfo(request);
 		this.payInfo(request);
-		
+
 		String userId = request.getBaseInfo().getUserId();
 		Long orderId = request.getBaseInfo().getOrderId();
-		String translateType = ordOrderDb.getTranslateType();//数据库获取订单翻译类型
-		String oldState = ordOrderDb.getState();//数据库获取订单当前状态
-		String newState = OrdersConstants.OrderState.STATE_WAIT_RECEIVE;//新状态为 待领取
+		String translateType = ordOrderDb.getTranslateType();// 数据库获取订单翻译类型
+		String oldState = ordOrderDb.getState();// 数据库获取订单当前状态
+		String newState = OrdersConstants.OrderState.STATE_WAIT_RECEIVE;// 新状态为
+																		// 待领取
 		//
 		this.orderStateChgInfoSubmit(userId, orderId, translateType, oldState, newState);
 		//
@@ -106,19 +107,24 @@ public class OrderPayProcessedResultBusiSVImpl implements IOrderPayProcessedResu
 	 */
 	public void prodInfo(OrderPayProcessedResultRequest request) {
 		OrdOdProdWithBLOBs ordOdProdDb = this.ordOdProdAtomSV.findByOrderId(request.getBaseInfo().getOrderId());
-		
-		// 订单产品下单成功时间修改
-		OrdOdProdWithBLOBs ordOdProdWithBLOBs = new OrdOdProdWithBLOBs();
-		ordOdProdWithBLOBs.setStateTime(request.getProdInfo().getStateTime());
 		//
-		Integer takeDay = Integer.valueOf(ordOdProdDb.getTakeDay());
-		Integer takeTime = Integer.valueOf(ordOdProdDb.getTakeTime());
-		//
-		ordOdProdWithBLOBs.setEndTime(DateCycleUtil.getTimestamp(request.getProdInfo().getStateTime(), "H", takeDay * 24 + takeTime));
-		
-		//
-		this.ordOdProdAtomSV.updateByOrderIdSelective(ordOdProdWithBLOBs, request.getBaseInfo().getOrderId());
+		if (OrdersConstants.TranslateType.ORDER_TYPE_FAST.equals(ordOdProdDb.getTranslateType())
+				|| OrdersConstants.TranslateType.ORDER_TYPE_DOC.equals(ordOdProdDb.getTranslateType())) {
 
+			// 订单产品下单成功时间修改
+			OrdOdProdWithBLOBs ordOdProdWithBLOBs = new OrdOdProdWithBLOBs();
+			ordOdProdWithBLOBs.setStateTime(request.getProdInfo().getStateTime());
+
+			//
+			Integer takeDay = Integer.valueOf(ordOdProdDb.getTakeDay());
+			Integer takeTime = Integer.valueOf(ordOdProdDb.getTakeTime());
+			//
+			ordOdProdWithBLOBs.setEndTime(
+					DateCycleUtil.getTimestamp(request.getProdInfo().getStateTime(), "H", takeDay * 24 + takeTime));
+
+			//
+			this.ordOdProdAtomSV.updateByOrderIdSelective(ordOdProdWithBLOBs, request.getBaseInfo().getOrderId());
+		}
 	}
 
 	/**
@@ -154,10 +160,12 @@ public class OrderPayProcessedResultBusiSVImpl implements IOrderPayProcessedResu
 		this.ordBalacneIfAtomSV.insertSelective(ordBalacneIf);
 		//
 	}
+
 	/**
 	 * 订单提交-订单轨迹表
 	 */
-	public void orderStateChgInfoSubmit(String userId,Long orderId,String translateType,String oldState,String newState){
+	public void orderStateChgInfoSubmit(String userId, Long orderId, String translateType, String oldState,
+			String newState) {
 		OrdOdStateChg ordOdStateChg = new OrdOdStateChg();
 		//
 		Long stateChgId = SequenceUtil.createStateChgId();
