@@ -17,6 +17,7 @@ import com.ai.yc.order.dao.mapper.bo.OrdOrder;
 import com.ai.yc.order.service.atom.interfaces.IOrdOrderAtomSV;
 import com.ai.yc.order.service.business.interfaces.IOrdOdStateChgBusiSV;
 import com.ai.yc.order.service.business.interfaces.IOrderReviewBusiSV;
+import com.ai.yc.order.util.DateCycleUtil;
 
 @Service
 public class OrderReviewBusiSVImpl implements IOrderReviewBusiSV {
@@ -53,7 +54,8 @@ public class OrderReviewBusiSVImpl implements IOrderReviewBusiSV {
 				order.setDisplayFlag(OrdersConstants.OrderDisplayFlag.FLAG_WAIT_OK);
 				order.setStateChgTime(sysDate);
 				order.setDisplayFlagChgTime(sysDate);
-				order.setEndChgTime(request.getEndChgTime());
+				//状态结束时间
+				order.setEndChgTime( new Timestamp(Long.valueOf(DateCycleUtil.getCycleDate("D", 7).get("endTime").toString())));
 				ordOrderAtomSV.updateById(order);
 				/* 2.写入订单状态变化轨迹表 */
 				OrdOdStateChg ordOdStateChg = new OrdOdStateChg();

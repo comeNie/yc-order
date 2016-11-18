@@ -1,6 +1,5 @@
 package com.ai.yc.order.api.orderreview.param;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 import com.ai.opt.base.vo.BaseInfo;
@@ -24,10 +23,7 @@ public class OrderReviewRequest extends BaseInfo {
 	 * 操作工号,必填
 	 */
 	private String operId;
-	/**
-	 * 状态结束时间
-	 */
-	private Timestamp  endChgTime;
+	
 
 
 	public String getReasonDesc() {
@@ -60,14 +56,6 @@ public class OrderReviewRequest extends BaseInfo {
 
 	public void setOrderIdList(List<Long> orderIdList) {
 		this.orderIdList = orderIdList;
-	}
-
-	public Timestamp getEndChgTime() {
-		return endChgTime;
-	}
-
-	public void setEndChgTime(Timestamp endChgTime) {
-		this.endChgTime = endChgTime;
 	}
 
 }
