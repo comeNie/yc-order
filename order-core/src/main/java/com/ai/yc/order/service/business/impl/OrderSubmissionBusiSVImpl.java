@@ -415,6 +415,8 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 			ordOdProdWithBLOBs.setInterperSum(request.getProductInfo().getInterperSum());// productInfo.setInterperSum(10l);
 			// 开始时间 stateTime 跟接口属性不同 需要重新赋值
 			ordOdProdWithBLOBs.setStateTime(request.getProductInfo().getStartTime());
+			//结束时间 口译获取前端传递的结束时间
+			ordOdProdWithBLOBs.setEndTime(request.getProductInfo().getEndTime());
 		}
 		// 语言对信息
 		List<LanguagePairInfo> languafePairInfoList = request.getProductInfo().getLanguagePairInfoList();
