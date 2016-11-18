@@ -22,7 +22,7 @@
 	 <bean id="propertyConfigurer"
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
     </bean>
-    
+     <context:property-placeholder location="classpath:*/*.properties" />
     <!--configure registry center -->
     <reg:zookeeper id="regCenter" server-lists="${dubbo.registry.address}" namespace="dd-job" base-sleep-time-milliseconds="1000" max-sleep-time-milliseconds="3000" max-retries="3" />
     
