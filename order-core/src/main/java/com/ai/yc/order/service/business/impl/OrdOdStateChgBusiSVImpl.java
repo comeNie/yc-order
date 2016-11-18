@@ -33,9 +33,9 @@ public class OrdOdStateChgBusiSVImpl implements IOrdOdStateChgBusiSV {
 
 	private final static String OFFER_CHG_ADMIN_DESC_EN = "Your order has been quoted, please finish the payment.";
 
-	private final static String CLOSE_CHG_ADMIN_DESC_CN = "管理员%s关闭了订单。";
+	private final static String CLOSE_CHG_ADMIN_DESC_CN = "客户关闭了订单。";
 
-	private final static String CLOSE_CHG_ADMIN_DESC_EN = "Administrator %s closed the order.";
+	private final static String CLOSE_CHG_ADMIN_DESC_EN = "Client closed the order.";
 	
 	private final static String CLOSE_CHG_DESC_CN = "订单 %s 已关闭。";
 
