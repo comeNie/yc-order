@@ -1,5 +1,7 @@
 package com.ai.yc.order.service.business.impl;
 
+import java.sql.Timestamp;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,6 +11,7 @@ import com.ai.opt.base.vo.ResponseHeader;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.ai.opt.sdk.util.BeanUtils;
 import com.ai.opt.sdk.util.DateUtil;
+import com.ai.opt.sdk.util.StringUtil;
 import com.ai.yc.order.api.paystatus.param.UpdatePayStatusRequest;
 import com.ai.yc.order.api.paystatus.param.UpdatePayStatusResponse;
 import com.ai.yc.order.constants.OrdersConstants;
@@ -71,19 +74,38 @@ public class UpdatePayStatusBusiSVImpl implements IUpdatePayStatusBusiSV {
 		}
 		chg.setOrgState(record.getState());
 		chg.setNewState(OrdersConstants.OrderState.STATE_WAIT_RECEIVE);
-		//修改主表信息
-		record.setState(OrdersConstants.OrderState.STATE_WAIT_RECEIVE);
-		record.setStateChgTime(DateUtil.getSysDate());
-		record.setDisplayFlag(OrdersConstants.OrderDisplayFlag.FLAG_TRASLATING);
-		record.setDisplayFlagChgTime(DateUtil.getSysDate());
-		record.setPayRemark(req.getOrderFee().getRemark());
-		iOrdOrderAtomSV.updateByPrimaryKeySelective(record);
+		
 		
 		//修改费用信息
 		OrdOdFeeTotal feeTotal = new OrdOdFeeTotal();
 		BeanUtils.copyProperties(feeTotal, req.getOrderFee());
 		feeTotal.setPayTime(DateUtil.getSysDate());
 		iOrdOdFeeTotalAtomSV.updateByOrderIdSelective(req.getOrderId(), feeTotal);
+		
+		OrdOdProdWithBLOBs prodRecord = iOrdOdProdAtomSV.findByOrderId(req.getOrderId());
+		if(prodRecord==null){
+			throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT, "产品信息不能为空");
+		}
+		//修改主表信息
+		if(OrdersConstants.TranslateType.ORDER_TYPE_ORAL.equals(record.getTranslateType())){
+			record.setEndChgTime(prodRecord.getEndTime());
+		}else{
+			long endChgTime = feeTotal.getPayTime().getTime();
+			if(!StringUtil.isBlank(prodRecord.getTakeDay())){
+				endChgTime = endChgTime + Long.valueOf(prodRecord.getTakeDay())*24*60*60*1000;
+			}
+			if(!StringUtil.isBlank(prodRecord.getTakeTime())){
+				endChgTime = endChgTime + Long.valueOf(prodRecord.getTakeTime())*60*60*1000;
+			}
+			record.setEndChgTime(new Timestamp(endChgTime));
+		}
+		record.setState(OrdersConstants.OrderState.STATE_WAIT_RECEIVE);
+		record.setStateChgTime(DateUtil.getSysDate());
+		record.setDisplayFlag(OrdersConstants.OrderDisplayFlag.FLAG_TRASLATING);
+		record.setDisplayFlagChgTime(DateUtil.getSysDate());
+		record.setPayRemark(req.getOrderFee().getRemark());
+		iOrdOrderAtomSV.updateByPrimaryKeySelective(record);
+	
 		
 		//修改产品信息
 		if(!OrdersConstants.TranslateType.ORDER_TYPE_ORAL.equals(record.getTranslateType())){
