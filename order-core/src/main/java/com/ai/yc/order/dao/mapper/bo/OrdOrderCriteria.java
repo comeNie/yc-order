@@ -2574,6 +2574,66 @@ public class OrdOrderCriteria {
             addCriterion("PAY_REMARK not between", value1, value2, "payRemark");
             return (Criteria) this;
         }
+
+        public Criteria andEndChgTimeIsNull() {
+            addCriterion("END_CHG_TIME is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndChgTimeIsNotNull() {
+            addCriterion("END_CHG_TIME is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndChgTimeEqualTo(Timestamp value) {
+            addCriterion("END_CHG_TIME =", value, "endChgTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndChgTimeNotEqualTo(Timestamp value) {
+            addCriterion("END_CHG_TIME <>", value, "endChgTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndChgTimeGreaterThan(Timestamp value) {
+            addCriterion("END_CHG_TIME >", value, "endChgTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndChgTimeGreaterThanOrEqualTo(Timestamp value) {
+            addCriterion("END_CHG_TIME >=", value, "endChgTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndChgTimeLessThan(Timestamp value) {
+            addCriterion("END_CHG_TIME <", value, "endChgTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndChgTimeLessThanOrEqualTo(Timestamp value) {
+            addCriterion("END_CHG_TIME <=", value, "endChgTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndChgTimeIn(List<Timestamp> values) {
+            addCriterion("END_CHG_TIME in", values, "endChgTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndChgTimeNotIn(List<Timestamp> values) {
+            addCriterion("END_CHG_TIME not in", values, "endChgTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndChgTimeBetween(Timestamp value1, Timestamp value2) {
+            addCriterion("END_CHG_TIME between", value1, value2, "endChgTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndChgTimeNotBetween(Timestamp value1, Timestamp value2) {
+            addCriterion("END_CHG_TIME not between", value1, value2, "endChgTime");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

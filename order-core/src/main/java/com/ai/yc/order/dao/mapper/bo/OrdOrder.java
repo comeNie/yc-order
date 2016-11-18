@@ -75,6 +75,8 @@ public class OrdOrder {
 
     private String payRemark;
 
+    private Timestamp endChgTime;
+
     public Long getOrderId() {
         return orderId;
     }
@@ -361,5 +363,13 @@ public class OrdOrder {
 
     public void setPayRemark(String payRemark) {
         this.payRemark = payRemark == null ? null : payRemark.trim();
+    }
+
+    public Timestamp getEndChgTime() {
+        return endChgTime;
+    }
+
+    public void setEndChgTime(Timestamp endChgTime) {
+        this.endChgTime = endChgTime;
     }
 }
