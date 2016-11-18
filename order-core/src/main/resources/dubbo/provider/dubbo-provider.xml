@@ -30,5 +30,5 @@
 
 	<import resource="../../context/core-context.xml" />
 	
-	<import resource="../../context/elasticjob-context.xml" />
+	<!-- <import resource="../../context/elasticjob-context.xml" /> -->
 </beans>
