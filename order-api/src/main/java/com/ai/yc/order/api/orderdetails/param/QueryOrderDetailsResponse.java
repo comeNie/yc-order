@@ -134,6 +134,9 @@ public class QueryOrderDetailsResponse extends BaseResponse{
      */
     private String state;
 
+    /**
+     * 预计交稿时间
+     */
     private Timestamp stateChgTime;
 
     /**
@@ -206,6 +209,11 @@ public class QueryOrderDetailsResponse extends BaseResponse{
      * 联系人信息
      */
     private ContactsVo contacts;
+    
+    /**
+     * 预计交稿时间
+     */
+    private Timestamp endChgTime;
     
     /**
      * 分配人员信息
@@ -542,6 +550,14 @@ public class QueryOrderDetailsResponse extends BaseResponse{
 
 	public void setPayRemark(String payRemark) {
 		this.payRemark = payRemark;
+	}
+
+	public Timestamp getEndChgTime() {
+		return endChgTime;
+	}
+
+	public void setEndChgTime(Timestamp endChgTime) {
+		this.endChgTime = endChgTime;
 	}
     
     
