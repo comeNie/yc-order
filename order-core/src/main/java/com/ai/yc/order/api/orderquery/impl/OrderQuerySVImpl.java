@@ -100,7 +100,7 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 				order.setBusiType(ord.getBusitype());
 				order.setChlId(ord.getChlid());
 				order.setDisplayFlag(ord.getDisplayflag());
-				order.setInterperName(ord.getUsername());
+				order.setInterperName(ord.getInterpername());
 				order.setFlag(ord.getFlag());
 				order.setInterperId(ord.getInterperid());
 				order.setLspName(ord.getLspname());
@@ -147,6 +147,9 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 					long time = ord.getEndtime().getTime() - DateUtil.getCurrentTimeMillis();
 					Timestamp scurrtest = new Timestamp(time);
 					order.setRemainingTime(scurrtest);
+				}
+				if(ord.getEndchgtime()!=null){
+					order.setEndChgTime(new Timestamp(ord.getEndchgtime().getTime()));
 				}
 				// 获取语言对名称
 				String extendInfos = JSON.toJSONString(ord.getOrdextendes());
@@ -311,7 +314,7 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 		}
 		// 如果译员名称不为空
 		if (!StringUtil.isBlank(request.getInterperName())) {
-			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.USER_NAME, request.getInterperName(),
+			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.INTERPER_NAME, request.getInterperName(),
 					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
 		}
 		// 如果lsp名称不为空

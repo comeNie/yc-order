@@ -52,14 +52,15 @@ public class IOrderQuerySVImplTest extends BaseTest{
 		//request.setStateChgTimeEnd(es);
 		request.setPageSize(10);
 		request.setPageNo(1);
-		List<Object> list = new ArrayList<Object>();
+		/*List<Object> list = new ArrayList<Object>();
 		Object o1 = "13";
 		Object o2 = "91";
 		list.add(o1);
-		list.add(o2);
+		list.add(o2);*/
+		request.setState("90");
 		//request.setStateList(list);
 		//request.setOrderByFlag("3");
-		request.setUserId("100329");
+		//request.setUserId("100329");
 		QueryOrderRsponse response = this.iOrderQuerySV.queryOrder(request);
 		log.info("response:"+JSON.toJSONString(response));
 	}

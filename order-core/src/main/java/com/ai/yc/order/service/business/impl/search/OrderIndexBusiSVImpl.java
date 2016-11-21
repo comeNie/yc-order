@@ -77,7 +77,7 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 			ordInfo.setSubflag(ord.getSubFlag());
 			ordInfo.setOperid(ord.getOperId());
 			ordInfo.setUserid(ord.getUserId());
-			ordInfo.setFinishtime(ord.getFinishTime());
+			ordInfo.setEndchgtime(ord.getEndChgTime());
 			//获取昵称
 			/*IYCUserServiceSV userServiceSV = DubboConsumerFactory.getService(IYCUserServiceSV.class);
 			SearchYCUserRequest request = new SearchYCUserRequest();
@@ -90,6 +90,7 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 			ordInfo.setUsername("test");
 			ordInfo.setLspname("test");
 			ordInfo.setUpdatename("test");
+			ordInfo.setInterpername("test");
 			// 查询商品信息
 			OrdOdProd ordOdProd = ordOdProdAtomSV.findByOrderId(ord.getOrderId());
 			if (ordOdProd != null) {
@@ -178,7 +179,7 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 					ordInfo.setSubflag(ord.getSubFlag());
 					ordInfo.setOperid(ord.getOperId());
 					ordInfo.setUserid(ord.getUserId());
-					ordInfo.setFinishtime(ord.getFinishTime());
+					ordInfo.setEndchgtime(ord.getEndChgTime());
 					//获取昵称
 					/*IYCUserServiceSV userServiceSV = DubboConsumerFactory.getService(IYCUserServiceSV.class);
 					SearchYCUserRequest request = new SearchYCUserRequest();
@@ -191,6 +192,7 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 					ordInfo.setUsername("test");
 					ordInfo.setLspname("test");
 					ordInfo.setUpdatename("test");
+					ordInfo.setInterpername("test");
 					// 查询商品信息
 					OrdOdProd ordOdProd = ordOdProdAtomSV.findByOrderId(ord.getOrderId());
 					if (ordOdProd != null) {

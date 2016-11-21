@@ -39,6 +39,8 @@ public class SearchFieldConfConstants {
     public static final String TAKE_DAY = "takeday";
     public static final String TAKE_TIME = "taketime";
     public static final String TOTAL_FEE = "totalfee";
+    public static final String INTERPER_NAME = "interpername";
+    
     
     
 }

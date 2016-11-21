@@ -28,7 +28,7 @@ public class OrdOrderVo extends BaseInfo {
 	 */
 	private String userId;
 	/**
-	 * 用户名称
+	 * 用户昵称
 	 */
 	private String userName;
 	/**
@@ -148,6 +148,10 @@ public class OrdOrderVo extends BaseInfo {
 	 * 修改剩余时间（一期未用）
 	 */
 	private Timestamp updateRemainingTime;
+	/**
+	 * 状态结束时间
+	 */
+	private Timestamp endChgTime;
 	/**
 	 * 总费用
 	 */
@@ -460,6 +464,14 @@ public class OrdOrderVo extends BaseInfo {
 
 	public void setOrdProdLevelList(List<OrdProdLevelVo> ordProdLevelList) {
 		this.ordProdLevelList = ordProdLevelList;
+	}
+
+	public Timestamp getEndChgTime() {
+		return endChgTime;
+	}
+
+	public void setEndChgTime(Timestamp endChgTime) {
+		this.endChgTime = endChgTime;
 	}
 
 }

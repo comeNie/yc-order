@@ -43,6 +43,8 @@ public class OrderInfo {
 	private String operid;
 	private String takeday;
 	private String taketime;
+	private Date endchgtime;
+	private String interpername;
 	/**
 	 * 报价人
 	 */
@@ -402,6 +404,22 @@ public class OrderInfo {
 
 	public void setTaketime(String taketime) {
 		this.taketime = taketime;
+	}
+
+	public Date getEndchgtime() {
+		return endchgtime;
+	}
+
+	public void setEndchgtime(Date endchgtime) {
+		this.endchgtime = endchgtime;
+	}
+
+	public String getInterpername() {
+		return interpername;
+	}
+
+	public void setInterpername(String interpername) {
+		this.interpername = interpername;
 	}
 
 }
