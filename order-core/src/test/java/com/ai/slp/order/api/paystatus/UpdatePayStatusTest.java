@@ -5,11 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ai.opt.sdk.dubbo.util.DubboConsumerFactory;
 import com.ai.slp.order.api.BaseTest;
-import com.ai.yc.common.api.sysdomain.interfaces.IQuerySysDomainSV;
-import com.ai.yc.common.api.sysdomain.param.QuerySysDomainDetailsRes;
-import com.ai.yc.common.api.sysduad.interfaces.IQuerySysDuadSV;
-import com.ai.yc.common.api.sysduad.param.QuerySysDuadListReq;
-import com.ai.yc.common.api.sysduad.param.QuerySysDuadListRes;
+import com.ai.yc.common.api.syspurpose.interfaces.IQuerySysPurposeSV;
+import com.ai.yc.common.api.syspurpose.param.QuerySysPurposeListRes;
 import com.ai.yc.order.api.paystatus.interfaces.IUpdatePayStatusSV;
 import com.ai.yc.order.api.paystatus.param.OrderFeeVo;
 import com.ai.yc.order.api.paystatus.param.UpdatePayStatusRequest;
@@ -50,11 +47,9 @@ public class UpdatePayStatusTest extends BaseTest {
 	@Test
 	public void test() {
 		Gson gson = new Gson();
-		QuerySysDuadListReq req = new QuerySysDuadListReq();
-		req.setLanguage("zh_CN");
-		req.setOrderType("1");
-	    QuerySysDuadListRes list = DubboConsumerFactory
-				.getService(IQuerySysDuadSV.class).querySysDuadList(req);
+		
+	    QuerySysPurposeListRes list = DubboConsumerFactory
+				.getService(IQuerySysPurposeSV.class).querySysPurposeList();
 		System.out.println(gson.toJson(list));
 		
 	}

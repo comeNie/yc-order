@@ -571,8 +571,7 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 		// 有效性校验
 		ValidateUtils.validateQueryOrdCount(request);
 		QueryOrdCountResponse response = new QueryOrdCountResponse();
-		int count = iOrdOrderBusiSV.findOrderCount(request);
-		response.setCountNumber(count);
+		response.setCountVos(iOrdOrderBusiSV.findOrderCount(request));
 		ResponseHeader responseHeader = new ResponseHeader(true, ExceptCodeConstants.Special.SUCCESS, "查询订单数成功");
 		response.setResponseHeader(responseHeader);
 		return response;

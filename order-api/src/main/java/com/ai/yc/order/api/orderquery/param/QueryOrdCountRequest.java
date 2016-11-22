@@ -49,14 +49,7 @@ public class QueryOrdCountRequest extends BaseInfo  {
 	 * 企业ID
 	 */
 	private String corporaId;
-	/**
-	 * 订单状态（后场）
-	 */
-	private String state;
-	/**
-	 * 客户端显示状态
-	 */
-	private String displayFlag;
+	
 	/**
 	 * 译员类型
 	 */
@@ -156,22 +149,6 @@ public class QueryOrdCountRequest extends BaseInfo  {
 
 	public void setCorporaId(String corporaId) {
 		this.corporaId = corporaId;
-	}
-
-	public String getState() {
-		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
-	}
-
-	public String getDisplayFlag() {
-		return displayFlag;
-	}
-
-	public void setDisplayFlag(String displayFlag) {
-		this.displayFlag = displayFlag;
 	}
 
 	public String getInterperType() {
