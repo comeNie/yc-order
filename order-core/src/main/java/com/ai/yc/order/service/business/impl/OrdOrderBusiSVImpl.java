@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
-import com.ai.opt.sdk.util.BeanUtils;
 import com.ai.opt.sdk.util.DateUtil;
 import com.ai.paas.ipaas.util.StringUtil;
 import com.ai.yc.order.api.orderquery.param.QueryOrdCountRequest;
@@ -37,7 +36,7 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 	@Override
 	public Map<String,Integer> findOrderCount(QueryOrdCountRequest request) {
 		OrdOrder orderRequest = new OrdOrder();
-		BeanUtils.copyProperties(orderRequest, request);
+		copyProperties(orderRequest, request);
 		Map<String,Integer> countMap = new HashMap<String,Integer>();
 		if(!StringUtil.isBlank(request.getUserId())){
 			//待支付
@@ -81,7 +80,22 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 		return countMap;
 	}
 	
-	
+	private void copyProperties(OrdOrder orderRequest,QueryOrdCountRequest request){
+		orderRequest.setBusiType(request.getBusiType());
+		orderRequest.setChlId(request.getChlId());
+		orderRequest.setFlag(request.getFlag());
+		orderRequest.setUserType(request.getUserType());
+		orderRequest.setUserId(request.getUserId());
+		orderRequest.setSubFlag(request.getSubFlag());
+		orderRequest.setOrderType(request.getOrderType());
+		orderRequest.setBusiType(request.getBusiType());
+		orderRequest.setOrderLevel(request.getOrderLevel());
+		orderRequest.setTranslateType(request.getTranslateType());
+		orderRequest.setCorporaId(request.getCorporaId());
+		orderRequest.setInterperType(request.getInterperType());
+		orderRequest.setInterperId(request.getInterperId());
+		orderRequest.setLspId(request.getLspId());
+	}
 	
 	@Override
 	@Transactional

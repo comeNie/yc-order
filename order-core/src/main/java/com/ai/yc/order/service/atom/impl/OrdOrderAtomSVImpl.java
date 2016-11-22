@@ -30,9 +30,6 @@ public class OrdOrderAtomSVImpl implements IOrdOrderAtomSV {
 		if (!StringUtil.isBlank(ordOrder.getFlag())) {
 			param.andFlagEqualTo(ordOrder.getFlag());
 		}
-		if (!StringUtil.isBlank(ordOrder.getTimeZone())) {
-			param.andTimeZoneEqualTo(ordOrder.getTimeZone());
-		}
 		if (!StringUtil.isBlank(ordOrder.getUserType())) {
 			param.andUserTypeEqualTo(ordOrder.getUserType());
 		}
@@ -80,7 +77,8 @@ public class OrdOrderAtomSVImpl implements IOrdOrderAtomSV {
 		}
 		return ordOrderMapper.countByExample(example);
 	}
-
+	
+	
 	@Override
 	public void insertSelective(OrdOrder OrdOrder) {
 		//
