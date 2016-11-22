@@ -34,6 +34,9 @@ import com.ai.yc.order.service.atom.interfaces.IOrdOdProdExtendAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdProdLevelAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOrderAtomSV;
 import com.ai.yc.order.service.business.interfaces.search.IOrderIndexBusiSV;
+import com.ai.yc.user.api.userservice.interfaces.IYCUserServiceSV;
+import com.ai.yc.user.api.userservice.param.SearchYCUserRequest;
+import com.ai.yc.user.api.userservice.param.YCUserInfoResponse;
 
 @Service
 public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
@@ -84,19 +87,17 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 			ordInfo.setOperid(ord.getOperId());
 			ordInfo.setUserid(ord.getUserId());
 			ordInfo.setEndchgtime(ord.getEndChgTime());
-			/*//获取昵称
+			//获取昵称
 			if(!StringUtil.isBlank(ord.getUserId())){
 				IYCUserServiceSV userServiceSV = DubboConsumerFactory.getService(IYCUserServiceSV.class);
 				SearchYCUserRequest request = new SearchYCUserRequest();
 				request.setUserId(ord.getUserId());
 				YCUserInfoResponse response = userServiceSV.searchYCUserInfo(request);
-				System.out.println("======="+response.getResponseHeader().getResultMessage());
 				if(response.getResponseHeader().isSuccess()==true){
 					ordInfo.setUsername(response.getNickname());
 				}
-			}*/
+			}
 			//赋值假数据
-			ordInfo.setUsername("test");
 			ordInfo.setLspname("test");
 			ordInfo.setInterpername("test");
 			// 查询商品信息
@@ -198,7 +199,7 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 					ordInfo.setOperid(ord.getOperId());
 					ordInfo.setUserid(ord.getUserId());
 					ordInfo.setEndchgtime(ord.getEndChgTime());
-					/*//获取昵称
+					//获取昵称
 					if(!StringUtil.isBlank(ord.getUserId())){
 						IYCUserServiceSV userServiceSV = DubboConsumerFactory.getService(IYCUserServiceSV.class);
 						SearchYCUserRequest request = new SearchYCUserRequest();
@@ -207,9 +208,8 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 						if(response.getResponseHeader().isSuccess()==true){
 							ordInfo.setUsername(response.getNickname());
 						}
-					}*/
+					}
 					//赋值假数据
-					ordInfo.setUsername("test");
 					ordInfo.setLspname("test");
 					ordInfo.setInterpername("test");
 					// 查询商品信息
