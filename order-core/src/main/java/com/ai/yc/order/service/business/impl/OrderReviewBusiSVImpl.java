@@ -65,9 +65,9 @@ public class OrderReviewBusiSVImpl implements IOrderReviewBusiSV {
 				ordOdStateChg.setNewState(request.getState());
 				ordOdStateChgBusiSV.checkChgDesc(ordOdStateChg);
 			} else {
-				/* 1.更新订单表中状态为“审核失败” */
+				/* 1.回退订单表中状态为“翻译中” */
 				Timestamp sysDate = DateUtil.getSysDate();
-				order.setState(request.getState());
+				order.setState(OrdersConstants.OrderState.STATE_TRASLATING);
 				order.setStateChgTime(sysDate);
 				ordOrderAtomSV.updateById(order);
 				/* 2.写入订单状态变化轨迹表 */
@@ -75,7 +75,7 @@ public class OrderReviewBusiSVImpl implements IOrderReviewBusiSV {
 				ordOdStateChg.setOrderId(order.getOrderId());
 				ordOdStateChg.setOperId(request.getOperId());
 				ordOdStateChg.setOrgState(OrdersConstants.OrderState.WAIT_REVIEW_STATE);
-				ordOdStateChg.setNewState(request.getState());
+				ordOdStateChg.setNewState(OrdersConstants.OrderState.STATE_TRASLATING);
 				ordOdStateChgBusiSV.checkChgDesc(ordOdStateChg);
 			}
 			//刷新数据到搜索引擎
