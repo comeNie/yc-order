@@ -30,6 +30,8 @@ public class AutoDealOrderBusiSVImpl implements IAutoDealOrderBusiSV {
 	private final static int _DAY_CANCEL = 3;
 	
 	private final static int _DAY_CONFIRM = 7;
+	
+	private final static int _MINUTE_REVIEW = 10;
 
 	@Override
 	public BaseResponse autoCancelOrder() {
@@ -83,7 +85,38 @@ public class AutoDealOrderBusiSVImpl implements IAutoDealOrderBusiSV {
     	    	chg.setOrderId(ordOrder.getOrderId());
     	    	chg.setOrgState(ordOrder.getState());
     	    	chg.setNewState(OrdersConstants.OrderState.WAIT_COMMENT_STATE);
+    	    	chg.setOperId(OrdersConstants.SYS_OPER_ID);
     	    	iOrdOdStateChgBusiSV.addAllCloseChgDesc(chg);
+    	    }
+    	}
+		BaseResponse resp = new BaseResponse();
+    	resp.setResponseHeader(new ResponseHeader(true, ResultCodeConstants.SUCCESS_CODE, "处理成功"));
+		return resp;
+	}
+
+	@Override
+	public BaseResponse autoReviewOrder() {
+		List<OrdOrder> ordOrders = iOrdOrderAtomSV.findByState(OrdersConstants.OrderState.WAIT_REVIEW_STATE);
+    	long now = System.currentTimeMillis();
+    	for(OrdOrder ordOrder:ordOrders){
+    		long start = ordOrder.getStateChgTime().getTime();
+    	    if(now-start >= _MINUTE_REVIEW*60*1000l){
+    	    	//修改订单状态为待确认
+    	    	OrdOrder record = new OrdOrder();
+    	    	record.setOrderId(ordOrder.getOrderId());
+    	    	record.setState(OrdersConstants.OrderState.WAIT_OK_STATE);
+    	    	record.setStateChgTime(DateUtil.getSysDate());
+    	    	record.setDisplayFlag(OrdersConstants.OrderDisplayFlag.FLAG_WAIT_OK);
+    	    	record.setDisplayFlagChgTime(DateUtil.getSysDate());
+    	    	record.setOperId(OrdersConstants.SYS_OPER_ID);
+    	    	iOrdOrderAtomSV.updateByPrimaryKeySelective(record);
+    	    	//添加订单轨迹
+    	    	OrdOdStateChg chg = new OrdOdStateChg();
+    	    	chg.setOrderId(ordOrder.getOrderId());
+    	    	chg.setOrgState(ordOrder.getState());
+    	    	chg.setNewState(OrdersConstants.OrderState.WAIT_OK_STATE);
+    	    	chg.setOperId(OrdersConstants.SYS_OPER_ID);
+    	    	iOrdOdStateChgBusiSV.checkChgDesc(chg);
     	    }
     	}
 		BaseResponse resp = new BaseResponse();

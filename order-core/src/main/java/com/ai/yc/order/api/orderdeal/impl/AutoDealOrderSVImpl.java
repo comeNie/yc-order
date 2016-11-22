@@ -33,4 +33,10 @@ public class AutoDealOrderSVImpl implements IAutoDealOrderSV {
 		return iAutoDealOrderBusiSV.autoConfirmOrder();
 	}
 
+	@Override
+	public BaseResponse autoReviewOrder() throws BusinessException,
+			SystemException {
+		return iAutoDealOrderBusiSV.autoReviewOrder();
+	}
+
 }

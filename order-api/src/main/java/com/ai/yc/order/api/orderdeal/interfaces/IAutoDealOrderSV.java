@@ -48,5 +48,19 @@ public interface IAutoDealOrderSV {
 	@POST
 	@Path("/autoConfirmOrder")
 	BaseResponse autoConfirmOrder()throws BusinessException,SystemException;
+	
+	/**
+     * 自动审核通过订单服务
+     * @param 
+     * @return 
+     * @throws BusinessException,SystemException
+     * @author hougang
+     * @ApiDocMethod
+     * @ApiCode ORD_2033
+     * @RestRelativeURL orderdeal/autoReviewOrder
+	 */
+	@POST
+	@Path("/autoReviewOrder")
+	BaseResponse autoReviewOrder()throws BusinessException,SystemException;
 
 }

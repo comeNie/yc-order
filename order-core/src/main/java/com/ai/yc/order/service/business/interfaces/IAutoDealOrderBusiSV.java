@@ -12,5 +12,7 @@ public interface IAutoDealOrderBusiSV {
 	BaseResponse autoCancelOrder();
 	
 	BaseResponse autoConfirmOrder();
+	
+	BaseResponse autoReviewOrder() ;
 
 }

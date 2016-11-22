@@ -10,32 +10,32 @@ import com.dangdang.ddframe.job.api.ShardingContext;
 import com.dangdang.ddframe.job.api.simple.SimpleJob;
 
 /**
- * @Description: 自动确认订单定时任务
+ * @Description: 自动审核订单定时任务
  * @author hougang@asiainfo.com
- * @date 2016年11月17日 下午4:48:12 
+ * @date 2016年11月22日 下午4:16:25 
  * @version V1.0
  */
-public class AutoConfirmOrderJob implements SimpleJob {
-	
-	private static final Logger LOG = LogManager.getLogger(AutoConfirmOrderJob.class);
+public class AutoReviewOrderJob implements SimpleJob{
+
+private static final Logger LOG = LogManager.getLogger(AutoReviewOrderJob.class);
 	
 	@Override
 	public void execute(ShardingContext shardingContext) {
-		LOG.info("自动确认订单定时任务start.....................");
+		LOG.info("自动审核订单定时任务start.....................");
 		IAutoDealOrderSV iAutoDealOrderSV = DubboConsumerFactory.getService(IAutoDealOrderSV.class);
     	BaseResponse resp = null;
     	try {
-    		resp = iAutoDealOrderSV.autoConfirmOrder();
+    		resp = iAutoDealOrderSV.autoReviewOrder();
 		} catch (Exception e) {
-			LOG.error("自动确认订单定时任务出现异常",e);
+			LOG.error("自动审核订单定时任务出现异常",e);
 		}
     	if(resp==null){
-    		LOG.error("自动确认订单定时任务出现异常");
+    		LOG.error("自动审核订单定时任务出现异常");
     	}
     	if(!resp.getResponseHeader().isSuccess()){
     		LOG.error(resp.getResponseHeader().getResultMessage());
     	}
-    	LOG.info("自动确认订单定时任务end.....................");
+    	LOG.info("自动审核订单定时任务end.....................");
 	}
 
 }
