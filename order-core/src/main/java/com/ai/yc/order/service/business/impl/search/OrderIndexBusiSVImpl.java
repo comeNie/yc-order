@@ -10,7 +10,13 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.sdk.components.ses.SESClientFactory;
+import com.ai.opt.sdk.dubbo.util.DubboConsumerFactory;
 import com.ai.opt.sdk.util.CollectionUtil;
+import com.ai.opt.sdk.util.StringUtil;
+import com.ai.yc.common.api.sysuser.interfaces.ISysUserQuerySV;
+import com.ai.yc.common.api.sysuser.param.SysUserQueryRequest;
+import com.ai.yc.common.api.sysuser.param.SysUserQueryResponse;
+import com.ai.yc.order.constants.OrdersConstants;
 import com.ai.yc.order.constants.SearchConstants;
 import com.ai.yc.order.dao.mapper.bo.OrdBalacneIf;
 import com.ai.yc.order.dao.mapper.bo.OrdOdFeeTotal;
@@ -78,18 +84,20 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 			ordInfo.setOperid(ord.getOperId());
 			ordInfo.setUserid(ord.getUserId());
 			ordInfo.setEndchgtime(ord.getEndChgTime());
-			//获取昵称
-			/*IYCUserServiceSV userServiceSV = DubboConsumerFactory.getService(IYCUserServiceSV.class);
-			SearchYCUserRequest request = new SearchYCUserRequest();
-			request.setUserId(ord.getUserId());
-			YCUserInfoResponse response = userServiceSV.searchYCUserInfo(request);
-			if(response.getResponseHeader().isSuccess()==true){
-				ordInfo.setUsername(response.getNickname());
+			/*//获取昵称
+			if(!StringUtil.isBlank(ord.getUserId())){
+				IYCUserServiceSV userServiceSV = DubboConsumerFactory.getService(IYCUserServiceSV.class);
+				SearchYCUserRequest request = new SearchYCUserRequest();
+				request.setUserId(ord.getUserId());
+				YCUserInfoResponse response = userServiceSV.searchYCUserInfo(request);
+				System.out.println("======="+response.getResponseHeader().getResultMessage());
+				if(response.getResponseHeader().isSuccess()==true){
+					ordInfo.setUsername(response.getNickname());
+				}
 			}*/
 			//赋值假数据
 			ordInfo.setUsername("test");
 			ordInfo.setLspname("test");
-			ordInfo.setUpdatename("test");
 			ordInfo.setInterpername("test");
 			// 查询商品信息
 			OrdOdProd ordOdProd = ordOdProdAtomSV.findByOrderId(ord.getOrderId());
@@ -127,6 +135,16 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 			// 查询费用信息
 			OrdOdFeeTotal ordOdFeeTotal = ordOdFeeTotalAtomSV.findByOrderId(ord.getOrderId());
 			if (ordOdFeeTotal != null) {
+				if(!StringUtil.isBlank(ordOdFeeTotal.getUpdateOperId())){
+					ISysUserQuerySV iSysUserQuerySV = DubboConsumerFactory.getService(ISysUserQuerySV.class);
+					SysUserQueryRequest req = new SysUserQueryRequest();
+					req.setId(ordOdFeeTotal.getUpdateOperId());
+					req.setTenantId(OrdersConstants.TENANT_ID);
+					SysUserQueryResponse userInfo = iSysUserQuerySV.queryUserInfo(req);
+					if(userInfo!=null){
+						ordInfo.setUpdatename((StringUtil.isBlank(userInfo.getName())?userInfo.getLoginName():userInfo.getName()));
+					}
+				}
 				ordInfo.setUpdateoperid(ordOdFeeTotal.getUpdateOperId());
 				ordInfo.setUpdatetime(ordOdFeeTotal.getUpdateTime());
 				ordInfo.setTotalfee(ordOdFeeTotal.getTotalFee());
@@ -180,18 +198,19 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 					ordInfo.setOperid(ord.getOperId());
 					ordInfo.setUserid(ord.getUserId());
 					ordInfo.setEndchgtime(ord.getEndChgTime());
-					//获取昵称
-					/*IYCUserServiceSV userServiceSV = DubboConsumerFactory.getService(IYCUserServiceSV.class);
-					SearchYCUserRequest request = new SearchYCUserRequest();
-					request.setUserId(ord.getUserId());
-					YCUserInfoResponse response = userServiceSV.searchYCUserInfo(request);
-					if(response.getResponseHeader().isSuccess()==true){
-						ordInfo.setUsername(response.getNickname());
+					/*//获取昵称
+					if(!StringUtil.isBlank(ord.getUserId())){
+						IYCUserServiceSV userServiceSV = DubboConsumerFactory.getService(IYCUserServiceSV.class);
+						SearchYCUserRequest request = new SearchYCUserRequest();
+						request.setUserId(ord.getUserId());
+						YCUserInfoResponse response = userServiceSV.searchYCUserInfo(request);
+						if(response.getResponseHeader().isSuccess()==true){
+							ordInfo.setUsername(response.getNickname());
+						}
 					}*/
 					//赋值假数据
 					ordInfo.setUsername("test");
 					ordInfo.setLspname("test");
-					ordInfo.setUpdatename("test");
 					ordInfo.setInterpername("test");
 					// 查询商品信息
 					OrdOdProd ordOdProd = ordOdProdAtomSV.findByOrderId(ord.getOrderId());
@@ -223,6 +242,16 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 						ordInfo.setUpdatetime(ordOdFeeTotal.getUpdateTime());
 						ordInfo.setCurrencyunit(ordOdFeeTotal.getCurrencyUnit());
 						ordInfo.setTotalfee(ordOdFeeTotal.getTotalFee());
+						if(!StringUtil.isBlank(ordOdFeeTotal.getUpdateOperId())){
+							ISysUserQuerySV iSysUserQuerySV = DubboConsumerFactory.getService(ISysUserQuerySV.class);
+							SysUserQueryRequest req = new SysUserQueryRequest();
+							req.setTenantId(OrdersConstants.TENANT_ID);
+							req.setId(ordOdFeeTotal.getUpdateOperId());
+							SysUserQueryResponse userInfo = iSysUserQuerySV.queryUserInfo(req);
+							if(userInfo!=null){
+								ordInfo.setUpdatename(userInfo.getName());
+							}
+						}
 					}
 					//查询翻译级别信息
 					List<OrdOdProdLevel> levelLists = ordOdProdLevelAtomSV.findByOrderId(ord.getOrderId());
