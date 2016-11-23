@@ -21,6 +21,32 @@ public class QueryOrdCountRequest extends BaseInfo  {
 	 * 用户ID
 	 */
 	private String userId;
+	
+	 /**
+	    * 订单状态(后厂)
+	    * 10：提交 
+		*11：待支付
+		*12：已支付
+		*13：待报价
+		*20：待领取
+		*21：已领取
+		*211：已分配
+		*23：翻译中
+		*24：已提交
+		*25：修改中
+		*40：待审核
+		*41：已审核
+		*42：审核失败（审核不通过）
+		*50：待确认
+		*51：已确认
+		*52：待评价
+		*53：已评价
+		*90：完成
+		*91：关闭（取消）
+		*92：已退款
+	     */
+	private String state;
+	
 	/**
 	 * 报价标识
 	 */
@@ -174,5 +200,15 @@ public class QueryOrdCountRequest extends BaseInfo  {
 	public void setInterperId(String interperId) {
 		this.interperId = interperId;
 	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+	
+	
 
 }

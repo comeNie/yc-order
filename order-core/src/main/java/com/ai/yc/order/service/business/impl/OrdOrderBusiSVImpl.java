@@ -38,6 +38,11 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 		OrdOrder orderRequest = new OrdOrder();
 		copyProperties(orderRequest, request);
 		Map<String,Integer> countMap = new HashMap<String,Integer>();
+		if(!StringUtil.isBlank(request.getState())){
+			int stateCount = ordOrderAtomSV.findOrderCount(orderRequest);
+			countMap.put(request.getState(), stateCount);
+			return countMap;
+		}
 		if(!StringUtil.isBlank(request.getUserId())){
 			//待支付
 			orderRequest.setDisplayFlag(OrdersConstants.OrderDisplayFlag.FLAG_WAIT_PAY);
@@ -94,6 +99,7 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 		orderRequest.setCorporaId(request.getCorporaId());
 		orderRequest.setInterperType(request.getInterperType());
 		orderRequest.setInterperId(request.getInterperId());
+		orderRequest.setState(request.getState());
 		orderRequest.setLspId(request.getLspId());
 	}
 	
