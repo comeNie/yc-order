@@ -2,14 +2,14 @@
 
 #env
 APP_HOME=/dubbo-service
-#APP_NAME为各中心的名字，如订单中心记为changhong.order,
+#APP_NAME为各中心的名字，如订单中心记为yc.order,
 
 APP_NAME="yc.order"
 APP_PARM="aiopt.order.name=${APP_NAME}"
 
 #此处的端口要与dubbo.properties中的端口对应，
-#如，商品中心的为：slp.order.dubbo.port
-PROCESS_PARM="slp.order.dubbo.port=${REST_PORT}"
+#如，商品中心的为：yc.order.dubbo.port
+PROCESS_PARM="yc.order.dubbo.port=${REST_PORT}"
 
 for file in ${APP_HOME}/libs/**/*.jar;
 do CP=${CP}:$file;
