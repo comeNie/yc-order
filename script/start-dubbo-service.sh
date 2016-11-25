@@ -57,7 +57,7 @@ sed -i "s/dubbo.registry.address=.*/dubbo.registry.address=${REST_REGISTRY_ADDR}
 
 #此处的端口要与dubbo.properties中的端口对应，
 #如，商品中心的为：slp.order.dubbo.port
-sed -i "s/slp.order.dubbo.port=.*/slp.order.dubbo.port=${REST_PORT}/g" ${APP_HOME}/config/dubbo/dubbo.properties
+sed -i "s/yc.order.dubbo.port=.*/yc.order.dubbo.port=${REST_PORT}/g" ${APP_HOME}/config/dubbo/dubbo.properties
 
 #此处的信息要与dubbo.properties中对应
 sed -i "s/dubbo.protocol.contextpath=.*/dubbo.protocol.contextpath=${CONTEXT_PATH}/g" ${APP_HOME}/config/dubbo/dubbo.properties
