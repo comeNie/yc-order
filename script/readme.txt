@@ -12,7 +12,7 @@ docker push 10.19.13.19:5000/yc-order:v1.0
 3. 运行镜像
 #--net=host  表示为主机(host)模式  去掉该配置，默认为桥接(bridge)模式
 #-e 代表需要设置的环境变量
-docker run -d --name yc-order -p 10883:10883 -e "REST_REGISTRY_ADDR=10.19.13.23:29181" -e "REST_PORT=10883" -e "CONTEXT_PATH=yc-order" -e "SDK_MODE=0" -e "CCS_NAME=aiopt-yc-order" -e "ZK_ADDR=10.19.13.23:29181" 10.19.13.18:5000/yc-order:v1.0 
+docker run -d --name yc-order -p 10883:10883 -e "REST_REGISTRY_ADDR=10.19.13.23:29181" -e "REST_PORT=10883" -e "CONTEXT_PATH=yc-order" -e "SDK_MODE=0" -e "CCS_NAME=aiopt-yc-order" -e "ZK_ADDR=10.19.13.23:29181" 10.19.13.20:5000/yc-order:v1.0 
 #查看镜像启动日志
 docker logs yc-order
 #进入容器，查看镜像内部的情况
