@@ -35,8 +35,10 @@ import com.ai.yc.order.service.atom.interfaces.IOrdOdProdLevelAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOrderAtomSV;
 import com.ai.yc.order.service.business.interfaces.search.IOrderIndexBusiSV;
 import com.ai.yc.user.api.userservice.interfaces.IYCUserServiceSV;
+import com.ai.yc.user.api.userservice.param.SearchYCTranslatorRequest;
 import com.ai.yc.user.api.userservice.param.SearchYCUserRequest;
 import com.ai.yc.user.api.userservice.param.YCLSPInfoReponse;
+import com.ai.yc.user.api.userservice.param.YCTranslatorInfoResponse;
 import com.ai.yc.user.api.userservice.param.YCUserInfoResponse;
 import com.ai.yc.user.api.userservice.param.searchYCLSPInfoRequest;
 
@@ -108,9 +110,15 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 					ordInfo.setLspname(lsp.getLspName());
 				}
 			}
-			//赋值假数据
-			//ordInfo.setLspname("test");
-			ordInfo.setInterpername("test");
+			//获取译员昵称
+			if(!StringUtil.isBlank(ord.getInterperId())){
+				SearchYCTranslatorRequest  translatorRequest = new SearchYCTranslatorRequest();
+				translatorRequest.setTranslatorId(ord.getInterperId());
+				YCTranslatorInfoResponse  interper = userServiceSV.searchYCTranslatorInfo(translatorRequest);
+				if(interper.getResponseHeader().isSuccess()==true){
+					ordInfo.setInterpername(interper.getNickname());
+				}
+			}
 			// 查询商品信息
 			OrdOdProd ordOdProd = ordOdProdAtomSV.findByOrderId(ord.getOrderId());
 			if (ordOdProd != null) {
@@ -229,9 +237,15 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 							ordInfo.setLspname(lsp.getLspName());
 						}
 					}
-					//赋值假数据
-					//ordInfo.setLspname("test");
-					ordInfo.setInterpername("test");
+					//获取译员昵称
+					if(!StringUtil.isBlank(ord.getInterperId())){
+						SearchYCTranslatorRequest  translatorRequest = new SearchYCTranslatorRequest();
+						translatorRequest.setTranslatorId(ord.getInterperId());
+						YCTranslatorInfoResponse  interper = userServiceSV.searchYCTranslatorInfo(translatorRequest);
+						if(interper.getResponseHeader().isSuccess()==true){
+							ordInfo.setInterpername(interper.getNickname());
+						}
+					}
 					// 查询商品信息
 					OrdOdProd ordOdProd = ordOdProdAtomSV.findByOrderId(ord.getOrderId());
 					if (ordOdProd != null) {
