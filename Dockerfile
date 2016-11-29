@@ -14,7 +14,7 @@ COPY ./script/start-dubbo-service.sh /start-dubbo-service.sh
 RUN chmod 755 /start-dubbo-service.sh
 
 # Expose dubbo/rest ports.
-EXPOSE 10887
+EXPOSE 10883
 
 # Define default command.
 CMD ["./start-dubbo-service.sh"]
