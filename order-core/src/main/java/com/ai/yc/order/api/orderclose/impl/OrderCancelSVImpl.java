@@ -10,7 +10,6 @@ import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.base.vo.BaseResponse;
 import com.ai.opt.base.vo.ResponseHeader;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
-import com.ai.opt.sdk.util.BeanUtils;
 import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.yc.order.api.orderclose.interfaces.IOrderCancelSV;
 import com.ai.yc.order.api.orderclose.param.OrderCancelRequest;
@@ -50,7 +49,9 @@ public class OrderCancelSVImpl implements IOrderCancelSV {
 					"待取消订单为空[orderId:"+request.getOrderId()+"]");
 		}
 		OrdOrder ordOrder = new OrdOrder();
-		BeanUtils.copyProperties(ordOrder, request);
+		ordOrder.setOrderId(request.getOrderId());
+		ordOrder.setOperId(request.getOperId());
+		ordOrder.setReasonDesc(request.getReasonDesc());
 		ordOrder.setState(noPayOrders.get(0).getState());
 		 //4.取消订单
 		orderCancelBusiSV.orderCancel(ordOrder);
@@ -60,5 +61,5 @@ public class OrderCancelSVImpl implements IOrderCancelSV {
 		sesDataUpdateSV.updateSesData(request.getOrderId());
 		return response;
 	}
-
+	
 }
