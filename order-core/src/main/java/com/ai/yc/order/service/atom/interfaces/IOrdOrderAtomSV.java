@@ -46,6 +46,12 @@ public interface IOrdOrderAtomSV {
 	 */
 	List<OrdOrder> findNoPayOrdList(long orderId);
 	/**
+	 * 根据id获取待报价订单
+	 * 
+	 * @author zhanglh
+	 */
+	List<OrdOrder> findNoPriceOrdList(long orderId);
+	/**
 	 * 根据id获取待审核订单
 	 * 
 	 * @author zhanglh

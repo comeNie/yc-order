@@ -138,4 +138,14 @@ public class OrdOrderAtomSVImpl implements IOrdOrderAtomSV {
 		return MapperFactory.getOrdOrderMapper().selectByExample(example);
 	}
 
+	@Override
+	public List<OrdOrder> findNoPriceOrdList(long orderId) {
+		OrdOrderMapper ordOrderMapper = MapperFactory.getOrdOrderMapper();
+		OrdOrderCriteria example=new OrdOrderCriteria();
+    	OrdOrderCriteria.Criteria criteria = example.createCriteria();
+    	criteria.andStateEqualTo(OrdersConstants.OrderState.STATE_WAIT_OFFER);
+    	criteria.andOrderIdEqualTo(orderId);
+    	return ordOrderMapper.selectByExample(example);
+	}
+
 }
