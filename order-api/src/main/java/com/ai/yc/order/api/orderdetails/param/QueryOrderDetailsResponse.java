@@ -162,7 +162,7 @@ public class QueryOrderDetailsResponse extends BaseResponse{
     /**
      * LSP编号
      */
-    private Long lspId;
+    private String lspId;
 
     /**
      * 领取人ID(译员)
@@ -406,11 +406,11 @@ public class QueryOrderDetailsResponse extends BaseResponse{
 		this.interperType = interperType;
 	}
 
-	public Long getLspId() {
+	public String getLspId() {
 		return lspId;
 	}
 
-	public void setLspId(Long lspId) {
+	public void setLspId(String lspId) {
 		this.lspId = lspId;
 	}
 
