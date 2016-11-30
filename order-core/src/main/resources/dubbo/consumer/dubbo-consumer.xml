@@ -44,8 +44,10 @@
 		interface="com.ai.yc.common.api.sysdomain.interfaces.IQuerySysDomainSV" />
 	<!-- 用户昵称 -->
 	<dubbo:reference id="iYCUserServiceSV"
-		interface="com.ai.yc.user.api.userservice.interfaces.IYCUserServiceSV" />	
-		
+		interface="com.ai.yc.user.api.userservice.interfaces.IYCUserServiceSV" />
+	<!-- 译员昵称 -->	
+	<dubbo:reference id="iYCTranslatorServiceSV	"
+	interface="com.ai.yc.translator.api.translatorservice.interfaces.IYCTranslatorServiceSV"/>
 	<!-- 后台登录用户 -->	
 	<dubbo:reference id="iSysUserQuerySV"
 		interface="com.ai.yc.common.api.sysuser.interfaces.ISysUserQuerySV" />	

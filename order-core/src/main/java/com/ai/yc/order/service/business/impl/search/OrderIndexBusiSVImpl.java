@@ -34,13 +34,14 @@ import com.ai.yc.order.service.atom.interfaces.IOrdOdProdExtendAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdProdLevelAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOrderAtomSV;
 import com.ai.yc.order.service.business.interfaces.search.IOrderIndexBusiSV;
+import com.ai.yc.translator.api.translatorservice.interfaces.IYCTranslatorServiceSV;
+import com.ai.yc.translator.api.translatorservice.param.SearchYCTranslatorRequest;
+import com.ai.yc.translator.api.translatorservice.param.YCLSPInfoReponse;
+import com.ai.yc.translator.api.translatorservice.param.YCTranslatorInfoResponse;
+import com.ai.yc.translator.api.translatorservice.param.searchYCLSPInfoRequest;
 import com.ai.yc.user.api.userservice.interfaces.IYCUserServiceSV;
-import com.ai.yc.user.api.userservice.param.SearchYCTranslatorRequest;
 import com.ai.yc.user.api.userservice.param.SearchYCUserRequest;
-import com.ai.yc.user.api.userservice.param.YCLSPInfoReponse;
-import com.ai.yc.user.api.userservice.param.YCTranslatorInfoResponse;
 import com.ai.yc.user.api.userservice.param.YCUserInfoResponse;
-import com.ai.yc.user.api.userservice.param.searchYCLSPInfoRequest;
 
 @Service
 public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
@@ -101,11 +102,12 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 					ordInfo.setUsername(response.getNickname());
 				}
 			}
+			IYCTranslatorServiceSV iYCTranslatorServiceSV = DubboConsumerFactory.getService(IYCTranslatorServiceSV.class);
 			//获取lsp名称
 			if(!StringUtil.isBlank(ord.getLspId())){
 				searchYCLSPInfoRequest lSPInfoRequest = new searchYCLSPInfoRequest();
 				lSPInfoRequest.setLspId(ord.getLspId());
-				YCLSPInfoReponse lsp = userServiceSV.searchLSPInfo(lSPInfoRequest);
+				YCLSPInfoReponse lsp = iYCTranslatorServiceSV.searchLSPInfo(lSPInfoRequest);
 				if(lsp.getResponseHeader().isSuccess()==true){
 					ordInfo.setLspname(lsp.getLspName());
 				}
@@ -114,7 +116,7 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 			if(!StringUtil.isBlank(ord.getInterperId())){
 				SearchYCTranslatorRequest  translatorRequest = new SearchYCTranslatorRequest();
 				translatorRequest.setTranslatorId(ord.getInterperId());
-				YCTranslatorInfoResponse  interper = userServiceSV.searchYCTranslatorInfo(translatorRequest);
+				YCTranslatorInfoResponse  interper = iYCTranslatorServiceSV.searchYCTranslatorInfo(translatorRequest);
 				if(interper.getResponseHeader().isSuccess()==true){
 					ordInfo.setInterpername(interper.getNickname());
 				}
@@ -229,10 +231,11 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 						}
 					}
 					//获取lsp名称
+					IYCTranslatorServiceSV iYCTranslatorServiceSV = DubboConsumerFactory.getService(IYCTranslatorServiceSV.class);
 					if(!StringUtil.isBlank(ord.getLspId())){
 						searchYCLSPInfoRequest lSPInfoRequest = new searchYCLSPInfoRequest();
 						lSPInfoRequest.setLspId(ord.getLspId());
-						YCLSPInfoReponse lsp = userServiceSV.searchLSPInfo(lSPInfoRequest);
+						YCLSPInfoReponse lsp = iYCTranslatorServiceSV.searchLSPInfo(lSPInfoRequest);
 						if(lsp.getResponseHeader().isSuccess()==true){
 							ordInfo.setLspname(lsp.getLspName());
 						}
@@ -241,7 +244,7 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 					if(!StringUtil.isBlank(ord.getInterperId())){
 						SearchYCTranslatorRequest  translatorRequest = new SearchYCTranslatorRequest();
 						translatorRequest.setTranslatorId(ord.getInterperId());
-						YCTranslatorInfoResponse  interper = userServiceSV.searchYCTranslatorInfo(translatorRequest);
+						YCTranslatorInfoResponse  interper = iYCTranslatorServiceSV.searchYCTranslatorInfo(translatorRequest);
 						if(interper.getResponseHeader().isSuccess()==true){
 							ordInfo.setInterpername(interper.getNickname());
 						}
