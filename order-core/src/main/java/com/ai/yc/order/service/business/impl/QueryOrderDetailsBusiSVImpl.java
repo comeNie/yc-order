@@ -123,12 +123,18 @@ public class QueryOrderDetailsBusiSVImpl implements IQueryOrderDetailsBusiSV {
 		if(ordOdProd!=null){
 			ProdVo prod = new ProdVo();
 			BeanUtils.copyProperties(prod, ordOdProd);
-			QuerySysPurposeDetailsRes purpose = iSysConfigAtomSV.querySysPurposeDetails(prod.getUseCode());
-			prod.setUseCn(purpose.getPurposeCn());
-			prod.setUseEn(purpose.getPurposeEn());
-			QuerySysDomainDetailsRes domain = iSysConfigAtomSV.querySysDomainDetails(prod.getFieldCode());
-			prod.setFieldCn(domain.getDomainCn());
-			prod.setFieldEn(domain.getDomainEn());
+			if(!StringUtil.isBlank(prod.getUseCode())){
+				QuerySysPurposeDetailsRes purpose = iSysConfigAtomSV.querySysPurposeDetails(prod.getUseCode());
+				prod.setUseCn(purpose.getPurposeCn());
+				prod.setUseEn(purpose.getPurposeEn());
+			}
+			
+            if(!StringUtil.isBlank(prod.getFieldCode())){
+            	QuerySysDomainDetailsRes domain = iSysConfigAtomSV.querySysDomainDetails(prod.getFieldCode());
+    			prod.setFieldCn(domain.getDomainCn());
+    			prod.setFieldEn(domain.getDomainEn());
+			}
+			
 			resp.setProd(prod);
 		}
 		

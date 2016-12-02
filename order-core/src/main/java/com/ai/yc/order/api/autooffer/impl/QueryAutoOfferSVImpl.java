@@ -1,6 +1,7 @@
 package com.ai.yc.order.api.autooffer.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
@@ -19,6 +20,7 @@ import com.alibaba.dubbo.config.annotation.Service;
  * @version V1.0
  */
 @Service
+@Component
 public class QueryAutoOfferSVImpl implements IQueryAutoOfferSV {
 	
 	@Autowired
