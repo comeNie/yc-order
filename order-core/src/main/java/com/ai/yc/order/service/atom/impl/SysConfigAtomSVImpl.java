@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.ai.opt.sdk.dubbo.util.DubboConsumerFactory;
+import com.ai.opt.sdk.util.StringUtil;
 import com.ai.yc.common.api.sysdomain.interfaces.IQuerySysDomainSV;
 import com.ai.yc.common.api.sysdomain.param.QuerySysDomainDetailsRes;
 import com.ai.yc.common.api.sysduad.interfaces.IQuerySysDuadSV;
@@ -24,6 +25,9 @@ public class SysConfigAtomSVImpl implements ISysConfigAtomSV {
 
 	@Override
 	public QuerySysDuadDetailsRes querySysDuadDetails(String duadId) {
+		if(StringUtil.isBlank(duadId)){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "语言对ID不能为空");
+		}
 		QuerySysDuadDetailsRes duad = DubboConsumerFactory.getService(IQuerySysDuadSV.class).querySysDuadDetails(duadId);
 		if(duad==null){
 			throw new BusinessException(ExceptCodeConstants.Special.SYSTEM_ERROR, "系统异常，请稍后重试");
@@ -36,6 +40,9 @@ public class SysConfigAtomSVImpl implements ISysConfigAtomSV {
 
 	@Override
 	public QuerySysPurposeDetailsRes querySysPurposeDetails(String purposeId) {
+		if(StringUtil.isBlank(purposeId)){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "用途ID不能为空");
+		}
 		QuerySysPurposeDetailsRes purpose = DubboConsumerFactory.getService(IQuerySysPurposeSV.class).querySysPurposeDetails(purposeId);
 		if(purpose==null){
 			throw new BusinessException(ExceptCodeConstants.Special.SYSTEM_ERROR, "系统异常，请稍后重试");
@@ -48,6 +55,9 @@ public class SysConfigAtomSVImpl implements ISysConfigAtomSV {
 
 	@Override
 	public QuerySysDomainDetailsRes querySysDomainDetails(String domainId) {
+		if(StringUtil.isBlank(domainId)){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "领域ID不能为空");
+		}
 		QuerySysDomainDetailsRes domain = DubboConsumerFactory.getService(IQuerySysDomainSV.class).querySysDomainDetails(domainId);
 		if(domain==null){
 			throw new BusinessException(ExceptCodeConstants.Special.SYSTEM_ERROR, "系统异常，请稍后重试");
