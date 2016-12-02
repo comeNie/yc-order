@@ -89,6 +89,9 @@ public class QueryOrdCountRequest extends BaseInfo  {
 	 */
 	private String interperId;
 	
+	/**
+	 * 译员等级
+	 */
 	private String interperLevel;
 
 	public String getSystemId() {
