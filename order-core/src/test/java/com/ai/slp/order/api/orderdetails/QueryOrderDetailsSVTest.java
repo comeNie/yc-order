@@ -15,7 +15,7 @@ public class QueryOrderDetailsSVTest extends BaseTest{
 	
 	@Test
 	public void testQueryOrderDetails(){
-		QueryOrderDetailsResponse resp = iQueryOrderDetailsSV.queryOrderDetails(2000000024195005l);
+		QueryOrderDetailsResponse resp = iQueryOrderDetailsSV.queryOrderDetails(2000000036591989l);
 		Gson gson = new Gson();
 		System.out.println(gson.toJson(resp));
 	}

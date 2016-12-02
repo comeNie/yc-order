@@ -27,4 +27,11 @@ public class OrderSearchImpl implements IOrderSearch {
 		ISearchClient searchClient = SESClientFactory.getSearchClient(SearchConstants.SearchNameSpace);
 		return searchClient.search(searchCriterias, from, offset, sorts, OrderInfo.class);
 	}
+
+	@Override
+	public int countAll(List<SearchCriteria> searchCriterias) {
+		ISearchClient searchClient = SESClientFactory.getSearchClient(SearchConstants.SearchNameSpace);
+		Result<OrderInfo> result = searchClient.search(searchCriterias, 0, 10000, null, OrderInfo.class);
+		return result==null?0:(int)result.getCount();
+	}
 }

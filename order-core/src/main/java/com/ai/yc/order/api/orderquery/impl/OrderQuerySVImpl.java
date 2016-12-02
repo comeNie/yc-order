@@ -32,6 +32,7 @@ import com.ai.yc.order.api.orderquery.param.QueryOrderRequest;
 import com.ai.yc.order.api.orderquery.param.QueryOrderRsponse;
 import com.ai.yc.order.constants.OrdersConstants;
 import com.ai.yc.order.constants.SearchFieldConfConstants;
+import com.ai.yc.order.interperlevel.rule.InterperLevelMap;
 import com.ai.yc.order.search.bo.OrdProdExtend;
 import com.ai.yc.order.search.bo.OrdProdLevel;
 import com.ai.yc.order.search.bo.OrderInfo;
@@ -48,6 +49,9 @@ import com.alibaba.fastjson.TypeReference;
 public class OrderQuerySVImpl implements IOrderQuerySV {
 	@Autowired
 	IOrdOrderBusiSV iOrdOrderBusiSV;
+	
+	@Autowired
+	private InterperLevelMap interperLevelMap;//译员级别判定订单查询级别
 
 	@Override
 	public QueryOrderRsponse queryOrder(QueryOrderRequest request) throws BusinessException, SystemException {

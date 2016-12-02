@@ -12,5 +12,7 @@ import com.ai.yc.order.search.dto.OrderSearchCriteria;
 public interface IOrderSearch {
     Result<Map<String, Object>> search(OrderSearchCriteria criteria);
     Result<OrderInfo> search(List<SearchCriteria>searchCriterias, int from,int offset, List<Sort> sorts);
+    
+    int countAll(List<SearchCriteria> searchCriterias);
 
 }

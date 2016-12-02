@@ -70,9 +70,9 @@ public class IOrderQuerySVImplTest extends BaseTest{
 		//request.setOrderLevel("1");
 		//request.setBusiType("1");
 		//request.setChlId("001");
-		request.setInterperId("1");
-		request.setInterperType("1");
-		
+		//request.setInterperId("1");
+		//request.setInterperType("1");
+		request.setState("20");
 		//request.setLspId("123");
 		/*request.setTranslateType("1");
 		request.setSubFlag("1");

@@ -88,6 +88,8 @@ public class QueryOrdCountRequest extends BaseInfo  {
 	 * 领取人（译员）ID
 	 */
 	private String interperId;
+	
+	private String interperLevel;
 
 	public String getSystemId() {
 		return systemId;
@@ -207,6 +209,14 @@ public class QueryOrdCountRequest extends BaseInfo  {
 
 	public void setState(String state) {
 		this.state = state;
+	}
+
+	public String getInterperLevel() {
+		return interperLevel;
+	}
+
+	public void setInterperLevel(String interperLevel) {
+		this.interperLevel = interperLevel;
 	}
 	
 	
