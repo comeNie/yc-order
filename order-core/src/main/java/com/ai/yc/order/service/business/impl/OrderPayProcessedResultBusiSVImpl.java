@@ -175,6 +175,8 @@ public class OrderPayProcessedResultBusiSVImpl implements IOrderPayProcessedResu
 		ordOdStateChg.setOperId(userId);
 		ordOdStateChg.setOrgState(oldState);
 		ordOdStateChg.setNewState(newState);
+		ordOdStateChg.setChgDesc("客户支付了订单");
+		ordOdStateChg.setChgDescEn("The client has paid for the order");
 		ordOdStateChg.setStateChgTime(DateUtil.getSysDate());
 		this.ordOdStateChgAtomSV.insertSelective(ordOdStateChg);
 	}
