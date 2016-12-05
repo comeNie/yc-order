@@ -44,6 +44,11 @@ public class OrdOdStateChgBusiSVImpl implements IOrdOdStateChgBusiSV {
 	private final static String CHECK_CHG_ADMIN_DESC_CN = "订单审核通过。";
 
 	private final static String CHECK_CHG_ADMIN_DESC_EN = "Order review passed.";
+	
+	private final static String REFUSE_CHECK_CHG_ADMIN_DESC_CN = "订单未通过审核。";
+	
+	private final static String REFUSE_CHECK_CHG_ADMIN_DESC_EN = "Order review failed.";
+	
 	/**
 	 * 译员xxxxxx领取了订单	Translator XXX  claimed the order
 	 */
@@ -133,8 +138,13 @@ public class OrdOdStateChgBusiSVImpl implements IOrdOdStateChgBusiSV {
 	public void checkChgDesc(OrdOdStateChg chg) {
 		chg.setStateChgId(SequenceUtil.createStateChgId());
 		chg.setOrgId(OrdersConstants.OrgID.ORG_ID_SYS);
-		chg.setChgDesc(CHECK_CHG_ADMIN_DESC_CN);
-		chg.setChgDescEn(CHECK_CHG_ADMIN_DESC_EN);
+		if(OrdersConstants.OrderState.REVIEWED_STATE.equals(chg.getNewState())){
+			chg.setChgDesc(CHECK_CHG_ADMIN_DESC_CN);
+			chg.setChgDescEn(CHECK_CHG_ADMIN_DESC_EN);
+		}else{
+			chg.setChgDesc(REFUSE_CHECK_CHG_ADMIN_DESC_CN);
+			chg.setChgDescEn(REFUSE_CHECK_CHG_ADMIN_DESC_EN);
+		}
 		chg.setStateChgTime(DateUtil.getSysDate());
 		ordOdStateChgAtomSV.insertSelective(chg);
 	}
