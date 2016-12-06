@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ai.opt.base.vo.BaseResponse;
 import com.ai.opt.base.vo.ResponseHeader;
 import com.ai.opt.sdk.util.DateUtil;
+import com.ai.yc.order.api.sesdata.interfaces.ISesDataUpdateSV;
 import com.ai.yc.order.constants.OrdersConstants;
 import com.ai.yc.order.constants.ResultCodeConstants;
 import com.ai.yc.order.dao.mapper.bo.OrdOdStateChg;
@@ -26,6 +27,8 @@ public class AutoDealOrderBusiSVImpl implements IAutoDealOrderBusiSV {
 	
 	@Autowired
 	private transient IOrdOdStateChgBusiSV iOrdOdStateChgBusiSV;
+	@Autowired
+	private ISesDataUpdateSV sesDataUpdateSV;
 	
 	private final static int _DAY_CANCEL = 3;
 	
@@ -48,7 +51,11 @@ public class AutoDealOrderBusiSVImpl implements IAutoDealOrderBusiSV {
     	    	record.setDisplayFlag(OrdersConstants.OrderDisplayFlag.FLAG_CANCEL);
     	    	record.setDisplayFlagChgTime(DateUtil.getSysDate());
     	    	record.setOperId(OrdersConstants.SYS_OPER_ID);
-    	    	iOrdOrderAtomSV.updateByPrimaryKeySelective(record);
+    	    	int count = iOrdOrderAtomSV.updateByPrimaryKeySelective(record);
+    	    	if(count>0){
+    	    		//刷新数据到搜索引擎
+    				sesDataUpdateSV.updateSesData(ordOrder.getOrderId());
+    	    	}
     	    	//添加订单轨迹
     	    	OrdOdStateChg chg = new OrdOdStateChg();
     	    	chg.setOrderId(ordOrder.getOrderId());
@@ -79,7 +86,11 @@ public class AutoDealOrderBusiSVImpl implements IAutoDealOrderBusiSV {
     	    	record.setDisplayFlag(OrdersConstants.OrderDisplayFlag.FLAG_WAIT_COMMENT);
     	    	record.setDisplayFlagChgTime(DateUtil.getSysDate());
     	    	record.setOperId(OrdersConstants.SYS_OPER_ID);
-    	    	iOrdOrderAtomSV.updateByPrimaryKeySelective(record);
+    	    	int count = iOrdOrderAtomSV.updateByPrimaryKeySelective(record);
+    	    	if(count>0){
+    	    		//刷新数据到搜索引擎
+    				sesDataUpdateSV.updateSesData(ordOrder.getOrderId());
+    	    	}
     	    	//添加订单轨迹
     	    	OrdOdStateChg chg = new OrdOdStateChg();
     	    	chg.setOrderId(ordOrder.getOrderId());
@@ -109,7 +120,11 @@ public class AutoDealOrderBusiSVImpl implements IAutoDealOrderBusiSV {
     	    	record.setDisplayFlag(OrdersConstants.OrderDisplayFlag.FLAG_WAIT_OK);
     	    	record.setDisplayFlagChgTime(DateUtil.getSysDate());
     	    	record.setOperId(OrdersConstants.SYS_OPER_ID);
-    	    	iOrdOrderAtomSV.updateByPrimaryKeySelective(record);
+    	    	int count = iOrdOrderAtomSV.updateByPrimaryKeySelective(record);
+    	    	if(count>0){
+    	    		//刷新数据到搜索引擎
+    				sesDataUpdateSV.updateSesData(ordOrder.getOrderId());
+    	    	}
     	    	//添加订单轨迹
     	    	OrdOdStateChg chg = new OrdOdStateChg();
     	    	chg.setOrderId(ordOrder.getOrderId());

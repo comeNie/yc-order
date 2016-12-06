@@ -50,7 +50,7 @@ public class OrderReviewBusiSVImpl implements IOrderReviewBusiSV {
 			if (OrdersConstants.OrderState.REVIEWED_STATE.equals(state)) {// 表示审核通过
 				/* 1.更新订单表中状态为“审核通过” */
 				Timestamp sysDate = DateUtil.getSysDate();
-				order.setState(request.getState());
+				order.setState(OrdersConstants.OrderDisplayFlag.FLAG_WAIT_OK);
 				order.setDisplayFlag(OrdersConstants.OrderDisplayFlag.FLAG_WAIT_OK);
 				order.setStateChgTime(sysDate);
 				order.setDisplayFlagChgTime(sysDate);
