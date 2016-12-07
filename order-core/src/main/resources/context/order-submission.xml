@@ -119,6 +119,9 @@
 		
 		<property name="translateLevelMap">
 			<map>
+				<entry key="100110" value="陪同翻译" />
+				<entry key="100120" value="交替翻译" />
+				<entry key="100130" value="同声翻译" />
 				<entry key="100210" value="标准级" />
 				<entry key="100220" value="专业级" />
 				<entry key="100230" value="出版级" />
