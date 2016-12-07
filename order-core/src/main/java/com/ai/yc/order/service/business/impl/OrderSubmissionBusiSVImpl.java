@@ -336,7 +336,7 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 		}
 		//待支付 三天内有效
 		ordOrder.setEndChgTime(new Timestamp(Long.valueOf(DateCycleUtil.getCycleDate("D", 3).get("endTime").toString())));
-		
+		ordOrder.setOperId(request.getBaseInfo().getUserId());
 		//
 		this.ordOrderAtomSV.insertSelective(ordOrder);
 	}
