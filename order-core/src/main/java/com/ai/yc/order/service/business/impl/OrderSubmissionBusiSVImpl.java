@@ -330,6 +330,7 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 			//ordOrder.setTimeZone("default");
 		}
 		if (TRANSLATE_TYPE_2.equals(request.getBaseInfo().getTranslateType())) {
+			ordOrder.setOrderLevel("4");
 			ordOrder.setState(OrdersConstants.OrderState.STATE_WAIT_OFFER);// 待报价
 			ordOrder.setDisplayFlag(OrdersConstants.OrderState.STATE_WAIT_OFFER);
 			//ordOrder.setTimeZone("default");
