@@ -85,7 +85,7 @@ public class UpdateOrderBusiSVImpl implements IUpdateOrderBusiSV{
 			OrdOrder order = new OrdOrder();
 			order.setOrderId(req.getOrderId());
 			order.setOrderLevel(req.getOrderLevel());
-			iOrdOrderAtomSV.updateByPrimaryKeySelective(record);
+			iOrdOrderAtomSV.updateByPrimaryKeySelective(order);
 		}
 		
 		//修改联系人信息
