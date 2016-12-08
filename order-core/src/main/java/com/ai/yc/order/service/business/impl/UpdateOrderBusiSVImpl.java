@@ -39,34 +39,34 @@ import com.ai.yc.order.util.SequenceUtil;
 
 /**
  * @author hougang@asiainfo.com
- * @date 2016年11月7日 下午5:22:22 
+ * @date 2016年11月7日 下午5:22:22
  * @version V1.0
  */
 @Service
 @Transactional
-public class UpdateOrderBusiSVImpl implements IUpdateOrderBusiSV{
-	
+public class UpdateOrderBusiSVImpl implements IUpdateOrderBusiSV {
+
 	@Autowired
 	private transient IOrdOrderAtomSV iOrdOrderAtomSV;
-	
+
 	@Autowired
 	private transient IOrdOdLogisticsAtomSV iOrdOdLogisticsAtomSV;
-	
+
 	@Autowired
 	private transient IOrdOdProdAtomSV iOrdOdProdAtomSV;
-	
+
 	@Autowired
 	private transient IOrdOdProdLevelAtomSV iOrdOdProdLevelAtomSV;
-	
+
 	@Autowired
 	private transient IOrdOdProdFileAtomSV iOrdOdProdFileAtomSV;
-	
+
 	@Autowired
 	private transient IOrdOdFeeTotalAtomSV iOrdOdFeeTotalAtomSV;
-	
+
 	@Autowired
 	private IOrdOdStateChgBusiSV iOrdOdStateChgBusiSV;
-	
+
 	@Autowired
 	private IOrderIndexBusiSV orderIndexBusiSV;
 
@@ -75,37 +75,29 @@ public class UpdateOrderBusiSVImpl implements IUpdateOrderBusiSV{
 		UpdateOrderResponse resp = new UpdateOrderResponse();
 		resp.setResponseHeader(new ResponseHeader(true, ResultCodeConstants.SUCCESS_CODE, "查询成功"));
 		OrdOrder record = iOrdOrderAtomSV.findByPrimaryKey(req.getOrderId());
-		if(record==null){
+		if (record == null) {
 			throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT, "订单不存在");
 		}
 		resp.setOrderId(req.getOrderId());
-		
-		//修改订单级别
-		if(!StringUtil.isBlank(req.getOrderLevel())){
-			OrdOrder order = new OrdOrder();
-			order.setOrderId(req.getOrderId());
-			order.setOrderLevel(req.getOrderLevel());
-			iOrdOrderAtomSV.updateByPrimaryKeySelective(order);
+
+		// 修改联系人信息
+		if (req.getContacts() != null) {
+			OrdOdLogistics logistics = new OrdOdLogistics();
+			BeanUtils.copyProperties(logistics, req.getContacts());
+			iOrdOdLogisticsAtomSV.updateByOrderIdSelective(logistics, req.getOrderId());
 		}
-		
-		//修改联系人信息
-		if(req.getContacts()!=null){
-			  OrdOdLogistics logistics = new OrdOdLogistics();
-			  BeanUtils.copyProperties(logistics, req.getContacts());
-			  iOrdOdLogisticsAtomSV.updateByOrderIdSelective(logistics, req.getOrderId());
-		}
-		
+
 		OrdOdProd ordOdProdRecord = iOrdOdProdAtomSV.findByOrderId(req.getOrderId());
-		//产品信息
-		if(req.getProd()!=null){
+		// 产品信息
+		if (req.getProd() != null) {
 			OrdOdProdWithBLOBs ordOdProd = new OrdOdProdWithBLOBs();
 			BeanUtils.copyProperties(ordOdProd, req.getProd());
 			iOrdOdProdAtomSV.updateByOrderIdSelective(ordOdProd, req.getOrderId());
-			//修改翻译级别
+			// 修改翻译级别
 			List<UProdLevelVo> prodLevels = req.getProd().getProdLevels();
-			if(ordOdProdRecord!=null&&prodLevels!=null){
+			if (ordOdProdRecord != null && prodLevels != null) {
 				iOrdOdProdLevelAtomSV.deleteByOrderId(req.getOrderId());
-				for(UProdLevelVo prodLevel:prodLevels){
+				for (UProdLevelVo prodLevel : prodLevels) {
 					OrdOdProdLevel ordOdProdLevel = new OrdOdProdLevel();
 					ordOdProdLevel.setProdDetalExtendId(SequenceUtil.createProdDetailLevelId());
 					ordOdProdLevel.setOrderId(req.getOrderId());
@@ -116,11 +108,11 @@ public class UpdateOrderBusiSVImpl implements IUpdateOrderBusiSV{
 				}
 			}
 		}
-		
-		//产品文件信息
-		if(ordOdProdRecord!=null&&req.getProdFiles()!=null){
+
+		// 产品文件信息
+		if (ordOdProdRecord != null && req.getProdFiles() != null) {
 			iOrdOdProdFileAtomSV.deleteByProdDetalId(ordOdProdRecord.getProdDetalId());
-			for(UProdFileVo prodFile:req.getProdFiles()){
+			for (UProdFileVo prodFile : req.getProdFiles()) {
 				OrdOdProdFile ordOdProdFile = new OrdOdProdFile();
 				Long prodFileId = SequenceUtil.createProdDetailFileId();
 				BeanUtils.copyProperties(ordOdProdFile, prodFile);
@@ -129,8 +121,8 @@ public class UpdateOrderBusiSVImpl implements IUpdateOrderBusiSV{
 				iOrdOdProdFileAtomSV.insertSelective(ordOdProdFile);
 			}
 		}
-		
-		//添加修改轨迹
+
+		// 添加修改轨迹
 		OrdOdStateChg chg = new OrdOdStateChg();
 		chg.setOrderId(record.getOrderId());
 		chg.setOrgState(record.getState());
@@ -138,40 +130,46 @@ public class UpdateOrderBusiSVImpl implements IUpdateOrderBusiSV{
 		chg.setOperId(req.getOperId());
 		chg.setOperName(req.getOperName());
 		iOrdOdStateChgBusiSV.addUpdateChgDesc(chg);
-		
-		//非待报价和非待支付，无法修改下面内容
-		if(!OrdersConstants.OrderState.STATE_WAIT_OFFER.equals(record.getState())
-				&&!OrdersConstants.OrderState.STATE_WAIT_PAY.equals(record.getState())){
+
+		// 非待报价和非待支付，无法修改下面内容
+		if (!OrdersConstants.OrderState.STATE_WAIT_OFFER.equals(record.getState())
+				&& !OrdersConstants.OrderState.STATE_WAIT_PAY.equals(record.getState())) {
 			return resp;
 		}
-		
-		//修改费用信息
-		if(req.getOrderFee()!=null){
+
+		// 修改费用信息
+		if (req.getOrderFee() != null) {
 			Long totalFee = req.getOrderFee().getTotalFee();
-			if(totalFee!=null&&totalFee>0){
+			if (totalFee != null && totalFee > 0) {
 				OrdOdFeeTotal ordOdFeeTotal = new OrdOdFeeTotal();
 				ordOdFeeTotal.setUpdateTime(DateUtil.getSysDate());
 				BeanUtils.copyProperties(ordOdFeeTotal, req.getOrderFee());
 				iOrdOdFeeTotalAtomSV.updateByOrderIdSelective(req.getOrderId(), ordOdFeeTotal);
-				//如果是报价，则修改订单状态并添加报价轨迹
-				if(OrdersConstants.OrderState.STATE_WAIT_OFFER.equals(record.getState())){
-					//修改订单状态
+				// 如果是报价，则修改订单状态并添加报价轨迹
+				if (OrdersConstants.OrderState.STATE_WAIT_OFFER.equals(record.getState())) {
+					// 修改订单状态
 					record.setState(OrdersConstants.OrderState.STATE_WAIT_PAY);
 					record.setStateChgTime(DateUtil.getSysDate());
 					record.setDisplayFlag(OrdersConstants.OrderDisplayFlag.FLAG_WAIT_PAY);
 					record.setDisplayFlagChgTime(DateUtil.getSysDate());
 					iOrdOrderAtomSV.updateByPrimaryKeySelective(record);
-					//添加报价轨迹
+					// 添加报价轨迹
 					chg.setNewState(OrdersConstants.OrderState.STATE_WAIT_PAY);
 					iOrdOdStateChgBusiSV.addOfferChgDesc(chg);
 				}
-				
+
 			}
 		}
-	    //更新搜索引擎
+		// 修改订单级别
+		if (!StringUtil.isBlank(req.getOrderLevel())) {
+			OrdOrder order = new OrdOrder();
+			order.setOrderId(req.getOrderId());
+			order.setOrderLevel(req.getOrderLevel());
+			iOrdOrderAtomSV.updateByPrimaryKeySelective(order);
+		}
+		// 更新搜索引擎
 		orderIndexBusiSV.insertSesData(req.getOrderId());
 		return resp;
 	}
-	
 
 }
