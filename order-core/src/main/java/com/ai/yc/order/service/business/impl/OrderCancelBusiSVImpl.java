@@ -28,7 +28,15 @@ public class OrderCancelBusiSVImpl implements IOrderCancelBusiSV {
 
     @Override
     public void orderCancel(OrdOrder ordOrder) throws BusinessException, SystemException {
-        /* 1.更新订单表中状态为“取消” */
+    	/* 2.写入订单状态变化轨迹表 */
+        OrdOdStateChg ordOdStateChg = new OrdOdStateChg();
+        ordOdStateChg.setOrderId(ordOrder.getOrderId());
+        ordOdStateChg.setOperId(ordOrder.getOperId());
+        ordOdStateChg.setOrgState(ordOrder.getState());
+        ordOdStateChg.setNewState(OrdersConstants.OrderState.CANCEL_STATE);
+        ordOdStateChgBusiSV.addCloseChgDesc(ordOdStateChg);
+        
+    	/* 1.更新订单表中状态为“取消” */
         Timestamp sysDate = DateUtil.getSysDate();
         ordOrder.setState(OrdersConstants.OrderState.CANCEL_STATE);
         ordOrder.setDisplayFlag(OrdersConstants.OrderDisplayFlag.FLAG_CANCEL);
@@ -36,12 +44,6 @@ public class OrderCancelBusiSVImpl implements IOrderCancelBusiSV {
         ordOrder.setDisplayFlagChgTime(sysDate);
         ordOrder.setOperId(ordOrder.getOperId());
         ordOrderAtomSV.updateById(ordOrder);
-        /* 2.写入订单状态变化轨迹表 */
-        OrdOdStateChg ordOdStateChg = new OrdOdStateChg();
-        ordOdStateChg.setOrderId(ordOrder.getOrderId());
-        ordOdStateChg.setOperId(ordOrder.getOperId());
-        ordOdStateChg.setOrgState(ordOrder.getState());
-        ordOdStateChg.setNewState(OrdersConstants.OrderState.CANCEL_STATE);
-        ordOdStateChgBusiSV.addCloseChgDesc(ordOdStateChg);
+        
     }
 }
