@@ -127,6 +127,7 @@ public class AutoDealOrderBusiSVImpl implements IAutoDealOrderBusiSV {
     	    	}
     	    	//添加订单轨迹
     	    	OrdOdStateChg chg = new OrdOdStateChg();
+    	    	chg.setOrgId(OrdersConstants.OrgID.ORG_ID_SYS);
     	    	chg.setOrderId(ordOrder.getOrderId());
     	    	chg.setOrgState(ordOrder.getState());
     	    	chg.setNewState(OrdersConstants.OrderState.WAIT_OK_STATE);

@@ -137,8 +137,7 @@ public class OrdOdStateChgBusiSVImpl implements IOrdOdStateChgBusiSV {
 	@Override
 	public void checkChgDesc(OrdOdStateChg chg) {
 		chg.setStateChgId(SequenceUtil.createStateChgId());
-		chg.setOrgId(OrdersConstants.OrgID.ORG_ID_SYS);
-		if(OrdersConstants.OrderState.REVIEWED_STATE.equals(chg.getNewState())){
+		if(OrdersConstants.OrderState.WAIT_OK_STATE.equals(chg.getNewState())){
 			chg.setChgDesc(CHECK_CHG_ADMIN_DESC_CN);
 			chg.setChgDescEn(CHECK_CHG_ADMIN_DESC_EN);
 		}else{
