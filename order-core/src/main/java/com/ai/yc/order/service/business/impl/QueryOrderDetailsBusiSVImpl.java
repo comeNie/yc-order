@@ -178,6 +178,7 @@ public class QueryOrderDetailsBusiSVImpl implements IQueryOrderDetailsBusiSV {
 			//获取操作员工姓名
 			if(!StringUtil.isBlank(orderFee.getUpdateOperId())){
 				SysUserQueryRequest req = new SysUserQueryRequest();
+				req.setTenantId(OrdersConstants.TENANT_ID);
 				req.setId(orderFee.getUpdateOperId());
 				SysUserQueryResponse userInfo = iSysUserAtomSV.queryUserInfo(req);
 				if(userInfo!=null){
