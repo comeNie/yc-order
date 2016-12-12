@@ -32,7 +32,6 @@ import com.ai.yc.order.api.orderquery.param.QueryOrderRequest;
 import com.ai.yc.order.api.orderquery.param.QueryOrderRsponse;
 import com.ai.yc.order.constants.OrdersConstants;
 import com.ai.yc.order.constants.SearchFieldConfConstants;
-import com.ai.yc.order.interperlevel.rule.InterperLevelMap;
 import com.ai.yc.order.search.bo.OrdProdExtend;
 import com.ai.yc.order.search.bo.OrdProdLevel;
 import com.ai.yc.order.search.bo.OrderInfo;
@@ -50,8 +49,6 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 	@Autowired
 	IOrdOrderBusiSV iOrdOrderBusiSV;
 	
-	@Autowired
-	private InterperLevelMap interperLevelMap;//译员级别判定订单查询级别
 
 	@Override
 	public QueryOrderRsponse queryOrder(QueryOrderRequest request) throws BusinessException, SystemException {
@@ -128,6 +125,9 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 				}
 				if (ord.getEndtime() != null) {
 					order.setEndTime(new Timestamp(ord.getEndtime().getTime()));
+				}
+				if(ord.getProdupdatetime()!=null){
+					order.setProdUpdateTime(new Timestamp(ord.getProdupdatetime().getTime()));
 				}
 				if (ord.getStatechgtime() != null) {
 					order.setStateChgTime(new Timestamp(ord.getStatechgtime().getTime()));

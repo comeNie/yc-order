@@ -46,6 +46,10 @@ public class OrderInfo {
 	private Date endchgtime;
 	private String interpername;
 	/**
+	 * 产品变更时间
+	 */
+	private Date produpdatetime;
+	/**
 	 * 报价人
 	 */
 	private String updatename;
@@ -420,6 +424,14 @@ public class OrderInfo {
 
 	public void setInterpername(String interpername) {
 		this.interpername = interpername;
+	}
+
+	public Date getProdupdatetime() {
+		return produpdatetime;
+	}
+
+	public void setProdupdatetime(Date produpdatetime) {
+		this.produpdatetime = produpdatetime;
 	}
 
 }

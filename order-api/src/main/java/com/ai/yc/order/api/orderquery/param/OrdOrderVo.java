@@ -145,6 +145,10 @@ public class OrdOrderVo extends BaseInfo {
 	 */
 	private Timestamp updateTime;
 	/**
+	 * 产品变更时间
+	 */
+	private Timestamp prodUpdateTime;
+	/**
 	 * 修改剩余时间（一期未用）
 	 */
 	private Timestamp updateRemainingTime;
@@ -473,5 +477,15 @@ public class OrdOrderVo extends BaseInfo {
 	public void setEndChgTime(Timestamp endChgTime) {
 		this.endChgTime = endChgTime;
 	}
+
+	public Timestamp getProdUpdateTime() {
+		return prodUpdateTime;
+	}
+
+	public void setProdUpdateTime(Timestamp prodUpdateTime) {
+		this.prodUpdateTime = prodUpdateTime;
+	}
+
+	
 
 }
