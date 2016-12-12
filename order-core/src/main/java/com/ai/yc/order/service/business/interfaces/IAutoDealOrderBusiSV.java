@@ -10,14 +10,20 @@ import com.ai.opt.base.vo.BaseResponse;
  * @version V1.0
  */
 public interface IAutoDealOrderBusiSV {
-	
-	BaseResponse autoCancelOrder();
 	/**
-	 * 返回订单id列表
+	 * 返回订单id列表,自动取消/关闭功能
+	 * @author zhangzd
+	 */
+	List<String> updateAutoCancelOrder();
+	/**
+	 * 返回订单id列表,自动确认功能
 	 * @author zhangzd
 	 */
 	List<String> updateAutoConfirmOrder();
-	
-	BaseResponse autoReviewOrder() ;
+	/**
+	 * 返回订单id列表,自动审核功能
+	 * @author zhangzd
+	 */
+	List<String> updateAutoReviewOrder() ;
 
 }

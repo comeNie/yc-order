@@ -130,12 +130,14 @@ public final class DateCycleUtil {
 		long now = DateUtil.getSysDate().getTime();
 		//
 		if (dateType.equals(DATE_TYPE_DAY)) {
-			
+			now=timestamp.getTime();
+			millisecond = amount * 24 * 60 * 60 * 1000;
 		} else if (dateType.equals(DATE_TYPE_HOURS)) {
 			now=timestamp.getTime();
 			millisecond = amount * 60 * 60 * 1000;
 		} else if (dateType.equals(DATE_TYPE_MINUTE)) {
-
+			now=timestamp.getTime();
+			millisecond = amount * 60 * 1000;
 		}
 		//
 		LOG.info("毫秒："+(now+millisecond));
@@ -178,8 +180,8 @@ public final class DateCycleUtil {
 		
 		String dateTypeValue = DateCycleUtil.dateTypeMap.get(DATE_TYPE_DAY);
 		LOG.info("日期类型："+dateTypeValue);
-		DateCycleUtil.getTimestamp(DateUtil.getSysDate(), "H",0);
-		DateCycleUtil.getTimestamp(DateUtil.getSysDate(), "H",-1);
+		DateCycleUtil.getTimestamp(DateUtil.getSysDate(), "D",0);
+		DateCycleUtil.getTimestamp(DateUtil.getSysDate(), "D",-1);
 		
 	}
 }
