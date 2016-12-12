@@ -179,7 +179,7 @@ public final class DateCycleUtil {
 		String dateTypeValue = DateCycleUtil.dateTypeMap.get(DATE_TYPE_DAY);
 		LOG.info("日期类型："+dateTypeValue);
 		DateCycleUtil.getTimestamp(DateUtil.getSysDate(), "H",0);
-		DateCycleUtil.getTimestamp(DateUtil.getSysDate(), "H",15);
+		DateCycleUtil.getTimestamp(DateUtil.getSysDate(), "H",-1);
 		
 	}
 }

@@ -1,5 +1,6 @@
 package com.ai.yc.order.service.atom.impl;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -146,6 +147,19 @@ public class OrdOrderAtomSVImpl implements IOrdOrderAtomSV {
     	criteria.andStateEqualTo(OrdersConstants.OrderState.STATE_WAIT_OFFER);
     	criteria.andOrderIdEqualTo(orderId);
     	return ordOrderMapper.selectByExample(example);
+	}
+
+	@Override
+	public List<OrdOrder> findByStateAndStateChgTime(String state, Timestamp stateChgTime) {
+		// TODO Auto-generated method stub
+		OrdOrderCriteria example = new OrdOrderCriteria();
+		//
+		OrdOrderCriteria.Criteria criteria = example.createCriteria();
+		//
+		criteria.andStateEqualTo(state);
+		criteria.andStateChgTimeLessThanOrEqualTo(stateChgTime);
+		//
+		return MapperFactory.getOrdOrderMapper().selectByExample(example);
 	}
 
 }

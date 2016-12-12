@@ -1,5 +1,6 @@
 package com.ai.yc.order.service.atom.interfaces;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import com.ai.yc.order.dao.mapper.bo.OrdOrder;
@@ -62,5 +63,9 @@ public interface IOrdOrderAtomSV {
 	 * 根据订单状态查询
 	 */
 	List<OrdOrder> findByState(String state);
+	/**
+	 * 根据状态和状态修改时间查询订单信息
+	 */
+	public List<OrdOrder> findByStateAndStateChgTime(String state,Timestamp stateChgTime);
 
 }

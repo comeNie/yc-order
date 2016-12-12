@@ -156,6 +156,12 @@ public final class OrdersConstants {
 		 * 翻译修改中
 		 */
 		public final static String STATE_TRASLATE_UPDATING = "23";
+		
+		/**
+		 * 完成
+		 */
+		public final static String FLAG_FINISHED = "90";
+		
 		/**
 		 * 取消
 		 */

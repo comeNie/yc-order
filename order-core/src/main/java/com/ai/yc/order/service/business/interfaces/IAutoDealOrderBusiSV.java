@@ -1,5 +1,7 @@
 package com.ai.yc.order.service.business.interfaces;
 
+import java.util.List;
+
 import com.ai.opt.base.vo.BaseResponse;
 
 /**
@@ -10,8 +12,11 @@ import com.ai.opt.base.vo.BaseResponse;
 public interface IAutoDealOrderBusiSV {
 	
 	BaseResponse autoCancelOrder();
-	
-	BaseResponse autoConfirmOrder();
+	/**
+	 * 返回订单id列表
+	 * @author zhangzd
+	 */
+	List<String> updateAutoConfirmOrder();
 	
 	BaseResponse autoReviewOrder() ;
 
