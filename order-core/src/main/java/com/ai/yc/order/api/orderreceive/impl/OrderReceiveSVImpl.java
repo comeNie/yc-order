@@ -11,6 +11,7 @@ import com.ai.yc.order.api.orderreceive.interfaces.IOrderReceiveSV;
 import com.ai.yc.order.api.orderreceive.param.OrderReceiveRequest;
 import com.ai.yc.order.api.orderreceive.param.OrderReceiveResponse;
 import com.ai.yc.order.service.business.interfaces.IOrderReceiveBusiSV;
+import com.ai.yc.order.service.business.interfaces.search.IOrderIndexBusiSV;
 import com.alibaba.dubbo.config.annotation.Service;
 
 @Service
@@ -18,6 +19,8 @@ import com.alibaba.dubbo.config.annotation.Service;
 public class OrderReceiveSVImpl implements IOrderReceiveSV {
 	@Autowired
 	private IOrderReceiveBusiSV orderReceiveBusiSV;
+	@Autowired
+	private IOrderIndexBusiSV orderIndexBusiSV;//订单搜索引擎添加服务
 
 	@Override
 	public OrderReceiveResponse orderReceive(OrderReceiveRequest request) throws BusinessException, SystemException {
@@ -26,6 +29,8 @@ public class OrderReceiveSVImpl implements IOrderReceiveSV {
 		ResponseHeader responseHeader = new ResponseHeader();
 		try {
 			response = this.orderReceiveBusiSV.updateOrderReceive(request);
+			//
+			this.orderIndexBusiSV.insertSesData(response.getOrderId());
 			responseHeader.setIsSuccess(true);
 			responseHeader.setResultCode(ExceptCodeConstants.Special.SUCCESS);
 			responseHeader.setResultMessage("订单领取成功");
