@@ -53,7 +53,7 @@ public class QueryAutoOfferRes extends BaseResponse {
 	}
 
 	public BigDecimal getPrice() {
-		return price;
+		return price.setScale(2, BigDecimal.ROUND_HALF_UP);
 	}
 
 	public void setPrice(BigDecimal price) {

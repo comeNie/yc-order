@@ -1,5 +1,7 @@
 package com.ai.slp.order.api.autooffer;
 
+import java.math.BigDecimal;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -9,21 +11,25 @@ import com.ai.yc.order.api.autooffer.param.QueryAutoOfferReq;
 import com.ai.yc.order.api.autooffer.param.QueryAutoOfferRes;
 
 public class QueryAutoOfferSVTest extends BaseTest {
-	
-	@Autowired 
+
+	@Autowired
 	private IQueryAutoOfferSV iQueryAutoOfferSV;
-	
+
 	@Test
-	public void queryAutoOffer(){
+	public void queryAutoOffer() {
 		QueryAutoOfferReq req = new QueryAutoOfferReq();
-		req.setDuadId("8");
+		req.setDuadId("1");
 		req.setLanguage("zh_CN");
-		req.setWordNum(1);
+		req.setWordNum(123);
 		req.setPurposeId("1");
-		req.setTranslateLevel("100220");
+		req.setTranslateLevel("100210");
 		req.setUrgent(false);
-		QueryAutoOfferRes res  = iQueryAutoOfferSV.queryAutoOffer(req);
-		System.out.println("res:"+res.getPrice());
+		QueryAutoOfferRes res = iQueryAutoOfferSV.queryAutoOffer(req);
+		double   f   =   111231.5585; 
+		BigDecimal   b   =   new   BigDecimal(1112.3355); 
+		
+		System.out.println("保留两位小数：" + b.setScale(2, BigDecimal.ROUND_HALF_UP));
+		System.out.println("res:" + res.getPrice());
 	}
 
 }
