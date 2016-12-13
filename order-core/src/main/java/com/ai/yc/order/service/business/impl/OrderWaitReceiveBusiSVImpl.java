@@ -204,8 +204,8 @@ public class OrderWaitReceiveBusiSVImpl implements IOrderWaitReceiveBusiSV {
 
 		// 如果翻译类型不为空 不等于2的情况
 		// if (!StringUtil.isBlank(request.getTranslateType())) {
-		searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.TRANSLATE_TYPE, "2",
-				new SearchOption(SearchOption.SearchLogic.must_not, SearchOption.SearchType.querystring)));
+//		searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.TRANSLATE_TYPE, "2",
+//				new SearchOption(SearchOption.SearchLogic.must_not, SearchOption.SearchType.querystring)));
 		// }
 		// 如果翻译主题不为空
 		if (!StringUtil.isBlank(request.getTranslateName())) {
