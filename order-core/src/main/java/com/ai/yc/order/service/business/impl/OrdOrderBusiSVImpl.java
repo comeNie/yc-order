@@ -129,6 +129,9 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 		ordOrder.setOrderId(request.getOrderId());
 		ordOrder.setState(request.getState());
 		ordOrder.setStateChgTime(DateUtil.getSysDate());
+		if(OrdersConstants.OrderState.FLAG_FINISHED.equals(request.getState())){
+			ordOrder.setFinishTime(DateUtil.getSysDate());
+		}
 		//
 		if(!StringUtil.isBlank(request.getDisplayFlag())){
 			ordOrder.setDisplayFlag(request.getDisplayFlag());
