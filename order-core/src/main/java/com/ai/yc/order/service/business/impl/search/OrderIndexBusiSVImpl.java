@@ -115,7 +115,7 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 			//获取译员昵称
 			if(!StringUtil.isBlank(ord.getInterperId())){
 				SearchYCTranslatorRequest  translatorRequest = new SearchYCTranslatorRequest();
-				translatorRequest.setTranslatorId(ord.getInterperId());
+				translatorRequest.setUserId(ord.getInterperId());
 				YCTranslatorInfoResponse  interper = iYCTranslatorServiceSV.searchYCTranslatorInfo(translatorRequest);
 				if(interper.getResponseHeader().isSuccess()==true){
 					ordInfo.setInterpername(interper.getNickname());
@@ -244,7 +244,7 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 					//获取译员昵称
 					if(!StringUtil.isBlank(ord.getInterperId())){
 						SearchYCTranslatorRequest  translatorRequest = new SearchYCTranslatorRequest();
-						translatorRequest.setTranslatorId(ord.getInterperId());
+						translatorRequest.setUserId(ord.getInterperId());
 						YCTranslatorInfoResponse  interper = iYCTranslatorServiceSV.searchYCTranslatorInfo(translatorRequest);
 						if(interper.getResponseHeader().isSuccess()==true){
 							ordInfo.setInterpername(interper.getNickname());
