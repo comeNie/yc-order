@@ -156,7 +156,9 @@ public class OrderWaitReceiveBusiSVImpl implements IOrderWaitReceiveBusiSV {
 					order.setLanguagePairName(extendList.get(0).getLangungechname());
 					order.setLanguageNameEn(extendList.get(0).getLangungeenname());
 				}
-
+				//获取币种
+				order.setCurrencyUnit(ord.getCurrencyunit());
+				//
 				results.add(order);
 			}
 		}

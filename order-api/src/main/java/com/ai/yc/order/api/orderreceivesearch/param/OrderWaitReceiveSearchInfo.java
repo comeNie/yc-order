@@ -62,6 +62,13 @@ public class OrderWaitReceiveSearchInfo implements Serializable {
 	 * 需耗时
 	 */
 	private String takeTime;
+	
+	/**
+	 *  币种
+	 *  "1：RMB
+		2：$"
+	 */
+	private String currencyUnit;// CURRENCY_UNIT
 
 	public Long getOrderId() {
 		return orderId;
@@ -165,6 +172,14 @@ public class OrderWaitReceiveSearchInfo implements Serializable {
 
 	public void setTakeTime(String takeTime) {
 		this.takeTime = takeTime;
+	}
+
+	public String getCurrencyUnit() {
+		return currencyUnit;
+	}
+
+	public void setCurrencyUnit(String currencyUnit) {
+		this.currencyUnit = currencyUnit;
 	}
 
 }
