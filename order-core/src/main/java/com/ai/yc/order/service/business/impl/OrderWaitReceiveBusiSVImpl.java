@@ -178,11 +178,11 @@ public class OrderWaitReceiveBusiSVImpl implements IOrderWaitReceiveBusiSV {
 		/**
 		 * 如果业务标识不为空
 		 */
-		if (!StringUtil.isBlank(request.getFlag())) {
-			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.FLAG, request.getFlag(),
-					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
-
-		}
+//		if (!StringUtil.isBlank(request.getFlag())) {
+//			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.FLAG, request.getFlag(),
+//					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
+//
+//		}
 		/**
 		 * 译员等级
 		 */

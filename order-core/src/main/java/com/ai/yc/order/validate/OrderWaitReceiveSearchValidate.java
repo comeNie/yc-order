@@ -27,14 +27,14 @@ public class OrderWaitReceiveSearchValidate {
 		 * 业务标识 0:国内业务 1：国际业务
 		 */
 		// flag;
-		if (StringUtil.isBlank(request.getFlag())) {
-			this.newException("业务标识不能为空");
-		} else {
-			String flag = this.orderSubmissionParam.getFlagMap().get(request.getFlag());
-			if (StringUtil.isBlank(flag)) {
-				this.newException("业务标识范围不正确，请参考" + JSON.toJSONString(this.orderSubmissionParam.getFlagMap()));
-			}
-		}
+//		if (StringUtil.isBlank(request.getFlag())) {
+//			this.newException("业务标识不能为空");
+//		} else {
+//			String flag = this.orderSubmissionParam.getFlagMap().get(request.getFlag());
+//			if (StringUtil.isBlank(flag)) {
+//				this.newException("业务标识范围不正确，请参考" + JSON.toJSONString(this.orderSubmissionParam.getFlagMap()));
+//			}
+//		}
 		/**
 		 * 译员级别 跟 订单级别一样
 		 */
