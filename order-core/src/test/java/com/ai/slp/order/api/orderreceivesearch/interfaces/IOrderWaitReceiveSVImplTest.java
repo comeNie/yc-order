@@ -19,11 +19,12 @@ public class IOrderWaitReceiveSVImplTest extends BaseTest {
 		request.setFlag("0");
 		request.setInterperLevel("4");
 		//request.setInterperType("0");
+		request.setTranslateName("测试1214ljq");
 		request.setPageNo(1);
 		
 		request.setPageSize(500);
-		request.setSortFlag("1");
-		request.setSortField("1");
+		request.setSortFlag("0");
+		request.setSortField("0");
 		request.setState("20");
 		OrderWaitReceiveSearchResponse response = this.orderWaitReceiveSV.pageSearchWaitReceive(request);
 		log.info("response:"+JSON.toJSONString(response));
