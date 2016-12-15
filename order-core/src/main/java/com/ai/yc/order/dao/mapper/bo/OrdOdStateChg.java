@@ -23,6 +23,12 @@ public class OrdOdStateChg {
 
     private String chgDescEn;
 
+    private String chgDescUEn;
+
+    private String chgDescD;
+
+    private String flag;
+
     public Long getStateChgId() {
         return stateChgId;
     }
@@ -101,5 +107,29 @@ public class OrdOdStateChg {
 
     public void setChgDescEn(String chgDescEn) {
         this.chgDescEn = chgDescEn == null ? null : chgDescEn.trim();
+    }
+
+    public String getChgDescUEn() {
+        return chgDescUEn;
+    }
+
+    public void setChgDescUEn(String chgDescUEn) {
+        this.chgDescUEn = chgDescUEn == null ? null : chgDescUEn.trim();
+    }
+
+    public String getChgDescD() {
+        return chgDescD;
+    }
+
+    public void setChgDescD(String chgDescD) {
+        this.chgDescD = chgDescD == null ? null : chgDescD.trim();
+    }
+
+    public String getFlag() {
+        return flag;
+    }
+
+    public void setFlag(String flag) {
+        this.flag = flag == null ? null : flag.trim();
     }
 }

@@ -794,6 +794,216 @@ public class OrdOdStateChgCriteria {
             addCriterion("CHG_DESC_EN not between", value1, value2, "chgDescEn");
             return (Criteria) this;
         }
+
+        public Criteria andChgDescUEnIsNull() {
+            addCriterion("CHG_DESC_U_EN is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChgDescUEnIsNotNull() {
+            addCriterion("CHG_DESC_U_EN is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChgDescUEnEqualTo(String value) {
+            addCriterion("CHG_DESC_U_EN =", value, "chgDescUEn");
+            return (Criteria) this;
+        }
+
+        public Criteria andChgDescUEnNotEqualTo(String value) {
+            addCriterion("CHG_DESC_U_EN <>", value, "chgDescUEn");
+            return (Criteria) this;
+        }
+
+        public Criteria andChgDescUEnGreaterThan(String value) {
+            addCriterion("CHG_DESC_U_EN >", value, "chgDescUEn");
+            return (Criteria) this;
+        }
+
+        public Criteria andChgDescUEnGreaterThanOrEqualTo(String value) {
+            addCriterion("CHG_DESC_U_EN >=", value, "chgDescUEn");
+            return (Criteria) this;
+        }
+
+        public Criteria andChgDescUEnLessThan(String value) {
+            addCriterion("CHG_DESC_U_EN <", value, "chgDescUEn");
+            return (Criteria) this;
+        }
+
+        public Criteria andChgDescUEnLessThanOrEqualTo(String value) {
+            addCriterion("CHG_DESC_U_EN <=", value, "chgDescUEn");
+            return (Criteria) this;
+        }
+
+        public Criteria andChgDescUEnLike(String value) {
+            addCriterion("CHG_DESC_U_EN like", value, "chgDescUEn");
+            return (Criteria) this;
+        }
+
+        public Criteria andChgDescUEnNotLike(String value) {
+            addCriterion("CHG_DESC_U_EN not like", value, "chgDescUEn");
+            return (Criteria) this;
+        }
+
+        public Criteria andChgDescUEnIn(List<String> values) {
+            addCriterion("CHG_DESC_U_EN in", values, "chgDescUEn");
+            return (Criteria) this;
+        }
+
+        public Criteria andChgDescUEnNotIn(List<String> values) {
+            addCriterion("CHG_DESC_U_EN not in", values, "chgDescUEn");
+            return (Criteria) this;
+        }
+
+        public Criteria andChgDescUEnBetween(String value1, String value2) {
+            addCriterion("CHG_DESC_U_EN between", value1, value2, "chgDescUEn");
+            return (Criteria) this;
+        }
+
+        public Criteria andChgDescUEnNotBetween(String value1, String value2) {
+            addCriterion("CHG_DESC_U_EN not between", value1, value2, "chgDescUEn");
+            return (Criteria) this;
+        }
+
+        public Criteria andChgDescDIsNull() {
+            addCriterion("CHG_DESC_D is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChgDescDIsNotNull() {
+            addCriterion("CHG_DESC_D is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChgDescDEqualTo(String value) {
+            addCriterion("CHG_DESC_D =", value, "chgDescD");
+            return (Criteria) this;
+        }
+
+        public Criteria andChgDescDNotEqualTo(String value) {
+            addCriterion("CHG_DESC_D <>", value, "chgDescD");
+            return (Criteria) this;
+        }
+
+        public Criteria andChgDescDGreaterThan(String value) {
+            addCriterion("CHG_DESC_D >", value, "chgDescD");
+            return (Criteria) this;
+        }
+
+        public Criteria andChgDescDGreaterThanOrEqualTo(String value) {
+            addCriterion("CHG_DESC_D >=", value, "chgDescD");
+            return (Criteria) this;
+        }
+
+        public Criteria andChgDescDLessThan(String value) {
+            addCriterion("CHG_DESC_D <", value, "chgDescD");
+            return (Criteria) this;
+        }
+
+        public Criteria andChgDescDLessThanOrEqualTo(String value) {
+            addCriterion("CHG_DESC_D <=", value, "chgDescD");
+            return (Criteria) this;
+        }
+
+        public Criteria andChgDescDLike(String value) {
+            addCriterion("CHG_DESC_D like", value, "chgDescD");
+            return (Criteria) this;
+        }
+
+        public Criteria andChgDescDNotLike(String value) {
+            addCriterion("CHG_DESC_D not like", value, "chgDescD");
+            return (Criteria) this;
+        }
+
+        public Criteria andChgDescDIn(List<String> values) {
+            addCriterion("CHG_DESC_D in", values, "chgDescD");
+            return (Criteria) this;
+        }
+
+        public Criteria andChgDescDNotIn(List<String> values) {
+            addCriterion("CHG_DESC_D not in", values, "chgDescD");
+            return (Criteria) this;
+        }
+
+        public Criteria andChgDescDBetween(String value1, String value2) {
+            addCriterion("CHG_DESC_D between", value1, value2, "chgDescD");
+            return (Criteria) this;
+        }
+
+        public Criteria andChgDescDNotBetween(String value1, String value2) {
+            addCriterion("CHG_DESC_D not between", value1, value2, "chgDescD");
+            return (Criteria) this;
+        }
+
+        public Criteria andFlagIsNull() {
+            addCriterion("FLAG is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFlagIsNotNull() {
+            addCriterion("FLAG is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFlagEqualTo(String value) {
+            addCriterion("FLAG =", value, "flag");
+            return (Criteria) this;
+        }
+
+        public Criteria andFlagNotEqualTo(String value) {
+            addCriterion("FLAG <>", value, "flag");
+            return (Criteria) this;
+        }
+
+        public Criteria andFlagGreaterThan(String value) {
+            addCriterion("FLAG >", value, "flag");
+            return (Criteria) this;
+        }
+
+        public Criteria andFlagGreaterThanOrEqualTo(String value) {
+            addCriterion("FLAG >=", value, "flag");
+            return (Criteria) this;
+        }
+
+        public Criteria andFlagLessThan(String value) {
+            addCriterion("FLAG <", value, "flag");
+            return (Criteria) this;
+        }
+
+        public Criteria andFlagLessThanOrEqualTo(String value) {
+            addCriterion("FLAG <=", value, "flag");
+            return (Criteria) this;
+        }
+
+        public Criteria andFlagLike(String value) {
+            addCriterion("FLAG like", value, "flag");
+            return (Criteria) this;
+        }
+
+        public Criteria andFlagNotLike(String value) {
+            addCriterion("FLAG not like", value, "flag");
+            return (Criteria) this;
+        }
+
+        public Criteria andFlagIn(List<String> values) {
+            addCriterion("FLAG in", values, "flag");
+            return (Criteria) this;
+        }
+
+        public Criteria andFlagNotIn(List<String> values) {
+            addCriterion("FLAG not in", values, "flag");
+            return (Criteria) this;
+        }
+
+        public Criteria andFlagBetween(String value1, String value2) {
+            addCriterion("FLAG between", value1, value2, "flag");
+            return (Criteria) this;
+        }
+
+        public Criteria andFlagNotBetween(String value1, String value2) {
+            addCriterion("FLAG not between", value1, value2, "flag");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
