@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.ai.opt.sdk.util.StringUtil;
 import com.ai.yc.order.dao.mapper.bo.OrdOdStateChg;
 import com.ai.yc.order.dao.mapper.bo.OrdOdStateChgCriteria;
 import com.ai.yc.order.dao.mapper.factory.MapperFactory;
@@ -23,6 +24,17 @@ public class OrdOdStateChgAtomSVImpl implements IOrdOdStateChgAtomSV {
 	public void insertSelective(OrdOdStateChg ordOdStateChg) {
 		// TODO Auto-generated method stub
 		MapperFactory.getOrdOdStateChgMapper().insertSelective(ordOdStateChg);
+	}
+	
+	@Override
+	public List<OrdOdStateChg> findByOrderIdAndFlag(Long orderId,String flag) {
+		OrdOdStateChgCriteria example = new OrdOdStateChgCriteria();
+		OrdOdStateChgCriteria.Criteria criteria = example.createCriteria();
+		criteria.andOrderIdEqualTo(orderId);
+		if(flag != null && !StringUtil.isBlank(flag)){
+			criteria.andFlagEqualTo(flag);
+		}
+		return MapperFactory.getOrdOdStateChgMapper().selectByExample(example);
 	}
 
 }

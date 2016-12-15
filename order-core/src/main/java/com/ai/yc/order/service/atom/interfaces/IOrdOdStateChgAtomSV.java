@@ -9,5 +9,7 @@ public interface IOrdOdStateChgAtomSV {
 	List<OrdOdStateChg> findByOrderId(Long orderId);
 	
 	public void insertSelective(OrdOdStateChg ordOdStateChg);
+	
+	public List<OrdOdStateChg> findByOrderIdAndFlag(Long orderId,String flag);
 
 }

@@ -57,6 +57,14 @@ public class OrderStateChgVo implements Serializable {
      * 变更时间
      */
     private Timestamp stateChgTime;
+    /**
+     * 门户前端展示 英文轨迹
+     */
+    private String chgDescUEn;
+    /**
+     * 门户前端展示 中文轨迹 
+     */
+    private String chgDescD;
 
 	public Long getStateChgId() {
 		return stateChgId;
@@ -128,6 +136,22 @@ public class OrderStateChgVo implements Serializable {
 
 	public void setStateChgTime(Timestamp stateChgTime) {
 		this.stateChgTime = stateChgTime;
+	}
+
+	public String getChgDescUEn() {
+		return chgDescUEn;
+	}
+
+	public void setChgDescUEn(String chgDescUEn) {
+		this.chgDescUEn = chgDescUEn;
+	}
+
+	public String getChgDescD() {
+		return chgDescD;
+	}
+
+	public void setChgDescD(String chgDescD) {
+		this.chgDescD = chgDescD;
 	}
     
     

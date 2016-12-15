@@ -10,6 +10,6 @@ import com.ai.yc.order.api.orderdetails.param.QueryOrderDetailsResponse;
  */
 public interface IQueryOrderDetailsBusiSV {
 	
-	QueryOrderDetailsResponse queryOrderDetails(Long orderId);
+	QueryOrderDetailsResponse queryOrderDetails(Long orderId,String flag);
 
 }

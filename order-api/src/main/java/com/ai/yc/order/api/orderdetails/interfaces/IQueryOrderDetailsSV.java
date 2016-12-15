@@ -34,7 +34,7 @@ public interface IQueryOrderDetailsSV {
 	 */
 	@POST
 	@Path("/queryOrderDetails")
-	QueryOrderDetailsResponse queryOrderDetails(Long orderId)throws BusinessException, SystemException;
+	QueryOrderDetailsResponse queryOrderDetails(Long orderId,String flag)throws BusinessException, SystemException;
 	
 	
 

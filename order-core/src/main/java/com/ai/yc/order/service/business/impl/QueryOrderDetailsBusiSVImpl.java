@@ -91,7 +91,7 @@ public class QueryOrderDetailsBusiSVImpl implements IQueryOrderDetailsBusiSV {
 	private transient ISysUserAtomSV iSysUserAtomSV;
 
 	@Override
-	public QueryOrderDetailsResponse queryOrderDetails(Long orderId) {
+	public QueryOrderDetailsResponse queryOrderDetails(Long orderId,String flag) {
 		QueryOrderDetailsResponse resp =  new QueryOrderDetailsResponse();
 		//订单主信息
 		OrdOrder ordOrder = iOrdOrderAtomSV.findByPrimaryKey(orderId);
@@ -190,7 +190,7 @@ public class QueryOrderDetailsBusiSVImpl implements IQueryOrderDetailsBusiSV {
 		
 		//订单状态轨迹
 		List<OrderStateChgVo> orderStateChgs = new ArrayList<OrderStateChgVo>();
-		List<OrdOdStateChg> ordOdStateChgs = iOrdOdStateChgAtomSV.findByOrderId(orderId);
+		List<OrdOdStateChg> ordOdStateChgs = iOrdOdStateChgAtomSV.findByOrderIdAndFlag(orderId,flag);
 		for(OrdOdStateChg ordOdStateChg:ordOdStateChgs){
 			OrderStateChgVo orderStateChgVo = new OrderStateChgVo();
 			BeanUtils.copyProperties(orderStateChgVo, ordOdStateChg);
