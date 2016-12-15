@@ -12,8 +12,11 @@ import com.ai.opt.sdk.util.DateUtil;
 import com.ai.yc.order.api.orderreview.param.OrderReviewRequest;
 import com.ai.yc.order.api.sesdata.interfaces.ISesDataUpdateSV;
 import com.ai.yc.order.constants.OrdersConstants;
+import com.ai.yc.order.dao.mapper.bo.OrdOdProd;
+import com.ai.yc.order.dao.mapper.bo.OrdOdProdWithBLOBs;
 import com.ai.yc.order.dao.mapper.bo.OrdOdStateChg;
 import com.ai.yc.order.dao.mapper.bo.OrdOrder;
+import com.ai.yc.order.service.atom.interfaces.IOrdOdProdAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOrderAtomSV;
 import com.ai.yc.order.service.business.interfaces.IOrdOdStateChgBusiSV;
 import com.ai.yc.order.service.business.interfaces.IOrderReviewBusiSV;
@@ -27,6 +30,8 @@ public class OrderReviewBusiSVImpl implements IOrderReviewBusiSV {
 	private IOrdOdStateChgBusiSV ordOdStateChgBusiSV;
 	@Autowired
 	private ISesDataUpdateSV sesDataUpdateSV;
+	@Autowired
+	private IOrdOdProdAtomSV ordOdProdAtomSV;
 
 	@Override
 	public void check(OrderReviewRequest request) {
@@ -64,6 +69,11 @@ public class OrderReviewBusiSVImpl implements IOrderReviewBusiSV {
 				//状态结束时间
 				order.setEndChgTime( new Timestamp(Long.valueOf(DateCycleUtil.getCycleDate("D", 7).get("endTime").toString())));
 				ordOrderAtomSV.updateById(order);
+				/* 3.修改产品表 中update_time zhangzd*/
+				OrdOdProdWithBLOBs ordOdProdWithBLOBs = new OrdOdProdWithBLOBs();
+				ordOdProdWithBLOBs.setUpdateTime(DateUtil.getSysDate());
+				//
+				this.ordOdProdAtomSV.updateByOrderIdSelective(ordOdProdWithBLOBs, order.getOrderId());
 			} else {
 				/* 1.写入订单状态变化轨迹表 */
 				OrdOdStateChg ordOdStateChg = new OrdOdStateChg();
@@ -79,6 +89,12 @@ public class OrderReviewBusiSVImpl implements IOrderReviewBusiSV {
 				order.setReasonDesc(request.getReasonDesc());
 				order.setStateChgTime(sysDate);
 				ordOrderAtomSV.updateById(order);
+				/* 3.修改产品表 中update_time zhangzd*/
+				OrdOdProdWithBLOBs ordOdProdWithBLOBs = new OrdOdProdWithBLOBs();
+				ordOdProdWithBLOBs.setUpdateTime(DateUtil.getSysDate());
+				//
+				this.ordOdProdAtomSV.updateByOrderIdSelective(ordOdProdWithBLOBs, order.getOrderId());
+			
 			}
 			//刷新数据到搜索引擎
 			sesDataUpdateSV.updateSesData(id);
