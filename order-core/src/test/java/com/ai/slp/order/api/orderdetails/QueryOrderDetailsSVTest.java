@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ai.slp.order.api.BaseTest;
 import com.ai.yc.order.api.orderdetails.interfaces.IQueryOrderDetailsSV;
+import com.ai.yc.order.api.orderdetails.param.QueryOrderDetailsRequest;
 import com.ai.yc.order.api.orderdetails.param.QueryOrderDetailsResponse;
 import com.google.gson.Gson;
 
@@ -15,7 +16,9 @@ public class QueryOrderDetailsSVTest extends BaseTest{
 	
 	@Test
 	public void testQueryOrderDetails(){
-		QueryOrderDetailsResponse resp = iQueryOrderDetailsSV.queryOrderDetails(2000000042454212l,"");
+		QueryOrderDetailsRequest request = new QueryOrderDetailsRequest();
+		request.setOrderId(1l);
+		QueryOrderDetailsResponse resp = iQueryOrderDetailsSV.queryOrderDetails(request);
 		Gson gson = new Gson();
 		System.out.println(gson.toJson(resp));
 	}

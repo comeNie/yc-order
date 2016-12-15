@@ -8,6 +8,7 @@ import javax.ws.rs.core.MediaType;
 
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
+import com.ai.yc.order.api.orderdetails.param.QueryOrderDetailsRequest;
 import com.ai.yc.order.api.orderdetails.param.QueryOrderDetailsResponse;
 
 /**
@@ -34,7 +35,7 @@ public interface IQueryOrderDetailsSV {
 	 */
 	@POST
 	@Path("/queryOrderDetails")
-	QueryOrderDetailsResponse queryOrderDetails(Long orderId,String flag)throws BusinessException, SystemException;
+	QueryOrderDetailsResponse queryOrderDetails(QueryOrderDetailsRequest request)throws BusinessException, SystemException;
 	
 	
 
