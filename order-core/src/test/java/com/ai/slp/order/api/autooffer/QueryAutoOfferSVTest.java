@@ -18,11 +18,14 @@ public class QueryAutoOfferSVTest extends BaseTest {
 	@Test
 	public void queryAutoOffer() {
 		QueryAutoOfferReq req = new QueryAutoOfferReq();
-		req.setDuadId("1");
+		
+		//[{"duadId":"8","language":"zh_CN","purposeId":"1","translateLevel":"100220","urgent":false,"wordNum":1}]
+
+		req.setDuadId("8");
 		req.setLanguage("zh_CN");
-		req.setWordNum(123);
+		req.setWordNum(1);
 		req.setPurposeId("1");
-		req.setTranslateLevel("100210");
+		req.setTranslateLevel("100220");
 		req.setUrgent(false);
 		QueryAutoOfferRes res = iQueryAutoOfferSV.queryAutoOffer(req);
 		double   f   =   111231.5585; 

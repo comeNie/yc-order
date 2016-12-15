@@ -18,6 +18,7 @@ import com.ai.paas.ipaas.util.StringUtil;
 import com.ai.yc.order.api.orderquery.param.QueryOrdCountRequest;
 import com.ai.yc.order.api.orderstate.param.OrderStateUpdateRequest;
 import com.ai.yc.order.api.orderstate.param.OrderStateUpdateResponse;
+import com.ai.yc.order.constants.OrdOdStateChgConstants;
 import com.ai.yc.order.constants.OrdersConstants;
 import com.ai.yc.order.constants.SearchFieldConfConstants;
 import com.ai.yc.order.dao.mapper.bo.OrdOdStateChg;
@@ -165,6 +166,14 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 		ordOdStateChg.setOperId(userId);
 		ordOdStateChg.setOrgState(oldState);
 		ordOdStateChg.setNewState(newState);
+		//完成状态
+		if(OrdersConstants.OrderState.FLAG_FINISHED.equals(newState)){
+			ordOdStateChg.setChgDesc("客户确认了订单");
+			ordOdStateChg.setChgDescEn("Client confirmed the order");
+			ordOdStateChg.setChgDescD("确认了订单");
+			ordOdStateChg.setChgDescUEn("Confirmed the order");
+			ordOdStateChg.setFlag(OrdOdStateChgConstants.FLAG_USER);
+		}
 		ordOdStateChg.setStateChgTime(DateUtil.getSysDate());
 		this.ordOdStateChgAtomSV.insertSelective(ordOdStateChg);
 	}

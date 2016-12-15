@@ -13,6 +13,7 @@ import com.ai.opt.base.vo.BaseResponse;
 import com.ai.opt.base.vo.ResponseHeader;
 import com.ai.opt.sdk.util.DateUtil;
 import com.ai.yc.order.api.sesdata.interfaces.ISesDataUpdateSV;
+import com.ai.yc.order.constants.OrdOdStateChgConstants;
 import com.ai.yc.order.constants.OrdersConstants;
 import com.ai.yc.order.constants.ResultCodeConstants;
 import com.ai.yc.order.dao.mapper.bo.OrdOdStateChg;
@@ -119,6 +120,9 @@ public class AutoDealOrderBusiSVImpl implements IAutoDealOrderBusiSV {
 			ordOdStateChg.setStateChgTime(DateUtil.getSysDate());
 			ordOdStateChg.setChgDesc("系统自动确认了订单");
 			ordOdStateChg.setChgDescEn("The system automatically confirmed the order.");
+			ordOdStateChg.setChgDescD("系统自动确认了订单");
+			ordOdStateChg.setChgDescUEn("The system automatically confirmed the order.");
+			ordOdStateChg.setFlag(OrdOdStateChgConstants.FLAG_USER);
 			//
 			ordOdStateChgAtomSV.insertSelective(ordOdStateChg);
 			//

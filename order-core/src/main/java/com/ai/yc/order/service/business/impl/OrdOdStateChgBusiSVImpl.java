@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.ai.opt.sdk.util.DateUtil;
 import com.ai.yc.order.api.orderreceive.param.OrderReceiveRequest;
+import com.ai.yc.order.constants.OrdOdStateChgConstants;
 import com.ai.yc.order.constants.OrdersConstants;
 import com.ai.yc.order.dao.mapper.bo.OrdOdStateChg;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdStateChgAtomSV;
@@ -106,6 +107,10 @@ public class OrdOdStateChgBusiSVImpl implements IOrdOdStateChgBusiSV {
 		chg.setOrgId(OrdersConstants.OrgID.ORG_ID_SYS);
 		chg.setChgDesc(descCn);
 		chg.setChgDescEn(descEn);
+		chg.setChgDescD(descCn);
+		chg.setChgDescUEn(descEn);
+		chg.setFlag(OrdOdStateChgConstants.FLAG_USER);
+		
 		chg.setStateChgTime(DateUtil.getSysDate());
 		ordOdStateChgAtomSV.insertSelective(chg);
 	}
@@ -130,6 +135,10 @@ public class OrdOdStateChgBusiSVImpl implements IOrdOdStateChgBusiSV {
 		String descEn = String.format(CLOSE_CHG_DESC_EN,String.valueOf(chg.getOrderId()));
 		chg.setChgDesc(descCn);
 		chg.setChgDescEn(descEn);
+		chg.setChgDescD(descCn);
+		chg.setChgDescUEn(descEn);
+		chg.setFlag(OrdOdStateChgConstants.FLAG_USER);
+		
 		chg.setStateChgTime(DateUtil.getSysDate());
 		ordOdStateChgAtomSV.insertSelective(chg);
 	}
@@ -140,6 +149,10 @@ public class OrdOdStateChgBusiSVImpl implements IOrdOdStateChgBusiSV {
 		if(OrdersConstants.OrderState.WAIT_OK_STATE.equals(chg.getNewState())){
 			chg.setChgDesc(CHECK_CHG_ADMIN_DESC_CN);
 			chg.setChgDescEn(CHECK_CHG_ADMIN_DESC_EN);
+			chg.setChgDescD("您的订单已翻译完成，请确认翻译结果");
+			chg.setChgDescUEn("Your order has been translated, please confirm the translation results");
+			chg.setFlag(OrdOdStateChgConstants.FLAG_USER);
+			
 		}else{
 			chg.setChgDesc(REFUSE_CHECK_CHG_ADMIN_DESC_CN);
 			chg.setChgDescEn(REFUSE_CHECK_CHG_ADMIN_DESC_EN);
@@ -170,6 +183,11 @@ public class OrdOdStateChgBusiSVImpl implements IOrdOdStateChgBusiSV {
 		ordOdStateChg.setChgDesc(descCn);
 		ordOdStateChg.setChgDescEn(descEn);
 		ordOdStateChg.setStateChgTime(DateUtil.getSysDate());
+		
+		ordOdStateChg.setChgDescD("订单已被译员领取，正在翻译中，请耐心等待");
+		ordOdStateChg.setChgDescUEn("Your order has been claimed by a translator and is being translated, please wait patiently");
+		ordOdStateChg.setFlag(OrdOdStateChgConstants.FLAG_USER);
+		
 		ordOdStateChgAtomSV.insertSelective(ordOdStateChg);
 	}
 

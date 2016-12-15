@@ -10,6 +10,7 @@ import com.ai.opt.sdk.util.BeanUtils;
 import com.ai.opt.sdk.util.DateUtil;
 import com.ai.yc.order.api.orderpay.param.OrderPayProcessedResultRequest;
 import com.ai.yc.order.api.orderpay.param.OrderPayProcessedResultResponse;
+import com.ai.yc.order.constants.OrdOdStateChgConstants;
 import com.ai.yc.order.constants.OrdersConstants;
 import com.ai.yc.order.dao.mapper.bo.OrdBalacneIf;
 import com.ai.yc.order.dao.mapper.bo.OrdOdFeeTotal;
@@ -177,6 +178,9 @@ public class OrderPayProcessedResultBusiSVImpl implements IOrderPayProcessedResu
 		ordOdStateChg.setNewState(newState);
 		ordOdStateChg.setChgDesc("客户支付了订单");
 		ordOdStateChg.setChgDescEn("The client has paid for the order");
+		ordOdStateChg.setChgDescD("订单已支付成功，进入任务中心等待译员领取");
+		ordOdStateChg.setChgDescUEn("Your order has been paid and released to the task center.  A translator will be assigned to deal with the task.");
+		ordOdStateChg.setFlag(OrdOdStateChgConstants.FLAG_USER);
 		ordOdStateChg.setStateChgTime(DateUtil.getSysDate());
 		this.ordOdStateChgAtomSV.insertSelective(ordOdStateChg);
 	}

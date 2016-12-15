@@ -15,6 +15,7 @@ import com.ai.yc.order.api.ordersubmission.param.LanguagePairInfo;
 import com.ai.yc.order.api.ordersubmission.param.OrderSubmissionRequest;
 import com.ai.yc.order.api.ordersubmission.param.OrderSubmissionResponse;
 import com.ai.yc.order.api.ordersubmission.param.TranslateLevelInfo;
+import com.ai.yc.order.constants.OrdOdStateChgConstants;
 import com.ai.yc.order.constants.OrdersConstants;
 import com.ai.yc.order.dao.mapper.bo.OrdOdFeeTotal;
 import com.ai.yc.order.dao.mapper.bo.OrdOdLogistics;
@@ -560,6 +561,11 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 		ordOdStateChg.setStateChgTime(DateUtil.getSysDate());
 		ordOdStateChg.setChgDesc(descCn);
 		ordOdStateChg.setChgDescEn(descEn);
+		//前端门户显示字段
+		ordOdStateChg.setChgDescD(descCn);
+		ordOdStateChg.setChgDescUEn(descEn);
+		ordOdStateChg.setFlag(OrdOdStateChgConstants.FLAG_USER);
+		//
 		this.ordOdStateChgAtomSV.insertSelective(ordOdStateChg);
 	}
 	
