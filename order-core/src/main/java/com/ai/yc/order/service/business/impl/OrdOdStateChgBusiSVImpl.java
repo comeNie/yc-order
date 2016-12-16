@@ -177,10 +177,12 @@ public class OrdOdStateChgBusiSVImpl implements IOrdOdStateChgBusiSV {
 		if ("0".equals(interperType)) {
 			descCn = String.format(ORDER_RECEIVE_DESC_CN_INTERPER,interperId);
 			descEn = String.format(ORDER_RECEIVE_DESC_EN_INTERPER,interperId);
+			ordOdStateChg.setOperId(interperId);
 		}
 		if ("1".equals(interperType)) {
 			descCn = String.format(ORDER_RECEIVE_DESC_CN_LSP,lspId);
 			descEn = String.format(ORDER_RECEIVE_DESC_EN_LSP,lspId);
+			ordOdStateChg.setOperId(lspId);
 		}
 		
 		ordOdStateChg.setChgDesc(descCn);

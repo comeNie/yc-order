@@ -16,8 +16,10 @@ import com.ai.yc.order.api.sesdata.interfaces.ISesDataUpdateSV;
 import com.ai.yc.order.constants.OrdOdStateChgConstants;
 import com.ai.yc.order.constants.OrdersConstants;
 import com.ai.yc.order.constants.ResultCodeConstants;
+import com.ai.yc.order.dao.mapper.bo.OrdOdProdWithBLOBs;
 import com.ai.yc.order.dao.mapper.bo.OrdOdStateChg;
 import com.ai.yc.order.dao.mapper.bo.OrdOrder;
+import com.ai.yc.order.service.atom.interfaces.IOrdOdProdAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdStateChgAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOrderAtomSV;
 import com.ai.yc.order.service.business.interfaces.IAutoDealOrderBusiSV;
@@ -39,6 +41,9 @@ public class AutoDealOrderBusiSVImpl implements IAutoDealOrderBusiSV {
 	private IOrdOdStateChgAtomSV ordOdStateChgAtomSV;
 	@Autowired
 	private ISesDataUpdateSV sesDataUpdateSV;
+	
+	@Autowired
+	private IOrdOdProdAtomSV ordOdProdAtomSV;
 
 	private final static int _DAY_CANCEL = 3;
 
@@ -186,6 +191,10 @@ public class AutoDealOrderBusiSVImpl implements IAutoDealOrderBusiSV {
 			record.setOperId(OrdersConstants.SYS_OPER_ID);
 			//
 			iOrdOrderAtomSV.updateByPrimaryKeySelective(record);
+			//系统自动审核完毕，需要修改updateTime字段 zhangzd 20161216
+			OrdOdProdWithBLOBs ordOdProdWithBLOBs = new OrdOdProdWithBLOBs();
+			ordOdProdWithBLOBs.setUpdateTime(DateUtil.getSysDate());
+			this.ordOdProdAtomSV.updateByOrderIdSelective(ordOdProdWithBLOBs, ordOrder.getOrderId());
 
 		}
 		// end 重写待审核订单10分钟自动审核功能 zhangzd 2016-12-12 11:45
