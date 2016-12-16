@@ -170,6 +170,9 @@ public class AutoDealOrderBusiSVImpl implements IAutoDealOrderBusiSV {
 			ordOdStateChg.setStateChgTime(DateUtil.getSysDate());
 			ordOdStateChg.setChgDesc("系统自动审核了订单");
 			ordOdStateChg.setChgDescEn("The system automatically reviewed the order.");
+			ordOdStateChg.setChgDescD("您的订单已翻译完成，请确认翻译结果");
+			ordOdStateChg.setChgDescUEn("Your order has been translated, please confirm the translation results");
+			ordOdStateChg.setFlag(OrdOdStateChgConstants.FLAG_USER);
 			//
 			ordOdStateChgAtomSV.insertSelective(ordOdStateChg);
 			//
