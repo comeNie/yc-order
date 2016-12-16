@@ -142,7 +142,7 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 		//
 		this.ordOrderAtomSV.updateByPrimaryKeySelective(ordOrder);
 		//
-		String userId = ordOrderDb.getUserId();
+		String userId = request.getUserId();
 		Long orderId = request.getOrderId();
 		String translateType = ordOrderDb.getTranslateType();// 数据库获取订单翻译类型
 		String oldState = ordOrderDb.getState();// 数据库获取订单当前状态

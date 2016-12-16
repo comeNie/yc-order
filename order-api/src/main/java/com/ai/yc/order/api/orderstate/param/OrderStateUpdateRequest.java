@@ -19,6 +19,10 @@ public class OrderStateUpdateRequest implements Serializable {
 	 * 客户端显示状态
 	 */
 	private String displayFlag;// DISPLAY_FLAG
+	/**
+	 * 用户id
+	 */
+	private String userId;
 
 	public String getState() {
 		return state;
@@ -42,6 +46,14 @@ public class OrderStateUpdateRequest implements Serializable {
 
 	public void setDisplayFlag(String displayFlag) {
 		this.displayFlag = displayFlag;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 }
