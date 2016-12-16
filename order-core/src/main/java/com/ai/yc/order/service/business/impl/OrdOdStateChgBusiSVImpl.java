@@ -125,6 +125,9 @@ public class OrdOdStateChgBusiSVImpl implements IOrdOdStateChgBusiSV {
 		chg.setOrgId(OrdersConstants.OrgID.ORG_ID_USER);
 		chg.setChgDesc(descCn);
 		chg.setChgDescEn(descEn);
+		chg.setChgDescD("订单 "+chg.getOrderId()+" 已关闭");
+		chg.setChgDescUEn("Order "+chg.getOrderId()+" has been closed.");
+		chg.setFlag(OrdOdStateChgConstants.FLAG_USER);
 		chg.setStateChgTime(DateUtil.getSysDate());
 		ordOdStateChgAtomSV.insertSelective(chg);
 	}
