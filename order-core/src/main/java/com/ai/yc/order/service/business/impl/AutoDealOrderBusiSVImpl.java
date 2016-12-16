@@ -1,5 +1,6 @@
 package com.ai.yc.order.service.business.impl;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -189,6 +190,8 @@ public class AutoDealOrderBusiSVImpl implements IAutoDealOrderBusiSV {
 			record.setDisplayFlag(OrdersConstants.OrderDisplayFlag.FLAG_WAIT_OK);
 			record.setDisplayFlagChgTime(DateUtil.getSysDate());
 			record.setOperId(OrdersConstants.SYS_OPER_ID);
+			//自动审核后 设置七天待确认时间
+			record.setEndChgTime( new Timestamp(Long.valueOf(DateCycleUtil.getCycleDate("D", 7).get("endTime").toString())));
 			//
 			iOrdOrderAtomSV.updateByPrimaryKeySelective(record);
 			//系统自动审核完毕，需要修改updateTime字段 zhangzd 20161216
