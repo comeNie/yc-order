@@ -18,7 +18,6 @@ import com.ai.yc.common.api.sysuser.param.SysUserQueryRequest;
 import com.ai.yc.common.api.sysuser.param.SysUserQueryResponse;
 import com.ai.yc.order.constants.OrdersConstants;
 import com.ai.yc.order.constants.SearchConstants;
-import com.ai.yc.order.dao.mapper.bo.OrdBalacneIf;
 import com.ai.yc.order.dao.mapper.bo.OrdOdFeeTotal;
 import com.ai.yc.order.dao.mapper.bo.OrdOdProd;
 import com.ai.yc.order.dao.mapper.bo.OrdOdProdExtend;
@@ -27,7 +26,6 @@ import com.ai.yc.order.dao.mapper.bo.OrdOrder;
 import com.ai.yc.order.search.bo.OrdProdExtend;
 import com.ai.yc.order.search.bo.OrdProdLevel;
 import com.ai.yc.order.search.bo.OrderInfo;
-import com.ai.yc.order.service.atom.interfaces.IOrdBalacneIfAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdFeeTotalAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdProdAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdProdExtendAtomSV;
@@ -52,8 +50,6 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 	private IOrdOdProdExtendAtomSV ordOdProdExtendAtomSV;
 	@Autowired
 	private IOrdOdFeeTotalAtomSV ordOdFeeTotalAtomSV;
-	@Autowired
-	private IOrdBalacneIfAtomSV ordBalacneIfAtomSV;
 	@Autowired
 	private IOrdOrderAtomSV ordOrderAtomSV;
 	@Autowired
@@ -172,12 +168,8 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 				ordInfo.setUpdatetime(ordOdFeeTotal.getUpdateTime());
 				ordInfo.setTotalfee(ordOdFeeTotal.getTotalFee());
 				ordInfo.setCurrencyunit(ordOdFeeTotal.getCurrencyUnit());
-			}
-			// 查询支付信息
-			OrdBalacneIf ordBalacneIf = ordBalacneIfAtomSV.findByOrderId(ord.getOrderId());
-			if (ordBalacneIf != null) {
-				ordInfo.setPaystyle(ordBalacneIf.getPayStyle());
-				ordInfo.setPaytime(ordBalacneIf.getPayTime());
+				ordInfo.setPaystyle(ordOdFeeTotal.getPayStyle());
+				ordInfo.setPaytime(ordOdFeeTotal.getPayTime());
 			}
 			ordInfoList.add(ordInfo);
 			
@@ -281,6 +273,8 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 						ordInfo.setUpdatetime(ordOdFeeTotal.getUpdateTime());
 						ordInfo.setCurrencyunit(ordOdFeeTotal.getCurrencyUnit());
 						ordInfo.setTotalfee(ordOdFeeTotal.getTotalFee());
+						ordInfo.setPaystyle(ordOdFeeTotal.getPayStyle());
+						ordInfo.setPaytime(ordOdFeeTotal.getPayTime());
 						if(!StringUtil.isBlank(ordOdFeeTotal.getUpdateOperId())){
 							ISysUserQuerySV iSysUserQuerySV = DubboConsumerFactory.getService(ISysUserQuerySV.class);
 							SysUserQueryRequest req = new SysUserQueryRequest();
@@ -301,12 +295,6 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 							ordLevelList.add(ordLevel);
 						}
 						ordInfo.setOrdprodleveles(ordLevelList);
-					}
-					// 查询支付信息
-					OrdBalacneIf ordBalacneIf = ordBalacneIfAtomSV.findByOrderId(ord.getOrderId());
-					if (ordBalacneIf != null) {
-						ordInfo.setPaystyle(ordBalacneIf.getPayStyle());
-						ordInfo.setPaytime(ordBalacneIf.getPayTime());
 					}
 					orderList.add(ordInfo);
 					SESClientFactory.getSearchClient(SearchConstants.SearchNameSpace).bulkInsert(orderList);
