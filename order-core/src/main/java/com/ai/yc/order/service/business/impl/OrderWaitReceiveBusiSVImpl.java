@@ -134,8 +134,9 @@ public class OrderWaitReceiveBusiSVImpl implements IOrderWaitReceiveBusiSV {
 				order.setTranslateType(ord.getTranslatetype());
 				order.setTakeDay(ord.getTakeday());
 				order.setTakeTime(ord.getTaketime());
-				order.setEsEndTime(new Timestamp(ord.getEsendtime().getTime()));
-				
+				if(null != ord.getEsendtime()){
+					order.setEsEndTime(new Timestamp(ord.getEsendtime().getTime()));
+				}
 				//
 				if (ord.getOrdertime() != null) {
 					order.setOrderTime(new Timestamp(ord.getOrdertime().getTime()));
