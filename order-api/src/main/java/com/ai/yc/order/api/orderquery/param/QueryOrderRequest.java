@@ -184,14 +184,7 @@ public class QueryOrderRequest extends BaseInfo {
 	 * 状态结束时间
 	 */
 	private Timestamp stateTimeEnd;
-	/**
-	 * 待领取结束查询开始时间(ORD_2006查询未用到)
-	 */
-	private Timestamp esEndtimeStart;
-	/**
-	 * 待领取结束查询结束时间(ORD_2006查询未用到)
-	 */
-	private Timestamp esEndtimeEnd;
+	
 	/**
 	 * 状态集合
 	 */
@@ -569,22 +562,6 @@ public class QueryOrderRequest extends BaseInfo {
 
 	public void setOrderByFlag(String orderByFlag) {
 		this.orderByFlag = orderByFlag;
-	}
-
-	public Timestamp getEsEndtimeStart() {
-		return esEndtimeStart;
-	}
-
-	public void setEsEndtimeStart(Timestamp esEndtimeStart) {
-		this.esEndtimeStart = esEndtimeStart;
-	}
-
-	public Timestamp getEsEndtimeEnd() {
-		return esEndtimeEnd;
-	}
-
-	public void setEsEndtimeEnd(Timestamp esEndtimeEnd) {
-		this.esEndtimeEnd = esEndtimeEnd;
 	}
 
 }
