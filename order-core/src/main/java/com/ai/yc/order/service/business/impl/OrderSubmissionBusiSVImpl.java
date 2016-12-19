@@ -420,6 +420,8 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 			ordOdProdWithBLOBs.setStateTime(request.getProductInfo().getStartTime());
 			//结束时间 口译获取前端传递的结束时间
 			ordOdProdWithBLOBs.setEndTime(request.getProductInfo().getEndTime());
+			//口译订单 添加es_end_time
+			ordOdProdWithBLOBs.setEsEndTime(request.getProductInfo().getStartTime());
 		}
 		// 语言对信息
 		List<LanguagePairInfo> languafePairInfoList = request.getProductInfo().getLanguagePairInfoList();

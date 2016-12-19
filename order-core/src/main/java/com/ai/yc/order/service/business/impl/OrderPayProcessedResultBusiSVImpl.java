@@ -122,7 +122,9 @@ public class OrderPayProcessedResultBusiSVImpl implements IOrderPayProcessedResu
 			//
 			ordOdProdWithBLOBs.setEndTime(
 					DateCycleUtil.getTimestamp(request.getProdInfo().getStateTime(), "H", takeDay * 24 + takeTime));
-
+			//es_end_time
+			ordOdProdWithBLOBs.setEsEndTime(ordOdProdWithBLOBs.getEndTime());
+			
 			//
 			this.ordOdProdAtomSV.updateByOrderIdSelective(ordOdProdWithBLOBs, request.getBaseInfo().getOrderId());
 		}
