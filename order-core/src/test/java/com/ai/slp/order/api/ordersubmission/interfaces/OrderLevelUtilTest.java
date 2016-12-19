@@ -12,10 +12,10 @@ public class OrderLevelUtilTest extends BaseTest {
 	//
 	@Test
 	public void orderLevel(){
-		Integer totalFee = 99999;
-		String translateLevel = "100230";
+		Integer totalFee = 10;
+		String translateLevel = "100220";
 		String translateType = "0";
-		String isUrgent = "N";
+		String isUrgent = "Y";
 		
 		String orderLevel = this.orderLevelUtil.orderLevel(totalFee, translateLevel, translateType, isUrgent);
 		//

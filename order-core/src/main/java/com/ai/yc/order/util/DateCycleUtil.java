@@ -182,6 +182,7 @@ public final class DateCycleUtil {
 		LOG.info("日期类型："+dateTypeValue);
 		DateCycleUtil.getTimestamp(DateUtil.getSysDate(), "D",0);
 		DateCycleUtil.getTimestamp(DateUtil.getSysDate(), "D",-1);
-		
+		String strDate = DateUtil.getDateString(DateUtil.getSysDate(), "YYYY-MM-dd HH:mm:ss");
+		LOG.info("strDate:"+strDate);
 	}
 }

@@ -27,6 +27,7 @@
 				<entry key="100_499_100210_N" value="2" />
 				<entry key="100_499_100220_N" value="2" />
 				<entry key="0_99_100210_Y" value="2" />
+				<entry key="0_99_100220_Y" value="2" />
 				
 				<!-- V3级别订单 -->	
 				<entry key="500_1999_100210_N" value="3" />
