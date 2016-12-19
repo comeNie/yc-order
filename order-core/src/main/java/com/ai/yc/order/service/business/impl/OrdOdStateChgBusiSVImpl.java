@@ -76,10 +76,12 @@ public class OrdOdStateChgBusiSVImpl implements IOrdOdStateChgBusiSV {
 			descCn = PAY_CHG_ADMIN_DESC_CN;
 			descEn = PAY_CHG_ADMIN_DESC_EN;
 		}
-
 		chg.setChgDesc(descCn);
 		chg.setChgDescEn(descEn);
 		chg.setStateChgTime(DateUtil.getSysDate());
+		chg.setChgDescD("订单已支付成功，进入任务中心等待译员领取");
+		chg.setChgDescUEn("Your order has been paid and released to the task center.  A translator will be assigned to deal with the task.");
+		chg.setFlag(OrdOdStateChgConstants.FLAG_USER);
 		ordOdStateChgAtomSV.insertSelective(chg);
 	}
 

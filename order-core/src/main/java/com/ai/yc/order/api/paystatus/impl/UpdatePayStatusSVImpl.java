@@ -44,12 +44,12 @@ public class UpdatePayStatusSVImpl implements IUpdatePayStatusSV{
 		if(StringUtil.isBlank(req.getOrderFee().getCurrencyUnit())){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "费用币种不能为空");
 		}
-		if(req.getOrderFee().getTotalFee()==null){
+		/*if(req.getOrderFee().getTotalFee()==null){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "总费用不能为空");
 		}
 		if(req.getOrderFee().getTotalFee()<0){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "总费用不合法");
-		}
+		}*/
 		if(req.getOrderFee().getDiscountFee()==null){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "总优惠金额不能为空");
 		}
