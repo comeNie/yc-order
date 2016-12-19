@@ -50,6 +50,10 @@ public class OrderInfo {
 	 */
 	private Date produpdatetime;
 	/**
+	 * 待领取结束时间
+	 */
+	private Date esendtime;
+	/**
 	 * 报价人
 	 */
 	private String updatename;
@@ -432,6 +436,14 @@ public class OrderInfo {
 
 	public void setProdupdatetime(Date produpdatetime) {
 		this.produpdatetime = produpdatetime;
+	}
+
+	public Date getEsendtime() {
+		return esendtime;
+	}
+
+	public void setEsendtime(Date esendtime) {
+		this.esendtime = esendtime;
 	}
 
 }
