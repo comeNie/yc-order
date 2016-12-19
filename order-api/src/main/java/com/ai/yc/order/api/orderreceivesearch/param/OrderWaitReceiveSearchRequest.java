@@ -45,11 +45,11 @@ public class OrderWaitReceiveSearchRequest implements Serializable {
 	 */
 	private String translateName;
 	/**
-	 * 开始时间
+	 * 开始时间(es_end_time)
 	 */
 	private Timestamp startStateTime;
 	/**
-	 * 结束时间
+	 * 结束时间(es_end_time)
 	 */
 	private Timestamp endStateTime;
 	// 是否分页

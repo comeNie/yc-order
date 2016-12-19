@@ -69,6 +69,10 @@ public class OrderWaitReceiveSearchInfo implements Serializable {
 		2：$"
 	 */
 	private String currencyUnit;// CURRENCY_UNIT
+	/**
+	 * 待领取结束时间
+	 */
+	private Timestamp esEndTime;
 
 	public Long getOrderId() {
 		return orderId;
@@ -180,6 +184,14 @@ public class OrderWaitReceiveSearchInfo implements Serializable {
 
 	public void setCurrencyUnit(String currencyUnit) {
 		this.currencyUnit = currencyUnit;
+	}
+
+	public Timestamp getEsEndTime() {
+		return esEndTime;
+	}
+
+	public void setEsEndTime(Timestamp esEndTime) {
+		this.esEndTime = esEndTime;
 	}
 
 }

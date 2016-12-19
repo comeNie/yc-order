@@ -110,10 +110,7 @@ public class OrderWaitReceiveBusiSVImpl implements IOrderWaitReceiveBusiSV {
 		}
 		// 剩余时间
 		if (FIELD_1.equals(request.getSortField())) {
-			sort = new Sort("takeday", sortFlagEn);
-			Sort sortTakeTime = new Sort("taketime", sortFlagEn);
-			//
-			sortList.add(sortTakeTime);
+			sort = new Sort("esendtime", sortFlagEn);
 		}
 		// 订单金额
 		if (FIELD_2.equals(request.getSortField())) {
@@ -137,6 +134,8 @@ public class OrderWaitReceiveBusiSVImpl implements IOrderWaitReceiveBusiSV {
 				order.setTranslateType(ord.getTranslatetype());
 				order.setTakeDay(ord.getTakeday());
 				order.setTakeTime(ord.getTaketime());
+				order.setEsEndTime(new Timestamp(ord.getEsendtime().getTime()));
+				
 				//
 				if (ord.getOrdertime() != null) {
 					order.setOrderTime(new Timestamp(ord.getOrdertime().getTime()));
@@ -245,7 +244,7 @@ public class OrderWaitReceiveBusiSVImpl implements IOrderWaitReceiveBusiSV {
 			String end = sdf.format(request.getEndStateTime());
 			SearchCriteria searchCriteria = new SearchCriteria();
 			searchCriteria.setOption(new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.range));
-			searchCriteria.setField(SearchFieldConfConstants.STATE_TIME);
+			searchCriteria.setField(SearchFieldConfConstants.ESEND_TIME);
 			searchCriteria.addFieldValue(start);
 			searchCriteria.addFieldValue(end);
 			searchfieldVos.add(searchCriteria);
