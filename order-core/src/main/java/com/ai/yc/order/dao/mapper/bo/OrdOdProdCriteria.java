@@ -1934,6 +1934,66 @@ public class OrdOdProdCriteria {
             addCriterion("TAKE_TIME not between", value1, value2, "takeTime");
             return (Criteria) this;
         }
+
+        public Criteria andEsEndTimeIsNull() {
+            addCriterion("ES_END_TIME is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEsEndTimeIsNotNull() {
+            addCriterion("ES_END_TIME is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEsEndTimeEqualTo(Timestamp value) {
+            addCriterion("ES_END_TIME =", value, "esEndTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEsEndTimeNotEqualTo(Timestamp value) {
+            addCriterion("ES_END_TIME <>", value, "esEndTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEsEndTimeGreaterThan(Timestamp value) {
+            addCriterion("ES_END_TIME >", value, "esEndTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEsEndTimeGreaterThanOrEqualTo(Timestamp value) {
+            addCriterion("ES_END_TIME >=", value, "esEndTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEsEndTimeLessThan(Timestamp value) {
+            addCriterion("ES_END_TIME <", value, "esEndTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEsEndTimeLessThanOrEqualTo(Timestamp value) {
+            addCriterion("ES_END_TIME <=", value, "esEndTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEsEndTimeIn(List<Timestamp> values) {
+            addCriterion("ES_END_TIME in", values, "esEndTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEsEndTimeNotIn(List<Timestamp> values) {
+            addCriterion("ES_END_TIME not in", values, "esEndTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEsEndTimeBetween(Timestamp value1, Timestamp value2) {
+            addCriterion("ES_END_TIME between", value1, value2, "esEndTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEsEndTimeNotBetween(Timestamp value1, Timestamp value2) {
+            addCriterion("ES_END_TIME not between", value1, value2, "esEndTime");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

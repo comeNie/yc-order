@@ -29,6 +29,7 @@
     <result column="TYPE_DESC" property="typeDesc" jdbcType="VARCHAR" />
     <result column="TAKE_DAY" property="takeDay" jdbcType="VARCHAR" />
     <result column="TAKE_TIME" property="takeTime" jdbcType="VARCHAR" />
+    <result column="ES_END_TIME" property="esEndTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.ai.yc.order.dao.mapper.bo.OrdOdProdWithBLOBs" extends="BaseResultMap" >
     <result column="NEED_TRANSLATE_INFO" property="needTranslateInfo" jdbcType="LONGVARCHAR" />
@@ -97,7 +98,7 @@
     INTERPER_GEN, MEETING_ADDRESS, INTERPER_SUM, USE_CODE, FIELD_CODE, IS_SET_TYPE, IS_URGENT, 
     STATE_TIME, END_TIME, PROD_DETAL_STATE, STATE, LOOK_STATE, INTERPER_FEE, IS_INVOICE, 
     UPDATE_CHL_ID, INTERPER_ID, UPDATE_INTERPER_ID, UPDATE_TIME, TYPE_DESC, TAKE_DAY, 
-    TAKE_TIME
+    TAKE_TIME, ES_END_TIME
   </sql>
   <sql id="Blob_Column_List" >
     NEED_TRANSLATE_INFO, TRANSLATE_INFO
@@ -163,7 +164,7 @@
       INTERPER_FEE, IS_INVOICE, UPDATE_CHL_ID, 
       INTERPER_ID, UPDATE_INTERPER_ID, UPDATE_TIME, 
       TYPE_DESC, TAKE_DAY, TAKE_TIME, 
-      NEED_TRANSLATE_INFO, TRANSLATE_INFO
+      ES_END_TIME, NEED_TRANSLATE_INFO, TRANSLATE_INFO
       )
     values (#{prodDetalId,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, #{translateType,jdbcType=VARCHAR}, 
       #{translateName,jdbcType=VARCHAR}, #{meetingSum,jdbcType=BIGINT}, #{translateSum,jdbcType=VARCHAR}, 
@@ -174,7 +175,7 @@
       #{interperFee,jdbcType=BIGINT}, #{isInvoice,jdbcType=VARCHAR}, #{updateChlId,jdbcType=VARCHAR}, 
       #{interperId,jdbcType=VARCHAR}, #{updateInterperId,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{typeDesc,jdbcType=VARCHAR}, #{takeDay,jdbcType=VARCHAR}, #{takeTime,jdbcType=VARCHAR}, 
-      #{needTranslateInfo,jdbcType=LONGVARCHAR}, #{translateInfo,jdbcType=LONGVARCHAR}
+      #{esEndTime,jdbcType=TIMESTAMP}, #{needTranslateInfo,jdbcType=LONGVARCHAR}, #{translateInfo,jdbcType=LONGVARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdProdWithBLOBs" >
@@ -260,6 +261,9 @@
       </if>
       <if test="takeTime != null" >
         TAKE_TIME,
+      </if>
+      <if test="esEndTime != null" >
+        ES_END_TIME,
       </if>
       <if test="needTranslateInfo != null" >
         NEED_TRANSLATE_INFO,
@@ -349,6 +353,9 @@
       </if>
       <if test="takeTime != null" >
         #{takeTime,jdbcType=VARCHAR},
+      </if>
+      <if test="esEndTime != null" >
+        #{esEndTime,jdbcType=TIMESTAMP},
       </if>
       <if test="needTranslateInfo != null" >
         #{needTranslateInfo,jdbcType=LONGVARCHAR},
@@ -448,6 +455,9 @@
       <if test="record.takeTime != null" >
         TAKE_TIME = #{record.takeTime,jdbcType=VARCHAR},
       </if>
+      <if test="record.esEndTime != null" >
+        ES_END_TIME = #{record.esEndTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="record.needTranslateInfo != null" >
         NEED_TRANSLATE_INFO = #{record.needTranslateInfo,jdbcType=LONGVARCHAR},
       </if>
@@ -488,6 +498,7 @@
       TYPE_DESC = #{record.typeDesc,jdbcType=VARCHAR},
       TAKE_DAY = #{record.takeDay,jdbcType=VARCHAR},
       TAKE_TIME = #{record.takeTime,jdbcType=VARCHAR},
+      ES_END_TIME = #{record.esEndTime,jdbcType=TIMESTAMP},
       NEED_TRANSLATE_INFO = #{record.needTranslateInfo,jdbcType=LONGVARCHAR},
       TRANSLATE_INFO = #{record.translateInfo,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
@@ -522,7 +533,8 @@
       UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
       TYPE_DESC = #{record.typeDesc,jdbcType=VARCHAR},
       TAKE_DAY = #{record.takeDay,jdbcType=VARCHAR},
-      TAKE_TIME = #{record.takeTime,jdbcType=VARCHAR}
+      TAKE_TIME = #{record.takeTime,jdbcType=VARCHAR},
+      ES_END_TIME = #{record.esEndTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -608,6 +620,9 @@
       <if test="takeTime != null" >
         TAKE_TIME = #{takeTime,jdbcType=VARCHAR},
       </if>
+      <if test="esEndTime != null" >
+        ES_END_TIME = #{esEndTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="needTranslateInfo != null" >
         NEED_TRANSLATE_INFO = #{needTranslateInfo,jdbcType=LONGVARCHAR},
       </if>
@@ -645,6 +660,7 @@
       TYPE_DESC = #{typeDesc,jdbcType=VARCHAR},
       TAKE_DAY = #{takeDay,jdbcType=VARCHAR},
       TAKE_TIME = #{takeTime,jdbcType=VARCHAR},
+      ES_END_TIME = #{esEndTime,jdbcType=TIMESTAMP},
       NEED_TRANSLATE_INFO = #{needTranslateInfo,jdbcType=LONGVARCHAR},
       TRANSLATE_INFO = #{translateInfo,jdbcType=LONGVARCHAR}
     where PROD_DETAL_ID = #{prodDetalId,jdbcType=BIGINT}
@@ -676,7 +692,8 @@
       UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
       TYPE_DESC = #{typeDesc,jdbcType=VARCHAR},
       TAKE_DAY = #{takeDay,jdbcType=VARCHAR},
-      TAKE_TIME = #{takeTime,jdbcType=VARCHAR}
+      TAKE_TIME = #{takeTime,jdbcType=VARCHAR},
+      ES_END_TIME = #{esEndTime,jdbcType=TIMESTAMP}
     where PROD_DETAL_ID = #{prodDetalId,jdbcType=BIGINT}
   </update>
 </mapper>

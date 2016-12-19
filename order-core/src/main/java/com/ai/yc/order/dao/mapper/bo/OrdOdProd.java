@@ -57,6 +57,8 @@ public class OrdOdProd {
 
     private String takeTime;
 
+    private Timestamp esEndTime;
+
     public Long getProdDetalId() {
         return prodDetalId;
     }
@@ -271,5 +273,13 @@ public class OrdOdProd {
 
     public void setTakeTime(String takeTime) {
         this.takeTime = takeTime == null ? null : takeTime.trim();
+    }
+
+    public Timestamp getEsEndTime() {
+        return esEndTime;
+    }
+
+    public void setEsEndTime(Timestamp esEndTime) {
+        this.esEndTime = esEndTime;
     }
 }
