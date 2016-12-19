@@ -70,6 +70,10 @@ public class ProductInfo implements Serializable {
 	 */
 	private Timestamp endTime;
 	/**
+	 * 需转换格式
+	 */
+	private String typeDesc;
+	/**
 	 * 语言对数据集合
 	 */
 	private List<LanguagePairInfo> languagePairInfoList;
@@ -208,6 +212,14 @@ public class ProductInfo implements Serializable {
 
 	public void setEndTime(Timestamp endTime) {
 		this.endTime = endTime;
+	}
+
+	public String getTypeDesc() {
+		return typeDesc;
+	}
+
+	public void setTypeDesc(String typeDesc) {
+		this.typeDesc = typeDesc;
 	}
 
 }

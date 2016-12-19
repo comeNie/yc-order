@@ -370,6 +370,7 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 		ordOdProdWithBLOBs.setTranslateType(request.getBaseInfo().getTranslateType());
 		ordOdProdWithBLOBs.setTranslateName(request.getBaseInfo().getTranslateName());
 		ordOdProdWithBLOBs.setOrderId(orderId);
+		ordOdProdWithBLOBs.setTypeDesc(request.getProductInfo().getTypeDesc());
 		//文本类翻译
 		if (TRANSLATE_TYPE_0.equals(request.getBaseInfo().getTranslateType())) {
 			ordOdProdWithBLOBs.setProdDetalState(OrdersConstants.OrdOdProd.ProdDetalState.UNTREATED);// 未处理
