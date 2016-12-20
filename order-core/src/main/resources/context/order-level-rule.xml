@@ -38,6 +38,8 @@
 				<!-- V4级别订单 -->
 				<entry key="2000_100210_N" value="4" />
 				<entry key="2000_100220_N" value="4" />
+				<entry key="2000_100210_Y" value="4" />
+				<entry key="2000_100220_Y" value="4" />
 				<entry key="500_1999_100210_Y" value="4" />
 				<entry key="500_1999_100220_Y" value="4" />
 				
