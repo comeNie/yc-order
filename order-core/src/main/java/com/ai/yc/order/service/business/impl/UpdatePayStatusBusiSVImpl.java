@@ -109,6 +109,7 @@ public class UpdatePayStatusBusiSVImpl implements IUpdatePayStatusBusiSV {
 		if(!OrdersConstants.TranslateType.ORDER_TYPE_ORAL.equals(record.getTranslateType())){
 			OrdOdProdWithBLOBs ordOdProd = new  OrdOdProdWithBLOBs();
 			ordOdProd.setStateTime(DateUtil.getSysDate());
+			ordOdProd.setEndTime(DateUtil.getSysDate());
 			iOrdOdProdAtomSV.updateByOrderIdSelective(ordOdProd, req.getOrderId());
 		}
 		
