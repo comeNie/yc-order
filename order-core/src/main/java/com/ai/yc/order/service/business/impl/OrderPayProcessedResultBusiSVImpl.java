@@ -52,6 +52,11 @@ public class OrderPayProcessedResultBusiSVImpl implements IOrderPayProcessedResu
 		if (null == ordOrderDb) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "此订单信息不存在");
 		}
+		//判断是否支付
+		OrdBalacneIf ordBalacneIf = this.ordBalacneIfAtomSV.findByOrderId(request.getBaseInfo().getOrderId());
+		if(null != ordBalacneIf){
+			throw new BusinessException(ExceptCodeConstants.Special.SYSTEM_ERROR, "此订单已经支付，请不要重复支付");
+		}
 		//
 		this.baseInfo(request);
 		this.feeInfo(request);
