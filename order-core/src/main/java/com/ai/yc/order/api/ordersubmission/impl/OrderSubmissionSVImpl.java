@@ -16,6 +16,7 @@ import com.ai.yc.order.service.business.interfaces.IOrderSubmissionBusiSV;
 import com.ai.yc.order.service.business.interfaces.search.IOrderIndexBusiSV;
 import com.ai.yc.order.validate.OrderSubmissionValidate;
 import com.alibaba.dubbo.config.annotation.Service;
+import com.alibaba.fastjson.JSON;
 
 @Service
 @Component
@@ -56,7 +57,7 @@ public class OrderSubmissionSVImpl implements IOrderSubmissionSV {
 			
 			responseHeader.setIsSuccess(false);
 			responseHeader.setResultCode("999999");
-			responseHeader.setResultMessage(e.getStackTrace().toString());
+			responseHeader.setResultMessage(JSON.toJSONString(e.getStackTrace()));
 			response.setResponseHeader(responseHeader);
 		}
 		return response;
