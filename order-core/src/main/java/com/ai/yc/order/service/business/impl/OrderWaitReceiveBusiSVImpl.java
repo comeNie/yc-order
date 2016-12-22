@@ -165,7 +165,7 @@ public class OrderWaitReceiveBusiSVImpl implements IOrderWaitReceiveBusiSV {
 		pageinfo.setResult(results);
 		pageinfo.setPageSize(request.getPageSize());
 		pageinfo.setPageNo(request.getPageNo());
-		pageinfo.setCount(new Long(result.getCount()).intValue());
+		pageinfo.setCount(Long.valueOf(result.getCount()).intValue());
 		response.setPageInfo(pageinfo);
 		ResponseHeader responseHeader = new ResponseHeader(true, ExceptCodeConstants.Special.SUCCESS, "订单查询成功");
 		response.setResponseHeader(responseHeader);
