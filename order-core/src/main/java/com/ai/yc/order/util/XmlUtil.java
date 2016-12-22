@@ -27,7 +27,7 @@ public class XmlUtil {
             //将map对象的数据转换成Bean对象  
             obj = mapToBean(map, clazz);  
         } catch(Exception e) {  
-            e.printStackTrace();  
+            //e.printStackTrace();  
         }  
         return obj;  
     }  
