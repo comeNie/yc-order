@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Logger;
 import com.ai.opt.base.vo.BaseResponse;
 import com.ai.opt.sdk.dubbo.util.DubboConsumerFactory;
 import com.ai.yc.order.api.orderdeal.interfaces.IAutoDealOrderSV;
+import com.alibaba.fastjson.JSON;
 import com.dangdang.ddframe.job.api.ShardingContext;
 import com.dangdang.ddframe.job.api.simple.SimpleJob;
 
@@ -23,18 +24,8 @@ public class AutoConfirmOrderJob implements SimpleJob {
 	public void execute(ShardingContext shardingContext) {
 		LOG.info("自动确认订单定时任务start.....................");
 		IAutoDealOrderSV iAutoDealOrderSV = DubboConsumerFactory.getService(IAutoDealOrderSV.class);
-    	BaseResponse resp = null;
-    	try {
-    		resp = iAutoDealOrderSV.autoConfirmOrder();
-		} catch (Exception e) {
-			LOG.error("自动确认订单定时任务出现异常",e);
-		}
-    	if(resp==null){
-    		LOG.error("自动确认订单定时任务出现异常");
-    	}
-    	if(!resp.getResponseHeader().isSuccess()){
-    		LOG.error(resp.getResponseHeader().getResultMessage());
-    	}
+    	BaseResponse resp = iAutoDealOrderSV.autoConfirmOrder();
+    	LOG.info("自动确认订单定时任务消息："+JSON.toJSONString(resp));
     	LOG.info("自动确认订单定时任务end.....................");
 	}
 
