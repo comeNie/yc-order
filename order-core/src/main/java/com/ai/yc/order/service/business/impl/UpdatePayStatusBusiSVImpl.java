@@ -26,6 +26,7 @@ import com.ai.yc.order.service.atom.interfaces.IOrdOrderAtomSV;
 import com.ai.yc.order.service.business.interfaces.IOrdOdStateChgBusiSV;
 import com.ai.yc.order.service.business.interfaces.IUpdatePayStatusBusiSV;
 import com.ai.yc.order.service.business.interfaces.search.IOrderIndexBusiSV;
+import com.ai.yc.order.util.DateCycleUtil;
 
 /**
  * @author hougang@asiainfo.com
@@ -57,6 +58,8 @@ public class UpdatePayStatusBusiSVImpl implements IUpdatePayStatusBusiSV {
 		//支付轨迹
 		OrdOdStateChg chg = new OrdOdStateChg();
 		OrdOrder record = iOrdOrderAtomSV.findByPrimaryKey(req.getOrderId());
+		OrdOdProdWithBLOBs ordOdProdDb = iOrdOdProdAtomSV.findByOrderId(req.getOrderId());
+		
 		if(record==null){
 			throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT, "订单不存在");
 		}
@@ -109,7 +112,14 @@ public class UpdatePayStatusBusiSVImpl implements IUpdatePayStatusBusiSV {
 		if(!OrdersConstants.TranslateType.ORDER_TYPE_ORAL.equals(record.getTranslateType())){
 			OrdOdProdWithBLOBs ordOdProd = new  OrdOdProdWithBLOBs();
 			ordOdProd.setStateTime(DateUtil.getSysDate());
-			ordOdProd.setEndTime(DateUtil.getSysDate());
+			//
+			Integer takeDay = Integer.valueOf(ordOdProdDb.getTakeDay());
+			Integer takeTime = Integer.valueOf(ordOdProdDb.getTakeTime());
+			//
+			ordOdProd.setEndTime(
+					DateCycleUtil.getTimestamp(ordOdProd.getStateTime(), "H", takeDay * 24 + takeTime));
+			//es_end_time
+			ordOdProd.setEsEndTime(ordOdProd.getEndTime());
 			iOrdOdProdAtomSV.updateByOrderIdSelective(ordOdProd, req.getOrderId());
 		}
 		
