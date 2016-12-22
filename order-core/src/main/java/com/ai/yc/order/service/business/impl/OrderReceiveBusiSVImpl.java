@@ -41,8 +41,8 @@ public class OrderReceiveBusiSVImpl implements IOrderReceiveBusiSV {
 		BeanUtils.copyVO(ordOrder, request.getBaseInfo());
 		//
 		this.ordOrderAtomSV.updateByPrimaryKeySelective(ordOrder);
-		//
-		OrdOdFeeTotal ordOdFeeTotal = new OrdOdFeeTotal();
+		//二期开发 跟平台佣金相关 保留 zhangzd
+		//OrdOdFeeTotal ordOdFeeTotal = new OrdOdFeeTotal();
 		//BeanUtils.copyVO(ordOdFeeTotal, request.getFeeInfo());
 		//this.ordOdFeeTotalAtomSV.updateByOrderIdSelective(request.getBaseInfo().getOrderId(),ordOdFeeTotal );
 		//
