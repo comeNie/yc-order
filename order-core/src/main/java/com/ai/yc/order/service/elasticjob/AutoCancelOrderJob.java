@@ -9,7 +9,6 @@ import com.ai.yc.order.api.orderdeal.interfaces.IAutoDealOrderSV;
 import com.alibaba.fastjson.JSON;
 import com.dangdang.ddframe.job.api.ShardingContext;
 import com.dangdang.ddframe.job.api.simple.SimpleJob;
-import com.esotericsoftware.minlog.Log;
 
 /**
  * @Description: 自动取消订单定时任务
