@@ -51,7 +51,11 @@ public class OrderPayProcessedResultSVImpl implements IOrderPayProcessedResultSV
 			responseHeader.setResultMessage(e.getErrorMessage());
 			response.setResponseHeader(responseHeader);
 		}catch(Exception e){
-			e.printStackTrace();
+			//e.printStackTrace();
+			responseHeader.setIsSuccess(false);
+			responseHeader.setResultCode(ExceptCodeConstants.Special.SYSTEM_ERROR);
+			responseHeader.setResultMessage("支付结果处理失败");
+			response.setResponseHeader(responseHeader);
 		}
 		//
 		return response;
