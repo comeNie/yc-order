@@ -126,7 +126,7 @@ public final class DateCycleUtil {
 	public static Timestamp getTimestamp(Timestamp timestamp, String dateType,int amount) {
 		LOG.info("当前周期类型：" + dateType);
 		LOG.info("当前周期数：" + amount);
-		long millisecond = 0l;
+		Integer millisecond = 0;
 		long now = DateUtil.getSysDate().getTime();
 		//
 		if (dateType.equals(DATE_TYPE_DAY)) {
@@ -180,8 +180,10 @@ public final class DateCycleUtil {
 		
 		String dateTypeValue = DateCycleUtil.dateTypeMap.get(DATE_TYPE_DAY);
 		LOG.info("日期类型："+dateTypeValue);
+		LOG.info("----------------------------------");
 		DateCycleUtil.getTimestamp(DateUtil.getSysDate(), "D",0);
 		DateCycleUtil.getTimestamp(DateUtil.getSysDate(), "D",-1);
+		LOG.info("----------------------------------");
 		String strDate = DateUtil.getDateString(DateUtil.getSysDate(), "YYYY-MM-dd HH:mm:ss");
 		LOG.info("strDate:"+strDate);
 	}
