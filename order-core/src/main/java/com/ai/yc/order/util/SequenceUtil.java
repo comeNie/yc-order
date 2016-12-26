@@ -44,7 +44,9 @@ public final class SequenceUtil {
     
     public static Long createOrderId() {
         String seq = SeqUtil.getNewId(ORD_ORDER$ORDER_ID$SEQ, 10);
-        int rannum = (int) (new Random().nextDouble() * (99999 - 10000 + 1)) + 10000;// 获取5位随机数
+        Random random = new Random();
+        //
+        int rannum = (int) (random.nextDouble() * (99999 - 10000 + 1)) + 10000;// 获取5位随机数
         String orderId = "2" + seq + rannum;
         return Long.valueOf(orderId);
     }
@@ -92,7 +94,9 @@ public final class SequenceUtil {
 
     public static Long createBalacneIfId() {
     	String seq = SeqUtil.getNewId(ORD_BALACNE_IF$BALACNE_IF_ID$SEQ, 10);
-        int rannum = (int) (new Random().nextDouble() * (99999 - 10000 + 1)) + 10000;// 获取5位随机数
+    	Random random = new Random();
+        //
+    	int rannum = (int) (random.nextDouble() * (99999 - 10000 + 1)) + 10000;// 获取5位随机数
         String balacneIfId = "3" + seq + rannum;
         return Long.valueOf(balacneIfId);
         //return SeqUtil.getNewId();
@@ -100,14 +104,18 @@ public final class SequenceUtil {
 
     public static String getExternalId() {
         String dateString = DateUtil.getDateString(DateUtil.YYYYMMDDHHMMSS);
-        int rannum = (int) (new Random().nextDouble() * (99999 - 10000 + 1)) + 10000;// 获取5位随机数
+        Random random = new Random();
+        //
+        int rannum = (int) (random.nextDouble() * (99999 - 10000 + 1)) + 10000;// 获取5位随机数
         String result = rannum + dateString;
         return result;
     }
     
     public static String createTemplateId() {
         String seq = SeqUtil.getNewId(FREIGHT_TEMPLATE$TEMPLATE_ID$SEQ, 10);
-        int rannum = (int) (new Random().nextDouble() * (99999 - 10000 + 1)) + 10000;// 获取5位随机数
+        Random random = new Random();
+        //
+        int rannum = (int) (random.nextDouble() * (99999 - 10000 + 1)) + 10000;// 获取5位随机数
         String templateId = "2" + seq + rannum;
         return templateId;
     }
