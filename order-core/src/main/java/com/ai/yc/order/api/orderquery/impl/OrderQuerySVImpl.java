@@ -366,7 +366,8 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 		if (request.getStateChgTimeStart() == null && request.getStateChgTimeEnd() != null) {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZ");
 			String end = sdf.format(request.getStateChgTimeEnd());
-			String start = sdf.format(new Date());
+			Timestamp sTime = Timestamp.valueOf(OrdersConstants.START_TIME);
+			String start = sdf.format(sTime);
 			SearchCriteria searchCriteria = new SearchCriteria();
 			searchCriteria.setOption(new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.range));
 			searchCriteria.setField(SearchFieldConfConstants.STATE_CHG_TIME);
@@ -402,7 +403,8 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 		if (request.getOrderTimeStart() == null && request.getOrderTimeEnd() != null) {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZ");
 			String end = sdf.format(request.getOrderTimeEnd());
-			String start = sdf.format(new Date());
+			Timestamp sTime = Timestamp.valueOf(OrdersConstants.START_TIME);
+			String start = sdf.format(sTime);
 			SearchCriteria searchCriteria = new SearchCriteria();
 			searchCriteria.setOption(new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.range));
 			searchCriteria.setField(SearchFieldConfConstants.ORDER_TIME);
@@ -438,7 +440,8 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 		if (request.getLockTimeStart() == null && request.getLockTimeEnd() != null) {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZ");
 			String end = sdf.format(request.getLockTimeEnd());
-			String start = sdf.format(new Date());
+			Timestamp sTime = Timestamp.valueOf(OrdersConstants.START_TIME);
+			String start = sdf.format(sTime);
 			SearchCriteria searchCriteria = new SearchCriteria();
 			searchCriteria.setOption(new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.range));
 			searchCriteria.setField(SearchFieldConfConstants.LOCK_TIME);
@@ -474,7 +477,8 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 		if (request.getPayTimeStart() == null && request.getPayTimeEnd() != null) {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZ");
 			String end = sdf.format(request.getPayTimeEnd());
-			String start = sdf.format(new Date());
+			Timestamp sTime = Timestamp.valueOf(OrdersConstants.START_TIME);
+			String start = sdf.format(sTime);
 			SearchCriteria searchCriteria = new SearchCriteria();
 			searchCriteria.setOption(new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.range));
 			searchCriteria.setField(SearchFieldConfConstants.PAY_TIME);
@@ -510,7 +514,8 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 		if (request.getUpdateTimeStart() == null && request.getUpdateTimeEnd() != null) {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZ");
 			String end = sdf.format(request.getUpdateTimeEnd());
-			String start = sdf.format(new Date());
+			Timestamp sTime = Timestamp.valueOf(OrdersConstants.START_TIME);
+			String start = sdf.format(sTime);
 			SearchCriteria searchCriteria = new SearchCriteria();
 			searchCriteria.setOption(new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.range));
 			searchCriteria.setField(SearchFieldConfConstants.UPDATE_TIME);
@@ -546,7 +551,8 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 		if (request.getStateTimeStart() == null && request.getStateTimeEnd() != null) {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZ");
 			String end = sdf.format(request.getStateTimeEnd());
-			String start = sdf.format(new Date());
+			Timestamp sTime = Timestamp.valueOf(OrdersConstants.START_TIME);
+			String start = sdf.format(sTime);
 			SearchCriteria searchCriteria = new SearchCriteria();
 			searchCriteria.setOption(new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.range));
 			searchCriteria.setField(SearchFieldConfConstants.STATE_TIME);
