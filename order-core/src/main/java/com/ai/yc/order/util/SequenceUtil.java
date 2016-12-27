@@ -122,7 +122,7 @@ public final class SequenceUtil {
     public static int returnRandom(){
     	Random random = new Random();
         //
-        int rannum = (int) (random.nextDouble() * (99999 - 10000 + 1)) + 10000;// 获取5位随机数
+        int rannum = (int) (random.nextDouble() * 90000) + 10000;// 获取5位随机数
         //
         return rannum;
     }
