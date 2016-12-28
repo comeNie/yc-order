@@ -103,10 +103,10 @@ public class OrderWaitReceiveBusiSVImpl implements IOrderWaitReceiveBusiSV {
 		if (FLAG_DESC.equals(request.getSortFlag())) {
 			sortFlagEn = SortOrder.DESC;
 		}
-		Sort sort = new Sort("starttime", SortOrder.DESC);
+		Sort sort = new Sort("ordertime", SortOrder.DESC);
 		// 发布时间字段
 		if (FIELD_0.equals(request.getSortField())) {
-			sort = new Sort("starttime", sortFlagEn);
+			sort = new Sort("ordertime", sortFlagEn);
 		}
 		// 剩余时间
 		if (FIELD_1.equals(request.getSortField())) {
