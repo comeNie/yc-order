@@ -80,6 +80,9 @@ public class AutoDealOrderBusiSVImpl implements IAutoDealOrderBusiSV {
 			ordOdStateChg.setStateChgTime(DateUtil.getSysDate());
 			ordOdStateChg.setChgDesc("订单 " + ordOrder.getOrderId() + " 已关闭");
 			ordOdStateChg.setChgDescEn("Order " + ordOrder.getOrderId() + " has been closed.");
+			ordOdStateChg.setChgDescD("订单 " + ordOrder.getOrderId() + " 已关闭");
+			ordOdStateChg.setChgDescUEn("Order " + ordOrder.getOrderId() + " has been closed.");
+			
 			//
 			ordOdStateChgAtomSV.insertSelective(ordOdStateChg);
 			//
