@@ -17,6 +17,7 @@ import com.ai.yc.order.api.sesdata.interfaces.ISesDataUpdateSV;
 import com.ai.yc.order.constants.OrdOdStateChgConstants;
 import com.ai.yc.order.constants.OrdersConstants;
 import com.ai.yc.order.constants.ResultCodeConstants;
+import com.ai.yc.order.dao.mapper.bo.OrdOdProd;
 import com.ai.yc.order.dao.mapper.bo.OrdOdProdWithBLOBs;
 import com.ai.yc.order.dao.mapper.bo.OrdOdStateChg;
 import com.ai.yc.order.dao.mapper.bo.OrdOrder;
@@ -204,5 +205,64 @@ public class AutoDealOrderBusiSVImpl implements IAutoDealOrderBusiSV {
 		//
 		return orderIdList;
 	}
+	
+	@Override
+	@Transactional
+	public List<String> updateAutoWaitSureOrder() {
+		// start 口译订单翻译中订单超时待确认 zhangzd 2016-12-28 11:05
+		List<OrdOrder> ordOrderList = iOrdOrderAtomSV.findByStateAndTranslateType(OrdersConstants.OrderState.STATE_TRASLATING,OrdersConstants.TranslateType.ORDER_TYPE_ORAL);
+		List<Long> orderIds = new ArrayList<Long>();
+		for(OrdOrder ordOrder : ordOrderList){
+			orderIds.add(ordOrder.getOrderId());
+		}
+		//
+		List<OrdOdProd> ordOdProdList = this.ordOdProdAtomSV.findByOrdersAndEndTime(orderIds, DateUtil.getSysDate());
+		//
+		log.info("查询出小于当前时间点的口译订单信息：" + ordOdProdList.size());
+		//
+		List<String> orderIdList = new ArrayList<String>();
+		//
+		for (OrdOdProd ordOdProd : ordOdProdList) {
+			//
+			orderIdList.add(ordOdProd.getOrderId().toString());
 
+			// 订单轨迹-（系统自动审核了订单）The system automatically reviewed the order.
+			OrdOdStateChg ordOdStateChg = new OrdOdStateChg();
+			//
+			ordOdStateChg.setStateChgId(SequenceUtil.createStateChgId());
+			ordOdStateChg.setOrderId(ordOdProd.getOrderId());
+			ordOdStateChg.setOrgState(OrdersConstants.OrderState.STATE_TRASLATING);
+			ordOdStateChg.setNewState(OrdersConstants.OrderState.WAIT_OK_STATE);
+			ordOdStateChg.setOperId(OrdersConstants.SYS_OPER_ID);
+			ordOdStateChg.setStateChgTime(DateUtil.getSysDate());
+			ordOdStateChg.setChgDesc("您的订单已翻译完成，请确认翻译结果");
+			ordOdStateChg.setChgDescEn("Your order has been translated, please confirm the translation results");
+			ordOdStateChg.setChgDescD("您的订单已翻译完成，请确认翻译结果");
+			ordOdStateChg.setChgDescUEn("Your order has been translated, please confirm the translation results");
+			ordOdStateChg.setFlag(OrdOdStateChgConstants.FLAG_USER);
+			//
+			ordOdStateChgAtomSV.insertSelective(ordOdStateChg);
+			//
+			// 修改订单状态为待确认
+			OrdOrder record = new OrdOrder();
+			record.setOrderId(ordOdProd.getOrderId());
+			record.setState(OrdersConstants.OrderState.WAIT_OK_STATE);
+			record.setStateChgTime(DateUtil.getSysDate());
+			record.setDisplayFlag(OrdersConstants.OrderDisplayFlag.FLAG_WAIT_OK);
+			record.setDisplayFlagChgTime(DateUtil.getSysDate());
+			record.setOperId(OrdersConstants.SYS_OPER_ID);
+			// 设置七天待确认时间
+			record.setEndChgTime( new Timestamp(Long.valueOf(DateCycleUtil.getCycleDate("D", 7).get("endTime").toString())));
+			//
+			iOrdOrderAtomSV.updateByPrimaryKeySelective(record);
+//			//系统自动审核完毕，需要修改updateTime字段 zhangzd 20161216
+//			OrdOdProdWithBLOBs ordOdProdWithBLOBs = new OrdOdProdWithBLOBs();
+//			ordOdProdWithBLOBs.setUpdateTime(DateUtil.getSysDate());
+//			this.ordOdProdAtomSV.updateByOrderIdSelective(ordOdProdWithBLOBs, ordOrder.getOrderId());
+
+		}
+		// end 口译订单翻译中订单超时待确认 zhangzd 2016-12-28 11:05
+		//
+		return orderIdList;
+	}
 }

@@ -25,5 +25,10 @@ public interface IAutoDealOrderBusiSV {
 	 * @author zhangzd
 	 */
 	List<String> updateAutoReviewOrder() ;
+	/**
+	 * 返回订单id列表,口译订单超时自动待确认
+	 * @author zhangzd
+	 */
+	List<String> updateAutoWaitSureOrder();
 
 }

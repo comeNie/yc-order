@@ -161,5 +161,16 @@ public class OrdOrderAtomSVImpl implements IOrdOrderAtomSV {
 		//
 		return MapperFactory.getOrdOrderMapper().selectByExample(example);
 	}
-
+	@Override
+	public List<OrdOrder> findByStateAndTranslateType(String state, String translateType) {
+		// TODO Auto-generated method stub
+		OrdOrderCriteria example = new OrdOrderCriteria();
+		//
+		OrdOrderCriteria.Criteria criteria = example.createCriteria();
+		//
+		criteria.andStateEqualTo(state);
+		criteria.andTranslateTypeEqualTo(translateType);
+		//
+		return MapperFactory.getOrdOrderMapper().selectByExample(example);
+	}
 }

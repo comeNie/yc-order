@@ -62,5 +62,19 @@ public interface IAutoDealOrderSV {
 	@POST
 	@Path("/autoReviewOrder")
 	BaseResponse autoReviewOrder()throws BusinessException,SystemException;
-
+	/**
+	 * 口译订单超过时间自动待确认
+	 *  
+	 * @param vo
+	 * @return
+	 * @throws BusinessException
+	 * @throws SystemException
+	 * @author zhangzd
+	 * @ApiDocMethod
+	 * @ApiCode ORD_203301
+	 * @RestRelativeURL orderdeal/autoWaitSureOrder
+	 */
+	@POST
+	@Path("/autoWaitSureOrder")
+	public BaseResponse autoWaitSureOrder()throws BusinessException,SystemException;
 }
