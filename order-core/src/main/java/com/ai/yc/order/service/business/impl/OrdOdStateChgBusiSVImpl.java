@@ -38,7 +38,7 @@ public class OrdOdStateChgBusiSVImpl implements IOrdOdStateChgBusiSV {
 
 	private final static String CLOSE_CHG_ADMIN_DESC_EN = "Client closed the order.";
 	
-	private final static String CLOSE_CHG_DESC_CN = "订单 %s 已关闭。";
+	private final static String CLOSE_CHG_DESC_CN = "订单 %s 已取消。";
 
 	private final static String CLOSE_CHG_DESC_EN = "Order %s has been closed.";
 
@@ -127,7 +127,7 @@ public class OrdOdStateChgBusiSVImpl implements IOrdOdStateChgBusiSV {
 		chg.setOrgId(OrdersConstants.OrgID.ORG_ID_USER);
 		chg.setChgDesc(descCn);
 		chg.setChgDescEn(descEn);
-		chg.setChgDescD("订单 "+chg.getOrderId()+" 已关闭");
+		chg.setChgDescD("订单 "+chg.getOrderId()+" 已取消");
 		chg.setChgDescUEn("Order "+chg.getOrderId()+" has been closed.");
 		chg.setFlag(OrdOdStateChgConstants.FLAG_USER);
 		chg.setStateChgTime(DateUtil.getSysDate());
