@@ -39,6 +39,6 @@
     
     <job:simple id="autoReviewOrderJob" class="com.ai.yc.order.service.elasticjob.AutoReviewOrderJob" registry-center-ref="regCenter" cron="0 0/5 * * * ?"   sharding-total-count="1" sharding-item-parameters="0=A" />
     
-    <job:simple id="autoWaitSureOrderJob" class="com.ai.yc.order.service.elasticjob.AutoWaitSureOrderJob" registry-center-ref="regCenter" cron="0 0/12 * * * ?"   sharding-total-count="1" sharding-item-parameters="0=A" />
+    <job:simple id="autoWaitSureOrderJob" class="com.ai.yc.order.service.elasticjob.AutoWaitSureOrderJob" registry-center-ref="regCenter" cron="0 0/2 * * * ?"   sharding-total-count="1" sharding-item-parameters="0=A" />
    
 </beans>
