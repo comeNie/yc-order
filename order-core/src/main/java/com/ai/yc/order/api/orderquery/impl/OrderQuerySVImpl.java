@@ -249,7 +249,7 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 		// 如果翻译主题不为空
 		if (!StringUtil.isBlank(request.getTranslateName())) {
 			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.TRANSLATE_NAME, request.getTranslateName(),
-					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
+					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.match,SearchOption.TermOperator.AND)));
 		}
 		// 如果企业id不为空
 		if (!StringUtil.isBlank(request.getCorporaId())) {
@@ -314,17 +314,17 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 		// 如果用户昵称不为空
 		if (!StringUtil.isBlank(request.getUserName())) {
 			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.USER_NAME, request.getUserName(),
-					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.match)));
+					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.match,SearchOption.TermOperator.AND)));
 		}
 		// 如果译员名称不为空
 		if (!StringUtil.isBlank(request.getInterperName())) {
 			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.INTERPER_NAME, request.getInterperName(),
-					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
+					new SearchOption(SearchOption.SearchLogic.must,SearchOption.SearchType.match,SearchOption.TermOperator.AND)));
 		}
 		// 如果lsp名称不为空
 		if (!StringUtil.isBlank(request.getLspName())) {
 			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.LSP_NAME, request.getLspName(),
-					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
+					new SearchOption(SearchOption.SearchLogic.must,SearchOption.SearchType.match,SearchOption.TermOperator.AND)));
 		}
 		// 如果支付方式不为空
 		if (!StringUtil.isBlank(request.getPayStyle())) {
@@ -335,7 +335,7 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 		if (!StringUtil.isBlank(request.getUpdateOperName())) {
 			searchfieldVos
 					.add(new SearchCriteria(SearchFieldConfConstants.UPDATE_OPER_NAME, request.getUpdateOperName(),
-							new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
+							new SearchOption(SearchOption.SearchLogic.must,SearchOption.SearchType.match,SearchOption.TermOperator.AND)));
 		}
 
 		// 如果状态变化开始、结束时间不为空
