@@ -565,7 +565,7 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 			SearchCriteria searchCriteria = new SearchCriteria();
 			SearchOption option = new SearchOption();
 			option.setSearchLogic(SearchOption.SearchLogic.must);
-			option.setSearchType(SearchOption.SearchType.match);
+			option.setSearchType(SearchOption.SearchType.term);
 			searchCriteria.setFieldValue(request.getStateList());
 			searchCriteria.setField(SearchFieldConfConstants.STATE);
 			searchCriteria.setOption(option);
