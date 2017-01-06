@@ -1,5 +1,7 @@
 package com.ai.yc.order.api.orderquery.param;
 
+import java.util.List;
+
 import com.ai.opt.base.vo.BaseInfo;
 
 public class QueryOrdCountRequest extends BaseInfo  {
@@ -93,6 +95,11 @@ public class QueryOrdCountRequest extends BaseInfo  {
 	 * 译员等级
 	 */
 	private String interperLevel;
+	
+	/**
+	 * 语言对ID
+	 */
+	private List<Object> languageIds;
 
 	public String getSystemId() {
 		return systemId;
@@ -220,6 +227,14 @@ public class QueryOrdCountRequest extends BaseInfo  {
 
 	public void setInterperLevel(String interperLevel) {
 		this.interperLevel = interperLevel;
+	}
+
+	public List<Object> getLanguageIds() {
+		return languageIds;
+	}
+
+	public void setLanguageIds(List<Object> languageIds) {
+		this.languageIds = languageIds;
 	}
 	
 	

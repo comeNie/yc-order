@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
+import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.opt.sdk.util.DateUtil;
 import com.ai.paas.ipaas.search.vo.SearchCriteria;
 import com.ai.paas.ipaas.search.vo.SearchOption;
@@ -54,45 +55,45 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 		copyProperties(orderRequest, request);
 		Map<String, Integer> countMap = new HashMap<String, Integer>();
 		if (!StringUtil.isBlank(request.getState())) {
-			int stateCount = countAllOrders(orderRequest, request.getInterperLevel());
+			int stateCount = countAllOrders(orderRequest, request.getInterperLevel(),request.getLanguageIds());
 			countMap.put(request.getState(), stateCount);
 			return countMap;
 		}
 		if (!StringUtil.isBlank(request.getUserId())) {
 			// 待支付
 			orderRequest.setDisplayFlag(OrdersConstants.OrderDisplayFlag.FLAG_WAIT_PAY);
-			int waitPayCount = countAllOrders(orderRequest, request.getInterperLevel());
+			int waitPayCount = countAllOrders(orderRequest, request.getInterperLevel(),request.getLanguageIds());
 			countMap.put(OrdersConstants.OrderDisplayFlag.FLAG_WAIT_PAY, waitPayCount);
 
 			// 待报价
 			orderRequest.setDisplayFlag(OrdersConstants.OrderDisplayFlag.FLAG_WAIT_OFFER);
-			int waitofferCount = countAllOrders(orderRequest, request.getInterperLevel());
+			int waitofferCount = countAllOrders(orderRequest, request.getInterperLevel(),request.getLanguageIds());
 			countMap.put(OrdersConstants.OrderDisplayFlag.FLAG_WAIT_OFFER, waitofferCount);
 
 			// 翻译中
 			orderRequest.setDisplayFlag(OrdersConstants.OrderDisplayFlag.FLAG_TRASLATING);
-			int translatingCount = countAllOrders(orderRequest, request.getInterperLevel());
+			int translatingCount = countAllOrders(orderRequest, request.getInterperLevel(),request.getLanguageIds());
 			countMap.put(OrdersConstants.OrderDisplayFlag.FLAG_TRASLATING, translatingCount);
 
 			// 待确认
 			orderRequest.setDisplayFlag(OrdersConstants.OrderDisplayFlag.FLAG_WAIT_OK);
-			int waitOkCount = countAllOrders(orderRequest, request.getInterperLevel());
+			int waitOkCount = countAllOrders(orderRequest, request.getInterperLevel(),request.getLanguageIds());
 			countMap.put(OrdersConstants.OrderDisplayFlag.FLAG_WAIT_OK, waitOkCount);
 
 			// 待评价
 			orderRequest.setDisplayFlag(OrdersConstants.OrderDisplayFlag.FLAG_WAIT_COMMENT);
-			int waitCommentCount = countAllOrders(orderRequest, request.getInterperLevel());
+			int waitCommentCount = countAllOrders(orderRequest, request.getInterperLevel(),request.getLanguageIds());
 			countMap.put(OrdersConstants.OrderDisplayFlag.FLAG_WAIT_COMMENT, waitCommentCount);
 
 		} else if (!StringUtil.isBlank(request.getInterperId()) || !StringUtil.isBlank(request.getInterperId())) {
 			// 待支付
 			orderRequest.setState(OrdersConstants.OrderState.STATE_RECEIVED);
-			int receivedCount = countAllOrders(orderRequest, request.getInterperLevel());
+			int receivedCount = countAllOrders(orderRequest, request.getInterperLevel(),request.getLanguageIds());
 			countMap.put(OrdersConstants.OrderState.STATE_RECEIVED, receivedCount);
 
 			// 翻译中
 			orderRequest.setState(OrdersConstants.OrderState.STATE_TRASLATING);
-			int translatingCount = countAllOrders(orderRequest, request.getInterperLevel());
+			int translatingCount = countAllOrders(orderRequest, request.getInterperLevel(),request.getLanguageIds());
 			countMap.put(OrdersConstants.OrderState.STATE_TRASLATING, translatingCount);
 		}
 
@@ -194,14 +195,14 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 		this.ordOdStateChgAtomSV.insertSelective(ordOdStateChg);
 	}
 
-	private int countAllOrders(OrdOrder request, String interperLevel) {
+	private int countAllOrders(OrdOrder request, String interperLevel,List<Object> languageIds) {
 		IOrderSearch orderSearch = new OrderSearchImpl();
-		List<SearchCriteria> searchCriterias = installConditions(request, interperLevel);
+		List<SearchCriteria> searchCriterias = installConditions(request, interperLevel,languageIds);
 		return orderSearch.countAll(searchCriterias);
 	}
 
 	// 搜索引擎数据公共查询条件
-	private List<SearchCriteria> installConditions(OrdOrder request, String interperLevel) {
+	private List<SearchCriteria> installConditions(OrdOrder request, String interperLevel,List<Object> languageIds) {
 		List<SearchCriteria> searchfieldVos = new ArrayList<SearchCriteria>();
 		if (!StringUtil.isBlank(interperLevel)) {
 			Map<String, OrderLevelRange> interperLevelMap = this.interperLevelMap.getInterperLevelMap();
@@ -218,11 +219,11 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 			searchCriteria.addFieldValue(maxValue);
 			searchfieldVos.add(searchCriteria);
 		}
-		// 如果业务标识不为空
+		/*// 如果业务标识不为空
 		if (!StringUtil.isBlank(request.getFlag())) {
 			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.FLAG, request.getFlag(),
 					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
-		}
+		}*/
 		// 如果订单id不为空
 		if (request.getOrderId() != null) {
 			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.ORDER_ID, request.getOrderId().toString(),
@@ -299,6 +300,18 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.INTERPER_ID, request.getInterperId(),
 					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
 		}
+		
+		// 如果为非LSP用户，且语言对id集合不为空，那么就传入 2017-01-06 11:04 gucl
+		if(StringUtil.isBlank(request.getLspId())){
+			if(!CollectionUtil.isEmpty(languageIds)){
+				SearchCriteria searchCriteria = new SearchCriteria();
+				searchCriteria.setOption(new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.term));
+				searchCriteria.setField(SearchFieldConfConstants.LANGUNGE_ID);
+				searchCriteria.setFieldValue(languageIds);
+				searchfieldVos.add(searchCriteria);
+			}
+		}
+		
 		return searchfieldVos;
 	}
 

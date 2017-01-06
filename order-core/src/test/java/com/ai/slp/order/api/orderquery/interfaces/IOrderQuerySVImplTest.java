@@ -67,6 +67,7 @@ public class IOrderQuerySVImplTest extends BaseTest{
 	@Test
 	public void orderQueryCount(){
 		QueryOrdCountRequest request = new QueryOrdCountRequest();
+		List<Object> languageIds =new ArrayList<Object>();
 		//request.setOrderLevel("1");
 		//request.setBusiType("1");
 		//request.setChlId("001");
@@ -80,6 +81,23 @@ public class IOrderQuerySVImplTest extends BaseTest{
 		request.setUserType("1");*/
 		//request.setUserId("1");
 		QueryOrdCountResponse response = this.iOrderQuerySV.queryOrderCount(request);
-		log.info("response:"+JSON.toJSONString(response));
+		log.error("response:"+JSON.toJSONString(response));
+	}
+	
+	@Test
+	public void orderQueryCountGucl(){
+		QueryOrdCountRequest request = new QueryOrdCountRequest();
+		//request.setFlag("0");
+		request.setInterperLevel("4");
+		//request.setInterperType("0");
+		//request.setTranslateName("测试1214ljq");
+		request.setState("20");
+		List<Object> languageIds = new ArrayList<Object>();
+		//languageIds.add("2");
+		languageIds.add("1");
+		request.setLanguageIds(languageIds);
+
+		QueryOrdCountResponse response = this.iOrderQuerySV.queryOrderCount(request);
+		log.error("response:"+JSON.toJSONString(response));
 	}
 }
