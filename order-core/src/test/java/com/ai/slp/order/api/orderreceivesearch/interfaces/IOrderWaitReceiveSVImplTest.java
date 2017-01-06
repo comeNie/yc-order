@@ -19,6 +19,7 @@ public class IOrderWaitReceiveSVImplTest extends BaseTest {
 	public void pageSearchWaitReceive(){
 		OrderWaitReceiveSearchRequest request = new OrderWaitReceiveSearchRequest();
 		//
+		request.setLspId("0");
 		request.setFlag("0");
 		request.setInterperLevel("4");
 		//request.setInterperType("0");
@@ -32,7 +33,7 @@ public class IOrderWaitReceiveSVImplTest extends BaseTest {
 		List<Object> languageIds = new ArrayList<Object>();
 		languageIds.add("2");
 		languageIds.add("1");
-		request.setLanguageIds(languageIds);
+		//request.setLanguageIds(languageIds);
 		//
 		OrderWaitReceiveSearchResponse response = this.orderWaitReceiveSV.pageSearchWaitReceive(request);
 		log.info("response:"+JSON.toJSONString(response));

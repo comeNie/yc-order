@@ -68,6 +68,7 @@ public class IOrderQuerySVImplTest extends BaseTest{
 	public void orderQueryCount(){
 		QueryOrdCountRequest request = new QueryOrdCountRequest();
 		List<Object> languageIds =new ArrayList<Object>();
+		request.setLspId("0");
 		//request.setOrderLevel("1");
 		//request.setBusiType("1");
 		//request.setChlId("001");
@@ -87,6 +88,7 @@ public class IOrderQuerySVImplTest extends BaseTest{
 	@Test
 	public void orderQueryCountGucl(){
 		QueryOrdCountRequest request = new QueryOrdCountRequest();
+		request.setLspId("0");
 		//request.setFlag("0");
 		request.setInterperLevel("4");
 		//request.setInterperType("0");
@@ -94,7 +96,7 @@ public class IOrderQuerySVImplTest extends BaseTest{
 		request.setState("20");
 		List<Object> languageIds = new ArrayList<Object>();
 		//languageIds.add("2");
-		languageIds.add("1");
+		//languageIds.add("1");
 		request.setLanguageIds(languageIds);
 
 		QueryOrdCountResponse response = this.iOrderQuerySV.queryOrderCount(request);
