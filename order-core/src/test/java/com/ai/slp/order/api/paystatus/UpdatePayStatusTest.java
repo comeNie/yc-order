@@ -48,9 +48,9 @@ public class UpdatePayStatusTest extends BaseTest {
 	public void test() {
 		Gson gson = new Gson();
 		
-	    QuerySysPurposeListRes list = DubboConsumerFactory
-				.getService(IQuerySysPurposeSV.class).querySysPurposeList();
-		System.out.println(gson.toJson(list));
+//	    QuerySysPurposeListRes list = DubboConsumerFactory
+//				.getService(IQuerySysPurposeSV.class).querySysPurposeList();
+//		System.out.println(gson.toJson(list));
 		
 	}
 
