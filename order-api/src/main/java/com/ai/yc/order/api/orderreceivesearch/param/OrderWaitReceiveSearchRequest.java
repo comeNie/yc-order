@@ -75,6 +75,10 @@ public class OrderWaitReceiveSearchRequest implements Serializable {
 	 * 每页大小，必填
 	 */
 	private Integer pageSize;
+	/**
+	 * lsp编号
+	 */
+	private String lspId;
 
 	public String getFlag() {
 		return flag;
@@ -194,6 +198,14 @@ public class OrderWaitReceiveSearchRequest implements Serializable {
 
 	public void setLanguageIds(List<Object> languageIds) {
 		this.languageIds = languageIds;
+	}
+
+	public String getLspId() {
+		return lspId;
+	}
+
+	public void setLspId(String lspId) {
+		this.lspId = lspId;
 	}
 
 }

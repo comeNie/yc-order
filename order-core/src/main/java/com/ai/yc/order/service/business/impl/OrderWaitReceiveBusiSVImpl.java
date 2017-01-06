@@ -57,10 +57,10 @@ public class OrderWaitReceiveBusiSVImpl implements IOrderWaitReceiveBusiSV {
 	 * 订单金额
 	 */
 	private static final String FIELD_2 = "2";
-	
+
 	@Autowired
-	private InterperLevelMap interperLevelMap;//译员级别判定订单查询级别
-	
+	private InterperLevelMap interperLevelMap;// 译员级别判定订单查询级别
+
 	@Override
 	public Result<OrderInfo> search(List<SearchCriteria> searchCriterias, int from, int offset, List<Sort> sorts) {
 		ISearchClient searchClient = SESClientFactory.getSearchClient(SearchConstants.SearchNameSpace);
@@ -118,8 +118,7 @@ public class OrderWaitReceiveBusiSVImpl implements IOrderWaitReceiveBusiSV {
 		}
 		sortList.add(sort);
 		//
-		Result<OrderInfo> result = this.search(orderSearchCriteria, startSize, maxSize,
-				sortList);
+		Result<OrderInfo> result = this.search(orderSearchCriteria, startSize, maxSize, sortList);
 		List<OrderInfo> ordList = result.getContents();
 		if (!CollectionUtil.isEmpty(ordList)) {
 			for (OrderInfo ord : ordList) {
@@ -134,7 +133,7 @@ public class OrderWaitReceiveBusiSVImpl implements IOrderWaitReceiveBusiSV {
 				order.setTranslateType(ord.getTranslatetype());
 				order.setTakeDay(ord.getTakeday());
 				order.setTakeTime(ord.getTaketime());
-				if(null != ord.getEsendtime()){
+				if (null != ord.getEsendtime()) {
 					order.setEsEndTime(new Timestamp(ord.getEsendtime().getTime()));
 				}
 				//
@@ -156,7 +155,7 @@ public class OrderWaitReceiveBusiSVImpl implements IOrderWaitReceiveBusiSV {
 					order.setLanguagePairName(extendList.get(0).getLangungechname());
 					order.setLanguageNameEn(extendList.get(0).getLangungeenname());
 				}
-				//获取币种
+				// 获取币种
 				order.setCurrencyUnit(ord.getCurrencyunit());
 				//
 				results.add(order);
@@ -178,24 +177,26 @@ public class OrderWaitReceiveBusiSVImpl implements IOrderWaitReceiveBusiSV {
 		/**
 		 * 如果业务标识不为空
 		 */
-//		if (!StringUtil.isBlank(request.getFlag())) {
-//			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.FLAG, request.getFlag(),
-//					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
-//
-//		}
+		// if (!StringUtil.isBlank(request.getFlag())) {
+		// searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.FLAG,
+		// request.getFlag(),
+		// new SearchOption(SearchOption.SearchLogic.must,
+		// SearchOption.SearchType.querystring)));
+		//
+		// }
 		/**
 		 * 译员等级
 		 */
 		if (!StringUtil.isBlank(request.getInterperLevel())) {
 			//
-			Map<String,OrderLevelRange> interperLevelMap = this.interperLevelMap.getInterperLevelMap();
+			Map<String, OrderLevelRange> interperLevelMap = this.interperLevelMap.getInterperLevelMap();
 			//
 			SearchCriteria searchCriteria = new SearchCriteria();
 			searchCriteria.setOption(new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.range));
 			searchCriteria.setField(SearchFieldConfConstants.ORDER_LEVEL);
 			String minValue = "1";
 			String maxValue = "1";
-			if(null != interperLevelMap.get(request.getInterperLevel())){
+			if (null != interperLevelMap.get(request.getInterperLevel())) {
 				minValue = interperLevelMap.get(request.getInterperLevel()).getMinValue();
 				maxValue = interperLevelMap.get(request.getInterperLevel()).getMaxValue();
 			}
@@ -206,15 +207,17 @@ public class OrderWaitReceiveBusiSVImpl implements IOrderWaitReceiveBusiSV {
 
 		// 如果翻译类型不为空 不等于2的情况
 		// if (!StringUtil.isBlank(request.getTranslateType())) {
-//		searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.TRANSLATE_TYPE, "2",
-//				new SearchOption(SearchOption.SearchLogic.must_not, SearchOption.SearchType.querystring)));
+		// searchfieldVos.add(new
+		// SearchCriteria(SearchFieldConfConstants.TRANSLATE_TYPE, "2",
+		// new SearchOption(SearchOption.SearchLogic.must_not,
+		// SearchOption.SearchType.querystring)));
 		// }
 		// 如果翻译主题不为空
 		if (!StringUtil.isBlank(request.getTranslateName())) {
 			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.TRANSLATE_NAME, request.getTranslateName(),
 					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
 		}
-		
+
 		// 如果state不为空
 		if (!StringUtil.isBlank(request.getState())) {
 			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.STATE, request.getState(),
@@ -251,12 +254,14 @@ public class OrderWaitReceiveBusiSVImpl implements IOrderWaitReceiveBusiSV {
 			searchfieldVos.add(searchCriteria);
 		}
 		// 如果语言对id集合不为空，那么就传入 2017-01-05 14:45 zhangzd
-		if(!CollectionUtil.isEmpty(request.getLanguageIds())){
-			SearchCriteria searchCriteria = new SearchCriteria();
-			searchCriteria.setOption(new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.term));
-			searchCriteria.setField(SearchFieldConfConstants.LANGUNGE_ID);
-			searchCriteria.setFieldValue(request.getLanguageIds());
-			searchfieldVos.add(searchCriteria);
+		if (StringUtil.isBlank(request.getLspId())) {
+			if (!CollectionUtil.isEmpty(request.getLanguageIds())) {
+				SearchCriteria searchCriteria = new SearchCriteria();
+				searchCriteria.setOption(new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.term));
+				searchCriteria.setField(SearchFieldConfConstants.LANGUNGE_ID);
+				searchCriteria.setFieldValue(request.getLanguageIds());
+				searchfieldVos.add(searchCriteria);
+			}
 		}
 		//
 		return searchfieldVos;
