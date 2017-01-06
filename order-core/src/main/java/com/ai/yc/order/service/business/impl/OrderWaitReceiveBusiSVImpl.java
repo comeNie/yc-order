@@ -256,13 +256,21 @@ public class OrderWaitReceiveBusiSVImpl implements IOrderWaitReceiveBusiSV {
 		// 如果lspId为空 
 		if (StringUtil.isBlank(request.getLspId())) {
 			// 如果语言对id集合不为空，那么就传入 2017-01-05 14:45 zhangzd
-			if (!CollectionUtil.isEmpty(request.getLanguageIds())) {
+			List<Object> languageIds = new ArrayList<Object>();
+			//
+			if(CollectionUtil.isEmpty(request.getLanguageIds())){
+				languageIds.add("0");//0代表不存在
+			}else{
+				languageIds = request.getLanguageIds();
+			}
+
+			//if (!CollectionUtil.isEmpty(request.getLanguageIds())) {
 				SearchCriteria searchCriteria = new SearchCriteria();
 				searchCriteria.setOption(new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.term));
 				searchCriteria.setField(SearchFieldConfConstants.LANGUNGE_ID);
-				searchCriteria.setFieldValue(request.getLanguageIds());
+				searchCriteria.setFieldValue(languageIds);
 				searchfieldVos.add(searchCriteria);
-			}
+			//}
 		}
 		//
 		return searchfieldVos;
