@@ -1,5 +1,8 @@
 package com.ai.slp.order.api.orderreceivesearch.interfaces;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -26,6 +29,11 @@ public class IOrderWaitReceiveSVImplTest extends BaseTest {
 		request.setSortFlag("1");
 		request.setSortField("0");
 		request.setState("20");
+		List<Object> languageIds = new ArrayList<Object>();
+		languageIds.add("2");
+		languageIds.add("1");
+		request.setLanguageIds(languageIds);
+		//
 		OrderWaitReceiveSearchResponse response = this.orderWaitReceiveSV.pageSearchWaitReceive(request);
 		log.info("response:"+JSON.toJSONString(response));
 	}

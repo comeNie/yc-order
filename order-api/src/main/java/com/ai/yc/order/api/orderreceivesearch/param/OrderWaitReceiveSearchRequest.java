@@ -2,6 +2,7 @@ package com.ai.yc.order.api.orderreceivesearch.param;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.List;
 
 public class OrderWaitReceiveSearchRequest implements Serializable {
 
@@ -30,8 +31,10 @@ public class OrderWaitReceiveSearchRequest implements Serializable {
 	 * 订单状态
 	 */
 	private String state;
-	// 语言对ID
-	// private
+	/**
+	 * 语言对ID
+	 */
+	private List<Object> languageIds;
 	/**
 	 * 用途ID
 	 */
@@ -183,6 +186,14 @@ public class OrderWaitReceiveSearchRequest implements Serializable {
 
 	public void setPageSize(Integer pageSize) {
 		this.pageSize = pageSize;
+	}
+
+	public List<Object> getLanguageIds() {
+		return languageIds;
+	}
+
+	public void setLanguageIds(List<Object> languageIds) {
+		this.languageIds = languageIds;
 	}
 
 }
