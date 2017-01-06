@@ -303,13 +303,15 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 		
 		// 如果为非LSP用户，且语言对id集合不为空，那么就传入 2017-01-06 11:04 gucl
 		if(StringUtil.isBlank(request.getLspId())){
-			if(!CollectionUtil.isEmpty(languageIds)){
-				SearchCriteria searchCriteria = new SearchCriteria();
-				searchCriteria.setOption(new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.term));
-				searchCriteria.setField(SearchFieldConfConstants.LANGUNGE_ID);
-				searchCriteria.setFieldValue(languageIds);
-				searchfieldVos.add(searchCriteria);
+			if(CollectionUtil.isEmpty(languageIds)){
+				languageIds = new ArrayList<Object>();
+				languageIds.add("0");//0代表不存在
 			}
+			SearchCriteria searchCriteria = new SearchCriteria();
+			searchCriteria.setOption(new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.term));
+			searchCriteria.setField(SearchFieldConfConstants.LANGUNGE_ID);
+			searchCriteria.setFieldValue(languageIds);
+			searchfieldVos.add(searchCriteria);
 		}
 		
 		return searchfieldVos;
