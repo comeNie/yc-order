@@ -10,10 +10,12 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ai.opt.sdk.util.BeanUtils;
 import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.opt.sdk.util.DateUtil;
+import com.ai.opt.sdk.util.StringUtil;
 import com.ai.yc.order.api.ordersubmission.param.FileInfo;
 import com.ai.yc.order.api.ordersubmission.param.LanguagePairInfo;
 import com.ai.yc.order.api.ordersubmission.param.OrderSubmissionRequest;
 import com.ai.yc.order.api.ordersubmission.param.OrderSubmissionResponse;
+import com.ai.yc.order.api.ordersubmission.param.StateChgInfo;
 import com.ai.yc.order.api.ordersubmission.param.TranslateLevelInfo;
 import com.ai.yc.order.constants.OrdOdStateChgConstants;
 import com.ai.yc.order.constants.OrdersConstants;
@@ -261,7 +263,10 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 		this.orderProductInfoSubmit(request, orderId);
 		this.orderFeeInfoSubmit(request, orderId);
 		this.orderContactInfoSubmit(request, orderId);
-		this.orderStateChgInfoSubmit(request.getBaseInfo().getUserId(), orderId, request.getBaseInfo().getTranslateType());
+		// return operName 2017-01-10 10:39 zhangzd
+		String operName = this.returnOperName(request.getStateChgInfo());
+		//
+		this.orderStateChgInfoSubmit(request.getBaseInfo().getUserId(), orderId, request.getBaseInfo().getTranslateType(),operName);
 		
 		// --------------产品信息---------------------
 		response.setOrderId(orderId);
@@ -281,7 +286,10 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 		this.orderProductInfoSubmit(request, orderId);
 		this.orderFeeInfoSubmit(request, orderId);
 		this.orderContactInfoSubmit(request, orderId);
-		this.orderStateChgInfoSubmit(request.getBaseInfo().getUserId(), orderId, request.getBaseInfo().getTranslateType());
+		// return operName 2017-01-10 10:39 zhangzd
+		String operName = this.returnOperName(request.getStateChgInfo());
+		//
+		this.orderStateChgInfoSubmit(request.getBaseInfo().getUserId(), orderId, request.getBaseInfo().getTranslateType(),operName);
 		
 		// --------------产品信息---------------------
 		response.setOrderId(orderId);
@@ -540,7 +548,7 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 	/**
 	 * 订单提交-订单轨迹表
 	 */
-	public void orderStateChgInfoSubmit(String userId,Long orderId,String translateType){
+	public void orderStateChgInfoSubmit(String userId,Long orderId,String translateType,String operName){
 		OrdOdStateChg ordOdStateChg = new OrdOdStateChg();
 		//
 		Long stateChgId = SequenceUtil.createStateChgId();
@@ -548,6 +556,7 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 		ordOdStateChg.setStateChgId(stateChgId);
 		ordOdStateChg.setOrderId(orderId);
 		ordOdStateChg.setOperId(userId);
+		ordOdStateChg.setOperName(operName);//2017-01-10 10:29 zhangzd
 		//
 		if (TRANSLATE_TYPE_0.equals(translateType)){
 			ordOdStateChg.setNewState(OrdersConstants.OrderState.STATE_WAIT_PAY);
@@ -576,7 +585,23 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 	public void saveContact(OrdOdLogistics ordOdLogistics) {
 		this.ordOdLogisticsAtomSV.insertSelective(ordOdLogistics);
 	}
-	
+	/**
+	 * return operName
+	 * @author zhangzd
+	 */
+	public String returnOperName(StateChgInfo stateChgInfo){
+		//
+		String operName = "";
+		if(null == stateChgInfo){
+			operName = "";
+		}else{
+			if(!StringUtil.isBlank(stateChgInfo.getOperName())){
+				operName = stateChgInfo.getOperName();
+			}
+		}
+		//
+		return operName;
+	}
 	
 
 }

@@ -24,6 +24,10 @@ public class OrderSubmissionRequest implements Serializable {
 	 * 联系人信息
 	 */
 	private ContactInfo contactInfo;
+	/**
+	 * 轨迹信息,目前包括operName属性，需要前台登录用户传递
+	 */
+	private StateChgInfo stateChgInfo;
 
 	public ContactInfo getContactInfo() {
 		return contactInfo;
@@ -55,6 +59,14 @@ public class OrderSubmissionRequest implements Serializable {
 
 	public void setFeeInfo(FeeInfo feeInfo) {
 		this.feeInfo = feeInfo;
+	}
+
+	public StateChgInfo getStateChgInfo() {
+		return stateChgInfo;
+	}
+
+	public void setStateChgInfo(StateChgInfo stateChgInfo) {
+		this.stateChgInfo = stateChgInfo;
 	}
 
 }

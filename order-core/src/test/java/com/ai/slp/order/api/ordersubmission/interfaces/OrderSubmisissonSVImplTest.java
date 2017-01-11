@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ai.opt.sdk.util.DateUtil;
+import com.ai.opt.sdk.util.StringUtil;
 import com.ai.slp.order.api.BaseTest;
 import com.ai.yc.order.api.ordersubmission.interfaces.IOrderSubmissionSV;
 import com.ai.yc.order.api.ordersubmission.param.BaseInfo;
@@ -18,6 +19,7 @@ import com.ai.yc.order.api.ordersubmission.param.LanguagePairInfo;
 import com.ai.yc.order.api.ordersubmission.param.OrderSubmissionRequest;
 import com.ai.yc.order.api.ordersubmission.param.OrderSubmissionResponse;
 import com.ai.yc.order.api.ordersubmission.param.ProductInfo;
+import com.ai.yc.order.api.ordersubmission.param.StateChgInfo;
 import com.ai.yc.order.api.ordersubmission.param.TranslateLevelInfo;
 import com.ai.yc.order.dao.mapper.bo.OrdOdLogistics;
 import com.ai.yc.order.service.business.interfaces.IOrderSubmissionBusiSV;
@@ -452,5 +454,22 @@ public class OrderSubmisissonSVImplTest extends BaseTest {
 		ordOdLogistics.setOrderId(1l);
 		
 		this.orderSubmissionBusiSV.saveContact(ordOdLogistics);
+	}
+	@Test
+	public void testa(){
+		OrderSubmissionRequest request = new OrderSubmissionRequest();
+		StateChgInfo stateChgInfo = new StateChgInfo();
+		stateChgInfo.setOperName("zhangzd");
+		request.setStateChgInfo(stateChgInfo);
+		//
+		String operName = "";
+		if(null == request.getStateChgInfo()){
+			operName = "";
+		}else{
+			if(!StringUtil.isBlank(request.getStateChgInfo().getOperName())){
+				operName = request.getStateChgInfo().getOperName();
+			}
+		}
+		log.info("operName:"+operName);
 	}
 }	
