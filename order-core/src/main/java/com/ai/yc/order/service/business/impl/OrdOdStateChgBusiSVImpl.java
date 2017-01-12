@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ai.opt.sdk.util.DateUtil;
+import com.ai.opt.sdk.util.StringUtil;
 import com.ai.yc.order.api.orderreceive.param.OrderReceiveRequest;
 import com.ai.yc.order.constants.OrdOdStateChgConstants;
 import com.ai.yc.order.constants.OrdersConstants;
@@ -170,6 +171,16 @@ public class OrdOdStateChgBusiSVImpl implements IOrdOdStateChgBusiSV {
 	public void orderReceiveChgDesc(OrderReceiveRequest request, String interperId, String interperType, String lspId,String orgState) {
 		OrdOdStateChg ordOdStateChg = new OrdOdStateChg();
 		//
+		//
+		String operName = "";
+		if(null == request.getStateChgInfo()){
+			operName = "";
+		}else{
+			if(!StringUtil.isBlank(request.getStateChgInfo().getOperName())){
+				operName = request.getStateChgInfo().getOperName();
+			}
+		}
+		//
 		ordOdStateChg.setStateChgId(SequenceUtil.createStateChgId());
 		ordOdStateChg.setNewState(request.getBaseInfo().getState());
 		ordOdStateChg.setOrgState(orgState);
@@ -177,16 +188,16 @@ public class OrdOdStateChgBusiSVImpl implements IOrdOdStateChgBusiSV {
 		String descCn = "";
 		String descEn = "";
 		if ("0".equals(interperType)) {
-			descCn = String.format(ORDER_RECEIVE_DESC_CN_INTERPER,interperId);
-			descEn = String.format(ORDER_RECEIVE_DESC_EN_INTERPER,interperId);
+			descCn = String.format(ORDER_RECEIVE_DESC_CN_INTERPER,operName);
+			descEn = String.format(ORDER_RECEIVE_DESC_EN_INTERPER,operName);
 			ordOdStateChg.setOperId(interperId);
 		}
 		if ("1".equals(interperType)) {
-			descCn = String.format(ORDER_RECEIVE_DESC_CN_LSP,lspId);
-			descEn = String.format(ORDER_RECEIVE_DESC_EN_LSP,lspId);
+			descCn = String.format(ORDER_RECEIVE_DESC_CN_LSP,operName);
+			descEn = String.format(ORDER_RECEIVE_DESC_EN_LSP,operName);
 			ordOdStateChg.setOperId(lspId);
 		}
-		
+		ordOdStateChg.setOperName(operName);
 		ordOdStateChg.setChgDesc(descCn);
 		ordOdStateChg.setChgDescEn(descEn);
 		ordOdStateChg.setStateChgTime(DateUtil.getSysDate());

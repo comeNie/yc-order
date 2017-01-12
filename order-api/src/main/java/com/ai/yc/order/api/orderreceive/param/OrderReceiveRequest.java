@@ -2,6 +2,7 @@ package com.ai.yc.order.api.orderreceive.param;
 
 import java.io.Serializable;
 
+
 public class OrderReceiveRequest implements Serializable {
 
 	/**
@@ -16,7 +17,10 @@ public class OrderReceiveRequest implements Serializable {
 	 * 订单费用信息
 	 */
 	private OrderReceiveFeeInfo feeInfo;
-
+	/**
+	 * 轨迹信息,目前包括operName属性，需要前台登录用户传递
+	 */
+	private OrderReceiveStateChgInfo stateChgInfo;
 	public OrderReceiveBaseInfo getBaseInfo() {
 		return baseInfo;
 	}
@@ -32,4 +36,13 @@ public class OrderReceiveRequest implements Serializable {
 	public void setFeeInfo(OrderReceiveFeeInfo feeInfo) {
 		this.feeInfo = feeInfo;
 	}
+
+	public OrderReceiveStateChgInfo getStateChgInfo() {
+		return stateChgInfo;
+	}
+
+	public void setStateChgInfo(OrderReceiveStateChgInfo stateChgInfo) {
+		this.stateChgInfo = stateChgInfo;
+	}
+
 }
