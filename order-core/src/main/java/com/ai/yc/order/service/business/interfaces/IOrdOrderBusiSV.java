@@ -17,4 +17,9 @@ public interface IOrdOrderBusiSV {
 	 * 修改订单状态 zhangzd 
 	 */
 	public OrderStateUpdateResponse updateState(OrderStateUpdateRequest request);
+	
+	/**
+	 * 查询订单数(领单大厅)
+	 */
+	public Map<String, Integer> findOrderCount4TaskCenter(QueryOrdCountRequest request);
 }

@@ -99,6 +99,23 @@ public class IOrderQuerySVImplTest extends BaseTest{
 		//languageIds.add("1");
 		request.setLanguageIds(languageIds);
 
+		QueryOrdCountResponse response = this.iOrderQuerySV.queryOrderCount4TaskCenter(request);
+		log.error("response:"+JSON.toJSONString(response));
+	}
+	@Test
+	public void orderQueryCount4user(){
+		QueryOrdCountRequest request = new QueryOrdCountRequest();
+		request.setUserId("4444361");;
+		//request.setFlag("0");
+		//request.setInterperLevel("4");
+		//request.setInterperType("0");
+		//request.setTranslateName("测试1214ljq");
+		//request.setState("20");
+		//List<Object> languageIds = new ArrayList<Object>();
+		//languageIds.add("2");
+		//languageIds.add("1");
+		//request.setLanguageIds(languageIds);
+
 		QueryOrdCountResponse response = this.iOrderQuerySV.queryOrderCount(request);
 		log.error("response:"+JSON.toJSONString(response));
 	}

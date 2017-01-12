@@ -195,14 +195,131 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 		this.ordOdStateChgAtomSV.insertSelective(ordOdStateChg);
 	}
 
+	//客户我的订单及译员我的订单统计
 	private int countAllOrders(OrdOrder request, String interperLevel,List<Object> languageIds) {
 		IOrderSearch orderSearch = new OrderSearchImpl();
 		List<SearchCriteria> searchCriterias = installConditions(request, interperLevel,languageIds);
 		return orderSearch.countAll(searchCriterias);
 	}
+	//订单大厅统计
+	private int countAllOrders4TaskCenter(OrdOrder request, String interperLevel,List<Object> languageIds) {
+		IOrderSearch orderSearch = new OrderSearchImpl();
+		List<SearchCriteria> searchCriterias = installConditions4TaskCenter(request, interperLevel,languageIds);
+		return orderSearch.countAll(searchCriterias);
+	}
 
-	// 搜索引擎数据公共查询条件
+	/**
+	 * 搜索引擎数据公共查询条件
+	 * @param request 请求
+	 * @param interperLevel 译员级别
+	 * @param languageIds 语言对
+	 * @return
+	 * @author gucl
+	 */
 	private List<SearchCriteria> installConditions(OrdOrder request, String interperLevel,List<Object> languageIds) {
+		List<SearchCriteria> searchfieldVos = new ArrayList<SearchCriteria>();
+		if (!StringUtil.isBlank(interperLevel)) {
+			Map<String, OrderLevelRange> interperLevelMap = this.interperLevelMap.getInterperLevelMap();
+			SearchCriteria searchCriteria = new SearchCriteria();
+			searchCriteria.setOption(new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.range));
+			searchCriteria.setField(SearchFieldConfConstants.ORDER_LEVEL);
+			String minValue = "1";
+			String maxValue = "1";
+			if (null != interperLevelMap.get(interperLevel)) {
+				minValue = interperLevelMap.get(interperLevel).getMinValue();
+				maxValue = interperLevelMap.get(interperLevel).getMaxValue();
+			}
+			searchCriteria.addFieldValue(minValue);
+			searchCriteria.addFieldValue(maxValue);
+			searchfieldVos.add(searchCriteria);
+		}
+		/*// 如果业务标识不为空
+		if (!StringUtil.isBlank(request.getFlag())) {
+			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.FLAG, request.getFlag(),
+					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
+		}*/
+		// 如果订单id不为空
+		if (request.getOrderId() != null) {
+			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.ORDER_ID, request.getOrderId().toString(),
+					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
+		}
+		// 如果用户类型不为空
+		if (!StringUtil.isBlank(request.getUserType())) {
+			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.USER_TYPE, request.getUserType(),
+					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
+		}
+		// 如果用户id不为空
+		if (!StringUtil.isBlank(request.getUserId())) {
+			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.USER_ID, request.getUserId(),
+					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
+		}
+		// 如果报价标识不为空
+		if (!StringUtil.isBlank(request.getSubFlag())) {
+			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.SUB_FLAG, request.getSubFlag(),
+					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
+		}
+		// 如果订单来源不为空
+		if (!StringUtil.isBlank(request.getChlId())) {
+			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.CHL_ID, request.getChlId(),
+					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
+		}
+		// 如果订单类型不为空
+		if (!StringUtil.isBlank(request.getOrderType())) {
+			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.ORDER_TYPE, request.getOrderType(),
+					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
+		}
+		// 如果订单级别不为空
+		if (!StringUtil.isBlank(request.getOrderLevel())) {
+			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.ORDER_LEVEL, request.getOrderLevel(),
+					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
+		}
+		// 如果翻译类型不为空
+		if (!StringUtil.isBlank(request.getTranslateType())) {
+			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.TRANSLATE_TYPE, request.getTranslateType(),
+					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
+		}
+
+		// 如果企业id不为空
+		if (!StringUtil.isBlank(request.getCorporaId())) {
+			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.CORPORA_ID, request.getCorporaId(),
+					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
+		}
+		// 如果state不为空
+		if (!StringUtil.isBlank(request.getState())) {
+			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.STATE, request.getState(),
+					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
+		}
+		// 如果客户端显示状态不为空
+		if (!StringUtil.isBlank(request.getDisplayFlag())) {
+			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.DISPLAY_FLAG, request.getDisplayFlag(),
+					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
+		}
+		// 如果译员类型不为空
+		if (!StringUtil.isBlank(request.getInterperType())) {
+			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.INTERPER_TYPE, request.getInterperType(),
+					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
+		}
+		// 如果操作员id不为空
+		if (!StringUtil.isBlank(request.getOperId())) {
+			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.OPER_ID, request.getOperId(),
+					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
+		}
+		// 如果lspid不为空
+		/*if (!StringUtil.isBlank(request.getLspId())) {
+			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.LSP_ID, request.getLspId(),
+					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
+		}*/
+		// 如果译员id不为空
+		if (!StringUtil.isBlank(request.getInterperId())) {
+			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.INTERPER_ID, request.getInterperId(),
+					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
+		}
+		
+		
+		return searchfieldVos;
+	}
+	
+	private List<SearchCriteria> installConditions4TaskCenter(OrdOrder request, String interperLevel,List<Object> languageIds) {
 		List<SearchCriteria> searchfieldVos = new ArrayList<SearchCriteria>();
 		if (!StringUtil.isBlank(interperLevel)) {
 			Map<String, OrderLevelRange> interperLevelMap = this.interperLevelMap.getInterperLevelMap();
@@ -315,6 +432,57 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 		}
 		
 		return searchfieldVos;
+	}
+
+	@Override
+	public Map<String, Integer> findOrderCount4TaskCenter(QueryOrdCountRequest request) {
+		OrdOrder orderRequest = new OrdOrder();
+		copyProperties(orderRequest, request);
+		Map<String, Integer> countMap = new HashMap<String, Integer>();
+		if (!StringUtil.isBlank(request.getState())) {
+			int stateCount = countAllOrders4TaskCenter(orderRequest, request.getInterperLevel(),request.getLanguageIds());
+			countMap.put(request.getState(), stateCount);
+			return countMap;
+		}
+		if (!StringUtil.isBlank(request.getUserId())) {
+			// 待支付
+			orderRequest.setDisplayFlag(OrdersConstants.OrderDisplayFlag.FLAG_WAIT_PAY);
+			int waitPayCount = countAllOrders4TaskCenter(orderRequest, request.getInterperLevel(),request.getLanguageIds());
+			countMap.put(OrdersConstants.OrderDisplayFlag.FLAG_WAIT_PAY, waitPayCount);
+
+			// 待报价
+			orderRequest.setDisplayFlag(OrdersConstants.OrderDisplayFlag.FLAG_WAIT_OFFER);
+			int waitofferCount = countAllOrders4TaskCenter(orderRequest, request.getInterperLevel(),request.getLanguageIds());
+			countMap.put(OrdersConstants.OrderDisplayFlag.FLAG_WAIT_OFFER, waitofferCount);
+
+			// 翻译中
+			orderRequest.setDisplayFlag(OrdersConstants.OrderDisplayFlag.FLAG_TRASLATING);
+			int translatingCount = countAllOrders4TaskCenter(orderRequest, request.getInterperLevel(),request.getLanguageIds());
+			countMap.put(OrdersConstants.OrderDisplayFlag.FLAG_TRASLATING, translatingCount);
+
+			// 待确认
+			orderRequest.setDisplayFlag(OrdersConstants.OrderDisplayFlag.FLAG_WAIT_OK);
+			int waitOkCount = countAllOrders4TaskCenter(orderRequest, request.getInterperLevel(),request.getLanguageIds());
+			countMap.put(OrdersConstants.OrderDisplayFlag.FLAG_WAIT_OK, waitOkCount);
+
+			// 待评价
+			orderRequest.setDisplayFlag(OrdersConstants.OrderDisplayFlag.FLAG_WAIT_COMMENT);
+			int waitCommentCount = countAllOrders4TaskCenter(orderRequest, request.getInterperLevel(),request.getLanguageIds());
+			countMap.put(OrdersConstants.OrderDisplayFlag.FLAG_WAIT_COMMENT, waitCommentCount);
+
+		} else if (!StringUtil.isBlank(request.getInterperId()) || !StringUtil.isBlank(request.getInterperId())) {
+			// 待支付
+			orderRequest.setState(OrdersConstants.OrderState.STATE_RECEIVED);
+			int receivedCount = countAllOrders4TaskCenter(orderRequest, request.getInterperLevel(),request.getLanguageIds());
+			countMap.put(OrdersConstants.OrderState.STATE_RECEIVED, receivedCount);
+
+			// 翻译中
+			orderRequest.setState(OrdersConstants.OrderState.STATE_TRASLATING);
+			int translatingCount = countAllOrders4TaskCenter(orderRequest, request.getInterperLevel(),request.getLanguageIds());
+			countMap.put(OrdersConstants.OrderState.STATE_TRASLATING, translatingCount);
+		}
+
+		return countMap;
 	}
 
 }

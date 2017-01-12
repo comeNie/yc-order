@@ -39,7 +39,7 @@ public interface IOrderQuerySV {
 	QueryOrderRsponse queryOrder(QueryOrderRequest queryOrderRequest) throws BusinessException, SystemException;
 	
 	/**
-	 * 订单数查询
+	 * 订单数查询（用于客户我的订单和译员我的订单统计）
 	 * @param request
 	 * @return
 	 * @throws BusinessException
@@ -52,4 +52,18 @@ public interface IOrderQuerySV {
 	@POST
 	@Path("/queryOrderCount")
 	QueryOrdCountResponse queryOrderCount(QueryOrdCountRequest request) throws BusinessException, SystemException;
+	/**
+	 * 订单数查询(用于领单大厅的订单数统计)
+	 * @param request
+	 * @return
+	 * @throws BusinessException
+	 * @throws SystemException
+	 * @author gucl
+	 * @ApiCode ORD_2022
+	 * @ApiDocMethod
+	 * @RestRelativeURL queryOrder/queryOrderCount4TaskCenter
+	 */
+	@POST
+	@Path("/queryOrderCount4TaskCenter")
+	QueryOrdCountResponse queryOrderCount4TaskCenter(QueryOrdCountRequest request) throws BusinessException, SystemException;
 }

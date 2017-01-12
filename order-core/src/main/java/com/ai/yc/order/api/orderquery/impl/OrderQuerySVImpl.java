@@ -587,4 +587,17 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 		return response;
 	}
 
+	@Override
+	public QueryOrdCountResponse queryOrderCount4TaskCenter(QueryOrdCountRequest request)
+			throws BusinessException, SystemException {
+		request.setTenantId(OrdersConstants.TENANT_ID);
+		// 有效性校验
+		ValidateUtils.validateQueryOrdCount(request);
+		QueryOrdCountResponse response = new QueryOrdCountResponse();
+		response.setCountMap(iOrdOrderBusiSV.findOrderCount4TaskCenter(request));
+		ResponseHeader responseHeader = new ResponseHeader(true, ExceptCodeConstants.Special.SUCCESS, "查询订单数成功");
+		response.setResponseHeader(responseHeader);
+		return response;
+	}
+
 }
