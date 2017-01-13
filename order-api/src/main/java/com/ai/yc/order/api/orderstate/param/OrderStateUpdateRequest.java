@@ -23,6 +23,10 @@ public class OrderStateUpdateRequest implements Serializable {
 	 * 用户id
 	 */
 	private String userId;
+	/**
+	 * 轨迹信息,目前包括operName属性，需要前台登录用户传递
+	 */
+	private UpdateStateChgInfo stateChgInfo;
 
 	public String getState() {
 		return state;
@@ -54,6 +58,14 @@ public class OrderStateUpdateRequest implements Serializable {
 
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+
+	public UpdateStateChgInfo getStateChgInfo() {
+		return stateChgInfo;
+	}
+
+	public void setStateChgInfo(UpdateStateChgInfo stateChgInfo) {
+		this.stateChgInfo = stateChgInfo;
 	}
 
 }

@@ -19,6 +19,7 @@ import com.ai.paas.ipaas.util.StringUtil;
 import com.ai.yc.order.api.orderquery.param.QueryOrdCountRequest;
 import com.ai.yc.order.api.orderstate.param.OrderStateUpdateRequest;
 import com.ai.yc.order.api.orderstate.param.OrderStateUpdateResponse;
+import com.ai.yc.order.api.orderstate.param.UpdateStateChgInfo;
 import com.ai.yc.order.constants.OrdOdStateChgConstants;
 import com.ai.yc.order.constants.OrdersConstants;
 import com.ai.yc.order.constants.SearchFieldConfConstants;
@@ -148,19 +149,37 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 		String translateType = ordOrderDb.getTranslateType();// 数据库获取订单翻译类型
 		String oldState = ordOrderDb.getState();// 数据库获取订单当前状态
 		String newState = request.getState();// 新状态为 待领取
+		// return operName 2017-01-10 10:39 zhangzd
+		String operName = this.returnOperName(request.getStateChgInfo());
 		//
-		this.orderStateChgInfoSubmit(userId, orderId, translateType, oldState, newState);
+		this.orderStateChgInfoSubmit(userId, orderId, translateType, oldState, newState,operName);
 		//
 		response.setOrderId(request.getOrderId());
 		//
 		return response;
 	}
-
+	/**
+	 * return operName
+	 * @author zhangzd
+	 */
+	public String returnOperName(UpdateStateChgInfo stateChgInfo){
+		//
+		String operName = "";
+		if(null == stateChgInfo){
+			operName = "";
+		}else{
+			if(!StringUtil.isBlank(stateChgInfo.getOperName())){
+				operName = stateChgInfo.getOperName();
+			}
+		}
+		//
+		return operName;
+	}
 	/**
 	 * 订单提交-订单轨迹表
 	 */
 	public void orderStateChgInfoSubmit(String userId, Long orderId, String translateType, String oldState,
-			String newState) {
+			String newState,String operName) {
 		OrdOdStateChg ordOdStateChg = new OrdOdStateChg();
 		//
 		Long stateChgId = SequenceUtil.createStateChgId();
@@ -168,6 +187,7 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 		ordOdStateChg.setStateChgId(stateChgId);
 		ordOdStateChg.setOrderId(orderId);
 		ordOdStateChg.setOperId(userId);
+		ordOdStateChg.setOperName(operName);//2017-01-13 15:01 zhangzd
 		ordOdStateChg.setOrgState(oldState);
 		ordOdStateChg.setNewState(newState);
 
@@ -179,8 +199,8 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 		}
 		// 待审核状态
 		if (OrdersConstants.OrderState.WAIT_REVIEW_STATE.equals(newState)) {
-			ordOdStateChg.setChgDesc("译员 "+userId+" 提交了译文");
-			ordOdStateChg.setChgDescEn("Translator "+userId+" submitted the order translated text");
+			ordOdStateChg.setChgDesc("译员 "+operName+" 提交了译文");
+			ordOdStateChg.setChgDescEn("Translator "+operName+" submitted the order translated text");
 			
 		}
 		// 完成状态
