@@ -169,44 +169,96 @@ public class OrdOdStateChgBusiSVImpl implements IOrdOdStateChgBusiSV {
 
 	@Override
 	public void orderReceiveChgDesc(OrderReceiveRequest request, String interperId, String interperType, String lspId,String orgState) {
-		OrdOdStateChg ordOdStateChg = new OrdOdStateChg();
-		//
-		//
-		String operName = "";
-		if(null == request.getStateChgInfo()){
-			operName = "";
-		}else{
-			if(!StringUtil.isBlank(request.getStateChgInfo().getOperName())){
-				operName = request.getStateChgInfo().getOperName();
-			}
-		}
-		//
-		ordOdStateChg.setStateChgId(SequenceUtil.createStateChgId());
-		ordOdStateChg.setNewState(request.getBaseInfo().getState());
-		ordOdStateChg.setOrgState(orgState);
-		ordOdStateChg.setOrderId(request.getBaseInfo().getOrderId());
-		String descCn = "";
-		String descEn = "";
+		//普通译员领取订单，需要插入两条订单流转信息，即：原始state->已领取，已领取->翻译中
 		if ("0".equals(interperType)) {
+			//== start===原始state->已领取========
+			OrdOdStateChg ordOdStateChg2Receive = new OrdOdStateChg();
+			//
+			String operName = "";
+			if(null == request.getStateChgInfo()){
+				operName = "";
+			}else{
+				if(!StringUtil.isBlank(request.getStateChgInfo().getOperName())){
+					operName = request.getStateChgInfo().getOperName();
+				}
+			}
+			//
+			ordOdStateChg2Receive.setStateChgId(SequenceUtil.createStateChgId());
+			ordOdStateChg2Receive.setNewState(OrdersConstants.OrderState.STATE_RECEIVED);
+			ordOdStateChg2Receive.setOrgState(orgState);
+			ordOdStateChg2Receive.setOrderId(request.getBaseInfo().getOrderId());
+			String descCn = "";
+			String descEn = "";
+			
 			descCn = String.format(ORDER_RECEIVE_DESC_CN_INTERPER,operName);
 			descEn = String.format(ORDER_RECEIVE_DESC_EN_INTERPER,operName);
-			ordOdStateChg.setOperId(interperId);
+			ordOdStateChg2Receive.setOperId(interperId);
+			
+			ordOdStateChg2Receive.setOperName(operName);
+			ordOdStateChg2Receive.setChgDesc(descCn);
+			ordOdStateChg2Receive.setChgDescEn(descEn);
+			ordOdStateChg2Receive.setStateChgTime(DateUtil.getSysDate());
+			
+			ordOdStateChg2Receive.setChgDescD("订单已被译员领取，正在翻译中，请耐心等待");
+			ordOdStateChg2Receive.setChgDescUEn("Your order has been claimed by a translator and is being translated, please wait patiently");
+			ordOdStateChg2Receive.setFlag(OrdOdStateChgConstants.FLAG_USER);
+			
+			ordOdStateChgAtomSV.insertSelective(ordOdStateChg2Receive);
+			//== end===原始state->已领取========
+			
+			//== start===已领取->翻译中========
+			OrdOdStateChg ordOdStateChg2Translating = new OrdOdStateChg();
+			ordOdStateChg2Translating.setStateChgId(SequenceUtil.createStateChgId());
+			ordOdStateChg2Translating.setNewState(OrdersConstants.OrderState.STATE_TRASLATING);
+			ordOdStateChg2Translating.setOrgState(OrdersConstants.OrderState.STATE_RECEIVED);
+			ordOdStateChg2Translating.setOrderId(request.getBaseInfo().getOrderId());
+			ordOdStateChg2Translating.setOperId(interperId);
+			
+			ordOdStateChg2Translating.setOperName(operName);
+			ordOdStateChg2Translating.setChgDesc("订单翻译中");
+			ordOdStateChg2Translating.setChgDescEn("Is translation orders");
+			ordOdStateChg2Translating.setStateChgTime(DateUtil.getSysDate());
+			
+			ordOdStateChgAtomSV.insertSelective(ordOdStateChg2Translating);
+			//== end===已领取->翻译中========
 		}
-		if ("1".equals(interperType)) {
+		//LSP译员领取订单，流程和之前一样，插入一条订单流转信息
+		else if ("1".equals(interperType)) {
+			OrdOdStateChg ordOdStateChg = new OrdOdStateChg();
+			//
+			String operName = "";
+			if(null == request.getStateChgInfo()){
+				operName = "";
+			}else{
+				if(!StringUtil.isBlank(request.getStateChgInfo().getOperName())){
+					operName = request.getStateChgInfo().getOperName();
+				}
+			}
+			//
+			ordOdStateChg.setStateChgId(SequenceUtil.createStateChgId());
+			ordOdStateChg.setNewState(request.getBaseInfo().getState());
+			ordOdStateChg.setOrgState(orgState);
+			ordOdStateChg.setOrderId(request.getBaseInfo().getOrderId());
+			String descCn = "";
+			String descEn = "";
+			
 			descCn = String.format(ORDER_RECEIVE_DESC_CN_LSP,operName);
 			descEn = String.format(ORDER_RECEIVE_DESC_EN_LSP,operName);
 			ordOdStateChg.setOperId(lspId);
+			
+			ordOdStateChg.setOperName(operName);
+			ordOdStateChg.setChgDesc(descCn);
+			ordOdStateChg.setChgDescEn(descEn);
+			ordOdStateChg.setStateChgTime(DateUtil.getSysDate());
+			
+			ordOdStateChg.setChgDescD("订单已被译员领取，正在翻译中，请耐心等待");
+			ordOdStateChg.setChgDescUEn("Your order has been claimed by a translator and is being translated, please wait patiently");
+			ordOdStateChg.setFlag(OrdOdStateChgConstants.FLAG_USER);
+			
+			ordOdStateChgAtomSV.insertSelective(ordOdStateChg);
 		}
-		ordOdStateChg.setOperName(operName);
-		ordOdStateChg.setChgDesc(descCn);
-		ordOdStateChg.setChgDescEn(descEn);
-		ordOdStateChg.setStateChgTime(DateUtil.getSysDate());
 		
-		ordOdStateChg.setChgDescD("订单已被译员领取，正在翻译中，请耐心等待");
-		ordOdStateChg.setChgDescUEn("Your order has been claimed by a translator and is being translated, please wait patiently");
-		ordOdStateChg.setFlag(OrdOdStateChgConstants.FLAG_USER);
 		
-		ordOdStateChgAtomSV.insertSelective(ordOdStateChg);
 	}
 
 	@Override
