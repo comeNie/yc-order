@@ -23,7 +23,7 @@ import com.ai.yc.order.api.orderdetails.param.QueryOrderDetailsResponse;
 public interface IQueryOrderDetailsSV {
 	
 	/**
-	 * 订单详情查询（我的订单）
+	 * 订单详情查询（我的订单） 用于业务运营前端
 	 * @param orderId 订单ID
 	 * @return
 	 * @throws BusinessException
@@ -36,6 +36,21 @@ public interface IQueryOrderDetailsSV {
 	@POST
 	@Path("/queryOrderDetails")
 	QueryOrderDetailsResponse queryOrderDetails(QueryOrderDetailsRequest request)throws BusinessException, SystemException;
+	
+	/**
+	 * 订单详情查询（我的订单） 用于PC门户前端
+	 * @param orderId 订单ID
+	 * @return
+	 * @throws BusinessException
+	 * @throws SystemException
+	 * @author gucl
+	 * @ApiCode ORD_2023
+	 * @ApiDocMethod
+     * @RestRelativeURL orderdetails/queryOrderDetails4Front
+	 */
+	@POST
+	@Path("/queryOrderDetails4Portal")
+	QueryOrderDetailsResponse queryOrderDetails4Portal(QueryOrderDetailsRequest request)throws BusinessException, SystemException;
 	
 	
 

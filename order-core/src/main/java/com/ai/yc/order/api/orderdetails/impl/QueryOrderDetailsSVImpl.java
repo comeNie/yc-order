@@ -37,4 +37,16 @@ public class QueryOrderDetailsSVImpl implements IQueryOrderDetailsSV {
 		return iQueryOrderDetailsBusiSV.queryOrderDetails(request.getOrderId(), request.getChgStateFlag());
 	}
 
+	@Override
+	public QueryOrderDetailsResponse queryOrderDetails4Portal(QueryOrderDetailsRequest request)
+			throws BusinessException, SystemException {
+		if(null == request){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "请求参数不能为空");
+		}
+		if(null == request.getOrderId()){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "订单ID不能为空");
+		}
+		return iQueryOrderDetailsBusiSV.queryOrderDetails4Portal(request.getOrderId(), request.getChgStateFlag());
+	}
+
 }

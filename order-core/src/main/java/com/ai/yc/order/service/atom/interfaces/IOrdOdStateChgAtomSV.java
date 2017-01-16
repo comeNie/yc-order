@@ -12,4 +12,6 @@ public interface IOrdOdStateChgAtomSV {
 	
 	public List<OrdOdStateChg> findByOrderIdAndFlag(Long orderId,String flag);
 
+	List<OrdOdStateChg> findByOrderIdAndFlag4Portal(Long orderId, String flag);
+
 }

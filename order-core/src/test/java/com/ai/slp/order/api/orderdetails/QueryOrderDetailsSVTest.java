@@ -17,8 +17,16 @@ public class QueryOrderDetailsSVTest extends BaseTest{
 	@Test
 	public void testQueryOrderDetails(){
 		QueryOrderDetailsRequest request = new QueryOrderDetailsRequest();
-		request.setOrderId(1l);
+		request.setOrderId(123l);
 		QueryOrderDetailsResponse resp = iQueryOrderDetailsSV.queryOrderDetails(request);
+		Gson gson = new Gson();
+		System.out.println(gson.toJson(resp));
+	}
+	@Test
+	public void testQueryOrderDetails4Portal(){
+		QueryOrderDetailsRequest request = new QueryOrderDetailsRequest();
+		request.setOrderId(123l);
+		QueryOrderDetailsResponse resp = iQueryOrderDetailsSV.queryOrderDetails4Portal(request);
 		Gson gson = new Gson();
 		System.out.println(gson.toJson(resp));
 	}

@@ -12,4 +12,6 @@ public interface IQueryOrderDetailsBusiSV {
 	
 	QueryOrderDetailsResponse queryOrderDetails(Long orderId,String flag);
 
+	QueryOrderDetailsResponse queryOrderDetails4Portal(Long orderId, String chgStateFlag);
+
 }
