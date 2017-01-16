@@ -50,6 +50,7 @@ public class OrdOdStateChgAtomSVImpl implements IOrdOdStateChgAtomSV {
 		if(StringUtil.isBlank(flag)){
 			List<String> orgStateList=new ArrayList<String>();
 			orgStateList.add(OrdersConstants.OrderState.STATE_COMMIT);
+			orgStateList.add(OrdersConstants.OrderState.STATE_WAIT_RECEIVE);
 			orgStateList.add(OrdersConstants.OrderState.STATE_RECEIVED);
 			orgStateList.add(OrdersConstants.OrderState.STATE_TRASLATING);
 			orgStateList.add(OrdersConstants.OrderState.STATE_TRASLATE_FINISHED);
