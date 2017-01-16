@@ -1,5 +1,6 @@
 package com.ai.yc.order.service.atom.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -45,11 +46,21 @@ public class OrdOdStateChgAtomSVImpl implements IOrdOdStateChgAtomSV {
 		if(flag != null && !StringUtil.isBlank(flag)){
 			criteria.andFlagEqualTo(flag);
 		}
-		//门户前端不需要显示org_state为11、12、13的轨迹信息
-		criteria.andOrgStateNotEqualTo(OrdersConstants.OrderState.STATE_WAIT_PAY);
-		criteria.andOrgStateNotEqualTo(OrdersConstants.OrderState.STATE_PAIED);
-		criteria.andOrgStateNotEqualTo(OrdersConstants.OrderState.STATE_WAIT_OFFER);
-		
+		//门户前端我是服务方（译员）的订单轨迹显示如下的轨迹信息
+		if(StringUtil.isBlank(flag)){
+			List<String> orgStateList=new ArrayList<String>();
+			orgStateList.add(OrdersConstants.OrderState.STATE_COMMIT);
+			orgStateList.add(OrdersConstants.OrderState.STATE_RECEIVED);
+			orgStateList.add(OrdersConstants.OrderState.STATE_TRASLATING);
+			orgStateList.add(OrdersConstants.OrderState.STATE_TRASLATE_FINISHED);
+			orgStateList.add(OrdersConstants.OrderState.WAIT_REVIEW_STATE);
+			orgStateList.add(OrdersConstants.OrderState.REVIEWED_STATE);
+			orgStateList.add(OrdersConstants.OrderState.REVIEW_FAILD_STATE);
+			orgStateList.add(OrdersConstants.OrderState.WAIT_OK_STATE);
+			orgStateList.add(OrdersConstants.OrderState.WAIT_COMMENT_STATE);
+			orgStateList.add(OrdersConstants.OrderState.FLAG_FINISHED);
+			criteria.andOrgStateIn(orgStateList);
+		}
 		return MapperFactory.getOrdOdStateChgMapper().selectByExample(example);
 	}
 

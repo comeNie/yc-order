@@ -154,12 +154,12 @@ public final class OrdersConstants {
 		/**
 		 * 翻译完成 已提交
 		 */
-		public final static String STATE_TRASLATE_FINISHED = "23";
+		public final static String STATE_TRASLATE_FINISHED = "24";
 
 		/**
 		 * 翻译修改中
 		 */
-		public final static String STATE_TRASLATE_UPDATING = "23";
+		public final static String STATE_TRASLATE_UPDATING = "25";
 		
 		/**
 		 * 完成
