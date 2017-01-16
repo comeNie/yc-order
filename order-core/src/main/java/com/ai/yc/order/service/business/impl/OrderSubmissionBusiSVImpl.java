@@ -557,6 +557,7 @@ public class OrderSubmissionBusiSVImpl implements IOrderSubmissionBusiSV {
 		ordOdStateChg.setOrderId(orderId);
 		ordOdStateChg.setOperId(userId);
 		ordOdStateChg.setOperName(operName);//2017-01-10 10:29 zhangzd
+		ordOdStateChg.setOrgState(OrdersConstants.OrderState.STATE_COMMIT);//gucl 2017-01-16 16:59订单提交
 		//
 		if (TRANSLATE_TYPE_0.equals(translateType)){
 			ordOdStateChg.setNewState(OrdersConstants.OrderState.STATE_WAIT_PAY);
