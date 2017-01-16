@@ -46,7 +46,7 @@ public interface IQueryOrderDetailsSV {
 	 * @author gucl
 	 * @ApiCode ORD_2023
 	 * @ApiDocMethod
-     * @RestRelativeURL orderdetails/queryOrderDetails4Front
+     * @RestRelativeURL orderdetails/queryOrderDetails4Portal
 	 */
 	@POST
 	@Path("/queryOrderDetails4Portal")
