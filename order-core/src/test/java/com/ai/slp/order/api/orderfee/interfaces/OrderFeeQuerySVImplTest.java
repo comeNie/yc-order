@@ -15,7 +15,7 @@ public class OrderFeeQuerySVImplTest extends BaseTest {
 	@Test
 	public void orderFeeQuery(){
 		OrderFeeQueryRequest request = new OrderFeeQueryRequest();
-		request.setOrderId(2000000023112336L);
+		request.setOrderId(2000000051859924L);
 		//
 		log.info("request:"+JSON.toJSONString(request));
 		OrderFeeQueryResponse response = this.orderFeeQuerySV.orderFeeQuery(request);

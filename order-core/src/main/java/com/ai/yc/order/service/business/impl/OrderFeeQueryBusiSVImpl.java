@@ -87,7 +87,7 @@ public class OrderFeeQueryBusiSVImpl implements IOrderFeeQueryBusiSV {
 			userInfo.setOperId(ordOdStateChg.getOperId());
 
 		}
-		response.setOrderFeeInfo(orderFeeInfo);
+		response.setUserInfo(userInfo);
 		//
 		return response;
 	}
