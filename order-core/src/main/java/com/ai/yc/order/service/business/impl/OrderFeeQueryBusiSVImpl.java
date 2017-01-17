@@ -12,15 +12,19 @@ import com.ai.yc.order.api.orderfee.param.OrderFeeProdInfo;
 import com.ai.yc.order.api.orderfee.param.OrderFeeQueryRequest;
 import com.ai.yc.order.api.orderfee.param.OrderFeeQueryResponse;
 import com.ai.yc.order.api.orderfee.param.OrderFeeTranslateLevelInfo;
+import com.ai.yc.order.api.orderfee.param.OrderFeeUserInfo;
+import com.ai.yc.order.constants.OrdersConstants;
 import com.ai.yc.order.dao.mapper.bo.OrdOdFeeTotal;
 import com.ai.yc.order.dao.mapper.bo.OrdOdProd;
 import com.ai.yc.order.dao.mapper.bo.OrdOdProdLevel;
 import com.ai.yc.order.dao.mapper.bo.OrdOdProdWithBLOBs;
+import com.ai.yc.order.dao.mapper.bo.OrdOdStateChg;
 import com.ai.yc.order.dao.mapper.bo.OrdOrder;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdFeeTotalAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdProdAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdProdFileAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdProdLevelAtomSV;
+import com.ai.yc.order.service.atom.interfaces.IOrdOdStateChgAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOrderAtomSV;
 import com.ai.yc.order.service.business.interfaces.IOrderFeeQueryBusiSV;
 /**
@@ -38,6 +42,8 @@ public class OrderFeeQueryBusiSVImpl implements IOrderFeeQueryBusiSV {
 	private IOrdOdProdAtomSV ordOdProdAtomSV;//产品信息
 	@Autowired
 	private IOrdOdProdLevelAtomSV ordOdProdLevelAtomSV;//翻译级别
+	@Autowired
+	private IOrdOdStateChgAtomSV ordOdStateChgAtomSV;
 	
 	@Override
 	public OrderFeeQueryResponse orderFeeQuery(OrderFeeQueryRequest request) {
@@ -72,6 +78,16 @@ public class OrderFeeQueryBusiSVImpl implements IOrderFeeQueryBusiSV {
 			orderFeeTranslateLevelInfoList.add(orderFeeTranslateLevelInfo);
 		}
 		response.setOrderFeeTranslateLevelInfoList(orderFeeTranslateLevelInfoList);
+		//查询下单的用户信息
+		OrdOdStateChg ordOdStateChg = this.ordOdStateChgAtomSV.findByOrderIdAndOrgState(orderId, OrdersConstants.OrderState.STATE_COMMIT);
+		//
+		OrderFeeUserInfo userInfo = new OrderFeeUserInfo();
+		if(null != ordOdStateChg){
+			
+			userInfo.setOperId(ordOdStateChg.getOperId());
+
+		}
+		response.setOrderFeeInfo(orderFeeInfo);
 		//
 		return response;
 	}

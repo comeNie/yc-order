@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.opt.sdk.util.StringUtil;
 import com.ai.yc.order.constants.OrdersConstants;
 import com.ai.yc.order.dao.mapper.bo.OrdOdStateChg;
@@ -63,6 +64,23 @@ public class OrdOdStateChgAtomSVImpl implements IOrdOdStateChgAtomSV {
 			criteria.andOrgStateIn(orgStateList);
 		}
 		return MapperFactory.getOrdOdStateChgMapper().selectByExample(example);
+	}
+
+	@Override
+	public OrdOdStateChg findByOrderIdAndOrgState(Long orderId, String orgState) {
+		OrdOdStateChgCriteria example = new OrdOdStateChgCriteria();
+		OrdOdStateChgCriteria.Criteria criteria = example.createCriteria();
+		criteria.andOrderIdEqualTo(orderId);
+		criteria.andOrgStateEqualTo(orgState);
+		//
+		List<OrdOdStateChg> list = MapperFactory.getOrdOdStateChgMapper().selectByExample(example);
+		OrdOdStateChg ordOdStateChg = null;
+		if(!CollectionUtil.isEmpty(list)){
+			ordOdStateChg = new OrdOdStateChg();
+			ordOdStateChg = list.get(0);
+		}
+		//
+		return ordOdStateChg;
 	}
 
 }
