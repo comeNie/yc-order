@@ -23,7 +23,10 @@ public class OrderReviewRequest extends BaseInfo {
 	 * 操作工号,必填
 	 */
 	private String operId;
-	
+	/**
+	 * 操作名
+	 */
+	private String operName;
 
 
 	public String getReasonDesc() {
@@ -56,6 +59,14 @@ public class OrderReviewRequest extends BaseInfo {
 
 	public void setOrderIdList(List<Long> orderIdList) {
 		this.orderIdList = orderIdList;
+	}
+
+	public String getOperName() {
+		return operName;
+	}
+
+	public void setOperName(String operName) {
+		this.operName = operName;
 	}
 
 }

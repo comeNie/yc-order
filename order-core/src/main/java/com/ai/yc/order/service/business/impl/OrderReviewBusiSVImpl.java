@@ -57,6 +57,7 @@ public class OrderReviewBusiSVImpl implements IOrderReviewBusiSV {
 				OrdOdStateChg ordOdStateChg = new OrdOdStateChg();
 				ordOdStateChg.setOrderId(order.getOrderId());
 				ordOdStateChg.setOperId(request.getOperId());
+				ordOdStateChg.setOperName(request.getOperName());
 				ordOdStateChg.setOrgState(OrdersConstants.OrderState.WAIT_REVIEW_STATE);
 				ordOdStateChg.setNewState(OrdersConstants.OrderDisplayFlag.FLAG_WAIT_OK);
 				ordOdStateChgBusiSV.checkChgDesc(ordOdStateChg);
@@ -80,6 +81,7 @@ public class OrderReviewBusiSVImpl implements IOrderReviewBusiSV {
 				ordOdStateChg.setOrderId(order.getOrderId());
 				ordOdStateChg.setOrgId(OrdersConstants.OrgID.ORG_ID_USER);
 				ordOdStateChg.setOperId(request.getOperId());
+				ordOdStateChg.setOperName(request.getOperName());
 				ordOdStateChg.setOrgState(OrdersConstants.OrderState.WAIT_REVIEW_STATE);
 				ordOdStateChg.setNewState(OrdersConstants.OrderState.STATE_TRASLATING);
 				ordOdStateChgBusiSV.checkChgDesc(ordOdStateChg);
