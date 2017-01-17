@@ -8,8 +8,10 @@ import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.ai.opt.sdk.util.BeanUtils;
 import com.ai.opt.sdk.util.DateUtil;
+import com.ai.opt.sdk.util.StringUtil;
 import com.ai.yc.order.api.orderpay.param.OrderPayProcessedResultRequest;
 import com.ai.yc.order.api.orderpay.param.OrderPayProcessedResultResponse;
+import com.ai.yc.order.api.orderpay.param.OrderPayProcessedResultStateChgInfo;
 import com.ai.yc.order.constants.OrdOdStateChgConstants;
 import com.ai.yc.order.constants.OrdersConstants;
 import com.ai.yc.order.dao.mapper.bo.OrdBalacneIf;
@@ -69,8 +71,10 @@ public class OrderPayProcessedResultBusiSVImpl implements IOrderPayProcessedResu
 		String oldState = ordOrderDb.getState();// 数据库获取订单当前状态
 		String newState = OrdersConstants.OrderState.STATE_WAIT_RECEIVE;// 新状态为
 																		// 待领取
+		// return operName 2017-01-17 17:13 zhangzd
+		String operName = this.returnOperName(request.getStateChgInfo());
 		//
-		this.orderStateChgInfoSubmit(userId, orderId, translateType, oldState, newState);
+		this.orderStateChgInfoSubmit(userId, orderId, translateType, oldState, newState, operName);
 		//
 		response.setOrderId(request.getBaseInfo().getOrderId());
 		//
@@ -173,7 +177,7 @@ public class OrderPayProcessedResultBusiSVImpl implements IOrderPayProcessedResu
 	 * 订单提交-订单轨迹表
 	 */
 	public void orderStateChgInfoSubmit(String userId, Long orderId, String translateType, String oldState,
-			String newState) {
+			String newState,String operName) {
 		OrdOdStateChg ordOdStateChg = new OrdOdStateChg();
 		//
 		Long stateChgId = SequenceUtil.createStateChgId();
@@ -181,6 +185,7 @@ public class OrderPayProcessedResultBusiSVImpl implements IOrderPayProcessedResu
 		ordOdStateChg.setStateChgId(stateChgId);
 		ordOdStateChg.setOrderId(orderId);
 		ordOdStateChg.setOperId(userId);
+		ordOdStateChg.setOperName(operName);
 		ordOdStateChg.setOrgState(oldState);
 		ordOdStateChg.setNewState(newState);
 		ordOdStateChg.setChgDesc("客户支付了订单");
@@ -190,6 +195,23 @@ public class OrderPayProcessedResultBusiSVImpl implements IOrderPayProcessedResu
 		ordOdStateChg.setFlag(OrdOdStateChgConstants.FLAG_USER);
 		ordOdStateChg.setStateChgTime(DateUtil.getSysDate());
 		this.ordOdStateChgAtomSV.insertSelective(ordOdStateChg);
+	}
+	/**
+	 * return operName
+	 * @author zhangzd
+	 */
+	public String returnOperName(OrderPayProcessedResultStateChgInfo stateChgInfo){
+		//
+		String operName = "";
+		if(null == stateChgInfo){
+			operName = "";
+		}else{
+			if(!StringUtil.isBlank(stateChgInfo.getOperName())){
+				operName = stateChgInfo.getOperName();
+			}
+		}
+		//
+		return operName;
 	}
 
 }

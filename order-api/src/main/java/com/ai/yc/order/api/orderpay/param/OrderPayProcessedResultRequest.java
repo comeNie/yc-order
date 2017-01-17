@@ -20,6 +20,10 @@ public class OrderPayProcessedResultRequest implements Serializable {
 	 * 产品信息
 	 */
 	private OrderPayProcessedResultProdInfo prodInfo;
+	/**
+	 * 用户信息
+	 */
+	private OrderPayProcessedResultStateChgInfo stateChgInfo;
 
 	public OrderPayProcessedResultBaseInfo getBaseInfo() {
 		return baseInfo;
@@ -43,6 +47,14 @@ public class OrderPayProcessedResultRequest implements Serializable {
 
 	public void setProdInfo(OrderPayProcessedResultProdInfo prodInfo) {
 		this.prodInfo = prodInfo;
+	}
+
+	public OrderPayProcessedResultStateChgInfo getStateChgInfo() {
+		return stateChgInfo;
+	}
+
+	public void setStateChgInfo(OrderPayProcessedResultStateChgInfo stateChgInfo) {
+		this.stateChgInfo = stateChgInfo;
 	}
 
 }
