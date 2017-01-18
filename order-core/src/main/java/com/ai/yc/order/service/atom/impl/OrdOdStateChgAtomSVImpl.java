@@ -37,6 +37,7 @@ public class OrdOdStateChgAtomSVImpl implements IOrdOdStateChgAtomSV {
 		if(flag != null && !StringUtil.isBlank(flag)){
 			criteria.andFlagEqualTo(flag);
 		}
+		example.setOrderByClause(" state_chg_time desc ");
 		return MapperFactory.getOrdOdStateChgMapper().selectByExample(example);
 	}
 	@Override
