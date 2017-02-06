@@ -12,5 +12,5 @@ import com.ai.yc.order.dao.mapper.bo.OrdOrder;
  */
 public interface IOrderCancelBusiSV {
 
-    public void orderCancel(OrdOrder ordOrder) throws BusinessException, SystemException;
+    public void orderCancel(OrdOrder ordOrder,String operName) throws BusinessException, SystemException;
 }

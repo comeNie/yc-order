@@ -17,6 +17,10 @@ public class OrderCancelRequest extends BaseInfo {
 	 * 操作工号,必填
 	 */
 	private String operId;
+	/**
+	 * 操作人员名称
+	 */
+	private String operName;
 
 	public Long getOrderId() {
 		return orderId;
@@ -40,6 +44,14 @@ public class OrderCancelRequest extends BaseInfo {
 
 	public void setOperId(String operId) {
 		this.operId = operId;
+	}
+
+	public String getOperName() {
+		return operName;
+	}
+
+	public void setOperName(String operName) {
+		this.operName = operName;
 	}
 
 }

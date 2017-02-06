@@ -27,11 +27,12 @@ public class OrderCancelBusiSVImpl implements IOrderCancelBusiSV {
     private IOrdOdStateChgBusiSV ordOdStateChgBusiSV;
 
     @Override
-    public void orderCancel(OrdOrder ordOrder) throws BusinessException, SystemException {
+    public void orderCancel(OrdOrder ordOrder,String operName) throws BusinessException, SystemException {
     	/* 2.写入订单状态变化轨迹表 */
         OrdOdStateChg ordOdStateChg = new OrdOdStateChg();
         ordOdStateChg.setOrderId(ordOrder.getOrderId());
         ordOdStateChg.setOperId(ordOrder.getOperId());
+        ordOdStateChg.setOperName(operName);
         ordOdStateChg.setOrgState(ordOrder.getState());
         ordOdStateChg.setNewState(OrdersConstants.OrderState.CANCEL_STATE);
         ordOdStateChgBusiSV.addCloseChgDesc(ordOdStateChg);

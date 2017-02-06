@@ -65,7 +65,7 @@ public class OrderCancelSVImpl implements IOrderCancelSV {
 			ordOrder.setState(noPriceOrders.get(0).getState());
 		}
 		 //4.取消订单
-		orderCancelBusiSV.orderCancel(ordOrder);
+		orderCancelBusiSV.orderCancel(ordOrder,request.getOperName());
 		ResponseHeader header=new ResponseHeader(true, ExceptCodeConstants.Special.SUCCESS, "关闭订单成功");
 		response.setResponseHeader(header);
 		//刷新数据到搜索引擎
