@@ -86,7 +86,7 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 			int waitCommentCount = countAllOrders(orderRequest, request.getInterperLevel(),request.getLanguageIds());
 			countMap.put(OrdersConstants.OrderDisplayFlag.FLAG_WAIT_COMMENT, waitCommentCount);
 
-		} else if (!StringUtil.isBlank(request.getInterperId()) || !StringUtil.isBlank(request.getInterperId())) {
+		} else if (!StringUtil.isBlank(request.getInterperId()) || !StringUtil.isBlank(request.getLspId())) {
 			// 待支付
 			orderRequest.setState(OrdersConstants.OrderState.STATE_RECEIVED);
 			int receivedCount = countAllOrders(orderRequest, request.getInterperLevel(),request.getLanguageIds());
@@ -325,10 +325,10 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
 		}
 		// 如果lspid不为空
-		/*if (!StringUtil.isBlank(request.getLspId())) {
+		if (!StringUtil.isBlank(request.getLspId())) {
 			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.LSP_ID, request.getLspId(),
 					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
-		}*/
+		}
 		// 如果译员id不为空
 		if (!StringUtil.isBlank(request.getInterperId())) {
 			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.INTERPER_ID, request.getInterperId(),
