@@ -48,7 +48,6 @@ import com.alibaba.fastjson.TypeReference;
 public class OrderQuerySVImpl implements IOrderQuerySV {
 	@Autowired
 	IOrdOrderBusiSV iOrdOrderBusiSV;
-	
 
 	@Override
 	public QueryOrderRsponse queryOrder(QueryOrderRequest request) throws BusinessException, SystemException {
@@ -73,18 +72,18 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 		IOrderSearch orderSearch = new OrderSearchImpl();
 		List<SearchCriteria> orderSearchCriteria = commonConditions(request);
 		List<Sort> sortList = new ArrayList<Sort>();
-		if(!StringUtil.isBlank(request.getOrderByFlag())){
-			if("1".equals(request.getOrderByFlag())){
+		if (!StringUtil.isBlank(request.getOrderByFlag())) {
+			if ("1".equals(request.getOrderByFlag())) {
 				Sort sort = new Sort(SearchFieldConfConstants.TAKE_DAY, SortOrder.DESC);
 				sortList.add(sort);
-			}else if("2".equals(request.getOrderByFlag())){
+			} else if ("2".equals(request.getOrderByFlag())) {
 				Sort sort = new Sort(SearchFieldConfConstants.TAKE_TIME, SortOrder.DESC);
 				sortList.add(sort);
-			}else if("3".equals(request.getOrderByFlag())){
+			} else if ("3".equals(request.getOrderByFlag())) {
 				Sort sort = new Sort(SearchFieldConfConstants.TOTAL_FEE, SortOrder.DESC);
 				sortList.add(sort);
 			}
-		}else{
+		} else {
 			Sort sort = new Sort(SearchFieldConfConstants.ORDER_TIME, SortOrder.DESC);
 			sortList.add(sort);
 		}
@@ -120,13 +119,23 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 				order.setTranslateName(ord.getTranslatename());
 				order.setTranslateType(ord.getTranslatetype());
 				order.setUpdateOperName(ord.getUpdatename());
+				order.setDiscountFee(ord.getDiscountfee());
+				// 评论信息
+				order.setEvaluateContent(ord.getEvaluatecontent());
+				order.setEvaluateSun(ord.getEvaluatesun());
+				order.setServeManner(ord.getServemanner());
+				order.setServeQuality(ord.getServequality());
+				order.setServeSpeed(ord.getServespeed());
+				if (ord.getEvaluatetime() != null) {
+					order.setEvaluateTime(new Timestamp(ord.getEvaluatetime().getTime()));
+				}
 				if (ord.getStarttime() != null) {
 					order.setStartTime(new Timestamp(ord.getStarttime().getTime()));
 				}
 				if (ord.getEndtime() != null) {
 					order.setEndTime(new Timestamp(ord.getEndtime().getTime()));
 				}
-				if(ord.getProdupdatetime()!=null){
+				if (ord.getProdupdatetime() != null) {
 					order.setProdUpdateTime(new Timestamp(ord.getProdupdatetime().getTime()));
 				}
 				if (ord.getStatechgtime() != null) {
@@ -152,7 +161,7 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 					Timestamp scurrtest = new Timestamp(time);
 					order.setRemainingTime(scurrtest);
 				}
-				if(ord.getEndchgtime()!=null){
+				if (ord.getEndchgtime() != null) {
 					order.setEndChgTime(new Timestamp(ord.getEndchgtime().getTime()));
 				}
 				// 获取语言对名称
@@ -249,7 +258,8 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 		// 如果翻译主题不为空
 		if (!StringUtil.isBlank(request.getTranslateName())) {
 			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.TRANSLATE_NAME, request.getTranslateName(),
-					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.match,SearchOption.TermOperator.AND)));
+					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.match,
+							SearchOption.TermOperator.AND)));
 		}
 		// 如果企业id不为空
 		if (!StringUtil.isBlank(request.getCorporaId())) {
@@ -314,17 +324,20 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 		// 如果用户昵称不为空
 		if (!StringUtil.isBlank(request.getUserName())) {
 			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.USER_NAME, request.getUserName(),
-					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.match,SearchOption.TermOperator.AND)));
+					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.match,
+							SearchOption.TermOperator.AND)));
 		}
 		// 如果译员名称不为空
 		if (!StringUtil.isBlank(request.getInterperName())) {
 			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.INTERPER_NAME, request.getInterperName(),
-					new SearchOption(SearchOption.SearchLogic.must,SearchOption.SearchType.match,SearchOption.TermOperator.AND)));
+					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.match,
+							SearchOption.TermOperator.AND)));
 		}
 		// 如果lsp名称不为空
 		if (!StringUtil.isBlank(request.getLspName())) {
 			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.LSP_NAME, request.getLspName(),
-					new SearchOption(SearchOption.SearchLogic.must,SearchOption.SearchType.match,SearchOption.TermOperator.AND)));
+					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.match,
+							SearchOption.TermOperator.AND)));
 		}
 		// 如果支付方式不为空
 		if (!StringUtil.isBlank(request.getPayStyle())) {
@@ -333,9 +346,9 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 		}
 		// 如果报价人不为空
 		if (!StringUtil.isBlank(request.getUpdateOperName())) {
-			searchfieldVos
-					.add(new SearchCriteria(SearchFieldConfConstants.UPDATE_OPER_NAME, request.getUpdateOperName(),
-							new SearchOption(SearchOption.SearchLogic.must,SearchOption.SearchType.match,SearchOption.TermOperator.AND)));
+			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.UPDATE_OPER_NAME,
+					request.getUpdateOperName(), new SearchOption(SearchOption.SearchLogic.must,
+							SearchOption.SearchType.match, SearchOption.TermOperator.AND)));
 		}
 
 		// 如果状态变化开始、结束时间不为空
@@ -412,6 +425,7 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 			searchCriteria.addFieldValue(end);
 			searchfieldVos.add(searchCriteria);
 		}
+
 		// 如果领取开始、结束时间不为空
 		if (request.getLockTimeStart() != null && request.getLockTimeEnd() != null) {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZ");
@@ -560,8 +574,8 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 			searchCriteria.addFieldValue(end);
 			searchfieldVos.add(searchCriteria);
 		}
-		//状态集合不为空
-		if(!CollectionUtil.isEmpty(request.getStateList())){
+		// 状态集合不为空
+		if (!CollectionUtil.isEmpty(request.getStateList())) {
 			SearchCriteria searchCriteria = new SearchCriteria();
 			SearchOption option = new SearchOption();
 			option.setSearchLogic(SearchOption.SearchLogic.must);
@@ -569,6 +583,44 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 			searchCriteria.setFieldValue(request.getStateList());
 			searchCriteria.setField(SearchFieldConfConstants.STATE);
 			searchCriteria.setOption(option);
+			searchfieldVos.add(searchCriteria);
+		}
+
+		// 如果评价开始、结束时间不为空
+		if (request.getEvaluateTimeStart() != null && request.getEvaluateTimeEnd() != null) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZ");
+			String start = sdf.format(request.getEvaluateTimeStart());
+			String end = sdf.format(request.getEvaluateTimeEnd());
+			SearchCriteria searchCriteria = new SearchCriteria();
+			searchCriteria.setOption(new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.range));
+			searchCriteria.setField(SearchFieldConfConstants.EVALUATE_TIME);
+			searchCriteria.addFieldValue(start);
+			searchCriteria.addFieldValue(end);
+			searchfieldVos.add(searchCriteria);
+		}
+		// 如果评价开始时间不为空
+		if (request.getEvaluateTimeStart() != null && request.getEvaluateTimeEnd() == null) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZ");
+			String start = sdf.format(request.getEvaluateTimeStart());
+			String end = sdf.format(new Date());
+			SearchCriteria searchCriteria = new SearchCriteria();
+			searchCriteria.setOption(new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.range));
+			searchCriteria.setField(SearchFieldConfConstants.EVALUATE_TIME);
+			searchCriteria.addFieldValue(start);
+			searchCriteria.addFieldValue(end);
+			searchfieldVos.add(searchCriteria);
+		}
+		// 如果评价结束时间不为空
+		if (request.getEvaluateTimeStart() == null && request.getEvaluateTimeEnd() != null) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZ");
+			String end = sdf.format(request.getEvaluateTimeEnd());
+			Timestamp sTime = Timestamp.valueOf(OrdersConstants.START_TIME);
+			String start = sdf.format(sTime);
+			SearchCriteria searchCriteria = new SearchCriteria();
+			searchCriteria.setOption(new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.range));
+			searchCriteria.setField(SearchFieldConfConstants.EVALUATE_TIME);
+			searchCriteria.addFieldValue(start);
+			searchCriteria.addFieldValue(end);
 			searchfieldVos.add(searchCriteria);
 		}
 		return searchfieldVos;

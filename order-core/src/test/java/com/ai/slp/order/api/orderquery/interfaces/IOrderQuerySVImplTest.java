@@ -46,7 +46,11 @@ public class IOrderQuerySVImplTest extends BaseTest{
 		request.setSubFlag("1");*/
 		//request.setTranslateName("翻译");
 		Timestamp ts = Timestamp.valueOf("2016-11-08 10:20:12");
-		Timestamp es = Timestamp.valueOf("2018-11-14 20:20:12");
+		Timestamp es = Timestamp.valueOf("2017-11-14 20:20:12");
+		request.setOrderTimeStart(ts);
+		request.setEvaluateTimeStart(ts);
+		//request.setEvaluateTimeEnd(es);
+		request.setOrderId(123l);
 			//request.setPayTimeStart(ts);
 		//request.setOrderTimeEnd(es);
 		//request.setStateChgTimeEnd(es);
@@ -57,7 +61,7 @@ public class IOrderQuerySVImplTest extends BaseTest{
 		Object o2 = "91";
 		list.add(o1);
 		list.add(o2);*/
-		request.setState("90");
+		//request.setState("90");
 		//request.setStateList(list);
 		//request.setOrderByFlag("3");
 		//request.setUserId("100329");

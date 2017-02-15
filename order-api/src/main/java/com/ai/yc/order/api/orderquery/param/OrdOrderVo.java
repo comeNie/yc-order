@@ -174,6 +174,91 @@ public class OrdOrderVo extends BaseInfo {
 	 */
 	private List<OrdProdLevelVo> ordProdLevelList;
 
+	/**
+	 * 总优惠费用
+	 */
+	private Long discountFee;
+	/**
+	 * 评论等级
+	 */
+	private String evaluateSun;
+	/**
+	 * 服务质量
+	 */
+	private Long serveQuality;
+	/**
+	 * 服务速度
+	 */
+	private Long serveSpeed;
+	/**
+	 * 服务态度
+	 */
+	private Long serveManner;
+	/**
+	 * 评论内容
+	 */
+	private String evaluateContent;
+	/**
+	 * 评论时间
+	 */
+	private Timestamp evaluateTime;
+
+	public Long getDiscountFee() {
+		return discountFee;
+	}
+
+	public void setDiscountFee(Long discountFee) {
+		this.discountFee = discountFee;
+	}
+
+	public String getEvaluateSun() {
+		return evaluateSun;
+	}
+
+	public void setEvaluateSun(String evaluateSun) {
+		this.evaluateSun = evaluateSun;
+	}
+
+	public Long getServeQuality() {
+		return serveQuality;
+	}
+
+	public void setServeQuality(Long serveQuality) {
+		this.serveQuality = serveQuality;
+	}
+
+	public Long getServeSpeed() {
+		return serveSpeed;
+	}
+
+	public void setServeSpeed(Long serveSpeed) {
+		this.serveSpeed = serveSpeed;
+	}
+
+	public Long getServeManner() {
+		return serveManner;
+	}
+
+	public void setServeManner(Long serveManner) {
+		this.serveManner = serveManner;
+	}
+
+	public String getEvaluateContent() {
+		return evaluateContent;
+	}
+
+	public void setEvaluateContent(String evaluateContent) {
+		this.evaluateContent = evaluateContent;
+	}
+
+	public Timestamp getEvaluateTime() {
+		return evaluateTime;
+	}
+
+	public void setEvaluateTime(Timestamp evaluateTime) {
+		this.evaluateTime = evaluateTime;
+	}
+
 	public Long getOrderId() {
 		return orderId;
 	}
@@ -485,7 +570,5 @@ public class OrdOrderVo extends BaseInfo {
 	public void setProdUpdateTime(Timestamp prodUpdateTime) {
 		this.prodUpdateTime = prodUpdateTime;
 	}
-
-	
 
 }

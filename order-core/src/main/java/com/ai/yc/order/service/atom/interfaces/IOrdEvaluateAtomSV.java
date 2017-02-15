@@ -1,5 +1,7 @@
 package com.ai.yc.order.service.atom.interfaces;
 
-public interface IOrdEvaluateAtomSV {
+import com.ai.yc.order.dao.mapper.bo.OrdEvaluate;
 
+public interface IOrdEvaluateAtomSV {
+	OrdEvaluate findByOrderId(Long orderId);
 }

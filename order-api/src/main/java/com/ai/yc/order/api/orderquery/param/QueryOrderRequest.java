@@ -184,7 +184,16 @@ public class QueryOrderRequest extends BaseInfo {
 	 * 状态结束时间
 	 */
 	private Timestamp stateTimeEnd;
-	
+	/**
+	 * 评价开始时间
+	 */
+	private Timestamp evaluateTimeStart;
+	/**
+	 * 评价结束时间
+	 */
+
+	private Timestamp evaluateTimeEnd;
+
 	/**
 	 * 状态集合
 	 */
@@ -562,6 +571,22 @@ public class QueryOrderRequest extends BaseInfo {
 
 	public void setOrderByFlag(String orderByFlag) {
 		this.orderByFlag = orderByFlag;
+	}
+
+	public Timestamp getEvaluateTimeStart() {
+		return evaluateTimeStart;
+	}
+
+	public void setEvaluateTimeStart(Timestamp evaluateTimeStart) {
+		this.evaluateTimeStart = evaluateTimeStart;
+	}
+
+	public Timestamp getEvaluateTimeEnd() {
+		return evaluateTimeEnd;
+	}
+
+	public void setEvaluateTimeEnd(Timestamp evaluateTimeEnd) {
+		this.evaluateTimeEnd = evaluateTimeEnd;
 	}
 
 }

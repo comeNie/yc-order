@@ -18,6 +18,7 @@ import com.ai.yc.common.api.sysuser.param.SysUserQueryRequest;
 import com.ai.yc.common.api.sysuser.param.SysUserQueryResponse;
 import com.ai.yc.order.constants.OrdersConstants;
 import com.ai.yc.order.constants.SearchConstants;
+import com.ai.yc.order.dao.mapper.bo.OrdEvaluate;
 import com.ai.yc.order.dao.mapper.bo.OrdOdFeeTotal;
 import com.ai.yc.order.dao.mapper.bo.OrdOdProd;
 import com.ai.yc.order.dao.mapper.bo.OrdOdProdExtend;
@@ -26,6 +27,7 @@ import com.ai.yc.order.dao.mapper.bo.OrdOrder;
 import com.ai.yc.order.search.bo.OrdProdExtend;
 import com.ai.yc.order.search.bo.OrdProdLevel;
 import com.ai.yc.order.search.bo.OrderInfo;
+import com.ai.yc.order.service.atom.interfaces.IOrdEvaluateAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdFeeTotalAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdProdAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdProdExtendAtomSV;
@@ -54,6 +56,8 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 	private IOrdOrderAtomSV ordOrderAtomSV;
 	@Autowired
 	private IOrdOdProdLevelAtomSV ordOdProdLevelAtomSV;
+	@Autowired
+	private IOrdEvaluateAtomSV ordEvaluateAtomSV;
 	@Override
 	public List<OrderInfo> orderFillQuery(List<OrdOrder> ordList) throws BusinessException, SystemException {
 
@@ -117,6 +121,16 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 					ordInfo.setInterpername(interper.getNickname());
 				}
 			}
+			//获取评价信息
+			OrdEvaluate ordEvaluate = ordEvaluateAtomSV.findByOrderId(ord.getOrderId());
+			if(ordEvaluate!=null){
+				ordInfo.setServemanner(ordEvaluate.getServeManner());
+				ordInfo.setServequality(ordEvaluate.getServeQuality());
+				ordInfo.setServespeed(ordEvaluate.getServeSpeen());
+				ordInfo.setEvaluatecontent(ordEvaluate.getEvaluateContent());
+				ordInfo.setEvaluatesun(ordEvaluate.getEvaluateSun());
+				ordInfo.setEvaluatetime(ordEvaluate.getEvaluateTime());
+			}
 			// 查询商品信息
 			OrdOdProd ordOdProd = ordOdProdAtomSV.findByOrderId(ord.getOrderId());
 			if (ordOdProd != null) {
@@ -168,6 +182,7 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 				ordInfo.setUpdateoperid(ordOdFeeTotal.getUpdateOperId());
 				ordInfo.setUpdatetime(ordOdFeeTotal.getUpdateTime());
 				ordInfo.setTotalfee(ordOdFeeTotal.getTotalFee());
+				ordInfo.setDiscountfee(ordOdFeeTotal.getDiscountFee());
 				ordInfo.setCurrencyunit(ordOdFeeTotal.getCurrencyUnit());
 				ordInfo.setPaystyle(ordOdFeeTotal.getPayStyle());
 				ordInfo.setPaytime(ordOdFeeTotal.getPayTime());
@@ -243,6 +258,16 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 							ordInfo.setInterpername(interper.getNickname());
 						}
 					}
+					//获取评价信息
+					OrdEvaluate ordEvaluate = ordEvaluateAtomSV.findByOrderId(ord.getOrderId());
+					if(ordEvaluate!=null){
+						ordInfo.setServemanner(ordEvaluate.getServeManner());
+						ordInfo.setServequality(ordEvaluate.getServeQuality());
+						ordInfo.setServespeed(ordEvaluate.getServeSpeen());
+						ordInfo.setEvaluatecontent(ordEvaluate.getEvaluateContent());
+						ordInfo.setEvaluatesun(ordEvaluate.getEvaluateSun());
+						ordInfo.setEvaluatetime(ordEvaluate.getEvaluateTime());
+					}
 					// 查询商品信息
 					OrdOdProd ordOdProd = ordOdProdAtomSV.findByOrderId(ord.getOrderId());
 					if (ordOdProd != null) {
@@ -275,6 +300,7 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 						ordInfo.setUpdatetime(ordOdFeeTotal.getUpdateTime());
 						ordInfo.setCurrencyunit(ordOdFeeTotal.getCurrencyUnit());
 						ordInfo.setTotalfee(ordOdFeeTotal.getTotalFee());
+						ordInfo.setDiscountfee(ordOdFeeTotal.getDiscountFee());
 						ordInfo.setPaystyle(ordOdFeeTotal.getPayStyle());
 						ordInfo.setPaytime(ordOdFeeTotal.getPayTime());
 						if(!StringUtil.isBlank(ordOdFeeTotal.getUpdateOperId())){

@@ -46,6 +46,10 @@ public class OrderInfo {
 	private Date endchgtime;
 	private String interpername;
 	/**
+	 * 总优惠费用
+	 */
+	private long  discountfee;
+	/**
 	 * 产品变更时间
 	 */
 	private Date produpdatetime;
@@ -63,13 +67,40 @@ public class OrderInfo {
 	private Date updatetime;
 
 	/**
-	 * 語言對
+	 * 语言对
 	 */
 	private List<OrdProdExtend> ordextendes;
 	/**
-	 * 翻譯級別
+	 * 翻译级别
 	 */
 	private List<OrdProdLevel> ordprodleveles;
+	/**
+	 * 评论等级
+	 */
+	private String  evaluatesun;
+	/**
+	 * 服务质量
+	 */
+	private long  servequality;
+	/**
+	 * 服务速度
+	 */
+	private long  servespeed;
+	/**
+	 * 服务态度
+	 */
+	private long  servemanner;
+	/**
+	 * 评论内容
+	 */
+	private String  evaluatecontent;
+	/**
+	 * 评论时间
+	 */
+	private Date   evaluatetime;
+		
+	
+	
 	public String getOrderid() {
 		return orderid;
 	}
@@ -444,6 +475,62 @@ public class OrderInfo {
 
 	public void setEsendtime(Date esendtime) {
 		this.esendtime = esendtime;
+	}
+
+	public String getEvaluatesun() {
+		return evaluatesun;
+	}
+
+	public void setEvaluatesun(String evaluatesun) {
+		this.evaluatesun = evaluatesun;
+	}
+
+	public long getServequality() {
+		return servequality;
+	}
+
+	public void setServequality(long servequality) {
+		this.servequality = servequality;
+	}
+
+	public long getServespeed() {
+		return servespeed;
+	}
+
+	public void setServespeed(long servespeed) {
+		this.servespeed = servespeed;
+	}
+
+	public long getServemanner() {
+		return servemanner;
+	}
+
+	public void setServemanner(long servemanner) {
+		this.servemanner = servemanner;
+	}
+
+	public String getEvaluatecontent() {
+		return evaluatecontent;
+	}
+
+	public void setEvaluatecontent(String evaluatecontent) {
+		this.evaluatecontent = evaluatecontent;
+	}
+
+	public Date getEvaluatetime() {
+		return evaluatetime;
+	}
+
+	public void setEvaluatetime(Date evaluatetime) {
+		this.evaluatetime = evaluatetime;
+	}
+
+	public long getDiscountfee() {
+		return discountfee;
+	}
+
+	public void setDiscountfee(long discountfee) {
+		this.discountfee = discountfee;
 	}
 
 }

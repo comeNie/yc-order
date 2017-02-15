@@ -40,7 +40,8 @@ public class SearchFieldConfConstants {
     public static final String TAKE_TIME = "taketime";
     public static final String TOTAL_FEE = "totalfee";
     public static final String INTERPER_NAME = "interpername";
-    public static final String ESEND_TIME = "esendtime";
+    public static final String ESEND_TIME = "esendtime";  
+    public static final String EVALUATE_TIME = "evaluatetime";
     
     
     
