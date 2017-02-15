@@ -19,6 +19,7 @@ import com.ai.yc.order.dao.mapper.interfaces.OrdOdProdLevelMapper;
 import com.ai.yc.order.dao.mapper.interfaces.OrdOdProdMapper;
 import com.ai.yc.order.dao.mapper.interfaces.OrdOdStateChgMapper;
 import com.ai.yc.order.dao.mapper.interfaces.OrdOrderMapper;
+import com.ai.yc.order.dao.mapper.interfaces.OrdReceiveTaskMapper;
 
 
 @Component
@@ -89,6 +90,10 @@ public class MapperFactory {
     
     public static OrdOdProdLevelMapper getOrdOdProdLevelMapper(){
     	return sqlSessionTemplate.getMapper(OrdOdProdLevelMapper.class);
+    }
+    
+    public static OrdReceiveTaskMapper getOrdReceiveTaskMapper(){
+    	return sqlSessionTemplate.getMapper(OrdReceiveTaskMapper.class);
     }
 }
 

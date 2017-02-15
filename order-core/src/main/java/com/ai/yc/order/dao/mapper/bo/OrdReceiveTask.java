@@ -2,10 +2,12 @@ package com.ai.yc.order.dao.mapper.bo;
 
 import java.sql.Timestamp;
 
-public class OrdOdPersonInfo {
-    private Long personId;
+public class OrdReceiveTask {
+    private Long id;
 
     private Long orderId;
+
+    private Long personId;
 
     private String operType;
 
@@ -15,24 +17,18 @@ public class OrdOdPersonInfo {
 
     private String tel;
 
-    private Long interperFee;
-
-    private Timestamp creartTime;
-
-    private String remark;
+    private Timestamp receiveTime;
 
     private String step;
 
-    private String receiveState;
+    private String state;
 
-    private Timestamp expectEndTime;
-
-    public Long getPersonId() {
-        return personId;
+    public Long getId() {
+        return id;
     }
 
-    public void setPersonId(Long personId) {
-        this.personId = personId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getOrderId() {
@@ -41,6 +37,14 @@ public class OrdOdPersonInfo {
 
     public void setOrderId(Long orderId) {
         this.orderId = orderId;
+    }
+
+    public Long getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(Long personId) {
+        this.personId = personId;
     }
 
     public String getOperType() {
@@ -75,28 +79,12 @@ public class OrdOdPersonInfo {
         this.tel = tel == null ? null : tel.trim();
     }
 
-    public Long getInterperFee() {
-        return interperFee;
+    public Timestamp getReceiveTime() {
+        return receiveTime;
     }
 
-    public void setInterperFee(Long interperFee) {
-        this.interperFee = interperFee;
-    }
-
-    public Timestamp getCreartTime() {
-        return creartTime;
-    }
-
-    public void setCreartTime(Timestamp creartTime) {
-        this.creartTime = creartTime;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark == null ? null : remark.trim();
+    public void setReceiveTime(Timestamp receiveTime) {
+        this.receiveTime = receiveTime;
     }
 
     public String getStep() {
@@ -107,19 +95,11 @@ public class OrdOdPersonInfo {
         this.step = step == null ? null : step.trim();
     }
 
-    public String getReceiveState() {
-        return receiveState;
+    public String getState() {
+        return state;
     }
 
-    public void setReceiveState(String receiveState) {
-        this.receiveState = receiveState == null ? null : receiveState.trim();
-    }
-
-    public Timestamp getExpectEndTime() {
-        return expectEndTime;
-    }
-
-    public void setExpectEndTime(Timestamp expectEndTime) {
-        this.expectEndTime = expectEndTime;
+    public void setState(String state) {
+        this.state = state == null ? null : state.trim();
     }
 }
