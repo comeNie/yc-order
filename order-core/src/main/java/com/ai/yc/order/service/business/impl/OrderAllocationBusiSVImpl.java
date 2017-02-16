@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ai.opt.sdk.util.BeanUtils;
 import com.ai.opt.sdk.util.DateUtil;
+import com.ai.yc.order.api.orderallocation.param.OrderAllocationExtendInfo;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationRequest;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationResponse;
 import com.ai.yc.order.constants.OrdOdStateChgConstants;
@@ -33,12 +34,16 @@ public class OrderAllocationBusiSVImpl implements IOrderAllocationBusiSV {
 		//
 		OrderAllocationResponse response = new OrderAllocationResponse();
 		//1.分配人员信息表入库
-		OrdOdPersonInfo ordOdPersonInfo = new OrdOdPersonInfo();
-		BeanUtils.copyVO(ordOdPersonInfo, request.getOrderAllocationExtendInfo());
-		ordOdPersonInfo.setOrderId(request.getOrderAllocationBaseInfo().getOrderId());
-		ordOdPersonInfo.setPersonId(SequenceUtil.createPersonId());
-		//
-		this.ordOdPersonInfoAtomSV.insertSelective(ordOdPersonInfo);
+		for(OrderAllocationExtendInfo orderAllocationExtendInfo : request.getOrderAllocationExtendInfoList() ){
+			//
+			OrdOdPersonInfo ordOdPersonInfo = new OrdOdPersonInfo();
+			BeanUtils.copyVO(ordOdPersonInfo, orderAllocationExtendInfo);
+			ordOdPersonInfo.setOrderId(request.getOrderAllocationBaseInfo().getOrderId());
+			ordOdPersonInfo.setPersonId(SequenceUtil.createPersonId());
+			//
+			this.ordOdPersonInfoAtomSV.insertSelective(ordOdPersonInfo);
+		}
+		
 		//2.修改订单主表状态字段
 		//2.1 先查询订单主表信息
 		OrdOrder ordOrderDb = this.ordOrderAtomSV.findByPrimaryKey(request.getOrderAllocationBaseInfo().getOrderId());

@@ -1,6 +1,7 @@
 package com.ai.yc.order.api.orderallocation.param;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class OrderAllocationRequest implements Serializable {
 
@@ -15,7 +16,7 @@ public class OrderAllocationRequest implements Serializable {
 	/**
 	 * 订单分配信息
 	 */
-	private OrderAllocationExtendInfo orderAllocationExtendInfo;
+	private List<OrderAllocationExtendInfo> orderAllocationExtendInfoList;
 
 	public OrderAllocationBaseInfo getOrderAllocationBaseInfo() {
 		return orderAllocationBaseInfo;
@@ -25,11 +26,12 @@ public class OrderAllocationRequest implements Serializable {
 		this.orderAllocationBaseInfo = orderAllocationBaseInfo;
 	}
 
-	public OrderAllocationExtendInfo getOrderAllocationExtendInfo() {
-		return orderAllocationExtendInfo;
+	public List<OrderAllocationExtendInfo> getOrderAllocationExtendInfoList() {
+		return orderAllocationExtendInfoList;
 	}
 
-	public void setOrderAllocationExtendInfo(OrderAllocationExtendInfo orderAllocationExtendInfo) {
-		this.orderAllocationExtendInfo = orderAllocationExtendInfo;
+	public void setOrderAllocationExtendInfoList(List<OrderAllocationExtendInfo> orderAllocationExtendInfoList) {
+		this.orderAllocationExtendInfoList = orderAllocationExtendInfoList;
 	}
+
 }
