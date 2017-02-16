@@ -40,6 +40,7 @@ public class OrderAllocationBusiSVImpl implements IOrderAllocationBusiSV {
 			BeanUtils.copyVO(ordOdPersonInfo, orderAllocationExtendInfo);
 			ordOdPersonInfo.setOrderId(request.getOrderAllocationBaseInfo().getOrderId());
 			ordOdPersonInfo.setPersonId(SequenceUtil.createPersonId());
+			ordOdPersonInfo.setReceiveState("0");//0:未领取
 			//
 			this.ordOdPersonInfoAtomSV.insertSelective(ordOdPersonInfo);
 		}
