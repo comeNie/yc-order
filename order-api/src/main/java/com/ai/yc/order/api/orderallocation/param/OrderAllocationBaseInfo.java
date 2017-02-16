@@ -16,6 +16,30 @@ public class OrderAllocationBaseInfo implements Serializable {
 	 * 订单状态
 	 */
 	private String state;
+	/**
+	 * 用户id
+	 */
+	private String userId;
+	/**
+	 * 操作者昵称
+	 */
+	private String operName;
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public String getOperName() {
+		return operName;
+	}
+
+	public void setOperName(String operName) {
+		this.operName = operName;
+	}
 
 	public Long getOrderId() {
 		return orderId;
