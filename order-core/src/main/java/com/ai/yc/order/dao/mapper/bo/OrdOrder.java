@@ -77,6 +77,8 @@ public class OrdOrder {
 
     private Timestamp endChgTime;
 
+    private String parentOrderId;
+
     public Long getOrderId() {
         return orderId;
     }
@@ -371,5 +373,13 @@ public class OrdOrder {
 
     public void setEndChgTime(Timestamp endChgTime) {
         this.endChgTime = endChgTime;
+    }
+
+    public String getParentOrderId() {
+        return parentOrderId;
+    }
+
+    public void setParentOrderId(String parentOrderId) {
+        this.parentOrderId = parentOrderId == null ? null : parentOrderId.trim();
     }
 }

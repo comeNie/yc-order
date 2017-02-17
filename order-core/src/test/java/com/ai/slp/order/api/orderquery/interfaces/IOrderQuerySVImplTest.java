@@ -45,10 +45,10 @@ public class IOrderQuerySVImplTest extends BaseTest{
 		request.setState("11");
 		request.setSubFlag("1");*/
 		//request.setTranslateName("翻译");
-		Timestamp ts = Timestamp.valueOf("2016-11-08 10:20:12");
+		Timestamp ts = Timestamp.valueOf("2017-02-14 12:47:12");
 		Timestamp es = Timestamp.valueOf("2017-11-14 20:20:12");
-		request.setOrderTimeStart(ts);
-		request.setEvaluateTimeStart(ts);
+		//request.setOrderTimeStart(ts);
+		//request.setEvaluateTimeStart(ts);
 		//request.setEvaluateTimeEnd(es);
 		request.setOrderId(123l);
 			//request.setPayTimeStart(ts);

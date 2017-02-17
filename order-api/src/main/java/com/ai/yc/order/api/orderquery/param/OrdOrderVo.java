@@ -202,6 +202,18 @@ public class OrdOrderVo extends BaseInfo {
 	 * 评论时间
 	 */
 	private Timestamp evaluateTime;
+	/**
+	 * 译员级别
+	 */
+	private String interLevel;
+	/**
+	 * 父订单ID
+	 */
+	private String parentOrderId;
+	/**
+	 * 评价状态
+	 */
+	private String evaluateState;
 
 	public Long getDiscountFee() {
 		return discountFee;
@@ -569,6 +581,30 @@ public class OrdOrderVo extends BaseInfo {
 
 	public void setProdUpdateTime(Timestamp prodUpdateTime) {
 		this.prodUpdateTime = prodUpdateTime;
+	}
+
+	public String getInterLevel() {
+		return interLevel;
+	}
+
+	public void setInterLevel(String interLevel) {
+		this.interLevel = interLevel;
+	}
+
+	public String getParentOrderId() {
+		return parentOrderId;
+	}
+
+	public void setParentOrderId(String parentOrderId) {
+		this.parentOrderId = parentOrderId;
+	}
+
+	public String getEvaluateState() {
+		return evaluateState;
+	}
+
+	public void setEvaluateState(String evaluateState) {
+		this.evaluateState = evaluateState;
 	}
 
 }

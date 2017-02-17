@@ -42,6 +42,7 @@ public class SearchFieldConfConstants {
     public static final String INTERPER_NAME = "interpername";
     public static final String ESEND_TIME = "esendtime";  
     public static final String EVALUATE_TIME = "evaluatetime";
+    public static final String BUSI_TYPE = "busitype";
     
     
     

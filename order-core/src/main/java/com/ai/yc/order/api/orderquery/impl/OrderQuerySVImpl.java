@@ -94,7 +94,6 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 				OrdOrderVo order = new OrdOrderVo();
 				List<OrdProdExtendVo> ordProdExtendList = new ArrayList<OrdProdExtendVo>();
 				List<OrdProdLevelVo> ordProdLevelList = new ArrayList<OrdProdLevelVo>();
-
 				// 订单id
 				order.setOrderId(Long.valueOf(ord.getOrderid()));
 				order.setBusiType(ord.getBusitype());
@@ -126,6 +125,9 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 				order.setServeManner(ord.getServemanner());
 				order.setServeQuality(ord.getServequality());
 				order.setServeSpeed(ord.getServespeed());
+				order.setEvaluateState(ord.getEvaluatestate());
+				order.setInterLevel(ord.getInterperlevel());
+				order.setParentOrderId(ord.getParentorderid());
 				if (ord.getEvaluatetime() != null) {
 					order.setEvaluateTime(new Timestamp(ord.getEvaluatetime().getTime()));
 				}
@@ -255,6 +257,13 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.TRANSLATE_TYPE, request.getTranslateType(),
 					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
 		}
+
+		// 如果业务类型不为空
+		if (!StringUtil.isBlank(request.getBusiType())) {
+			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.BUSI_TYPE, request.getBusiType(),
+					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
+		}
+
 		// 如果翻译主题不为空
 		if (!StringUtil.isBlank(request.getTranslateName())) {
 			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.TRANSLATE_NAME, request.getTranslateName(),

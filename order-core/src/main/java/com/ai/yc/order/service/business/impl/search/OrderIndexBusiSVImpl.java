@@ -67,6 +67,7 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 			List<OrdProdLevel> ordLevelLists = new ArrayList<OrdProdLevel>();
 			OrderInfo ordInfo = new OrderInfo();
 			ordInfo.setOrderid(ord.getOrderId().toString());
+			ordInfo.setParentorderid(ord.getParentOrderId());
 			ordInfo.setBusitype(ord.getBusiType());
 			ordInfo.setCorpoarid(ord.getCorporaId());
 			ordInfo.setFlag(ord.getFlag());
@@ -119,6 +120,7 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 				YCTranslatorInfoResponse  interper = iYCTranslatorServiceSV.searchYCTranslatorInfo(translatorRequest);
 				if(interper.getResponseHeader().isSuccess()==true){
 					ordInfo.setInterpername(interper.getNickname());
+					ordInfo.setInterperlevel(interper.getVipLevel());
 				}
 			}
 			//获取评价信息
@@ -130,6 +132,7 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 				ordInfo.setEvaluatecontent(ordEvaluate.getEvaluateContent());
 				ordInfo.setEvaluatesun(ordEvaluate.getEvaluateSun());
 				ordInfo.setEvaluatetime(ordEvaluate.getEvaluateTime());
+				ordInfo.setEvaluatestate(ordEvaluate.getState());
 			}
 			// 查询商品信息
 			OrdOdProd ordOdProd = ordOdProdAtomSV.findByOrderId(ord.getOrderId());
@@ -204,6 +207,7 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 				if(ord!=null){
 					OrderInfo ordInfo = new OrderInfo();
 					ordInfo.setOrderid(ord.getOrderId().toString());
+					ordInfo.setParentorderid(ord.getParentOrderId());
 					ordInfo.setBusitype(ord.getBusiType());
 					ordInfo.setCorpoarid(ord.getCorporaId());
 					ordInfo.setFlag(ord.getFlag());
@@ -256,6 +260,7 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 						YCTranslatorInfoResponse  interper = iYCTranslatorServiceSV.searchYCTranslatorInfo(translatorRequest);
 						if(interper.getResponseHeader().isSuccess()==true){
 							ordInfo.setInterpername(interper.getNickname());
+							ordInfo.setInterperlevel(interper.getVipLevel());
 						}
 					}
 					//获取评价信息
@@ -267,6 +272,7 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 						ordInfo.setEvaluatecontent(ordEvaluate.getEvaluateContent());
 						ordInfo.setEvaluatesun(ordEvaluate.getEvaluateSun());
 						ordInfo.setEvaluatetime(ordEvaluate.getEvaluateTime());
+						ordInfo.setEvaluatestate(ordEvaluate.getState());
 					}
 					// 查询商品信息
 					OrdOdProd ordOdProd = ordOdProdAtomSV.findByOrderId(ord.getOrderId());

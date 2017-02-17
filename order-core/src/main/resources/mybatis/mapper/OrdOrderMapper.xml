@@ -39,6 +39,7 @@
     <result column="CITY_CODE" property="cityCode" jdbcType="VARCHAR" />
     <result column="PAY_REMARK" property="payRemark" jdbcType="VARCHAR" />
     <result column="END_CHG_TIME" property="endChgTime" jdbcType="TIMESTAMP" />
+    <result column="PARENT_ORDER_ID" property="parentOrderId" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -103,13 +104,15 @@
     SUB_FLAG, USER_TYPE, USER_ID, CORPORA_ID, ACCOUNT_ID, TIME_ZONE, ORDER_TIME, STATE, 
     STATE_CHG_TIME, DISPLAY_FLAG, DISPLAY_FLAG_CHG_TIME, INTERPER_TYPE, LSP_ID, INTERPER_ID, 
     LOCK_TIME, OPER_ID, UPDATE_FLAG, REASON_DESC, REMARK, FINISH_TIME, ORDER_DESC, KEYWORDS, 
-    IF_WARNING, WARNING_TYPE, IP_ADDRESS, PROVINCE_CODE, CITY_CODE, PAY_REMARK, END_CHG_TIME
+    IF_WARNING, WARNING_TYPE, IP_ADDRESS, PROVINCE_CODE, CITY_CODE, PAY_REMARK, END_CHG_TIME, 
+    PARENT_ORDER_ID
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOrderCriteria" >
     select
     <if test="distinct" >
       distinct
     </if>
+    'false' as QUERYID,
     <include refid="Base_Column_List" />
     from ord_order
     <if test="_parameter != null" >
@@ -151,7 +154,7 @@
       FINISH_TIME, ORDER_DESC, KEYWORDS, 
       IF_WARNING, WARNING_TYPE, IP_ADDRESS, 
       PROVINCE_CODE, CITY_CODE, PAY_REMARK, 
-      END_CHG_TIME)
+      END_CHG_TIME, PARENT_ORDER_ID)
     values (#{orderId,jdbcType=BIGINT}, #{flag,jdbcType=VARCHAR}, #{chlId,jdbcType=VARCHAR}, 
       #{orderType,jdbcType=VARCHAR}, #{busiType,jdbcType=VARCHAR}, #{orderLevel,jdbcType=VARCHAR}, 
       #{translateType,jdbcType=VARCHAR}, #{translateName,jdbcType=VARCHAR}, #{subFlag,jdbcType=VARCHAR}, 
@@ -164,7 +167,7 @@
       #{finishTime,jdbcType=TIMESTAMP}, #{orderDesc,jdbcType=VARCHAR}, #{keywords,jdbcType=VARCHAR}, 
       #{ifWarning,jdbcType=VARCHAR}, #{warningType,jdbcType=VARCHAR}, #{ipAddress,jdbcType=VARCHAR}, 
       #{provinceCode,jdbcType=VARCHAR}, #{cityCode,jdbcType=VARCHAR}, #{payRemark,jdbcType=VARCHAR}, 
-      #{endChgTime,jdbcType=TIMESTAMP})
+      #{endChgTime,jdbcType=TIMESTAMP}, #{parentOrderId,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOrder" >
     insert into ord_order
@@ -280,6 +283,9 @@
       <if test="endChgTime != null" >
         END_CHG_TIME,
       </if>
+      <if test="parentOrderId != null" >
+        PARENT_ORDER_ID,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="orderId != null" >
@@ -392,6 +398,9 @@
       </if>
       <if test="endChgTime != null" >
         #{endChgTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="parentOrderId != null" >
+        #{parentOrderId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -515,6 +524,9 @@
       <if test="record.endChgTime != null" >
         END_CHG_TIME = #{record.endChgTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.parentOrderId != null" >
+        PARENT_ORDER_ID = #{record.parentOrderId,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -558,7 +570,8 @@
       PROVINCE_CODE = #{record.provinceCode,jdbcType=VARCHAR},
       CITY_CODE = #{record.cityCode,jdbcType=VARCHAR},
       PAY_REMARK = #{record.payRemark,jdbcType=VARCHAR},
-      END_CHG_TIME = #{record.endChgTime,jdbcType=TIMESTAMP}
+      END_CHG_TIME = #{record.endChgTime,jdbcType=TIMESTAMP},
+      PARENT_ORDER_ID = #{record.parentOrderId,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -674,6 +687,9 @@
       <if test="endChgTime != null" >
         END_CHG_TIME = #{endChgTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="parentOrderId != null" >
+        PARENT_ORDER_ID = #{parentOrderId,jdbcType=VARCHAR},
+      </if>
     </set>
     where ORDER_ID = #{orderId,jdbcType=BIGINT}
   </update>
@@ -714,7 +730,8 @@
       PROVINCE_CODE = #{provinceCode,jdbcType=VARCHAR},
       CITY_CODE = #{cityCode,jdbcType=VARCHAR},
       PAY_REMARK = #{payRemark,jdbcType=VARCHAR},
-      END_CHG_TIME = #{endChgTime,jdbcType=TIMESTAMP}
+      END_CHG_TIME = #{endChgTime,jdbcType=TIMESTAMP},
+      PARENT_ORDER_ID = #{parentOrderId,jdbcType=VARCHAR}
     where ORDER_ID = #{orderId,jdbcType=BIGINT}
   </update>
 </mapper>

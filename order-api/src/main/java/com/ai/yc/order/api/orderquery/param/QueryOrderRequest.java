@@ -59,6 +59,10 @@ public class QueryOrderRequest extends BaseInfo {
 	 * 企业ID
 	 */
 	private String corporaId;
+	/**
+	 * 业务类型
+	 */
+	private String busiType;
 
 	/**
 	 * 订单后场状态
@@ -587,6 +591,14 @@ public class QueryOrderRequest extends BaseInfo {
 
 	public void setEvaluateTimeEnd(Timestamp evaluateTimeEnd) {
 		this.evaluateTimeEnd = evaluateTimeEnd;
+	}
+
+	public String getBusiType() {
+		return busiType;
+	}
+
+	public void setBusiType(String busiType) {
+		this.busiType = busiType;
 	}
 
 }

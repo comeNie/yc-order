@@ -98,7 +98,18 @@ public class OrderInfo {
 	 * 评论时间
 	 */
 	private Date   evaluatetime;
-		
+	/**
+	 * 评论状态	
+	 */
+	private String evaluatestate;
+	/**
+	 * 议员级别
+	 */
+	private String interperlevel;
+	/**
+	 * 父订单Id
+	 */
+	private String parentorderid;
 	
 	
 	public String getOrderid() {
@@ -531,6 +542,30 @@ public class OrderInfo {
 
 	public void setDiscountfee(long discountfee) {
 		this.discountfee = discountfee;
+	}
+
+	public String getEvaluatestate() {
+		return evaluatestate;
+	}
+
+	public void setEvaluatestate(String evaluatestate) {
+		this.evaluatestate = evaluatestate;
+	}
+
+	public String getInterperlevel() {
+		return interperlevel;
+	}
+
+	public void setInterperlevel(String interperlevel) {
+		this.interperlevel = interperlevel;
+	}
+
+	public String getParentorderid() {
+		return parentorderid;
+	}
+
+	public void setParentorderid(String parentorderid) {
+		this.parentorderid = parentorderid;
 	}
 
 }

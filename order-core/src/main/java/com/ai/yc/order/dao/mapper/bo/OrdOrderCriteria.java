@@ -2634,6 +2634,76 @@ public class OrdOrderCriteria {
             addCriterion("END_CHG_TIME not between", value1, value2, "endChgTime");
             return (Criteria) this;
         }
+
+        public Criteria andParentOrderIdIsNull() {
+            addCriterion("PARENT_ORDER_ID is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentOrderIdIsNotNull() {
+            addCriterion("PARENT_ORDER_ID is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentOrderIdEqualTo(String value) {
+            addCriterion("PARENT_ORDER_ID =", value, "parentOrderId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentOrderIdNotEqualTo(String value) {
+            addCriterion("PARENT_ORDER_ID <>", value, "parentOrderId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentOrderIdGreaterThan(String value) {
+            addCriterion("PARENT_ORDER_ID >", value, "parentOrderId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentOrderIdGreaterThanOrEqualTo(String value) {
+            addCriterion("PARENT_ORDER_ID >=", value, "parentOrderId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentOrderIdLessThan(String value) {
+            addCriterion("PARENT_ORDER_ID <", value, "parentOrderId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentOrderIdLessThanOrEqualTo(String value) {
+            addCriterion("PARENT_ORDER_ID <=", value, "parentOrderId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentOrderIdLike(String value) {
+            addCriterion("PARENT_ORDER_ID like", value, "parentOrderId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentOrderIdNotLike(String value) {
+            addCriterion("PARENT_ORDER_ID not like", value, "parentOrderId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentOrderIdIn(List<String> values) {
+            addCriterion("PARENT_ORDER_ID in", values, "parentOrderId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentOrderIdNotIn(List<String> values) {
+            addCriterion("PARENT_ORDER_ID not in", values, "parentOrderId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentOrderIdBetween(String value1, String value2) {
+            addCriterion("PARENT_ORDER_ID between", value1, value2, "parentOrderId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentOrderIdNotBetween(String value1, String value2) {
+            addCriterion("PARENT_ORDER_ID not between", value1, value2, "parentOrderId");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
