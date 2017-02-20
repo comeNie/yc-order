@@ -4,4 +4,6 @@ import com.ai.yc.order.dao.mapper.bo.OrdEvaluate;
 
 public interface IOrdEvaluateAtomSV {
 	OrdEvaluate findByOrderId(Long orderId);
+	
+	OrdEvaluate findByOrderId(Long orderId,String state);
 }

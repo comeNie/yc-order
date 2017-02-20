@@ -14,6 +14,11 @@ public final class OrdersConstants {
 	 * 查询默认开始时间
 	 */
 	public final static String START_TIME = "2000-01-01 00:00:00";
+	/**
+	 * 评价显示状态
+	 */
+	public final static String EVALUTE_SHOW_STATE = "0";
+	
 
 	public final static class TranslatePrice {
 		private TranslatePrice() {

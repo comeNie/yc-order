@@ -39,6 +39,10 @@ public class QueryOrdEvaluteResponse extends BaseResponse {
 	 * 备注
 	 */
 	private String remark;
+	/**
+	 * 状态
+	 */
+	private String state;
 
 	public Long getOrderId() {
 		return orderId;
@@ -102,6 +106,14 @@ public class QueryOrdEvaluteResponse extends BaseResponse {
 
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
 	}
 
 }

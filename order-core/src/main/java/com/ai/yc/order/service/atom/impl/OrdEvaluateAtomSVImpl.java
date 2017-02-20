@@ -24,4 +24,17 @@ public class OrdEvaluateAtomSVImpl implements IOrdEvaluateAtomSV {
 		return ordEvaluate.get(0);
 	}
 
+	@Override
+	public OrdEvaluate findByOrderId(Long orderId, String state) {
+		OrdEvaluateCriteria example = new OrdEvaluateCriteria();
+		OrdEvaluateCriteria.Criteria criteria = example.createCriteria();
+		criteria.andOrderIdEqualTo(orderId);
+		criteria.andStateEqualTo(state);
+		List<OrdEvaluate> ordEvaluate = MapperFactory.getOrdEvaluateMapper().selectByExample(example);
+		if (CollectionUtil.isEmpty(ordEvaluate)) {
+			return null;
+		}
+		return ordEvaluate.get(0);
+	}
+
 }
