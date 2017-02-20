@@ -245,10 +245,15 @@ public class QueryOrderDetailsResponse extends BaseResponse{
      */
     private OrderFeeVo orderFee;
     
+    
     /**
      * 订单状态轨迹
      */
     private List<OrderStateChgVo> orderStateChgs;
+    /**
+     * 评论信息
+     */
+    private EvaluateVo evaluateVo;
 
 	
 
@@ -558,6 +563,14 @@ public class QueryOrderDetailsResponse extends BaseResponse{
 
 	public void setEndChgTime(Timestamp endChgTime) {
 		this.endChgTime = endChgTime;
+	}
+
+	public EvaluateVo getEvaluateVo() {
+		return evaluateVo;
+	}
+
+	public void setEvaluateVo(EvaluateVo evaluateVo) {
+		this.evaluateVo = evaluateVo;
 	}
     
     

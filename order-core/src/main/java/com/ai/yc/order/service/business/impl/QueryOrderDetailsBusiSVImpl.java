@@ -16,6 +16,7 @@ import com.ai.yc.common.api.syspurpose.param.QuerySysPurposeDetailsRes;
 import com.ai.yc.common.api.sysuser.param.SysUserQueryRequest;
 import com.ai.yc.common.api.sysuser.param.SysUserQueryResponse;
 import com.ai.yc.order.api.orderdetails.param.ContactsVo;
+import com.ai.yc.order.api.orderdetails.param.EvaluateVo;
 import com.ai.yc.order.api.orderdetails.param.OrderFeeVo;
 import com.ai.yc.order.api.orderdetails.param.OrderStateChgVo;
 import com.ai.yc.order.api.orderdetails.param.PersonInfoVo;
@@ -26,6 +27,7 @@ import com.ai.yc.order.api.orderdetails.param.ProdVo;
 import com.ai.yc.order.api.orderdetails.param.QueryOrderDetailsResponse;
 import com.ai.yc.order.constants.OrdersConstants;
 import com.ai.yc.order.constants.ResultCodeConstants;
+import com.ai.yc.order.dao.mapper.bo.OrdEvaluate;
 import com.ai.yc.order.dao.mapper.bo.OrdOdFeeTotal;
 import com.ai.yc.order.dao.mapper.bo.OrdOdLogistics;
 import com.ai.yc.order.dao.mapper.bo.OrdOdPersonInfo;
@@ -35,6 +37,7 @@ import com.ai.yc.order.dao.mapper.bo.OrdOdProdLevel;
 import com.ai.yc.order.dao.mapper.bo.OrdOdProdWithBLOBs;
 import com.ai.yc.order.dao.mapper.bo.OrdOdStateChg;
 import com.ai.yc.order.dao.mapper.bo.OrdOrder;
+import com.ai.yc.order.service.atom.interfaces.IOrdEvaluateAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdFeeTotalAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdLogisticsAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdPersonInfoAtomSV;
@@ -89,6 +92,9 @@ public class QueryOrderDetailsBusiSVImpl implements IQueryOrderDetailsBusiSV {
 	
 	@Autowired
 	private transient ISysUserAtomSV iSysUserAtomSV;
+	
+	@Autowired
+	private IOrdEvaluateAtomSV ordEvaluateAtomSV;
 
 	@Override
 	public QueryOrderDetailsResponse queryOrderDetails(Long orderId,String flag) {
@@ -106,6 +112,14 @@ public class QueryOrderDetailsBusiSVImpl implements IQueryOrderDetailsBusiSV {
 			ContactsVo contacts = new ContactsVo();
 			BeanUtils.copyProperties(contacts, logistics);
 			resp.setContacts(contacts);
+		}
+		
+		//评价信息
+		OrdEvaluate ordEvaluate = ordEvaluateAtomSV.findByOrderId(orderId);
+		if(ordEvaluate!=null){
+			EvaluateVo evaluteVo = new EvaluateVo();
+			BeanUtils.copyProperties(evaluteVo, ordEvaluate);
+			resp.setEvaluateVo(evaluteVo);
 		}
 		
 		//分配人员信息
@@ -218,7 +232,13 @@ public class QueryOrderDetailsBusiSVImpl implements IQueryOrderDetailsBusiSV {
 			BeanUtils.copyProperties(contacts, logistics);
 			resp.setContacts(contacts);
 		}
-		
+		//评价信息
+		OrdEvaluate ordEvaluate = ordEvaluateAtomSV.findByOrderId(orderId);
+		if(ordEvaluate!=null){
+			EvaluateVo evaluteVo = new EvaluateVo();
+			BeanUtils.copyProperties(evaluteVo, ordEvaluate);
+			resp.setEvaluateVo(evaluteVo);
+		}
 		//分配人员信息
 		List<PersonInfoVo> personInfos = new ArrayList<PersonInfoVo>();
 		List<OrdOdPersonInfo> ordOdPersonInfos  = iOrdOdPersonInfoAtomSV.findByOrderId(Long.valueOf(orderId));
