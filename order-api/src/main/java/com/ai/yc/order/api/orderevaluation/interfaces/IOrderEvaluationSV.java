@@ -10,6 +10,8 @@ import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.yc.order.api.orderevaluation.param.OrderEvaluationRequest;
 import com.ai.yc.order.api.orderevaluation.param.OrderEvaluationResponse;
+import com.ai.yc.order.api.orderevaluation.param.QueryOrdEvaluteRequest;
+import com.ai.yc.order.api.orderevaluation.param.QueryOrdEvaluteResponse;
 
 @Path("/OrderEvaluationSV")
 @Consumes({ MediaType.APPLICATION_JSON })
@@ -30,4 +32,17 @@ public interface IOrderEvaluationSV {
 	@POST
 	@Path("/orderEvaluation")
 	public OrderEvaluationResponse orderEvaluation(OrderEvaluationRequest request)  throws BusinessException, SystemException;
+	/**
+	 * 订单评价查询
+	 * @param request
+	 * @return
+	 * @throws BusinessException
+	 * @throws SystemException
+	 * @author zhanglh
+	 * @ApiCode ORD_2022
+	 * @RestRelativeURL OrderEvaluationSV/queryOrderEvalute
+	 */
+	@POST
+	@Path("/queryOrderEvalute")
+	QueryOrdEvaluteResponse queryOrderEvalute(QueryOrdEvaluteRequest request)throws BusinessException, SystemException;
 }
