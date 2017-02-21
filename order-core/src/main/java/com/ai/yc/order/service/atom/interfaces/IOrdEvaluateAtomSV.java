@@ -6,4 +6,6 @@ public interface IOrdEvaluateAtomSV {
 	OrdEvaluate findByOrderId(Long orderId);
 	
 	OrdEvaluate findByOrderId(Long orderId,String state);
+	
+	int insertSelective(OrdEvaluate record);
 }
