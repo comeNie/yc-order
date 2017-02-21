@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ai.opt.base.exception.BusinessException;
+import com.ai.opt.base.exception.SystemException;
+import com.ai.opt.base.vo.BaseResponse;
 import com.ai.opt.base.vo.ResponseHeader;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.ai.opt.sdk.util.BeanUtils;
@@ -13,6 +15,7 @@ import com.ai.yc.order.api.orderevaluation.param.OrderEvaluationRequest;
 import com.ai.yc.order.api.orderevaluation.param.OrderEvaluationResponse;
 import com.ai.yc.order.api.orderevaluation.param.QueryOrdEvaluteRequest;
 import com.ai.yc.order.api.orderevaluation.param.QueryOrdEvaluteResponse;
+import com.ai.yc.order.api.orderevaluation.param.UpdateOrdEvaluateRequest;
 import com.ai.yc.order.constants.OrdOdStateChgConstants;
 import com.ai.yc.order.constants.OrdersConstants;
 import com.ai.yc.order.constants.ResultCodeConstants;
@@ -36,7 +39,7 @@ public class OrdEvaluateBusiSVImpl implements IOrdEvaluateBusiSV {
 	private IOrdOrderAtomSV ordOrderAtomSV;//订单主表
 	@Autowired
 	private IOrdOdStateChgAtomSV ordOdStateChgAtomSV;//订单轨迹表
-	
+
 	@Override
 	public QueryOrdEvaluteResponse queryEvaluteByOrdId(QueryOrdEvaluteRequest request) {
 		QueryOrdEvaluteResponse respponse = new QueryOrdEvaluteResponse();
@@ -55,7 +58,19 @@ public class OrdEvaluateBusiSVImpl implements IOrdEvaluateBusiSV {
 		respponse.setResponseHeader(new ResponseHeader(true, ResultCodeConstants.SUCCESS_CODE, "查询成功"));
 		return respponse;
 	}
-	
+	@Override
+	public BaseResponse updateEvaluate(UpdateOrdEvaluateRequest request) throws BusinessException, SystemException {
+		OrdEvaluate ordEvaluate = new OrdEvaluate();
+		BeanUtils.copyProperties(ordEvaluate, request);
+		int num =  ordEvaluateAtomSV.updateEvaluateByOrdId(ordEvaluate, request.getOrderId());
+		BaseResponse response  = new BaseResponse();
+		if(num>0){
+			response.setResponseHeader(new ResponseHeader(true, ResultCodeConstants.SUCCESS_CODE, "修改成功"));
+		}else{
+			response.setResponseHeader(new ResponseHeader(false, ResultCodeConstants.FAIL_CODE, "修改失败"));
+		}
+		return response;
+	}
 	
 	@Override
 	public OrderEvaluationResponse orderEvaluation(OrderEvaluationRequest request) {
@@ -113,5 +128,4 @@ public class OrdEvaluateBusiSVImpl implements IOrdEvaluateBusiSV {
 		//
 		return response;
 	}
-
 }

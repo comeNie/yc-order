@@ -38,8 +38,17 @@ public class OrdEvaluateAtomSVImpl implements IOrdEvaluateAtomSV {
 	}
 
 	@Override
+	public int updateEvaluateByOrdId(OrdEvaluate ordEvaluate,Long orderId) {
+		OrdEvaluateCriteria example = new OrdEvaluateCriteria();
+		OrdEvaluateCriteria.Criteria  criteria = example.createCriteria();
+		criteria.andOrderIdEqualTo(orderId);
+		return MapperFactory.getOrdEvaluateMapper().updateByExampleSelective(ordEvaluate, example);
+	}
+	
+	@Override
 	public int insertSelective(OrdEvaluate record) {
 		return  MapperFactory.getOrdEvaluateMapper().insertSelective(record);
 	}
+
 
 }
