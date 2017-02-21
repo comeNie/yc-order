@@ -42,6 +42,8 @@ public final class SequenceUtil {
     
     private static final String ORD_OD_PERSON_INFO$PERSON_ID$SEQ = "ORD_OD_PERSON_INFO$PERSON_ID$SEQ";
     
+    private static final String ORD_EVALUATE$EVALUATE_ID$SEQ = "ORD_EVALUATE$EVALUATE_ID$SEQ";
+    
     public static Long createOrderId() {
         String seq = SeqUtil.getNewId(ORD_ORDER$ORDER_ID$SEQ, 10);
         String orderId = "2" + seq + SequenceUtil.returnRandom();
@@ -83,7 +85,9 @@ public final class SequenceUtil {
     public static Long createPersonId(){
     	return SeqUtil.getNewId(ORD_OD_PERSON_INFO$PERSON_ID$SEQ);
     }
-    
+    public static Long createEvaluateId(){
+    	return SeqUtil.getNewId(ORD_EVALUATE$EVALUATE_ID$SEQ);
+    }
 
     public static Long createFeeOffsetId() {
         return SeqUtil.getNewId(ORD_OD_FEE_OFFSET$FEE_OFFSET_ID$SEQ);
