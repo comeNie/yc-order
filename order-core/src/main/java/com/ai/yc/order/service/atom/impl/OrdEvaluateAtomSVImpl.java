@@ -37,4 +37,9 @@ public class OrdEvaluateAtomSVImpl implements IOrdEvaluateAtomSV {
 		return ordEvaluate.get(0);
 	}
 
+	@Override
+	public int insertSelective(OrdEvaluate record) {
+		return  MapperFactory.getOrdEvaluateMapper().insertSelective(record);
+	}
+
 }
