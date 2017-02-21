@@ -5,6 +5,7 @@ import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.opt.sdk.util.StringUtil;
 import com.ai.yc.order.api.orderclose.param.OrderCancelRequest;
+import com.ai.yc.order.api.orderevaluation.param.OrderEvaluationRequest;
 import com.ai.yc.order.api.orderquery.param.QueryOrdCountRequest;
 import com.ai.yc.order.api.orderquery.param.QueryOrderRequest;
 import com.ai.yc.order.api.orderreview.param.OrderReviewRequest;
@@ -58,6 +59,51 @@ public class ValidateUtils {
 		}
 		if (StringUtil.isBlank(condition.getState())) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "状态不能为空");
+		}
+	}
+	
+	/**
+	 * 订单评价参数校验
+	 */
+	public static void validateOrderEvaluation(OrderEvaluationRequest condition) {
+		if (condition == null) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "参数对象不能为空");
+		}
+		if(condition.getBaseInfo()==null) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "订单基本信息对象不能为空");
+		}
+		if(condition.getExtendInfo()==null) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "评价基本信息对象不能为空");
+		}
+		if(condition.getBaseInfo().getOrderId()==null) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "订单ID不能为空");
+		}
+		if (StringUtil.isBlank(condition.getBaseInfo().getState())) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "订单状态不能为空");
+		}
+		if (StringUtil.isBlank(condition.getBaseInfo().getUserId())) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "用户id不能为空");
+		}
+		if (StringUtil.isBlank(condition.getBaseInfo().getOperName())) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "操作者昵称不能为空");
+		}
+		if(condition.getExtendInfo().getServeQuality()==null) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "评价信息服务质量不能为空");
+		}
+		if(condition.getExtendInfo().getServeSpeen()==null) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "评价信息服务速度不能为空");
+		}
+		if(condition.getExtendInfo().getServeManner()==null) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "评价信息服务态度不能为空");
+		}
+		if (StringUtil.isBlank(condition.getExtendInfo().getEvaluateContent())) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "评价内容不能为空");
+		}
+		if (StringUtil.isBlank(condition.getExtendInfo().getState())) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "评价信息状态不能为空");
+		}
+		if (condition.getExtendInfo().getEvaluateTime()==null) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "评论时间不能为空");
 		}
 	}
 }
