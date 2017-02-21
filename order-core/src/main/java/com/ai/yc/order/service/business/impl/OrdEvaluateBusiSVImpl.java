@@ -2,6 +2,7 @@ package com.ai.yc.order.service.business.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
@@ -30,6 +31,7 @@ import com.ai.yc.order.service.business.interfaces.IOrdEvaluateBusiSV;
 import com.ai.yc.order.util.SequenceUtil;
 
 @Service
+@Transactional
 public class OrdEvaluateBusiSVImpl implements IOrdEvaluateBusiSV {
 	@Autowired
 	private IOrdEvaluateAtomSV ordEvaluateAtomSV;
