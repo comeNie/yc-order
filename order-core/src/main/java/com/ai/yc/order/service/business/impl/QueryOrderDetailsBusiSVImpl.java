@@ -119,6 +119,7 @@ public class QueryOrderDetailsBusiSVImpl implements IQueryOrderDetailsBusiSV {
 		if(ordEvaluate!=null){
 			EvaluateVo evaluteVo = new EvaluateVo();
 			BeanUtils.copyProperties(evaluteVo, ordEvaluate);
+			evaluteVo.setServeSpeed(ordEvaluate.getServeSpeen());
 			resp.setEvaluateVo(evaluteVo);
 		}
 		
@@ -237,6 +238,7 @@ public class QueryOrderDetailsBusiSVImpl implements IQueryOrderDetailsBusiSV {
 		if(ordEvaluate!=null){
 			EvaluateVo evaluteVo = new EvaluateVo();
 			BeanUtils.copyProperties(evaluteVo, ordEvaluate);
+			evaluteVo.setServeSpeed(ordEvaluate.getServeSpeen());
 			resp.setEvaluateVo(evaluteVo);
 		}
 		//分配人员信息
