@@ -20,7 +20,7 @@ public class OrderEvaluationRuleTest extends BaseTest {
 	@Test
 	public void orderEvaluationRule(){
 		Integer rule = this.orderEvaluationRuleSV.orderEvaluationRule(10, 20, 30);
-		log.info("评价级别："+rule);
+		log.info("评价级别---："+rule);
 	}
 	
 	@Test
