@@ -17,6 +17,7 @@ import com.ai.yc.order.api.orderevaluation.param.UpdateOrdEvaluateRequest;
 import com.ai.yc.order.dao.mapper.bo.OrdOrder;
 import com.ai.yc.order.service.atom.interfaces.IOrdOrderAtomSV;
 import com.ai.yc.order.service.business.interfaces.IOrdEvaluateBusiSV;
+import com.ai.yc.order.service.business.interfaces.search.IOrderIndexBusiSV;
 import com.ai.yc.order.util.ValidateUtils;
 import com.alibaba.dubbo.config.annotation.Service;
 @Service
@@ -26,7 +27,8 @@ public class OrderEvaluationSVImpl implements IOrderEvaluationSV{
 	private IOrdEvaluateBusiSV ordEvaluateBusiSV;
 	@Autowired
 	private IOrdOrderAtomSV ordOrderAtomSV;
-	
+	@Autowired
+	IOrderIndexBusiSV orderIndexBusiSV;
 	@Override
 	public OrderEvaluationResponse orderEvaluation(OrderEvaluationRequest request)
 			throws BusinessException, SystemException {
@@ -82,7 +84,10 @@ public class OrderEvaluationSVImpl implements IOrderEvaluationSV{
 		if(ordOrder==null){
 			throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT, "该订单不存在");
 		}
-		return ordEvaluateBusiSV.updateEvaluate(request);
+		BaseResponse response = ordEvaluateBusiSV.updateEvaluate(request);
+		//刷新数据到搜索引擎
+		orderIndexBusiSV.insertSesData(request.getOrderId());
+		return response;
 	}
 
 }
