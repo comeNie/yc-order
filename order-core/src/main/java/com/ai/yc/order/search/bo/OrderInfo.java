@@ -48,7 +48,16 @@ public class OrderInfo {
 	/**
 	 * 总优惠费用
 	 */
-	private long  discountfee;
+	private long discountfee;
+	/**
+	 * 平台佣金
+	 */
+	private long platfee;
+	/**
+	 * 译员佣金
+	 */
+
+	private long interperfee;
 	/**
 	 * 产品变更时间
 	 */
@@ -77,29 +86,29 @@ public class OrderInfo {
 	/**
 	 * 评论等级
 	 */
-	private String  evaluatesun;
+	private String evaluatesun;
 	/**
 	 * 服务质量
 	 */
-	private long  servequality;
+	private long servequality;
 	/**
 	 * 服务速度
 	 */
-	private long  servespeed;
+	private long servespeed;
 	/**
 	 * 服务态度
 	 */
-	private long  servemanner;
+	private long servemanner;
 	/**
 	 * 评论内容
 	 */
-	private String  evaluatecontent;
+	private String evaluatecontent;
 	/**
 	 * 评论时间
 	 */
-	private Date   evaluatetime;
+	private Date evaluatetime;
 	/**
-	 * 评论状态	
+	 * 评论状态
 	 */
 	private String evaluatestate;
 	/**
@@ -110,8 +119,7 @@ public class OrderInfo {
 	 * 父订单Id
 	 */
 	private String parentorderid;
-	
-	
+
 	public String getOrderid() {
 		return orderid;
 	}
@@ -566,6 +574,22 @@ public class OrderInfo {
 
 	public void setParentorderid(String parentorderid) {
 		this.parentorderid = parentorderid;
+	}
+
+	public long getPlatfee() {
+		return platfee;
+	}
+
+	public void setPlatfee(long platfee) {
+		this.platfee = platfee;
+	}
+
+	public long getInterperfee() {
+		return interperfee;
+	}
+
+	public void setInterperfee(long interperfee) {
+		this.interperfee = interperfee;
 	}
 
 }

@@ -189,6 +189,12 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 				ordInfo.setCurrencyunit(ordOdFeeTotal.getCurrencyUnit());
 				ordInfo.setPaystyle(ordOdFeeTotal.getPayStyle());
 				ordInfo.setPaytime(ordOdFeeTotal.getPayTime());
+				if(ordOdFeeTotal.getPlatFee()!=null){
+					ordInfo.setPlatfee(ordOdFeeTotal.getPlatFee());
+				}
+				if(ordOdFeeTotal.getInterperFee()!=null){
+					ordInfo.setInterperfee(ordOdFeeTotal.getInterperFee());
+				}
 			}
 			ordInfoList.add(ordInfo);
 			
@@ -309,6 +315,12 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 						ordInfo.setDiscountfee(ordOdFeeTotal.getDiscountFee());
 						ordInfo.setPaystyle(ordOdFeeTotal.getPayStyle());
 						ordInfo.setPaytime(ordOdFeeTotal.getPayTime());
+						if(ordOdFeeTotal.getPlatFee()!=null){
+							ordInfo.setPlatfee(ordOdFeeTotal.getPlatFee());
+						}
+						if(ordOdFeeTotal.getInterperFee()!=null){
+							ordInfo.setInterperfee(ordOdFeeTotal.getInterperFee());
+						}
 						if(!StringUtil.isBlank(ordOdFeeTotal.getUpdateOperId())){
 							ISysUserQuerySV iSysUserQuerySV = DubboConsumerFactory.getService(ISysUserQuerySV.class);
 							SysUserQueryRequest req = new SysUserQueryRequest();

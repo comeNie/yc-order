@@ -119,6 +119,8 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 				order.setTranslateType(ord.getTranslatetype());
 				order.setUpdateOperName(ord.getUpdatename());
 				order.setDiscountFee(ord.getDiscountfee());
+				order.setPlatFee(ord.getPlatfee());
+				order.setInterperFee(ord.getInterperfee());
 				// 评论信息
 				order.setEvaluateContent(ord.getEvaluatecontent());
 				order.setEvaluateSun(ord.getEvaluatesun());

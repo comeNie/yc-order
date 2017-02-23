@@ -161,6 +161,14 @@ public class OrdOrderVo extends BaseInfo {
 	 */
 	private long totalFee;
 	/**
+	 * 平台佣金
+	 */
+	private long platFee;
+	/**
+	 * 译员佣金
+	 */
+	private long interperFee;
+	/**
 	 * 币种
 	 */
 	private String currencyUnit;
@@ -605,6 +613,22 @@ public class OrdOrderVo extends BaseInfo {
 
 	public void setEvaluateState(String evaluateState) {
 		this.evaluateState = evaluateState;
+	}
+
+	public long getPlatFee() {
+		return platFee;
+	}
+
+	public void setPlatFee(long platFee) {
+		this.platFee = platFee;
+	}
+
+	public long getInterperFee() {
+		return interperFee;
+	}
+
+	public void setInterperFee(long interperFee) {
+		this.interperFee = interperFee;
 	}
 
 }
