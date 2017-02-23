@@ -25,6 +25,10 @@ public class UpdateOrdEvaluateRequest extends BaseInfo{
 	 * 评论内容
 	 */
 	private String evaluateContent;
+	/**
+	 * 备注
+	 */
+	private String remark;
 
 	public Long getOrderId() {
 		return orderId;
@@ -64,6 +68,14 @@ public class UpdateOrdEvaluateRequest extends BaseInfo{
 
 	public void setEvaluateContent(String evaluateContent) {
 		this.evaluateContent = evaluateContent;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
 }
