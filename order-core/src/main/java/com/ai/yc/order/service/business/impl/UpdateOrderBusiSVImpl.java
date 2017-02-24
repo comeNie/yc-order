@@ -146,10 +146,11 @@ public class UpdateOrderBusiSVImpl implements IUpdateOrderBusiSV {
 		chg.setOperId(req.getOperId());
 		chg.setOperName(req.getOperName());
 		iOrdOdStateChgBusiSV.addUpdateChgDesc(chg);
-
 		// 非待报价和非待支付，无法修改下面内容
 		if (!OrdersConstants.OrderState.STATE_WAIT_OFFER.equals(record.getState())
 				&& !OrdersConstants.OrderState.STATE_WAIT_PAY.equals(record.getState())) {
+			// 更新搜索引擎
+			orderIndexBusiSV.insertSesData(req.getOrderId());
 			return resp;
 		}
 
