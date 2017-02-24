@@ -52,6 +52,14 @@ public class UpdateOrderRequest implements Serializable{
    	 * 操作人用户名
    	 */
    	private String operName;
+   	/**
+   	 * 原因
+   	 */
+   	private String  reasonDesc;
+   	/**
+   	 * 状态
+   	 */
+   	private String state;
 
 	public Long getOrderId() {
 		return orderId;
@@ -115,6 +123,22 @@ public class UpdateOrderRequest implements Serializable{
 
 	public void setOrderLevel(String orderLevel) {
 		this.orderLevel = orderLevel;
+	}
+
+	public String getReasonDesc() {
+		return reasonDesc;
+	}
+
+	public void setReasonDesc(String reasonDesc) {
+		this.reasonDesc = reasonDesc;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
 	}
     
     
