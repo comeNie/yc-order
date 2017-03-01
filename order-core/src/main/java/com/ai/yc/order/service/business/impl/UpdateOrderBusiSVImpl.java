@@ -126,6 +126,7 @@ public class UpdateOrderBusiSVImpl implements IUpdateOrderBusiSV {
 			OrdOrder order = new OrdOrder();
 			order.setOrderId(req.getOrderId());
 			order.setState(req.getState());
+			order.setDisplayFlag(req.getState());
 			iOrdOrderAtomSV.updateByPrimaryKeySelective(order);
 		}
 		if(!StringUtil.isBlank(req.getReasonDesc())){
