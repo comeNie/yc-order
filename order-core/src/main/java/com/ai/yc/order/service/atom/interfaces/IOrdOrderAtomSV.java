@@ -68,6 +68,10 @@ public interface IOrdOrderAtomSV {
 	 */
 	public List<OrdOrder> findByStateAndStateChgTime(String state,Timestamp stateChgTime);
 	/**
+	 * 根据状态、业务类型和状态修改时间查询订单信息
+	 */
+	public List<OrdOrder> findByStateAndStateChgTimeAndBusiType(String state,String busiType,Timestamp stateChgTime);
+	/**
 	 * 根据状态和翻译类型查询订单信息
 	 */
 	public List<OrdOrder> findByStateAndTranslateType(String state,String translateType);

@@ -10,13 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ai.opt.base.vo.BaseResponse;
-import com.ai.opt.base.vo.ResponseHeader;
 import com.ai.opt.sdk.util.DateUtil;
 import com.ai.yc.order.api.sesdata.interfaces.ISesDataUpdateSV;
 import com.ai.yc.order.constants.OrdOdStateChgConstants;
 import com.ai.yc.order.constants.OrdersConstants;
-import com.ai.yc.order.constants.ResultCodeConstants;
 import com.ai.yc.order.dao.mapper.bo.OrdOdProd;
 import com.ai.yc.order.dao.mapper.bo.OrdOdProdWithBLOBs;
 import com.ai.yc.order.dao.mapper.bo.OrdOdStateChg;
@@ -157,8 +154,8 @@ public class AutoDealOrderBusiSVImpl implements IAutoDealOrderBusiSV {
 	@Transactional
 	public List<String> updateAutoReviewOrder() {
 		// start 重写待审核订单10分钟自动审核功能 zhangzd 2016-12-12 11:45
-		List<OrdOrder> ordOrderList = iOrdOrderAtomSV.findByStateAndStateChgTime(
-				OrdersConstants.OrderState.WAIT_REVIEW_STATE,
+		List<OrdOrder> ordOrderList = iOrdOrderAtomSV.findByStateAndStateChgTimeAndBusiType(
+				OrdersConstants.OrderState.WAIT_REVIEW_STATE,OrdersConstants.NORMAL_BUSI_TYPE,
 				DateCycleUtil.getTimestamp(DateUtil.getSysDate(), "MIN", -10));
 		//
 		log.info("系统需要待审核订单量：" + ordOrderList.size());

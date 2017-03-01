@@ -150,7 +150,7 @@ public class OrdOrderAtomSVImpl implements IOrdOrderAtomSV {
 	}
 
 	@Override
-	public List<OrdOrder> findByStateAndStateChgTime(String state, Timestamp stateChgTime) {
+	public List<OrdOrder> findByStateAndStateChgTime(String state,Timestamp stateChgTime) {
 		// TODO Auto-generated method stub
 		OrdOrderCriteria example = new OrdOrderCriteria();
 		//
@@ -172,5 +172,19 @@ public class OrdOrderAtomSVImpl implements IOrdOrderAtomSV {
 		criteria.andTranslateTypeEqualTo(translateType);
 		//
 		return MapperFactory.getOrdOrderMapper().selectByExample(example);
+	}
+
+	@Override
+	public List<OrdOrder> findByStateAndStateChgTimeAndBusiType(String state, String busiType, Timestamp stateChgTime) {
+		// TODO Auto-generated method stub
+				OrdOrderCriteria example = new OrdOrderCriteria();
+				//
+				OrdOrderCriteria.Criteria criteria = example.createCriteria();
+				//
+				criteria.andStateEqualTo(state);
+				criteria.andBusiTypeEqualTo(busiType);
+				criteria.andStateChgTimeLessThanOrEqualTo(stateChgTime);
+				//
+				return MapperFactory.getOrdOrderMapper().selectByExample(example);
 	}
 }

@@ -18,6 +18,10 @@ public final class OrdersConstants {
 	 * 评价显示状态
 	 */
 	public final static String EVALUTE_SHOW_STATE = "0";
+	/**
+	 * 业务类型-正常单
+	 */
+	public final static String NORMAL_BUSI_TYPE = "1";
 	
 
 	public final static class TranslatePrice {
