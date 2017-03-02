@@ -121,29 +121,11 @@ public class UpdateOrderBusiSVImpl implements IUpdateOrderBusiSV {
 				iOrdOdProdFileAtomSV.insertSelective(ordOdProdFile);
 			}
 		}
-		//修改审核备注和状态
-		if(!StringUtil.isBlank(req.getState())){
-			OrdOrder order = new OrdOrder();
-			order.setOrderId(req.getOrderId());
-			order.setState(req.getState());
-			order.setDisplayFlag(req.getState());
-			iOrdOrderAtomSV.updateByPrimaryKeySelective(order);
-		}
-		if(!StringUtil.isBlank(req.getReasonDesc())){
-			OrdOrder order = new OrdOrder();
-			order.setOrderId(req.getOrderId());
-			order.setReasonDesc(req.getReasonDesc());
-			iOrdOrderAtomSV.updateByPrimaryKeySelective(order);
-		}
 		// 添加修改轨迹
 		OrdOdStateChg chg = new OrdOdStateChg();
 		chg.setOrderId(record.getOrderId());
 		chg.setOrgState(record.getState());
-		if(!StringUtil.isBlank(req.getState())){
-			chg.setNewState(req.getState());
-		}else{
-			chg.setNewState(record.getState());
-		}
+		chg.setNewState(record.getState());
 		chg.setOperId(req.getOperId());
 		chg.setOperName(req.getOperName());
 		iOrdOdStateChgBusiSV.addUpdateChgDesc(chg);
