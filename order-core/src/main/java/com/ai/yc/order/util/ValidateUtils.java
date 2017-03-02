@@ -8,6 +8,7 @@ import com.ai.yc.order.api.orderclose.param.OrderCancelRequest;
 import com.ai.yc.order.api.orderevaluation.param.OrderEvaluationRequest;
 import com.ai.yc.order.api.orderquery.param.QueryOrdCountRequest;
 import com.ai.yc.order.api.orderquery.param.QueryOrderRequest;
+import com.ai.yc.order.api.orderrefund.param.OrderRefundRequest;
 import com.ai.yc.order.api.orderreview.param.OrderReviewRequest;
 
 public class ValidateUtils {
@@ -104,6 +105,26 @@ public class ValidateUtils {
 		}
 		if (condition.getExtendInfo().getEvaluateTime()==null) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "评论时间不能为空");
+		}
+	}
+	/**
+	 * 退款审核订单校验
+	 */
+	public static void validateRefundOrder(OrderRefundRequest request) {
+		if (request == null) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "参数对象不能为空");
+		}
+		if(null == request.getOrderId()){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"订单编号不能为空");
+		}
+		if(StringUtil.isBlank(request.getState())){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"订单状态不能为空");
+		}
+		if(StringUtil.isBlank(request.getBusiType())){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"业务类型不能为空");
+		}
+		if(StringUtil.isBlank(request.getDisplayFlag())){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"客户端显示状态不能为空");
 		}
 	}
 }

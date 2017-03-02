@@ -17,6 +17,8 @@ import com.ai.paas.ipaas.search.vo.SearchCriteria;
 import com.ai.paas.ipaas.search.vo.SearchOption;
 import com.ai.paas.ipaas.util.StringUtil;
 import com.ai.yc.order.api.orderquery.param.QueryOrdCountRequest;
+import com.ai.yc.order.api.orderrefund.param.OrderRefundRequest;
+import com.ai.yc.order.api.orderrefund.param.OrderRefundResponse;
 import com.ai.yc.order.api.orderstate.param.OrderStateUpdateRequest;
 import com.ai.yc.order.api.orderstate.param.OrderStateUpdateResponse;
 import com.ai.yc.order.api.orderstate.param.UpdateStateChgInfo;
@@ -56,45 +58,45 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 		copyProperties(orderRequest, request);
 		Map<String, Integer> countMap = new HashMap<String, Integer>();
 		if (!StringUtil.isBlank(request.getState())) {
-			int stateCount = countAllOrders(orderRequest, request.getInterperLevel(),request.getLanguageIds());
+			int stateCount = countAllOrders(orderRequest, request.getInterperLevel(), request.getLanguageIds());
 			countMap.put(request.getState(), stateCount);
 			return countMap;
 		}
 		if (!StringUtil.isBlank(request.getUserId())) {
 			// 待支付
 			orderRequest.setDisplayFlag(OrdersConstants.OrderDisplayFlag.FLAG_WAIT_PAY);
-			int waitPayCount = countAllOrders(orderRequest, request.getInterperLevel(),request.getLanguageIds());
+			int waitPayCount = countAllOrders(orderRequest, request.getInterperLevel(), request.getLanguageIds());
 			countMap.put(OrdersConstants.OrderDisplayFlag.FLAG_WAIT_PAY, waitPayCount);
 
 			// 待报价
 			orderRequest.setDisplayFlag(OrdersConstants.OrderDisplayFlag.FLAG_WAIT_OFFER);
-			int waitofferCount = countAllOrders(orderRequest, request.getInterperLevel(),request.getLanguageIds());
+			int waitofferCount = countAllOrders(orderRequest, request.getInterperLevel(), request.getLanguageIds());
 			countMap.put(OrdersConstants.OrderDisplayFlag.FLAG_WAIT_OFFER, waitofferCount);
 
 			// 翻译中
 			orderRequest.setDisplayFlag(OrdersConstants.OrderDisplayFlag.FLAG_TRASLATING);
-			int translatingCount = countAllOrders(orderRequest, request.getInterperLevel(),request.getLanguageIds());
+			int translatingCount = countAllOrders(orderRequest, request.getInterperLevel(), request.getLanguageIds());
 			countMap.put(OrdersConstants.OrderDisplayFlag.FLAG_TRASLATING, translatingCount);
 
 			// 待确认
 			orderRequest.setDisplayFlag(OrdersConstants.OrderDisplayFlag.FLAG_WAIT_OK);
-			int waitOkCount = countAllOrders(orderRequest, request.getInterperLevel(),request.getLanguageIds());
+			int waitOkCount = countAllOrders(orderRequest, request.getInterperLevel(), request.getLanguageIds());
 			countMap.put(OrdersConstants.OrderDisplayFlag.FLAG_WAIT_OK, waitOkCount);
 
 			// 待评价
 			orderRequest.setDisplayFlag(OrdersConstants.OrderDisplayFlag.FLAG_WAIT_COMMENT);
-			int waitCommentCount = countAllOrders(orderRequest, request.getInterperLevel(),request.getLanguageIds());
+			int waitCommentCount = countAllOrders(orderRequest, request.getInterperLevel(), request.getLanguageIds());
 			countMap.put(OrdersConstants.OrderDisplayFlag.FLAG_WAIT_COMMENT, waitCommentCount);
 
 		} else if (!StringUtil.isBlank(request.getInterperId()) || !StringUtil.isBlank(request.getLspId())) {
 			// 待支付
 			orderRequest.setState(OrdersConstants.OrderState.STATE_RECEIVED);
-			int receivedCount = countAllOrders(orderRequest, request.getInterperLevel(),request.getLanguageIds());
+			int receivedCount = countAllOrders(orderRequest, request.getInterperLevel(), request.getLanguageIds());
 			countMap.put(OrdersConstants.OrderState.STATE_RECEIVED, receivedCount);
 
 			// 翻译中
 			orderRequest.setState(OrdersConstants.OrderState.STATE_TRASLATING);
-			int translatingCount = countAllOrders(orderRequest, request.getInterperLevel(),request.getLanguageIds());
+			int translatingCount = countAllOrders(orderRequest, request.getInterperLevel(), request.getLanguageIds());
 			countMap.put(OrdersConstants.OrderState.STATE_TRASLATING, translatingCount);
 		}
 
@@ -152,34 +154,37 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 		// return operName 2017-01-10 10:39 zhangzd
 		String operName = this.returnOperName(request.getStateChgInfo());
 		//
-		this.orderStateChgInfoSubmit(userId, orderId, translateType, oldState, newState,operName);
+		this.orderStateChgInfoSubmit(userId, orderId, translateType, oldState, newState, operName);
 		//
 		response.setOrderId(request.getOrderId());
 		//
 		return response;
 	}
+
 	/**
 	 * return operName
+	 * 
 	 * @author zhangzd
 	 */
-	public String returnOperName(UpdateStateChgInfo stateChgInfo){
+	public String returnOperName(UpdateStateChgInfo stateChgInfo) {
 		//
 		String operName = "";
-		if(null == stateChgInfo){
+		if (null == stateChgInfo) {
 			operName = "";
-		}else{
-			if(!StringUtil.isBlank(stateChgInfo.getOperName())){
+		} else {
+			if (!StringUtil.isBlank(stateChgInfo.getOperName())) {
 				operName = stateChgInfo.getOperName();
 			}
 		}
 		//
 		return operName;
 	}
+
 	/**
 	 * 订单提交-订单轨迹表
 	 */
 	public void orderStateChgInfoSubmit(String userId, Long orderId, String translateType, String oldState,
-			String newState,String operName) {
+			String newState, String operName) {
 		OrdOdStateChg ordOdStateChg = new OrdOdStateChg();
 		//
 		Long stateChgId = SequenceUtil.createStateChgId();
@@ -187,7 +192,7 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 		ordOdStateChg.setStateChgId(stateChgId);
 		ordOdStateChg.setOrderId(orderId);
 		ordOdStateChg.setOperId(userId);
-		ordOdStateChg.setOperName(operName);//2017-01-13 15:01 zhangzd
+		ordOdStateChg.setOperName(operName);// 2017-01-13 15:01 zhangzd
 		ordOdStateChg.setOrgState(oldState);
 		ordOdStateChg.setNewState(newState);
 
@@ -199,9 +204,9 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 		}
 		// 待审核状态
 		if (OrdersConstants.OrderState.WAIT_REVIEW_STATE.equals(newState)) {
-			ordOdStateChg.setChgDesc("译员 "+operName+" 提交了译文");
-			ordOdStateChg.setChgDescEn("Translator "+operName+" submitted the order translated text");
-			
+			ordOdStateChg.setChgDesc("译员 " + operName + " 提交了译文");
+			ordOdStateChg.setChgDescEn("Translator " + operName + " submitted the order translated text");
+
 		}
 		// 完成状态
 		if (OrdersConstants.OrderState.FLAG_FINISHED.equals(newState)) {
@@ -215,28 +220,33 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 		this.ordOdStateChgAtomSV.insertSelective(ordOdStateChg);
 	}
 
-	//客户我的订单及译员我的订单统计
-	private int countAllOrders(OrdOrder request, String interperLevel,List<Object> languageIds) {
+	// 客户我的订单及译员我的订单统计
+	private int countAllOrders(OrdOrder request, String interperLevel, List<Object> languageIds) {
 		IOrderSearch orderSearch = new OrderSearchImpl();
-		List<SearchCriteria> searchCriterias = installConditions(request, interperLevel,languageIds);
+		List<SearchCriteria> searchCriterias = installConditions(request, interperLevel, languageIds);
 		return orderSearch.countAll(searchCriterias);
 	}
-	//订单大厅统计
-	private int countAllOrders4TaskCenter(OrdOrder request, String interperLevel,List<Object> languageIds) {
+
+	// 订单大厅统计
+	private int countAllOrders4TaskCenter(OrdOrder request, String interperLevel, List<Object> languageIds) {
 		IOrderSearch orderSearch = new OrderSearchImpl();
-		List<SearchCriteria> searchCriterias = installConditions4TaskCenter(request, interperLevel,languageIds);
+		List<SearchCriteria> searchCriterias = installConditions4TaskCenter(request, interperLevel, languageIds);
 		return orderSearch.countAll(searchCriterias);
 	}
 
 	/**
 	 * 搜索引擎数据公共查询条件
-	 * @param request 请求
-	 * @param interperLevel 译员级别
-	 * @param languageIds 语言对
+	 * 
+	 * @param request
+	 *            请求
+	 * @param interperLevel
+	 *            译员级别
+	 * @param languageIds
+	 *            语言对
 	 * @return
 	 * @author gucl
 	 */
-	private List<SearchCriteria> installConditions(OrdOrder request, String interperLevel,List<Object> languageIds) {
+	private List<SearchCriteria> installConditions(OrdOrder request, String interperLevel, List<Object> languageIds) {
 		List<SearchCriteria> searchfieldVos = new ArrayList<SearchCriteria>();
 		if (!StringUtil.isBlank(interperLevel)) {
 			Map<String, OrderLevelRange> interperLevelMap = this.interperLevelMap.getInterperLevelMap();
@@ -253,11 +263,12 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 			searchCriteria.addFieldValue(maxValue);
 			searchfieldVos.add(searchCriteria);
 		}
-		/*// 如果业务标识不为空
-		if (!StringUtil.isBlank(request.getFlag())) {
-			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.FLAG, request.getFlag(),
-					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
-		}*/
+		/*
+		 * // 如果业务标识不为空 if (!StringUtil.isBlank(request.getFlag())) {
+		 * searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.FLAG,
+		 * request.getFlag(), new SearchOption(SearchOption.SearchLogic.must,
+		 * SearchOption.SearchType.querystring))); }
+		 */
 		// 如果订单id不为空
 		if (request.getOrderId() != null) {
 			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.ORDER_ID, request.getOrderId().toString(),
@@ -334,12 +345,12 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.INTERPER_ID, request.getInterperId(),
 					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
 		}
-		
-		
+
 		return searchfieldVos;
 	}
-	
-	private List<SearchCriteria> installConditions4TaskCenter(OrdOrder request, String interperLevel,List<Object> languageIds) {
+
+	private List<SearchCriteria> installConditions4TaskCenter(OrdOrder request, String interperLevel,
+			List<Object> languageIds) {
 		List<SearchCriteria> searchfieldVos = new ArrayList<SearchCriteria>();
 		if (!StringUtil.isBlank(interperLevel)) {
 			Map<String, OrderLevelRange> interperLevelMap = this.interperLevelMap.getInterperLevelMap();
@@ -356,11 +367,12 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 			searchCriteria.addFieldValue(maxValue);
 			searchfieldVos.add(searchCriteria);
 		}
-		/*// 如果业务标识不为空
-		if (!StringUtil.isBlank(request.getFlag())) {
-			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.FLAG, request.getFlag(),
-					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
-		}*/
+		/*
+		 * // 如果业务标识不为空 if (!StringUtil.isBlank(request.getFlag())) {
+		 * searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.FLAG,
+		 * request.getFlag(), new SearchOption(SearchOption.SearchLogic.must,
+		 * SearchOption.SearchType.querystring))); }
+		 */
 		// 如果订单id不为空
 		if (request.getOrderId() != null) {
 			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.ORDER_ID, request.getOrderId().toString(),
@@ -428,21 +440,23 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
 		}
 		// 如果lspid不为空
-		/*if (!StringUtil.isBlank(request.getLspId())) {
-			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.LSP_ID, request.getLspId(),
-					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
-		}*/
+		/*
+		 * if (!StringUtil.isBlank(request.getLspId())) { searchfieldVos.add(new
+		 * SearchCriteria(SearchFieldConfConstants.LSP_ID, request.getLspId(),
+		 * new SearchOption(SearchOption.SearchLogic.must,
+		 * SearchOption.SearchType.querystring))); }
+		 */
 		// 如果译员id不为空
 		if (!StringUtil.isBlank(request.getInterperId())) {
 			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.INTERPER_ID, request.getInterperId(),
 					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
 		}
-		
+
 		// 如果为非LSP用户，且语言对id集合不为空，那么就传入 2017-01-06 11:04 gucl
-		if(StringUtil.isBlank(request.getLspId())){
-			if(CollectionUtil.isEmpty(languageIds)){
+		if (StringUtil.isBlank(request.getLspId())) {
+			if (CollectionUtil.isEmpty(languageIds)) {
 				languageIds = new ArrayList<Object>();
-				languageIds.add("0");//0代表不存在
+				languageIds.add("0");// 0代表不存在
 			}
 			SearchCriteria searchCriteria = new SearchCriteria();
 			searchCriteria.setOption(new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.term));
@@ -450,7 +464,7 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 			searchCriteria.setFieldValue(languageIds);
 			searchfieldVos.add(searchCriteria);
 		}
-		
+
 		return searchfieldVos;
 	}
 
@@ -460,49 +474,102 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 		copyProperties(orderRequest, request);
 		Map<String, Integer> countMap = new HashMap<String, Integer>();
 		if (!StringUtil.isBlank(request.getState())) {
-			int stateCount = countAllOrders4TaskCenter(orderRequest, request.getInterperLevel(),request.getLanguageIds());
+			int stateCount = countAllOrders4TaskCenter(orderRequest, request.getInterperLevel(),
+					request.getLanguageIds());
 			countMap.put(request.getState(), stateCount);
 			return countMap;
 		}
 		if (!StringUtil.isBlank(request.getUserId())) {
 			// 待支付
 			orderRequest.setDisplayFlag(OrdersConstants.OrderDisplayFlag.FLAG_WAIT_PAY);
-			int waitPayCount = countAllOrders4TaskCenter(orderRequest, request.getInterperLevel(),request.getLanguageIds());
+			int waitPayCount = countAllOrders4TaskCenter(orderRequest, request.getInterperLevel(),
+					request.getLanguageIds());
 			countMap.put(OrdersConstants.OrderDisplayFlag.FLAG_WAIT_PAY, waitPayCount);
 
 			// 待报价
 			orderRequest.setDisplayFlag(OrdersConstants.OrderDisplayFlag.FLAG_WAIT_OFFER);
-			int waitofferCount = countAllOrders4TaskCenter(orderRequest, request.getInterperLevel(),request.getLanguageIds());
+			int waitofferCount = countAllOrders4TaskCenter(orderRequest, request.getInterperLevel(),
+					request.getLanguageIds());
 			countMap.put(OrdersConstants.OrderDisplayFlag.FLAG_WAIT_OFFER, waitofferCount);
 
 			// 翻译中
 			orderRequest.setDisplayFlag(OrdersConstants.OrderDisplayFlag.FLAG_TRASLATING);
-			int translatingCount = countAllOrders4TaskCenter(orderRequest, request.getInterperLevel(),request.getLanguageIds());
+			int translatingCount = countAllOrders4TaskCenter(orderRequest, request.getInterperLevel(),
+					request.getLanguageIds());
 			countMap.put(OrdersConstants.OrderDisplayFlag.FLAG_TRASLATING, translatingCount);
 
 			// 待确认
 			orderRequest.setDisplayFlag(OrdersConstants.OrderDisplayFlag.FLAG_WAIT_OK);
-			int waitOkCount = countAllOrders4TaskCenter(orderRequest, request.getInterperLevel(),request.getLanguageIds());
+			int waitOkCount = countAllOrders4TaskCenter(orderRequest, request.getInterperLevel(),
+					request.getLanguageIds());
 			countMap.put(OrdersConstants.OrderDisplayFlag.FLAG_WAIT_OK, waitOkCount);
 
 			// 待评价
 			orderRequest.setDisplayFlag(OrdersConstants.OrderDisplayFlag.FLAG_WAIT_COMMENT);
-			int waitCommentCount = countAllOrders4TaskCenter(orderRequest, request.getInterperLevel(),request.getLanguageIds());
+			int waitCommentCount = countAllOrders4TaskCenter(orderRequest, request.getInterperLevel(),
+					request.getLanguageIds());
 			countMap.put(OrdersConstants.OrderDisplayFlag.FLAG_WAIT_COMMENT, waitCommentCount);
 
 		} else if (!StringUtil.isBlank(request.getInterperId()) || !StringUtil.isBlank(request.getInterperId())) {
 			// 待支付
 			orderRequest.setState(OrdersConstants.OrderState.STATE_RECEIVED);
-			int receivedCount = countAllOrders4TaskCenter(orderRequest, request.getInterperLevel(),request.getLanguageIds());
+			int receivedCount = countAllOrders4TaskCenter(orderRequest, request.getInterperLevel(),
+					request.getLanguageIds());
 			countMap.put(OrdersConstants.OrderState.STATE_RECEIVED, receivedCount);
 
 			// 翻译中
 			orderRequest.setState(OrdersConstants.OrderState.STATE_TRASLATING);
-			int translatingCount = countAllOrders4TaskCenter(orderRequest, request.getInterperLevel(),request.getLanguageIds());
+			int translatingCount = countAllOrders4TaskCenter(orderRequest, request.getInterperLevel(),
+					request.getLanguageIds());
 			countMap.put(OrdersConstants.OrderState.STATE_TRASLATING, translatingCount);
 		}
 
 		return countMap;
+	}
+
+	@Override
+	public OrderRefundResponse refundOrd(OrderRefundRequest request) {
+		OrderRefundResponse response = new OrderRefundResponse();
+		
+		OrdOrder ordOrderDb = this.ordOrderAtomSV.findByPrimaryKey(request.getOrderId());
+		if (null == ordOrderDb) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "此订单信息不存在");
+		}
+		
+		OrdOrder ordOrder = new OrdOrder();
+		ordOrder.setOrderId(request.getOrderId());
+		ordOrder.setState(request.getState());
+		ordOrder.setStateChgTime(DateUtil.getSysDate());
+		ordOrder.setEndChgTime(DateUtil.getSysDate());
+		ordOrder.setBusiType(request.getBusiType());
+		
+		if (!StringUtil.isBlank(request.getDisplayFlag())) {
+			ordOrder.setDisplayFlag(request.getDisplayFlag());
+			ordOrder.setDisplayFlagChgTime(DateUtil.getSysDate());
+		}
+		
+		this.ordOrderAtomSV.updateByPrimaryKeySelective(ordOrder);
+		// 4.入库订单轨迹表 41审核失败，92：退款完成
+		OrdOdStateChg ordOdStateChg = new OrdOdStateChg();
+		ordOdStateChg.setStateChgId(SequenceUtil.createStateChgId());
+		ordOdStateChg.setOrderId(request.getOrderId());
+		ordOdStateChg.setChgDesc("订单 " + request.getOrderId() + " 退款申请");
+		ordOdStateChg.setChgDescEn("");
+		ordOdStateChg.setChgDescD("");
+		ordOdStateChg.setChgDescUEn("");
+		ordOdStateChg.setFlag(OrdOdStateChgConstants.FLAG_USER);
+		ordOdStateChg.setOrgId("1");
+		ordOdStateChg.setOperId(request.getOperId());
+		ordOdStateChg.setOperName(request.getOperName());
+		ordOdStateChg.setOrgState(ordOrderDb.getState());
+		ordOdStateChg.setNewState(request.getState());
+		ordOdStateChg.setStateChgTime(DateUtil.getSysDate());
+		
+		this.ordOdStateChgAtomSV.insertSelective(ordOdStateChg);
+		
+		response.setOrderId(request.getOrderId());
+		
+		return response;
 	}
 
 }
