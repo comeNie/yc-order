@@ -120,9 +120,6 @@ public class ValidateUtils {
 		if(StringUtil.isBlank(request.getState())){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"订单状态不能为空");
 		}
-		if(StringUtil.isBlank(request.getBusiType())){
-			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"业务类型不能为空");
-		}
 		if(StringUtil.isBlank(request.getDisplayFlag())){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"客户端显示状态不能为空");
 		}

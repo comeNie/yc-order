@@ -36,12 +36,12 @@ public class OrderRefundSVImpl implements IOrderRefundSV {
 			
 			response = this.ordOrderBusiSV.refundOrd(request);
 			Long orderId = response.getOrderId();
-			logger.info("订单退款申请结果处理返回订单编号：>>>>>>"+orderId);
+			logger.info("订单退款结果处理返回订单编号：>>>>>>"+orderId);
 			this.orderIndexBusiSV.insertSesData(response.getOrderId());
 			
 			responseHeader.setIsSuccess(true);
 			responseHeader.setResultCode(ExceptCodeConstants.Special.SUCCESS);
-			responseHeader.setResultMessage("订单退款申请成功");
+			responseHeader.setResultMessage("订单退款处理成功");
 			response.setResponseHeader(responseHeader);
 			
 		} catch (BusinessException | SystemException e) {
