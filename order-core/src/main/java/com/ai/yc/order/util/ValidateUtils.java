@@ -126,5 +126,11 @@ public class ValidateUtils {
 		if(StringUtil.isBlank(request.getDisplayFlag())){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"客户端显示状态不能为空");
 		}
+		if (StringUtil.isBlank(request.getOperId())) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "操作id不能为空");
+		}
+		if (StringUtil.isBlank(request.getOperName())) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "操作者昵称不能为空");
+		}
 	}
 }

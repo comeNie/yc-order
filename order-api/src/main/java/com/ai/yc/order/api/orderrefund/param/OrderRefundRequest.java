@@ -30,6 +30,10 @@ public class OrderRefundRequest implements Serializable {
 	 * 操作者名称
 	 */
 	private String operName;
+	/**
+	 * 原因
+	 */
+	private String reasonDesc;
 
 	public Long getOrderId() {
 		return orderId;
@@ -77,6 +81,14 @@ public class OrderRefundRequest implements Serializable {
 
 	public void setOperName(String operName) {
 		this.operName = operName;
+	}
+
+	public String getReasonDesc() {
+		return reasonDesc;
+	}
+
+	public void setReasonDesc(String reasonDesc) {
+		this.reasonDesc = reasonDesc;
 	}
 
 }
