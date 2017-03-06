@@ -3,6 +3,7 @@ package com.ai.yc.order.service.business.interfaces;
 import java.util.Map;
 
 import com.ai.yc.order.api.orderquery.param.QueryOrdCountRequest;
+import com.ai.yc.order.api.orderrefund.param.OrderRefundCheckRequest;
 import com.ai.yc.order.api.orderrefund.param.OrderRefundRequest;
 import com.ai.yc.order.api.orderrefund.param.OrderRefundResponse;
 import com.ai.yc.order.api.orderstate.param.OrderStateUpdateRequest;
@@ -25,7 +26,11 @@ public interface IOrdOrderBusiSV {
 	 */
 	public Map<String, Integer> findOrderCount4TaskCenter(QueryOrdCountRequest request);
 	/**
-	 * 退款审核
+	 * 退款申请
 	 */
 	public OrderRefundResponse refundOrd(OrderRefundRequest request);
+	/**
+	 * 退款审核
+	 */
+	public OrderRefundResponse refundCheckOrd(OrderRefundCheckRequest request);
 }

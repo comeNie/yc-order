@@ -17,6 +17,7 @@ import com.ai.paas.ipaas.search.vo.SearchCriteria;
 import com.ai.paas.ipaas.search.vo.SearchOption;
 import com.ai.paas.ipaas.util.StringUtil;
 import com.ai.yc.order.api.orderquery.param.QueryOrdCountRequest;
+import com.ai.yc.order.api.orderrefund.param.OrderRefundCheckRequest;
 import com.ai.yc.order.api.orderrefund.param.OrderRefundRequest;
 import com.ai.yc.order.api.orderrefund.param.OrderRefundResponse;
 import com.ai.yc.order.api.orderstate.param.OrderStateUpdateRequest;
@@ -530,28 +531,25 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 	@Override
 	public OrderRefundResponse refundOrd(OrderRefundRequest request) {
 		OrderRefundResponse response = new OrderRefundResponse();
-		
+
 		OrdOrder ordOrderDb = this.ordOrderAtomSV.findByPrimaryKey(request.getOrderId());
 		if (null == ordOrderDb) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "此订单信息不存在");
 		}
-		
+
 		OrdOrder ordOrder = new OrdOrder();
 		ordOrder.setOrderId(request.getOrderId());
 		ordOrder.setState(request.getState());
 		ordOrder.setStateChgTime(DateUtil.getSysDate());
 		ordOrder.setEndChgTime(DateUtil.getSysDate());
 		ordOrder.setBusiType(request.getBusiType());
-		if (!StringUtil.isBlank(request.getReasonDesc())) {
-			ordOrder.setReasonDesc(request.getReasonDesc());
-		}
 		if (!StringUtil.isBlank(request.getDisplayFlag())) {
 			ordOrder.setDisplayFlag(request.getDisplayFlag());
 			ordOrder.setDisplayFlagChgTime(DateUtil.getSysDate());
 		}
-		
+
 		this.ordOrderAtomSV.updateByPrimaryKeySelective(ordOrder);
-		// 4.入库订单轨迹表 41审核失败，92：退款完成
+		// 4.入库订单轨迹表
 		OrdOdStateChg ordOdStateChg = new OrdOdStateChg();
 		ordOdStateChg.setStateChgId(SequenceUtil.createStateChgId());
 		ordOdStateChg.setOrderId(request.getOrderId());
@@ -566,11 +564,57 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 		ordOdStateChg.setOrgState(ordOrderDb.getState());
 		ordOdStateChg.setNewState(request.getState());
 		ordOdStateChg.setStateChgTime(DateUtil.getSysDate());
-		
+
 		this.ordOdStateChgAtomSV.insertSelective(ordOdStateChg);
-		
+
 		response.setOrderId(request.getOrderId());
-		
+
+		return response;
+	}
+
+	@Override
+	public OrderRefundResponse refundCheckOrd(OrderRefundCheckRequest request) {
+		OrderRefundResponse response = new OrderRefundResponse();
+
+		OrdOrder ordOrderDb = this.ordOrderAtomSV.findByPrimaryKey(request.getOrderId());
+		if (null == ordOrderDb) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "此订单信息不存在");
+		}
+
+		OrdOrder ordOrder = new OrdOrder();
+		ordOrder.setOrderId(request.getOrderId());
+		ordOrder.setState(request.getState());
+		ordOrder.setStateChgTime(DateUtil.getSysDate());
+		ordOrder.setEndChgTime(DateUtil.getSysDate());
+		if (!StringUtil.isBlank(request.getReasonDesc())) {
+			ordOrder.setReasonDesc(request.getReasonDesc());
+		}
+		if (!StringUtil.isBlank(request.getDisplayFlag())) {
+			ordOrder.setDisplayFlag(request.getDisplayFlag());
+			ordOrder.setDisplayFlagChgTime(DateUtil.getSysDate());
+		}
+
+		this.ordOrderAtomSV.updateByPrimaryKeySelective(ordOrder);
+		// 4.入库订单轨迹表 41审核失败，92：退款完成
+		OrdOdStateChg ordOdStateChg = new OrdOdStateChg();
+		ordOdStateChg.setStateChgId(SequenceUtil.createStateChgId());
+		ordOdStateChg.setOrderId(request.getOrderId());
+		ordOdStateChg.setChgDesc("订单 " + request.getOrderId() + " 退款审核");
+		ordOdStateChg.setChgDescEn("");
+		ordOdStateChg.setChgDescD("");
+		ordOdStateChg.setChgDescUEn("");
+		ordOdStateChg.setFlag(OrdOdStateChgConstants.FLAG_USER);
+		ordOdStateChg.setOrgId("1");
+		ordOdStateChg.setOperId(request.getOperId());
+		ordOdStateChg.setOperName(request.getOperName());
+		ordOdStateChg.setOrgState(ordOrderDb.getState());
+		ordOdStateChg.setNewState(request.getState());
+		ordOdStateChg.setStateChgTime(DateUtil.getSysDate());
+
+		this.ordOdStateChgAtomSV.insertSelective(ordOdStateChg);
+
+		response.setOrderId(request.getOrderId());
+
 		return response;
 	}
 
