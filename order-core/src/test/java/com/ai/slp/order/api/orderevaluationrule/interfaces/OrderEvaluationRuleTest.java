@@ -33,8 +33,9 @@ public class OrderEvaluationRuleTest extends BaseTest {
 	@Test
 	public void orderEvaluationUpdate(){
 		UpdateOrdEvaluateRequest re = new UpdateOrdEvaluateRequest();
-		re.setOrderId(123663463556l);
-		re.setState("1");
+		re.setOrderId(123l);
+		re.setState("0");
+		re.setRemark("niaho测试123");
 		BaseResponse response = this.orderEvaluationSV.updateEvaluateByOrdId(re);
 		 log.error("response:"+JSON.toJSONString(response));
 	}
