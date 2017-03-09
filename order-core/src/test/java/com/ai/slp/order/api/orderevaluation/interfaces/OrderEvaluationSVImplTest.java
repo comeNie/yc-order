@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.ai.opt.sdk.util.DateUtil;
 import com.ai.slp.order.api.BaseTest;
 import com.ai.yc.order.api.orderevaluation.interfaces.IOrderEvaluationSV;
+import com.ai.yc.order.api.orderevaluation.param.OrdEvaluationRuleRequest;
+import com.ai.yc.order.api.orderevaluation.param.OrdEvaluationRuleResponse;
 import com.ai.yc.order.api.orderevaluation.param.OrderEvaluationBaseInfo;
 import com.ai.yc.order.api.orderevaluation.param.OrderEvaluationExtendInfo;
 import com.ai.yc.order.api.orderevaluation.param.OrderEvaluationRequest;
@@ -37,6 +39,15 @@ public class OrderEvaluationSVImplTest extends BaseTest{
 		request.setBaseInfo(baseInfo);
 		request.setExtendInfo(extendInfo);
 		OrderEvaluationResponse response = orderEvaluationSV.orderEvaluation(request);
+		System.out.println(JSON.toJSONString(response));
+	}
+	@Test
+	public void orderEvaluationRule() {
+		OrdEvaluationRuleRequest request=new OrdEvaluationRuleRequest();
+		/*request.setServeManner(4);
+		request.setServeSpeen(6);
+		request.setServeQuality(30);*/
+		OrdEvaluationRuleResponse response = orderEvaluationSV.orderEvaluationRule(request);
 		System.out.println(JSON.toJSONString(response));
 	}
 }

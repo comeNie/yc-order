@@ -16,4 +16,6 @@ public interface IOrdEvaluateBusiSV {
 	public BaseResponse updateEvaluate(UpdateOrdEvaluateRequest request) throws BusinessException, SystemException;
 
 	public OrderEvaluationResponse orderEvaluation(OrderEvaluationRequest request);
+	
+	public Integer orderEvaluateRule(Integer serveQuality, Integer serveSpeen, Integer serveManner);
 }

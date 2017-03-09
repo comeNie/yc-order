@@ -5,6 +5,7 @@ import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.opt.sdk.util.StringUtil;
 import com.ai.yc.order.api.orderclose.param.OrderCancelRequest;
+import com.ai.yc.order.api.orderevaluation.param.OrdEvaluationRuleRequest;
 import com.ai.yc.order.api.orderevaluation.param.OrderEvaluationRequest;
 import com.ai.yc.order.api.orderquery.param.QueryOrdCountRequest;
 import com.ai.yc.order.api.orderquery.param.QueryOrderRequest;
@@ -156,5 +157,23 @@ public class ValidateUtils {
 		if (StringUtil.isBlank(request.getOperName())) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "操作者昵称不能为空");
 		}
+	}
+	/**
+	 * 评价规则校验
+	 */
+	public static void validateEvaluteRule(OrdEvaluationRuleRequest request) {
+		if (request == null) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "参数对象不能为空");
+		}
+		if(null == request.getServeManner()){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"态度不能为空");
+		}
+		if(null == request.getServeQuality()){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"质量不能为空");
+		}
+		if(null == request.getServeSpeen()){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"速度不能为空");
+		}
+		
 	}
 }

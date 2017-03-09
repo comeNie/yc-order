@@ -9,6 +9,8 @@ import com.ai.opt.base.vo.BaseResponse;
 import com.ai.opt.base.vo.ResponseHeader;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.ai.yc.order.api.orderevaluation.interfaces.IOrderEvaluationSV;
+import com.ai.yc.order.api.orderevaluation.param.OrdEvaluationRuleRequest;
+import com.ai.yc.order.api.orderevaluation.param.OrdEvaluationRuleResponse;
 import com.ai.yc.order.api.orderevaluation.param.OrderEvaluationRequest;
 import com.ai.yc.order.api.orderevaluation.param.OrderEvaluationResponse;
 import com.ai.yc.order.api.orderevaluation.param.QueryOrdEvaluteRequest;
@@ -87,6 +89,30 @@ public class OrderEvaluationSVImpl implements IOrderEvaluationSV{
 		BaseResponse response = ordEvaluateBusiSV.updateEvaluate(request);
 		//刷新数据到搜索引擎
 		orderIndexBusiSV.insertSesData(request.getOrderId());
+		return response;
+	}
+
+	@Override
+	public OrdEvaluationRuleResponse orderEvaluationRule(OrdEvaluationRuleRequest request)
+			throws BusinessException, SystemException {
+		ValidateUtils.validateEvaluteRule(request);
+		OrdEvaluationRuleResponse response  =new OrdEvaluationRuleResponse();
+		ResponseHeader responseHeader = new ResponseHeader();
+		try{
+			Integer evaluationRule = ordEvaluateBusiSV.orderEvaluateRule(request.getServeQuality(), 
+					request.getServeSpeen(), request.getServeManner());
+			response.setRuleLevel(evaluationRule);
+			responseHeader.setIsSuccess(true);
+			responseHeader.setResultCode(ExceptCodeConstants.Special.SUCCESS);
+			responseHeader.setResultMessage("订单规则成功");
+			response.setResponseHeader(responseHeader);
+		}catch(Exception e){
+			responseHeader.setIsSuccess(false);
+			responseHeader.setResultCode(ExceptCodeConstants.Special.SYSTEM_ERROR);
+			responseHeader.setResultMessage("订单规则失败");
+			response.setResponseHeader(responseHeader);
+		}
+		//
 		return response;
 	}
 

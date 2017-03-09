@@ -9,6 +9,8 @@ import javax.ws.rs.core.MediaType;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.base.vo.BaseResponse;
+import com.ai.yc.order.api.orderevaluation.param.OrdEvaluationRuleRequest;
+import com.ai.yc.order.api.orderevaluation.param.OrdEvaluationRuleResponse;
 import com.ai.yc.order.api.orderevaluation.param.OrderEvaluationRequest;
 import com.ai.yc.order.api.orderevaluation.param.OrderEvaluationResponse;
 import com.ai.yc.order.api.orderevaluation.param.QueryOrdEvaluteRequest;
@@ -65,4 +67,20 @@ public interface IOrderEvaluationSV {
 	@POST
 	@Path("/updateEvaluateState")
 	public BaseResponse updateEvaluateByOrdId(UpdateOrdEvaluateRequest request) throws BusinessException, SystemException;
+	
+	/**
+	 * 订单评价规则
+	 * 
+	 * @param vo
+	 * @return
+	 * @throws BusinessException
+	 * @throws SystemException
+	 * @author zhanglh
+	 * @ApiDocMethod
+	 * @RestRelativeURL OrderEvaluationSV/orderEvaluationRule
+	 */
+	@POST
+	@Path("/orderEvaluationRule")
+	public OrdEvaluationRuleResponse orderEvaluationRule(OrdEvaluationRuleRequest request)
+			throws BusinessException, SystemException;
 }
