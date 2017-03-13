@@ -22,6 +22,10 @@ public final class OrdersConstants {
 	 * 业务类型-正常单
 	 */
 	public final static String NORMAL_BUSI_TYPE = "1";
+	/**
+	 * 领取状态-1已领取
+	 */
+	public final static String RECEIVE_STATE = "1";
 	
 
 	public final static class TranslatePrice {

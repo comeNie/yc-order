@@ -15,6 +15,7 @@ import com.ai.yc.order.api.orderallocation.param.OrderAllocationExtendInfo;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationRequest;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationResponse;
 import com.ai.yc.order.constants.OrdOdStateChgConstants;
+import com.ai.yc.order.constants.OrdersConstants;
 import com.ai.yc.order.dao.mapper.bo.OrdOdPersonInfo;
 import com.ai.yc.order.dao.mapper.bo.OrdOdStateChg;
 import com.ai.yc.order.dao.mapper.bo.OrdOrder;
@@ -86,7 +87,7 @@ public class OrderAllocationBusiSVImpl implements IOrderAllocationBusiSV {
 		BaseListResponse<OrdAllocationePersones> response = new BaseListResponse<OrdAllocationePersones>();
 		List<OrdAllocationePersones> personList = new ArrayList<OrdAllocationePersones>();
 		//是否需要加上领取状态???????
-		List<OrdOdPersonInfo> list = ordOdPersonInfoAtomSV.findByOrderId(orderId);
+		List<OrdOdPersonInfo> list = ordOdPersonInfoAtomSV.findByOrderId(orderId,OrdersConstants.RECEIVE_STATE);
 		 for(OrdOdPersonInfo info:list){
 			 OrdAllocationePersones persones = new OrdAllocationePersones();
 			 BeanUtils.copyVO(persones, info);
