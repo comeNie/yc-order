@@ -41,7 +41,7 @@ public interface IOrderAllocationSV {
 	 * @throws SystemException
 	 * @author zhanglh
 	 * @ApiCode
-	 * @RestRelativeURL OrderAllocationSV/orderAllocation
+	 * @RestRelativeURL OrderAllocationSV/ordPersonInfo
 	 */
 	@POST
 	@Path("/ordPersonInfo")
