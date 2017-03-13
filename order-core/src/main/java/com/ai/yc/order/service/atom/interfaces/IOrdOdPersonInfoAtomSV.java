@@ -8,4 +8,6 @@ public interface IOrdOdPersonInfoAtomSV {
 	public void insertSelective(OrdOdPersonInfo ordOdPersonInfo);
 	
 	List<OrdOdPersonInfo> findByOrderId(Long orderId);
+	
+	List<OrdOdPersonInfo> findByOrderId(Long orderId,String state);
 }

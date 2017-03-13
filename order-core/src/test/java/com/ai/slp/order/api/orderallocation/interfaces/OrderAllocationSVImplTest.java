@@ -6,9 +6,12 @@ import java.util.List;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.ai.opt.base.vo.BaseListResponse;
 import com.ai.opt.sdk.util.DateUtil;
 import com.ai.slp.order.api.BaseTest;
 import com.ai.yc.order.api.orderallocation.interfaces.IOrderAllocationSV;
+import com.ai.yc.order.api.orderallocation.param.OrdAllocationePersonRequest;
+import com.ai.yc.order.api.orderallocation.param.OrdAllocationePersones;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationBaseInfo;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationExtendInfo;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationRequest;
@@ -50,5 +53,12 @@ public class OrderAllocationSVImplTest extends BaseTest {
 		//
 		log.info("response:"+JSON.toJSONString(response));
 		//
+	}
+	@Test
+	public void orderAllocationPerson(){
+		OrdAllocationePersonRequest req = new OrdAllocationePersonRequest();
+		req.setOrderId(123l);
+		BaseListResponse<OrdAllocationePersones> response = orderAllocationSV.queryAllocationPersonInfoByOrdId(req);
+		System.out.println("response="+JSON.toJSONString(response));
 	}
 }

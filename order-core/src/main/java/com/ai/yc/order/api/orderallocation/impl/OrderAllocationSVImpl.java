@@ -7,9 +7,12 @@ import org.springframework.stereotype.Component;
 
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
+import com.ai.opt.base.vo.BaseListResponse;
 import com.ai.opt.base.vo.ResponseHeader;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.ai.yc.order.api.orderallocation.interfaces.IOrderAllocationSV;
+import com.ai.yc.order.api.orderallocation.param.OrdAllocationePersonRequest;
+import com.ai.yc.order.api.orderallocation.param.OrdAllocationePersones;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationRequest;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationResponse;
 import com.ai.yc.order.service.business.interfaces.IOrderAllocationBusiSV;
@@ -46,6 +49,17 @@ public class OrderAllocationSVImpl implements IOrderAllocationSV {
 		}
 		//
 		return response;
+	}
+	@Override
+	public BaseListResponse<OrdAllocationePersones> queryAllocationPersonInfoByOrdId(
+			OrdAllocationePersonRequest request) throws BusinessException, SystemException {
+		if (request == null) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "参数对象不能为空");
+		}
+		if(null == request.getOrderId()){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"订单编号不能为空");
+		}
+		return orderAllocationBusiSV.queryOrderAllocationPerson(request.getOrderId());
 	}
 
 }

@@ -8,6 +8,9 @@ import javax.ws.rs.core.MediaType;
 
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
+import com.ai.opt.base.vo.BaseListResponse;
+import com.ai.yc.order.api.orderallocation.param.OrdAllocationePersonRequest;
+import com.ai.yc.order.api.orderallocation.param.OrdAllocationePersones;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationRequest;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationResponse;
 
@@ -30,5 +33,18 @@ public interface IOrderAllocationSV {
 	@POST
 	@Path("/orderAllocation")
 	public OrderAllocationResponse orderAllocation(OrderAllocationRequest request) throws BusinessException, SystemException;
+	/**
+	 * 分配人员信息查询
+	 * @param request
+	 * @return
+	 * @throws BusinessException
+	 * @throws SystemException
+	 * @author zhanglh
+	 * @ApiCode
+	 * @RestRelativeURL OrderAllocationSV/orderAllocation
+	 */
+	@POST
+	@Path("/ordPersonInfo")
+	public BaseListResponse<OrdAllocationePersones> queryAllocationPersonInfoByOrdId(OrdAllocationePersonRequest request) throws BusinessException, SystemException;
 
 }

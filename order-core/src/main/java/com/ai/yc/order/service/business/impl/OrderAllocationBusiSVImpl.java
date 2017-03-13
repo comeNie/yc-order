@@ -1,11 +1,16 @@
 package com.ai.yc.order.service.business.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ai.opt.base.vo.BaseListResponse;
 import com.ai.opt.sdk.util.BeanUtils;
 import com.ai.opt.sdk.util.DateUtil;
+import com.ai.yc.order.api.orderallocation.param.OrdAllocationePersones;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationExtendInfo;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationRequest;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationResponse;
@@ -74,6 +79,21 @@ public class OrderAllocationBusiSVImpl implements IOrderAllocationBusiSV {
 		response.setOrderId(request.getOrderAllocationBaseInfo().getOrderId());
 		//
 		return response;
+	}
+
+	@Override
+	public BaseListResponse<OrdAllocationePersones> queryOrderAllocationPerson(long orderId) {
+		BaseListResponse<OrdAllocationePersones> response = new BaseListResponse<OrdAllocationePersones>();
+		List<OrdAllocationePersones> personList = new ArrayList<OrdAllocationePersones>();
+		//是否需要加上领取状态???????
+		List<OrdOdPersonInfo> list = ordOdPersonInfoAtomSV.findByOrderId(orderId);
+		 for(OrdOdPersonInfo info:list){
+			 OrdAllocationePersones persones = new OrdAllocationePersones();
+			 BeanUtils.copyVO(persones, info);
+			 personList.add(persones);
+		 }
+		 response.setResult(personList); 
+		 return response;
 	}
 
 }
