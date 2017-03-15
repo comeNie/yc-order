@@ -112,10 +112,10 @@ public class OrdEvaluateBusiSVImpl implements IOrdEvaluateBusiSV {
 		OrdOdStateChg ordOdStateChg = new OrdOdStateChg();
 		ordOdStateChg.setStateChgId(SequenceUtil.createStateChgId());
 		ordOdStateChg.setOrderId(request.getBaseInfo().getOrderId());
-		ordOdStateChg.setChgDesc("订单 "+request.getBaseInfo().getOrderId()+" 已评价");
-		ordOdStateChg.setChgDescEn("");
-		ordOdStateChg.setChgDescD("");
-		ordOdStateChg.setChgDescUEn("");
+		ordOdStateChg.setChgDesc("客户评价了订单");
+		ordOdStateChg.setChgDescEn("Client evaluated the order");
+		ordOdStateChg.setChgDescD("客户评价了订单");
+		ordOdStateChg.setChgDescUEn("Client evaluated the order");
 		ordOdStateChg.setFlag(OrdOdStateChgConstants.FLAG_USER);
 		ordOdStateChg.setOrgId("1");
 		ordOdStateChg.setOperId(request.getBaseInfo().getUserId());
