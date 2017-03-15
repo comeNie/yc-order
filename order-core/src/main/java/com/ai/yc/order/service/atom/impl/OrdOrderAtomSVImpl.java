@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.opt.sdk.util.StringUtil;
 import com.ai.yc.order.constants.OrdersConstants;
 import com.ai.yc.order.dao.mapper.bo.OrdOrder;
@@ -186,5 +187,21 @@ public class OrdOrderAtomSVImpl implements IOrdOrderAtomSV {
 				criteria.andStateChgTimeLessThanOrEqualTo(stateChgTime);
 				//
 				return MapperFactory.getOrdOrderMapper().selectByExample(example);
+	}
+
+	@Override
+	public OrdOrder findOrdByStateOrId(long orderId, String state) {
+		OrdOrderMapper ordOrderMapper = MapperFactory.getOrdOrderMapper();
+		OrdOrderCriteria example=new OrdOrderCriteria();
+    	OrdOrderCriteria.Criteria criteria = example.createCriteria();
+    	criteria.andOrderIdEqualTo(orderId);
+    	if(!StringUtil.isBlank(state)){
+    		criteria.andStateEqualTo(state);
+    	}
+    	List<OrdOrder> list = ordOrderMapper.selectByExample(example);
+    	if(!CollectionUtil.isEmpty(list)){
+    		return list.get(0);
+    	}
+    	return null;
 	}
 }

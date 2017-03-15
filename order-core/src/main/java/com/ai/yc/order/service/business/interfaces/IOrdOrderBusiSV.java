@@ -2,6 +2,8 @@ package com.ai.yc.order.service.business.interfaces;
 
 import java.util.Map;
 
+import com.ai.opt.base.vo.BaseResponse;
+import com.ai.yc.order.api.orderdeplay.param.OrderDeplayRequest;
 import com.ai.yc.order.api.orderquery.param.QueryOrdCountRequest;
 import com.ai.yc.order.api.orderrefund.param.OrderRefundCheckRequest;
 import com.ai.yc.order.api.orderrefund.param.OrderRefundRequest;
@@ -33,4 +35,8 @@ public interface IOrdOrderBusiSV {
 	 * 退款审核
 	 */
 	public OrderRefundResponse refundCheckOrd(OrderRefundCheckRequest request);
+	/**
+	 * 订单延时
+	 */
+	public void deplayOrder(OrderDeplayRequest request);
 }

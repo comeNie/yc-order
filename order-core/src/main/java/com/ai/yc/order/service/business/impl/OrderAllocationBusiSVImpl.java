@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ai.opt.base.vo.BaseListResponse;
+import com.ai.opt.base.vo.ResponseHeader;
+import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.ai.opt.sdk.util.BeanUtils;
 import com.ai.opt.sdk.util.DateUtil;
 import com.ai.yc.order.api.orderallocation.param.OrdAllocationePersones;
@@ -94,6 +96,8 @@ public class OrderAllocationBusiSVImpl implements IOrderAllocationBusiSV {
 			 personList.add(persones);
 		 }
 		 response.setResult(personList); 
+		 ResponseHeader responseHeader = new ResponseHeader(true, ExceptCodeConstants.Special.SUCCESS, "订单分配人员查询成功");
+		 response.setResponseHeader(responseHeader);
 		 return response;
 	}
 

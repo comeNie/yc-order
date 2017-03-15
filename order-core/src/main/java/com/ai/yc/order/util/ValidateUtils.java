@@ -5,6 +5,7 @@ import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.opt.sdk.util.StringUtil;
 import com.ai.yc.order.api.orderclose.param.OrderCancelRequest;
+import com.ai.yc.order.api.orderdeplay.param.OrderDeplayRequest;
 import com.ai.yc.order.api.orderevaluation.param.OrdEvaluationRuleRequest;
 import com.ai.yc.order.api.orderevaluation.param.OrderEvaluationRequest;
 import com.ai.yc.order.api.orderquery.param.QueryOrdCountRequest;
@@ -159,7 +160,7 @@ public class ValidateUtils {
 		}
 	}
 	/**
-	 * 评价规则校验
+	 * 评价规则校验OrderDeplayRequest
 	 */
 	public static void validateEvaluteRule(OrdEvaluationRuleRequest request) {
 		if (request == null) {
@@ -175,5 +176,28 @@ public class ValidateUtils {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"速度不能为空");
 		}
 		
+	}
+	/**
+	 * 订单延迟校验
+	 */
+	public static void validateOrdDeplay(OrderDeplayRequest request) {
+		if (request == null) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "参数对象不能为空");
+		}
+		if(null == request.getOrderId()){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"订单id不能为空");
+		}
+		if(null == request.getOperId()){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"操作者id不能为空");
+		}
+		if(null == request.getEndChgTime() || "".equals(request.getEndChgTime())){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"状态结束时间不能为空");
+		}
+		if(null == request.getOperId()){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"操作者id不能为空");
+		}
+		if(StringUtil.isBlank(request.getOperName())){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"操作者名称不能为空");
+		}
 	}
 }

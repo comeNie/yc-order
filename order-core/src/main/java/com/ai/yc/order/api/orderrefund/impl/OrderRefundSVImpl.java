@@ -13,6 +13,8 @@ import com.ai.yc.order.api.orderrefund.interfaces.IOrderRefundSV;
 import com.ai.yc.order.api.orderrefund.param.OrderRefundCheckRequest;
 import com.ai.yc.order.api.orderrefund.param.OrderRefundRequest;
 import com.ai.yc.order.api.orderrefund.param.OrderRefundResponse;
+import com.ai.yc.order.dao.mapper.bo.OrdOrder;
+import com.ai.yc.order.service.atom.interfaces.IOrdOrderAtomSV;
 import com.ai.yc.order.service.business.interfaces.IOrdOrderBusiSV;
 import com.ai.yc.order.service.business.interfaces.search.IOrderIndexBusiSV;
 import com.ai.yc.order.util.ValidateUtils;
@@ -27,6 +29,8 @@ public class OrderRefundSVImpl implements IOrderRefundSV {
 
 	@Autowired
 	private IOrdOrderBusiSV ordOrderBusiSV;
+	@Autowired
+	private IOrdOrderAtomSV ordOrderAtomSV;
 
 	@Override
 	public OrderRefundResponse refund(OrderRefundRequest request) throws BusinessException, SystemException {
@@ -35,7 +39,6 @@ public class OrderRefundSVImpl implements IOrderRefundSV {
 		try {
 			// 有效性校验
 			ValidateUtils.validateRefundOrder(request);
-
 			response = this.ordOrderBusiSV.refundOrd(request);
 			Long orderId = response.getOrderId();
 			logger.info("订单退款申请结果处理返回订单编号：>>>>>>" + orderId);
@@ -64,7 +67,6 @@ public class OrderRefundSVImpl implements IOrderRefundSV {
 		try {
 			// 有效性校验
 			ValidateUtils.validateRefundCheck(request);
-
 			response = this.ordOrderBusiSV.refundCheckOrd(request);
 			Long orderId = response.getOrderId();
 			logger.info("订单退款审核结果处理返回订单编号：>>>>>>" + orderId);

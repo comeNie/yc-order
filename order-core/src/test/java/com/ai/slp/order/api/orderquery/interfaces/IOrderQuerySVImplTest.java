@@ -92,7 +92,7 @@ public class IOrderQuerySVImplTest extends BaseTest{
 	@Test
 	public void orderQueryCountGucl(){
 		QueryOrdCountRequest request = new QueryOrdCountRequest();
-		request.setLspId("0");
+		//request.setLspId("0");
 		//request.setFlag("0");
 		request.setInterperLevel("4");
 		//request.setInterperType("0");

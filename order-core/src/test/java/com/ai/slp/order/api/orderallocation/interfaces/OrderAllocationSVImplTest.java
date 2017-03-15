@@ -57,7 +57,7 @@ public class OrderAllocationSVImplTest extends BaseTest {
 	@Test
 	public void orderAllocationPerson(){
 		OrdAllocationePersonRequest req = new OrdAllocationePersonRequest();
-		req.setOrderId(123l);
+		req.setOrderId(2000000057014948l);
 		BaseListResponse<OrdAllocationePersones> response = orderAllocationSV.queryAllocationPersonInfoByOrdId(req);
 		System.out.println("response="+JSON.toJSONString(response));
 	}

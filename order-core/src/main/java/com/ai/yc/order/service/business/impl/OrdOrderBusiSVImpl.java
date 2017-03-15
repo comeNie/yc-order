@@ -10,12 +10,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ai.opt.base.exception.BusinessException;
+import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
+import com.ai.opt.sdk.util.BeanUtils;
 import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.opt.sdk.util.DateUtil;
 import com.ai.paas.ipaas.search.vo.SearchCriteria;
 import com.ai.paas.ipaas.search.vo.SearchOption;
 import com.ai.paas.ipaas.util.StringUtil;
+import com.ai.yc.order.api.orderdeplay.param.OrderDeplayRequest;
 import com.ai.yc.order.api.orderquery.param.QueryOrdCountRequest;
 import com.ai.yc.order.api.orderrefund.param.OrderRefundCheckRequest;
 import com.ai.yc.order.api.orderrefund.param.OrderRefundRequest;
@@ -47,7 +50,12 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 
 	@Autowired
 	private InterperLevelMap interperLevelMap;// 译员级别判定订单查询级别
-
+	/**
+	 * 订单延时
+	 */
+	private final static String ORDER_DEPLAY_CN = "客户申请延时确定译文";
+	private final static String ORDER_DEPLAY_UCN = "您已申请延时确定译文";	
+	private final static String ORDER_DEPLAY_EN = "You have applied to postpone the confirmation";
 	@Override
 	public OrdOrder findByPrimaryKey(OrdOrder ordOrder) {
 		return this.ordOrderAtomSV.findByPrimaryKey(ordOrder);
@@ -531,12 +539,10 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 	@Override
 	public OrderRefundResponse refundOrd(OrderRefundRequest request) {
 		OrderRefundResponse response = new OrderRefundResponse();
-
 		OrdOrder ordOrderDb = this.ordOrderAtomSV.findByPrimaryKey(request.getOrderId());
 		if (null == ordOrderDb) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "此订单信息不存在");
 		}
-
 		OrdOrder ordOrder = new OrdOrder();
 		ordOrder.setOrderId(request.getOrderId());
 		ordOrder.setState(request.getState());
@@ -583,7 +589,6 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 		if (null == ordOrderDb) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "此订单信息不存在");
 		}
-
 		OrdOrder ordOrder = new OrdOrder();
 		ordOrder.setOrderId(request.getOrderId());
 		ordOrder.setState(request.getState());
@@ -619,6 +624,40 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 		response.setOrderId(request.getOrderId());
 
 		return response;
+	}
+
+	@Override
+	public void deplayOrder(OrderDeplayRequest request) {
+		OrdOrder noConfirmOrders=null;
+		 //1.获取待确认的订单
+		try {
+			noConfirmOrders = ordOrderAtomSV.findOrdByStateOrId(request.getOrderId(),"50");
+		} catch (Exception e) {
+			throw new SystemException(e);
+		}
+		 //2.判断订单是否存在
+		if(noConfirmOrders==null) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, 
+					"待确认订单为空[orderId:"+request.getOrderId()+"]");
+		}
+		OrdOrder ord = new OrdOrder();
+		BeanUtils.copyProperties(ord, request);
+		ordOrderAtomSV.updateByPrimaryKeySelective(ord);
+		// 添加修改轨迹
+		OrdOdStateChg chg = new OrdOdStateChg();
+		chg.setOrderId(request.getOrderId());
+		chg.setOrgState(noConfirmOrders.getState());
+		chg.setNewState(noConfirmOrders.getState());
+		chg.setOperId(request.getOperId());
+		chg.setOperName(request.getOperName());
+		chg.setChgDesc(ORDER_DEPLAY_CN);
+		chg.setChgDescEn(ORDER_DEPLAY_EN);
+		//前端门户显示字段
+		chg.setChgDescUEn(ORDER_DEPLAY_EN);
+		chg.setChgDescD(ORDER_DEPLAY_UCN);
+		chg.setFlag(OrdOdStateChgConstants.FLAG_USER);
+		chg.setOperName(request.getOperName());
+		ordOdStateChgAtomSV.insertSelective(chg);
 	}
 
 }

@@ -75,5 +75,9 @@ public interface IOrdOrderAtomSV {
 	 * 根据状态和翻译类型查询订单信息
 	 */
 	public List<OrdOrder> findByStateAndTranslateType(String state,String translateType);
+	/**
+	 * 根据id、state获取订单
+	 */
+	OrdOrder findOrdByStateOrId(long orderId,String state);
 	
 }

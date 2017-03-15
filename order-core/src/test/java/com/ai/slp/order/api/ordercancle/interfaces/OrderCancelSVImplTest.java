@@ -22,7 +22,7 @@ public class OrderCancelSVImplTest  extends BaseTest{
 	@Test
 	public void orderCancel(){
 		OrderCancelRequest res = new OrderCancelRequest();
-		res.setOrderId(123l);
+		res.setOrderId(31233123123232l);
 		res.setOperId("123456");
 		res.setReasonDesc("cesshi");
 		res.setTenantId("yinyun");
