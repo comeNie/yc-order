@@ -5,9 +5,6 @@ import java.sql.Timestamp;
 
 public class OrderAllocationExtendInfo implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -34,6 +31,10 @@ public class OrderAllocationExtendInfo implements Serializable {
 	 * 分配时间 分配信息
 	 */
 	private Timestamp creartTime;
+	/**
+	 * 期望完成时间
+	 */
+	private Timestamp expectEndTime;
 	/**
 	 * 备注 分配信息
 	 */
@@ -105,6 +106,14 @@ public class OrderAllocationExtendInfo implements Serializable {
 
 	public void setStep(String step) {
 		this.step = step;
+	}
+
+	public Timestamp getExpectEndTime() {
+		return expectEndTime;
+	}
+
+	public void setExpectEndTime(Timestamp expectEndTime) {
+		this.expectEndTime = expectEndTime;
 	}
 
 }
