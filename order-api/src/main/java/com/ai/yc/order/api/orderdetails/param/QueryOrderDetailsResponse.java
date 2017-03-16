@@ -19,6 +19,10 @@ public class QueryOrderDetailsResponse extends BaseResponse{
 	 * 订单ID
 	 */
 	private Long orderId;
+	/**
+	 * 父订单id
+	 */
+	private String parentOrderId;
 	
     /**
      * 0:国内业务 1：国际业务
@@ -571,6 +575,14 @@ public class QueryOrderDetailsResponse extends BaseResponse{
 
 	public void setEvaluateVo(EvaluateVo evaluateVo) {
 		this.evaluateVo = evaluateVo;
+	}
+
+	public String getParentOrderId() {
+		return parentOrderId;
+	}
+
+	public void setParentOrderId(String parentOrderId) {
+		this.parentOrderId = parentOrderId;
 	}
     
     
