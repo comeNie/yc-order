@@ -544,6 +544,9 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "此订单信息不存在");
 		}
 		OrdOrder ordOrder = new OrdOrder();
+		//获取父订单号
+		Long parentOrderId = SequenceUtil.createOrderId();
+		ordOrder.setParentOrderId(parentOrderId.toString());
 		ordOrder.setOrderId(request.getOrderId());
 		ordOrder.setState(request.getState());
 		ordOrder.setStateChgTime(DateUtil.getSysDate());
