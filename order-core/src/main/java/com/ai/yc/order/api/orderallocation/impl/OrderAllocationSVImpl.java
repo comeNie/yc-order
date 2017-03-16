@@ -51,15 +51,12 @@ public class OrderAllocationSVImpl implements IOrderAllocationSV {
 		return response;
 	}
 	@Override
-	public BaseListResponse<OrdAllocationePersones> queryAllocationPersonInfoByOrdId(
+	public BaseListResponse<OrdAllocationePersones> queryAllocationPersonInfo(
 			OrdAllocationePersonRequest request) throws BusinessException, SystemException {
 		if (request == null) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "参数对象不能为空");
 		}
-		if(null == request.getOrderId()){
-			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"订单编号不能为空");
-		}
-		return orderAllocationBusiSV.queryOrderAllocationPerson(request.getOrderId());
+		return orderAllocationBusiSV.queryOrderAllocationPerson(request);
 	}
 
 }

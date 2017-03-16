@@ -40,11 +40,11 @@ public interface IOrderAllocationSV {
 	 * @throws BusinessException
 	 * @throws SystemException
 	 * @author zhanglh
-	 * @ApiCode
+	 * @ApiCode ORD_2025
 	 * @RestRelativeURL OrderAllocationSV/ordPersonInfo
 	 */
 	@POST
 	@Path("/ordPersonInfo")
-	public BaseListResponse<OrdAllocationePersones> queryAllocationPersonInfoByOrdId(OrdAllocationePersonRequest request) throws BusinessException, SystemException;
+	public BaseListResponse<OrdAllocationePersones> queryAllocationPersonInfo(OrdAllocationePersonRequest request) throws BusinessException, SystemException;
 
 }

@@ -15,11 +15,11 @@ public class OrdRefundTest  extends BaseTest{
 	@Test
 	public void orderRefund(){
 		OrderRefundRequest re = new OrderRefundRequest();
-		re.setOrderId(2000000025187511l);
+		re.setOrderId(2311111111232100l);
 		re.setState("40");
 		re.setBusiType("2");
 		re.setDisplayFlag("40");
-		re.setOperId("123");
+		//re.setOperId("123");
 		re.setOperName("ceshi");
 		re.setReasonDesc("退款测试");
 		OrderRefundResponse response = this.orderRefundSV.refund(re);

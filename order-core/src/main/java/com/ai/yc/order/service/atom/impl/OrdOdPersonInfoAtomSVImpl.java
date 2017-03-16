@@ -38,4 +38,21 @@ public class OrdOdPersonInfoAtomSVImpl implements IOrdOdPersonInfoAtomSV {
 		return personInfos;
 	}
 
+	@Override
+	public List<OrdOdPersonInfo> findPersonInfo(OrdOdPersonInfo ordOdPersonInfo) {
+		OrdOdPersonInfoCriteria  example = new OrdOdPersonInfoCriteria();
+		OrdOdPersonInfoCriteria.Criteria criteria = example.createCriteria();
+		if(!StringUtil.isBlank(ordOdPersonInfo.getInterperId())){
+			criteria.andInterperIdEqualTo(ordOdPersonInfo.getInterperId());
+		}
+		if(null!=ordOdPersonInfo.getOrderId() &&(!"".equals(ordOdPersonInfo.getOrderId()))){
+			criteria.andOrderIdEqualTo(ordOdPersonInfo.getOrderId());
+		}
+		if(!StringUtil.isBlank(ordOdPersonInfo.getReceiveState())){
+			criteria.andReceiveStateEqualTo(ordOdPersonInfo.getReceiveState());
+		}
+		List<OrdOdPersonInfo> personInfos = MapperFactory.getOrdOdPersonInfoMapper().selectByExample(example);
+		return personInfos;
+	}
+
 }

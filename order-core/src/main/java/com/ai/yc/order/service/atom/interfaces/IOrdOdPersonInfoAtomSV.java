@@ -10,4 +10,6 @@ public interface IOrdOdPersonInfoAtomSV {
 	List<OrdOdPersonInfo> findByOrderId(Long orderId);
 	
 	List<OrdOdPersonInfo> findByOrderId(Long orderId,String state);
+	
+	List<OrdOdPersonInfo> findPersonInfo(OrdOdPersonInfo ordOdPersonInfo);
 }

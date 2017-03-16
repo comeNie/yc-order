@@ -12,6 +12,7 @@ import com.ai.opt.base.vo.ResponseHeader;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.ai.opt.sdk.util.BeanUtils;
 import com.ai.opt.sdk.util.DateUtil;
+import com.ai.yc.order.api.orderallocation.param.OrdAllocationePersonRequest;
 import com.ai.yc.order.api.orderallocation.param.OrdAllocationePersones;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationExtendInfo;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationRequest;
@@ -88,8 +89,26 @@ public class OrderAllocationBusiSVImpl implements IOrderAllocationBusiSV {
 	public BaseListResponse<OrdAllocationePersones> queryOrderAllocationPerson(long orderId) {
 		BaseListResponse<OrdAllocationePersones> response = new BaseListResponse<OrdAllocationePersones>();
 		List<OrdAllocationePersones> personList = new ArrayList<OrdAllocationePersones>();
-		//是否需要加上领取状态???????
+		//是否需要加上领取状态
 		List<OrdOdPersonInfo> list = ordOdPersonInfoAtomSV.findByOrderId(orderId,OrdersConstants.RECEIVE_STATE);
+		 for(OrdOdPersonInfo info:list){
+			 OrdAllocationePersones persones = new OrdAllocationePersones();
+			 BeanUtils.copyVO(persones, info);
+			 personList.add(persones);
+		 }
+		 response.setResult(personList); 
+		 ResponseHeader responseHeader = new ResponseHeader(true, ExceptCodeConstants.Special.SUCCESS, "订单分配人员查询成功");
+		 response.setResponseHeader(responseHeader);
+		 return response;
+	}
+
+	@Override
+	public BaseListResponse<OrdAllocationePersones> queryOrderAllocationPerson(OrdAllocationePersonRequest request) {
+		BaseListResponse<OrdAllocationePersones> response = new BaseListResponse<OrdAllocationePersones>();
+		List<OrdAllocationePersones> personList = new ArrayList<OrdAllocationePersones>();
+		OrdOdPersonInfo ordOdPersonInfo = new OrdOdPersonInfo();
+		BeanUtils.copyVO(ordOdPersonInfo, request);
+		List<OrdOdPersonInfo> list = ordOdPersonInfoAtomSV.findPersonInfo(ordOdPersonInfo);
 		 for(OrdOdPersonInfo info:list){
 			 OrdAllocationePersones persones = new OrdAllocationePersones();
 			 BeanUtils.copyVO(persones, info);
