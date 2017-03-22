@@ -16,6 +16,7 @@ import com.ai.yc.order.api.orderallocation.param.OrdAllocationePersones;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationRequest;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationResponse;
 import com.ai.yc.order.service.business.interfaces.IOrderAllocationBusiSV;
+import com.ai.yc.order.util.ValidateUtils;
 import com.alibaba.dubbo.config.annotation.Service;
 
 @Service
@@ -31,6 +32,8 @@ public class OrderAllocationSVImpl implements IOrderAllocationSV {
 		ResponseHeader responseHeader = new ResponseHeader();
 		//
 		try{
+			//有效性校验
+			ValidateUtils.validateAllocateOrder(request);
 			response = this.orderAllocationBusiSV.saveOrderAllocation(request);
 			responseHeader.setIsSuccess(true);
 			responseHeader.setResultCode(ExceptCodeConstants.Special.SUCCESS);

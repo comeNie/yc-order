@@ -24,6 +24,10 @@ public class OrderAllocationBaseInfo implements Serializable {
 	 * 操作者昵称
 	 */
 	private String operName;
+	/**
+	 * 操作工号
+	 */
+	private String operId;
 
 	public String getUserId() {
 		return userId;
@@ -55,6 +59,14 @@ public class OrderAllocationBaseInfo implements Serializable {
 
 	public void setState(String state) {
 		this.state = state;
+	}
+
+	public String getOperId() {
+		return operId;
+	}
+
+	public void setOperId(String operId) {
+		this.operId = operId;
 	}
 
 }

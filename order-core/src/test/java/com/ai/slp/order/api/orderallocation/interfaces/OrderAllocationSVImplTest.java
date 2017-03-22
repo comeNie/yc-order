@@ -1,5 +1,6 @@
 package com.ai.slp.order.api.orderallocation.interfaces;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,10 +26,11 @@ public class OrderAllocationSVImplTest extends BaseTest {
 	public void orderAllocation(){
 		OrderAllocationRequest request = new OrderAllocationRequest();
 		OrderAllocationBaseInfo baseInfo = new OrderAllocationBaseInfo();
-		baseInfo.setOrderId(2000000054587176l);
-		baseInfo.setState("100");
+		baseInfo.setOrderId(123l);
+		baseInfo.setState("211");
 		baseInfo.setUserId("12345");
-		baseInfo.setOperName("zhangzd");
+		baseInfo.setOperName("zhangsansan");
+		baseInfo.setOperId("1222");
 		//
 		request.setOrderAllocationBaseInfo(baseInfo);
 		//
@@ -36,11 +38,14 @@ public class OrderAllocationSVImplTest extends BaseTest {
 		extendInfo.setCreartTime(DateUtil.getSysDate());
 		extendInfo.setInterperFee(1000l);
 		extendInfo.setInterperId("12333");
-		extendInfo.setInterperName("zhangzd");
-		extendInfo.setOperType("0");
-		extendInfo.setRemark("翻译此订单,测试用。。。");
-		extendInfo.setStep("1");
-		extendInfo.setTel("15811169257");
+		extendInfo.setInterperName("zhangsansan");
+		extendInfo.setOperType("1");
+		extendInfo.setRemark("审校此订单,测试用。。。");
+		extendInfo.setStep("2");
+		extendInfo.setTel("13311169257");
+		Timestamp t = new Timestamp(DateUtil.getCurrentTimeMillis());
+		extendInfo.setExpectEndTime(t);
+		
 		//
 		List<OrderAllocationExtendInfo> extendInfoList = new ArrayList<OrderAllocationExtendInfo>();
 		//

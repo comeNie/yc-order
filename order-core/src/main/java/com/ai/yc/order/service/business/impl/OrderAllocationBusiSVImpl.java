@@ -11,6 +11,7 @@ import com.ai.opt.base.vo.BaseListResponse;
 import com.ai.opt.base.vo.ResponseHeader;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.ai.opt.sdk.util.BeanUtils;
+import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.opt.sdk.util.DateUtil;
 import com.ai.yc.order.api.orderallocation.param.OrdAllocationePersonRequest;
 import com.ai.yc.order.api.orderallocation.param.OrdAllocationePersones;
@@ -35,7 +36,14 @@ public class OrderAllocationBusiSVImpl implements IOrderAllocationBusiSV {
 	private IOrdOrderAtomSV ordOrderAtomSV;//订单主表
 	@Autowired
 	private IOrdOdStateChgAtomSV ordOdStateChgAtomSV;//订单轨迹表
-	
+	/**
+	 * 订单分配
+	 */
+	private final static String ORDER_ALLOCATION_CN = " %s 分配翻译订单";	
+	private final static String ORDER_ALLOCATION_EN = " %s assigned the order";
+	private final static String ORDER_ALLOCATION_CHECK_CN = " %s 分配审校订单";	
+	private final static String ORDER_ALLOCATION_CHECK_EN = " %s assigned the proofreading order to Translator";
+
 	@Override
 	@Transactional
 	public OrderAllocationResponse saveOrderAllocation(OrderAllocationRequest request) {
@@ -61,15 +69,35 @@ public class OrderAllocationBusiSVImpl implements IOrderAllocationBusiSV {
 		OrdOrder ordOrderUpdate = new OrdOrder();
 		ordOrderUpdate.setOrderId(request.getOrderAllocationBaseInfo().getOrderId());
 		ordOrderUpdate.setState(request.getOrderAllocationBaseInfo().getState());
+		ordOrderUpdate.setStateChgTime(DateUtil.getSysDate());
+		ordOrderUpdate.setDisplayFlag(request.getOrderAllocationBaseInfo().getState());
+		ordOrderUpdate.setDisplayFlagChgTime(DateUtil.getSysDate());
 		this.ordOrderAtomSV.updateByPrimaryKeySelective(ordOrderUpdate);
 		//3.入库订单轨迹表 状态为---211：已分配（口译订单则为瞬时状态，直接为“50：待确认”）
 		OrdOdStateChg ordOdStateChg = new OrdOdStateChg();
 		ordOdStateChg.setStateChgId(SequenceUtil.createStateChgId());
 		ordOdStateChg.setOrderId(request.getOrderAllocationBaseInfo().getOrderId());
-		ordOdStateChg.setChgDesc("订单 "+request.getOrderAllocationBaseInfo().getOrderId()+" 已分配");
-		ordOdStateChg.setChgDescEn("");
-		ordOdStateChg.setChgDescD("");
-		ordOdStateChg.setChgDescUEn("");
+		//获取中英文轨迹信息
+		String descCn = String.format(ORDER_ALLOCATION_CN,request.getOrderAllocationBaseInfo().getOperName());
+		String descEn = String.format(ORDER_ALLOCATION_EN,request.getOrderAllocationBaseInfo().getOperName());
+		String descCheckCn = String.format(ORDER_ALLOCATION_CHECK_CN,request.getOrderAllocationBaseInfo().getOperName());
+		String descCheckEn = String.format(ORDER_ALLOCATION_CHECK_EN,request.getOrderAllocationBaseInfo().getOperName());
+		ordOdStateChg.setChgDescEn(descEn);
+		ordOdStateChg.setChgDescD(descCn);
+		ordOdStateChg.setChgDescUEn(descEn);
+		ordOdStateChg.setChgDesc(descCn);
+		List<OrderAllocationExtendInfo> list = request.getOrderAllocationExtendInfoList();
+		if(!CollectionUtil.isEmpty(list)){
+			OrderAllocationExtendInfo info = list.get(0);
+			if(info!=null){
+				if(OrdersConstants.OrdOperType.OPER_CHECK_TYPE.equals(info.getOperType())){
+					ordOdStateChg.setChgDescEn(descCheckEn);
+					ordOdStateChg.setChgDescD(descCheckCn);
+					ordOdStateChg.setChgDescUEn(descCheckEn);
+					ordOdStateChg.setChgDesc(descCheckCn);
+				}
+			}
+		}
 		ordOdStateChg.setFlag(OrdOdStateChgConstants.FLAG_USER);
 		ordOdStateChg.setOrgId("1");
 		ordOdStateChg.setOperId(request.getOrderAllocationBaseInfo().getUserId());

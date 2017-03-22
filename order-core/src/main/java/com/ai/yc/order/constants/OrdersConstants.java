@@ -43,7 +43,19 @@ public final class OrdersConstants {
 
 		public final static String RMB = "1";
 	}
+	public final static class OrdOperType {
+		private OrdOperType() {
+		}
 
+		/**
+		 * 0:翻译 1:审校 2:口译
+		 */
+		public final static String OPER_TRANSLATE_TYPE = "0";
+
+		public final static String OPER_CHECK_TYPE = "1";
+		
+		public final static String OPER_MOUTH_TYPE = "2";
+	}
 	public final static class OrdOdFeeTotal {
 		private OrdOdFeeTotal() {
 		}
