@@ -17,26 +17,6 @@ public class OrdOdPersonInfoAtomSVImpl implements IOrdOdPersonInfoAtomSV {
 		MapperFactory.getOrdOdPersonInfoMapper().insertSelective(ordOdPersonInfo);
 	}
 
-	@Override
-	public List<OrdOdPersonInfo> findByOrderId(Long orderId) {
-		OrdOdPersonInfoCriteria  example = new OrdOdPersonInfoCriteria();
-		OrdOdPersonInfoCriteria.Criteria criteria = example.createCriteria();
-		criteria.andOrderIdEqualTo(orderId);
-		List<OrdOdPersonInfo> personInfos = MapperFactory.getOrdOdPersonInfoMapper().selectByExample(example);
-		return personInfos;
-	}
-
-	@Override
-	public List<OrdOdPersonInfo> findByOrderId(Long orderId, String state) {
-		OrdOdPersonInfoCriteria  example = new OrdOdPersonInfoCriteria();
-		OrdOdPersonInfoCriteria.Criteria criteria = example.createCriteria();
-		criteria.andOrderIdEqualTo(orderId);
-		if(!StringUtil.isBlank(state)){
-			criteria.andReceiveStateEqualTo(state);
-		}
-		List<OrdOdPersonInfo> personInfos = MapperFactory.getOrdOdPersonInfoMapper().selectByExample(example);
-		return personInfos;
-	}
 
 	@Override
 	public List<OrdOdPersonInfo> findPersonInfo(OrdOdPersonInfo ordOdPersonInfo) {
@@ -45,11 +25,11 @@ public class OrdOdPersonInfoAtomSVImpl implements IOrdOdPersonInfoAtomSV {
 		if(!StringUtil.isBlank(ordOdPersonInfo.getInterperId())){
 			criteria.andInterperIdEqualTo(ordOdPersonInfo.getInterperId());
 		}
-		if(null!=ordOdPersonInfo.getOrderId() &&(!"".equals(ordOdPersonInfo.getOrderId()))){
-			criteria.andOrderIdEqualTo(ordOdPersonInfo.getOrderId());
+		if(ordOdPersonInfo.getReceiveFollowId()!=null){
+			criteria.andReceiveFollowIdEqualTo(ordOdPersonInfo.getReceiveFollowId());
 		}
-		if(!StringUtil.isBlank(ordOdPersonInfo.getReceiveState())){
-			criteria.andReceiveStateEqualTo(ordOdPersonInfo.getReceiveState());
+		if(ordOdPersonInfo.getPersonId()!=null){
+			criteria.andPersonIdEqualTo(ordOdPersonInfo.getPersonId());
 		}
 		List<OrdOdPersonInfo> personInfos = MapperFactory.getOrdOdPersonInfoMapper().selectByExample(example);
 		return personInfos;

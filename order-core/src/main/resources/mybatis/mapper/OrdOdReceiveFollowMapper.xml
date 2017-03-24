@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.yc.order.dao.mapper.interfaces.OrdOdReceiveFollowMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.yc.order.dao.mapper.bo.OrdOdReceiveFollow" >
+    <id column="RECEIVE_FOLLOW_ID" property="receiveFollowId" jdbcType="BIGINT" />
+    <result column="ORDER_ID" property="orderId" jdbcType="BIGINT" />
+    <result column="OPER_TYPE" property="operType" jdbcType="VARCHAR" />
+    <result column="STEP" property="step" jdbcType="VARCHAR" />
+    <result column="RECEIVE_STATE" property="receiveState" jdbcType="VARCHAR" />
+    <result column="FINISH_STATE" property="finishState" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    RECEIVE_FOLLOW_ID, ORDER_ID, OPER_TYPE, STEP, RECEIVE_STATE, FINISH_STATE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdReceiveFollowCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from ord_od_receive_follow
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from ord_od_receive_follow
+    where RECEIVE_FOLLOW_ID = #{receiveFollowId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="Long" >
+    delete from ord_od_receive_follow
+    where RECEIVE_FOLLOW_ID = #{receiveFollowId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdReceiveFollowCriteria" >
+    delete from ord_od_receive_follow
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdReceiveFollow" >
+    insert into ord_od_receive_follow (RECEIVE_FOLLOW_ID, ORDER_ID, OPER_TYPE, 
+      STEP, RECEIVE_STATE, FINISH_STATE
+      )
+    values (#{receiveFollowId,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, #{operType,jdbcType=VARCHAR}, 
+      #{step,jdbcType=VARCHAR}, #{receiveState,jdbcType=VARCHAR}, #{finishState,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdReceiveFollow" >
+    insert into ord_od_receive_follow
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="receiveFollowId != null" >
+        RECEIVE_FOLLOW_ID,
+      </if>
+      <if test="orderId != null" >
+        ORDER_ID,
+      </if>
+      <if test="operType != null" >
+        OPER_TYPE,
+      </if>
+      <if test="step != null" >
+        STEP,
+      </if>
+      <if test="receiveState != null" >
+        RECEIVE_STATE,
+      </if>
+      <if test="finishState != null" >
+        FINISH_STATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="receiveFollowId != null" >
+        #{receiveFollowId,jdbcType=BIGINT},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="operType != null" >
+        #{operType,jdbcType=VARCHAR},
+      </if>
+      <if test="step != null" >
+        #{step,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveState != null" >
+        #{receiveState,jdbcType=VARCHAR},
+      </if>
+      <if test="finishState != null" >
+        #{finishState,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdReceiveFollowCriteria" resultType="java.lang.Integer" >
+    select count(*) from ord_od_receive_follow
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ord_od_receive_follow
+    <set >
+      <if test="record.receiveFollowId != null" >
+        RECEIVE_FOLLOW_ID = #{record.receiveFollowId,jdbcType=BIGINT},
+      </if>
+      <if test="record.orderId != null" >
+        ORDER_ID = #{record.orderId,jdbcType=BIGINT},
+      </if>
+      <if test="record.operType != null" >
+        OPER_TYPE = #{record.operType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.step != null" >
+        STEP = #{record.step,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receiveState != null" >
+        RECEIVE_STATE = #{record.receiveState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.finishState != null" >
+        FINISH_STATE = #{record.finishState,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ord_od_receive_follow
+    set RECEIVE_FOLLOW_ID = #{record.receiveFollowId,jdbcType=BIGINT},
+      ORDER_ID = #{record.orderId,jdbcType=BIGINT},
+      OPER_TYPE = #{record.operType,jdbcType=VARCHAR},
+      STEP = #{record.step,jdbcType=VARCHAR},
+      RECEIVE_STATE = #{record.receiveState,jdbcType=VARCHAR},
+      FINISH_STATE = #{record.finishState,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdReceiveFollow" >
+    update ord_od_receive_follow
+    <set >
+      <if test="orderId != null" >
+        ORDER_ID = #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="operType != null" >
+        OPER_TYPE = #{operType,jdbcType=VARCHAR},
+      </if>
+      <if test="step != null" >
+        STEP = #{step,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveState != null" >
+        RECEIVE_STATE = #{receiveState,jdbcType=VARCHAR},
+      </if>
+      <if test="finishState != null" >
+        FINISH_STATE = #{finishState,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where RECEIVE_FOLLOW_ID = #{receiveFollowId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdReceiveFollow" >
+    update ord_od_receive_follow
+    set ORDER_ID = #{orderId,jdbcType=BIGINT},
+      OPER_TYPE = #{operType,jdbcType=VARCHAR},
+      STEP = #{step,jdbcType=VARCHAR},
+      RECEIVE_STATE = #{receiveState,jdbcType=VARCHAR},
+      FINISH_STATE = #{finishState,jdbcType=VARCHAR}
+    where RECEIVE_FOLLOW_ID = #{receiveFollowId,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ai.yc.order.dao.mapper.interfaces.OrdOdPersonInfoMapper" >
-  <resultMap id="BaseResultMap" type="com.ai.yc.order.dao.mapper.bo.OrdOdPersonInfo" >
-    <id column="PERSON_ID" property="personId" jdbcType="BIGINT" />
+<mapper namespace="com.ai.yc.order.dao.mapper.interfaces.OrdOdReceiveMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.yc.order.dao.mapper.bo.OrdOdReceive" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="PERSON_ID" property="personId" jdbcType="BIGINT" />
     <result column="RECEIVE_FOLLOW_ID" property="receiveFollowId" jdbcType="BIGINT" />
     <result column="INTERPER_ID" property="interperId" jdbcType="VARCHAR" />
     <result column="INTERPER_NAME" property="interperName" jdbcType="VARCHAR" />
-    <result column="TEL" property="tel" jdbcType="VARCHAR" />
     <result column="INTERPER_FEE" property="interperFee" jdbcType="BIGINT" />
-    <result column="CREART_TIME" property="creartTime" jdbcType="TIMESTAMP" />
-    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
-    <result column="STEP" property="step" jdbcType="VARCHAR" />
-    <result column="EXPECT_END_TIME" property="expectEndTime" jdbcType="TIMESTAMP" />
+    <result column="TEL" property="tel" jdbcType="VARCHAR" />
+    <result column="RECEIVE_TIME" property="receiveTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -72,17 +70,17 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    PERSON_ID, RECEIVE_FOLLOW_ID, INTERPER_ID, INTERPER_NAME, TEL, INTERPER_FEE, CREART_TIME, 
-    REMARK, STEP, EXPECT_END_TIME
+    ID, PERSON_ID, RECEIVE_FOLLOW_ID, INTERPER_ID, INTERPER_NAME, INTERPER_FEE, TEL, 
+    RECEIVE_TIME
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdPersonInfoCriteria" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdReceiveCriteria" >
     select
     <if test="distinct" >
       distinct
     </if>
     'false' as QUERYID,
     <include refid="Base_Column_List" />
-    from ord_od_person_info
+    from ord_od_receive
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -96,32 +94,33 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Long" >
     select 
     <include refid="Base_Column_List" />
-    from ord_od_person_info
-    where PERSON_ID = #{personId,jdbcType=BIGINT}
+    from ord_od_receive
+    where ID = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="Long" >
-    delete from ord_od_person_info
-    where PERSON_ID = #{personId,jdbcType=BIGINT}
+    delete from ord_od_receive
+    where ID = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdPersonInfoCriteria" >
-    delete from ord_od_person_info
+  <delete id="deleteByExample" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdReceiveCriteria" >
+    delete from ord_od_receive
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdPersonInfo" >
-    insert into ord_od_person_info (PERSON_ID, RECEIVE_FOLLOW_ID, INTERPER_ID, 
-      INTERPER_NAME, TEL, INTERPER_FEE, 
-      CREART_TIME, REMARK, STEP, 
-      EXPECT_END_TIME)
-    values (#{personId,jdbcType=BIGINT}, #{receiveFollowId,jdbcType=BIGINT}, #{interperId,jdbcType=VARCHAR}, 
-      #{interperName,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{interperFee,jdbcType=BIGINT}, 
-      #{creartTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, #{step,jdbcType=VARCHAR}, 
-      #{expectEndTime,jdbcType=TIMESTAMP})
+  <insert id="insert" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdReceive" >
+    insert into ord_od_receive (ID, PERSON_ID, RECEIVE_FOLLOW_ID, 
+      INTERPER_ID, INTERPER_NAME, INTERPER_FEE, 
+      TEL, RECEIVE_TIME)
+    values (#{id,jdbcType=BIGINT}, #{personId,jdbcType=BIGINT}, #{receiveFollowId,jdbcType=BIGINT}, 
+      #{interperId,jdbcType=VARCHAR}, #{interperName,jdbcType=VARCHAR}, #{interperFee,jdbcType=BIGINT}, 
+      #{tel,jdbcType=VARCHAR}, #{receiveTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdPersonInfo" >
-    insert into ord_od_person_info
+  <insert id="insertSelective" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdReceive" >
+    insert into ord_od_receive
     <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
       <if test="personId != null" >
         PERSON_ID,
       </if>
@@ -134,26 +133,20 @@
       <if test="interperName != null" >
         INTERPER_NAME,
       </if>
-      <if test="tel != null" >
-        TEL,
-      </if>
       <if test="interperFee != null" >
         INTERPER_FEE,
       </if>
-      <if test="creartTime != null" >
-        CREART_TIME,
+      <if test="tel != null" >
+        TEL,
       </if>
-      <if test="remark != null" >
-        REMARK,
-      </if>
-      <if test="step != null" >
-        STEP,
-      </if>
-      <if test="expectEndTime != null" >
-        EXPECT_END_TIME,
+      <if test="receiveTime != null" >
+        RECEIVE_TIME,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
       <if test="personId != null" >
         #{personId,jdbcType=BIGINT},
       </if>
@@ -166,35 +159,29 @@
       <if test="interperName != null" >
         #{interperName,jdbcType=VARCHAR},
       </if>
-      <if test="tel != null" >
-        #{tel,jdbcType=VARCHAR},
-      </if>
       <if test="interperFee != null" >
         #{interperFee,jdbcType=BIGINT},
       </if>
-      <if test="creartTime != null" >
-        #{creartTime,jdbcType=TIMESTAMP},
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
       </if>
-      <if test="remark != null" >
-        #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="step != null" >
-        #{step,jdbcType=VARCHAR},
-      </if>
-      <if test="expectEndTime != null" >
-        #{expectEndTime,jdbcType=TIMESTAMP},
+      <if test="receiveTime != null" >
+        #{receiveTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdPersonInfoCriteria" resultType="java.lang.Integer" >
-    select count(*) from ord_od_person_info
+  <select id="countByExample" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdReceiveCriteria" resultType="java.lang.Integer" >
+    select count(*) from ord_od_receive
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update ord_od_person_info
+    update ord_od_receive
     <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
       <if test="record.personId != null" >
         PERSON_ID = #{record.personId,jdbcType=BIGINT},
       </if>
@@ -207,23 +194,14 @@
       <if test="record.interperName != null" >
         INTERPER_NAME = #{record.interperName,jdbcType=VARCHAR},
       </if>
-      <if test="record.tel != null" >
-        TEL = #{record.tel,jdbcType=VARCHAR},
-      </if>
       <if test="record.interperFee != null" >
         INTERPER_FEE = #{record.interperFee,jdbcType=BIGINT},
       </if>
-      <if test="record.creartTime != null" >
-        CREART_TIME = #{record.creartTime,jdbcType=TIMESTAMP},
+      <if test="record.tel != null" >
+        TEL = #{record.tel,jdbcType=VARCHAR},
       </if>
-      <if test="record.remark != null" >
-        REMARK = #{record.remark,jdbcType=VARCHAR},
-      </if>
-      <if test="record.step != null" >
-        STEP = #{record.step,jdbcType=VARCHAR},
-      </if>
-      <if test="record.expectEndTime != null" >
-        EXPECT_END_TIME = #{record.expectEndTime,jdbcType=TIMESTAMP},
+      <if test="record.receiveTime != null" >
+        RECEIVE_TIME = #{record.receiveTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -231,24 +209,25 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update ord_od_person_info
-    set PERSON_ID = #{record.personId,jdbcType=BIGINT},
+    update ord_od_receive
+    set ID = #{record.id,jdbcType=BIGINT},
+      PERSON_ID = #{record.personId,jdbcType=BIGINT},
       RECEIVE_FOLLOW_ID = #{record.receiveFollowId,jdbcType=BIGINT},
       INTERPER_ID = #{record.interperId,jdbcType=VARCHAR},
       INTERPER_NAME = #{record.interperName,jdbcType=VARCHAR},
-      TEL = #{record.tel,jdbcType=VARCHAR},
       INTERPER_FEE = #{record.interperFee,jdbcType=BIGINT},
-      CREART_TIME = #{record.creartTime,jdbcType=TIMESTAMP},
-      REMARK = #{record.remark,jdbcType=VARCHAR},
-      STEP = #{record.step,jdbcType=VARCHAR},
-      EXPECT_END_TIME = #{record.expectEndTime,jdbcType=TIMESTAMP}
+      TEL = #{record.tel,jdbcType=VARCHAR},
+      RECEIVE_TIME = #{record.receiveTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdPersonInfo" >
-    update ord_od_person_info
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdReceive" >
+    update ord_od_receive
     <set >
+      <if test="personId != null" >
+        PERSON_ID = #{personId,jdbcType=BIGINT},
+      </if>
       <if test="receiveFollowId != null" >
         RECEIVE_FOLLOW_ID = #{receiveFollowId,jdbcType=BIGINT},
       </if>
@@ -258,38 +237,27 @@
       <if test="interperName != null" >
         INTERPER_NAME = #{interperName,jdbcType=VARCHAR},
       </if>
-      <if test="tel != null" >
-        TEL = #{tel,jdbcType=VARCHAR},
-      </if>
       <if test="interperFee != null" >
         INTERPER_FEE = #{interperFee,jdbcType=BIGINT},
       </if>
-      <if test="creartTime != null" >
-        CREART_TIME = #{creartTime,jdbcType=TIMESTAMP},
+      <if test="tel != null" >
+        TEL = #{tel,jdbcType=VARCHAR},
       </if>
-      <if test="remark != null" >
-        REMARK = #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="step != null" >
-        STEP = #{step,jdbcType=VARCHAR},
-      </if>
-      <if test="expectEndTime != null" >
-        EXPECT_END_TIME = #{expectEndTime,jdbcType=TIMESTAMP},
+      <if test="receiveTime != null" >
+        RECEIVE_TIME = #{receiveTime,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where PERSON_ID = #{personId,jdbcType=BIGINT}
+    where ID = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdPersonInfo" >
-    update ord_od_person_info
-    set RECEIVE_FOLLOW_ID = #{receiveFollowId,jdbcType=BIGINT},
+  <update id="updateByPrimaryKey" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdReceive" >
+    update ord_od_receive
+    set PERSON_ID = #{personId,jdbcType=BIGINT},
+      RECEIVE_FOLLOW_ID = #{receiveFollowId,jdbcType=BIGINT},
       INTERPER_ID = #{interperId,jdbcType=VARCHAR},
       INTERPER_NAME = #{interperName,jdbcType=VARCHAR},
-      TEL = #{tel,jdbcType=VARCHAR},
       INTERPER_FEE = #{interperFee,jdbcType=BIGINT},
-      CREART_TIME = #{creartTime,jdbcType=TIMESTAMP},
-      REMARK = #{remark,jdbcType=VARCHAR},
-      STEP = #{step,jdbcType=VARCHAR},
-      EXPECT_END_TIME = #{expectEndTime,jdbcType=TIMESTAMP}
-    where PERSON_ID = #{personId,jdbcType=BIGINT}
+      TEL = #{tel,jdbcType=VARCHAR},
+      RECEIVE_TIME = #{receiveTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

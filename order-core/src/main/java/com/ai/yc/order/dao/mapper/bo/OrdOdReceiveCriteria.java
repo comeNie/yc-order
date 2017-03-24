@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrdOdPersonInfoCriteria {
+public class OrdOdReceiveCriteria {
     protected String orderByClause;
 
     protected boolean distinct;
@@ -15,7 +15,7 @@ public class OrdOdPersonInfoCriteria {
 
     protected Integer limitEnd;
 
-    public OrdOdPersonInfoCriteria() {
+    public OrdOdReceiveCriteria() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -123,6 +123,66 @@ public class OrdOdPersonInfoCriteria {
                 throw new RuntimeException("Between values for " + property + " cannot be null");
             }
             criteria.add(new Criterion(condition, value1, value2));
+        }
+
+        public Criteria andIdIsNull() {
+            addCriterion("ID is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdIsNotNull() {
+            addCriterion("ID is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdEqualTo(Long value) {
+            addCriterion("ID =", value, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdNotEqualTo(Long value) {
+            addCriterion("ID <>", value, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdGreaterThan(Long value) {
+            addCriterion("ID >", value, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("ID >=", value, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdLessThan(Long value) {
+            addCriterion("ID <", value, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdLessThanOrEqualTo(Long value) {
+            addCriterion("ID <=", value, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdIn(List<Long> values) {
+            addCriterion("ID in", values, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdNotIn(List<Long> values) {
+            addCriterion("ID not in", values, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdBetween(Long value1, Long value2) {
+            addCriterion("ID between", value1, value2, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdNotBetween(Long value1, Long value2) {
+            addCriterion("ID not between", value1, value2, "id");
+            return (Criteria) this;
         }
 
         public Criteria andPersonIdIsNull() {
@@ -385,6 +445,66 @@ public class OrdOdPersonInfoCriteria {
             return (Criteria) this;
         }
 
+        public Criteria andInterperFeeIsNull() {
+            addCriterion("INTERPER_FEE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterperFeeIsNotNull() {
+            addCriterion("INTERPER_FEE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterperFeeEqualTo(Long value) {
+            addCriterion("INTERPER_FEE =", value, "interperFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterperFeeNotEqualTo(Long value) {
+            addCriterion("INTERPER_FEE <>", value, "interperFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterperFeeGreaterThan(Long value) {
+            addCriterion("INTERPER_FEE >", value, "interperFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterperFeeGreaterThanOrEqualTo(Long value) {
+            addCriterion("INTERPER_FEE >=", value, "interperFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterperFeeLessThan(Long value) {
+            addCriterion("INTERPER_FEE <", value, "interperFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterperFeeLessThanOrEqualTo(Long value) {
+            addCriterion("INTERPER_FEE <=", value, "interperFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterperFeeIn(List<Long> values) {
+            addCriterion("INTERPER_FEE in", values, "interperFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterperFeeNotIn(List<Long> values) {
+            addCriterion("INTERPER_FEE not in", values, "interperFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterperFeeBetween(Long value1, Long value2) {
+            addCriterion("INTERPER_FEE between", value1, value2, "interperFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterperFeeNotBetween(Long value1, Long value2) {
+            addCriterion("INTERPER_FEE not between", value1, value2, "interperFee");
+            return (Criteria) this;
+        }
+
         public Criteria andTelIsNull() {
             addCriterion("TEL is null");
             return (Criteria) this;
@@ -455,323 +575,63 @@ public class OrdOdPersonInfoCriteria {
             return (Criteria) this;
         }
 
-        public Criteria andInterperFeeIsNull() {
-            addCriterion("INTERPER_FEE is null");
+        public Criteria andReceiveTimeIsNull() {
+            addCriterion("RECEIVE_TIME is null");
             return (Criteria) this;
         }
 
-        public Criteria andInterperFeeIsNotNull() {
-            addCriterion("INTERPER_FEE is not null");
+        public Criteria andReceiveTimeIsNotNull() {
+            addCriterion("RECEIVE_TIME is not null");
             return (Criteria) this;
         }
 
-        public Criteria andInterperFeeEqualTo(Long value) {
-            addCriterion("INTERPER_FEE =", value, "interperFee");
+        public Criteria andReceiveTimeEqualTo(Timestamp value) {
+            addCriterion("RECEIVE_TIME =", value, "receiveTime");
             return (Criteria) this;
         }
 
-        public Criteria andInterperFeeNotEqualTo(Long value) {
-            addCriterion("INTERPER_FEE <>", value, "interperFee");
+        public Criteria andReceiveTimeNotEqualTo(Timestamp value) {
+            addCriterion("RECEIVE_TIME <>", value, "receiveTime");
             return (Criteria) this;
         }
 
-        public Criteria andInterperFeeGreaterThan(Long value) {
-            addCriterion("INTERPER_FEE >", value, "interperFee");
+        public Criteria andReceiveTimeGreaterThan(Timestamp value) {
+            addCriterion("RECEIVE_TIME >", value, "receiveTime");
             return (Criteria) this;
         }
 
-        public Criteria andInterperFeeGreaterThanOrEqualTo(Long value) {
-            addCriterion("INTERPER_FEE >=", value, "interperFee");
+        public Criteria andReceiveTimeGreaterThanOrEqualTo(Timestamp value) {
+            addCriterion("RECEIVE_TIME >=", value, "receiveTime");
             return (Criteria) this;
         }
 
-        public Criteria andInterperFeeLessThan(Long value) {
-            addCriterion("INTERPER_FEE <", value, "interperFee");
+        public Criteria andReceiveTimeLessThan(Timestamp value) {
+            addCriterion("RECEIVE_TIME <", value, "receiveTime");
             return (Criteria) this;
         }
 
-        public Criteria andInterperFeeLessThanOrEqualTo(Long value) {
-            addCriterion("INTERPER_FEE <=", value, "interperFee");
+        public Criteria andReceiveTimeLessThanOrEqualTo(Timestamp value) {
+            addCriterion("RECEIVE_TIME <=", value, "receiveTime");
             return (Criteria) this;
         }
 
-        public Criteria andInterperFeeIn(List<Long> values) {
-            addCriterion("INTERPER_FEE in", values, "interperFee");
+        public Criteria andReceiveTimeIn(List<Timestamp> values) {
+            addCriterion("RECEIVE_TIME in", values, "receiveTime");
             return (Criteria) this;
         }
 
-        public Criteria andInterperFeeNotIn(List<Long> values) {
-            addCriterion("INTERPER_FEE not in", values, "interperFee");
+        public Criteria andReceiveTimeNotIn(List<Timestamp> values) {
+            addCriterion("RECEIVE_TIME not in", values, "receiveTime");
             return (Criteria) this;
         }
 
-        public Criteria andInterperFeeBetween(Long value1, Long value2) {
-            addCriterion("INTERPER_FEE between", value1, value2, "interperFee");
+        public Criteria andReceiveTimeBetween(Timestamp value1, Timestamp value2) {
+            addCriterion("RECEIVE_TIME between", value1, value2, "receiveTime");
             return (Criteria) this;
         }
 
-        public Criteria andInterperFeeNotBetween(Long value1, Long value2) {
-            addCriterion("INTERPER_FEE not between", value1, value2, "interperFee");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreartTimeIsNull() {
-            addCriterion("CREART_TIME is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreartTimeIsNotNull() {
-            addCriterion("CREART_TIME is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreartTimeEqualTo(Timestamp value) {
-            addCriterion("CREART_TIME =", value, "creartTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreartTimeNotEqualTo(Timestamp value) {
-            addCriterion("CREART_TIME <>", value, "creartTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreartTimeGreaterThan(Timestamp value) {
-            addCriterion("CREART_TIME >", value, "creartTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreartTimeGreaterThanOrEqualTo(Timestamp value) {
-            addCriterion("CREART_TIME >=", value, "creartTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreartTimeLessThan(Timestamp value) {
-            addCriterion("CREART_TIME <", value, "creartTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreartTimeLessThanOrEqualTo(Timestamp value) {
-            addCriterion("CREART_TIME <=", value, "creartTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreartTimeIn(List<Timestamp> values) {
-            addCriterion("CREART_TIME in", values, "creartTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreartTimeNotIn(List<Timestamp> values) {
-            addCriterion("CREART_TIME not in", values, "creartTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreartTimeBetween(Timestamp value1, Timestamp value2) {
-            addCriterion("CREART_TIME between", value1, value2, "creartTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreartTimeNotBetween(Timestamp value1, Timestamp value2) {
-            addCriterion("CREART_TIME not between", value1, value2, "creartTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andRemarkIsNull() {
-            addCriterion("REMARK is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andRemarkIsNotNull() {
-            addCriterion("REMARK is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andRemarkEqualTo(String value) {
-            addCriterion("REMARK =", value, "remark");
-            return (Criteria) this;
-        }
-
-        public Criteria andRemarkNotEqualTo(String value) {
-            addCriterion("REMARK <>", value, "remark");
-            return (Criteria) this;
-        }
-
-        public Criteria andRemarkGreaterThan(String value) {
-            addCriterion("REMARK >", value, "remark");
-            return (Criteria) this;
-        }
-
-        public Criteria andRemarkGreaterThanOrEqualTo(String value) {
-            addCriterion("REMARK >=", value, "remark");
-            return (Criteria) this;
-        }
-
-        public Criteria andRemarkLessThan(String value) {
-            addCriterion("REMARK <", value, "remark");
-            return (Criteria) this;
-        }
-
-        public Criteria andRemarkLessThanOrEqualTo(String value) {
-            addCriterion("REMARK <=", value, "remark");
-            return (Criteria) this;
-        }
-
-        public Criteria andRemarkLike(String value) {
-            addCriterion("REMARK like", value, "remark");
-            return (Criteria) this;
-        }
-
-        public Criteria andRemarkNotLike(String value) {
-            addCriterion("REMARK not like", value, "remark");
-            return (Criteria) this;
-        }
-
-        public Criteria andRemarkIn(List<String> values) {
-            addCriterion("REMARK in", values, "remark");
-            return (Criteria) this;
-        }
-
-        public Criteria andRemarkNotIn(List<String> values) {
-            addCriterion("REMARK not in", values, "remark");
-            return (Criteria) this;
-        }
-
-        public Criteria andRemarkBetween(String value1, String value2) {
-            addCriterion("REMARK between", value1, value2, "remark");
-            return (Criteria) this;
-        }
-
-        public Criteria andRemarkNotBetween(String value1, String value2) {
-            addCriterion("REMARK not between", value1, value2, "remark");
-            return (Criteria) this;
-        }
-
-        public Criteria andStepIsNull() {
-            addCriterion("STEP is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andStepIsNotNull() {
-            addCriterion("STEP is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andStepEqualTo(String value) {
-            addCriterion("STEP =", value, "step");
-            return (Criteria) this;
-        }
-
-        public Criteria andStepNotEqualTo(String value) {
-            addCriterion("STEP <>", value, "step");
-            return (Criteria) this;
-        }
-
-        public Criteria andStepGreaterThan(String value) {
-            addCriterion("STEP >", value, "step");
-            return (Criteria) this;
-        }
-
-        public Criteria andStepGreaterThanOrEqualTo(String value) {
-            addCriterion("STEP >=", value, "step");
-            return (Criteria) this;
-        }
-
-        public Criteria andStepLessThan(String value) {
-            addCriterion("STEP <", value, "step");
-            return (Criteria) this;
-        }
-
-        public Criteria andStepLessThanOrEqualTo(String value) {
-            addCriterion("STEP <=", value, "step");
-            return (Criteria) this;
-        }
-
-        public Criteria andStepLike(String value) {
-            addCriterion("STEP like", value, "step");
-            return (Criteria) this;
-        }
-
-        public Criteria andStepNotLike(String value) {
-            addCriterion("STEP not like", value, "step");
-            return (Criteria) this;
-        }
-
-        public Criteria andStepIn(List<String> values) {
-            addCriterion("STEP in", values, "step");
-            return (Criteria) this;
-        }
-
-        public Criteria andStepNotIn(List<String> values) {
-            addCriterion("STEP not in", values, "step");
-            return (Criteria) this;
-        }
-
-        public Criteria andStepBetween(String value1, String value2) {
-            addCriterion("STEP between", value1, value2, "step");
-            return (Criteria) this;
-        }
-
-        public Criteria andStepNotBetween(String value1, String value2) {
-            addCriterion("STEP not between", value1, value2, "step");
-            return (Criteria) this;
-        }
-
-        public Criteria andExpectEndTimeIsNull() {
-            addCriterion("EXPECT_END_TIME is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andExpectEndTimeIsNotNull() {
-            addCriterion("EXPECT_END_TIME is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andExpectEndTimeEqualTo(Timestamp value) {
-            addCriterion("EXPECT_END_TIME =", value, "expectEndTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andExpectEndTimeNotEqualTo(Timestamp value) {
-            addCriterion("EXPECT_END_TIME <>", value, "expectEndTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andExpectEndTimeGreaterThan(Timestamp value) {
-            addCriterion("EXPECT_END_TIME >", value, "expectEndTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andExpectEndTimeGreaterThanOrEqualTo(Timestamp value) {
-            addCriterion("EXPECT_END_TIME >=", value, "expectEndTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andExpectEndTimeLessThan(Timestamp value) {
-            addCriterion("EXPECT_END_TIME <", value, "expectEndTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andExpectEndTimeLessThanOrEqualTo(Timestamp value) {
-            addCriterion("EXPECT_END_TIME <=", value, "expectEndTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andExpectEndTimeIn(List<Timestamp> values) {
-            addCriterion("EXPECT_END_TIME in", values, "expectEndTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andExpectEndTimeNotIn(List<Timestamp> values) {
-            addCriterion("EXPECT_END_TIME not in", values, "expectEndTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andExpectEndTimeBetween(Timestamp value1, Timestamp value2) {
-            addCriterion("EXPECT_END_TIME between", value1, value2, "expectEndTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andExpectEndTimeNotBetween(Timestamp value1, Timestamp value2) {
-            addCriterion("EXPECT_END_TIME not between", value1, value2, "expectEndTime");
+        public Criteria andReceiveTimeNotBetween(Timestamp value1, Timestamp value2) {
+            addCriterion("RECEIVE_TIME not between", value1, value2, "receiveTime");
             return (Criteria) this;
         }
     }

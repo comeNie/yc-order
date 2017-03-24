@@ -2,7 +2,9 @@ package com.ai.yc.order.dao.mapper.bo;
 
 import java.sql.Timestamp;
 
-public class OrdOdPersonInfo {
+public class OrdOdReceive {
+    private Long id;
+
     private Long personId;
 
     private Long receiveFollowId;
@@ -11,17 +13,19 @@ public class OrdOdPersonInfo {
 
     private String interperName;
 
-    private String tel;
-
     private Long interperFee;
 
-    private Timestamp creartTime;
+    private String tel;
 
-    private String remark;
+    private Timestamp receiveTime;
 
-    private String step;
+    public Long getId() {
+        return id;
+    }
 
-    private Timestamp expectEndTime;
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Long getPersonId() {
         return personId;
@@ -55,14 +59,6 @@ public class OrdOdPersonInfo {
         this.interperName = interperName == null ? null : interperName.trim();
     }
 
-    public String getTel() {
-        return tel;
-    }
-
-    public void setTel(String tel) {
-        this.tel = tel == null ? null : tel.trim();
-    }
-
     public Long getInterperFee() {
         return interperFee;
     }
@@ -71,35 +67,19 @@ public class OrdOdPersonInfo {
         this.interperFee = interperFee;
     }
 
-    public Timestamp getCreartTime() {
-        return creartTime;
+    public String getTel() {
+        return tel;
     }
 
-    public void setCreartTime(Timestamp creartTime) {
-        this.creartTime = creartTime;
+    public void setTel(String tel) {
+        this.tel = tel == null ? null : tel.trim();
     }
 
-    public String getRemark() {
-        return remark;
+    public Timestamp getReceiveTime() {
+        return receiveTime;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark == null ? null : remark.trim();
-    }
-
-    public String getStep() {
-        return step;
-    }
-
-    public void setStep(String step) {
-        this.step = step == null ? null : step.trim();
-    }
-
-    public Timestamp getExpectEndTime() {
-        return expectEndTime;
-    }
-
-    public void setExpectEndTime(Timestamp expectEndTime) {
-        this.expectEndTime = expectEndTime;
+    public void setReceiveTime(Timestamp receiveTime) {
+        this.receiveTime = receiveTime;
     }
 }

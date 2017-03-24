@@ -17,83 +17,85 @@ import com.ai.yc.order.dao.mapper.interfaces.OrdOdProdExtendMapper;
 import com.ai.yc.order.dao.mapper.interfaces.OrdOdProdFileMapper;
 import com.ai.yc.order.dao.mapper.interfaces.OrdOdProdLevelMapper;
 import com.ai.yc.order.dao.mapper.interfaces.OrdOdProdMapper;
+import com.ai.yc.order.dao.mapper.interfaces.OrdOdReceiveFollowMapper;
+import com.ai.yc.order.dao.mapper.interfaces.OrdOdReceiveMapper;
 import com.ai.yc.order.dao.mapper.interfaces.OrdOdStateChgMapper;
 import com.ai.yc.order.dao.mapper.interfaces.OrdOrderMapper;
-import com.ai.yc.order.dao.mapper.interfaces.OrdReceiveTaskMapper;
-
 
 @Component
 public class MapperFactory {
 
-    @Autowired
-    private SqlSessionTemplate st;
+	@Autowired
+	private SqlSessionTemplate st;
 
-    private static SqlSessionTemplate sqlSessionTemplate;
+	private static SqlSessionTemplate sqlSessionTemplate;
 
-    @PostConstruct
-    void init() {
-        setSqlSessionTemplate(st);
-    }
+	@PostConstruct
+	void init() {
+		setSqlSessionTemplate(st);
+	}
 
-    public static void setSqlSessionTemplate(SqlSessionTemplate sqlSessionTemplate) {
-        MapperFactory.sqlSessionTemplate = sqlSessionTemplate;
-    }
-    
-    public static OrdOrderMapper getOrdOrderMapper(){
-    	return sqlSessionTemplate.getMapper(OrdOrderMapper.class);
-    }
+	public static void setSqlSessionTemplate(SqlSessionTemplate sqlSessionTemplate) {
+		MapperFactory.sqlSessionTemplate = sqlSessionTemplate;
+	}
 
-    
-    public static OrdBalacneIfMapper getOrdBalacneIfMapper(){
-    	return sqlSessionTemplate.getMapper(OrdBalacneIfMapper.class);
-    }
-    
-    public static OrdEvaluateMapper getOrdEvaluateMapper(){
-    	return sqlSessionTemplate.getMapper(OrdEvaluateMapper.class);
-    }
-    
-    public static OrdOdFeeOffsetMapper getOrdOdFeeOffsetMapper(){
-    	return sqlSessionTemplate.getMapper(OrdOdFeeOffsetMapper.class);
-    }
-    
-    public static OrdOdFeeProdMapper getOrdOdFeeProdMapper(){
-    	return sqlSessionTemplate.getMapper(OrdOdFeeProdMapper.class);
-    }
-    
-    public static OrdOdFeeTotalMapper getOrdOdFeeTotalMapper(){
-    	return sqlSessionTemplate.getMapper(OrdOdFeeTotalMapper.class);
-    }
-    
-    public static OrdOdLogisticsMapper getOrdOdLogisticsMapper(){
-    	return sqlSessionTemplate.getMapper(OrdOdLogisticsMapper.class);
-    }
-    
-    public static OrdOdPersonInfoMapper getOrdOdPersonInfoMapper(){
-    	return sqlSessionTemplate.getMapper(OrdOdPersonInfoMapper.class);
-    }
-    
-    public static OrdOdProdExtendMapper getOrdOdProdExtendMapper(){
-    	return sqlSessionTemplate.getMapper(OrdOdProdExtendMapper.class);
-    }
-    
-    public static OrdOdProdMapper getOrdOdProdMapper(){
-    	return sqlSessionTemplate.getMapper(OrdOdProdMapper.class);
-    }
-    
-    public static OrdOdStateChgMapper getOrdOdStateChgMapper(){
-    	return sqlSessionTemplate.getMapper(OrdOdStateChgMapper.class);
-    }
-    
-    public static OrdOdProdFileMapper getOrdOdProdFileMapper(){
-    	return sqlSessionTemplate.getMapper(OrdOdProdFileMapper.class);
-    }
-    
-    public static OrdOdProdLevelMapper getOrdOdProdLevelMapper(){
-    	return sqlSessionTemplate.getMapper(OrdOdProdLevelMapper.class);
-    }
-    
-    public static OrdReceiveTaskMapper getOrdReceiveTaskMapper(){
-    	return sqlSessionTemplate.getMapper(OrdReceiveTaskMapper.class);
-    }
+	public static OrdOrderMapper getOrdOrderMapper() {
+		return sqlSessionTemplate.getMapper(OrdOrderMapper.class);
+	}
+
+	public static OrdBalacneIfMapper getOrdBalacneIfMapper() {
+		return sqlSessionTemplate.getMapper(OrdBalacneIfMapper.class);
+	}
+
+	public static OrdEvaluateMapper getOrdEvaluateMapper() {
+		return sqlSessionTemplate.getMapper(OrdEvaluateMapper.class);
+	}
+
+	public static OrdOdFeeOffsetMapper getOrdOdFeeOffsetMapper() {
+		return sqlSessionTemplate.getMapper(OrdOdFeeOffsetMapper.class);
+	}
+
+	public static OrdOdFeeProdMapper getOrdOdFeeProdMapper() {
+		return sqlSessionTemplate.getMapper(OrdOdFeeProdMapper.class);
+	}
+
+	public static OrdOdFeeTotalMapper getOrdOdFeeTotalMapper() {
+		return sqlSessionTemplate.getMapper(OrdOdFeeTotalMapper.class);
+	}
+
+	public static OrdOdLogisticsMapper getOrdOdLogisticsMapper() {
+		return sqlSessionTemplate.getMapper(OrdOdLogisticsMapper.class);
+	}
+
+	public static OrdOdPersonInfoMapper getOrdOdPersonInfoMapper() {
+		return sqlSessionTemplate.getMapper(OrdOdPersonInfoMapper.class);
+	}
+
+	public static OrdOdProdExtendMapper getOrdOdProdExtendMapper() {
+		return sqlSessionTemplate.getMapper(OrdOdProdExtendMapper.class);
+	}
+
+	public static OrdOdProdMapper getOrdOdProdMapper() {
+		return sqlSessionTemplate.getMapper(OrdOdProdMapper.class);
+	}
+
+	public static OrdOdStateChgMapper getOrdOdStateChgMapper() {
+		return sqlSessionTemplate.getMapper(OrdOdStateChgMapper.class);
+	}
+
+	public static OrdOdProdFileMapper getOrdOdProdFileMapper() {
+		return sqlSessionTemplate.getMapper(OrdOdProdFileMapper.class);
+	}
+
+	public static OrdOdProdLevelMapper getOrdOdProdLevelMapper() {
+		return sqlSessionTemplate.getMapper(OrdOdProdLevelMapper.class);
+	}
+
+	public static OrdOdReceiveMapper getOrdOdReceiveMapper() {
+		return sqlSessionTemplate.getMapper(OrdOdReceiveMapper.class);
+	}
+
+	public static OrdOdReceiveFollowMapper getOrdOdReceiveFollowMapper() {
+		return sqlSessionTemplate.getMapper(OrdOdReceiveFollowMapper.class);
+	}
 }
-

@@ -7,9 +7,6 @@ import com.ai.yc.order.dao.mapper.bo.OrdOdPersonInfo;
 public interface IOrdOdPersonInfoAtomSV {
 	public void insertSelective(OrdOdPersonInfo ordOdPersonInfo);
 	
-	List<OrdOdPersonInfo> findByOrderId(Long orderId);
-	
-	List<OrdOdPersonInfo> findByOrderId(Long orderId,String state);
 	
 	List<OrdOdPersonInfo> findPersonInfo(OrdOdPersonInfo ordOdPersonInfo);
 }

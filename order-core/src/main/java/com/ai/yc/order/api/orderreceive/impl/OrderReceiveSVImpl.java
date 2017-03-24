@@ -8,6 +8,7 @@ import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.base.vo.ResponseHeader;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.ai.yc.order.api.orderreceive.interfaces.IOrderReceiveSV;
+import com.ai.yc.order.api.orderreceive.param.OrderAlloReceiveRequest;
 import com.ai.yc.order.api.orderreceive.param.OrderReceiveRequest;
 import com.ai.yc.order.api.orderreceive.param.OrderReceiveResponse;
 import com.ai.yc.order.service.business.interfaces.IOrderReceiveBusiSV;
@@ -43,6 +44,12 @@ public class OrderReceiveSVImpl implements IOrderReceiveSV {
 		}
 		//
 		return response;
+	}
+
+	@Override
+	public OrderReceiveResponse orderAlloReceive(OrderAlloReceiveRequest request)
+			throws BusinessException, SystemException {
+		return null;
 	}
 
 }

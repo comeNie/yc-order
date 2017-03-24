@@ -10,7 +10,7 @@ import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.base.vo.BaseListResponse;
 import com.ai.yc.order.api.orderallocation.param.OrdAllocationePersonRequest;
-import com.ai.yc.order.api.orderallocation.param.OrdAllocationePersones;
+import com.ai.yc.order.api.orderallocation.param.OrdAllocationInfo;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationRequest;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationResponse;
 
@@ -34,17 +34,17 @@ public interface IOrderAllocationSV {
 	@Path("/orderAllocation")
 	public OrderAllocationResponse orderAllocation(OrderAllocationRequest request) throws BusinessException, SystemException;
 	/**
-	 * 分配人员信息查询
+	 * 分配订单查询
 	 * @param request
 	 * @return
 	 * @throws BusinessException
 	 * @throws SystemException
 	 * @author zhanglh
 	 * @ApiCode ORD_2025
-	 * @RestRelativeURL OrderAllocationSV/ordPersonInfo
+	 * @RestRelativeURL OrderAllocationSV/ordAllocationInfo
 	 */
 	@POST
-	@Path("/ordPersonInfo")
-	public BaseListResponse<OrdAllocationePersones> queryAllocationPersonInfo(OrdAllocationePersonRequest request) throws BusinessException, SystemException;
+	@Path("/ordAllocationInfo")
+	public BaseListResponse<OrdAllocationInfo> queryAllocationInfo(OrdAllocationePersonRequest request) throws BusinessException, SystemException;
 
 }

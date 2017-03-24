@@ -7,11 +7,13 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.ai.opt.sdk.util.BeanUtils;
+import com.ai.yc.order.api.orderreceive.param.OrderAlloReceiveRequest;
 import com.ai.yc.order.api.orderreceive.param.OrderReceiveRequest;
 import com.ai.yc.order.api.orderreceive.param.OrderReceiveResponse;
-import com.ai.yc.order.dao.mapper.bo.OrdOdFeeTotal;
+import com.ai.yc.order.dao.mapper.bo.OrdOdReceive;
 import com.ai.yc.order.dao.mapper.bo.OrdOrder;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdFeeTotalAtomSV;
+import com.ai.yc.order.service.atom.interfaces.IOrdOdReceiveAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOrderAtomSV;
 import com.ai.yc.order.service.business.interfaces.IOrdOdStateChgBusiSV;
 import com.ai.yc.order.service.business.interfaces.IOrderReceiveBusiSV;
@@ -25,6 +27,8 @@ public class OrderReceiveBusiSVImpl implements IOrderReceiveBusiSV {
 	private IOrdOdFeeTotalAtomSV ordOdFeeTotalAtomSV;
 	@Autowired
 	private IOrdOdStateChgBusiSV ordOdStateChgBusiSV;
+	@Autowired
+	private IOrdOdReceiveAtomSV ordOdReceiveAtomSV;
 	
 	@Override
 	@Transactional
@@ -49,6 +53,24 @@ public class OrderReceiveBusiSVImpl implements IOrderReceiveBusiSV {
 		this.ordOdStateChgBusiSV.orderReceiveChgDesc(request, request.getBaseInfo().getInterperId(), request.getBaseInfo().getInterperType(), request.getBaseInfo().getLspId(),ordOrderDb.getState());
 		//
 		response.setOrderId(request.getBaseInfo().getOrderId());
+		return response;
+	}
+
+	@Override
+	public OrderReceiveResponse updateOrderAlloReceive(OrderAlloReceiveRequest request) {
+		OrderReceiveResponse response = new OrderReceiveResponse();
+		//
+		OrdOrder ordOrderDb = this.ordOrderAtomSV.findByPrimaryKey(request.getOrderId());
+		if (null == ordOrderDb) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "此订单信息不存在");
+		}
+		OrdOdReceive ordOrderTask = new OrdOdReceive();
+		BeanUtils.copyVO(ordOrderTask, request);
+		
+		this.ordOdReceiveAtomSV.updateByPrimaryKeySelective(ordOrderTask);
+		//添加轨迹信息
+		
+		response.setOrderId(request.getOrderId());
 		return response;
 	}
 

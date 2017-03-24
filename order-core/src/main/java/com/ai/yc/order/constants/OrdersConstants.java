@@ -25,7 +25,11 @@ public final class OrdersConstants {
 	/**
 	 * 领取状态-1已领取
 	 */
-	public final static String RECEIVE_STATE = "1";
+	public final static String RECEIVE_ALREADY_STATE = "1";
+	/**
+	 * 未领取状态-0未领取
+	 */
+	public final static String RECEIVE_STATE = "0";
 	
 
 	public final static class TranslatePrice {

@@ -10,9 +10,10 @@ import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.base.vo.BaseListResponse;
 import com.ai.opt.base.vo.ResponseHeader;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
+import com.ai.paas.ipaas.util.StringUtil;
 import com.ai.yc.order.api.orderallocation.interfaces.IOrderAllocationSV;
 import com.ai.yc.order.api.orderallocation.param.OrdAllocationePersonRequest;
-import com.ai.yc.order.api.orderallocation.param.OrdAllocationePersones;
+import com.ai.yc.order.api.orderallocation.param.OrdAllocationInfo;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationRequest;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationResponse;
 import com.ai.yc.order.service.business.interfaces.IOrderAllocationBusiSV;
@@ -22,7 +23,6 @@ import com.alibaba.dubbo.config.annotation.Service;
 @Service
 @Component
 public class OrderAllocationSVImpl implements IOrderAllocationSV {
-	private static Logger logger = LoggerFactory.getLogger(OrderAllocationSVImpl.class);
 	@Autowired
 	private IOrderAllocationBusiSV orderAllocationBusiSV;
 	@Override
@@ -54,10 +54,13 @@ public class OrderAllocationSVImpl implements IOrderAllocationSV {
 		return response;
 	}
 	@Override
-	public BaseListResponse<OrdAllocationePersones> queryAllocationPersonInfo(
+	public BaseListResponse<OrdAllocationInfo> queryAllocationInfo(
 			OrdAllocationePersonRequest request) throws BusinessException, SystemException {
 		if (request == null) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "参数对象不能为空");
+		}
+		if (StringUtil.isBlank(request.getInterperId())) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "议员id不能为空");
 		}
 		return orderAllocationBusiSV.queryOrderAllocationPerson(request);
 	}
