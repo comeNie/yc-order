@@ -1,7 +1,5 @@
 package com.ai.yc.order.api.orderallocation.impl;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,8 +10,10 @@ import com.ai.opt.base.vo.ResponseHeader;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.ai.paas.ipaas.util.StringUtil;
 import com.ai.yc.order.api.orderallocation.interfaces.IOrderAllocationSV;
-import com.ai.yc.order.api.orderallocation.param.OrdAllocationePersonRequest;
+import com.ai.yc.order.api.orderallocation.param.OrdAlloInterperFeeInfoResponse;
+import com.ai.yc.order.api.orderallocation.param.OrdAlloInterperFeeRequest;
 import com.ai.yc.order.api.orderallocation.param.OrdAllocationInfo;
+import com.ai.yc.order.api.orderallocation.param.OrdAllocationePersonRequest;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationRequest;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationResponse;
 import com.ai.yc.order.service.business.interfaces.IOrderAllocationBusiSV;
@@ -63,6 +63,17 @@ public class OrderAllocationSVImpl implements IOrderAllocationSV {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "议员id不能为空");
 		}
 		return orderAllocationBusiSV.queryOrderAllocationPerson(request);
+	}
+	@Override
+	public OrdAlloInterperFeeInfoResponse queryAlloInterperFee(OrdAlloInterperFeeRequest request)
+			throws BusinessException, SystemException {
+		if (request == null) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "参数对象不能为空");
+		}
+		if (null==request.getOrderId()) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "订单id不能为空");
+		}
+		return orderAllocationBusiSV.queryAllocationInterperFee(request.getOrderId());
 	}
 
 }

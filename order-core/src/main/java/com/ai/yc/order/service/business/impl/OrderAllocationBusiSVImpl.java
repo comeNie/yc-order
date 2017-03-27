@@ -11,9 +11,11 @@ import com.ai.opt.base.vo.BaseListResponse;
 import com.ai.opt.base.vo.ResponseHeader;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.ai.opt.sdk.util.BeanUtils;
+import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.opt.sdk.util.DateUtil;
 import com.ai.yc.order.api.orderallocation.param.OrdAllocationPersonInfo;
 import com.ai.yc.order.api.orderallocation.param.OrdAllocationePersonRequest;
+import com.ai.yc.order.api.orderallocation.param.OrdAlloInterperFeeInfoResponse;
 import com.ai.yc.order.api.orderallocation.param.OrdAllocationInfo;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationReceiveFollowInfo;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationRequest;
@@ -21,6 +23,7 @@ import com.ai.yc.order.api.orderallocation.param.OrderAllocationResponse;
 import com.ai.yc.order.constants.OrdOdStateChgConstants;
 import com.ai.yc.order.constants.OrdersConstants;
 import com.ai.yc.order.dao.mapper.attach.OrdOrderAttach;
+import com.ai.yc.order.dao.mapper.attach.OrdOrderInferperFeeAttach;
 import com.ai.yc.order.dao.mapper.bo.OrdOdPersonInfo;
 import com.ai.yc.order.dao.mapper.bo.OrdOdReceiveFollow;
 import com.ai.yc.order.dao.mapper.bo.OrdOdStateChg;
@@ -140,6 +143,18 @@ public class OrderAllocationBusiSVImpl implements IOrderAllocationBusiSV {
 		}
 		response.setResult(allcationList);
 		ResponseHeader responseHeader = new ResponseHeader(true, ExceptCodeConstants.Special.SUCCESS, "订单分配信息查询成功");
+		response.setResponseHeader(responseHeader);
+		return response;
+	}
+
+	@Override
+	public OrdAlloInterperFeeInfoResponse queryAllocationInterperFee(long orderId) {
+		OrdAlloInterperFeeInfoResponse response = new OrdAlloInterperFeeInfoResponse();
+		OrdOrderInferperFeeAttach ordOrderFeeAttach = this.ordOrderAttachAtomSV.queryAlocationInterperFee(orderId, OrdersConstants.RECEIVE_ALREADY_STATE);
+		if(ordOrderFeeAttach!=null){
+			BeanUtils.copyVO(response, ordOrderFeeAttach);
+		}
+		ResponseHeader responseHeader = new ResponseHeader(true, ExceptCodeConstants.Special.SUCCESS, "订单对应的译员佣金查询成功");
 		response.setResponseHeader(responseHeader);
 		return response;
 	}

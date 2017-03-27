@@ -13,7 +13,7 @@ public class SESdataUpdateTest extends BaseTest{
 	private ISesDataUpdateSV iSesDataUpdateSV;
 	@Test
 	public void updateSes(){
-		BaseResponse response = this.iSesDataUpdateSV.updateSesData(2000000056832048l);
+		BaseResponse response = this.iSesDataUpdateSV.updateSesData(2000000124410734L);
 		log.info("response:"+JSON.toJSONString(response));
 	}
 }

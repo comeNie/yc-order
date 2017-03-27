@@ -22,4 +22,9 @@ public interface OrdOrderAttachMapper {
     @SelectProvider(type = OrdOrderAllocationSqlProvider.class, method = "allocationQueryOrdOrder")
 	public List<OrdOrderAttach> getAllocationOrdOrder(@Param("interperId") String interperId,
 			@Param("receiveState") String receiveState);
+		
+		@Results({ @Result(property = "interperFee", column = "sum_interper_fee")})
+	    @SelectProvider(type = OrdOrderAlloInterperFeeSqlProvider.class, method = "allocationQueryOrdOrderFee")
+		public OrdOrderInferperFeeAttach getAllocationOrdOrderFee(@Param("orderId") Long orderId,
+				@Param("receiveState") String receiveState);
 }

@@ -11,9 +11,11 @@ import com.ai.opt.base.vo.BaseListResponse;
 import com.ai.opt.sdk.util.DateUtil;
 import com.ai.slp.order.api.BaseTest;
 import com.ai.yc.order.api.orderallocation.interfaces.IOrderAllocationSV;
+import com.ai.yc.order.api.orderallocation.param.OrdAlloInterperFeeInfoResponse;
+import com.ai.yc.order.api.orderallocation.param.OrdAlloInterperFeeRequest;
+import com.ai.yc.order.api.orderallocation.param.OrdAllocationInfo;
 import com.ai.yc.order.api.orderallocation.param.OrdAllocationPersonInfo;
 import com.ai.yc.order.api.orderallocation.param.OrdAllocationePersonRequest;
-import com.ai.yc.order.api.orderallocation.param.OrdAllocationInfo;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationBaseInfo;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationReceiveFollowInfo;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationRequest;
@@ -76,6 +78,13 @@ public class OrderAllocationSVImplTest extends BaseTest {
 		//req.setReceiveState("0");
 		req.setInterperId("1223");
 		BaseListResponse<OrdAllocationInfo> response = orderAllocationSV.queryAllocationInfo(req);
+		System.out.println("response="+JSON.toJSONString(response));
+	}
+	@Test
+	public void orderAllocationPersonFee(){
+		OrdAlloInterperFeeRequest req = new OrdAlloInterperFeeRequest();
+		req.setOrderId(1234l);
+		OrdAlloInterperFeeInfoResponse response = orderAllocationSV.queryAlloInterperFee(req);
 		System.out.println("response="+JSON.toJSONString(response));
 	}
 }

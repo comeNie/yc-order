@@ -139,11 +139,11 @@ public class OrderSubmisissonSVImplTest extends BaseTest {
 		 */
 		ContactInfo contactInfo = new ContactInfo();
 		// 联系人姓名
-		contactInfo.setContactName("zhangzd");
+		contactInfo.setContactName("zhangsan");
 		// 联系人电话
-		contactInfo.setContactTel("15811169257");
+		contactInfo.setContactTel("16811169253");
 		// 联系人邮箱
-		contactInfo.setContactEmail("zhangzd@asiainfo.com");
+		contactInfo.setContactEmail("zhangsan@asiainfo.com");
 		// 附加信息
 		contactInfo.setRemark("备注信息");
 		/**
