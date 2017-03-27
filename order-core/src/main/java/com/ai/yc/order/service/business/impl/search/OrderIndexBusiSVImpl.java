@@ -240,34 +240,42 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 					ordInfo.setUserid(ord.getUserId());
 					ordInfo.setEndchgtime(ord.getEndChgTime());
 					//获取昵称
-					IYCUserServiceSV userServiceSV = DubboConsumerFactory.getService(IYCUserServiceSV.class);
-					if(!StringUtil.isBlank(ord.getUserId())){
-						SearchYCUserRequest request = new SearchYCUserRequest();
-						request.setUserId(ord.getUserId());
-						YCUserInfoResponse response = userServiceSV.searchYCUserInfo(request);
-						if(response.getResponseHeader().isSuccess()==true){
-							ordInfo.setUsername(response.getNickname());
+					try{
+						IYCUserServiceSV userServiceSV = DubboConsumerFactory.getService(IYCUserServiceSV.class);
+						if(!StringUtil.isBlank(ord.getUserId())){
+							SearchYCUserRequest request = new SearchYCUserRequest();
+							request.setUserId(ord.getUserId());
+							YCUserInfoResponse response = userServiceSV.searchYCUserInfo(request);
+							if(response.getResponseHeader().isSuccess()==true){
+								ordInfo.setUsername(response.getNickname());
+							}
 						}
+					}catch(Exception e){
+						 throw new SystemException("","调用用户中心获取昵称失败");
 					}
-					//获取lsp名称
-					IYCTranslatorServiceSV iYCTranslatorServiceSV = DubboConsumerFactory.getService(IYCTranslatorServiceSV.class);
-					if(!StringUtil.isBlank(ord.getLspId())){
-						searchYCLSPInfoRequest lSPInfoRequest = new searchYCLSPInfoRequest();
-						lSPInfoRequest.setLspId(ord.getLspId());
-						YCLSPInfoReponse lsp = iYCTranslatorServiceSV.searchLSPInfo(lSPInfoRequest);
-						if(lsp.getResponseHeader().isSuccess()==true){
-							ordInfo.setLspname(lsp.getLspName());
+					try{
+						//获取lsp名称
+						IYCTranslatorServiceSV iYCTranslatorServiceSV = DubboConsumerFactory.getService(IYCTranslatorServiceSV.class);
+						if(!StringUtil.isBlank(ord.getLspId())){
+							searchYCLSPInfoRequest lSPInfoRequest = new searchYCLSPInfoRequest();
+							lSPInfoRequest.setLspId(ord.getLspId());
+							YCLSPInfoReponse lsp = iYCTranslatorServiceSV.searchLSPInfo(lSPInfoRequest);
+							if(lsp.getResponseHeader().isSuccess()==true){
+								ordInfo.setLspname(lsp.getLspName());
+							}
 						}
-					}
-					//获取译员昵称
-					if(!StringUtil.isBlank(ord.getInterperId())){
-						SearchYCTranslatorRequest  translatorRequest = new SearchYCTranslatorRequest();
-						translatorRequest.setUserId(ord.getInterperId());
-						YCTranslatorInfoResponse  interper = iYCTranslatorServiceSV.searchYCTranslatorInfo(translatorRequest);
-						if(interper.getResponseHeader().isSuccess()==true){
-							ordInfo.setInterpername(interper.getNickname());
-							ordInfo.setInterperlevel(interper.getVipLevel());
+						//获取译员昵称
+						if(!StringUtil.isBlank(ord.getInterperId())){
+							SearchYCTranslatorRequest  translatorRequest = new SearchYCTranslatorRequest();
+							translatorRequest.setUserId(ord.getInterperId());
+							YCTranslatorInfoResponse  interper = iYCTranslatorServiceSV.searchYCTranslatorInfo(translatorRequest);
+							if(interper.getResponseHeader().isSuccess()==true){
+								ordInfo.setInterpername(interper.getNickname());
+								ordInfo.setInterperlevel(interper.getVipLevel());
+							}
 						}
+					}catch(Exception e){
+						 throw new SystemException("","调用译员中心获取名称失败");
 					}
 					//获取评价信息
 					OrdEvaluate ordEvaluate = ordEvaluateAtomSV.findByOrderId(ord.getOrderId());
