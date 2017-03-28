@@ -39,9 +39,17 @@ public class OrderAlloReceiveRequest implements Serializable {
 	 */
 	private String step;
 	/**
-	 * 状态0：未开始1：进行中2：已完成
+	 * 译员佣金
 	 */
-	private String state;
+	private Long interperFee;
+	/**
+	 * 操作人id
+	 */
+	private String operId;
+	/**
+	 * 操作人姓名
+	 */
+	private String operName;
 
 	public Long getOrderId() {
 		return orderId;
@@ -107,12 +115,28 @@ public class OrderAlloReceiveRequest implements Serializable {
 		this.step = step;
 	}
 
-	public String getState() {
-		return state;
+	public Long getInterperFee() {
+		return interperFee;
 	}
 
-	public void setState(String state) {
-		this.state = state;
+	public void setInterperFee(Long interperFee) {
+		this.interperFee = interperFee;
+	}
+
+	public String getOperId() {
+		return operId;
+	}
+
+	public void setOperId(String operId) {
+		this.operId = operId;
+	}
+
+	public String getOperName() {
+		return operName;
+	}
+
+	public void setOperName(String operName) {
+		this.operName = operName;
 	}
 
 }

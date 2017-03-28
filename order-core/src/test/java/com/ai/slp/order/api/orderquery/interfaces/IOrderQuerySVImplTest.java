@@ -50,7 +50,7 @@ public class IOrderQuerySVImplTest extends BaseTest{
 		//request.setOrderTimeStart(ts);
 		//request.setEvaluateTimeStart(ts);
 		//request.setEvaluateTimeEnd(es);
-		request.setOrderId(123l);
+		request.setOrderId(1277777773l);
 			//request.setPayTimeStart(ts);
 		//request.setOrderTimeEnd(es);
 		//request.setStateChgTimeEnd(es);

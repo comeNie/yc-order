@@ -9,8 +9,8 @@ import com.ai.yc.order.service.atom.interfaces.IOrdOdReceiveAtomSV;
 public class OrdOdReceiveAtomSVImpl implements IOrdOdReceiveAtomSV{
 
 	@Override
-	public int updateByPrimaryKeySelective(OrdOdReceive record) {
-		return MapperFactory.getOrdOdReceiveMapper().updateByPrimaryKeySelective(record);
+	public int insertByPrimaryKeySelective(OrdOdReceive record) {
+		return MapperFactory.getOrdOdReceiveMapper().insertSelective(record);
 	}
 
 }

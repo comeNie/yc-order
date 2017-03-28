@@ -8,4 +8,5 @@ public interface IOrderReceiveBusiSV {
 	public OrderReceiveResponse updateOrderReceive(OrderReceiveRequest request);
 	
 	public OrderReceiveResponse updateOrderAlloReceive(OrderAlloReceiveRequest request);
+	
 }

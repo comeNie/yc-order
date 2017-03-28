@@ -5,9 +5,11 @@ import org.springframework.stereotype.Service;
 
 import com.ai.opt.sdk.util.DateUtil;
 import com.ai.opt.sdk.util.StringUtil;
+import com.ai.yc.order.api.orderreceive.param.OrderAlloReceiveRequest;
 import com.ai.yc.order.api.orderreceive.param.OrderReceiveRequest;
 import com.ai.yc.order.constants.OrdOdStateChgConstants;
 import com.ai.yc.order.constants.OrdersConstants;
+import com.ai.yc.order.constants.OrdersConstants.OrderState;
 import com.ai.yc.order.dao.mapper.bo.OrdOdStateChg;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdStateChgAtomSV;
 import com.ai.yc.order.service.business.interfaces.IOrdOdStateChgBusiSV;
@@ -270,6 +272,33 @@ public class OrdOdStateChgBusiSVImpl implements IOrdOdStateChgBusiSV {
     	chg.setOperId(OrdersConstants.SYS_OPER_ID);
 		chg.setStateChgTime(DateUtil.getSysDate());
 		ordOdStateChgAtomSV.insertSelective(chg);
+	}
+
+	@Override
+	public void orderAlloReceiveChgDesc(OrderAlloReceiveRequest request, String orgState) {
+		OrdOdStateChg ordOdStateChg = new OrdOdStateChg();
+		//
+		ordOdStateChg.setStateChgId(SequenceUtil.createStateChgId());
+		ordOdStateChg.setNewState(OrderState.STATE_RECEIVED);
+		ordOdStateChg.setOrgState(orgState);
+		ordOdStateChg.setOrderId(request.getOrderId());
+		String descCn = "";
+		String descEn = "";
+		
+		descCn = String.format(ORDER_RECEIVE_DESC_CN_LSP,request.getOperName());
+		descEn = String.format(ORDER_RECEIVE_DESC_EN_LSP,request.getOperName());
+		ordOdStateChg.setOperId(request.getOperId());
+		
+		ordOdStateChg.setOperName(request.getOperName());
+		ordOdStateChg.setChgDesc(descCn);
+		ordOdStateChg.setChgDescEn(descEn);
+		ordOdStateChg.setStateChgTime(DateUtil.getSysDate());
+		
+		ordOdStateChg.setChgDescD("订单已被译员领取，正在翻译中，请耐心等待");
+		ordOdStateChg.setChgDescUEn("Your order has been claimed by a translator and is being translated, please wait patiently");
+		ordOdStateChg.setFlag(OrdOdStateChgConstants.FLAG_USER);
+		
+		ordOdStateChgAtomSV.insertSelective(ordOdStateChg);
 	}
 
 }

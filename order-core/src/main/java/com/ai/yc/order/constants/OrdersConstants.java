@@ -30,6 +30,10 @@ public final class OrdersConstants {
 	 * 未领取状态-0未领取
 	 */
 	public final static String RECEIVE_STATE = "0";
+	/**
+	 * 0-未开始
+	 */
+	public final static String FINISH_STATE = "0";
 	
 
 	public final static class TranslatePrice {

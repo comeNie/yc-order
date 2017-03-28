@@ -1,5 +1,6 @@
 package com.ai.yc.order.service.business.interfaces;
 
+import com.ai.yc.order.api.orderreceive.param.OrderAlloReceiveRequest;
 import com.ai.yc.order.api.orderreceive.param.OrderReceiveRequest;
 import com.ai.yc.order.dao.mapper.bo.OrdOdStateChg;
 
@@ -31,6 +32,11 @@ public interface IOrdOdStateChgBusiSV {
 	 * 订单领取状态变更 
 	 */
 	public void orderReceiveChgDesc(OrderReceiveRequest request, String interperId,String interperType,String lspId,String orgState);
+	/**
+	 * 分配订单领取
+	 */
+	public void orderAlloReceiveChgDesc(OrderAlloReceiveRequest request,String orgState);
+	
 	
 	void addAllCloseChgDesc(OrdOdStateChg chg) ;
 	

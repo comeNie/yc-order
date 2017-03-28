@@ -49,7 +49,26 @@ public class OrderReceiveSVImpl implements IOrderReceiveSV {
 	@Override
 	public OrderReceiveResponse orderAlloReceive(OrderAlloReceiveRequest request)
 			throws BusinessException, SystemException {
-		return null;
+		//有效性校验
+		//
+		OrderReceiveResponse response = new OrderReceiveResponse();
+		ResponseHeader responseHeader = new ResponseHeader();
+		try {
+			response = this.orderReceiveBusiSV.updateOrderAlloReceive(request);
+			this.orderIndexBusiSV.insertSesData(response.getOrderId());
+			//
+			responseHeader.setIsSuccess(true);
+			responseHeader.setResultCode(ExceptCodeConstants.Special.SUCCESS);
+			responseHeader.setResultMessage("分配订单领取成功");
+			response.setResponseHeader(responseHeader);
+		} catch (BusinessException | SystemException e) {
+			responseHeader.setIsSuccess(false);
+			responseHeader.setResultCode(e.getErrorCode());
+			responseHeader.setResultMessage(e.getErrorMessage());
+			response.setResponseHeader(responseHeader);
+		}
+		//
+		return response;
 	}
 
 }
