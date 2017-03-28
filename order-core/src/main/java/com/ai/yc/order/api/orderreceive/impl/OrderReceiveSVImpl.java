@@ -13,6 +13,7 @@ import com.ai.yc.order.api.orderreceive.param.OrderReceiveRequest;
 import com.ai.yc.order.api.orderreceive.param.OrderReceiveResponse;
 import com.ai.yc.order.service.business.interfaces.IOrderReceiveBusiSV;
 import com.ai.yc.order.service.business.interfaces.search.IOrderIndexBusiSV;
+import com.ai.yc.order.util.ValidateUtils;
 import com.alibaba.dubbo.config.annotation.Service;
 
 @Service
@@ -50,6 +51,7 @@ public class OrderReceiveSVImpl implements IOrderReceiveSV {
 	public OrderReceiveResponse orderAlloReceive(OrderAlloReceiveRequest request)
 			throws BusinessException, SystemException {
 		//有效性校验
+		ValidateUtils.validateOrdAlloReceive(request);
 		//
 		OrderReceiveResponse response = new OrderReceiveResponse();
 		ResponseHeader responseHeader = new ResponseHeader();
