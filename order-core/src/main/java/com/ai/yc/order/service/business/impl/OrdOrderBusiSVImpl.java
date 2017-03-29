@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
+import com.ai.opt.base.vo.ResponseHeader;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.ai.opt.sdk.util.BeanUtils;
 import com.ai.opt.sdk.util.CollectionUtil;
@@ -19,6 +20,8 @@ import com.ai.paas.ipaas.search.vo.SearchCriteria;
 import com.ai.paas.ipaas.search.vo.SearchOption;
 import com.ai.paas.ipaas.util.StringUtil;
 import com.ai.yc.order.api.orderdeplay.param.OrderDeplayRequest;
+import com.ai.yc.order.api.orderquery.param.OrdOrderCountRequest;
+import com.ai.yc.order.api.orderquery.param.OrdOrderCountResponse;
 import com.ai.yc.order.api.orderquery.param.QueryOrdCountRequest;
 import com.ai.yc.order.api.orderrefund.param.OrderRefundCheckRequest;
 import com.ai.yc.order.api.orderrefund.param.OrderRefundRequest;
@@ -29,12 +32,14 @@ import com.ai.yc.order.api.orderstate.param.UpdateStateChgInfo;
 import com.ai.yc.order.constants.OrdOdStateChgConstants;
 import com.ai.yc.order.constants.OrdersConstants;
 import com.ai.yc.order.constants.SearchFieldConfConstants;
+import com.ai.yc.order.dao.mapper.attach.OrdOrderCountAttach;
 import com.ai.yc.order.dao.mapper.bo.OrdOdStateChg;
 import com.ai.yc.order.dao.mapper.bo.OrdOrder;
 import com.ai.yc.order.interperlevel.rule.InterperLevelMap;
 import com.ai.yc.order.interperlevel.rule.OrderLevelRange;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdStateChgAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOrderAtomSV;
+import com.ai.yc.order.service.atom.interfaces.IOrdOrderAttachAtomSV;
 import com.ai.yc.order.service.business.impl.search.OrderSearchImpl;
 import com.ai.yc.order.service.business.interfaces.IOrdOrderBusiSV;
 import com.ai.yc.order.service.business.interfaces.search.IOrderSearch;
@@ -50,6 +55,9 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 
 	@Autowired
 	private InterperLevelMap interperLevelMap;// 译员级别判定订单查询级别
+	
+	@Autowired
+	private IOrdOrderAttachAtomSV ordOrderAttachAtomSV;
 	/**
 	 * 订单延时
 	 */
@@ -661,6 +669,18 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 		chg.setFlag(OrdOdStateChgConstants.FLAG_USER);
 		chg.setOperName(request.getOperName());
 		ordOdStateChgAtomSV.insertSelective(chg);
+	}
+
+	@Override
+	public OrdOrderCountResponse countInfo(OrdOrderCountRequest request) {
+		OrdOrderCountResponse response  = new OrdOrderCountResponse();
+		OrdOrderCountAttach attach = ordOrderAttachAtomSV.queryOrderCountInfo(request.getChlId(),request.getUserId(),request.getCorporaId());
+		if(attach!=null){
+			BeanUtils.copyVO(response, attach);
+		}
+		ResponseHeader responseHeader = new ResponseHeader(true, ExceptCodeConstants.Special.SUCCESS, "订单汇总信息查询成功");
+		response.setResponseHeader(responseHeader);
+		return response;
 	}
 
 }

@@ -8,6 +8,8 @@ import javax.ws.rs.core.MediaType;
 
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
+import com.ai.yc.order.api.orderquery.param.OrdOrderCountRequest;
+import com.ai.yc.order.api.orderquery.param.OrdOrderCountResponse;
 import com.ai.yc.order.api.orderquery.param.QueryOrdCountRequest;
 import com.ai.yc.order.api.orderquery.param.QueryOrdCountResponse;
 import com.ai.yc.order.api.orderquery.param.QueryOrderRequest;
@@ -66,4 +68,15 @@ public interface IOrderQuerySV {
 	@POST
 	@Path("/queryOrderCount4TaskCenter")
 	QueryOrdCountResponse queryOrderCount4TaskCenter(QueryOrdCountRequest request) throws BusinessException, SystemException;
+	/**
+	 * 订单汇总信息查询
+	 * @param request
+	 * @return
+	 * @throws BusinessException
+	 * @throws SystemException
+	 * @author zhanglh
+	 * @ApiCode
+	 * @RestRelativeURL queryOrder/queryOrderCountInfo
+	 */
+	OrdOrderCountResponse queryOrderCountInfo(OrdOrderCountRequest request) throws BusinessException, SystemException;
 }

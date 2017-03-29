@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.ai.yc.order.dao.mapper.attach.OrdOrderAttach;
 import com.ai.yc.order.dao.mapper.attach.OrdOrderAttachMapper;
+import com.ai.yc.order.dao.mapper.attach.OrdOrderCountAttach;
 import com.ai.yc.order.dao.mapper.attach.OrdOrderInferperFeeAttach;
 import com.ai.yc.order.service.atom.interfaces.IOrdOrderAttachAtomSV;
 @Component
@@ -21,6 +22,10 @@ public class OrdOrderAttachAtomSVImpl implements IOrdOrderAttachAtomSV {
 	public OrdOrderInferperFeeAttach queryAlocationInterperFee(long orderId, String receiveState) {
 		
 		return ordOrderAttachMapper.getAllocationOrdOrderFee(orderId, receiveState);
+	}
+	@Override
+	public OrdOrderCountAttach queryOrderCountInfo(String chlId, String userId, String corporaId) {
+		return ordOrderAttachMapper.getOrdOrderCount(chlId, userId, corporaId);
 	}
 
 }

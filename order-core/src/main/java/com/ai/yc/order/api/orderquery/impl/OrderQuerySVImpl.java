@@ -23,6 +23,8 @@ import com.ai.paas.ipaas.search.vo.Sort;
 import com.ai.paas.ipaas.search.vo.Sort.SortOrder;
 import com.ai.paas.ipaas.util.StringUtil;
 import com.ai.yc.order.api.orderquery.interfaces.IOrderQuerySV;
+import com.ai.yc.order.api.orderquery.param.OrdOrderCountRequest;
+import com.ai.yc.order.api.orderquery.param.OrdOrderCountResponse;
 import com.ai.yc.order.api.orderquery.param.OrdOrderVo;
 import com.ai.yc.order.api.orderquery.param.OrdProdExtendVo;
 import com.ai.yc.order.api.orderquery.param.OrdProdLevelVo;
@@ -661,6 +663,12 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 		ResponseHeader responseHeader = new ResponseHeader(true, ExceptCodeConstants.Special.SUCCESS, "查询订单数成功");
 		response.setResponseHeader(responseHeader);
 		return response;
+	}
+
+	@Override
+	public OrdOrderCountResponse queryOrderCountInfo(OrdOrderCountRequest request)
+			throws BusinessException, SystemException {
+		return iOrdOrderBusiSV.countInfo(request);
 	}
 
 }

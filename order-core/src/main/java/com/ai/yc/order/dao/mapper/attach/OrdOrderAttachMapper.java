@@ -22,9 +22,22 @@ public interface OrdOrderAttachMapper {
     @SelectProvider(type = OrdOrderAllocationSqlProvider.class, method = "allocationQueryOrdOrder")
 	public List<OrdOrderAttach> getAllocationOrdOrder(@Param("interperId") String interperId,
 			@Param("receiveState") String receiveState);
-		
+		/**
+		 * 佣金查询
+		 */
 		@Results({ @Result(property = "interperFee", column = "sum_interper_fee")})
 	    @SelectProvider(type = OrdOrderAlloInterperFeeSqlProvider.class, method = "allocationQueryOrdOrderFee")
 		public OrdOrderInferperFeeAttach getAllocationOrdOrderFee(@Param("orderId") Long orderId,
 				@Param("receiveState") String receiveState);
+		/**
+		 * 信息汇总
+		 */
+		@Results({ @Result(property = "orderCounts", column = "orderCounts"),
+			 	@Result(property = "discountFeeCount", column = "discountFeeCount"),
+		        @Result(property = "paidFeeCount", column = "paidFeeCount"),
+		        @Result(property = "adjustFeeCount", column = "adjustFeeCount")
+		})
+	    @SelectProvider(type = OrdorderCountSqlProvider.class, method = "ordOrderCount")
+		public OrdOrderCountAttach getOrdOrderCount(@Param("chlId") String chlId,
+				@Param("userId") String userId,@Param("corporaId") String corporaId);
 }
