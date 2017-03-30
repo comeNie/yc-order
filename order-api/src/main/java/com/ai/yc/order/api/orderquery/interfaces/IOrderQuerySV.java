@@ -78,5 +78,7 @@ public interface IOrderQuerySV {
 	 * @ApiCode
 	 * @RestRelativeURL queryOrder/queryOrderCountInfo
 	 */
+	@POST
+	@Path("/queryOrderCountInfo")
 	OrdOrderCountResponse queryOrderCountInfo(OrdOrderCountRequest request) throws BusinessException, SystemException;
 }
