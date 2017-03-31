@@ -14,4 +14,6 @@ public interface IOrdOdProdAtomSV {
 	void updateByOrderIdSelective(OrdOdProdWithBLOBs ordOdProdWithBLOBs,Long orderId);
 	
 	public List<OrdOdProd> findByOrdersAndEndTime(List<Long> orderIds,Timestamp endTime);
+	
+	void updateBySelective(OrdOdProd ordOdProd);
 }

@@ -26,6 +26,9 @@ import com.ai.yc.order.api.orderquery.param.QueryOrdCountRequest;
 import com.ai.yc.order.api.orderrefund.param.OrderRefundCheckRequest;
 import com.ai.yc.order.api.orderrefund.param.OrderRefundRequest;
 import com.ai.yc.order.api.orderrefund.param.OrderRefundResponse;
+import com.ai.yc.order.api.orderreprocess.param.OrdProductInfo;
+import com.ai.yc.order.api.orderreprocess.param.OrderBaseInfo;
+import com.ai.yc.order.api.orderreprocess.param.OrderReprocessRequest;
 import com.ai.yc.order.api.orderstate.param.OrderStateUpdateRequest;
 import com.ai.yc.order.api.orderstate.param.OrderStateUpdateResponse;
 import com.ai.yc.order.api.orderstate.param.UpdateStateChgInfo;
@@ -33,10 +36,12 @@ import com.ai.yc.order.constants.OrdOdStateChgConstants;
 import com.ai.yc.order.constants.OrdersConstants;
 import com.ai.yc.order.constants.SearchFieldConfConstants;
 import com.ai.yc.order.dao.mapper.attach.OrdOrderCountAttach;
+import com.ai.yc.order.dao.mapper.bo.OrdOdProd;
 import com.ai.yc.order.dao.mapper.bo.OrdOdStateChg;
 import com.ai.yc.order.dao.mapper.bo.OrdOrder;
 import com.ai.yc.order.interperlevel.rule.InterperLevelMap;
 import com.ai.yc.order.interperlevel.rule.OrderLevelRange;
+import com.ai.yc.order.service.atom.interfaces.IOrdOdProdAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdStateChgAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOrderAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOrderAttachAtomSV;
@@ -44,6 +49,7 @@ import com.ai.yc.order.service.business.impl.search.OrderSearchImpl;
 import com.ai.yc.order.service.business.interfaces.IOrdOrderBusiSV;
 import com.ai.yc.order.service.business.interfaces.search.IOrderSearch;
 import com.ai.yc.order.util.SequenceUtil;
+import com.alibaba.fastjson.JSON;
 
 @Service
 public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
@@ -55,15 +61,20 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 
 	@Autowired
 	private InterperLevelMap interperLevelMap;// 译员级别判定订单查询级别
-	
+
 	@Autowired
 	private IOrdOrderAttachAtomSV ordOrderAttachAtomSV;
+
+	@Autowired
+	private IOrdOdProdAtomSV ordOdProdAtomSV;
+
 	/**
 	 * 订单延时
 	 */
 	private final static String ORDER_DEPLAY_CN = "客户申请延时确定译文";
-	private final static String ORDER_DEPLAY_UCN = "您已申请延时确定译文";	
+	private final static String ORDER_DEPLAY_UCN = "您已申请延时确定译文";
 	private final static String ORDER_DEPLAY_EN = "You have applied to postpone the confirmation";
+
 	@Override
 	public OrdOrder findByPrimaryKey(OrdOrder ordOrder) {
 		return this.ordOrderAtomSV.findByPrimaryKey(ordOrder);
@@ -552,7 +563,7 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "此订单信息不存在");
 		}
 		OrdOrder ordOrder = new OrdOrder();
-		//获取父订单号
+		// 获取父订单号
 		Long parentOrderId = SequenceUtil.createOrderId();
 		ordOrder.setParentOrderId(parentOrderId.toString());
 		ordOrder.setOrderId(request.getOrderId());
@@ -573,9 +584,9 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 		OrdOdStateChg ordOdStateChg = new OrdOdStateChg();
 		ordOdStateChg.setStateChgId(SequenceUtil.createStateChgId());
 		ordOdStateChg.setOrderId(request.getOrderId());
-		ordOdStateChg.setChgDesc("订单 " + request.getOrderId() + " 退款申请");
+		ordOdStateChg.setChgDesc("客户要求退款：没有按时完成");
 		ordOdStateChg.setChgDescEn("");
-		ordOdStateChg.setChgDescD("");
+		ordOdStateChg.setChgDescD("客户要求退款：没有按时完成");
 		ordOdStateChg.setChgDescUEn("");
 		ordOdStateChg.setFlag(OrdOdStateChgConstants.FLAG_USER);
 		ordOdStateChg.setOrgId("1");
@@ -639,17 +650,17 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 
 	@Override
 	public void deplayOrder(OrderDeplayRequest request) {
-		OrdOrder noConfirmOrders=null;
-		 //1.获取待确认的订单
+		OrdOrder noConfirmOrders = null;
+		// 1.获取待确认的订单
 		try {
-			noConfirmOrders = ordOrderAtomSV.findOrdByStateOrId(request.getOrderId(),"50");
+			noConfirmOrders = ordOrderAtomSV.findOrdByStateOrId(request.getOrderId(), "50");
 		} catch (Exception e) {
 			throw new SystemException(e);
 		}
-		 //2.判断订单是否存在
-		if(noConfirmOrders==null) {
-			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, 
-					"待确认订单为空[orderId:"+request.getOrderId()+"]");
+		// 2.判断订单是否存在
+		if (noConfirmOrders == null) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,
+					"待确认订单为空[orderId:" + request.getOrderId() + "]");
 		}
 		OrdOrder ord = new OrdOrder();
 		BeanUtils.copyProperties(ord, request);
@@ -657,30 +668,78 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 		// 添加修改轨迹
 		OrdOdStateChg chg = new OrdOdStateChg();
 		chg.setOrderId(request.getOrderId());
+		chg.setStateChgId(SequenceUtil.createStateChgId());
 		chg.setOrgState(noConfirmOrders.getState());
 		chg.setNewState(noConfirmOrders.getState());
 		chg.setOperId(request.getOperId());
 		chg.setOperName(request.getOperName());
 		chg.setChgDesc(ORDER_DEPLAY_CN);
 		chg.setChgDescEn(ORDER_DEPLAY_EN);
-		//前端门户显示字段
+		// 前端门户显示字段
 		chg.setChgDescUEn(ORDER_DEPLAY_EN);
 		chg.setChgDescD(ORDER_DEPLAY_UCN);
 		chg.setFlag(OrdOdStateChgConstants.FLAG_USER);
 		chg.setOperName(request.getOperName());
+		chg.setStateChgTime(DateUtil.getSysDate());
 		ordOdStateChgAtomSV.insertSelective(chg);
 	}
 
 	@Override
 	public OrdOrderCountResponse countInfo(OrdOrderCountRequest request) {
-		OrdOrderCountResponse response  = new OrdOrderCountResponse();
-		OrdOrderCountAttach attach = ordOrderAttachAtomSV.queryOrderCountInfo(request.getChlId(),request.getUserId(),request.getCorporaId());
-		if(attach!=null){
+		OrdOrderCountResponse response = new OrdOrderCountResponse();
+		OrdOrderCountAttach attach = ordOrderAttachAtomSV.queryOrderCountInfo(request.getChlId(), request.getUserId(),
+				request.getCorporaId());
+		if (attach != null) {
 			BeanUtils.copyVO(response, attach);
 		}
 		ResponseHeader responseHeader = new ResponseHeader(true, ExceptCodeConstants.Special.SUCCESS, "订单汇总信息查询成功");
 		response.setResponseHeader(responseHeader);
 		return response;
+	}
+
+	@Override
+	public void reprocessOrder(OrderReprocessRequest request) {
+		// 判断订单是否存在
+		OrdOrder ordOrderDb = this.ordOrderAtomSV.findByPrimaryKey(request.getBaseInfo().getOrderId());
+		if (null == ordOrderDb) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "此订单信息不存在");
+		}
+		// 修改订单状态
+		OrderBaseInfo baseInfo = request.getBaseInfo();
+		BeanUtils.copyVO(ordOrderDb, baseInfo);
+		ordOrderDb.setStateChgTime(DateUtil.getSysDate());
+		ordOrderAtomSV.updateByPrimaryKeySelective(ordOrderDb);
+		// 修改产品信息
+		OrdProductInfo ordProductInfo = request.getProductInfo();
+		OrdOdProd ordOdProd = ordOdProdAtomSV.findByOrderId(request.getBaseInfo().getOrderId());
+		// 判断订单产品信息是否存在
+		if (ordOdProd == null) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "订单的产品信息为空");
+		}
+		if (null != ordProductInfo) {
+			ordOdProd.setTakeDay(ordProductInfo.getTakeDay());
+			ordOdProd.setTakeTime(ordProductInfo.getTakeTime());
+		}
+		System.out.println("========="+JSON.toJSONString(ordOdProd));
+		ordOdProdAtomSV.updateBySelective(ordOdProd);
+		// 添加修改轨迹
+		OrdOdStateChg chg = new OrdOdStateChg();
+		chg.setOrderId(request.getBaseInfo().getOrderId());
+		chg.setStateChgId(SequenceUtil.createStateChgId());
+		chg.setOrgState(ordOrderDb.getState());
+		chg.setNewState(request.getBaseInfo().getState());
+		chg.setOperId(request.getBaseInfo().getOperId());
+		chg.setOperName(request.getBaseInfo().getOperName());
+		chg.setChgDesc("客户要求修改订单：翻译的不够准确");
+		chg.setChgDescEn("Client asked for revising the order: the translation is not accurate enough");
+		// 前端门户显示字段
+		chg.setChgDescUEn("Client asked for revising the order: the translation is not accurate enough");
+		chg.setChgDescD("客户要求修改订单：翻译的不够准确");
+		chg.setFlag(OrdOdStateChgConstants.FLAG_USER);
+		chg.setOperName(request.getBaseInfo().getOperName());
+		chg.setStateChgTime(DateUtil.getSysDate());
+		ordOdStateChgAtomSV.insertSelective(chg);
+
 	}
 
 }

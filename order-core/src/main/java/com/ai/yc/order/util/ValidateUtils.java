@@ -15,6 +15,7 @@ import com.ai.yc.order.api.orderquery.param.QueryOrderRequest;
 import com.ai.yc.order.api.orderreceive.param.OrderAlloReceiveRequest;
 import com.ai.yc.order.api.orderrefund.param.OrderRefundCheckRequest;
 import com.ai.yc.order.api.orderrefund.param.OrderRefundRequest;
+import com.ai.yc.order.api.orderreprocess.param.OrderReprocessRequest;
 import com.ai.yc.order.api.orderreview.param.OrderReviewRequest;
 
 public class ValidateUtils {
@@ -283,6 +284,38 @@ public class ValidateUtils {
 		}
 		if(StringUtil.isBlank(request.getOperName())){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"操作者名称不能为空");
+		}
+	}
+	/**
+	 * 订单返工校验
+	 */
+	public static void validateOrdReprocess(OrderReprocessRequest request) {
+		if (request == null) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "参数对象不能为空");
+		}
+		if(null==request.getBaseInfo()){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"基础信息不能为空");
+		}
+		if(null==request.getProductInfo()){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"产品信息不能为空");
+		}
+		if(null == request.getBaseInfo().getOrderId()){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"订单id不能为空");
+		}
+		if(StringUtil.isBlank(request.getBaseInfo().getState())){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"状态不能为空");
+		}
+		if(StringUtil.isBlank(request.getBaseInfo().getOperId())){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"操作者id不能为空");
+		}
+		if(StringUtil.isBlank(request.getBaseInfo().getOperName())){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"操作者名称不能为空");
+		}
+		if(StringUtil.isBlank(request.getProductInfo().getTakeDay())){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"需耗天不能为空");
+		}
+		if(StringUtil.isBlank(request.getProductInfo().getTakeTime())){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"需耗时不能为空");
 		}
 	}
 }

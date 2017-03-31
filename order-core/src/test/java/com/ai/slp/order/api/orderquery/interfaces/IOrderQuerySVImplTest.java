@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ai.slp.order.api.BaseTest;
 import com.ai.yc.order.api.orderquery.interfaces.IOrderQuerySV;
+import com.ai.yc.order.api.orderquery.param.OrdOrderCountRequest;
+import com.ai.yc.order.api.orderquery.param.OrdOrderCountResponse;
 import com.ai.yc.order.api.orderquery.param.QueryOrdCountRequest;
 import com.ai.yc.order.api.orderquery.param.QueryOrdCountResponse;
 import com.ai.yc.order.api.orderquery.param.QueryOrderRequest;
@@ -121,6 +123,13 @@ public class IOrderQuerySVImplTest extends BaseTest{
 		//request.setLanguageIds(languageIds);
 
 		QueryOrdCountResponse response = this.iOrderQuerySV.queryOrderCount(request);
+		log.error("response:"+JSON.toJSONString(response));
+	}
+	@Test
+	public void orderQueryCountinfo(){
+		OrdOrderCountRequest request = new OrdOrderCountRequest();
+		request.setUserId("4444361");;
+		OrdOrderCountResponse response = this.iOrderQuerySV.queryOrderCountInfo(request);
 		log.error("response:"+JSON.toJSONString(response));
 	}
 }
