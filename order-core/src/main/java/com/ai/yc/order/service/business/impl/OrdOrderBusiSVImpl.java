@@ -714,6 +714,8 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 		OrderBaseInfo baseInfo = request.getBaseInfo();
 		BeanUtils.copyVO(ordOrderDb, baseInfo);
 		ordOrderDb.setStateChgTime(DateUtil.getSysDate());
+		ordOrderDb.setDisplayFlag(baseInfo.getState());
+		ordOrderDb.setDisplayFlagChgTime(DateUtil.getSysDate());
 		ordOrderAtomSV.updateByPrimaryKeySelective(ordOrderDb);
 		// 修改产品信息
 		OrdProductInfo ordProductInfo = request.getProductInfo();
@@ -726,7 +728,6 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 			ordOdProd.setTakeDay(ordProductInfo.getTakeDay());
 			ordOdProd.setTakeTime(ordProductInfo.getTakeTime());
 		}
-		System.out.println("========="+JSON.toJSONString(ordOdProd));
 		ordOdProdAtomSV.updateBySelective(ordOdProd);
 		// 添加修改轨迹
 		OrdOdStateChg chg = new OrdOdStateChg();

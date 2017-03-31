@@ -10,6 +10,7 @@ import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.ai.yc.order.api.orderreprocess.interfaces.IOrderReprocessSV;
 import com.ai.yc.order.api.orderreprocess.param.OrderReprocessRequest;
 import com.ai.yc.order.api.orderreprocess.param.OrderReprocessResponse;
+import com.ai.yc.order.api.sesdata.interfaces.ISesDataUpdateSV;
 import com.ai.yc.order.service.business.interfaces.IOrdOrderBusiSV;
 import com.ai.yc.order.util.ValidateUtils;
 import com.alibaba.dubbo.config.annotation.Service;
@@ -18,6 +19,8 @@ import com.alibaba.dubbo.config.annotation.Service;
 public class OrderReprocessSVImpl implements IOrderReprocessSV {
 	@Autowired
 	private IOrdOrderBusiSV ordOrderBusiSV;
+	@Autowired
+	private ISesDataUpdateSV sesDataUpdateSV;
 	@Override
 	public OrderReprocessResponse orderReprocess(OrderReprocessRequest request)
 			throws BusinessException, SystemException {
@@ -33,6 +36,8 @@ public class OrderReprocessSVImpl implements IOrderReprocessSV {
 			responseHeader.setResultCode(ExceptCodeConstants.Special.SUCCESS);
 			responseHeader.setResultMessage("订单返工成功");
 			response.setResponseHeader(responseHeader);
+			//刷新数据到搜索引擎
+			sesDataUpdateSV.updateSesData(request.getBaseInfo().getOrderId());
 		} catch (Exception e) {
 			responseHeader.setIsSuccess(false);
 			responseHeader.setResultCode(ExceptCodeConstants.Special.SYSTEM_ERROR);
