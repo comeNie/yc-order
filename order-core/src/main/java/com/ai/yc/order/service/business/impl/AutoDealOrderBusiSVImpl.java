@@ -136,9 +136,9 @@ public class AutoDealOrderBusiSVImpl implements IAutoDealOrderBusiSV {
 			// 修改订单状态为完成
 			OrdOrder record = new OrdOrder();
 			record.setOrderId(ordOrder.getOrderId());
-			record.setState(OrdersConstants.OrderState.FLAG_FINISHED);
+			record.setState(OrdersConstants.OrderState.WAIT_JUDGE_STATE);
 			record.setStateChgTime(DateUtil.getSysDate());
-			record.setDisplayFlag(OrdersConstants.OrderDisplayFlag.FLAG_FINISHED);
+			record.setDisplayFlag(OrdersConstants.OrderDisplayFlag.WAIT_JUDGE_STATE);
 			record.setDisplayFlagChgTime(DateUtil.getSysDate());
 			record.setOperId(OrdersConstants.SYS_OPER_ID);
 			//

@@ -226,6 +226,10 @@ public final class OrdersConstants {
 		 * 待确认
 		 */
 		public final static String WAIT_COMMENT_STATE = "52";
+		/**
+		 * 待评价
+		 */
+		public final static String WAIT_JUDGE_STATE = "52";
 
 	}
 
@@ -275,6 +279,11 @@ public final class OrdersConstants {
 		 * 已退款
 		 */
 		public final static String FLAG_REFUNDED = "92";
+		
+		/**
+		 * 待评价
+		 */
+		public final static String WAIT_JUDGE_STATE = "52";
 
 	}
 

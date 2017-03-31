@@ -165,12 +165,18 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 		ordOrder.setStateChgTime(DateUtil.getSysDate());
 		if (OrdersConstants.OrderState.FLAG_FINISHED.equals(request.getState())) {
 			ordOrder.setFinishTime(DateUtil.getSysDate());
+			//如果前端传90状态为待评价，轨迹状态不变仍为90
+			ordOrder.setState(OrdersConstants.OrderState.WAIT_JUDGE_STATE);
 		}
 		//
 		if (!StringUtil.isBlank(request.getDisplayFlag())) {
 			ordOrder.setDisplayFlag(request.getDisplayFlag());
 			ordOrder.setDisplayFlagChgTime(DateUtil.getSysDate());
 		}
+		if (!StringUtil.isBlank(request.getDisplayFlag()) && OrdersConstants.OrderState.FLAG_FINISHED.equals(request.getDisplayFlag())) {
+			//如果前端传90状态为待评价，轨迹状态不变仍为90
+			ordOrder.setDisplayFlag(OrdersConstants.OrderState.WAIT_JUDGE_STATE);
+		} 
 		//
 		this.ordOrderAtomSV.updateByPrimaryKeySelective(ordOrder);
 		//
