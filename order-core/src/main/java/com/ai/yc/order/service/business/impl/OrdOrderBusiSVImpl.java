@@ -18,6 +18,8 @@ import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.opt.sdk.util.DateUtil;
 import com.ai.paas.ipaas.search.vo.SearchCriteria;
 import com.ai.paas.ipaas.search.vo.SearchOption;
+import com.ai.paas.ipaas.search.vo.SearchOption.SearchLogic;
+import com.ai.paas.ipaas.search.vo.SearchOption.SearchType;
 import com.ai.paas.ipaas.util.StringUtil;
 import com.ai.yc.order.api.orderdeplay.param.OrderDeplayRequest;
 import com.ai.yc.order.api.orderquery.param.OrdOrderCountRequest;
@@ -165,7 +167,7 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 		ordOrder.setStateChgTime(DateUtil.getSysDate());
 		if (OrdersConstants.OrderState.FLAG_FINISHED.equals(request.getState())) {
 			ordOrder.setFinishTime(DateUtil.getSysDate());
-			//如果前端传90状态为待评价，轨迹状态不变仍为90
+			// 如果前端传90状态为待评价，轨迹状态不变仍为90
 			ordOrder.setState(OrdersConstants.OrderState.WAIT_JUDGE_STATE);
 		}
 		//
@@ -173,10 +175,11 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 			ordOrder.setDisplayFlag(request.getDisplayFlag());
 			ordOrder.setDisplayFlagChgTime(DateUtil.getSysDate());
 		}
-		if (!StringUtil.isBlank(request.getDisplayFlag()) && OrdersConstants.OrderState.FLAG_FINISHED.equals(request.getDisplayFlag())) {
-			//如果前端传90状态为待评价，轨迹状态不变仍为90
+		if (!StringUtil.isBlank(request.getDisplayFlag())
+				&& OrdersConstants.OrderState.FLAG_FINISHED.equals(request.getDisplayFlag())) {
+			// 如果前端传90状态为待评价，轨迹状态不变仍为90
 			ordOrder.setDisplayFlag(OrdersConstants.OrderState.WAIT_JUDGE_STATE);
-		} 
+		}
 		//
 		this.ordOrderAtomSV.updateByPrimaryKeySelective(ordOrder);
 		//
@@ -314,9 +317,24 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
 		}
 		// 如果用户id不为空
-		if (!StringUtil.isBlank(request.getUserId())) {
+		if (!StringUtil.isBlank(request.getUserId()) && StringUtil.isBlank(request.getCorporaId())) {
 			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.USER_ID, request.getUserId(),
 					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
+		}
+
+		// 如果企业id不为空
+		if (!StringUtil.isBlank(request.getCorporaId()) && StringUtil.isBlank(request.getUserId())) {
+			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.CORPORA_ID, request.getCorporaId(),
+					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
+		}
+		// 如果企业id和用户id同时不为空
+		if (!StringUtil.isBlank(request.getUserId()) && !StringUtil.isBlank(request.getCorporaId())) {
+			SearchCriteria vo = new SearchCriteria();
+			vo.addSubCriteria(new SearchCriteria(SearchFieldConfConstants.CORPORA_ID, request.getCorporaId(),
+					new SearchOption(SearchLogic.should, SearchType.querystring)));
+			vo.addSubCriteria(new SearchCriteria(SearchFieldConfConstants.USER_ID, request.getUserId(),
+					new SearchOption(SearchLogic.should, SearchType.querystring)));
+			searchfieldVos.add(vo);
 		}
 		// 如果报价标识不为空
 		if (!StringUtil.isBlank(request.getSubFlag())) {
@@ -341,12 +359,6 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 		// 如果翻译类型不为空
 		if (!StringUtil.isBlank(request.getTranslateType())) {
 			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.TRANSLATE_TYPE, request.getTranslateType(),
-					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
-		}
-
-		// 如果企业id不为空
-		if (!StringUtil.isBlank(request.getCorporaId())) {
-			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.CORPORA_ID, request.getCorporaId(),
 					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
 		}
 		// 如果state不为空
@@ -418,10 +430,25 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
 		}
 		// 如果用户id不为空
-		if (!StringUtil.isBlank(request.getUserId())) {
+		if (!StringUtil.isBlank(request.getUserId()) && StringUtil.isBlank(request.getCorporaId())) {
 			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.USER_ID, request.getUserId(),
 					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
 		}
+		// 如果企业id不为空
+		if (!StringUtil.isBlank(request.getCorporaId()) && StringUtil.isBlank(request.getUserId())) {
+			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.CORPORA_ID, request.getCorporaId(),
+					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
+		}
+		// 如果企业id和用户id同时不为空
+		if (!StringUtil.isBlank(request.getUserId()) && !StringUtil.isBlank(request.getCorporaId())) {
+			SearchCriteria vo = new SearchCriteria();
+			vo.addSubCriteria(new SearchCriteria(SearchFieldConfConstants.CORPORA_ID, request.getCorporaId(),
+					new SearchOption(SearchLogic.should, SearchType.querystring)));
+			vo.addSubCriteria(new SearchCriteria(SearchFieldConfConstants.USER_ID, request.getUserId(),
+					new SearchOption(SearchLogic.should, SearchType.querystring)));
+			searchfieldVos.add(vo);
+		}
+
 		// 如果报价标识不为空
 		if (!StringUtil.isBlank(request.getSubFlag())) {
 			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.SUB_FLAG, request.getSubFlag(),
@@ -448,11 +475,6 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
 		}
 
-		// 如果企业id不为空
-		if (!StringUtil.isBlank(request.getCorporaId())) {
-			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.CORPORA_ID, request.getCorporaId(),
-					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
-		}
 		// 如果state不为空
 		if (!StringUtil.isBlank(request.getState())) {
 			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.STATE, request.getState(),

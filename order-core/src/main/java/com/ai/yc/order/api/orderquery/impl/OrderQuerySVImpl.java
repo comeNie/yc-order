@@ -19,6 +19,8 @@ import com.ai.opt.sdk.util.DateUtil;
 import com.ai.paas.ipaas.search.vo.Result;
 import com.ai.paas.ipaas.search.vo.SearchCriteria;
 import com.ai.paas.ipaas.search.vo.SearchOption;
+import com.ai.paas.ipaas.search.vo.SearchOption.SearchLogic;
+import com.ai.paas.ipaas.search.vo.SearchOption.SearchType;
 import com.ai.paas.ipaas.search.vo.Sort;
 import com.ai.paas.ipaas.search.vo.Sort.SortOrder;
 import com.ai.paas.ipaas.util.StringUtil;
@@ -123,6 +125,7 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 				order.setDiscountFee(ord.getDiscountfee());
 				order.setPlatFee(ord.getPlatfee());
 				order.setInterperFee(ord.getInterperfee());
+				order.setPaidFee(ord.getPaidfee());
 				// 评论信息
 				order.setEvaluateContent(ord.getEvaluatecontent());
 				order.setEvaluateSun(ord.getEvaluatesun());
@@ -232,9 +235,21 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
 		}
 		// 如果用户id不为空
-		if (!StringUtil.isBlank(request.getUserId())) {
+		if (!StringUtil.isBlank(request.getUserId()) && StringUtil.isBlank(request.getCorporaId())) {
 			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.USER_ID, request.getUserId(),
 					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
+		}
+		// 如果企业id不为空
+				if (!StringUtil.isBlank(request.getCorporaId()) && StringUtil.isBlank(request.getUserId())) {
+					searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.CORPORA_ID, request.getCorporaId(),
+							new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
+				}
+		//如果企业id和用户id同时不为空
+		if(!StringUtil.isBlank(request.getUserId()) && !StringUtil.isBlank(request.getCorporaId())){
+			SearchCriteria vo = new SearchCriteria();
+            vo.addSubCriteria(new SearchCriteria(SearchFieldConfConstants.CORPORA_ID, request.getCorporaId(), new SearchOption(SearchLogic.should, SearchType.querystring)));
+            vo.addSubCriteria(new SearchCriteria(SearchFieldConfConstants.USER_ID, request.getUserId(), new SearchOption(SearchLogic.should, SearchType.querystring)));
+            searchfieldVos.add(vo);
 		}
 		// 如果报价标识不为空
 		if (!StringUtil.isBlank(request.getSubFlag())) {
@@ -273,11 +288,6 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.TRANSLATE_NAME, request.getTranslateName(),
 					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.match,
 							SearchOption.TermOperator.AND)));
-		}
-		// 如果企业id不为空
-		if (!StringUtil.isBlank(request.getCorporaId())) {
-			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.CORPORA_ID, request.getCorporaId(),
-					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
 		}
 		// 如果state不为空
 		if (!StringUtil.isBlank(request.getState())) {

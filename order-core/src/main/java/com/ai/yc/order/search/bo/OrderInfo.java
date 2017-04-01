@@ -54,6 +54,10 @@ public class OrderInfo {
 	 */
 	private long platfee;
 	/**
+	 * 总实收费用
+	 */
+	private long paidfee;
+	/**
 	 * 译员佣金
 	 */
 
@@ -590,6 +594,14 @@ public class OrderInfo {
 
 	public void setInterperfee(long interperfee) {
 		this.interperfee = interperfee;
+	}
+
+	public long getPaidfee() {
+		return paidfee;
+	}
+
+	public void setPaidfee(long paidfee) {
+		this.paidfee = paidfee;
 	}
 
 }

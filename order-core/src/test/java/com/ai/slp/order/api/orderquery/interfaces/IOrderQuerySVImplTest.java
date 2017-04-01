@@ -52,11 +52,11 @@ public class IOrderQuerySVImplTest extends BaseTest{
 		//request.setOrderTimeStart(ts);
 		//request.setEvaluateTimeStart(ts);
 		//request.setEvaluateTimeEnd(es);
-		request.setOrderId(1277777773l);
+		//request.setOrderId(1277777773l);
 			//request.setPayTimeStart(ts);
 		//request.setOrderTimeEnd(es);
 		//request.setStateChgTimeEnd(es);
-		request.setPageSize(10);
+		request.setPageSize(100);
 		request.setPageNo(1);
 		/*List<Object> list = new ArrayList<Object>();
 		Object o1 = "13";
@@ -67,6 +67,8 @@ public class IOrderQuerySVImplTest extends BaseTest{
 		//request.setStateList(list);
 		//request.setOrderByFlag("3");
 		//request.setUserId("100329");
+		request.setCorporaId("00000027");
+		request.setUserId("4444914");
 		QueryOrderRsponse response = this.iOrderQuerySV.queryOrder(request);
 		log.info("response:"+JSON.toJSONString(response));
 	}

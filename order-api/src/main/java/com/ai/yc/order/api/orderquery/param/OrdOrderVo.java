@@ -161,6 +161,10 @@ public class OrdOrderVo extends BaseInfo {
 	 */
 	private long totalFee;
 	/**
+	 * 总实收费用
+	 */
+	private long paidFee;
+	/**
 	 * 平台佣金
 	 */
 	private long platFee;
@@ -629,6 +633,14 @@ public class OrdOrderVo extends BaseInfo {
 
 	public void setInterperFee(long interperFee) {
 		this.interperFee = interperFee;
+	}
+
+	public long getPaidFee() {
+		return paidFee;
+	}
+
+	public void setPaidFee(long paidFee) {
+		this.paidFee = paidFee;
 	}
 
 }
