@@ -24,7 +24,7 @@
     <result column="URGENT_FEE" property="urgentFee" jdbcType="BIGINT" />
     <result column="DESC_TYPE_FEE" property="descTypeFee" jdbcType="BIGINT" />
     <result column="REMARK" property="remark" jdbcType="VARCHAR" />
-    <result column="DISCOUNT_SUM" property="discountSum" jdbcType="VARCHAR" />
+    <result column="DISCOUNT_SUM" property="discountSum" jdbcType="DECIMAL" />
     <result column="COUPON_FEE" property="couponFee" jdbcType="BIGINT" />
     <result column="JF_COUPON_FEE" property="jfCouponFee" jdbcType="BIGINT" />
   </resultMap>
@@ -97,6 +97,7 @@
     <if test="distinct" >
       distinct
     </if>
+    'false' as QUERYID,
     <include refid="Base_Column_List" />
     from ord_od_fee_total
     <if test="_parameter != null" >
@@ -142,7 +143,7 @@
       #{payStyle,jdbcType=VARCHAR}, #{updateOperId,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{updateChlId,jdbcType=VARCHAR}, #{totalJf,jdbcType=BIGINT}, #{payTime,jdbcType=TIMESTAMP}, 
       #{setTypeFee,jdbcType=BIGINT}, #{urgentFee,jdbcType=BIGINT}, #{descTypeFee,jdbcType=BIGINT}, 
-      #{remark,jdbcType=VARCHAR}, #{discountSum,jdbcType=VARCHAR}, #{couponFee,jdbcType=BIGINT}, 
+      #{remark,jdbcType=VARCHAR}, #{discountSum,jdbcType=DECIMAL}, #{couponFee,jdbcType=BIGINT}, 
       #{jfCouponFee,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.ai.yc.order.dao.mapper.bo.OrdOdFeeTotal" >
@@ -292,7 +293,7 @@
         #{remark,jdbcType=VARCHAR},
       </if>
       <if test="discountSum != null" >
-        #{discountSum,jdbcType=VARCHAR},
+        #{discountSum,jdbcType=DECIMAL},
       </if>
       <if test="couponFee != null" >
         #{couponFee,jdbcType=BIGINT},
@@ -378,7 +379,7 @@
         REMARK = #{record.remark,jdbcType=VARCHAR},
       </if>
       <if test="record.discountSum != null" >
-        DISCOUNT_SUM = #{record.discountSum,jdbcType=VARCHAR},
+        DISCOUNT_SUM = #{record.discountSum,jdbcType=DECIMAL},
       </if>
       <if test="record.couponFee != null" >
         COUPON_FEE = #{record.couponFee,jdbcType=BIGINT},
@@ -415,7 +416,7 @@
       URGENT_FEE = #{record.urgentFee,jdbcType=BIGINT},
       DESC_TYPE_FEE = #{record.descTypeFee,jdbcType=BIGINT},
       REMARK = #{record.remark,jdbcType=VARCHAR},
-      DISCOUNT_SUM = #{record.discountSum,jdbcType=VARCHAR},
+      DISCOUNT_SUM = #{record.discountSum,jdbcType=DECIMAL},
       COUPON_FEE = #{record.couponFee,jdbcType=BIGINT},
       JF_COUPON_FEE = #{record.jfCouponFee,jdbcType=BIGINT}
     <if test="_parameter != null" >
@@ -489,7 +490,7 @@
         REMARK = #{remark,jdbcType=VARCHAR},
       </if>
       <if test="discountSum != null" >
-        DISCOUNT_SUM = #{discountSum,jdbcType=VARCHAR},
+        DISCOUNT_SUM = #{discountSum,jdbcType=DECIMAL},
       </if>
       <if test="couponFee != null" >
         COUPON_FEE = #{couponFee,jdbcType=BIGINT},
@@ -523,7 +524,7 @@
       URGENT_FEE = #{urgentFee,jdbcType=BIGINT},
       DESC_TYPE_FEE = #{descTypeFee,jdbcType=BIGINT},
       REMARK = #{remark,jdbcType=VARCHAR},
-      DISCOUNT_SUM = #{discountSum,jdbcType=VARCHAR},
+      DISCOUNT_SUM = #{discountSum,jdbcType=DECIMAL},
       COUPON_FEE = #{couponFee,jdbcType=BIGINT},
       JF_COUPON_FEE = #{jfCouponFee,jdbcType=BIGINT}
     where ORDER_ID = #{orderId,jdbcType=BIGINT}

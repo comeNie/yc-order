@@ -1525,62 +1525,52 @@ public class OrdOdFeeTotalCriteria {
             return (Criteria) this;
         }
 
-        public Criteria andDiscountSumEqualTo(String value) {
+        public Criteria andDiscountSumEqualTo(Long value) {
             addCriterion("DISCOUNT_SUM =", value, "discountSum");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountSumNotEqualTo(String value) {
+        public Criteria andDiscountSumNotEqualTo(Long value) {
             addCriterion("DISCOUNT_SUM <>", value, "discountSum");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountSumGreaterThan(String value) {
+        public Criteria andDiscountSumGreaterThan(Long value) {
             addCriterion("DISCOUNT_SUM >", value, "discountSum");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountSumGreaterThanOrEqualTo(String value) {
+        public Criteria andDiscountSumGreaterThanOrEqualTo(Long value) {
             addCriterion("DISCOUNT_SUM >=", value, "discountSum");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountSumLessThan(String value) {
+        public Criteria andDiscountSumLessThan(Long value) {
             addCriterion("DISCOUNT_SUM <", value, "discountSum");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountSumLessThanOrEqualTo(String value) {
+        public Criteria andDiscountSumLessThanOrEqualTo(Long value) {
             addCriterion("DISCOUNT_SUM <=", value, "discountSum");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountSumLike(String value) {
-            addCriterion("DISCOUNT_SUM like", value, "discountSum");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiscountSumNotLike(String value) {
-            addCriterion("DISCOUNT_SUM not like", value, "discountSum");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiscountSumIn(List<String> values) {
+        public Criteria andDiscountSumIn(List<Long> values) {
             addCriterion("DISCOUNT_SUM in", values, "discountSum");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountSumNotIn(List<String> values) {
+        public Criteria andDiscountSumNotIn(List<Long> values) {
             addCriterion("DISCOUNT_SUM not in", values, "discountSum");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountSumBetween(String value1, String value2) {
+        public Criteria andDiscountSumBetween(Long value1, Long value2) {
             addCriterion("DISCOUNT_SUM between", value1, value2, "discountSum");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountSumNotBetween(String value1, String value2) {
+        public Criteria andDiscountSumNotBetween(Long value1, Long value2) {
             addCriterion("DISCOUNT_SUM not between", value1, value2, "discountSum");
             return (Criteria) this;
         }

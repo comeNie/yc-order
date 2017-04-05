@@ -107,6 +107,7 @@ public class OrderPayProcessedResultBusiSVImpl implements IOrderPayProcessedResu
 		OrdOdFeeTotal ordOdFeeTotal = new OrdOdFeeTotal();
 		//
 		BeanUtils.copyVO(ordOdFeeTotal, request.getFeeInfo());
+		ordOdFeeTotal.setDiscountSum(request.getFeeInfo().getDiscountFee());
 		//
 		this.ordOdFeeTotalAtomSV.updateByOrderIdSelective(request.getBaseInfo().getOrderId(), ordOdFeeTotal);
 

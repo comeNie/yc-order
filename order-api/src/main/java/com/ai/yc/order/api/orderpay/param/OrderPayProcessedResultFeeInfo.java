@@ -1,6 +1,7 @@
 package com.ai.yc.order.api.orderpay.param;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 public class OrderPayProcessedResultFeeInfo implements Serializable {
@@ -52,13 +53,13 @@ public class OrderPayProcessedResultFeeInfo implements Serializable {
 	 */
 	private String externalId;// EXTERNAL_ID;
 	/**
-	 * 订单折扣
+	 * 订单折扣传2位小数,例如传入0.88
 	 */
-	private String  discountSum;
+	private BigDecimal discountSum;
 	/**
 	 * 优惠券抵扣金额
 	 */
-	private Long  couponFee;
+	private Long couponFee;
 
 	public String getExternalId() {
 		return externalId;
@@ -140,11 +141,11 @@ public class OrderPayProcessedResultFeeInfo implements Serializable {
 		this.totalJf = totalJf;
 	}
 
-	public String getDiscountSum() {
+	public BigDecimal getDiscountSum() {
 		return discountSum;
 	}
 
-	public void setDiscountSum(String discountSum) {
+	public void setDiscountSum(BigDecimal discountSum) {
 		this.discountSum = discountSum;
 	}
 
@@ -155,5 +156,5 @@ public class OrderPayProcessedResultFeeInfo implements Serializable {
 	public void setCouponFee(Long couponFee) {
 		this.couponFee = couponFee;
 	}
-	
+
 }

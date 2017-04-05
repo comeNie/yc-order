@@ -47,7 +47,7 @@ public class OrdOdFeeTotal {
 
     private String remark;
 
-    private String discountSum;
+    private Long discountSum;
 
     private Long couponFee;
 
@@ -229,12 +229,12 @@ public class OrdOdFeeTotal {
         this.remark = remark == null ? null : remark.trim();
     }
 
-    public String getDiscountSum() {
+    public Long getDiscountSum() {
         return discountSum;
     }
 
-    public void setDiscountSum(String discountSum) {
-        this.discountSum = discountSum == null ? null : discountSum.trim();
+    public void setDiscountSum(Long discountSum) {
+        this.discountSum = discountSum;
     }
 
     public Long getCouponFee() {
