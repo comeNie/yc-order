@@ -55,6 +55,10 @@ public class OrderPayProcessedResultFeeInfo implements Serializable {
 	 * 订单折扣
 	 */
 	private String  discountSum;
+	/**
+	 * 优惠券抵扣金额
+	 */
+	private Long  couponFee;
 
 	public String getExternalId() {
 		return externalId;
@@ -142,6 +146,14 @@ public class OrderPayProcessedResultFeeInfo implements Serializable {
 
 	public void setDiscountSum(String discountSum) {
 		this.discountSum = discountSum;
+	}
+
+	public Long getCouponFee() {
+		return couponFee;
+	}
+
+	public void setCouponFee(Long couponFee) {
+		this.couponFee = couponFee;
 	}
 	
 }
