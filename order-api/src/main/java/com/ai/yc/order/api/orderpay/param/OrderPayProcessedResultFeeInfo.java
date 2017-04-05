@@ -51,6 +51,10 @@ public class OrderPayProcessedResultFeeInfo implements Serializable {
 	 * 外部支付流水号
 	 */
 	private String externalId;// EXTERNAL_ID;
+	/**
+	 * 订单折扣
+	 */
+	private String  discountSum;
 
 	public String getExternalId() {
 		return externalId;
@@ -131,4 +135,13 @@ public class OrderPayProcessedResultFeeInfo implements Serializable {
 	public void setTotalJf(Long totalJf) {
 		this.totalJf = totalJf;
 	}
+
+	public String getDiscountSum() {
+		return discountSum;
+	}
+
+	public void setDiscountSum(String discountSum) {
+		this.discountSum = discountSum;
+	}
+	
 }
