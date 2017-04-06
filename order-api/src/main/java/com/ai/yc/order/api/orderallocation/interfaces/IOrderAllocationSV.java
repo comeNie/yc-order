@@ -10,6 +10,8 @@ import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.yc.order.api.orderallocation.param.OrdAlloInterperFeeInfoResponse;
 import com.ai.yc.order.api.orderallocation.param.OrdAlloInterperFeeRequest;
+import com.ai.yc.order.api.orderallocation.param.OrdAllocationCountRequest;
+import com.ai.yc.order.api.orderallocation.param.OrdAllocationCountResponse;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationRequest;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationResponse;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationSearchRequest;
@@ -62,5 +64,18 @@ public interface IOrderAllocationSV {
 	@POST
 	@Path("/queryAlloInterperFee")
 	public OrdAlloInterperFeeInfoResponse queryAlloInterperFee(OrdAlloInterperFeeRequest request) throws BusinessException, SystemException;
+	/**
+	 * 查询lsp分配订单数量
+	 * @param request
+	 * @return
+	 * @throws BusinessException
+	 * @throws SystemException
+	 * @author zhanglh
+	 * @ApiCode
+	 * @RestRelativeURL OrderAllocationSV/queryAlloOrderCount
+	 */
+	@POST
+	@Path("/queryAlloOrderCount")
+	public OrdAllocationCountResponse queryAlloOrderCount(OrdAllocationCountRequest request) throws BusinessException, SystemException;
 	
 }

@@ -10,6 +10,8 @@ import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.ai.yc.order.api.orderallocation.interfaces.IOrderAllocationSV;
 import com.ai.yc.order.api.orderallocation.param.OrdAlloInterperFeeInfoResponse;
 import com.ai.yc.order.api.orderallocation.param.OrdAlloInterperFeeRequest;
+import com.ai.yc.order.api.orderallocation.param.OrdAllocationCountRequest;
+import com.ai.yc.order.api.orderallocation.param.OrdAllocationCountResponse;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationRequest;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationResponse;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationSearchRequest;
@@ -81,7 +83,35 @@ public class OrderAllocationSVImpl implements IOrderAllocationSV {
 			responseHeader.setResultMessage(e.getErrorMessage());
 			response.setResponseHeader(responseHeader);
 		} catch (Exception e){
-			
+			responseHeader.setIsSuccess(false);
+			responseHeader.setResultCode(ExceptCodeConstants.Special.SYSTEM_ERROR);
+			responseHeader.setResultMessage("待领取订单查询失败");
+			response.setResponseHeader(responseHeader);
+		}
+		return response;
+	}
+	@Override
+	public OrdAllocationCountResponse queryAlloOrderCount(OrdAllocationCountRequest request)
+			throws BusinessException, SystemException {
+		OrdAllocationCountResponse response = new OrdAllocationCountResponse();
+		ResponseHeader responseHeader = new ResponseHeader();
+		try {
+			//有效性校验
+		
+			responseHeader.setIsSuccess(true);
+			responseHeader.setResultCode(ExceptCodeConstants.Special.SUCCESS);
+			responseHeader.setResultMessage("待领取订单数量查询成功");
+			response.setResponseHeader(responseHeader);
+		} catch (BusinessException | SystemException e) {
+			responseHeader.setIsSuccess(false);
+			responseHeader.setResultCode(e.getErrorCode());
+			responseHeader.setResultMessage(e.getErrorMessage());
+			response.setResponseHeader(responseHeader);
+		} catch (Exception e){
+			responseHeader.setIsSuccess(false);
+			responseHeader.setResultCode(ExceptCodeConstants.Special.SYSTEM_ERROR);
+			responseHeader.setResultMessage("待领取订单数量查询失败");
+			response.setResponseHeader(responseHeader);
 		}
 		return response;
 	}
