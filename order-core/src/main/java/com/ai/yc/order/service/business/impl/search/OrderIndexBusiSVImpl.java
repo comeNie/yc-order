@@ -181,24 +181,6 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 				}
 				ordInfo.setOrdprodleveles(ordLevelLists);
 			}
-			//查询分配信息
-			OrdOdReceiveFollow ordOdReceiveFollow = ordOdReceiveFollowAtomSV.findByOrderId(ord.getOrderId());
-			if(null!=ordOdReceiveFollow){
-				ordInfo.setOpertype(ordOdReceiveFollow.getOperType());
-				ordInfo.setReceivestate(ordOdReceiveFollow.getReceiveState());
-				OrdOdPersonInfo ordOdPersonInfo = new OrdOdPersonInfo();
-				ordOdPersonInfo.setReceiveFollowId(ordOdReceiveFollow.getReceiveFollowId());
-				List<OrdOdPersonInfo> personList = ordOdPersonInfoAtomSV.findPersonInfo(ordOdPersonInfo);
-				if(!CollectionUtil.isEmpty(personList)){
-					for(OrdOdPersonInfo per:personList){
-						OrdPersonInfo perInfo = new OrdPersonInfo();
-						perInfo.setIntrperpersonid(per.getInterperId());
-						perInfo.setPersonid(per.getPersonId());
-						personLists.add(perInfo);
-					}
-					ordInfo.setOrdpersoninfoes(personLists);
-				}
-			}
 			// 查询费用信息
 			OrdOdFeeTotal ordOdFeeTotal = ordOdFeeTotalAtomSV.findByOrderId(ord.getOrderId());
 			if (ordOdFeeTotal != null) {
@@ -347,24 +329,6 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 							ordextendList.add(prodextend);
 						}
 						ordInfo.setOrdextendes(ordextendList);
-					}
-					//查询分配信息
-					OrdOdReceiveFollow ordOdReceiveFollow = ordOdReceiveFollowAtomSV.findByOrderId(ord.getOrderId());
-					if(null!=ordOdReceiveFollow){
-						ordInfo.setOpertype(ordOdReceiveFollow.getOperType());
-						ordInfo.setReceivestate(ordOdReceiveFollow.getReceiveState());
-						OrdOdPersonInfo ordOdPersonInfo = new OrdOdPersonInfo();
-						ordOdPersonInfo.setReceiveFollowId(ordOdReceiveFollow.getReceiveFollowId());
-						List<OrdOdPersonInfo> personList = ordOdPersonInfoAtomSV.findPersonInfo(ordOdPersonInfo);
-						if(!CollectionUtil.isEmpty(personList)){
-							for(OrdOdPersonInfo per:personList){
-								OrdPersonInfo perInfo = new OrdPersonInfo();
-								perInfo.setIntrperpersonid(per.getInterperId());
-								perInfo.setPersonid(per.getPersonId());
-								personLists.add(perInfo);
-							}
-							ordInfo.setOrdpersoninfoes(personLists);
-						}
 					}
 					// 查询费用信息
 					OrdOdFeeTotal ordOdFeeTotal = ordOdFeeTotalAtomSV.findByOrderId(ord.getOrderId());

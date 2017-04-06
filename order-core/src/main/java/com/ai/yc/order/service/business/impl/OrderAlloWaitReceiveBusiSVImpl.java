@@ -5,6 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.ai.opt.base.vo.PageInfo;
 import com.ai.opt.base.vo.ResponseHeader;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
@@ -26,7 +29,8 @@ import com.ai.yc.order.service.business.interfaces.IOrderAlloWaitReceiveBusiSV;
 import com.ai.yc.order.service.business.interfaces.search.IOrderSearch;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
-
+@Service
+@Transactional
 public class OrderAlloWaitReceiveBusiSVImpl implements IOrderAlloWaitReceiveBusiSV {
 	/**
 	 * 升序
@@ -102,10 +106,10 @@ public class OrderAlloWaitReceiveBusiSVImpl implements IOrderAlloWaitReceiveBusi
 				order.setOrderId(Long.valueOf(ord.getOrderid()));
 				order.setTotalFee(ord.getTotalfee());
 				order.setTranslateName(ord.getTranslatename());
+				//order.setOperType(ord.getOpertype());
 				if (null != ord.getEsendtime()) {
 					order.setEsEndTime(new Timestamp(ord.getEsendtime().getTime()));
 				}
-				//
 				if (ord.getOrdertime() != null) {
 					order.setOrderTime(new Timestamp(ord.getOrdertime().getTime()));
 				}
@@ -115,11 +119,12 @@ public class OrderAlloWaitReceiveBusiSVImpl implements IOrderAlloWaitReceiveBusi
 						new TypeReference<List<OrdProdExtend>>() {
 						});
 				if (!CollectionUtil.isEmpty(extendList)) {
-					//
 					order.setLanguagePair(extendList.get(0).getLangungeid());
 					order.setLanguagePairName(extendList.get(0).getLangungechname());
 					order.setLanguageNameEn(extendList.get(0).getLangungeenname());
 				}
+				//获取分配人员信息
+				//String persones = JSON.toJSONString(ord.getOrdpersoninfoes());
 				// 获取币种
 				order.setCurrencyUnit(ord.getCurrencyunit());
 				//

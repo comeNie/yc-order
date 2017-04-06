@@ -6,6 +6,7 @@ import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.opt.sdk.util.StringUtil;
 import com.ai.yc.order.api.orderallocation.param.OrdAllocationPersonInfo;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationRequest;
+import com.ai.yc.order.api.orderallocation.param.OrderAllocationSearchRequest;
 import com.ai.yc.order.api.orderclose.param.OrderCancelRequest;
 import com.ai.yc.order.api.orderdeplay.param.OrderDeplayRequest;
 import com.ai.yc.order.api.orderevaluation.param.OrdEvaluationRuleRequest;
@@ -266,6 +267,20 @@ public class ValidateUtils {
 		}
 		if(StringUtil.isBlank(request.getOperName())){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"操作者名称不能为空");
+		}
+	}
+	/**
+	 * 分配订单查询
+	 */
+	public static void validateAlloQuryeOrder(OrderAllocationSearchRequest condition) {
+		if (condition == null) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "参数对象不能为空");
+		}
+		if (null==condition.getPageNo()) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "页码不能为空");
+		}
+		if (null==condition.getPageSize()) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "页码大小不能为空");
 		}
 	}
 	/**
