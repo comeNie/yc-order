@@ -20,18 +20,23 @@ import com.ai.yc.order.constants.OrdersConstants;
 import com.ai.yc.order.constants.SearchConstants;
 import com.ai.yc.order.dao.mapper.bo.OrdEvaluate;
 import com.ai.yc.order.dao.mapper.bo.OrdOdFeeTotal;
+import com.ai.yc.order.dao.mapper.bo.OrdOdPersonInfo;
 import com.ai.yc.order.dao.mapper.bo.OrdOdProd;
 import com.ai.yc.order.dao.mapper.bo.OrdOdProdExtend;
 import com.ai.yc.order.dao.mapper.bo.OrdOdProdLevel;
+import com.ai.yc.order.dao.mapper.bo.OrdOdReceiveFollow;
 import com.ai.yc.order.dao.mapper.bo.OrdOrder;
+import com.ai.yc.order.search.bo.OrdPersonInfo;
 import com.ai.yc.order.search.bo.OrdProdExtend;
 import com.ai.yc.order.search.bo.OrdProdLevel;
 import com.ai.yc.order.search.bo.OrderInfo;
 import com.ai.yc.order.service.atom.interfaces.IOrdEvaluateAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdFeeTotalAtomSV;
+import com.ai.yc.order.service.atom.interfaces.IOrdOdPersonInfoAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdProdAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdProdExtendAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdProdLevelAtomSV;
+import com.ai.yc.order.service.atom.interfaces.IOrdOdReceiveFollowAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOrderAtomSV;
 import com.ai.yc.order.service.business.interfaces.search.IOrderIndexBusiSV;
 import com.ai.yc.translator.api.translatorservice.interfaces.IYCTranslatorServiceSV;
@@ -58,6 +63,12 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 	private IOrdOdProdLevelAtomSV ordOdProdLevelAtomSV;
 	@Autowired
 	private IOrdEvaluateAtomSV ordEvaluateAtomSV;
+	
+	@Autowired
+	private IOrdOdReceiveFollowAtomSV ordOdReceiveFollowAtomSV;
+	
+	@Autowired
+	private IOrdOdPersonInfoAtomSV ordOdPersonInfoAtomSV;
 	@Override
 	public List<OrderInfo> orderFillQuery(List<OrdOrder> ordList) throws BusinessException, SystemException {
 
@@ -65,6 +76,7 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 		for (OrdOrder ord : ordList) {
 			List<OrdProdExtend> ordextendList = new ArrayList<OrdProdExtend>();
 			List<OrdProdLevel> ordLevelLists = new ArrayList<OrdProdLevel>();
+			List<OrdPersonInfo> personLists = new ArrayList<OrdPersonInfo>();
 			OrderInfo ordInfo = new OrderInfo();
 			ordInfo.setOrderid(ord.getOrderId().toString());
 			ordInfo.setParentorderid(ord.getParentOrderId());
@@ -169,6 +181,24 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 				}
 				ordInfo.setOrdprodleveles(ordLevelLists);
 			}
+			//查询分配信息
+			OrdOdReceiveFollow ordOdReceiveFollow = ordOdReceiveFollowAtomSV.findByOrderId(ord.getOrderId());
+			if(null!=ordOdReceiveFollow){
+				ordInfo.setOpertype(ordOdReceiveFollow.getOperType());
+				ordInfo.setReceivestate(ordOdReceiveFollow.getReceiveState());
+				OrdOdPersonInfo ordOdPersonInfo = new OrdOdPersonInfo();
+				ordOdPersonInfo.setReceiveFollowId(ordOdReceiveFollow.getReceiveFollowId());
+				List<OrdOdPersonInfo> personList = ordOdPersonInfoAtomSV.findPersonInfo(ordOdPersonInfo);
+				if(!CollectionUtil.isEmpty(personList)){
+					for(OrdOdPersonInfo per:personList){
+						OrdPersonInfo perInfo = new OrdPersonInfo();
+						perInfo.setIntrperpersonid(per.getInterperId());
+						perInfo.setPersonid(per.getPersonId());
+						personLists.add(perInfo);
+					}
+					ordInfo.setOrdpersoninfoes(personLists);
+				}
+			}
 			// 查询费用信息
 			OrdOdFeeTotal ordOdFeeTotal = ordOdFeeTotalAtomSV.findByOrderId(ord.getOrderId());
 			if (ordOdFeeTotal != null) {
@@ -214,6 +244,7 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 				List<OrdProdExtend> ordextendList = new ArrayList<OrdProdExtend>();
 				List<OrderInfo> orderList = new ArrayList<OrderInfo>();
 				List<OrdProdLevel> ordLevelList = new ArrayList<OrdProdLevel>();
+				List<OrdPersonInfo> personLists = new ArrayList<OrdPersonInfo>();
 				if(ord!=null){
 					OrderInfo ordInfo = new OrderInfo();
 					ordInfo.setOrderid(ord.getOrderId().toString());
@@ -316,6 +347,24 @@ public class OrderIndexBusiSVImpl implements IOrderIndexBusiSV {
 							ordextendList.add(prodextend);
 						}
 						ordInfo.setOrdextendes(ordextendList);
+					}
+					//查询分配信息
+					OrdOdReceiveFollow ordOdReceiveFollow = ordOdReceiveFollowAtomSV.findByOrderId(ord.getOrderId());
+					if(null!=ordOdReceiveFollow){
+						ordInfo.setOpertype(ordOdReceiveFollow.getOperType());
+						ordInfo.setReceivestate(ordOdReceiveFollow.getReceiveState());
+						OrdOdPersonInfo ordOdPersonInfo = new OrdOdPersonInfo();
+						ordOdPersonInfo.setReceiveFollowId(ordOdReceiveFollow.getReceiveFollowId());
+						List<OrdOdPersonInfo> personList = ordOdPersonInfoAtomSV.findPersonInfo(ordOdPersonInfo);
+						if(!CollectionUtil.isEmpty(personList)){
+							for(OrdOdPersonInfo per:personList){
+								OrdPersonInfo perInfo = new OrdPersonInfo();
+								perInfo.setIntrperpersonid(per.getInterperId());
+								perInfo.setPersonid(per.getPersonId());
+								personLists.add(perInfo);
+							}
+							ordInfo.setOrdpersoninfoes(personLists);
+						}
 					}
 					// 查询费用信息
 					OrdOdFeeTotal ordOdFeeTotal = ordOdFeeTotalAtomSV.findByOrderId(ord.getOrderId());

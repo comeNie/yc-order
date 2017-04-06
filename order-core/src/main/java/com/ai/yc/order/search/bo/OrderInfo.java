@@ -88,6 +88,10 @@ public class OrderInfo {
 	 */
 	private List<OrdProdLevel> ordprodleveles;
 	/**
+	 * lsp分配人员信息
+	 */
+	private List<OrdPersonInfo> ordpersoninfoes;
+	/**
 	 * 评论等级
 	 */
 	private String evaluatesun;
@@ -123,6 +127,15 @@ public class OrderInfo {
 	 * 父订单Id
 	 */
 	private String parentorderid;
+	/**
+	 * 操作类型
+	 */
+	private String opertype;
+	/**
+	 * 领取状态
+	 */
+	private String receivestate;
+	
 
 	public String getOrderid() {
 		return orderid;
@@ -602,6 +615,30 @@ public class OrderInfo {
 
 	public void setPaidfee(long paidfee) {
 		this.paidfee = paidfee;
+	}
+
+	public String getOpertype() {
+		return opertype;
+	}
+
+	public void setOpertype(String opertype) {
+		this.opertype = opertype;
+	}
+
+	public String getReceivestate() {
+		return receivestate;
+	}
+
+	public void setReceivestate(String receivestate) {
+		this.receivestate = receivestate;
+	}
+
+	public List<OrdPersonInfo> getOrdpersoninfoes() {
+		return ordpersoninfoes;
+	}
+
+	public void setOrdpersoninfoes(List<OrdPersonInfo> ordpersoninfoes) {
+		this.ordpersoninfoes = ordpersoninfoes;
 	}
 
 }

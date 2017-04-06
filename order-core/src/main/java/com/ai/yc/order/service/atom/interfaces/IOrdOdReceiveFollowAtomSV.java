@@ -11,7 +11,7 @@ public interface IOrdOdReceiveFollowAtomSV {
 	
 	public void updateSelective(OrdOdReceiveFollow ordOdReceiveFollow);
 	
-	public OrdOdReceiveFollow findByOrderAndStep(long orderId,String step,String recerveState);
+	public OrdOdReceiveFollow findByOrderAndState(long orderId,String recerveState);
 	
 	
 }

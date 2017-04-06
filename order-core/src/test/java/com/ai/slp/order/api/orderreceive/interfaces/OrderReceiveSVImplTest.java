@@ -33,16 +33,11 @@ public class OrderReceiveSVImplTest extends BaseTest {
 	@Test
 	public void orderAlloReceive(){
 		OrderAlloReceiveRequest request = new OrderAlloReceiveRequest();
-		request.setInterperId("1111");
 		request.setOperType("0");
-		request.setInterperFee(1234l);
 		request.setOperId("123");
 		request.setOperName("ceshi");
 		request.setPersonId(2l);
-		request.setStep("0");
-		request.setTel("13254567678");
 		request.setOrderId(1234l);
-		request.setInterperName("bella");
 		//
 		log.info("request:"+JSON.toJSONString(request));
 		OrderReceiveResponse response = this.orderReceiveSV.orderAlloReceive(request);

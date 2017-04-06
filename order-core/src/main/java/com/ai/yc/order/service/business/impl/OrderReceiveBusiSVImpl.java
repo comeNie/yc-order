@@ -76,7 +76,7 @@ public class OrderReceiveBusiSVImpl implements IOrderReceiveBusiSV {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "此订单信息不存在");
 		}
 		// 1、修改任务跟踪信息
-		OrdOdReceiveFollow ordOrderDbFollow = ordOdReceiveFollowAtomSV.findByOrderAndStep(request.getOrderId(), request.getStep(), OrdersConstants.RECEIVE_STATE);
+		OrdOdReceiveFollow ordOrderDbFollow = ordOdReceiveFollowAtomSV.findByOrderAndState(request.getOrderId(), OrdersConstants.RECEIVE_STATE);
 		if(null==ordOrderDbFollow){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "未领取任务跟踪信息不存在");
 		}

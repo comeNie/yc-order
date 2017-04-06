@@ -8,13 +8,12 @@ import javax.ws.rs.core.MediaType;
 
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
-import com.ai.opt.base.vo.BaseListResponse;
-import com.ai.yc.order.api.orderallocation.param.OrdAllocationePersonRequest;
 import com.ai.yc.order.api.orderallocation.param.OrdAlloInterperFeeInfoResponse;
 import com.ai.yc.order.api.orderallocation.param.OrdAlloInterperFeeRequest;
-import com.ai.yc.order.api.orderallocation.param.OrdAllocationInfo;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationRequest;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationResponse;
+import com.ai.yc.order.api.orderallocation.param.OrderAllocationSearchRequest;
+import com.ai.yc.order.api.orderallocation.param.OrderAllocationSearchResponse;
 
 @Path("/OrderAllocationSV")
 @Consumes({ MediaType.APPLICATION_JSON })
@@ -47,7 +46,7 @@ public interface IOrderAllocationSV {
 	 */
 	@POST
 	@Path("/ordAllocationInfo")
-	public BaseListResponse<OrdAllocationInfo> queryAllocationInfo(OrdAllocationePersonRequest request) throws BusinessException, SystemException;
+	public OrderAllocationSearchResponse pageSearchAlloWaitReceive(OrderAllocationSearchRequest request) throws BusinessException, SystemException;
 
 	
 	/**

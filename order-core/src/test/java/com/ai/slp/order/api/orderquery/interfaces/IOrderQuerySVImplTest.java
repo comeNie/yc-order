@@ -27,7 +27,7 @@ public class IOrderQuerySVImplTest extends BaseTest{
 		//request.setOrderType("1ololp");
 		Long ss= 2000000015L;
 		//request.setUserName("大海HAODEDSKLDSL");
-		//request.setOrderId(2000000025373363l);
+		request.setOrderId(2000000058874544l);
 		//request.setUpdateOperName("test");
 		//request.setTranslateName("翻译");
 		//request.setOperId("10001");
@@ -67,8 +67,8 @@ public class IOrderQuerySVImplTest extends BaseTest{
 		//request.setStateList(list);
 		//request.setOrderByFlag("3");
 		//request.setUserId("100329");
-		request.setCorporaId("00000027");
-		request.setUserId("4444914");
+		//request.setCorporaId("00000027");
+		//request.setUserId("4444914");
 		QueryOrderRsponse response = this.iOrderQuerySV.queryOrder(request);
 		log.info("response:"+JSON.toJSONString(response));
 	}

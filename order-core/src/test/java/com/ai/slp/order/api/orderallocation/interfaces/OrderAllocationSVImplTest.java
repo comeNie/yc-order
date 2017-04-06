@@ -7,19 +7,18 @@ import java.util.List;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.ai.opt.base.vo.BaseListResponse;
 import com.ai.opt.sdk.util.DateUtil;
 import com.ai.slp.order.api.BaseTest;
 import com.ai.yc.order.api.orderallocation.interfaces.IOrderAllocationSV;
 import com.ai.yc.order.api.orderallocation.param.OrdAlloInterperFeeInfoResponse;
 import com.ai.yc.order.api.orderallocation.param.OrdAlloInterperFeeRequest;
-import com.ai.yc.order.api.orderallocation.param.OrdAllocationInfo;
 import com.ai.yc.order.api.orderallocation.param.OrdAllocationPersonInfo;
-import com.ai.yc.order.api.orderallocation.param.OrdAllocationePersonRequest;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationBaseInfo;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationReceiveFollowInfo;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationRequest;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationResponse;
+import com.ai.yc.order.api.orderallocation.param.OrderAllocationSearchRequest;
+import com.ai.yc.order.api.orderallocation.param.OrderAllocationSearchResponse;
 import com.alibaba.fastjson.JSON;
 
 public class OrderAllocationSVImplTest extends BaseTest {
@@ -73,11 +72,11 @@ public class OrderAllocationSVImplTest extends BaseTest {
 	}
 	@Test
 	public void orderAllocationPerson(){
-		OrdAllocationePersonRequest req = new OrdAllocationePersonRequest();
+		OrderAllocationSearchRequest req = new OrderAllocationSearchRequest();
 		//req.setOrderId(2000000057014948l);
 		//req.setReceiveState("0");
 		req.setInterperId("1223");
-		BaseListResponse<OrdAllocationInfo> response = orderAllocationSV.queryAllocationInfo(req);
+		OrderAllocationSearchResponse response = orderAllocationSV.pageSearchAlloWaitReceive(req);
 		System.out.println("response="+JSON.toJSONString(response));
 	}
 	@Test

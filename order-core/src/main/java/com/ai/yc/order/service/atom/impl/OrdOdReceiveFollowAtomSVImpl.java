@@ -46,11 +46,10 @@ public class OrdOdReceiveFollowAtomSVImpl implements IOrdOdReceiveFollowAtomSV {
 	}
 
 	@Override
-	public OrdOdReceiveFollow findByOrderAndStep(long orderId, String step, String recerveState) {
+	public OrdOdReceiveFollow findByOrderAndState(long orderId, String recerveState) {
 		OrdOdReceiveFollowCriteria example = new OrdOdReceiveFollowCriteria();
 		OrdOdReceiveFollowCriteria.Criteria criteria = example.createCriteria();
 		criteria.andOrderIdEqualTo(orderId);
-		criteria.andStepEqualTo(step);
 		criteria.andReceiveStateEqualTo(recerveState);
 		List<OrdOdReceiveFollow> ordOdFollows = MapperFactory.getOrdOdReceiveFollowMapper().selectByExample(example);
 		if(CollectionUtil.isEmpty(ordOdFollows)){

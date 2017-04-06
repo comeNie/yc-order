@@ -1,5 +1,7 @@
 package com.ai.slp.order.api.orderpay.interfaces;
 
+import java.math.BigDecimal;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -24,7 +26,7 @@ public class OrderPayProcessedResultSVImplTest extends BaseTest {
 		baseInfo.setAccountId(1001l);
 		baseInfo.setCorporaId("1001");
 		baseInfo.setDisplayFlag("23");
-		baseInfo.setOrderId(2000000026313431l);
+		baseInfo.setOrderId(2000000024373466l);
 		baseInfo.setOrderType("1");
 		baseInfo.setState("23");
 		baseInfo.setUserId("1001");
@@ -38,6 +40,9 @@ public class OrderPayProcessedResultSVImplTest extends BaseTest {
 		feeInfo.setTotalFee(1000l);
 		feeInfo.setPayTime(DateUtil.getSysDate());
 		feeInfo.setExternalId("1000001");
+		BigDecimal b = new BigDecimal("22.2");
+		feeInfo.setDiscountSum(b);
+		feeInfo.setDiscountFee(13l);
 		//
 		request.setBaseInfo(baseInfo);
 		request.setProdInfo(prodInfo);
