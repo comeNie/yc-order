@@ -56,8 +56,8 @@ public class OrderReceiveSVImpl implements IOrderReceiveSV {
 		OrderReceiveResponse response = new OrderReceiveResponse();
 		ResponseHeader responseHeader = new ResponseHeader();
 		try {
-			response = this.orderReceiveBusiSV.updateOrderAlloReceive(request);
-			this.orderIndexBusiSV.insertSesData(response.getOrderId());
+			//response = this.orderReceiveBusiSV.updateOrderAlloReceive(request);
+			//this.orderIndexBusiSV.insertSesData(response.getOrderId());
 			//
 			responseHeader.setIsSuccess(true);
 			responseHeader.setResultCode(ExceptCodeConstants.Special.SUCCESS);
