@@ -30,8 +30,6 @@ public class OrderReceiveBusiSVImpl implements IOrderReceiveBusiSV {
 	@Autowired
 	private IOrdOrderAtomSV ordOrderAtomSV;
 	@Autowired
-	private IOrdOdFeeTotalAtomSV ordOdFeeTotalAtomSV;
-	@Autowired
 	private IOrdOdStateChgBusiSV ordOdStateChgBusiSV;
 	@Autowired
 	private IOrdOdReceiveAtomSV ordOdReceiveAtomSV;
@@ -76,7 +74,11 @@ public class OrderReceiveBusiSVImpl implements IOrderReceiveBusiSV {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "此订单信息不存在");
 		}
 		// 1、修改任务跟踪信息
-		OrdOdReceiveFollow ordOrderDbFollow = ordOdReceiveFollowAtomSV.findByOrderAndState(request.getOrderId(), OrdersConstants.RECEIVE_STATE);
+		OrdOdReceiveFollow ordFollow = new OrdOdReceiveFollow();
+		ordFollow.setStep(request.getStep());
+		ordFollow.setReceiveState( OrdersConstants.RECEIVE_STATE);
+		ordFollow.setOrderId(request.getOrderId());
+		OrdOdReceiveFollow ordOrderDbFollow = ordOdReceiveFollowAtomSV.find(ordFollow);
 		if(null==ordOrderDbFollow){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "未领取任务跟踪信息不存在");
 		}

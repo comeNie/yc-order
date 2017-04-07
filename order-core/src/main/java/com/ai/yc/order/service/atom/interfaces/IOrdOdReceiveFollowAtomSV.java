@@ -13,5 +13,7 @@ public interface IOrdOdReceiveFollowAtomSV {
 	
 	public OrdOdReceiveFollow findByOrderAndState(long orderId,String recerveState);
 	
+	public OrdOdReceiveFollow find(OrdOdReceiveFollow ordOdReceiveFollow);
+	
 	
 }
