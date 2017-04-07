@@ -75,7 +75,7 @@ public class OrderAllocationSVImpl implements IOrderAllocationSV {
 		try {
 			//有效性校验
 			//ValidateUtils.validateAlloQuryeOrder(request);
-			//response = this.orderAlloWaitReceiveBusiSV.pageSearchAlloWaitReceive(request);
+			response = this.orderAlloWaitReceiveBusiSV.pageSearchAlloWaitReceive(request);
 			responseHeader.setIsSuccess(true);
 			responseHeader.setResultCode(ExceptCodeConstants.Special.SUCCESS);
 			responseHeader.setResultMessage("待领取订单查询成功");

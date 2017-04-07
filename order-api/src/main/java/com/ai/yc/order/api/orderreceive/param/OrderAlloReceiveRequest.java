@@ -9,38 +9,34 @@ public class OrderAlloReceiveRequest implements Serializable {
 	 */
 	private Long orderId;
 	/**
-	 * 人员信息id
+	 * 译员id
 	 */
-	private Long personId;
+	private String interperId;
 	/**
-	 * 操作类型
+	 * 步骤
 	 */
-	private String operType;
-	/**
-	 * 操作人id
-	 */
-	private String operId;
+	private String step;
 	/**
 	 * 操作人姓名
 	 */
 	private String operName;
-	public Long getPersonId() {
-		return personId;
+	public Long getOrderId() {
+		return orderId;
 	}
-	public void setPersonId(Long personId) {
-		this.personId = personId;
+	public void setOrderId(Long orderId) {
+		this.orderId = orderId;
 	}
-	public String getOperType() {
-		return operType;
+	public String getInterperId() {
+		return interperId;
 	}
-	public void setOperType(String operType) {
-		this.operType = operType;
+	public void setInterperId(String interperId) {
+		this.interperId = interperId;
 	}
-	public String getOperId() {
-		return operId;
+	public String getStep() {
+		return step;
 	}
-	public void setOperId(String operId) {
-		this.operId = operId;
+	public void setStep(String step) {
+		this.step = step;
 	}
 	public String getOperName() {
 		return operName;
@@ -48,11 +44,7 @@ public class OrderAlloReceiveRequest implements Serializable {
 	public void setOperName(String operName) {
 		this.operName = operName;
 	}
-	public Long getOrderId() {
-		return orderId;
-	}
-	public void setOrderId(Long orderId) {
-		this.orderId = orderId;
-	}
+
 	
+
 }

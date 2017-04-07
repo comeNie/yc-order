@@ -1,5 +1,6 @@
 package com.ai.yc.order.service.business.impl;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -210,6 +211,8 @@ public class QueryOrderDetailsBusiSVImpl implements IQueryOrderDetailsBusiSV {
 		if (ordOdFeeTotal != null) {
 			OrderFeeVo orderFee = new OrderFeeVo();
 			BeanUtils.copyProperties(orderFee, ordOdFeeTotal);
+			BigDecimal sum =  new BigDecimal(ordOdFeeTotal.getDiscountSum());
+			orderFee.setDiscountSum(sum);
 			// 获取操作员工姓名
 			if (!StringUtil.isBlank(orderFee.getUpdateOperId())) {
 				SysUserQueryRequest req = new SysUserQueryRequest();

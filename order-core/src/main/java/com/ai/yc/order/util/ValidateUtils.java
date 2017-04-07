@@ -250,20 +250,20 @@ public class ValidateUtils {
 		
 	}
 	/**
-	 * 订单领取校验
+	 * 分配订单领取校验
 	 */
 	public static void validateOrdAlloReceive(OrderAlloReceiveRequest request) {
 		if (request == null) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "参数对象不能为空");
 		}
-		if(null == request.getPersonId()){
-			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"分配人员id不能为空");
+		if(null == request.getOrderId()){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"订单id不能为空");
 		}
-		if(StringUtil.isBlank(request.getOperType())){
+		if(null == request.getInterperId()){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"译员id不能为空");
+		}
+		if(StringUtil.isBlank(request.getStep())){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"操作类型不能为空");
-		}
-		if(StringUtil.isBlank(request.getOperId())){
-			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"操作者id不能为空");
 		}
 		if(StringUtil.isBlank(request.getOperName())){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"操作者名称不能为空");

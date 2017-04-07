@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +25,7 @@ import com.ai.yc.order.api.orderallocation.param.OrderAllocationSearchResponse;
 import com.ai.yc.order.constants.SearchFieldConfConstants;
 import com.ai.yc.order.search.bo.OrdProdExtend;
 import com.ai.yc.order.search.bo.OrderInfo;
+import com.ai.yc.order.service.atom.interfaces.IOrdOrderAttachAtomSV;
 import com.ai.yc.order.service.business.impl.search.OrderSearchImpl;
 import com.ai.yc.order.service.business.interfaces.IOrderAlloWaitReceiveBusiSV;
 import com.ai.yc.order.service.business.interfaces.search.IOrderSearch;
@@ -32,6 +34,7 @@ import com.alibaba.fastjson.TypeReference;
 @Service
 @Transactional
 public class OrderAlloWaitReceiveBusiSVImpl implements IOrderAlloWaitReceiveBusiSV {
+	
 	/**
 	 * 升序
 	 */
@@ -52,7 +55,8 @@ public class OrderAlloWaitReceiveBusiSVImpl implements IOrderAlloWaitReceiveBusi
 	 * 订单金额
 	 */
 	private static final String FIELD_2 = "2";
-	
+	@Autowired
+	private IOrdOrderAttachAtomSV ordOrderAttachAtomSV;
 	@Override
 	public OrderAllocationSearchResponse pageSearchAlloWaitReceive(OrderAllocationSearchRequest request) {
 		int startSize = 1;

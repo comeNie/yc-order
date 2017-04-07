@@ -51,7 +51,7 @@ public class OrderReceiveSVImpl implements IOrderReceiveSV {
 	public OrderReceiveResponse orderAlloReceive(OrderAlloReceiveRequest request)
 			throws BusinessException, SystemException {
 		//有效性校验
-		ValidateUtils.validateOrdAlloReceive(request);
+		//ValidateUtils.validateOrdAlloReceive(request);
 		//
 		OrderReceiveResponse response = new OrderReceiveResponse();
 		ResponseHeader responseHeader = new ResponseHeader();

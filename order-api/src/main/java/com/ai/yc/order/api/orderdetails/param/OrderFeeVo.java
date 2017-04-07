@@ -1,6 +1,7 @@
 package com.ai.yc.order.api.orderdetails.param;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 /**
@@ -114,7 +115,7 @@ public class OrderFeeVo implements Serializable {
     /**
      * 订单折扣
      */
-    private String discountSum;
+    private BigDecimal discountSum;
 
     /**
      * 优惠券抵扣金额
@@ -270,11 +271,11 @@ public class OrderFeeVo implements Serializable {
 		this.payTime = payTime;
 	}
 
-	public String getDiscountSum() {
+	public BigDecimal getDiscountSum() {
 		return discountSum;
 	}
 
-	public void setDiscountSum(String discountSum) {
+	public void setDiscountSum(BigDecimal discountSum) {
 		this.discountSum = discountSum;
 	}
 

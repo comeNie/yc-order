@@ -287,7 +287,7 @@ public class OrdOdStateChgBusiSVImpl implements IOrdOdStateChgBusiSV {
 		
 		descCn = String.format(ORDER_RECEIVE_DESC_CN_LSP,request.getOperName());
 		descEn = String.format(ORDER_RECEIVE_DESC_EN_LSP,request.getOperName());
-		ordOdStateChg.setOperId(request.getOperId());
+		ordOdStateChg.setOperId(request.getInterperId());
 		
 		ordOdStateChg.setOperName(request.getOperName());
 		ordOdStateChg.setChgDesc(descCn);
