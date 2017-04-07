@@ -34,10 +34,11 @@ import com.ai.yc.order.service.business.interfaces.IOrderAlloWaitReceiveBusiSV;
 import com.ai.yc.order.service.business.interfaces.search.IOrderSearch;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
+
 @Service
 @Transactional
 public class OrderAlloWaitReceiveBusiSVImpl implements IOrderAlloWaitReceiveBusiSV {
-	
+
 	/**
 	 * 升序
 	 */
@@ -62,6 +63,7 @@ public class OrderAlloWaitReceiveBusiSVImpl implements IOrderAlloWaitReceiveBusi
 	private IOrdOrderAttachAtomSV ordOrderAttachAtomSV;
 	@Autowired
 	private IOrdOdReceiveFollowAtomSV ordOdReceiveFollowAtomSV;
+
 	@Override
 	public OrderAllocationSearchResponse pageSearchAlloWaitReceive(OrderAllocationSearchRequest request) {
 		int startSize = 1;
@@ -80,12 +82,13 @@ public class OrderAlloWaitReceiveBusiSVImpl implements IOrderAlloWaitReceiveBusi
 		PageInfo<OrderAllocationSearchInfo> pageinfo = new PageInfo<OrderAllocationSearchInfo>();
 
 		List<OrderAllocationSearchInfo> results = new ArrayList<OrderAllocationSearchInfo>();
-		//获取分配订单id
-		List<Object> orderIdlist = ordOrderAttachAtomSV.queryAlocationOrder(request.getInterperId(), OrdersConstants.RECEIVE_STATE);
-		if(CollectionUtil.isEmpty(orderIdlist)){
+		// 获取分配订单id
+		List<Object> orderIdlist = ordOrderAttachAtomSV.queryAlocationOrder(request.getInterperId(),
+				OrdersConstants.RECEIVE_STATE);
+		/*if (CollectionUtil.isEmpty(orderIdlist)) {
 			return response;
-		}
-		List<SearchCriteria> orderSearchCriteria = commonConditions(request,orderIdlist);
+		}*/
+		List<SearchCriteria> orderSearchCriteria = commonConditions(request, orderIdlist);
 		List<Sort> sortList = new ArrayList<Sort>();
 		SortOrder sortFlagEn = SortOrder.ASC;
 		//
@@ -118,9 +121,10 @@ public class OrderAlloWaitReceiveBusiSVImpl implements IOrderAlloWaitReceiveBusi
 				order.setOrderId(Long.valueOf(ord.getOrderid()));
 				order.setTotalFee(ord.getTotalfee());
 				order.setTranslateName(ord.getTranslatename());
-				//查询任务跟踪信息获取操作类型
-				OrdOdReceiveFollow ordOdReceiveFollow = ordOdReceiveFollowAtomSV.findByOrderAndState(Long.valueOf(ord.getOrderid()), OrdersConstants.RECEIVE_STATE);
-				if(null!=ordOdReceiveFollow){
+				// 查询任务跟踪信息获取操作类型
+				OrdOdReceiveFollow ordOdReceiveFollow = ordOdReceiveFollowAtomSV
+						.findByOrderAndState(Long.valueOf(ord.getOrderid()), OrdersConstants.RECEIVE_STATE);
+				if (null != ordOdReceiveFollow) {
 					order.setOperType(ordOdReceiveFollow.getOperType());
 				}
 				if (null != ord.getEsendtime()) {
@@ -154,55 +158,51 @@ public class OrderAlloWaitReceiveBusiSVImpl implements IOrderAlloWaitReceiveBusi
 		response.setResponseHeader(responseHeader);
 		return response;
 	}
+
 	// 搜索引擎数据公共查询条件
-		public List<SearchCriteria> commonConditions(OrderAllocationSearchRequest request,List<Object> orderIdlist) {
-			List<SearchCriteria> searchfieldVos = new ArrayList<SearchCriteria>();
+	public List<SearchCriteria> commonConditions(OrderAllocationSearchRequest request, List<Object> orderIdlist) {
+		List<SearchCriteria> searchfieldVos = new ArrayList<SearchCriteria>();
 
-			// 如果翻译主题不为空
-			if (!StringUtil.isBlank(request.getTranslateName())) {
-				searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.TRANSLATE_NAME, request.getTranslateName(),
-						new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
-			}
-			// 如果译员id不为空
-			if (!StringUtil.isBlank(request.getInterperId())) {
-				searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.INTERPER_ID, request.getInterperId(),
-						new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
-			}
-
-			// 如果用途id不为空
-			if (!StringUtil.isBlank(request.getUseCode())) {
-				searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.USE_CODE, request.getUseCode(),
-						new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
-			}
-			// 如果领域id不为空
-			if (!StringUtil.isBlank(request.getFieldCode())) {
-				searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.FIELD_CODE, request.getFieldCode(),
-						new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
-			}
-
-			// 产品表中开始时间字段区间查询 stateTime
-			if (null != request.getStartStateTime() && null != request.getEndStateTime()) {
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZ");
-				String start = sdf.format(request.getStartStateTime());
-				String end = sdf.format(request.getEndStateTime());
-				SearchCriteria searchCriteria = new SearchCriteria();
-				searchCriteria.setOption(new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.range));
-				searchCriteria.setField(SearchFieldConfConstants.ESEND_TIME);
-				searchCriteria.addFieldValue(start);
-				searchCriteria.addFieldValue(end);
-				searchfieldVos.add(searchCriteria);
-			}
-			//
-			if(!CollectionUtil.isEmpty(orderIdlist)){
-				SearchCriteria searchCriteria = new SearchCriteria();
-				SearchOption option = new SearchOption();
-				option.setSearchLogic(SearchOption.SearchLogic.must);
-				option.setSearchType(SearchOption.SearchType.term);
-				searchCriteria.setFieldValue(orderIdlist);
-				searchCriteria.setField(SearchFieldConfConstants.ORDER_ID);
-				searchCriteria.setOption(option);
-				searchfieldVos.add(searchCriteria);
-			}
-			return searchfieldVos;
+		// 如果翻译主题不为空
+		if (!StringUtil.isBlank(request.getTranslateName())) {
+			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.TRANSLATE_NAME, request.getTranslateName(),
+					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
 		}
+		// 如果用途id不为空
+		if (!StringUtil.isBlank(request.getUseCode())) {
+			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.USE_CODE, request.getUseCode(),
+					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
+		}
+		// 如果领域id不为空
+		if (!StringUtil.isBlank(request.getFieldCode())) {
+			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.FIELD_CODE, request.getFieldCode(),
+					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
+		}
+
+		// 产品表中开始时间字段区间查询 stateTime
+		if (null != request.getStartStateTime() && null != request.getEndStateTime()) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZ");
+			String start = sdf.format(request.getStartStateTime());
+			String end = sdf.format(request.getEndStateTime());
+			SearchCriteria searchCriteria = new SearchCriteria();
+			searchCriteria.setOption(new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.range));
+			searchCriteria.setField(SearchFieldConfConstants.ESEND_TIME);
+			searchCriteria.addFieldValue(start);
+			searchCriteria.addFieldValue(end);
+			searchfieldVos.add(searchCriteria);
+		}
+
+		if (!CollectionUtil.isEmpty(orderIdlist)) {
+			SearchCriteria searchCriteria = new SearchCriteria();
+			SearchOption option = new SearchOption();
+			option.setSearchLogic(SearchOption.SearchLogic.must);
+			option.setSearchType(SearchOption.SearchType.term);
+			searchCriteria.setFieldValue(orderIdlist);
+			searchCriteria.setField(SearchFieldConfConstants.ORDER_ID);
+			searchCriteria.setOption(option);
+			searchfieldVos.add(searchCriteria);
+		}
+
+		return searchfieldVos;
+	}
 }

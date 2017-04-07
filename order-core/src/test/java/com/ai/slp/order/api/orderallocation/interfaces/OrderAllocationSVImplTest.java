@@ -75,7 +75,7 @@ public class OrderAllocationSVImplTest extends BaseTest {
 		OrderAllocationSearchRequest req = new OrderAllocationSearchRequest();
 		//req.setOrderId(2000000057014948l);
 		//req.setReceiveState("0");
-		//req.setInterperId("1223");
+		req.setInterperId("1223");
 		req.setPageNo(1);
 		req.setPageSize(111);
 		OrderAllocationSearchResponse response = orderAllocationSV.pageSearchAlloWaitReceive(req);
