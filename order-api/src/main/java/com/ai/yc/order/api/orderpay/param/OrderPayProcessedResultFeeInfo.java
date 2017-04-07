@@ -55,7 +55,7 @@ public class OrderPayProcessedResultFeeInfo implements Serializable {
 	/**
 	 * 订单折扣传2位小数,例如传入0.88
 	 */
-	private BigDecimal discountSum;
+	 private BigDecimal discountSum;
 	/**
 	 * 优惠券抵扣金额
 	 */

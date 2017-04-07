@@ -67,6 +67,9 @@ public class OrderAllocationSVImpl implements IOrderAllocationSV {
 		}
 		return orderAllocationBusiSV.queryAllocationInterperFee(request.getOrderId());
 	}
+	/**
+	 * 分配订单查询
+	 */
 	@Override
 	public OrderAllocationSearchResponse pageSearchAlloWaitReceive(OrderAllocationSearchRequest request)
 			throws BusinessException, SystemException {
@@ -74,7 +77,7 @@ public class OrderAllocationSVImpl implements IOrderAllocationSV {
 		ResponseHeader responseHeader = new ResponseHeader();
 		try {
 			//有效性校验
-			//ValidateUtils.validateAlloQuryeOrder(request);
+			ValidateUtils.validateAlloQuryeOrder(request);
 			response = this.orderAlloWaitReceiveBusiSV.pageSearchAlloWaitReceive(request);
 			responseHeader.setIsSuccess(true);
 			responseHeader.setResultCode(ExceptCodeConstants.Special.SUCCESS);

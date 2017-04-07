@@ -1,5 +1,6 @@
 package com.ai.yc.order.dao.mapper.bo;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -1525,52 +1526,52 @@ public class OrdOdFeeTotalCriteria {
             return (Criteria) this;
         }
 
-        public Criteria andDiscountSumEqualTo(Long value) {
+        public Criteria andDiscountSumEqualTo(BigDecimal value) {
             addCriterion("DISCOUNT_SUM =", value, "discountSum");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountSumNotEqualTo(Long value) {
+        public Criteria andDiscountSumNotEqualTo(BigDecimal value) {
             addCriterion("DISCOUNT_SUM <>", value, "discountSum");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountSumGreaterThan(Long value) {
+        public Criteria andDiscountSumGreaterThan(BigDecimal value) {
             addCriterion("DISCOUNT_SUM >", value, "discountSum");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountSumGreaterThanOrEqualTo(Long value) {
+        public Criteria andDiscountSumGreaterThanOrEqualTo(BigDecimal value) {
             addCriterion("DISCOUNT_SUM >=", value, "discountSum");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountSumLessThan(Long value) {
+        public Criteria andDiscountSumLessThan(BigDecimal value) {
             addCriterion("DISCOUNT_SUM <", value, "discountSum");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountSumLessThanOrEqualTo(Long value) {
+        public Criteria andDiscountSumLessThanOrEqualTo(BigDecimal value) {
             addCriterion("DISCOUNT_SUM <=", value, "discountSum");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountSumIn(List<Long> values) {
+        public Criteria andDiscountSumIn(List<BigDecimal> values) {
             addCriterion("DISCOUNT_SUM in", values, "discountSum");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountSumNotIn(List<Long> values) {
+        public Criteria andDiscountSumNotIn(List<BigDecimal> values) {
             addCriterion("DISCOUNT_SUM not in", values, "discountSum");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountSumBetween(Long value1, Long value2) {
+        public Criteria andDiscountSumBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("DISCOUNT_SUM between", value1, value2, "discountSum");
             return (Criteria) this;
         }
 
-        public Criteria andDiscountSumNotBetween(Long value1, Long value2) {
+        public Criteria andDiscountSumNotBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("DISCOUNT_SUM not between", value1, value2, "discountSum");
             return (Criteria) this;
         }

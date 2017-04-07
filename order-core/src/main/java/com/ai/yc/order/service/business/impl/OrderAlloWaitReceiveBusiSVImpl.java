@@ -22,9 +22,12 @@ import com.ai.paas.ipaas.util.StringUtil;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationSearchInfo;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationSearchRequest;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationSearchResponse;
+import com.ai.yc.order.constants.OrdersConstants;
 import com.ai.yc.order.constants.SearchFieldConfConstants;
+import com.ai.yc.order.dao.mapper.bo.OrdOdReceiveFollow;
 import com.ai.yc.order.search.bo.OrdProdExtend;
 import com.ai.yc.order.search.bo.OrderInfo;
+import com.ai.yc.order.service.atom.interfaces.IOrdOdReceiveFollowAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOrderAttachAtomSV;
 import com.ai.yc.order.service.business.impl.search.OrderSearchImpl;
 import com.ai.yc.order.service.business.interfaces.IOrderAlloWaitReceiveBusiSV;
@@ -57,6 +60,8 @@ public class OrderAlloWaitReceiveBusiSVImpl implements IOrderAlloWaitReceiveBusi
 	private static final String FIELD_2 = "2";
 	@Autowired
 	private IOrdOrderAttachAtomSV ordOrderAttachAtomSV;
+	@Autowired
+	private IOrdOdReceiveFollowAtomSV ordOdReceiveFollowAtomSV;
 	@Override
 	public OrderAllocationSearchResponse pageSearchAlloWaitReceive(OrderAllocationSearchRequest request) {
 		int startSize = 1;
@@ -75,8 +80,12 @@ public class OrderAlloWaitReceiveBusiSVImpl implements IOrderAlloWaitReceiveBusi
 		PageInfo<OrderAllocationSearchInfo> pageinfo = new PageInfo<OrderAllocationSearchInfo>();
 
 		List<OrderAllocationSearchInfo> results = new ArrayList<OrderAllocationSearchInfo>();
-
-		List<SearchCriteria> orderSearchCriteria = commonConditions(request);
+		//获取分配订单id
+		List<Object> orderIdlist = ordOrderAttachAtomSV.queryAlocationOrder(request.getInterperId(), OrdersConstants.RECEIVE_STATE);
+		if(CollectionUtil.isEmpty(orderIdlist)){
+			return response;
+		}
+		List<SearchCriteria> orderSearchCriteria = commonConditions(request,orderIdlist);
 		List<Sort> sortList = new ArrayList<Sort>();
 		SortOrder sortFlagEn = SortOrder.ASC;
 		//
@@ -105,12 +114,15 @@ public class OrderAlloWaitReceiveBusiSVImpl implements IOrderAlloWaitReceiveBusi
 		if (!CollectionUtil.isEmpty(ordList)) {
 			for (OrderInfo ord : ordList) {
 				OrderAllocationSearchInfo order = new OrderAllocationSearchInfo();
-
 				// 订单id
 				order.setOrderId(Long.valueOf(ord.getOrderid()));
 				order.setTotalFee(ord.getTotalfee());
 				order.setTranslateName(ord.getTranslatename());
-				//order.setOperType(ord.getOpertype());
+				//查询任务跟踪信息获取操作类型
+				OrdOdReceiveFollow ordOdReceiveFollow = ordOdReceiveFollowAtomSV.findByOrderAndState(Long.valueOf(ord.getOrderid()), OrdersConstants.RECEIVE_STATE);
+				if(null!=ordOdReceiveFollow){
+					order.setOperType(ordOdReceiveFollow.getOperType());
+				}
 				if (null != ord.getEsendtime()) {
 					order.setEsEndTime(new Timestamp(ord.getEsendtime().getTime()));
 				}
@@ -127,8 +139,6 @@ public class OrderAlloWaitReceiveBusiSVImpl implements IOrderAlloWaitReceiveBusi
 					order.setLanguagePairName(extendList.get(0).getLangungechname());
 					order.setLanguageNameEn(extendList.get(0).getLangungeenname());
 				}
-				//获取分配人员信息
-				//String persones = JSON.toJSONString(ord.getOrdpersoninfoes());
 				// 获取币种
 				order.setCurrencyUnit(ord.getCurrencyunit());
 				//
@@ -145,7 +155,7 @@ public class OrderAlloWaitReceiveBusiSVImpl implements IOrderAlloWaitReceiveBusi
 		return response;
 	}
 	// 搜索引擎数据公共查询条件
-		public List<SearchCriteria> commonConditions(OrderAllocationSearchRequest request) {
+		public List<SearchCriteria> commonConditions(OrderAllocationSearchRequest request,List<Object> orderIdlist) {
 			List<SearchCriteria> searchfieldVos = new ArrayList<SearchCriteria>();
 
 			// 如果翻译主题不为空
@@ -183,6 +193,16 @@ public class OrderAlloWaitReceiveBusiSVImpl implements IOrderAlloWaitReceiveBusi
 				searchfieldVos.add(searchCriteria);
 			}
 			//
+			if(!CollectionUtil.isEmpty(orderIdlist)){
+				SearchCriteria searchCriteria = new SearchCriteria();
+				SearchOption option = new SearchOption();
+				option.setSearchLogic(SearchOption.SearchLogic.must);
+				option.setSearchType(SearchOption.SearchType.term);
+				searchCriteria.setFieldValue(orderIdlist);
+				searchCriteria.setField(SearchFieldConfConstants.ORDER_ID);
+				searchCriteria.setOption(option);
+				searchfieldVos.add(searchCriteria);
+			}
 			return searchfieldVos;
 		}
 }

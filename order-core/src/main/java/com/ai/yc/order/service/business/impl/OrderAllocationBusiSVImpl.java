@@ -132,26 +132,11 @@ public class OrderAllocationBusiSVImpl implements IOrderAllocationBusiSV {
 	}
 
 	@Override
-	public BaseListResponse<OrdAllocationInfo> queryOrderAllocationPerson(OrdAllocationePersonRequest request) {
-		BaseListResponse<OrdAllocationInfo> response = new BaseListResponse<OrdAllocationInfo>();
-		List<OrdAllocationInfo> allcationList = new ArrayList<OrdAllocationInfo>();
-		List<OrdOrderAttach> ordOrderAttachList = this.ordOrderAttachAtomSV.queryAlocationOrder(request.getInterperId(), OrdersConstants.RECEIVE_STATE);
-		for(OrdOrderAttach attach:ordOrderAttachList){
-			OrdAllocationInfo info = new OrdAllocationInfo();
-			BeanUtils.copyVO(info, attach);
-			allcationList.add(info);
-		}
-		response.setResult(allcationList);
-		ResponseHeader responseHeader = new ResponseHeader(true, ExceptCodeConstants.Special.SUCCESS, "订单分配信息查询成功");
-		response.setResponseHeader(responseHeader);
-		return response;
-	}
-
-	@Override
 	public OrdAlloInterperFeeInfoResponse queryAllocationInterperFee(long orderId) {
 		OrdAlloInterperFeeInfoResponse response = new OrdAlloInterperFeeInfoResponse();
-		OrdOrderInferperFeeAttach ordOrderFeeAttach = this.ordOrderAttachAtomSV.queryAlocationInterperFee(orderId, OrdersConstants.RECEIVE_ALREADY_STATE);
-		if(ordOrderFeeAttach!=null){
+		OrdOrderInferperFeeAttach ordOrderFeeAttach = this.ordOrderAttachAtomSV.queryAlocationInterperFee(orderId,
+				OrdersConstants.RECEIVE_ALREADY_STATE);
+		if (ordOrderFeeAttach != null) {
 			BeanUtils.copyVO(response, ordOrderFeeAttach);
 		}
 		ResponseHeader responseHeader = new ResponseHeader(true, ExceptCodeConstants.Special.SUCCESS, "订单对应的译员佣金查询成功");

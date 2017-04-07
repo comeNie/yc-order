@@ -1,5 +1,6 @@
 package com.ai.yc.order.dao.mapper.bo;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 public class OrdOdFeeTotal {
@@ -47,7 +48,7 @@ public class OrdOdFeeTotal {
 
     private String remark;
 
-    private Long discountSum;
+    private BigDecimal discountSum;
 
     private Long couponFee;
 
@@ -229,11 +230,11 @@ public class OrdOdFeeTotal {
         this.remark = remark == null ? null : remark.trim();
     }
 
-    public Long getDiscountSum() {
+    public BigDecimal getDiscountSum() {
         return discountSum;
     }
 
-    public void setDiscountSum(Long discountSum) {
+    public void setDiscountSum(BigDecimal discountSum) {
         this.discountSum = discountSum;
     }
 
