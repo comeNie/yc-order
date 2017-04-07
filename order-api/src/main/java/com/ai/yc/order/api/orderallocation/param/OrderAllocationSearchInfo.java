@@ -12,10 +12,6 @@ public class OrderAllocationSearchInfo implements Serializable {
 	 */
 	private Long orderId;
 	/**
-	 * 分配人员id
-	 */
-	private Long personId;
-	/**
 	 * 翻译主题
 	 */
 	private String translateName;
@@ -130,14 +126,6 @@ public class OrderAllocationSearchInfo implements Serializable {
 
 	public void setOperType(String operType) {
 		this.operType = operType;
-	}
-
-	public Long getPersonId() {
-		return personId;
-	}
-
-	public void setPersonId(Long personId) {
-		this.personId = personId;
 	}
 
 }
