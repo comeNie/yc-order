@@ -7,6 +7,7 @@ import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.base.vo.ResponseHeader;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
+import com.ai.paas.ipaas.util.StringUtil;
 import com.ai.yc.order.api.orderallocation.interfaces.IOrderAllocationSV;
 import com.ai.yc.order.api.orderallocation.param.OrdAlloInterperFeeInfoResponse;
 import com.ai.yc.order.api.orderallocation.param.OrdAlloInterperFeeRequest;
@@ -106,6 +107,11 @@ public class OrderAllocationSVImpl implements IOrderAllocationSV {
 			if (request == null) {
 				throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "参数对象不能为空");
 			}
+			if (StringUtil.isBlank(request.getInterperId())) {
+				throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "译员id不能为空");
+			}
+			int counts = this.orderAlloWaitReceiveBusiSV.pageSearchAlloWaitReceiveCount(request);
+			response.setOrderCount(counts);
 			responseHeader.setIsSuccess(true);
 			responseHeader.setResultCode(ExceptCodeConstants.Special.SUCCESS);
 			responseHeader.setResultMessage("待领取订单数量查询成功");

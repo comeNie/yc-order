@@ -19,6 +19,7 @@ import com.ai.paas.ipaas.search.vo.SearchOption;
 import com.ai.paas.ipaas.search.vo.Sort;
 import com.ai.paas.ipaas.search.vo.Sort.SortOrder;
 import com.ai.paas.ipaas.util.StringUtil;
+import com.ai.yc.order.api.orderallocation.param.OrdAllocationCountRequest;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationSearchInfo;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationSearchRequest;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationSearchResponse;
@@ -204,5 +205,17 @@ public class OrderAlloWaitReceiveBusiSVImpl implements IOrderAlloWaitReceiveBusi
 		}
 
 		return searchfieldVos;
+	}
+
+	@Override
+	public int pageSearchAlloWaitReceiveCount(OrdAllocationCountRequest request) {
+		// 获取分配订单id
+		List<Object> orderIdlist = ordOrderAttachAtomSV.queryAlocationOrder(request.getInterperId(),
+				OrdersConstants.RECEIVE_STATE);
+		if (CollectionUtil.isEmpty(orderIdlist)) {
+			return 0;
+		}else{
+			return orderIdlist.size();
+		}
 	}
 }
