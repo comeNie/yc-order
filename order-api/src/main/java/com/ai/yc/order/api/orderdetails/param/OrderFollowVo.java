@@ -29,7 +29,7 @@ public class OrderFollowVo implements Serializable {
 	/**
 	 * 领取人信息
 	 */
-	private List<ReceiveInfoVo> receiveInfos;
+	private ReceiveInfoVo receiveInfos;
 
 	public String getStep() {
 		return step;
@@ -67,11 +67,11 @@ public class OrderFollowVo implements Serializable {
 		this.personInfos = personInfos;
 	}
 
-	public List<ReceiveInfoVo> getReceiveInfos() {
+	public ReceiveInfoVo getReceiveInfos() {
 		return receiveInfos;
 	}
 
-	public void setReceiveInfos(List<ReceiveInfoVo> receiveInfos) {
+	public void setReceiveInfos(ReceiveInfoVo receiveInfos) {
 		this.receiveInfos = receiveInfos;
 	}
 
