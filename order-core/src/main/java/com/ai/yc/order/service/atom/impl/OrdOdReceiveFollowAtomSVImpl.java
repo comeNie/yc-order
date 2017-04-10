@@ -75,6 +75,9 @@ public class OrdOdReceiveFollowAtomSVImpl implements IOrdOdReceiveFollowAtomSV {
 		if(!StringUtil.isBlank(ordOdReceiveFollow.getOperType())){
 			criteria.andOperTypeEqualTo(ordOdReceiveFollow.getOperType());
 		}
+		if(!StringUtil.isBlank(ordOdReceiveFollow.getFinishState())){
+			criteria.andFinishStateEqualTo(ordOdReceiveFollow.getFinishState());
+		}
 		List<OrdOdReceiveFollow> ordOdFollows = MapperFactory.getOrdOdReceiveFollowMapper().selectByExample(example);
 		if(CollectionUtil.isEmpty(ordOdFollows)){
 			return null;

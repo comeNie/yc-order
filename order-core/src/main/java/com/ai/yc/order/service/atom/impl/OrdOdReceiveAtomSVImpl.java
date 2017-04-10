@@ -18,7 +18,7 @@ public class OrdOdReceiveAtomSVImpl implements IOrdOdReceiveAtomSV{
 	}
 
 	@Override
-	public List<OrdOdReceive> findByFollowId(long followId) {
+	public OrdOdReceive findByFollowId(long followId) {
 		OrdOdReceiveCriteria example = new OrdOdReceiveCriteria();
 		OrdOdReceiveCriteria.Criteria criteria = example.createCriteria();
 		criteria.andReceiveFollowIdEqualTo(followId);
@@ -26,7 +26,7 @@ public class OrdOdReceiveAtomSVImpl implements IOrdOdReceiveAtomSV{
 		if(CollectionUtil.isEmpty(ordOdReceives)){
 			return null;
 		}
-		return ordOdReceives;
+		return ordOdReceives.get(0);
 	}
 
 }

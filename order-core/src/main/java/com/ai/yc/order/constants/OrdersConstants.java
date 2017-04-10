@@ -34,6 +34,10 @@ public final class OrdersConstants {
 	 * 0-未开始
 	 */
 	public final static String FINISH_STATE = "0";
+	/**
+	 * 1-进行中
+	 */
+	public final static String NOT_FINISH_STATE = "1";
 	
 
 	public final static class TranslatePrice {
