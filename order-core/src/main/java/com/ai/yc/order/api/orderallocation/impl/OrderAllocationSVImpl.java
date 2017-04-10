@@ -19,6 +19,7 @@ import com.ai.yc.order.api.orderallocation.param.OrderAllocationSearchRequest;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationSearchResponse;
 import com.ai.yc.order.service.business.interfaces.IOrderAlloWaitReceiveBusiSV;
 import com.ai.yc.order.service.business.interfaces.IOrderAllocationBusiSV;
+import com.ai.yc.order.service.business.interfaces.search.IOrderIndexBusiSV;
 import com.ai.yc.order.util.ValidateUtils;
 import com.alibaba.dubbo.config.annotation.Service;
 
@@ -29,6 +30,9 @@ public class OrderAllocationSVImpl implements IOrderAllocationSV {
 	private IOrderAllocationBusiSV orderAllocationBusiSV;
 	@Autowired
 	private IOrderAlloWaitReceiveBusiSV orderAlloWaitReceiveBusiSV;
+	
+	@Autowired
+	private IOrderIndexBusiSV orderIndexBusiSV;//订单搜索引擎添加服务
 	@Override
 	public OrderAllocationResponse orderAllocation(OrderAllocationRequest request)
 			throws BusinessException, SystemException {
@@ -42,6 +46,7 @@ public class OrderAllocationSVImpl implements IOrderAllocationSV {
 			responseHeader.setIsSuccess(true);
 			responseHeader.setResultCode(ExceptCodeConstants.Special.SUCCESS);
 			responseHeader.setResultMessage("订单分配成功");
+			this.orderIndexBusiSV.insertSesData(response.getOrderId());
 			response.setResponseHeader(responseHeader);
 		}catch(BusinessException | SystemException e){
 			responseHeader.setIsSuccess(false);
