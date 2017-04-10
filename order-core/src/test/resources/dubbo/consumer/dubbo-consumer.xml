@@ -21,5 +21,7 @@
 		address="${dubbo.registry.address}" />
 
 	<dubbo:monitor protocol="registry" />
-
+	<!-- 用途 -->
+	<dubbo:reference id="iQuerySysPurposeSV"
+					 interface="com.ai.yc.common.api.syspurpose.interfaces.IQuerySysPurposeSV" />
 </beans>
