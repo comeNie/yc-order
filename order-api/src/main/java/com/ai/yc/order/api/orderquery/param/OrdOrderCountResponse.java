@@ -10,6 +10,14 @@ public class OrdOrderCountResponse extends BaseResponse {
 	 */
 	private long orderCounts;
 	/**
+	 * 后付费总订单数
+	 */
+	private long orderHFCounts;
+	/**
+	 * 后付费总费用
+	 */
+	private long HFtotalFees;
+	/**
 	 * 总优惠金额
 	 */
 	private long discountFeeCount;
@@ -52,6 +60,22 @@ public class OrdOrderCountResponse extends BaseResponse {
 
 	public void setAdjustFeeCount(long adjustFeeCount) {
 		this.adjustFeeCount = adjustFeeCount;
+	}
+
+	public long getOrderHFCounts() {
+		return orderHFCounts;
+	}
+
+	public void setOrderHFCounts(long orderHFCounts) {
+		this.orderHFCounts = orderHFCounts;
+	}
+
+	public long getHFtotalFees() {
+		return HFtotalFees;
+	}
+
+	public void setHFtotalFees(long hFtotalFees) {
+		HFtotalFees = hFtotalFees;
 	}
 
 }

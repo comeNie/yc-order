@@ -38,6 +38,7 @@ import com.ai.yc.order.constants.OrdOdStateChgConstants;
 import com.ai.yc.order.constants.OrdersConstants;
 import com.ai.yc.order.constants.SearchFieldConfConstants;
 import com.ai.yc.order.dao.mapper.attach.OrdOrderCountAttach;
+import com.ai.yc.order.dao.mapper.attach.OrdOrderHFCountAttach;
 import com.ai.yc.order.dao.mapper.bo.OrdOdProd;
 import com.ai.yc.order.dao.mapper.bo.OrdOdStateChg;
 import com.ai.yc.order.dao.mapper.bo.OrdOrder;
@@ -723,6 +724,12 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 		OrdOrderCountResponse response = new OrdOrderCountResponse();
 		OrdOrderCountAttach attach = ordOrderAttachAtomSV.queryOrderCountInfo(request.getChlId(), request.getUserId(),
 				request.getCorporaId());
+		OrdOrderHFCountAttach attachHF = ordOrderAttachAtomSV.queryOrderCountHFInfo(request.getChlId(), request.getUserId(),
+				request.getCorporaId());
+		if(null!=attachHF){
+			response.setOrderHFCounts(attachHF.getOrderCounts());
+			response.setHFtotalFees(attachHF.getTotalFeeCount());
+		}
 		if (attach != null) {
 			BeanUtils.copyVO(response, attach);
 		}
