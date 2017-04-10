@@ -6,52 +6,56 @@ import java.sql.Timestamp;
 /**
  * @Description: 分配人员信息
  * @author hougang@asiainfo.com
- * @date 2016年11月4日 下午8:01:26 
+ * @date 2016年11月4日 下午8:01:26
  * @version V1.0
  */
 public class PersonInfoVo implements Serializable {
-	
+
 	private static final long serialVersionUID = -3423047025144403211L;
-	
+
 	/**
 	 * 人员信息ID
 	 */
 	private Long personId;
 
-    /**
-     * 操作类型
-     */
-    private String operType;
+	/**
+	 * 步骤
+	 */
+	private String step;
 
-    /**
-     * 译员ID
-     */
-    private String interperId;
+	/**
+	 * 译员ID
+	 */
+	private String interperId;
 
-    /**
-     * 译员姓名
-     */
-    private String interperName;
+	/**
+	 * 译员姓名
+	 */
+	private String interperName;
 
-    /**
-     * 联系方式
-     */
-    private String tel;
+	/**
+	 * 联系方式
+	 */
+	private String tel;
 
-    /**
-     * 译员佣金
-     */
-    private Long interperFee;
+	/**
+	 * 译员佣金
+	 */
+	private Long interperFee;
 
-    /**
-     * 分配时间
-     */
-    private Timestamp creartTime;
+	/**
+	 * 分配时间
+	 */
+	private Timestamp creartTime;
+	/**
+	 * 期望完成时间
+	 */
+	private Timestamp expectEndTime;
 
-    /**
-     * 备注
-     */
-    private String remark;
+	/**
+	 * 备注
+	 */
+	private String remark;
 
 	public Long getPersonId() {
 		return personId;
@@ -61,12 +65,12 @@ public class PersonInfoVo implements Serializable {
 		this.personId = personId;
 	}
 
-	public String getOperType() {
-		return operType;
+	public String getStep() {
+		return step;
 	}
 
-	public void setOperType(String operType) {
-		this.operType = operType;
+	public void setStep(String step) {
+		this.step = step;
 	}
 
 	public String getInterperId() {
@@ -116,7 +120,13 @@ public class PersonInfoVo implements Serializable {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-    
-    
+
+	public Timestamp getExpectEndTime() {
+		return expectEndTime;
+	}
+
+	public void setExpectEndTime(Timestamp expectEndTime) {
+		this.expectEndTime = expectEndTime;
+	}
 
 }

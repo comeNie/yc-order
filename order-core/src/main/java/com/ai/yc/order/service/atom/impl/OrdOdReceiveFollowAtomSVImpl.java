@@ -18,7 +18,7 @@ public class OrdOdReceiveFollowAtomSVImpl implements IOrdOdReceiveFollowAtomSV {
 	}
 
 	@Override
-	public OrdOdReceiveFollow findByOrderId(long orderId) {
+	public List<OrdOdReceiveFollow> findByOrderId(long orderId) {
 		OrdOdReceiveFollowCriteria example = new OrdOdReceiveFollowCriteria();
 		OrdOdReceiveFollowCriteria.Criteria criteria = example.createCriteria();
 		criteria.andOrderIdEqualTo(orderId);
@@ -26,7 +26,7 @@ public class OrdOdReceiveFollowAtomSVImpl implements IOrdOdReceiveFollowAtomSV {
 		if(CollectionUtil.isEmpty(ordOdFollows)){
 			return null;
 		}
-		return ordOdFollows.get(0);
+		return ordOdFollows;
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class OrdOdReceiveFollowAtomSVImpl implements IOrdOdReceiveFollowAtomSV {
 	}
 
 	@Override
-	public OrdOdReceiveFollow findByOrderAndState(long orderId, String recerveState) {
+	public List<OrdOdReceiveFollow> findByOrderAndState(long orderId, String recerveState) {
 		OrdOdReceiveFollowCriteria example = new OrdOdReceiveFollowCriteria();
 		OrdOdReceiveFollowCriteria.Criteria criteria = example.createCriteria();
 		criteria.andOrderIdEqualTo(orderId);
@@ -56,7 +56,7 @@ public class OrdOdReceiveFollowAtomSVImpl implements IOrdOdReceiveFollowAtomSV {
 		if(CollectionUtil.isEmpty(ordOdFollows)){
 			return null;
 		}
-		return ordOdFollows.get(0);
+		return ordOdFollows;
 	}
 
 	@Override

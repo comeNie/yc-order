@@ -1,6 +1,5 @@
 package com.ai.yc.order.service.business.impl;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +10,7 @@ import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.vo.ResponseHeader;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.ai.opt.sdk.util.BeanUtils;
+import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.opt.sdk.util.StringUtil;
 import com.ai.yc.common.api.sysdomain.param.QuerySysDomainDetailsRes;
 import com.ai.yc.common.api.syspurpose.param.QuerySysPurposeDetailsRes;
@@ -26,6 +26,7 @@ import com.ai.yc.order.api.orderdetails.param.ProdFileVo;
 import com.ai.yc.order.api.orderdetails.param.ProdLevelVo;
 import com.ai.yc.order.api.orderdetails.param.ProdVo;
 import com.ai.yc.order.api.orderdetails.param.QueryOrderDetailsResponse;
+import com.ai.yc.order.api.orderdetails.param.ReceiveInfoVo;
 import com.ai.yc.order.constants.OrdersConstants;
 import com.ai.yc.order.constants.ResultCodeConstants;
 import com.ai.yc.order.dao.mapper.bo.OrdEvaluate;
@@ -36,6 +37,7 @@ import com.ai.yc.order.dao.mapper.bo.OrdOdProdExtend;
 import com.ai.yc.order.dao.mapper.bo.OrdOdProdFile;
 import com.ai.yc.order.dao.mapper.bo.OrdOdProdLevel;
 import com.ai.yc.order.dao.mapper.bo.OrdOdProdWithBLOBs;
+import com.ai.yc.order.dao.mapper.bo.OrdOdReceive;
 import com.ai.yc.order.dao.mapper.bo.OrdOdReceiveFollow;
 import com.ai.yc.order.dao.mapper.bo.OrdOdStateChg;
 import com.ai.yc.order.dao.mapper.bo.OrdOrder;
@@ -47,6 +49,7 @@ import com.ai.yc.order.service.atom.interfaces.IOrdOdProdAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdProdExtendAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdProdFileAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdProdLevelAtomSV;
+import com.ai.yc.order.service.atom.interfaces.IOrdOdReceiveAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdReceiveFollowAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdStateChgAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOrderAtomSV;
@@ -100,6 +103,8 @@ public class QueryOrderDetailsBusiSVImpl implements IQueryOrderDetailsBusiSV {
 	private IOrdEvaluateAtomSV ordEvaluateAtomSV;
 	@Autowired
 	private IOrdOdReceiveFollowAtomSV ordOdReceiveFollowAtomSV;// 任务跟踪服务
+	@Autowired
+	private IOrdOdReceiveAtomSV ordOdReceiveAtomSV;
 
 	@Override
 	public QueryOrderDetailsResponse queryOrderDetails(Long orderId, String flag) {
@@ -131,7 +136,7 @@ public class QueryOrderDetailsBusiSVImpl implements IQueryOrderDetailsBusiSV {
 		// 分配人员信息
 		List<PersonInfoVo> personInfos = new ArrayList<PersonInfoVo>();
 		// 根据订单id获取任务跟踪id
-		OrdOdReceiveFollow ordOdReceiveFollow = ordOdReceiveFollowAtomSV.findByOrderId(orderId);
+		/*List<OrdOdReceiveFollow> ordOdReceiveFollow = ordOdReceiveFollowAtomSV.findByOrderId(orderId);
 		if (ordOdReceiveFollow != null) {
 			long followId = ordOdReceiveFollow.getReceiveFollowId();
 			OrdOdPersonInfo personRequst = new OrdOdPersonInfo();
@@ -143,7 +148,7 @@ public class QueryOrderDetailsBusiSVImpl implements IQueryOrderDetailsBusiSV {
 				personInfos.add(personInfoVo);
 			}
 			resp.setPersonInfos(personInfos);
-		}
+		}*/
 		/*
 		 * List<OrdOdPersonInfo> ordOdPersonInfos =
 		 * iOrdOdPersonInfoAtomSV.findByOrderId(Long.valueOf(orderId));
@@ -265,17 +270,37 @@ public class QueryOrderDetailsBusiSVImpl implements IQueryOrderDetailsBusiSV {
 		}
 		// 分配人员信息
 		List<PersonInfoVo> personInfos = new ArrayList<PersonInfoVo>();
-		// 根据订单id获取任务跟踪id
-		OrdOdReceiveFollow ordOdReceiveFollow = ordOdReceiveFollowAtomSV.findByOrderId(orderId);
-		if (ordOdReceiveFollow != null) {
-			long followId = ordOdReceiveFollow.getReceiveFollowId();
-			OrdOdPersonInfo personRequst = new OrdOdPersonInfo();
-			personRequst.setReceiveFollowId(followId);
-			List<OrdOdPersonInfo> ordOdPersonInfos = iOrdOdPersonInfoAtomSV.findPersonInfo(personRequst);
-			for (OrdOdPersonInfo ordOdPersonInfo : ordOdPersonInfos) {
-				PersonInfoVo personInfoVo = new PersonInfoVo();
-				BeanUtils.copyProperties(personInfoVo, ordOdPersonInfo);
-				personInfos.add(personInfoVo);
+		//领取人信息
+		List<ReceiveInfoVo> receiveInfoVos  = new ArrayList<ReceiveInfoVo>();
+		List<OrdOdReceiveFollow> ordOdReceiveFollowLists = ordOdReceiveFollowAtomSV.findByOrderAndState(orderId,"2");
+		if(!CollectionUtil.isEmpty(ordOdReceiveFollowLists)){
+			for(OrdOdReceiveFollow fllow:ordOdReceiveFollowLists){
+				long followId = fllow.getReceiveFollowId();
+				List<OrdOdReceive> ordOdReceiveLists = ordOdReceiveAtomSV.findByFollowId(followId);
+				if(!CollectionUtil.isEmpty(ordOdReceiveLists)){
+					for(OrdOdReceive receive:ordOdReceiveLists){
+						ReceiveInfoVo receiveInfo  = new ReceiveInfoVo();
+						BeanUtils.copyProperties(receiveInfo, receive);
+						receiveInfo.setStep(fllow.getStep());
+						receiveInfoVos.add(receiveInfo);
+					}
+				}
+			}
+			resp.setReceiveInfos(receiveInfoVos);
+		}
+		// 根据订单id获取任务跟踪id集合
+		List<OrdOdReceiveFollow> ordOdReceiveFollowList = ordOdReceiveFollowAtomSV.findByOrderId(orderId);
+		if (!CollectionUtil.isEmpty(ordOdReceiveFollowList)) {
+			for(OrdOdReceiveFollow follow:ordOdReceiveFollowList){
+				long followId = follow.getReceiveFollowId();
+				OrdOdPersonInfo personRequst = new OrdOdPersonInfo();
+				personRequst.setReceiveFollowId(followId);
+				List<OrdOdPersonInfo> ordOdPersonInfos = iOrdOdPersonInfoAtomSV.findPersonInfo(personRequst);
+				for (OrdOdPersonInfo ordOdPersonInfo : ordOdPersonInfos) {
+					PersonInfoVo personInfoVo = new PersonInfoVo();
+					BeanUtils.copyProperties(personInfoVo, ordOdPersonInfo);
+					personInfos.add(personInfoVo);
+				}
 			}
 			resp.setPersonInfos(personInfos);
 		}

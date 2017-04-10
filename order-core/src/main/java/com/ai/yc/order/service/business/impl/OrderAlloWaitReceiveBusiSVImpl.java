@@ -85,9 +85,9 @@ public class OrderAlloWaitReceiveBusiSVImpl implements IOrderAlloWaitReceiveBusi
 		// 获取分配订单id
 		List<Object> orderIdlist = ordOrderAttachAtomSV.queryAlocationOrder(request.getInterperId(),
 				OrdersConstants.RECEIVE_STATE);
-		/*if (CollectionUtil.isEmpty(orderIdlist)) {
+		if (CollectionUtil.isEmpty(orderIdlist)) {
 			return response;
-		}*/
+		}
 		List<SearchCriteria> orderSearchCriteria = commonConditions(request, orderIdlist);
 		List<Sort> sortList = new ArrayList<Sort>();
 		SortOrder sortFlagEn = SortOrder.ASC;
@@ -122,10 +122,10 @@ public class OrderAlloWaitReceiveBusiSVImpl implements IOrderAlloWaitReceiveBusi
 				order.setTotalFee(ord.getTotalfee());
 				order.setTranslateName(ord.getTranslatename());
 				// 查询任务跟踪信息获取操作类型
-				OrdOdReceiveFollow ordOdReceiveFollow = ordOdReceiveFollowAtomSV
+				List<OrdOdReceiveFollow> ordOdReceiveFollowList = ordOdReceiveFollowAtomSV
 						.findByOrderAndState(Long.valueOf(ord.getOrderid()), OrdersConstants.RECEIVE_STATE);
-				if (null != ordOdReceiveFollow) {
-					order.setOperType(ordOdReceiveFollow.getOperType());
+				if (!CollectionUtil.isEmpty(ordOdReceiveFollowList)) {
+					order.setOperType(ordOdReceiveFollowList.get(0).getOperType());
 				}
 				if (null != ord.getEsendtime()) {
 					order.setEsEndTime(new Timestamp(ord.getEsendtime().getTime()));

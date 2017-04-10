@@ -8,13 +8,13 @@ import com.ai.opt.base.vo.BaseResponse;
 /**
  * @Description: 订单详情返回参数
  * @author hougang@asiainfo.com
- * @date 2016年11月4日 下午6:11:23 
+ * @date 2016年11月4日 下午6:11:23
  * @version V1.0
  */
-public class QueryOrderDetailsResponse extends BaseResponse{
+public class QueryOrderDetailsResponse extends BaseResponse {
 
 	private static final long serialVersionUID = 4023488269519438541L;
-	
+
 	/**
 	 * 订单ID
 	 */
@@ -23,243 +23,195 @@ public class QueryOrderDetailsResponse extends BaseResponse{
 	 * 父订单id
 	 */
 	private String parentOrderId;
-	
-    /**
-     * 0:国内业务 1：国际业务
-     */
-    private String flag;
 
-    /**
-     * 订单来源
-     * 0：PC-中文站
-     *1：PC-英文站
-     *2：百度
-     *3：金山
-     *4：找翻译
-     *5：WAP-中文
-     *6：WAP-英语
-     *7：微信助手
-     */
-    private String chlId;
+	/**
+	 * 0:国内业务 1：国际业务
+	 */
+	private String flag;
 
-    /**
-     * 订单类型
-     * 1：个人订单
-     * 2：企业订单
-     */
-    private String orderType;
+	/**
+	 * 订单来源 0：PC-中文站 1：PC-英文站 2：百度 3：金山 4：找翻译 5：WAP-中文 6：WAP-英语 7：微信助手
+	 */
+	private String chlId;
 
-    /**
-     * 业务类型
-     * 1：正常单
-     * 2：退费单
-     */
-    private String busiType;
+	/**
+	 * 订单类型 1：个人订单 2：企业订单
+	 */
+	private String orderType;
 
-    /**
-     * 订单级别
-     */
-    private String orderLevel;
+	/**
+	 * 业务类型 1：正常单 2：退费单
+	 */
+	private String busiType;
 
-    /**
-     * 翻译类型
-     * 0：文本翻译
-     *1：文档翻译
-     *2：口译翻译
-     */
-    private String translateType;
+	/**
+	 * 订单级别
+	 */
+	private String orderLevel;
 
-    /**
-     * 翻译主题
-     */
-    private String translateName;
+	/**
+	 * 翻译类型 0：文本翻译 1：文档翻译 2：口译翻译
+	 */
+	private String translateType;
 
-    /**
-     * 报价标识 0：系统自动报 1：人工报价
-     */
-    private String subFlag;
+	/**
+	 * 翻译主题
+	 */
+	private String translateName;
 
-    /**
-     * 用户类型   
-     * 10：个人
-     * 11：企业
-     * 12：代理人
-     */
-    private String userType;
-    
-    private String timeZone;
+	/**
+	 * 报价标识 0：系统自动报 1：人工报价
+	 */
+	private String subFlag;
 
-    /**
-     * 用户ID
-     */
-    private String userId;
-    
-   
+	/**
+	 * 用户类型 10：个人 11：企业 12：代理人
+	 */
+	private String userType;
 
-    /**
-     * 企业ID
-     */
-    private String corporaId;
+	private String timeZone;
 
-    /**
-     * 账户ID
-     */
-    private Long accountId;
+	/**
+	 * 用户ID
+	 */
+	private String userId;
 
+	/**
+	 * 企业ID
+	 */
+	private String corporaId;
 
-    /**
-     * 下单时间
-     */
-    private Timestamp orderTime;
- 
+	/**
+	 * 账户ID
+	 */
+	private Long accountId;
 
-    /**
-    * 订单状态(后厂)
-    * 10：提交 
-	*11：待支付
-	*12：已支付
-	*13：待报价
-	*20：待领取
-	*21：已领取
-	*211：已分配
-	*23：翻译中
-	*24：已提交
-	*25：修改中
-	*40：待审核
-	*41：已审核
-	*42：审核失败（审核不通过）
-	*50：待确认
-	*51：已确认
-	*52：待评价
-	*53：已评价
-	*90：完成
-	*91：关闭（取消）
-	*92：已退款
-     */
-    private String state;
+	/**
+	 * 下单时间
+	 */
+	private Timestamp orderTime;
 
-    /**
-     * 预计交稿时间
-     */
-    private Timestamp stateChgTime;
+	/**
+	 * 订单状态(后厂) 10：提交 11：待支付 12：已支付 13：待报价 20：待领取 21：已领取 211：已分配 23：翻译中 24：已提交
+	 * 25：修改中 40：待审核 41：已审核 42：审核失败（审核不通过） 50：待确认 51：已确认 52：待评价 53：已评价 90：完成
+	 * 91：关闭（取消） 92：已退款
+	 */
+	private String state;
 
-    /**
-     * 客户端显示状态
-     * 11：待支付
-     *13：待报价
-     *23：翻译中
-     *50：待确认
-     *52：待评价
-     *90：完成
-     *91：关闭（取消）
-     *92：已退款
-     */
-    private String displayFlag;
+	/**
+	 * 预计交稿时间
+	 */
+	private Timestamp stateChgTime;
 
-    private Timestamp displayFlagChgTime;
+	/**
+	 * 客户端显示状态 11：待支付 13：待报价 23：翻译中 50：待确认 52：待评价 90：完成 91：关闭（取消） 92：已退款
+	 */
+	private String displayFlag;
 
-    /**
-     * 译员类型   0：普通译员 1：LSP译员
-     */
-    private String interperType;
+	private Timestamp displayFlagChgTime;
 
-    /**
-     * LSP编号
-     */
-    private String lspId;
+	/**
+	 * 译员类型 0：普通译员 1：LSP译员
+	 */
+	private String interperType;
 
-    /**
-     * 领取人ID(译员)
-     */
-    private String interperId;
+	/**
+	 * LSP编号
+	 */
+	private String lspId;
 
-    /**
-     * 领取时间
-     */
-    private Timestamp lockTime;
+	/**
+	 * 领取人ID(译员)
+	 */
+	private String interperId;
 
-    /**
-     * 操作工号
-     */
-    private String operId;
+	/**
+	 * 领取时间
+	 */
+	private Timestamp lockTime;
 
+	/**
+	 * 操作工号
+	 */
+	private String operId;
 
-    /**
-     * 备注
-     */
-    private String remark;
-    
-    /**
-     * 支付备注
-     */
-    private String payRemark;
+	/**
+	 * 备注
+	 */
+	private String remark;
 
-    /**
-     * 完成时间
-     */
-    private Timestamp finishTime;
+	/**
+	 * 支付备注
+	 */
+	private String payRemark;
 
-    /**
-     * 订单简要信息
-     */
-    private String orderDesc;
+	/**
+	 * 完成时间
+	 */
+	private Timestamp finishTime;
 
-    /**
-     * 原因描述（撤改单）
-     */
-    private String reasonDesc;
+	/**
+	 * 订单简要信息
+	 */
+	private String orderDesc;
 
-    /**
-     * 联系人信息
-     */
-    private ContactsVo contacts;
-    
-    /**
-     * 预计交稿时间
-     */
-    private Timestamp endChgTime;
-    
-    /**
-     * 分配人员信息
-     */
-    private List<PersonInfoVo> personInfos;
-    
-    /**
-     * 产品明细信息
-     */
-    private ProdVo prod;
-    
-    /**
-     * 语言对列表
-     */
-    private List<ProdExtendVo> prodExtends;
-    
-    /**
-     * 翻译级别列表
-     */
-    private List<ProdLevelVo> prodLevels;
-    
-    /**
-     * 文件列表
-     */
-    private List<ProdFileVo> prodFiles;
-    
-    /**
-     * 订单费用信息
-     */
-    private OrderFeeVo orderFee;
-    
-    
-    /**
-     * 订单状态轨迹
-     */
-    private List<OrderStateChgVo> orderStateChgs;
-    /**
-     * 评论信息
-     */
-    private EvaluateVo evaluateVo;
+	/**
+	 * 原因描述（撤改单）
+	 */
+	private String reasonDesc;
 
-	
+	/**
+	 * 联系人信息
+	 */
+	private ContactsVo contacts;
+
+	/**
+	 * 预计交稿时间
+	 */
+	private Timestamp endChgTime;
+
+	/**
+	 * 分配人员信息
+	 */
+	private List<PersonInfoVo> personInfos;
+	/**
+	 * 领取人信息
+	 */
+	private List<ReceiveInfoVo> receiveInfos;
+
+	/**
+	 * 产品明细信息
+	 */
+	private ProdVo prod;
+
+	/**
+	 * 语言对列表
+	 */
+	private List<ProdExtendVo> prodExtends;
+
+	/**
+	 * 翻译级别列表
+	 */
+	private List<ProdLevelVo> prodLevels;
+
+	/**
+	 * 文件列表
+	 */
+	private List<ProdFileVo> prodFiles;
+
+	/**
+	 * 订单费用信息
+	 */
+	private OrderFeeVo orderFee;
+
+	/**
+	 * 订单状态轨迹
+	 */
+	private List<OrderStateChgVo> orderStateChgs;
+	/**
+	 * 评论信息
+	 */
+	private EvaluateVo evaluateVo;
 
 	public Long getOrderId() {
 		return orderId;
@@ -348,8 +300,6 @@ public class QueryOrderDetailsResponse extends BaseResponse{
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-
-    
 
 	public String getCorporaId() {
 		return corporaId;
@@ -479,8 +429,6 @@ public class QueryOrderDetailsResponse extends BaseResponse{
 		this.reasonDesc = reasonDesc;
 	}
 
-    
-
 	public ContactsVo getContacts() {
 		return contacts;
 	}
@@ -584,6 +532,13 @@ public class QueryOrderDetailsResponse extends BaseResponse{
 	public void setParentOrderId(String parentOrderId) {
 		this.parentOrderId = parentOrderId;
 	}
-    
-    
+
+	public List<ReceiveInfoVo> getReceiveInfos() {
+		return receiveInfos;
+	}
+
+	public void setReceiveInfos(List<ReceiveInfoVo> receiveInfos) {
+		this.receiveInfos = receiveInfos;
+	}
+
 }
