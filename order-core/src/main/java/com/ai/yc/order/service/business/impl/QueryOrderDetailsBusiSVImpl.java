@@ -281,12 +281,11 @@ public class QueryOrderDetailsBusiSVImpl implements IQueryOrderDetailsBusiSV {
 					for(OrdOdReceive receive:ordOdReceiveLists){
 						ReceiveInfoVo receiveInfo  = new ReceiveInfoVo();
 						BeanUtils.copyProperties(receiveInfo, receive);
-						receiveInfo.setStep(fllow.getStep());
 						receiveInfoVos.add(receiveInfo);
 					}
 				}
 			}
-			resp.setReceiveInfos(receiveInfoVos);
+			//resp.setReceiveInfos(receiveInfoVos);
 		}
 		// 根据订单id获取任务跟踪id集合
 		List<OrdOdReceiveFollow> ordOdReceiveFollowList = ordOdReceiveFollowAtomSV.findByOrderId(orderId);
@@ -302,7 +301,7 @@ public class QueryOrderDetailsBusiSVImpl implements IQueryOrderDetailsBusiSV {
 					personInfos.add(personInfoVo);
 				}
 			}
-			resp.setPersonInfos(personInfos);
+			//resp.setPersonInfos(personInfos);
 		}
 		/*
 		 * //分配人员信息 List<PersonInfoVo> personInfos = new
