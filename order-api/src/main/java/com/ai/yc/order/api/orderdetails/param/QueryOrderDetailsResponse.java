@@ -169,15 +169,14 @@ public class QueryOrderDetailsResponse extends BaseResponse {
 	 * 预计交稿时间
 	 */
 	private Timestamp endChgTime;
-
 	/**
-	 * 分配人员信息
+	 * 分配信息
 	 */
-	private List<PersonInfoVo> personInfos;
+	private List<OrderFollowVo> followInfoes;
 	/**
-	 * 领取人信息
+	 * 订单
 	 */
-	private List<ReceiveInfoVo> receiveInfos;
+	private Long currentReceiveFollowId;
 
 	/**
 	 * 产品明细信息
@@ -437,14 +436,6 @@ public class QueryOrderDetailsResponse extends BaseResponse {
 		this.contacts = contacts;
 	}
 
-	public List<PersonInfoVo> getPersonInfos() {
-		return personInfos;
-	}
-
-	public void setPersonInfos(List<PersonInfoVo> personInfos) {
-		this.personInfos = personInfos;
-	}
-
 	public ProdVo getProd() {
 		return prod;
 	}
@@ -533,12 +524,20 @@ public class QueryOrderDetailsResponse extends BaseResponse {
 		this.parentOrderId = parentOrderId;
 	}
 
-	public List<ReceiveInfoVo> getReceiveInfos() {
-		return receiveInfos;
+	public List<OrderFollowVo> getFollowInfoes() {
+		return followInfoes;
 	}
 
-	public void setReceiveInfos(List<ReceiveInfoVo> receiveInfos) {
-		this.receiveInfos = receiveInfos;
+	public void setFollowInfoes(List<OrderFollowVo> followInfoes) {
+		this.followInfoes = followInfoes;
+	}
+
+	public Long getCurrentReceiveFollowId() {
+		return currentReceiveFollowId;
+	}
+
+	public void setCurrentReceiveFollowId(Long currentReceiveFollowId) {
+		this.currentReceiveFollowId = currentReceiveFollowId;
 	}
 
 }

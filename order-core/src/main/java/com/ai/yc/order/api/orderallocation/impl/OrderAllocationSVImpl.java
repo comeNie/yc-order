@@ -103,7 +103,9 @@ public class OrderAllocationSVImpl implements IOrderAllocationSV {
 		ResponseHeader responseHeader = new ResponseHeader();
 		try {
 			//有效性校验
-		
+			if (request == null) {
+				throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "参数对象不能为空");
+			}
 			responseHeader.setIsSuccess(true);
 			responseHeader.setResultCode(ExceptCodeConstants.Special.SUCCESS);
 			responseHeader.setResultMessage("待领取订单数量查询成功");

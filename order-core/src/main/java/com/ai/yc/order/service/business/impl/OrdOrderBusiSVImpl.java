@@ -51,7 +51,6 @@ import com.ai.yc.order.service.business.impl.search.OrderSearchImpl;
 import com.ai.yc.order.service.business.interfaces.IOrdOrderBusiSV;
 import com.ai.yc.order.service.business.interfaces.search.IOrderSearch;
 import com.ai.yc.order.util.SequenceUtil;
-import com.alibaba.fastjson.JSON;
 
 @Service
 public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
@@ -613,9 +612,9 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 		ordOdStateChg.setStateChgId(SequenceUtil.createStateChgId());
 		ordOdStateChg.setOrderId(request.getOrderId());
 		ordOdStateChg.setChgDesc("客户要求退款：没有按时完成");
-		ordOdStateChg.setChgDescEn("");
+		ordOdStateChg.setChgDescEn("Client asked for refund: failed to deliver the translation on time");
 		ordOdStateChg.setChgDescD("客户要求退款：没有按时完成");
-		ordOdStateChg.setChgDescUEn("");
+		ordOdStateChg.setChgDescUEn("Client asked for refund: failed to deliver the translation on time");
 		ordOdStateChg.setFlag(OrdOdStateChgConstants.FLAG_USER);
 		ordOdStateChg.setOrgId("1");
 		ordOdStateChg.setOperId(request.getOperId());
@@ -653,14 +652,21 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 		}
 
 		this.ordOrderAtomSV.updateByPrimaryKeySelective(ordOrder);
-		// 4.入库订单轨迹表 41审核失败，92：退款完成
+		// 4.入库订单轨迹表 42审核失败，92：退款完成
 		OrdOdStateChg ordOdStateChg = new OrdOdStateChg();
 		ordOdStateChg.setStateChgId(SequenceUtil.createStateChgId());
 		ordOdStateChg.setOrderId(request.getOrderId());
-		ordOdStateChg.setChgDesc("订单 " + request.getOrderId() + " 退款审核");
-		ordOdStateChg.setChgDescEn("");
-		ordOdStateChg.setChgDescD("");
-		ordOdStateChg.setChgDescUEn("");
+		if("42".equals(request.getState())){
+			ordOdStateChg.setChgDesc("订单未通过审核");
+			ordOdStateChg.setChgDescEn("Order review failed");
+			ordOdStateChg.setChgDescD("订单未通过审核");
+			ordOdStateChg.setChgDescUEn("Order review failed");
+		}else if("92".equals(request.getState())){
+			ordOdStateChg.setChgDesc("您的订单已退款，预计30个工作日之内将款项返回至原支付账户");
+			ordOdStateChg.setChgDescEn("Your order has been refunded; the fund will be returned to your disbursement account within 30 workdays");
+			ordOdStateChg.setChgDescD("您的订单已退款，预计30个工作日之内将款项返回至原支付账户");
+			ordOdStateChg.setChgDescUEn("Your order has been refunded; the fund will be returned to your disbursement account within 30 workdays");
+		}
 		ordOdStateChg.setFlag(OrdOdStateChgConstants.FLAG_USER);
 		ordOdStateChg.setOrgId("1");
 		ordOdStateChg.setOperId(request.getOperId());

@@ -19,6 +19,7 @@ import com.ai.yc.common.api.sysuser.param.SysUserQueryResponse;
 import com.ai.yc.order.api.orderdetails.param.ContactsVo;
 import com.ai.yc.order.api.orderdetails.param.EvaluateVo;
 import com.ai.yc.order.api.orderdetails.param.OrderFeeVo;
+import com.ai.yc.order.api.orderdetails.param.OrderFollowVo;
 import com.ai.yc.order.api.orderdetails.param.OrderStateChgVo;
 import com.ai.yc.order.api.orderdetails.param.PersonInfoVo;
 import com.ai.yc.order.api.orderdetails.param.ProdExtendVo;
@@ -136,19 +137,19 @@ public class QueryOrderDetailsBusiSVImpl implements IQueryOrderDetailsBusiSV {
 		// 分配人员信息
 		List<PersonInfoVo> personInfos = new ArrayList<PersonInfoVo>();
 		// 根据订单id获取任务跟踪id
-		/*List<OrdOdReceiveFollow> ordOdReceiveFollow = ordOdReceiveFollowAtomSV.findByOrderId(orderId);
-		if (ordOdReceiveFollow != null) {
-			long followId = ordOdReceiveFollow.getReceiveFollowId();
-			OrdOdPersonInfo personRequst = new OrdOdPersonInfo();
-			personRequst.setReceiveFollowId(followId);
-			List<OrdOdPersonInfo> ordOdPersonInfos = iOrdOdPersonInfoAtomSV.findPersonInfo(personRequst);
-			for (OrdOdPersonInfo ordOdPersonInfo : ordOdPersonInfos) {
-				PersonInfoVo personInfoVo = new PersonInfoVo();
-				BeanUtils.copyProperties(personInfoVo, ordOdPersonInfo);
-				personInfos.add(personInfoVo);
-			}
-			resp.setPersonInfos(personInfos);
-		}*/
+		/*
+		 * List<OrdOdReceiveFollow> ordOdReceiveFollow =
+		 * ordOdReceiveFollowAtomSV.findByOrderId(orderId); if
+		 * (ordOdReceiveFollow != null) { long followId =
+		 * ordOdReceiveFollow.getReceiveFollowId(); OrdOdPersonInfo personRequst
+		 * = new OrdOdPersonInfo(); personRequst.setReceiveFollowId(followId);
+		 * List<OrdOdPersonInfo> ordOdPersonInfos =
+		 * iOrdOdPersonInfoAtomSV.findPersonInfo(personRequst); for
+		 * (OrdOdPersonInfo ordOdPersonInfo : ordOdPersonInfos) { PersonInfoVo
+		 * personInfoVo = new PersonInfoVo();
+		 * BeanUtils.copyProperties(personInfoVo, ordOdPersonInfo);
+		 * personInfos.add(personInfoVo); } resp.setPersonInfos(personInfos); }
+		 */
 		/*
 		 * List<OrdOdPersonInfo> ordOdPersonInfos =
 		 * iOrdOdPersonInfoAtomSV.findByOrderId(Long.valueOf(orderId));
@@ -268,54 +269,48 @@ public class QueryOrderDetailsBusiSVImpl implements IQueryOrderDetailsBusiSV {
 			evaluteVo.setServeSpeed(ordEvaluate.getServeSpeen());
 			resp.setEvaluateVo(evaluteVo);
 		}
-		// 分配人员信息
-		List<PersonInfoVo> personInfos = new ArrayList<PersonInfoVo>();
-		//领取人信息
-		List<ReceiveInfoVo> receiveInfoVos  = new ArrayList<ReceiveInfoVo>();
-		List<OrdOdReceiveFollow> ordOdReceiveFollowLists = ordOdReceiveFollowAtomSV.findByOrderAndState(orderId,"2");
-		if(!CollectionUtil.isEmpty(ordOdReceiveFollowLists)){
-			for(OrdOdReceiveFollow fllow:ordOdReceiveFollowLists){
+		// 返回的分配信息
+		List<OrderFollowVo> followLists = new ArrayList<OrderFollowVo>();
+		List<OrdOdReceiveFollow> ordOdReceiveFollowLists = ordOdReceiveFollowAtomSV.findByOrderId(orderId);
+		if (!CollectionUtil.isEmpty(ordOdReceiveFollowLists)) {
+			for (OrdOdReceiveFollow fllow : ordOdReceiveFollowLists) {
+				OrderFollowVo followVo = new OrderFollowVo();
+				BeanUtils.copyProperties(followVo, fllow);
 				long followId = fllow.getReceiveFollowId();
-				List<OrdOdReceive> ordOdReceiveLists = ordOdReceiveAtomSV.findByFollowId(followId);
-				if(!CollectionUtil.isEmpty(ordOdReceiveLists)){
-					for(OrdOdReceive receive:ordOdReceiveLists){
-						ReceiveInfoVo receiveInfo  = new ReceiveInfoVo();
-						BeanUtils.copyProperties(receiveInfo, receive);
-						receiveInfo.setStep(fllow.getStep());
-						receiveInfoVos.add(receiveInfo);
-					}
-				}
-			}
-			resp.setReceiveInfos(receiveInfoVos);
-		}
-		// 根据订单id获取任务跟踪id集合
-		List<OrdOdReceiveFollow> ordOdReceiveFollowList = ordOdReceiveFollowAtomSV.findByOrderId(orderId);
-		if (!CollectionUtil.isEmpty(ordOdReceiveFollowList)) {
-			for(OrdOdReceiveFollow follow:ordOdReceiveFollowList){
-				long followId = follow.getReceiveFollowId();
+				// 获取每个步骤下分配人员信息
 				OrdOdPersonInfo personRequst = new OrdOdPersonInfo();
 				personRequst.setReceiveFollowId(followId);
-				List<OrdOdPersonInfo> ordOdPersonInfos = iOrdOdPersonInfoAtomSV.findPersonInfo(personRequst);
-				for (OrdOdPersonInfo ordOdPersonInfo : ordOdPersonInfos) {
-					PersonInfoVo personInfoVo = new PersonInfoVo();
-					BeanUtils.copyProperties(personInfoVo, ordOdPersonInfo);
-					personInfos.add(personInfoVo);
+				personRequst.setStep(fllow.getStep());
+				List<OrdOdPersonInfo> ordOdPersonLists = iOrdOdPersonInfoAtomSV.findPersonInfo(personRequst);
+				if (!CollectionUtil.isEmpty(ordOdPersonLists)) {
+					List<PersonInfoVo> personInfos = new ArrayList<PersonInfoVo>();
+					for (OrdOdPersonInfo ordPerson : ordOdPersonLists) {
+						PersonInfoVo personVo = new PersonInfoVo();
+						BeanUtils.copyProperties(personVo, ordPerson);
+						personInfos.add(personVo);
+					}
+					followVo.setPersonInfos(personInfos);
 				}
+				// 获取领取人id
+				OrdOdReceive ordOdReceive = ordOdReceiveAtomSV.findByFollowId(followId);
+				if (null != ordOdReceive) {
+					ReceiveInfoVo receiveInfoVo = new ReceiveInfoVo();
+					receiveInfoVo.setInterperId(ordOdReceive.getInterperId());
+					followVo.setReceiveInfos(receiveInfoVo);
+				}
+				followLists.add(followVo);
 			}
-			resp.setPersonInfos(personInfos);
 		}
-		/*
-		 * //分配人员信息 List<PersonInfoVo> personInfos = new
-		 * ArrayList<PersonInfoVo>(); OrdOdPersonInfo personRequst = new
-		 * OrdOdPersonInfo(); personRequst.setReceiveFollowId(receiveFollowId);
-		 * List<OrdOdPersonInfo> ordOdPersonInfos =
-		 * iOrdOdPersonInfoAtomSV.findByOrderId(Long.valueOf(orderId));
-		 * for(OrdOdPersonInfo ordOdPersonInfo:ordOdPersonInfos){ PersonInfoVo
-		 * personInfoVo = new PersonInfoVo();
-		 * BeanUtils.copyProperties(personInfoVo, ordOdPersonInfo);
-		 * personInfos.add(personInfoVo); } resp.setPersonInfos(personInfos);
-		 */
-
+		resp.setFollowInfoes(followLists);
+		// 获取当前订单处于哪个步骤
+		OrdOdReceiveFollow requestFollow = new OrdOdReceiveFollow();
+		requestFollow.setOrderId(orderId);
+		requestFollow.setFinishState(OrdersConstants.NOT_FINISH_STATE);
+		requestFollow.setReceiveState(OrdersConstants.RECEIVE_ALREADY_STATE);
+		OrdOdReceiveFollow followOrdResponse = ordOdReceiveFollowAtomSV.find(requestFollow);
+		if (null != followOrdResponse) {
+			resp.setCurrentReceiveFollowId(followOrdResponse.getReceiveFollowId());
+		}
 		// 产品明细信息
 		OrdOdProdWithBLOBs ordOdProd = iOrdOdProdAtomSV.findByOrderId(orderId);
 		if (ordOdProd != null) {

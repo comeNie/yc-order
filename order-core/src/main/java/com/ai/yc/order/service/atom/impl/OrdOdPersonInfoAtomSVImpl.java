@@ -31,6 +31,9 @@ public class OrdOdPersonInfoAtomSVImpl implements IOrdOdPersonInfoAtomSV {
 		if(ordOdPersonInfo.getPersonId()!=null){
 			criteria.andPersonIdEqualTo(ordOdPersonInfo.getPersonId());
 		}
+		if(!StringUtil.isBlank(ordOdPersonInfo.getStep())){
+			criteria.andStepEqualTo(ordOdPersonInfo.getStep());
+		}
 		List<OrdOdPersonInfo> personInfos = MapperFactory.getOrdOdPersonInfoMapper().selectByExample(example);
 		return personInfos;
 	}
