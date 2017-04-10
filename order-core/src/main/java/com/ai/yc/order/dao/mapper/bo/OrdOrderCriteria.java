@@ -2704,6 +2704,76 @@ public class OrdOrderCriteria {
             addCriterion("PARENT_ORDER_ID not between", value1, value2, "parentOrderId");
             return (Criteria) this;
         }
+
+        public Criteria andDelayedFlagIsNull() {
+            addCriterion("DELAYED_FLAG is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelayedFlagIsNotNull() {
+            addCriterion("DELAYED_FLAG is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelayedFlagEqualTo(String value) {
+            addCriterion("DELAYED_FLAG =", value, "delayedFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelayedFlagNotEqualTo(String value) {
+            addCriterion("DELAYED_FLAG <>", value, "delayedFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelayedFlagGreaterThan(String value) {
+            addCriterion("DELAYED_FLAG >", value, "delayedFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelayedFlagGreaterThanOrEqualTo(String value) {
+            addCriterion("DELAYED_FLAG >=", value, "delayedFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelayedFlagLessThan(String value) {
+            addCriterion("DELAYED_FLAG <", value, "delayedFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelayedFlagLessThanOrEqualTo(String value) {
+            addCriterion("DELAYED_FLAG <=", value, "delayedFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelayedFlagLike(String value) {
+            addCriterion("DELAYED_FLAG like", value, "delayedFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelayedFlagNotLike(String value) {
+            addCriterion("DELAYED_FLAG not like", value, "delayedFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelayedFlagIn(List<String> values) {
+            addCriterion("DELAYED_FLAG in", values, "delayedFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelayedFlagNotIn(List<String> values) {
+            addCriterion("DELAYED_FLAG not in", values, "delayedFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelayedFlagBetween(String value1, String value2) {
+            addCriterion("DELAYED_FLAG between", value1, value2, "delayedFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDelayedFlagNotBetween(String value1, String value2) {
+            addCriterion("DELAYED_FLAG not between", value1, value2, "delayedFlag");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

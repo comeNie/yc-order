@@ -699,6 +699,7 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 		}
 		OrdOrder ord = new OrdOrder();
 		BeanUtils.copyProperties(ord, request);
+		ord.setDelayedFlag("1");
 		ordOrderAtomSV.updateByPrimaryKeySelective(ord);
 		// 添加修改轨迹
 		OrdOdStateChg chg = new OrdOdStateChg();

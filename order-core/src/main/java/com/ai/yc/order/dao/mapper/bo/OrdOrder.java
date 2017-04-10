@@ -79,6 +79,8 @@ public class OrdOrder {
 
     private String parentOrderId;
 
+    private String delayedFlag;
+
     public Long getOrderId() {
         return orderId;
     }
@@ -381,5 +383,13 @@ public class OrdOrder {
 
     public void setParentOrderId(String parentOrderId) {
         this.parentOrderId = parentOrderId == null ? null : parentOrderId.trim();
+    }
+
+    public String getDelayedFlag() {
+        return delayedFlag;
+    }
+
+    public void setDelayedFlag(String delayedFlag) {
+        this.delayedFlag = delayedFlag == null ? null : delayedFlag.trim();
     }
 }
