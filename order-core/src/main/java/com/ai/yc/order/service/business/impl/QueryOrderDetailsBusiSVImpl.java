@@ -305,7 +305,7 @@ public class QueryOrderDetailsBusiSVImpl implements IQueryOrderDetailsBusiSV {
 		// 获取当前订单处于哪个步骤
 		OrdOdReceiveFollow requestFollow = new OrdOdReceiveFollow();
 		requestFollow.setOrderId(orderId);
-		requestFollow.setFinishState(OrdersConstants.NOT_FINISH_STATE);
+		requestFollow.setFinishState(OrdersConstants.FINISHING_STATE);
 		requestFollow.setReceiveState(OrdersConstants.RECEIVE_ALREADY_STATE);
 		OrdOdReceiveFollow followOrdResponse = ordOdReceiveFollowAtomSV.find(requestFollow);
 		if (null != followOrdResponse) {

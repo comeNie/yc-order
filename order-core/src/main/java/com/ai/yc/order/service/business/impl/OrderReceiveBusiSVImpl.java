@@ -84,7 +84,7 @@ public class OrderReceiveBusiSVImpl implements IOrderReceiveBusiSV {
 		}
 		BeanUtils.copyVO(ordOrderDbFollow, request);
 		ordOrderDbFollow.setReceiveState(OrdersConstants.RECEIVE_ALREADY_STATE);
-		ordOrderDbFollow.setFinishState(OrdersConstants.FINISH_STATE);
+		ordOrderDbFollow.setFinishState(OrdersConstants.FINISHING_STATE);
 		ordOdReceiveFollowAtomSV.updateSelective(ordOrderDbFollow);
 		OrdOdReceive ordOrderTask = new OrdOdReceive();
 		// 2、领取任务信息入库
@@ -97,7 +97,7 @@ public class OrderReceiveBusiSVImpl implements IOrderReceiveBusiSV {
 		// 3、 修改订单主表状态
 		OrdOrder ordOrderUpdate = new OrdOrder();
 		ordOrderUpdate.setOrderId(request.getOrderId());
-		ordOrderUpdate.setState(OrderState.STATE_RECEIVED);
+		ordOrderUpdate.setState(OrderState.STATE_TRASLATING);
 		ordOrderUpdate.setStateChgTime(DateUtil.getSysDate());
 		this.ordOrderAtomSV.updateByPrimaryKeySelective(ordOrderUpdate);
 		// 4、添加轨迹信息

@@ -31,13 +31,21 @@ public final class OrdersConstants {
 	 */
 	public final static String RECEIVE_STATE = "0";
 	/**
+	 * 待领取-2
+	 */
+	public final static String WAIT_RECEIVE_STATE = "2";
+	/**
 	 * 0-未开始
 	 */
 	public final static String FINISH_STATE = "0";
 	/**
 	 * 1-进行中
 	 */
-	public final static String NOT_FINISH_STATE = "1";
+	public final static String FINISHING_STATE = "1";
+	/**
+	 * 2-已完成
+	 */
+	public final static String FINISHED_STATE = "2";
 	
 
 	public final static class TranslatePrice {

@@ -3,27 +3,30 @@ package com.ai.yc.order.api.translatesave.param;
 import java.io.Serializable;
 import java.util.List;
 
-
 /**
- * @Description: 
+ * @Description:
  * @author hougang@asiainfo.com
- * @date 2016年11月17日 下午7:46:15 
+ * @date 2016年11月17日 下午7:46:15
  * @version V1.0
  */
-public class SaveTranslateInfoRequest implements Serializable{
-	
+public class SaveTranslateInfoRequest implements Serializable {
+
 	private static final long serialVersionUID = -5341746378735771941L;
 
 	/**
 	 * 订单ID(必填)
 	 */
 	private Long orderId;
-	
+	/**
+	 * 当前任务跟踪id
+	 */
+	private Long receiveFollowId;
+
 	/**
 	 * 翻译内容
 	 */
 	private String translateInfo;
-	
+
 	/**
 	 * 文件列表
 	 */
@@ -52,7 +55,13 @@ public class SaveTranslateInfoRequest implements Serializable{
 	public void setFileVos(List<TranslateFileVo> fileVos) {
 		this.fileVos = fileVos;
 	}
-	
-	
+
+	public Long getReceiveFollowId() {
+		return receiveFollowId;
+	}
+
+	public void setReceiveFollowId(Long receiveFollowId) {
+		this.receiveFollowId = receiveFollowId;
+	}
 
 }
