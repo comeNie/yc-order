@@ -122,7 +122,7 @@ public class OrderReviewBusiSVImpl implements IOrderReviewBusiSV {
 			ordOdStateChg.setOrderId(order.getOrderId());
 			ordOdStateChg.setOperId(request.getOperId());
 			ordOdStateChg.setOperName(request.getOperName());
-			ordOdStateChg.setOrgState("93");
+			ordOdStateChg.setOrgState(OrdersConstants.OrderState.LSP_WAIT_REVIEW_STATE);
 			ordOdStateChg.setNewState(OrdersConstants.OrderState.WAIT_REVIEW_STATE);
 			ordOdStateChgBusiSV.checkChgDesc(ordOdStateChg);
 			/* 2.更新订单表中状态为“待译文审核” */
@@ -144,12 +144,12 @@ public class OrderReviewBusiSVImpl implements IOrderReviewBusiSV {
 			ordOdStateChg.setOrgId(OrdersConstants.OrgID.ORG_ID_USER);
 			ordOdStateChg.setOperId(request.getOperId());
 			ordOdStateChg.setOperName(request.getOperName());
-			ordOdStateChg.setOrgState("93");
+			ordOdStateChg.setOrgState(OrdersConstants.OrderState.LSP_WAIT_REVIEW_STATE);
 			ordOdStateChg.setNewState(OrdersConstants.OrderState.STATE_TRASLATING);
 			ordOdStateChgBusiSV.checkChgDesc(ordOdStateChg);
-			/* 2.回退订单表中状态为“翻译中” */
+			/* 2.回退订单表中状态为“修改中” */
 			Timestamp sysDate = DateUtil.getSysDate();
-			order.setState(OrdersConstants.OrderState.STATE_TRASLATING);
+			order.setState(OrdersConstants.OrderState.STATE_TRASLATE_UPDATING);
 			order.setReasonDesc(request.getReasonDesc());
 			order.setStateChgTime(sysDate);
 			ordOrderAtomSV.updateById(order);

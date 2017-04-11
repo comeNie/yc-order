@@ -83,22 +83,22 @@ public class TranslateSaveBusiSVImpl implements ITranslateSaveBusiSV {
 			OrdOdReceiveFollow ordOdNextFollow = ordOdReceiveFollowAtomSV.find(ordOdReceiveFollow);
 			if(null!=ordOdNextFollow){
 				//将当前步骤修改为已完成，下步骤领取状态为待领取，将订单状态改回已分配
-				ordOdFollow.setFinishState("2");
+				ordOdFollow.setFinishState(OrdersConstants.FINISHED_STATE);
 				ordOdReceiveFollowAtomSV.updateSelective(ordOdFollow);
-				ordOdNextFollow.setReceiveState("2");
+				ordOdNextFollow.setReceiveState(OrdersConstants.WAIT_RECEIVE_STATE);
 				ordOdReceiveFollowAtomSV.updateSelective(ordOdNextFollow);
 				OrdOrder order = new OrdOrder();
 				order.setOrderId(request.getOrderId());
-				order.setState("211");
+				order.setState(OrdersConstants.OrderState.STATE_DISTRIBUTION);
 				iOrdOrderAtomSV.updateByPrimaryKeySelective(order);
 				//添加轨迹信息
 			}else {
 				//将当前步骤改成已完成，将订单状态改成LSP待审核
-				ordOdFollow.setFinishState("2");
+				ordOdFollow.setFinishState(OrdersConstants.FINISHED_STATE);
 				ordOdReceiveFollowAtomSV.updateSelective(ordOdFollow);
 				OrdOrder order = new OrdOrder();
 				order.setOrderId(request.getOrderId());
-				order.setState("93");
+				order.setState(OrdersConstants.OrderState.LSP_WAIT_REVIEW_STATE);
 				iOrdOrderAtomSV.updateByPrimaryKeySelective(order);
 			}
 		}

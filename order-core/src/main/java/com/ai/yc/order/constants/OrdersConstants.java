@@ -219,6 +219,10 @@ public final class OrdersConstants {
 		 * 待审核
 		 */
 		public final static String WAIT_REVIEW_STATE = "40";
+		/**
+		 * LSP待审核
+		 */
+		public final static String LSP_WAIT_REVIEW_STATE = "43";
 		
 		/**
 		 * 已经审核
