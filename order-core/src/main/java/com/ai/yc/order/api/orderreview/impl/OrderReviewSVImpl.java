@@ -9,6 +9,7 @@ import com.ai.opt.base.vo.BaseResponse;
 import com.ai.opt.base.vo.ResponseHeader;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.ai.yc.order.api.orderreview.interfaces.IOrderReviewSV;
+import com.ai.yc.order.api.orderreview.param.OrderLspReviewRequest;
 import com.ai.yc.order.api.orderreview.param.OrderReviewRequest;
 import com.ai.yc.order.constants.OrdersConstants;
 import com.ai.yc.order.service.business.interfaces.IOrderReviewBusiSV;
@@ -28,6 +29,18 @@ public class OrderReviewSVImpl implements IOrderReviewSV {
 		iOrderReviewBusiSV.check(request);
         ResponseHeader responseHeader = new ResponseHeader(true,
                 ExceptCodeConstants.Special.SUCCESS, "成功");
+        response.setResponseHeader(responseHeader);
+        return response;
+	}
+	@Override
+	public BaseResponse handLspReviewOrder(OrderLspReviewRequest request) throws BusinessException, SystemException {
+		/* 1.参数检验*/
+		request.setTenantId(OrdersConstants.TENANT_ID);
+		ValidateUtils.validateLspReviewOrder(request);
+		BaseResponse response =new BaseResponse();
+		iOrderReviewBusiSV.lspCheck(request);
+        ResponseHeader responseHeader = new ResponseHeader(true,
+                ExceptCodeConstants.Special.SUCCESS, "lsp审核成功");
         response.setResponseHeader(responseHeader);
         return response;
 	}

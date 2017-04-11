@@ -17,6 +17,7 @@ import com.ai.yc.order.api.orderreceive.param.OrderAlloReceiveRequest;
 import com.ai.yc.order.api.orderrefund.param.OrderRefundCheckRequest;
 import com.ai.yc.order.api.orderrefund.param.OrderRefundRequest;
 import com.ai.yc.order.api.orderreprocess.param.OrderReprocessRequest;
+import com.ai.yc.order.api.orderreview.param.OrderLspReviewRequest;
 import com.ai.yc.order.api.orderreview.param.OrderReviewRequest;
 
 public class ValidateUtils {
@@ -61,6 +62,23 @@ public class ValidateUtils {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "参数对象不能为空");
 		}
 		if (CollectionUtil.isEmpty(condition.getOrderIdList())) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "订单ID不能为空");
+		}
+		if (StringUtil.isBlank(condition.getOperId())) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "操作员ID不能为空");
+		}
+		if (StringUtil.isBlank(condition.getState())) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "状态不能为空");
+		}
+	}
+	/**
+	 * lsp审核订单校验
+	 */
+	public static void validateLspReviewOrder(OrderLspReviewRequest condition) {
+		if (condition == null) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "参数对象不能为空");
+		}
+		if (null==condition.getOrderId()) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "订单ID不能为空");
 		}
 		if (StringUtil.isBlank(condition.getOperId())) {

@@ -9,6 +9,7 @@ import javax.ws.rs.core.MediaType;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.base.vo.BaseResponse;
+import com.ai.yc.order.api.orderreview.param.OrderLspReviewRequest;
 import com.ai.yc.order.api.orderreview.param.OrderReviewRequest;
 
 @Path("/orderreview")
@@ -30,5 +31,18 @@ public interface IOrderReviewSV {
 	@POST
 	@Path("/handReviewOrder")
 	public BaseResponse handReviewOrder(OrderReviewRequest request) throws BusinessException, SystemException;
+	/**
+	 * lsp译文审核
+	 * @param request
+	 * @return
+	 * @throws BusinessException
+	 * @throws SystemException
+	 * @author zhanglh
+	 * @ApiCode
+	 * @RestRelativeURL orderreview/handLspReviewOrder
+	 */
+	@POST
+	@Path("/handLspReviewOrder")
+	public BaseResponse handLspReviewOrder(OrderLspReviewRequest request) throws BusinessException, SystemException;
 
 }
