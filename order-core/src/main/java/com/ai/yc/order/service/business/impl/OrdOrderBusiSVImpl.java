@@ -686,16 +686,16 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 	@Override
 	public void deplayOrder(OrderDeplayRequest request) {
 		OrdOrder noConfirmOrders = null;
-		// 1.获取待确认的订单
+		// 1.获取订单
 		try {
-			noConfirmOrders = ordOrderAtomSV.findOrdByStateOrId(request.getOrderId(), "50");
+			noConfirmOrders = ordOrderAtomSV.findByPrimaryKey(request.getOrderId());
 		} catch (Exception e) {
 			throw new SystemException(e);
 		}
 		// 2.判断订单是否存在
 		if (noConfirmOrders == null) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,
-					"待确认订单为空[orderId:" + request.getOrderId() + "]");
+					"订单为空[orderId:" + request.getOrderId() + "]");
 		}
 		OrdOrder ord = new OrdOrder();
 		BeanUtils.copyProperties(ord, request);
