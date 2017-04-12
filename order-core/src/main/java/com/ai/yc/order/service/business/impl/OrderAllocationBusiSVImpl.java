@@ -59,6 +59,11 @@ public class OrderAllocationBusiSVImpl implements IOrderAllocationBusiSV {
 		OrderAllocationResponse response = new OrderAllocationResponse();
 		// 1 先查询订单主表信息
 		OrdOrder ordOrderDb = this.ordOrderAtomSV.findByPrimaryKey(request.getOrderAllocationBaseInfo().getOrderId());
+		if (null == ordOrderDb) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "此订单信息不存在");
+		}
+		//获取翻译类型
+		String orderTypr = ordOrderDb.getTranslateType();
 		// 2、任务跟踪信息入库
 		List<OrderAllocationReceiveFollowInfo> followInfoList = request.getOrderAllocationReceiveFollowList();
 		for (OrderAllocationReceiveFollowInfo follow : followInfoList) {
@@ -121,20 +126,28 @@ public class OrderAllocationBusiSVImpl implements IOrderAllocationBusiSV {
 			ordOdStateChg.setOperId(request.getOrderAllocationBaseInfo().getUserId());
 			ordOdStateChg.setOperName(request.getOrderAllocationBaseInfo().getOperName());
 			ordOdStateChg.setOrgState(ordOrderDb.getState());
-			ordOdStateChg.setNewState(request.getOrderAllocationBaseInfo().getState());
+			if("2".equals(orderTypr)){
+				ordOdStateChg.setNewState("50");
+			}else{
+				ordOdStateChg.setNewState("211");
+			}
 			ordOdStateChg.setStateChgTime(DateUtil.getSysDate());
 			//
 			this.ordOdStateChgAtomSV.insertSelective(ordOdStateChg);
 		}
 
 		// 2.2 修改订单主表状态
-		OrdOrder ordOrderUpdate = new OrdOrder();
-		ordOrderUpdate.setOrderId(request.getOrderAllocationBaseInfo().getOrderId());
-		ordOrderUpdate.setState(request.getOrderAllocationBaseInfo().getState());
-		ordOrderUpdate.setStateChgTime(DateUtil.getSysDate());
-		// ordOrderUpdate.setDisplayFlag(request.getOrderAllocationBaseInfo().getState());
-		// ordOrderUpdate.setDisplayFlagChgTime(DateUtil.getSysDate());
-		this.ordOrderAtomSV.updateByPrimaryKeySelective(ordOrderUpdate);
+		//判断如果为口译那么后端和前段状态为待确认，如果是笔译只改变后端状态为已分配
+		if("2".equals(orderTypr)){
+			ordOrderDb.setState("50");
+			ordOrderDb.setStateChgTime(DateUtil.getSysDate());
+			ordOrderDb.setDisplayFlag("50");
+			ordOrderDb.setDisplayFlagChgTime(DateUtil.getSysDate());
+		}else{
+			ordOrderDb.setState("211");
+			ordOrderDb.setStateChgTime(DateUtil.getSysDate());
+		}
+		this.ordOrderAtomSV.updateByPrimaryKeySelective(ordOrderDb);
 
 		//
 		response.setOrderId(request.getOrderAllocationBaseInfo().getOrderId());

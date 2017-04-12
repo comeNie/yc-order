@@ -13,10 +13,6 @@ public class OrderAllocationBaseInfo implements Serializable {
 	 */
 	private Long orderId;
 	/**
-	 * 订单状态
-	 */
-	private String state;
-	/**
 	 * 用户id
 	 */
 	private String userId;
@@ -47,14 +43,6 @@ public class OrderAllocationBaseInfo implements Serializable {
 
 	public void setOrderId(Long orderId) {
 		this.orderId = orderId;
-	}
-
-	public String getState() {
-		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
 	}
 
 }

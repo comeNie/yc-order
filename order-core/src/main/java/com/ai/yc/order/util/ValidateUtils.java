@@ -228,11 +228,11 @@ public class ValidateUtils {
 		if(null == request.getOrderAllocationBaseInfo()){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"分配基本信息参数对象不能为空");
 		}
+		if(CollectionUtil.isEmpty(request.getOrderAllocationReceiveFollowList())){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"分配任务参数对象不能为空");
+		}
 		if(null==request.getOrderAllocationBaseInfo().getOrderId()){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"订单id不能为空");
-		}
-		if(StringUtil.isBlank(request.getOrderAllocationBaseInfo().getState())){
-			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"订单状态不能为空");
 		}
 		if(StringUtil.isBlank(request.getOrderAllocationBaseInfo().getUserId())){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"操作者id不能为空");

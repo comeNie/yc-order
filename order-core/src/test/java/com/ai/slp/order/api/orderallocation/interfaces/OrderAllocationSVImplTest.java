@@ -29,7 +29,7 @@ public class OrderAllocationSVImplTest extends BaseTest {
 		OrderAllocationRequest request = new OrderAllocationRequest();
 		OrderAllocationBaseInfo baseInfo = new OrderAllocationBaseInfo();
 		baseInfo.setOrderId(1234l);
-		baseInfo.setState("22");
+		//baseInfo.setState("22");
 		baseInfo.setUserId("12345");
 		baseInfo.setOperName("zhangsansan1112");
 		//
