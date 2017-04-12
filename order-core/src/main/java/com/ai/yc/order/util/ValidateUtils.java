@@ -228,31 +228,6 @@ public class ValidateUtils {
 		if(null == request.getOrderAllocationBaseInfo()){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"分配基本信息参数对象不能为空");
 		}
-		if(null==request.getOrderAllocationReceiveFollowInfo()){
-			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"任务跟踪参数对象不能为空");
-		}
-		if(CollectionUtil.isEmpty(request.getOrdAllocationPersonInfoList())){
-			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"分配人员参数对象不能为空");
-		}
-		if(null!=request.getOrderAllocationReceiveFollowInfo()){
-			if(StringUtil.isBlank(request.getOrderAllocationReceiveFollowInfo().getOperType())){
-				throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"操作类型不能为空");
-			}
-		}
-		if(!CollectionUtil.isEmpty(request.getOrdAllocationPersonInfoList())){
-			for(OrdAllocationPersonInfo info:request.getOrdAllocationPersonInfoList()){
-				if(null==info){
-					throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"分配人员参数对象不能为空");
-				}else{
-					if(StringUtil.isBlank(info.getInterperName())){
-						throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"译员名称不能为空");
-					}
-					if(StringUtil.isBlank(info.getTel())){
-						throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"联系方式不能为空");
-					}
-				}
-			}
-		}
 		if(null==request.getOrderAllocationBaseInfo().getOrderId()){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"订单id不能为空");
 		}

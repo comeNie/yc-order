@@ -15,5 +15,7 @@ public interface IOrdOrderAttachAtomSV {
 	 public OrdOrderCountAttach queryOrderCountInfo(String chlId,String userId,String corporaId);
 	 
 	 public OrdOrderHFCountAttach queryOrderCountHFInfo(String chlId,String userId,String corporaId);
+	 
+	 public List<Object> queryInterperOrder(String interperId);
 
 }

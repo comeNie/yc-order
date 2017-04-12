@@ -7,6 +7,10 @@ public class OrdAllocationPersonInfo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	/**
+	 * 人员信息id，用于修改时使用
+	 */
+	private Long personId;
+	/**
 	 * 译员id
 	 */
 	private String interperId;
@@ -89,6 +93,14 @@ public class OrdAllocationPersonInfo implements Serializable {
 
 	public void setReamrk(String reamrk) {
 		this.reamrk = reamrk;
+	}
+
+	public Long getPersonId() {
+		return personId;
+	}
+
+	public void setPersonId(Long personId) {
+		this.personId = personId;
 	}
 
 }

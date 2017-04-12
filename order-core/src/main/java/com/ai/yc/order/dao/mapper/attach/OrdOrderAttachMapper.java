@@ -14,6 +14,13 @@ public interface OrdOrderAttachMapper {
 			@Param("receiveState") String receiveState);
 
 	/**
+	 * lsp下译员领取订单查询
+	 */
+	@Results({ @Result(property = "orderId", column = "order_id") })
+	@SelectProvider(type = OrdInterperQuerySqlProvider.class, method = "interperQueryOrdOrder")
+	public List<Object> getInterperOrdOrder(@Param("interperId") String interperId);
+
+	/**
 	 * 佣金查询
 	 */
 	@Results({ @Result(property = "interperFee", column = "sum_interper_fee") })
@@ -36,8 +43,7 @@ public interface OrdOrderAttachMapper {
 	 * 后付费信息汇总
 	 */
 	@Results({ @Result(property = "orderCounts", column = "orderCounts"),
-			@Result(property = "totalFeeCount", column = "totalFeeCount"),
-			 })
+			@Result(property = "totalFeeCount", column = "totalFeeCount"), })
 	@SelectProvider(type = OrdorderHFCountSqlProvider.class, method = "ordOrderHFCount")
 	public OrdOrderHFCountAttach getOrdOrderHFCount(@Param("chlId") String chlId, @Param("userId") String userId,
 			@Param("corporaId") String corporaId);

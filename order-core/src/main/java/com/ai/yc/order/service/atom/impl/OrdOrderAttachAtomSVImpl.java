@@ -31,5 +31,9 @@ public class OrdOrderAttachAtomSVImpl implements IOrdOrderAttachAtomSV {
 	public OrdOrderHFCountAttach queryOrderCountHFInfo(String chlId, String userId, String corporaId) {
 		return ordOrderAttachMapper.getOrdOrderHFCount(chlId, userId, corporaId);
 	}
+	@Override
+	public List<Object> queryInterperOrder(String interperId) {
+		return ordOrderAttachMapper.getInterperOrdOrder(interperId);
+	}
 
 }

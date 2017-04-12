@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.vo.BaseListResponse;
 import com.ai.opt.base.vo.ResponseHeader;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
@@ -62,29 +63,75 @@ public class OrderAllocationBusiSVImpl implements IOrderAllocationBusiSV {
 	public OrderAllocationResponse saveOrderAllocation(OrderAllocationRequest request) {
 
 		OrderAllocationResponse response = new OrderAllocationResponse();
-		// 1、任务跟踪信息入库
-		OrdOdReceiveFollow ordOdfollow = new OrdOdReceiveFollow();
-		OrderAllocationReceiveFollowInfo followInfo = request.getOrderAllocationReceiveFollowInfo();
-		BeanUtils.copyVO(ordOdfollow, followInfo);
-		long followId = SequenceUtil.createFollowId();
-		ordOdfollow.setReceiveFollowId(followId);
-		ordOdfollow.setOrderId(request.getOrderAllocationBaseInfo().getOrderId());
-		ordOdReceiveFollowAtomSV.insertSelective(ordOdfollow);
-		// 2.分配人员信息表入库
-		for (OrdAllocationPersonInfo ordAllocationPersonInfo : request.getOrdAllocationPersonInfoList()) {
-			//
-			OrdOdPersonInfo ordOdPersonInfo = new OrdOdPersonInfo();
-			BeanUtils.copyVO(ordOdPersonInfo, ordAllocationPersonInfo);
-			ordOdPersonInfo.setStep(followInfo.getStep());
-			ordOdPersonInfo.setReceiveFollowId(followId);
-			ordOdPersonInfo.setPersonId(SequenceUtil.createPersonId());
-			//
-			this.ordOdPersonInfoAtomSV.insertSelective(ordOdPersonInfo);
-		}
-
-		// 2.修改订单主表状态字段
 		// 2.1 先查询订单主表信息
 		OrdOrder ordOrderDb = this.ordOrderAtomSV.findByPrimaryKey(request.getOrderAllocationBaseInfo().getOrderId());
+		// 1、任务跟踪信息入库
+		List<OrderAllocationReceiveFollowInfo> followInfoList = request.getOrderAllocationReceiveFollowList();
+		for (OrderAllocationReceiveFollowInfo follow : followInfoList) {
+			OrdOdReceiveFollow ordOdfollow = new OrdOdReceiveFollow();
+			BeanUtils.copyVO(ordOdfollow, follow);
+			long followId = SequenceUtil.createFollowId();
+			ordOdfollow.setReceiveFollowId(followId);
+			ordOdfollow.setOrderId(request.getOrderAllocationBaseInfo().getOrderId());
+			ordOdReceiveFollowAtomSV.insertSelective(ordOdfollow);
+			// 2.分配人员信息表入库
+			for (OrdAllocationPersonInfo ordAllocationPersonInfo : follow.getOrdAllocationPersonInfoList()) {
+				OrdOdPersonInfo ordOdPersonInfo = new OrdOdPersonInfo();
+				BeanUtils.copyVO(ordOdPersonInfo, ordAllocationPersonInfo);
+				ordOdPersonInfo.setStep(follow.getStep());
+				ordOdPersonInfo.setReceiveFollowId(followId);
+				if (null != ordAllocationPersonInfo.getPersonId()) {
+					//判断订单是否被领取，如果领取返回错误信息
+					OrdOdReceiveFollow odFollow = new OrdOdReceiveFollow();
+					odFollow.setReceiveFollowId(follow.getFollowId());
+					OrdOdReceiveFollow followOdInfo = ordOdReceiveFollowAtomSV.find(odFollow);
+					if(null==followOdInfo){
+						throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT, "该任务为空");
+					}else{
+						if("1".equals(followOdInfo.getReceiveState())){
+							throw new BusinessException(ExceptCodeConstants.Special.PARAM_TYPE_NOT_RIGHT, "该任务已被领取不能进行修改");
+						}
+					}
+					//修改分配人员
+					ordOdPersonInfo.setPersonId(ordAllocationPersonInfo.getPersonId());
+					ordOdPersonInfoAtomSV.updateSelective(ordOdPersonInfo);
+				} else {
+					ordOdPersonInfo.setPersonId(SequenceUtil.createPersonId());
+					this.ordOdPersonInfoAtomSV.insertSelective(ordOdPersonInfo);
+				}
+			}
+			// 3.入库订单轨迹表 状态为---211：已分配（口译订单则为瞬时状态，直接为“50：待确认”）
+			OrdOdStateChg ordOdStateChg = new OrdOdStateChg();
+			ordOdStateChg.setStateChgId(SequenceUtil.createStateChgId());
+			ordOdStateChg.setOrderId(request.getOrderAllocationBaseInfo().getOrderId());
+			// 获取中英文轨迹信息
+			String descCn = String.format(ORDER_ALLOCATION_CN, request.getOrderAllocationBaseInfo().getOperName());
+			String descEn = String.format(ORDER_ALLOCATION_EN, request.getOrderAllocationBaseInfo().getOperName());
+			String descCheckCn = String.format(ORDER_ALLOCATION_CHECK_CN,
+					request.getOrderAllocationBaseInfo().getOperName());
+			String descCheckEn = String.format(ORDER_ALLOCATION_CHECK_EN,
+					request.getOrderAllocationBaseInfo().getOperName());
+			ordOdStateChg.setChgDescEn(descEn);
+			ordOdStateChg.setChgDescD(descCn);
+			ordOdStateChg.setChgDescUEn(descEn);
+			ordOdStateChg.setChgDesc(descCn);
+			if (OrdersConstants.OrdOperType.OPER_CHECK_TYPE.equals(follow.getOperType())) {
+				ordOdStateChg.setChgDescEn(descCheckEn);
+				ordOdStateChg.setChgDescD(descCheckCn);
+				ordOdStateChg.setChgDescUEn(descCheckEn);
+				ordOdStateChg.setChgDesc(descCheckCn);
+			}
+			ordOdStateChg.setFlag(OrdOdStateChgConstants.FLAG_USER);
+			ordOdStateChg.setOrgId("1");
+			ordOdStateChg.setOperId(request.getOrderAllocationBaseInfo().getUserId());
+			ordOdStateChg.setOperName(request.getOrderAllocationBaseInfo().getOperName());
+			ordOdStateChg.setOrgState(ordOrderDb.getState());
+			ordOdStateChg.setNewState(request.getOrderAllocationBaseInfo().getState());
+			ordOdStateChg.setStateChgTime(DateUtil.getSysDate());
+			//
+			this.ordOdStateChgAtomSV.insertSelective(ordOdStateChg);
+		}
+
 		// 2.2 修改订单主表状态
 		OrdOrder ordOrderUpdate = new OrdOrder();
 		ordOrderUpdate.setOrderId(request.getOrderAllocationBaseInfo().getOrderId());
@@ -93,38 +140,7 @@ public class OrderAllocationBusiSVImpl implements IOrderAllocationBusiSV {
 		// ordOrderUpdate.setDisplayFlag(request.getOrderAllocationBaseInfo().getState());
 		// ordOrderUpdate.setDisplayFlagChgTime(DateUtil.getSysDate());
 		this.ordOrderAtomSV.updateByPrimaryKeySelective(ordOrderUpdate);
-		// 3.入库订单轨迹表 状态为---211：已分配（口译订单则为瞬时状态，直接为“50：待确认”）
-		OrdOdStateChg ordOdStateChg = new OrdOdStateChg();
-		ordOdStateChg.setStateChgId(SequenceUtil.createStateChgId());
-		ordOdStateChg.setOrderId(request.getOrderAllocationBaseInfo().getOrderId());
-		// 获取中英文轨迹信息
-		String descCn = String.format(ORDER_ALLOCATION_CN, request.getOrderAllocationBaseInfo().getOperName());
-		String descEn = String.format(ORDER_ALLOCATION_EN, request.getOrderAllocationBaseInfo().getOperName());
-		String descCheckCn = String.format(ORDER_ALLOCATION_CHECK_CN,
-				request.getOrderAllocationBaseInfo().getOperName());
-		String descCheckEn = String.format(ORDER_ALLOCATION_CHECK_EN,
-				request.getOrderAllocationBaseInfo().getOperName());
-		ordOdStateChg.setChgDescEn(descEn);
-		ordOdStateChg.setChgDescD(descCn);
-		ordOdStateChg.setChgDescUEn(descEn);
-		ordOdStateChg.setChgDesc(descCn);
-		if (followInfo != null) {
-			if (OrdersConstants.OrdOperType.OPER_CHECK_TYPE.equals(followInfo.getOperType())) {
-				ordOdStateChg.setChgDescEn(descCheckEn);
-				ordOdStateChg.setChgDescD(descCheckCn);
-				ordOdStateChg.setChgDescUEn(descCheckEn);
-				ordOdStateChg.setChgDesc(descCheckCn);
-			}
-		}
-		ordOdStateChg.setFlag(OrdOdStateChgConstants.FLAG_USER);
-		ordOdStateChg.setOrgId("1");
-		ordOdStateChg.setOperId(request.getOrderAllocationBaseInfo().getUserId());
-		ordOdStateChg.setOperName(request.getOrderAllocationBaseInfo().getOperName());
-		ordOdStateChg.setOrgState(ordOrderDb.getState());
-		ordOdStateChg.setNewState(request.getOrderAllocationBaseInfo().getState());
-		ordOdStateChg.setStateChgTime(DateUtil.getSysDate());
-		//
-		this.ordOdStateChgAtomSV.insertSelective(ordOdStateChg);
+
 		//
 		response.setOrderId(request.getOrderAllocationBaseInfo().getOrderId());
 		//

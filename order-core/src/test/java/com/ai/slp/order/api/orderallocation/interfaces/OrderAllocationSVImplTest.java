@@ -44,7 +44,7 @@ public class OrderAllocationSVImplTest extends BaseTest {
 		followInfo.setReceiveState("0");
 		followInfo.setStep("0");
 		followInfo.setFinishState("0");
-		request.setOrderAllocationReceiveFollowInfo(followInfo);
+		//request.setOrderAllocationReceiveFollowInfo(followInfo);
 		person.setInterperId("1223");
 		person.setInterperName("分配测试员");
 		person.setTel("13768989009");
@@ -62,7 +62,7 @@ public class OrderAllocationSVImplTest extends BaseTest {
 		person.setCreartTime(t);
 		list.add(person);
 		list.add(person1);
-		request.setOrdAllocationPersonInfoList(list);
+		//request.setOrdAllocationPersonInfoList(list);
 		//
 		log.info("request:"+JSON.toJSONString(request));
 		OrderAllocationResponse response = this.orderAllocationSV.orderAllocation(request);

@@ -38,4 +38,10 @@ public class OrdOdPersonInfoAtomSVImpl implements IOrdOdPersonInfoAtomSV {
 		return personInfos;
 	}
 
+
+	@Override
+	public void updateSelective(OrdOdPersonInfo ordOdPersonInfo) {
+		MapperFactory.getOrdOdPersonInfoMapper().updateByPrimaryKeySelective(ordOdPersonInfo);
+	}
+
 }

@@ -13,12 +13,7 @@ public class OrderAllocationRequest implements Serializable {
 	/**
 	 * 任务跟踪信息
 	 */
-	private OrderAllocationReceiveFollowInfo orderAllocationReceiveFollowInfo;
-
-	/**
-	 * 订单分配人员信息
-	 */
-	private List<OrdAllocationPersonInfo> ordAllocationPersonInfoList;
+	private List<OrderAllocationReceiveFollowInfo> orderAllocationReceiveFollowList;
 
 	public OrderAllocationBaseInfo getOrderAllocationBaseInfo() {
 		return orderAllocationBaseInfo;
@@ -28,20 +23,13 @@ public class OrderAllocationRequest implements Serializable {
 		this.orderAllocationBaseInfo = orderAllocationBaseInfo;
 	}
 
-	public OrderAllocationReceiveFollowInfo getOrderAllocationReceiveFollowInfo() {
-		return orderAllocationReceiveFollowInfo;
+	public List<OrderAllocationReceiveFollowInfo> getOrderAllocationReceiveFollowList() {
+		return orderAllocationReceiveFollowList;
 	}
 
-	public void setOrderAllocationReceiveFollowInfo(OrderAllocationReceiveFollowInfo orderAllocationReceiveFollowInfo) {
-		this.orderAllocationReceiveFollowInfo = orderAllocationReceiveFollowInfo;
-	}
-
-	public List<OrdAllocationPersonInfo> getOrdAllocationPersonInfoList() {
-		return ordAllocationPersonInfoList;
-	}
-
-	public void setOrdAllocationPersonInfoList(List<OrdAllocationPersonInfo> ordAllocationPersonInfoList) {
-		this.ordAllocationPersonInfoList = ordAllocationPersonInfoList;
+	public void setOrderAllocationReceiveFollowList(
+			List<OrderAllocationReceiveFollowInfo> orderAllocationReceiveFollowList) {
+		this.orderAllocationReceiveFollowList = orderAllocationReceiveFollowList;
 	}
 
 }
