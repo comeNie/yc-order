@@ -32,7 +32,6 @@ public class OrderAllocationSVImplTest extends BaseTest {
 		baseInfo.setState("22");
 		baseInfo.setUserId("12345");
 		baseInfo.setOperName("zhangsansan1112");
-		baseInfo.setOperId("1222");
 		//
 		request.setOrderAllocationBaseInfo(baseInfo);
 		//
@@ -41,9 +40,7 @@ public class OrderAllocationSVImplTest extends BaseTest {
 		OrdAllocationPersonInfo person  = new OrdAllocationPersonInfo();
 		OrdAllocationPersonInfo person1  = new OrdAllocationPersonInfo();
 		followInfo.setOperType("11");
-		followInfo.setReceiveState("0");
 		followInfo.setStep("0");
-		followInfo.setFinishState("0");
 		//request.setOrderAllocationReceiveFollowInfo(followInfo);
 		person.setInterperId("1223");
 		person.setInterperName("分配测试员");
@@ -59,7 +56,6 @@ public class OrderAllocationSVImplTest extends BaseTest {
 		Timestamp t = new Timestamp(DateUtil.getCurrentTimeMillis());
 		
 		person.setExpectEndTime(t);
-		person.setCreartTime(t);
 		list.add(person);
 		list.add(person1);
 		//request.setOrdAllocationPersonInfoList(list);

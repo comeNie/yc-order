@@ -1,6 +1,5 @@
 package com.ai.yc.order.service.business.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,22 +7,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ai.opt.base.exception.BusinessException;
-import com.ai.opt.base.vo.BaseListResponse;
 import com.ai.opt.base.vo.ResponseHeader;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.ai.opt.sdk.util.BeanUtils;
-import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.opt.sdk.util.DateUtil;
-import com.ai.yc.order.api.orderallocation.param.OrdAllocationPersonInfo;
-import com.ai.yc.order.api.orderallocation.param.OrdAllocationePersonRequest;
 import com.ai.yc.order.api.orderallocation.param.OrdAlloInterperFeeInfoResponse;
-import com.ai.yc.order.api.orderallocation.param.OrdAllocationInfo;
+import com.ai.yc.order.api.orderallocation.param.OrdAllocationPersonInfo;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationReceiveFollowInfo;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationRequest;
 import com.ai.yc.order.api.orderallocation.param.OrderAllocationResponse;
 import com.ai.yc.order.constants.OrdOdStateChgConstants;
 import com.ai.yc.order.constants.OrdersConstants;
-import com.ai.yc.order.dao.mapper.attach.OrdOrderAttach;
 import com.ai.yc.order.dao.mapper.attach.OrdOrderInferperFeeAttach;
 import com.ai.yc.order.dao.mapper.bo.OrdOdPersonInfo;
 import com.ai.yc.order.dao.mapper.bo.OrdOdReceiveFollow;
@@ -63,9 +57,9 @@ public class OrderAllocationBusiSVImpl implements IOrderAllocationBusiSV {
 	public OrderAllocationResponse saveOrderAllocation(OrderAllocationRequest request) {
 
 		OrderAllocationResponse response = new OrderAllocationResponse();
-		// 2.1 先查询订单主表信息
+		// 1 先查询订单主表信息
 		OrdOrder ordOrderDb = this.ordOrderAtomSV.findByPrimaryKey(request.getOrderAllocationBaseInfo().getOrderId());
-		// 1、任务跟踪信息入库
+		// 2、任务跟踪信息入库
 		List<OrderAllocationReceiveFollowInfo> followInfoList = request.getOrderAllocationReceiveFollowList();
 		for (OrderAllocationReceiveFollowInfo follow : followInfoList) {
 			OrdOdReceiveFollow ordOdfollow = new OrdOdReceiveFollow();
@@ -80,6 +74,7 @@ public class OrderAllocationBusiSVImpl implements IOrderAllocationBusiSV {
 				BeanUtils.copyVO(ordOdPersonInfo, ordAllocationPersonInfo);
 				ordOdPersonInfo.setStep(follow.getStep());
 				ordOdPersonInfo.setReceiveFollowId(followId);
+				ordOdPersonInfo.setCreartTime(DateUtil.getSysDate());
 				if (null != ordAllocationPersonInfo.getPersonId()) {
 					//判断订单是否被领取，如果领取返回错误信息
 					OrdOdReceiveFollow odFollow = new OrdOdReceiveFollow();

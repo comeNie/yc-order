@@ -27,10 +27,6 @@ public class OrdAllocationPersonInfo implements Serializable {
 	 */
 	private Long interperFee;
 	/**
-	 * 分配时间
-	 */
-	private Timestamp creartTime;
-	/**
 	 * 期望完成时间
 	 */
 	private Timestamp expectEndTime;
@@ -69,14 +65,6 @@ public class OrdAllocationPersonInfo implements Serializable {
 
 	public void setInterperFee(Long interperFee) {
 		this.interperFee = interperFee;
-	}
-
-	public Timestamp getCreartTime() {
-		return creartTime;
-	}
-
-	public void setCreartTime(Timestamp creartTime) {
-		this.creartTime = creartTime;
 	}
 
 	public Timestamp getExpectEndTime() {

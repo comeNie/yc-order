@@ -234,7 +234,7 @@ public class ValidateUtils {
 		if(StringUtil.isBlank(request.getOrderAllocationBaseInfo().getState())){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"订单状态不能为空");
 		}
-		if(StringUtil.isBlank(request.getOrderAllocationBaseInfo().getOperId())){
+		if(StringUtil.isBlank(request.getOrderAllocationBaseInfo().getUserId())){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL,"操作者id不能为空");
 		}
 		if(StringUtil.isBlank(request.getOrderAllocationBaseInfo().getOperName())){
