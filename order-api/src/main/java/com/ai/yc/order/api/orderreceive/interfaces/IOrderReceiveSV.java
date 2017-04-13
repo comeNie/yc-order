@@ -41,6 +41,8 @@ public interface IOrderReceiveSV {
 	 * @ApiCode ORD_2024
 	 * @RestRelativeURL OrderReceiveSV/orderAlloReceive
 	 */
+	@POST
+	@Path("/orderAlloReceive")
 	public OrderReceiveResponse orderAlloReceive(OrderAlloReceiveRequest request) throws BusinessException, SystemException;
 	
 	
