@@ -2774,6 +2774,76 @@ public class OrdOrderCriteria {
             addCriterion("DELAYED_FLAG not between", value1, value2, "delayedFlag");
             return (Criteria) this;
         }
+
+        public Criteria andOperInterperIdIsNull() {
+            addCriterion("OPER_INTERPER_ID is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperInterperIdIsNotNull() {
+            addCriterion("OPER_INTERPER_ID is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperInterperIdEqualTo(String value) {
+            addCriterion("OPER_INTERPER_ID =", value, "operInterperId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperInterperIdNotEqualTo(String value) {
+            addCriterion("OPER_INTERPER_ID <>", value, "operInterperId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperInterperIdGreaterThan(String value) {
+            addCriterion("OPER_INTERPER_ID >", value, "operInterperId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperInterperIdGreaterThanOrEqualTo(String value) {
+            addCriterion("OPER_INTERPER_ID >=", value, "operInterperId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperInterperIdLessThan(String value) {
+            addCriterion("OPER_INTERPER_ID <", value, "operInterperId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperInterperIdLessThanOrEqualTo(String value) {
+            addCriterion("OPER_INTERPER_ID <=", value, "operInterperId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperInterperIdLike(String value) {
+            addCriterion("OPER_INTERPER_ID like", value, "operInterperId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperInterperIdNotLike(String value) {
+            addCriterion("OPER_INTERPER_ID not like", value, "operInterperId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperInterperIdIn(List<String> values) {
+            addCriterion("OPER_INTERPER_ID in", values, "operInterperId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperInterperIdNotIn(List<String> values) {
+            addCriterion("OPER_INTERPER_ID not in", values, "operInterperId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperInterperIdBetween(String value1, String value2) {
+            addCriterion("OPER_INTERPER_ID between", value1, value2, "operInterperId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperInterperIdNotBetween(String value1, String value2) {
+            addCriterion("OPER_INTERPER_ID not between", value1, value2, "operInterperId");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

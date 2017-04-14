@@ -43,6 +43,7 @@ public class SearchFieldConfConstants {
     public static final String ESEND_TIME = "esendtime";  
     public static final String EVALUATE_TIME = "evaluatetime";
     public static final String BUSI_TYPE = "busitype";
+    public static final String OPER_INTERPER_ID = "operinterperid";
     
     
     

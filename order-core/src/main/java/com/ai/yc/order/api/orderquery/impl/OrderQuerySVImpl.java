@@ -315,7 +315,7 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
 		}
 		// 如果译员id不为空
-		if (!StringUtil.isBlank(request.getInterperId())) {
+		if (!StringUtil.isBlank(request.getInterperId()) && StringUtil.isBlank(request.getLspId())) {
 			searchfieldVos.add(new SearchCriteria(SearchFieldConfConstants.INTERPER_ID, request.getInterperId(),
 					new SearchOption(SearchOption.SearchLogic.must, SearchOption.SearchType.querystring)));
 		}
@@ -645,6 +645,13 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 			searchCriteria.addFieldValue(start);
 			searchCriteria.addFieldValue(end);
 			searchfieldVos.add(searchCriteria);
+		}
+		//如果lspid和interperid都不为空
+		if(!StringUtil.isBlank(request.getInterperId()) && !StringUtil.isBlank(request.getLspId())){
+			SearchCriteria vo = new SearchCriteria();
+            vo.addSubCriteria(new SearchCriteria(SearchFieldConfConstants.INTERPER_ID, request.getCorporaId(), new SearchOption(SearchLogic.should, SearchType.querystring)));
+            vo.addSubCriteria(new SearchCriteria(SearchFieldConfConstants.OPER_INTERPER_ID, request.getUserId(), new SearchOption(SearchLogic.should, SearchType.querystring)));
+            searchfieldVos.add(vo);
 		}
 		return searchfieldVos;
 	}

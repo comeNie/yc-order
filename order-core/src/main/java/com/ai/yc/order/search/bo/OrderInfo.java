@@ -123,6 +123,10 @@ public class OrderInfo {
 	 * 父订单Id
 	 */
 	private String parentorderid;
+	/**
+	 * 分配领取操作人
+	 */
+	private String operinterperid;
 
 	public String getOrderid() {
 		return orderid;
@@ -602,6 +606,14 @@ public class OrderInfo {
 
 	public void setPaidfee(long paidfee) {
 		this.paidfee = paidfee;
+	}
+
+	public String getOperinterperid() {
+		return operinterperid;
+	}
+
+	public void setOperinterperid(String operinterperid) {
+		this.operinterperid = operinterperid;
 	}
 
 }

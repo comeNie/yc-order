@@ -81,6 +81,8 @@ public class OrdOrder {
 
     private String delayedFlag;
 
+    private String operInterperId;
+
     public Long getOrderId() {
         return orderId;
     }
@@ -391,5 +393,13 @@ public class OrdOrder {
 
     public void setDelayedFlag(String delayedFlag) {
         this.delayedFlag = delayedFlag == null ? null : delayedFlag.trim();
+    }
+
+    public String getOperInterperId() {
+        return operInterperId;
+    }
+
+    public void setOperInterperId(String operInterperId) {
+        this.operInterperId = operInterperId == null ? null : operInterperId.trim();
     }
 }
