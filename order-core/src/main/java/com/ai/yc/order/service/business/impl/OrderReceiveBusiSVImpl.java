@@ -50,6 +50,8 @@ public class OrderReceiveBusiSVImpl implements IOrderReceiveBusiSV {
 
 		OrdOrder ordOrder = new OrdOrder();
 		BeanUtils.copyVO(ordOrder, request.getBaseInfo());
+		//操作领取人赋值
+		ordOrder.setOperInterperId(request.getBaseInfo().getInterperId());
 		//
 		this.ordOrderAtomSV.updateByPrimaryKeySelective(ordOrder);
 		// 二期开发 跟平台佣金相关 保留 zhangzd
@@ -99,6 +101,8 @@ public class OrderReceiveBusiSVImpl implements IOrderReceiveBusiSV {
 		ordOrderUpdate.setOrderId(request.getOrderId());
 		ordOrderUpdate.setState(OrderState.STATE_TRASLATING);
 		ordOrderUpdate.setStateChgTime(DateUtil.getSysDate());
+		//操作领取人赋值
+		ordOrderUpdate.setOperInterperId(request.getInterperId());
 		this.ordOrderAtomSV.updateByPrimaryKeySelective(ordOrderUpdate);
 		// 4、添加轨迹信息
 		this.ordOdStateChgBusiSV.orderAlloReceiveChgDesc(request, ordOrderDb.getState());

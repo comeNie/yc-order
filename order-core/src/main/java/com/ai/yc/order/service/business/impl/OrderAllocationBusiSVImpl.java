@@ -147,6 +147,8 @@ public class OrderAllocationBusiSVImpl implements IOrderAllocationBusiSV {
 			ordOrderDb.setState("211");
 			ordOrderDb.setStateChgTime(DateUtil.getSysDate());
 		}
+		//操作分配领取人
+		ordOrderDb.setOperInterperId("");
 		this.ordOrderAtomSV.updateByPrimaryKeySelective(ordOrderDb);
 
 		//
