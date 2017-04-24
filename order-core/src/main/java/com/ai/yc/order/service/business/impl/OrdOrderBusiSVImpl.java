@@ -647,7 +647,7 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 		if (!StringUtil.isBlank(request.getReasonDesc())) {
 			ordOrder.setReasonDesc(request.getReasonDesc());
 		}
-		if (!StringUtil.isBlank(request.getDisplayFlag())) {
+		if (!StringUtil.isBlank(request.getDisplayFlag()) && "92".equals(request.getState())) {
 			ordOrder.setDisplayFlag(request.getDisplayFlag());
 			ordOrder.setDisplayFlagChgTime(DateUtil.getSysDate());
 		}
