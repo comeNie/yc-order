@@ -1,6 +1,7 @@
 package com.ai.yc.order.service.business.interfaces;
 
 import com.ai.yc.order.api.orderreceive.param.OrderAlloReceiveRequest;
+import com.ai.yc.order.api.orderreceive.param.OrderBackReceiveRequest;
 import com.ai.yc.order.api.orderreceive.param.OrderReceiveRequest;
 import com.ai.yc.order.dao.mapper.bo.OrdOdStateChg;
 
@@ -44,5 +45,9 @@ public interface IOrdOdStateChgBusiSV {
 	 * 系统提交了订单
 	 */
 	void addSysConfirmeChgDesc(OrdOdStateChg chg) ;
+	/**
+	 * 运营后天分配领取订单
+	 */
+	void orderBackReceiveChgDesc(OrderBackReceiveRequest request, String orgState);
 
 }

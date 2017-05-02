@@ -9,6 +9,7 @@ import javax.ws.rs.core.MediaType;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.yc.order.api.orderreceive.param.OrderAlloReceiveRequest;
+import com.ai.yc.order.api.orderreceive.param.OrderBackReceiveRequest;
 import com.ai.yc.order.api.orderreceive.param.OrderReceiveRequest;
 import com.ai.yc.order.api.orderreceive.param.OrderReceiveResponse;
 
@@ -44,6 +45,18 @@ public interface IOrderReceiveSV {
 	@POST
 	@Path("/orderAlloReceive")
 	public OrderReceiveResponse orderAlloReceive(OrderAlloReceiveRequest request) throws BusinessException, SystemException;
+	
+	/**
+	 * 运营后台订单分配（领取）
+	 * @param request
+	 * @return
+	 * @throws BusinessException
+	 * @throws SystemException
+	 * @author zhanglh
+	 * @ApiCode
+	 * @RestRelativeURL OrderReceiveSV/orderBackReceive
+	 */
+	public OrderReceiveResponse orderBackReceive(OrderBackReceiveRequest request) throws BusinessException, SystemException;
 	
 	
 	

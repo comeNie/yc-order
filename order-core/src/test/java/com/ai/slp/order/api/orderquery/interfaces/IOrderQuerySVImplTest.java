@@ -27,7 +27,7 @@ public class IOrderQuerySVImplTest extends BaseTest{
 		//request.setOrderType("1ololp");
 		Long ss= 2000000015L;
 		//request.setUserName("大海HAODEDSKLDSL");
-		request.setOrderId(2000000058874544l);
+		//request.setOrderId(2000000058874544l);
 		//request.setUpdateOperName("test");
 		//request.setTranslateName("翻译");
 		//request.setOperId("10001");
@@ -56,7 +56,9 @@ public class IOrderQuerySVImplTest extends BaseTest{
 			//request.setPayTimeStart(ts);
 		//request.setOrderTimeEnd(es);
 		//request.setStateChgTimeEnd(es);
-		request.setPageSize(100);
+		request.setLspId("1");
+		request.setInterperId("1");
+		request.setPageSize(2);
 		request.setPageNo(1);
 		/*List<Object> list = new ArrayList<Object>();
 		Object o1 = "13";

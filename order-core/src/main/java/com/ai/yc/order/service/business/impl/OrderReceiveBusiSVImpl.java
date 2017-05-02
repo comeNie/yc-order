@@ -9,6 +9,7 @@ import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.ai.opt.sdk.util.BeanUtils;
 import com.ai.opt.sdk.util.DateUtil;
 import com.ai.yc.order.api.orderreceive.param.OrderAlloReceiveRequest;
+import com.ai.yc.order.api.orderreceive.param.OrderBackReceiveRequest;
 import com.ai.yc.order.api.orderreceive.param.OrderReceiveRequest;
 import com.ai.yc.order.api.orderreceive.param.OrderReceiveResponse;
 import com.ai.yc.order.constants.OrdersConstants;
@@ -50,7 +51,7 @@ public class OrderReceiveBusiSVImpl implements IOrderReceiveBusiSV {
 
 		OrdOrder ordOrder = new OrdOrder();
 		BeanUtils.copyVO(ordOrder, request.getBaseInfo());
-		//操作领取人赋值
+		// 操作领取人赋值
 		ordOrder.setOperInterperId(request.getBaseInfo().getInterperId());
 		//
 		this.ordOrderAtomSV.updateByPrimaryKeySelective(ordOrder);
@@ -78,10 +79,10 @@ public class OrderReceiveBusiSVImpl implements IOrderReceiveBusiSV {
 		// 1、修改任务跟踪信息
 		OrdOdReceiveFollow ordFollow = new OrdOdReceiveFollow();
 		ordFollow.setStep(request.getStep());
-		ordFollow.setReceiveState( OrdersConstants.RECEIVE_STATE);
+		ordFollow.setReceiveState(OrdersConstants.RECEIVE_STATE);
 		ordFollow.setOrderId(request.getOrderId());
 		OrdOdReceiveFollow ordOrderDbFollow = ordOdReceiveFollowAtomSV.find(ordFollow);
-		if(null==ordOrderDbFollow){
+		if (null == ordOrderDbFollow) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "未领取任务跟踪信息不存在");
 		}
 		BeanUtils.copyVO(ordOrderDbFollow, request);
@@ -101,11 +102,34 @@ public class OrderReceiveBusiSVImpl implements IOrderReceiveBusiSV {
 		ordOrderUpdate.setOrderId(request.getOrderId());
 		ordOrderUpdate.setState(OrderState.STATE_TRASLATING);
 		ordOrderUpdate.setStateChgTime(DateUtil.getSysDate());
-		//操作领取人赋值
+		// 操作领取人赋值
 		ordOrderUpdate.setOperInterperId(request.getInterperId());
 		this.ordOrderAtomSV.updateByPrimaryKeySelective(ordOrderUpdate);
 		// 4、添加轨迹信息
 		this.ordOdStateChgBusiSV.orderAlloReceiveChgDesc(request, ordOrderDb.getState());
+		response.setOrderId(request.getOrderId());
+		return response;
+	}
+
+	@Override
+	public OrderReceiveResponse updateBackReceive(OrderBackReceiveRequest request) {
+
+		OrderReceiveResponse response = new OrderReceiveResponse();
+		//
+		OrdOrder ordOrderDb = this.ordOrderAtomSV.findByPrimaryKey(request.getOrderId());
+		if (null == ordOrderDb) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "此订单信息不存在");
+		}
+
+		OrdOrder ordOrder = new OrdOrder();
+		BeanUtils.copyVO(ordOrder, request);
+		ordOrder.setLockTime(DateUtil.getSysDate());
+		// 操作领取人赋值
+		ordOrder.setOperInterperId(request.getInterperId());
+		//
+		this.ordOrderAtomSV.updateByPrimaryKeySelective(ordOrder);
+		this.ordOdStateChgBusiSV.orderBackReceiveChgDesc(request, ordOrderDb.getState());
+		//
 		response.setOrderId(request.getOrderId());
 		return response;
 	}
