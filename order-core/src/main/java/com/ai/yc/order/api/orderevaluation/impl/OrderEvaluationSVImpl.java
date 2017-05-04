@@ -44,6 +44,7 @@ public class OrderEvaluationSVImpl implements IOrderEvaluationSV{
 			responseHeader.setResultCode(ExceptCodeConstants.Special.SUCCESS);
 			responseHeader.setResultMessage("订单评价成功");
 			response.setResponseHeader(responseHeader);
+			orderIndexBusiSV.insertSesData(response.getOrderId());
 		}catch(BusinessException | SystemException e){
 			responseHeader.setIsSuccess(false);
 			responseHeader.setResultCode(e.getErrorCode());
