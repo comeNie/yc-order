@@ -5,19 +5,9 @@ import java.io.Serializable;
 public class UpdateProdFileRequest implements Serializable {
 	private static final long serialVersionUID = 1L;
 	/**
-	 * 订单ID
+	 * 产品明细ID
 	 */
-	private Long orderId;
-
-	/**
-	 * 文件名称
-	 */
-	private String fileName;
-
-	/**
-	 * 文件存储ID
-	 */
-	private String fileSaveId;
+	private Long prodFileId;
 
 	/**
 	 * 翻译文件名称
@@ -36,22 +26,6 @@ public class UpdateProdFileRequest implements Serializable {
 	 * 操作人
 	 */
 	private String operName;
-
-	public String getFileName() {
-		return fileName;
-	}
-
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
-
-	public String getFileSaveId() {
-		return fileSaveId;
-	}
-
-	public void setFileSaveId(String fileSaveId) {
-		this.fileSaveId = fileSaveId;
-	}
 
 	public String getFileTranslateName() {
 		return fileTranslateName;
@@ -85,12 +59,12 @@ public class UpdateProdFileRequest implements Serializable {
 		this.operName = operName;
 	}
 
-	public Long getOrderId() {
-		return orderId;
+	public Long getProdFileId() {
+		return prodFileId;
 	}
 
-	public void setOrderId(Long orderId) {
-		this.orderId = orderId;
+	public void setProdFileId(Long prodFileId) {
+		this.prodFileId = prodFileId;
 	}
 
 }

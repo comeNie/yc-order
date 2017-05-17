@@ -49,12 +49,11 @@ public class UpdateOrderSVTest extends BaseTest{
 	@Test
 	public void testOrderFlie(){
 		UpdateProdFileRequest req = new UpdateProdFileRequest();
-		req.setOrderId(123l);
 		req.setOperName("10000");
-		req.setFileName("ceshi");
-		req.setFileTranslateName("cehsi");
-		req.setFileSaveId("11");
+		req.setFileTranslateName("cehsi122");
+		req.setFileTranslateId("000");
 		req.setTaskCreation("1");
+		req.setProdFileId(123l);
 		BaseResponse reesapose = iUpdateOrderSV.updateOrderFile(req);
 		System.out.println("RESULT="+JSON.toJSONString(reesapose));
 	}

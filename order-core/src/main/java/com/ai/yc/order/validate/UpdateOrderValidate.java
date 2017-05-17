@@ -22,8 +22,8 @@ public class UpdateOrderValidate {
 		if(req==null){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "参数不能为空");
 		}
-		if(req.getOrderId()==null){
-			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "订单ID不能为空");
+		if(req.getProdFileId()==null){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "产品明细文件ID不能为空");
 		}
 	}
 	public void validate(UpdateOrderRequest req){

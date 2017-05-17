@@ -10,4 +10,9 @@ public interface IOrdOdProdFileAtomSV {
 	List<OrdOdProdFile> findByProdDetalId(Long prodDetalId);
 	
 	void deleteByProdDetalId(Long prodDetalId);
+	
+	OrdOdProdFile findByProdFileId(String prodFileId);
+	
+	void updateSelective(OrdOdProdFile ordOdProdFile);
+	
 }

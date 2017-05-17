@@ -178,16 +178,17 @@ public class UpdateOrderBusiSVImpl implements IUpdateOrderBusiSV {
 	public BaseResponse updateOrderFile(UpdateProdFileRequest req) {
 		BaseResponse response = new BaseResponse();
 		response.setResponseHeader(new ResponseHeader(true, ResultCodeConstants.SUCCESS_CODE, "产品文件修改成功"));
-		OrdOdProd prod = iOrdOdProdAtomSV.findByOrderId(req.getOrderId());
+		OrdOdProdFile prodFile = iOrdOdProdFileAtomSV.findByProdFileId(String.valueOf(req.getProdFileId()));
 		// 产品文件信息
-		if (null != prod) {
-			iOrdOdProdFileAtomSV.deleteByProdDetalId(prod.getProdDetalId());
+		if (null != prodFile) {
 			OrdOdProdFile ordOdProdFile = new OrdOdProdFile();
-			Long prodFileId = SequenceUtil.createProdDetailFileId();
-			BeanUtils.copyProperties(ordOdProdFile, req);
-			ordOdProdFile.setProdFileId(String.valueOf(prodFileId));
-			ordOdProdFile.setProdDetalId(prod.getProdDetalId());
-			iOrdOdProdFileAtomSV.insertSelective(ordOdProdFile);
+			ordOdProdFile.setProdFileId(String.valueOf(req.getProdFileId()));
+			ordOdProdFile.setFileTranslateName(req.getFileTranslateName());
+			ordOdProdFile.setFileTranslateId(req.getFileTranslateId());
+			ordOdProdFile.setTaskCreation("1");
+			iOrdOdProdFileAtomSV.updateSelective(ordOdProdFile);
+		}else{
+			throw new BusinessException(ExceptCodeConstants.Special.NO_RESULT, "产品文件信息不存在");
 		}
 		return response;
 	}
