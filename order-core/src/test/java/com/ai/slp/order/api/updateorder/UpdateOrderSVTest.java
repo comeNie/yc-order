@@ -13,6 +13,7 @@ import com.ai.yc.order.api.orderdeplay.param.OrderDeplayRequest;
 import com.ai.yc.order.api.updateorder.interfaces.IUpdateOrderSV;
 import com.ai.yc.order.api.updateorder.param.UProdVo;
 import com.ai.yc.order.api.updateorder.param.UpdateOrderRequest;
+import com.ai.yc.order.api.updateorder.param.UpdateProdFileRequest;
 import com.alibaba.fastjson.JSON;
 
 public class UpdateOrderSVTest extends BaseTest{
@@ -43,6 +44,18 @@ public class UpdateOrderSVTest extends BaseTest{
 		Timestamp t = new Timestamp(DateUtil.getCurrentTimeMillis());
 		req.setEndChgTime(t);
 		BaseResponse reesapose = iOrderDeplaySV.orderDeplay(req);
+		System.out.println("RESULT="+JSON.toJSONString(reesapose));
+	}
+	@Test
+	public void testOrderFlie(){
+		UpdateProdFileRequest req = new UpdateProdFileRequest();
+		req.setOrderId(123l);
+		req.setOperName("10000");
+		req.setFileName("ceshi");
+		req.setFileTranslateName("cehsi");
+		req.setFileSaveId("11");
+		req.setTaskCreation("1");
+		BaseResponse reesapose = iUpdateOrderSV.updateOrderFile(req);
 		System.out.println("RESULT="+JSON.toJSONString(reesapose));
 	}
 

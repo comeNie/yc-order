@@ -5,9 +5,11 @@ import org.springframework.stereotype.Component;
 
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
+import com.ai.opt.base.vo.BaseResponse;
 import com.ai.yc.order.api.updateorder.interfaces.IUpdateOrderSV;
 import com.ai.yc.order.api.updateorder.param.UpdateOrderRequest;
 import com.ai.yc.order.api.updateorder.param.UpdateOrderResponse;
+import com.ai.yc.order.api.updateorder.param.UpdateProdFileRequest;
 import com.ai.yc.order.service.business.interfaces.IUpdateOrderBusiSV;
 import com.ai.yc.order.validate.UpdateOrderValidate;
 import com.alibaba.dubbo.config.annotation.Service;
@@ -33,6 +35,12 @@ public class UpdateOrderSVImpl implements IUpdateOrderSV {
 			throws BusinessException, SystemException {
 		updateOrderValidate.validate(req);
 		return iUpdateOrderBusiSV.updateOrderInfo(req);
+	}
+
+	@Override
+	public BaseResponse updateOrderFile(UpdateProdFileRequest req) throws BusinessException, SystemException {
+		updateOrderValidate.validateFlie(req);
+		return iUpdateOrderBusiSV.updateOrderFile(req);
 	}
 
 }

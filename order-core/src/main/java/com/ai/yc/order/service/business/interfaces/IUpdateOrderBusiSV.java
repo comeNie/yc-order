@@ -1,7 +1,9 @@
 package com.ai.yc.order.service.business.interfaces;
 
+import com.ai.opt.base.vo.BaseResponse;
 import com.ai.yc.order.api.updateorder.param.UpdateOrderRequest;
 import com.ai.yc.order.api.updateorder.param.UpdateOrderResponse;
+import com.ai.yc.order.api.updateorder.param.UpdateProdFileRequest;
 
 /**
  * @author hougang@asiainfo.com
@@ -11,5 +13,7 @@ import com.ai.yc.order.api.updateorder.param.UpdateOrderResponse;
 public interface IUpdateOrderBusiSV {
 	
 	UpdateOrderResponse updateOrderInfo(UpdateOrderRequest req);
+	
+	BaseResponse updateOrderFile(UpdateProdFileRequest req);
 
 }

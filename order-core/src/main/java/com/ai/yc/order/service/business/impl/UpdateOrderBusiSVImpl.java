@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ai.opt.base.exception.BusinessException;
+import com.ai.opt.base.vo.BaseResponse;
 import com.ai.opt.base.vo.ResponseHeader;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.ai.opt.sdk.util.BeanUtils;
@@ -16,6 +17,7 @@ import com.ai.yc.order.api.updateorder.param.UProdFileVo;
 import com.ai.yc.order.api.updateorder.param.UProdLevelVo;
 import com.ai.yc.order.api.updateorder.param.UpdateOrderRequest;
 import com.ai.yc.order.api.updateorder.param.UpdateOrderResponse;
+import com.ai.yc.order.api.updateorder.param.UpdateProdFileRequest;
 import com.ai.yc.order.constants.OrdersConstants;
 import com.ai.yc.order.constants.ResultCodeConstants;
 import com.ai.yc.order.dao.mapper.bo.OrdOdFeeTotal;
@@ -170,6 +172,24 @@ public class UpdateOrderBusiSVImpl implements IUpdateOrderBusiSV {
 		// 更新搜索引擎
 		orderIndexBusiSV.insertSesData(req.getOrderId());
 		return resp;
+	}
+
+	@Override
+	public BaseResponse updateOrderFile(UpdateProdFileRequest req) {
+		BaseResponse response = new BaseResponse();
+		response.setResponseHeader(new ResponseHeader(true, ResultCodeConstants.SUCCESS_CODE, "产品文件修改成功"));
+		OrdOdProd prod = iOrdOdProdAtomSV.findByOrderId(req.getOrderId());
+		// 产品文件信息
+		if (null != prod) {
+			iOrdOdProdFileAtomSV.deleteByProdDetalId(prod.getProdDetalId());
+			OrdOdProdFile ordOdProdFile = new OrdOdProdFile();
+			Long prodFileId = SequenceUtil.createProdDetailFileId();
+			BeanUtils.copyProperties(ordOdProdFile, req);
+			ordOdProdFile.setProdFileId(String.valueOf(prodFileId));
+			ordOdProdFile.setProdDetalId(prod.getProdDetalId());
+			iOrdOdProdFileAtomSV.insertSelective(ordOdProdFile);
+		}
+		return response;
 	}
 
 }

@@ -533,6 +533,76 @@ public class OrdOdProdFileCriteria {
             addCriterion("FILE_TRANSLATE_NAME not between", value1, value2, "fileTranslateName");
             return (Criteria) this;
         }
+
+        public Criteria andTaskCreationIsNull() {
+            addCriterion("TASK_CREATION is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskCreationIsNotNull() {
+            addCriterion("TASK_CREATION is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskCreationEqualTo(String value) {
+            addCriterion("TASK_CREATION =", value, "taskCreation");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskCreationNotEqualTo(String value) {
+            addCriterion("TASK_CREATION <>", value, "taskCreation");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskCreationGreaterThan(String value) {
+            addCriterion("TASK_CREATION >", value, "taskCreation");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskCreationGreaterThanOrEqualTo(String value) {
+            addCriterion("TASK_CREATION >=", value, "taskCreation");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskCreationLessThan(String value) {
+            addCriterion("TASK_CREATION <", value, "taskCreation");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskCreationLessThanOrEqualTo(String value) {
+            addCriterion("TASK_CREATION <=", value, "taskCreation");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskCreationLike(String value) {
+            addCriterion("TASK_CREATION like", value, "taskCreation");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskCreationNotLike(String value) {
+            addCriterion("TASK_CREATION not like", value, "taskCreation");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskCreationIn(List<String> values) {
+            addCriterion("TASK_CREATION in", values, "taskCreation");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskCreationNotIn(List<String> values) {
+            addCriterion("TASK_CREATION not in", values, "taskCreation");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskCreationBetween(String value1, String value2) {
+            addCriterion("TASK_CREATION between", value1, value2, "taskCreation");
+            return (Criteria) this;
+        }
+
+        public Criteria andTaskCreationNotBetween(String value1, String value2) {
+            addCriterion("TASK_CREATION not between", value1, value2, "taskCreation");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

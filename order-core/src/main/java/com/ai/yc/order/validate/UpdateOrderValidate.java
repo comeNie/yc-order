@@ -8,6 +8,7 @@ import com.ai.opt.sdk.util.StringUtil;
 import com.ai.yc.order.api.updateorder.param.UContactsVo;
 import com.ai.yc.order.api.updateorder.param.UOrderFeeVo;
 import com.ai.yc.order.api.updateorder.param.UpdateOrderRequest;
+import com.ai.yc.order.api.updateorder.param.UpdateProdFileRequest;
 
 /**
  * @Description: 订单信息修改校验
@@ -17,7 +18,14 @@ import com.ai.yc.order.api.updateorder.param.UpdateOrderRequest;
  */
 @Component("updateOrderValidate")
 public class UpdateOrderValidate {
-	
+	public void validateFlie(UpdateProdFileRequest req){
+		if(req==null){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "参数不能为空");
+		}
+		if(req.getOrderId()==null){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "订单ID不能为空");
+		}
+	}
 	public void validate(UpdateOrderRequest req){
 		if(req==null){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "参数不能为空");

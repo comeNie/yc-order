@@ -13,6 +13,8 @@ public class OrdOdProdFile {
 
     private String fileTranslateName;
 
+    private String taskCreation;
+
     public String getProdFileId() {
         return prodFileId;
     }
@@ -59,5 +61,13 @@ public class OrdOdProdFile {
 
     public void setFileTranslateName(String fileTranslateName) {
         this.fileTranslateName = fileTranslateName == null ? null : fileTranslateName.trim();
+    }
+
+    public String getTaskCreation() {
+        return taskCreation;
+    }
+
+    public void setTaskCreation(String taskCreation) {
+        this.taskCreation = taskCreation == null ? null : taskCreation.trim();
     }
 }

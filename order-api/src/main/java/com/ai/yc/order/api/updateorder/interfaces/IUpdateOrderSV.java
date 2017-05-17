@@ -8,8 +8,10 @@ import javax.ws.rs.core.MediaType;
 
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
+import com.ai.opt.base.vo.BaseResponse;
 import com.ai.yc.order.api.updateorder.param.UpdateOrderRequest;
 import com.ai.yc.order.api.updateorder.param.UpdateOrderResponse;
+import com.ai.yc.order.api.updateorder.param.UpdateProdFileRequest;
 
 /**
  * @Description:订单信息修改
@@ -35,5 +37,16 @@ public interface IUpdateOrderSV {
 	@POST
 	@Path("/updateOrderInfo")
 	UpdateOrderResponse updateOrderInfo(UpdateOrderRequest req)throws BusinessException,SystemException;
+	/**
+	 * 修改产品明细文件
+	 * @param req
+	 * @return
+	 * @throws BusinessException
+	 * @throws SystemException
+	 * @author zhanglh
+	 * @ApiCode
+	 * @RestRelativeURL updateorder/updateOrderFile
+	 */
+	BaseResponse updateOrderFile(UpdateProdFileRequest req)throws BusinessException,SystemException;
 
 }
