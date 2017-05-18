@@ -5,28 +5,31 @@ import java.io.Serializable;
 /**
  * @Description: 文件信息
  * @author hougang@asiainfo.com
- * @date 2016年11月4日 下午8:42:12 
+ * @date 2016年11月4日 下午8:42:12
  * @version V1.0
  */
-public class ProdFileVo implements Serializable{
-	
-	private static final long serialVersionUID = -7415876498022426680L;
+public class ProdFileVo implements Serializable {
 
+	private static final long serialVersionUID = -7415876498022426680L;
+	/**
+	 * 文件明细id
+	 */
+	private String prodFileId;
 	/**
 	 * 文件名称
 	 */
 	private String fileName;
-	
+
 	/**
 	 * 文件存储ID
 	 */
 	private String fileSaveId;
-	
+
 	/**
 	 * 翻译文件名称
 	 */
 	private String fileTranslateName;
-	
+
 	/**
 	 * 翻译文件存储ID
 	 */
@@ -48,8 +51,6 @@ public class ProdFileVo implements Serializable{
 		this.fileSaveId = fileSaveId;
 	}
 
-	
-
 	public String getFileTranslateId() {
 		return fileTranslateId;
 	}
@@ -65,7 +66,13 @@ public class ProdFileVo implements Serializable{
 	public void setFileTranslateName(String fileTranslateName) {
 		this.fileTranslateName = fileTranslateName;
 	}
-	
-	
+
+	public String getProdFileId() {
+		return prodFileId;
+	}
+
+	public void setProdFileId(String prodFileId) {
+		this.prodFileId = prodFileId;
+	}
 
 }
