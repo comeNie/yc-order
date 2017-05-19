@@ -14,6 +14,8 @@ import com.ai.yc.order.api.orderquery.param.QueryOrdCountRequest;
 import com.ai.yc.order.api.orderquery.param.QueryOrdCountResponse;
 import com.ai.yc.order.api.orderquery.param.QueryOrderRequest;
 import com.ai.yc.order.api.orderquery.param.QueryOrderRsponse;
+import com.ai.yc.order.api.orderquery.param.RecordOrderRequest;
+import com.ai.yc.order.api.orderquery.param.RecordOrderResponse;
 /**
  * 查询订单列表
  * Date: 2016年11月2日 <br>
@@ -81,4 +83,19 @@ public interface IOrderQuerySV {
 	@POST
 	@Path("/queryOrderCountInfo")
 	OrdOrderCountResponse queryOrderCountInfo(OrdOrderCountRequest request) throws BusinessException, SystemException;
+	
+	
+	/**
+	 * 译员工作记录查询
+	 * @param request
+	 * @return
+	 * @throws BusinessException
+	 * @throws SystemException
+	 * @author zhanglh
+	 * @ApiCode
+	 * @RestRelativeURL queryOrder/queryRecordOrder 
+	 */
+	@POST
+	@Path("/queryRecordOrder")
+	RecordOrderResponse queryRecordOrder(RecordOrderRequest request) throws BusinessException, SystemException;
 }

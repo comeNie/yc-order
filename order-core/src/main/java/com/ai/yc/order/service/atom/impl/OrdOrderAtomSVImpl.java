@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.opt.sdk.util.StringUtil;
+import com.ai.yc.order.api.orderquery.param.RecordOrderRequest;
 import com.ai.yc.order.constants.OrdersConstants;
 import com.ai.yc.order.dao.mapper.bo.OrdOrder;
 import com.ai.yc.order.dao.mapper.bo.OrdOrderCriteria;
@@ -203,5 +204,56 @@ public class OrdOrderAtomSVImpl implements IOrdOrderAtomSV {
     		return list.get(0);
     	}
     	return null;
+	}
+
+	@Override
+	public List<OrdOrder> getRecordOrder(RecordOrderRequest req,String state) {
+		OrdOrderMapper ordOrderMapper = MapperFactory.getOrdOrderMapper();
+		OrdOrderCriteria example=new OrdOrderCriteria();
+    	OrdOrderCriteria.Criteria criteria = example.createCriteria();
+    	example.setLimitStart((req.getPageNo() - 1) * req.getPageSize());
+		example.setLimitEnd(req.getPageSize());
+    	if(null!=req.getOrderId()){
+    		criteria.andOrderIdEqualTo(req.getOrderId());
+    	}
+    	if(!StringUtil.isBlank(req.getInterperId())){
+    		criteria.andInterperIdEqualTo(req.getInterperId());
+    	}
+    	if(null!=req.getStateChgTimeStart() && null==req.getStateChgTimeEnd()){
+    		criteria.andStateChgTimeGreaterThanOrEqualTo(req.getStateChgTimeStart());
+    	}
+    	if(null==req.getStateChgTimeStart() && null!=req.getStateChgTimeEnd()){
+    		criteria.andStateChgTimeLessThanOrEqualTo(req.getStateChgTimeEnd());
+    	}
+    	if(null!=req.getStateChgTimeStart() && null!=req.getStateChgTimeEnd()){
+    		criteria.andStateChgTimeBetween(req.getStateChgTimeStart(), req.getStateChgTimeEnd());
+    	}
+    	if(!StringUtil.isBlank(state)){
+    		criteria.andStateEqualTo(state);
+    	}
+    	return ordOrderMapper.selectByExample(example);
+	}
+
+	@Override
+	public int getRecordOrderCount(RecordOrderRequest req, String state) {
+		OrdOrderMapper ordOrderMapper = MapperFactory.getOrdOrderMapper();
+		OrdOrderCriteria example=new OrdOrderCriteria();
+    	OrdOrderCriteria.Criteria criteria = example.createCriteria();
+    	if(null!=req.getOrderId()){
+    		criteria.andOrderIdEqualTo(req.getOrderId());
+    	}
+    	if(null!=req.getStateChgTimeStart() && null==req.getStateChgTimeEnd()){
+    		criteria.andStateChgTimeGreaterThanOrEqualTo(req.getStateChgTimeStart());
+    	}
+    	if(null==req.getStateChgTimeStart() && null!=req.getStateChgTimeEnd()){
+    		criteria.andStateChgTimeLessThanOrEqualTo(req.getStateChgTimeEnd());
+    	}
+    	if(null!=req.getStateChgTimeStart() && null!=req.getStateChgTimeEnd()){
+    		criteria.andStateChgTimeBetween(req.getStateChgTimeStart(), req.getStateChgTimeEnd());
+    	}
+    	if(!StringUtil.isBlank(state)){
+    		criteria.andStateEqualTo(state);
+    	}
+    	return ordOrderMapper.countByExample(example);
 	}
 }

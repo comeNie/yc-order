@@ -34,6 +34,8 @@ import com.ai.yc.order.api.orderquery.param.QueryOrdCountRequest;
 import com.ai.yc.order.api.orderquery.param.QueryOrdCountResponse;
 import com.ai.yc.order.api.orderquery.param.QueryOrderRequest;
 import com.ai.yc.order.api.orderquery.param.QueryOrderRsponse;
+import com.ai.yc.order.api.orderquery.param.RecordOrderRequest;
+import com.ai.yc.order.api.orderquery.param.RecordOrderResponse;
 import com.ai.yc.order.constants.OrdersConstants;
 import com.ai.yc.order.constants.SearchFieldConfConstants;
 import com.ai.yc.order.search.bo.OrdProdExtend;
@@ -686,6 +688,20 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 	public OrdOrderCountResponse queryOrderCountInfo(OrdOrderCountRequest request)
 			throws BusinessException, SystemException {
 		return iOrdOrderBusiSV.countInfo(request);
+	}
+
+	@Override
+	public RecordOrderResponse queryRecordOrder(RecordOrderRequest request) throws BusinessException, SystemException {
+		if (request == null) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "参数对象不能为空");
+		}
+		if (request.getPageNo()==null) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "页码不能为空");
+		}
+		if (request.getPageSize()==null) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "页码大小不能为空");
+		}
+		return iOrdOrderBusiSV.getRecordOrder(request);
 	}
 
 }

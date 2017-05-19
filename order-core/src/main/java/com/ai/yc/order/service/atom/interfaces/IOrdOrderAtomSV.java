@@ -3,6 +3,7 @@ package com.ai.yc.order.service.atom.interfaces;
 import java.sql.Timestamp;
 import java.util.List;
 
+import com.ai.yc.order.api.orderquery.param.RecordOrderRequest;
 import com.ai.yc.order.dao.mapper.bo.OrdOrder;
 
 public interface IOrdOrderAtomSV {
@@ -79,5 +80,11 @@ public interface IOrdOrderAtomSV {
 	 * 根据id、state获取订单
 	 */
 	OrdOrder findOrdByStateOrId(long orderId,String state);
+	 /**
+	  * 查询工作记录信息
+	  */
+	public List<OrdOrder> getRecordOrder(RecordOrderRequest req,String state);
+	
+	public int getRecordOrderCount(RecordOrderRequest req,String state);
 	
 }

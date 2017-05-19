@@ -243,6 +243,10 @@ public final class OrdersConstants {
 		 */
 		public final static String WAIT_COMMENT_STATE = "52";
 		/**
+		 * 已确认
+		 */
+		public final static String COMMENTED_STATE = "51";
+		/**
 		 * 待评价
 		 */
 		public final static String WAIT_JUDGE_STATE = "52";

@@ -6,6 +6,8 @@ import com.ai.yc.order.api.orderdeplay.param.OrderDeplayRequest;
 import com.ai.yc.order.api.orderquery.param.OrdOrderCountRequest;
 import com.ai.yc.order.api.orderquery.param.OrdOrderCountResponse;
 import com.ai.yc.order.api.orderquery.param.QueryOrdCountRequest;
+import com.ai.yc.order.api.orderquery.param.RecordOrderRequest;
+import com.ai.yc.order.api.orderquery.param.RecordOrderResponse;
 import com.ai.yc.order.api.orderrefund.param.OrderRefundCheckRequest;
 import com.ai.yc.order.api.orderrefund.param.OrderRefundRequest;
 import com.ai.yc.order.api.orderrefund.param.OrderRefundResponse;
@@ -49,4 +51,8 @@ public interface IOrdOrderBusiSV {
 	 * 订单返工
 	 */
 	public void reprocessOrder(OrderReprocessRequest request);
+	/**
+	 * 获取议员工作记录
+	 */
+	public RecordOrderResponse getRecordOrder(RecordOrderRequest req);
 }

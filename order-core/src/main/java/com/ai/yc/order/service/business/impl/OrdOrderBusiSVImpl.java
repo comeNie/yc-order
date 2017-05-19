@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
+import com.ai.opt.base.vo.PageInfo;
 import com.ai.opt.base.vo.ResponseHeader;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.ai.opt.sdk.util.BeanUtils;
@@ -24,7 +25,12 @@ import com.ai.paas.ipaas.util.StringUtil;
 import com.ai.yc.order.api.orderdeplay.param.OrderDeplayRequest;
 import com.ai.yc.order.api.orderquery.param.OrdOrderCountRequest;
 import com.ai.yc.order.api.orderquery.param.OrdOrderCountResponse;
+import com.ai.yc.order.api.orderquery.param.OrdProdExtendVo;
 import com.ai.yc.order.api.orderquery.param.QueryOrdCountRequest;
+import com.ai.yc.order.api.orderquery.param.RecoedCountInfo;
+import com.ai.yc.order.api.orderquery.param.RecordOrderRequest;
+import com.ai.yc.order.api.orderquery.param.RecordOrderResponse;
+import com.ai.yc.order.api.orderquery.param.RecordOrderVo;
 import com.ai.yc.order.api.orderrefund.param.OrderRefundCheckRequest;
 import com.ai.yc.order.api.orderrefund.param.OrderRefundRequest;
 import com.ai.yc.order.api.orderrefund.param.OrderRefundResponse;
@@ -36,15 +42,21 @@ import com.ai.yc.order.api.orderstate.param.OrderStateUpdateResponse;
 import com.ai.yc.order.api.orderstate.param.UpdateStateChgInfo;
 import com.ai.yc.order.constants.OrdOdStateChgConstants;
 import com.ai.yc.order.constants.OrdersConstants;
+import com.ai.yc.order.constants.OrdersConstants.OrderState;
 import com.ai.yc.order.constants.SearchFieldConfConstants;
 import com.ai.yc.order.dao.mapper.attach.OrdOrderCountAttach;
 import com.ai.yc.order.dao.mapper.attach.OrdOrderHFCountAttach;
+import com.ai.yc.order.dao.mapper.attach.RecordOrderInfoAttach;
+import com.ai.yc.order.dao.mapper.bo.OrdOdFeeTotal;
 import com.ai.yc.order.dao.mapper.bo.OrdOdProd;
+import com.ai.yc.order.dao.mapper.bo.OrdOdProdExtend;
 import com.ai.yc.order.dao.mapper.bo.OrdOdStateChg;
 import com.ai.yc.order.dao.mapper.bo.OrdOrder;
 import com.ai.yc.order.interperlevel.rule.InterperLevelMap;
 import com.ai.yc.order.interperlevel.rule.OrderLevelRange;
+import com.ai.yc.order.service.atom.interfaces.IOrdOdFeeTotalAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdProdAtomSV;
+import com.ai.yc.order.service.atom.interfaces.IOrdOdProdExtendAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOdStateChgAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOrderAtomSV;
 import com.ai.yc.order.service.atom.interfaces.IOrdOrderAttachAtomSV;
@@ -69,6 +81,12 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 
 	@Autowired
 	private IOrdOdProdAtomSV ordOdProdAtomSV;
+	
+	@Autowired
+	private IOrdOdProdExtendAtomSV ordOdProdExtendAtomSV;
+	
+	@Autowired
+	private IOrdOdFeeTotalAtomSV ordOdFeeTotalAtomSV;
 
 	/**
 	 * 订单延时
@@ -783,6 +801,67 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 		chg.setStateChgTime(DateUtil.getSysDate());
 		ordOdStateChgAtomSV.insertSelective(chg);
 
+	}
+
+	@Override
+	public RecordOrderResponse getRecordOrder(RecordOrderRequest req) {
+		RecordOrderResponse response = new RecordOrderResponse();
+		List<OrdOrder> orderList = ordOrderAtomSV.getRecordOrder(req, OrderState.COMMENTED_STATE);
+		List<RecordOrderVo> results = new ArrayList<RecordOrderVo>();
+		if (!CollectionUtil.isEmpty(orderList)) {
+			for (OrdOrder order : orderList) {
+				RecordOrderVo orderVO = new RecordOrderVo();
+				BeanUtils.copyProperties(orderVO, order);
+				//获取对应的语言对信息
+				List<OrdProdExtendVo> ordProdExtendList = new ArrayList<OrdProdExtendVo>();
+				List<OrdOdProdExtend> ordOdProdExtendList = ordOdProdExtendAtomSV.findByOrderId(order.getOrderId());
+				if (!CollectionUtil.isEmpty(ordOdProdExtendList)) {
+					for (OrdOdProdExtend extend : ordOdProdExtendList) {
+						OrdProdExtendVo prodextendVo = new OrdProdExtendVo();
+						BeanUtils.copyProperties(prodextendVo, extend);
+						prodextendVo.setLangungePairChName(extend.getLangungePairName());
+						prodextendVo.setLangungePairEnName(extend.getLangungeNameEn());
+						ordProdExtendList.add(prodextendVo);
+					}
+					orderVO.setOrdProdExtendList(ordProdExtendList);
+				}
+				// 查询费用信息
+				OrdOdFeeTotal ordOdFeeTotal = ordOdFeeTotalAtomSV.findByOrderId(order.getOrderId());
+				if (ordOdFeeTotal != null) {
+					if (ordOdFeeTotal.getPlatFee() != null) {
+						orderVO.setPlatFee(ordOdFeeTotal.getPlatFee());
+					}
+					if (ordOdFeeTotal.getInterperFee() != null) {
+						orderVO.setInterperFee(ordOdFeeTotal.getInterperFee());
+					}
+					if (ordOdFeeTotal.getPaidFee() != null) {
+						orderVO.setPaidFee(ordOdFeeTotal.getPaidFee());
+					}
+				}
+				//获取翻译字数
+				OrdOdProd ordOdProd = ordOdProdAtomSV.findByOrderId(order.getOrderId());
+				if (ordOdProd != null) {
+					orderVO.setTranslateSum(Long.valueOf(ordOdProd.getTranslateSum()));
+				}
+				results.add(orderVO);
+			}
+		}
+		PageInfo<RecordOrderVo> pageinfo = new PageInfo<RecordOrderVo>();
+		pageinfo.setResult(results);
+		pageinfo.setPageSize(req.getPageSize());
+		pageinfo.setPageNo(req.getPageNo());
+		pageinfo.setCount(ordOrderAtomSV.getRecordOrderCount(req, OrderState.COMMENTED_STATE));
+		response.setPageInfo(pageinfo);
+		//获取汇总信息
+		RecordOrderInfoAttach attach = ordOrderAttachAtomSV.queryRecordOrderInfo(req.getOrderId(),OrderState.COMMENTED_STATE, req.getInterperId(),req.getStateChgTimeStart(), req.getStateChgTimeEnd());
+		if(null!=attach){
+			RecoedCountInfo countInfo = new RecoedCountInfo();
+			countInfo.setSumInterperFee(attach.getInterperFeeCount());
+			countInfo.setSumPlatFee(attach.getPlatFeeCount());
+			countInfo.setSumTotalFee(attach.getTotalFeeCount());
+			response.setCountInfo(countInfo);
+		}
+		return response;
 	}
 
 }

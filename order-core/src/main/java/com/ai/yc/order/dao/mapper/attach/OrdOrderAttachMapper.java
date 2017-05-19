@@ -1,5 +1,6 @@
 package com.ai.yc.order.dao.mapper.attach;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -47,4 +48,17 @@ public interface OrdOrderAttachMapper {
 	@SelectProvider(type = OrdorderHFCountSqlProvider.class, method = "ordOrderHFCount")
 	public OrdOrderHFCountAttach getOrdOrderHFCount(@Param("chlId") String chlId, @Param("userId") String userId,
 			@Param("corporaId") String corporaId);
+
+	/**
+	 * 获取工作记录
+	 */
+	@Results({ @Result(property = "totalFeeCount", column = "totalFeeCount"),
+			@Result(property = "platFeeCount", column = "platFeeCount"),
+			@Result(property = "interperFeeCount", column = "interperFeeCount") })
+	@SelectProvider(type = RecordOrderInfoSqlProvider.class, method = "recordOrderCount")
+	public RecordOrderInfoAttach getRecordCount(@Param("orderId") Long orderId,
+			@Param("state") String state,
+			@Param("interperId") String interperId,
+			@Param("stateChgTimeStart") Timestamp stateChgTimeStart,
+			@Param("stateChgTimeEnd") Timestamp stateChgTimeEnd);
 }

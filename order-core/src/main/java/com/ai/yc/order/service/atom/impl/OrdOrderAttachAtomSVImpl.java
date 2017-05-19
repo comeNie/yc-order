@@ -1,5 +1,6 @@
 package com.ai.yc.order.service.atom.impl;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import com.ai.yc.order.dao.mapper.attach.OrdOrderAttachMapper;
 import com.ai.yc.order.dao.mapper.attach.OrdOrderCountAttach;
 import com.ai.yc.order.dao.mapper.attach.OrdOrderHFCountAttach;
 import com.ai.yc.order.dao.mapper.attach.OrdOrderInferperFeeAttach;
+import com.ai.yc.order.dao.mapper.attach.RecordOrderInfoAttach;
 import com.ai.yc.order.service.atom.interfaces.IOrdOrderAttachAtomSV;
 @Component
 public class OrdOrderAttachAtomSVImpl implements IOrdOrderAttachAtomSV {
@@ -34,6 +36,11 @@ public class OrdOrderAttachAtomSVImpl implements IOrdOrderAttachAtomSV {
 	@Override
 	public List<Object> queryInterperOrder(String interperId) {
 		return ordOrderAttachMapper.getInterperOrdOrder(interperId);
+	}
+	@Override
+	public RecordOrderInfoAttach queryRecordOrderInfo(Long orderId,String state,String interperId, Timestamp stateChgTimeStart,
+			Timestamp stateChgTimeEnd) {
+		return ordOrderAttachMapper.getRecordCount(orderId, state ,interperId,stateChgTimeStart, stateChgTimeEnd);
 	}
 
 }
