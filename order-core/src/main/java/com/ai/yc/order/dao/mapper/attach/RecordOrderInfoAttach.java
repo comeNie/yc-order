@@ -13,6 +13,10 @@ public class RecordOrderInfoAttach {
 	 * 议员费用
 	 */
 	private long interperFeeCount;
+	/**
+	 * 币种
+	 */
+	private String currencyUnit;
 
 	public long getTotalFeeCount() {
 		return totalFeeCount;
@@ -36,6 +40,14 @@ public class RecordOrderInfoAttach {
 
 	public void setInterperFeeCount(long interperFeeCount) {
 		this.interperFeeCount = interperFeeCount;
+	}
+
+	public String getCurrencyUnit() {
+		return currencyUnit;
+	}
+
+	public void setCurrencyUnit(String currencyUnit) {
+		this.currencyUnit = currencyUnit;
 	}
 
 }

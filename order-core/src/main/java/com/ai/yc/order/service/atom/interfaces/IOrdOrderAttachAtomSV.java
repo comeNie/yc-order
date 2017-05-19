@@ -20,6 +20,6 @@ public interface IOrdOrderAttachAtomSV {
 	 
 	 public List<Object> queryInterperOrder(String interperId);
 	 
-	 public RecordOrderInfoAttach queryRecordOrderInfo(Long orderId,String state,String interperId,Timestamp stateChgTimeStart,Timestamp stateChgTimeEnd);
+	 public RecordOrderInfoAttach queryRecordOrderInfo(Long orderId,String state,String interperId,String lspId,Timestamp stateChgTimeStart,Timestamp stateChgTimeEnd);
 
 }

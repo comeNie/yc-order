@@ -837,6 +837,7 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 					if (ordOdFeeTotal.getPaidFee() != null) {
 						orderVO.setPaidFee(ordOdFeeTotal.getPaidFee());
 					}
+					orderVO.setCurrencyUnit(ordOdFeeTotal.getCurrencyUnit());
 				}
 				//获取翻译字数
 				OrdOdProd ordOdProd = ordOdProdAtomSV.findByOrderId(order.getOrderId());
@@ -853,12 +854,13 @@ public class OrdOrderBusiSVImpl implements IOrdOrderBusiSV {
 		pageinfo.setCount(ordOrderAtomSV.getRecordOrderCount(req, OrderState.COMMENTED_STATE));
 		response.setPageInfo(pageinfo);
 		//获取汇总信息
-		RecordOrderInfoAttach attach = ordOrderAttachAtomSV.queryRecordOrderInfo(req.getOrderId(),OrderState.COMMENTED_STATE, req.getInterperId(),req.getStateChgTimeStart(), req.getStateChgTimeEnd());
+		RecordOrderInfoAttach attach = ordOrderAttachAtomSV.queryRecordOrderInfo(req.getOrderId(),OrderState.COMMENTED_STATE, req.getInterperId(),req.getLspId(),req.getStateChgTimeStart(), req.getStateChgTimeEnd());
 		if(null!=attach){
 			RecoedCountInfo countInfo = new RecoedCountInfo();
 			countInfo.setSumInterperFee(attach.getInterperFeeCount());
 			countInfo.setSumPlatFee(attach.getPlatFeeCount());
 			countInfo.setSumTotalFee(attach.getTotalFeeCount());
+			countInfo.setCurrencyUnit(attach.getCurrencyUnit());
 			response.setCountInfo(countInfo);
 		}
 		return response;

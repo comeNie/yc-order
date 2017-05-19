@@ -38,9 +38,9 @@ public class OrdOrderAttachAtomSVImpl implements IOrdOrderAttachAtomSV {
 		return ordOrderAttachMapper.getInterperOrdOrder(interperId);
 	}
 	@Override
-	public RecordOrderInfoAttach queryRecordOrderInfo(Long orderId,String state,String interperId, Timestamp stateChgTimeStart,
+	public RecordOrderInfoAttach queryRecordOrderInfo(Long orderId,String state,String interperId, String lspId,Timestamp stateChgTimeStart,
 			Timestamp stateChgTimeEnd) {
-		return ordOrderAttachMapper.getRecordCount(orderId, state ,interperId,stateChgTimeStart, stateChgTimeEnd);
+		return ordOrderAttachMapper.getRecordCount(orderId, state ,interperId,lspId,stateChgTimeStart, stateChgTimeEnd);
 	}
 
 }

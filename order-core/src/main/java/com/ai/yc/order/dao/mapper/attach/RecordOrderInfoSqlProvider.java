@@ -7,7 +7,7 @@ public class RecordOrderInfoSqlProvider {
 	public String recordOrderCount(Map<String, Object> param) {
 		StringBuffer seqBuffer = new StringBuffer();
 		seqBuffer
-				.append("select sum(fee.plat_fee) platFeeCount,sum(interper_fee) interperFeeCount,sum(total_fee)totalFeeCount "
+				.append("select fee.currency_unit currencyUnit,sum(fee.plat_fee) platFeeCount,sum(interper_fee) interperFeeCount,sum(total_fee)totalFeeCount "
 						+ "from ord_order orders,ord_od_fee_total fee  where orders.order_id=fee.order_id");
 		if (param.get("orderId") != null)
 			seqBuffer.append(" and orders.order_id = '" + param.get("orderId") + "'");
@@ -27,8 +27,13 @@ public class RecordOrderInfoSqlProvider {
 		}
 		if (param.get("state") != null)
 			seqBuffer.append(" and orders.state = '" + param.get("state") + "'");
+		
 		if (param.get("interperId") != null)
 			seqBuffer.append(" and orders.interper_id = '" + param.get("interperId") + "'");
+		
+		if (param.get("lspId") != null)
+			seqBuffer.append(" and orders.lsp_id = '" + param.get("lspId") + "'");
+		
 		return seqBuffer.toString();
 	}
 }

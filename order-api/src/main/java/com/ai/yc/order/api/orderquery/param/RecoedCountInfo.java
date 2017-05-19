@@ -13,6 +13,10 @@ public class RecoedCountInfo {
 	 * 议员总费
 	 */
 	private long sumInterperFee;
+	/**
+	 * 币种
+	 */
+	private String currencyUnit;
 
 	public long getSumTotalFee() {
 		return sumTotalFee;
@@ -36,6 +40,14 @@ public class RecoedCountInfo {
 
 	public void setSumInterperFee(long sumInterperFee) {
 		this.sumInterperFee = sumInterperFee;
+	}
+
+	public String getCurrencyUnit() {
+		return currencyUnit;
+	}
+
+	public void setCurrencyUnit(String currencyUnit) {
+		this.currencyUnit = currencyUnit;
 	}
 
 }

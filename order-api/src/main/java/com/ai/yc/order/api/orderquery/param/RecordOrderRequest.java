@@ -15,6 +15,10 @@ public class RecordOrderRequest extends BaseInfo {
 	 */
 	private String interperId;
 	/**
+	 * lspId
+	 */
+	private String lspId;
+	/**
 	 * 状态变化开始时间
 	 */
 	private Timestamp stateChgTimeStart;
@@ -72,6 +76,14 @@ public class RecordOrderRequest extends BaseInfo {
 
 	public void setPageSize(Integer pageSize) {
 		this.pageSize = pageSize;
+	}
+
+	public String getLspId() {
+		return lspId;
+	}
+
+	public void setLspId(String lspId) {
+		this.lspId = lspId;
 	}
 
 }

@@ -219,6 +219,9 @@ public class OrdOrderAtomSVImpl implements IOrdOrderAtomSV {
     	if(!StringUtil.isBlank(req.getInterperId())){
     		criteria.andInterperIdEqualTo(req.getInterperId());
     	}
+    	if(!StringUtil.isBlank(req.getLspId())){
+    		criteria.andLspIdEqualTo(req.getLspId());
+    	}
     	if(null!=req.getStateChgTimeStart() && null==req.getStateChgTimeEnd()){
     		criteria.andStateChgTimeGreaterThanOrEqualTo(req.getStateChgTimeStart());
     	}
@@ -250,6 +253,12 @@ public class OrdOrderAtomSVImpl implements IOrdOrderAtomSV {
     	}
     	if(null!=req.getStateChgTimeStart() && null!=req.getStateChgTimeEnd()){
     		criteria.andStateChgTimeBetween(req.getStateChgTimeStart(), req.getStateChgTimeEnd());
+    	}
+    	if(!StringUtil.isBlank(req.getInterperId())){
+    		criteria.andInterperIdEqualTo(req.getInterperId());
+    	}
+    	if(!StringUtil.isBlank(req.getLspId())){
+    		criteria.andLspIdEqualTo(req.getLspId());
     	}
     	if(!StringUtil.isBlank(state)){
     		criteria.andStateEqualTo(state);

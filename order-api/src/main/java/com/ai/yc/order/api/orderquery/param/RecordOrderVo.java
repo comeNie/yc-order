@@ -3,8 +3,7 @@ package com.ai.yc.order.api.orderquery.param;
 import java.sql.Timestamp;
 import java.util.List;
 
-
-public class RecordOrderVo{
+public class RecordOrderVo {
 
 	/**
 	 * 订单id
@@ -40,6 +39,10 @@ public class RecordOrderVo{
 	 * 翻译字数
 	 */
 	private long translateSum;
+	/**
+	 * 币种
+	 */
+	private String currencyUnit;
 
 	public Long getOrderId() {
 		return orderId;
@@ -103,6 +106,14 @@ public class RecordOrderVo{
 
 	public void setTranslateSum(long translateSum) {
 		this.translateSum = translateSum;
+	}
+
+	public String getCurrencyUnit() {
+		return currencyUnit;
+	}
+
+	public void setCurrencyUnit(String currencyUnit) {
+		this.currencyUnit = currencyUnit;
 	}
 
 }

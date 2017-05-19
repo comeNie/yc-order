@@ -54,11 +54,13 @@ public interface OrdOrderAttachMapper {
 	 */
 	@Results({ @Result(property = "totalFeeCount", column = "totalFeeCount"),
 			@Result(property = "platFeeCount", column = "platFeeCount"),
+			@Result(property = "currencyUnit", column = "currencyUnit"),
 			@Result(property = "interperFeeCount", column = "interperFeeCount") })
 	@SelectProvider(type = RecordOrderInfoSqlProvider.class, method = "recordOrderCount")
 	public RecordOrderInfoAttach getRecordCount(@Param("orderId") Long orderId,
 			@Param("state") String state,
 			@Param("interperId") String interperId,
+			@Param("lspId") String lspId,
 			@Param("stateChgTimeStart") Timestamp stateChgTimeStart,
 			@Param("stateChgTimeEnd") Timestamp stateChgTimeEnd);
 }
