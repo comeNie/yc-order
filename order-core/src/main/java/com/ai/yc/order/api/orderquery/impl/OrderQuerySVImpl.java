@@ -701,7 +701,10 @@ public class OrderQuerySVImpl implements IOrderQuerySV {
 		if (request.getPageSize()==null) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "页码大小不能为空");
 		}
-		return iOrdOrderBusiSV.getRecordOrder(request);
+		RecordOrderResponse response =  iOrdOrderBusiSV.getRecordOrder(request);
+		ResponseHeader responseHeader = new ResponseHeader(true, ExceptCodeConstants.Special.SUCCESS, "查询订单数成功");
+		response.setResponseHeader(responseHeader);
+		return response;
 	}
 
 }
