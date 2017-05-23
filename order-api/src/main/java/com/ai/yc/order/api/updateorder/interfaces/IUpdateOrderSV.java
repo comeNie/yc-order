@@ -47,6 +47,8 @@ public interface IUpdateOrderSV {
 	 * @ApiCode
 	 * @RestRelativeURL updateorder/updateOrderFile
 	 */
+	@POST
+	@Path("/updateOrderFile")
 	BaseResponse updateOrderFile(UpdateProdFileRequest req)throws BusinessException,SystemException;
 
 }
