@@ -107,6 +107,9 @@ public class OrdEvaluateBusiSVImpl implements IOrdEvaluateBusiSV {
 		OrdOrder ordOrderUpdate = new OrdOrder();
 		ordOrderUpdate.setOrderId(request.getBaseInfo().getOrderId());
 		ordOrderUpdate.setState(request.getBaseInfo().getState());
+		ordOrderUpdate.setStateChgTime(DateUtil.getSysDate());
+		ordOrderUpdate.setDisplayFlag(request.getBaseInfo().getState());
+		ordOrderUpdate.setDisplayFlagChgTime(DateUtil.getSysDate());
 		this.ordOrderAtomSV.updateByPrimaryKeySelective(ordOrderUpdate);
 		//4.入库订单轨迹表 53：已评价（瞬时状态，记录轨迹）90：完成
 		OrdOdStateChg ordOdStateChg = new OrdOdStateChg();
